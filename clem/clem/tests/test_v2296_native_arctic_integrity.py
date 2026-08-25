@@ -151,7 +151,7 @@ def test_windows_ci_and_versioned_dependency_records_exist() -> None:
     dependency_record = json.loads(
         (ROOT / "dependency_integrity.lock.json").read_text(encoding="utf-8")
     )
-    assert dependency_record["model_version"] == "2.29.23"
+    assert dependency_record["model_version"] == "2.29.28"
     verifier = (ROOT / "tools/verify_dependency_lock.py").read_text(encoding="utf-8")
     assert "verify_installed_hashes" in verifier
     assert "platform.platform()" in verifier

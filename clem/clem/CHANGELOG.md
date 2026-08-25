@@ -11,9 +11,12 @@
 - PIOMAS nRMSE improves to 0.1883 and ICESat-2 bias/correlation to +0.283 m/+0.692. CryoSat-2 correlation is -0.123 and explicitly keeps full temporal thickness validation incomplete.
 - Adds a volume-conserving 12 m grid-cell mean local-thickness deformation/spreading constraint and scales prognostic area tendencies through the 55–66 N module transition; exact 5° and 10° SSP2-4.5 trajectories remain stable through 2100.
 - Reclassifies CryoSat-2, ICESat-2, and OSI SAF as development-informed constraints/diagnostics rather than independent validation.
-- Adds fail-closed current-version 5°/10° coupled validation, mandatory cross-resolution comparison, atomic canonical publication, and finalizer verification of pass flags plus source hashes.
+- Adds fail-closed current-version 5°/10° coupled validation, mandatory cross-resolution comparison, and members-first/summary-last publication whose commit record hashes every canonical member.
 - Fresh 5°/10° Arctic→Greenland→AMOC runs pass all engineering and cross-resolution gates; scientific release remains false because predictive/prospective skill and CryoSat-2 temporal response remain failed or incomplete.
-- Restores the broader 140-test release regimen and adds three fail-closed coupled-integrity regressions; all 143 checks pass in the recorded Python 3.13.13 / pytest 9.1.1 environment.
+- Restores the broader release regression regimen and records it through one unchanged-tree pytest invocation with hashed NDJSON and JUnit evidence; the finalizer checks exact counts, exit codes, unique node IDs, raw-evidence hashes, and the test-bound tree fingerprint.
+- Makes final ZIP creation transactional and verifies every archived payload against both the manifest and the test-bound fingerprint before replacing an existing release archive.
+- Enforces the 12 m mechanical-spreading thickness as a strict production-state limit: a full-cover state that cannot hold the conserved volume within the limit now fails fast.
+- Refreshes dependency-lock provenance and installed-content hashes for the recorded Windows / Python 3.13.13 release environment.
 - Removes the invalid 1979 retrospective fold and uses a fixed prior-derived candidate grid with pre-cutoff-only fold selection for 1989/1999/2009 cutoffs. The exercise remains method-development evidence and does not authorize a predictive-skill claim.
 - Fixes synthetic/missing observation-operator flags to fail closed instead of raising a KeyError.
 - Keeps NSIDC-0611 and 2027+ untouched prospective validation explicitly incomplete.

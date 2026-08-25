@@ -3,17 +3,21 @@
 
 Canonical release artifacts are promoted out of a staging directory only after
 both per-resolution validators and the cross-resolution combiner exit cleanly.
-Failed diagnostics remain in staging and can never be mistaken for completion.
+Members are replaced first and a hash-binding summary is committed last, so an
+interruption leaves either a valid old generation or a fail-closed mixed set.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+from tools.v22928_release_integrity import artifact_bundle_payload
 
 
 ROOT = Path(__file__).resolve().parent
@@ -28,6 +32,8 @@ ARTIFACT_NAMES = tuple(
     + [f"COUPLED_TIMESERIES_V2_29_28_{resolution}DEG.csv" for resolution in (5, 10)]
     + ["VALIDATION_SUMMARY_V2_29_28.json"]
 )
+SUMMARY_NAME = "VALIDATION_SUMMARY_V2_29_28.json"
+BUNDLE_MEMBER_NAMES = tuple(name for name in ARTIFACT_NAMES if name != SUMMARY_NAME)
 
 
 def _run(command: list[str]) -> None:
@@ -56,6 +62,29 @@ def _run_resolutions(commands: list[list[str]]) -> None:
     if failures:
         command, return_code = failures[0]
         raise subprocess.CalledProcessError(return_code, command)
+
+
+def _bind_staged_generation(staging: Path) -> None:
+    """Add the member hashes that make the summary the generation commit record."""
+
+    summary_path = staging / SUMMARY_NAME
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["canonical_artifact_bundle"] = artifact_bundle_payload(
+        staging, BUNDLE_MEMBER_NAMES
+    )
+    temporary = summary_path.with_suffix(summary_path.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    temporary.replace(summary_path)
+
+
+def _promote_staged_generation(staging: Path, output_dir: Path) -> None:
+    """Publish members first and the hash-binding summary as the commit point."""
+
+    for name in BUNDLE_MEMBER_NAMES:
+        (staging / name).replace(output_dir / name)
+    (staging / SUMMARY_NAME).replace(output_dir / SUMMARY_NAME)
 
 
 def main() -> None:
@@ -112,12 +141,8 @@ def main() -> None:
             raise RuntimeError(
                 "Successful coupled workflow did not produce: " + ", ".join(missing_outputs)
             )
-        for name in ARTIFACT_NAMES:
-            source = staging / name
-            destination = output_dir / name
-            if destination.exists():
-                destination.unlink()
-            source.replace(destination)
+        _bind_staged_generation(staging)
+        _promote_staged_generation(staging, output_dir)
         shutil.rmtree(staging)
     except BaseException:
         print(f"Validation failed; noncanonical diagnostics retained in {staging}", flush=True)

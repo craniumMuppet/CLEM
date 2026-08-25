@@ -1,7 +1,7 @@
 {
-  "aggregate_sha256": "a2d37333898a01ed3c5f10911b5022ac7f8ce78b9d2bdcb226dd6b3804a1acc2",
+  "aggregate_sha256": "64384c564e15f0058e5f9ea8f0518ca435badd6bd7ac6ad8d83522f9f7dc9ed0",
   "algorithm": "sha256",
-  "file_count": 615,
+  "file_count": 619,
   "files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -55,13 +55,13 @@
     },
     {
       "path": "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_10DEG.json",
-      "sha256": "8408a2b774800633a17e761f9b3f2f480656b74c225659205fb898f3481acc26",
-      "size_bytes": 56546
+      "sha256": "a3195514e79a5861ec63baa6267c3477b309019093b496571a5eb3e1a8e4be95",
+      "size_bytes": 56628
     },
     {
       "path": "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_5DEG.json",
-      "sha256": "deee1388a8342653b2fada3ebb6d0ef24218dba84f422a8dbce1a29e5f7b8e92",
-      "size_bytes": 56693
+      "sha256": "47d5a1bec191c27b0b95d1547d8e4a0a1153711e199a368d5500925f3a013478",
+      "size_bytes": 56683
     },
     {
       "path": "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json",
@@ -110,8 +110,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "01572c89d66947535c720551026d7e9583c220e61e00dd38e5bf5e1325c5d443",
-      "size_bytes": 65474
+      "sha256": "d138bfe335ce4c96b6f5b3d549a6b1b93560267079305b47b938fb3270be2ce8",
+      "size_bytes": 66051
     },
     {
       "path": "CO2_TARGET_SWEEP_V2_19_0.md",
@@ -140,13 +140,13 @@
     },
     {
       "path": "COUPLED_TIMESERIES_V2_29_28_10DEG.csv",
-      "sha256": "ef6e14e11c896b020c75dfeb98fbb574e8f09fe6fe2a56e75864afe1042c1567",
-      "size_bytes": 3177740
+      "sha256": "1430506341ec3e4c83f374df8f503dab438e590e2eb22f9de097c750fc05dfdf",
+      "size_bytes": 3120907
     },
     {
       "path": "COUPLED_TIMESERIES_V2_29_28_5DEG.csv",
-      "sha256": "17c70ba82677f18a49f8f0d75197a3e4f60010bf39933ca1698b48e88b653e2a",
-      "size_bytes": 3180968
+      "sha256": "b421fc6e0246f31e2055cff937a26039a2ca3a97dbf67ad854c6f7591717d040",
+      "size_bytes": 3123889
     },
     {
       "path": "CRASH_LOGGING_LAUNCHER_FIX_2026.txt",
@@ -460,8 +460,8 @@
     },
     {
       "path": "PACKAGE_INFO_V2_29_28.json",
-      "sha256": "660b0574b696460e1116be84293a6ad4d48ebec33ca33ed5283d656f22033605",
-      "size_bytes": 1725
+      "sha256": "a544a1775a1a39e401ee206e86e7ffe340ecbdbc98420864e22abf3519b26672",
+      "size_bytes": 1737
     },
     {
       "path": "PACKAGE_MANIFEST_SEA_ICE_FIX.json",
@@ -535,8 +535,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "ab9755da85fa2e89eb91f234cb88096e6f849e131b0bde6080f3bfebe47d67a3",
-      "size_bytes": 4155
+      "sha256": "7c29388d54c8a0c33b02a972154fd61486f6d0818de4bc2eb2c4200913b76a0e",
+      "size_bytes": 4347
     },
     {
       "path": "RELEASE_FINGERPRINT_SCIENTIFIC_REVIEW_FIXED_2026.json",
@@ -600,8 +600,8 @@
     },
     {
       "path": "SCIENTIFIC_CONSTRAINTS.md",
-      "sha256": "719ff3b888ee41dfd59eea1ca89f3bc2957e476883a1e21a9a31dab6e58b8ba7",
-      "size_bytes": 19752
+      "sha256": "0ddf319bbe229a9ed8b74b7d7220ddd1eaf76ecd3b8e870cdcc9997ea23045af",
+      "size_bytes": 19913
     },
     {
       "path": "SCIENTIFIC_REVIEW_FIXES_2026.md",
@@ -640,13 +640,13 @@
     },
     {
       "path": "SEA_ICE_VALIDATION_V2_29_28_10DEG.json",
-      "sha256": "7bdae937c03dbbce099010b9c2608bddc502147dabdad322b1c1cf9f40023849",
-      "size_bytes": 466444
+      "sha256": "ed3dbd583132300ef662ecee4ff4e66a9b194ee9ccf43013429288ce034d1667",
+      "size_bytes": 465362
     },
     {
       "path": "SEA_ICE_VALIDATION_V2_29_28_5DEG.json",
-      "sha256": "342a21c145968e211f15c898055df22ffbb4b265f7ab5ed4895e51e5cb6f3563",
-      "size_bytes": 466620
+      "sha256": "c553c088e21e9ec513f2e6d00f335a07c59c0c9a3662ef60e207c52c62e3435a",
+      "size_bytes": 465490
     },
     {
       "path": "SETTING_REFERENCE_GUIDE.md",
@@ -700,13 +700,18 @@
     },
     {
       "path": "TESTED_CODE_FINGERPRINT_V2_29_28.json",
-      "sha256": "2d79c697d749183870849a7a9c4ea4adec542f96b9be0be8e2b05b8d9a8cc6f3",
-      "size_bytes": 101137
+      "sha256": "6cfb4fa65578a8ab71b703f252b7102e3795ce94b91b32077339c607575d703f",
+      "size_bytes": 100478
     },
     {
       "path": "TEST_EVENTS_V2_29_23.ndjson",
       "sha256": "8d684c510362c3044e29a5e46c819bdd20f0ae1833d8ec5576ea43a7a0381d80",
       "size_bytes": 67543
+    },
+    {
+      "path": "TEST_EVENTS_V2_29_28.ndjson",
+      "sha256": "31f6e3c46ea198b690ec6b777b3b2231393b10219254432aa162bdaa9851d5f6",
+      "size_bytes": 31271
     },
     {
       "path": "TEST_RESULTS_ARCTIC_ACQUISITION_HOTFIX_2026.txt",
@@ -975,13 +980,18 @@
     },
     {
       "path": "TEST_RESULTS_V2_29_28.json",
-      "sha256": "9c484ab550c59000bdce99ac3c433c34dc931c17cf32ec0c0bfb8c2d351fb152",
-      "size_bytes": 18680
+      "sha256": "a819ccfabc0ad88ae37d483dc4f194f2b209f8eae10a5f64bcea50bcb0b264a1",
+      "size_bytes": 163065
+    },
+    {
+      "path": "TEST_RESULTS_V2_29_28.junit.xml",
+      "sha256": "7fec6a115f83954a30a8f003d155b3f60715091e2018ec471efba833191263b4",
+      "size_bytes": 21274
     },
     {
       "path": "TEST_RESULTS_V2_29_28.txt",
-      "sha256": "fb2c184b966540361d00d6a332664ee5c8a4105deb47c771f8490ca47aa79672",
-      "size_bytes": 490
+      "sha256": "987d395f825d96617e5ab99228cc31114e2346b124a45b4b877cea6febbf7e19",
+      "size_bytes": 433
     },
     {
       "path": "TEST_RESULTS_V2_29_3.txt",
@@ -1210,8 +1220,8 @@
     },
     {
       "path": "V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md",
-      "sha256": "3913ff9d9c15869565a6bbb27f5dc508054edc07e868e9488176307291d20e5b",
-      "size_bytes": 2502
+      "sha256": "1638cf29daf2e01c6e1ed3bb512232e3b267122aee77055e10234b3bf50ac2e4",
+      "size_bytes": 2994
     },
     {
       "path": "V2_29_2_RELEASE_INTEGRITY.md",
@@ -1440,8 +1450,8 @@
     },
     {
       "path": "VALIDATION_SUMMARY_V2_29_28.json",
-      "sha256": "e667c7c1be03655177d6874957936414f8ab667a02ab5ec07036b11ee4e99952",
-      "size_bytes": 109115
+      "sha256": "857cdf4de859b1173e7f508d22c487451a4f7ada22f8660d21a2e9248674867b",
+      "size_bytes": 262045
     },
     {
       "path": "VALIDATION_SUMMARY_V2_29_3.json",
@@ -1555,8 +1565,8 @@
     },
     {
       "path": "climate_model.py",
-      "sha256": "849cee0a16b8b8f8f60bc777edfad8838a59b41cf7c3ffaefd4d8678353f0102",
-      "size_bytes": 637022
+      "sha256": "4e0bc4ee97e422fb61192d3298daf3c94b3d1d2059d95cde60def118d062c327",
+      "size_bytes": 638114
     },
     {
       "path": "climate_model_gui.py",
@@ -1780,8 +1790,8 @@
     },
     {
       "path": "dependency_integrity.lock.json",
-      "sha256": "c1b6db4999882eb060ff12e0d81a4b61e59238b6b38b15db49fae0cbbc4d8893",
-      "size_bytes": 20685
+      "sha256": "44a5bca577d4865bc34d1e9e407e6997a2fc708d9614adb743ecdd5a54448b8a",
+      "size_bytes": 22007
     },
     {
       "path": "development_regression_benchmarks.json",
@@ -2004,6 +2014,11 @@
       "size_bytes": 8249
     },
     {
+      "path": "run_v22928_engineering_tests.py",
+      "sha256": "0792adfb67c110893972434724d05c0f6cd0cd5f9216df394b30368525296d03",
+      "size_bytes": 10211
+    },
+    {
       "path": "runtime_provenance.py",
       "sha256": "9887d7a77b696cf0f7146408fbf6839ae95d18b1bb2750f8bc25a02853b3be86",
       "size_bytes": 6507
@@ -2140,7 +2155,7 @@
     },
     {
       "path": "tests/test_v227_structural_arctic_greenland.py",
-      "sha256": "1e6d33a10fc089a6c24bd70209286abde05bf3b5e1be1c03c546fbe71110f51f",
+      "sha256": "638f026995981f163aa8f49023ceb4224aa4871c407329f4295d1c65ac9db978",
       "size_bytes": 10143
     },
     {
@@ -2215,8 +2230,8 @@
     },
     {
       "path": "tests/test_v22920_prognostic_sea_ice.py",
-      "sha256": "75bcf420ace9855975d7a750b7b4a74bc47cf6e984431d63232094c995c0c6e0",
-      "size_bytes": 8448
+      "sha256": "dd46fc731638139059eb463442c863e4b974087e41ab0940717a3db653e70d83",
+      "size_bytes": 8947
     },
     {
       "path": "tests/test_v22920_review_corrections.py",
@@ -2240,8 +2255,8 @@
     },
     {
       "path": "tests/test_v22928_coupled_fail_closed.py",
-      "sha256": "ad473f3894fb7a07a577b757ac81928a3622c9d2e0ad55bfd087e85ef932fd3b",
-      "size_bytes": 3771
+      "sha256": "7632d6310d81f74d3700de697bbea54fdbaf953da8ebb20c01e218e2c570f4d5",
+      "size_bytes": 5822
     },
     {
       "path": "tests/test_v22928_release_finalization.py",
@@ -2270,7 +2285,7 @@
     },
     {
       "path": "tests/test_v2296_native_arctic_integrity.py",
-      "sha256": "03bad7354acf78309270db9dbbc586fc2873b5c3c624c50d33f875aa4443d33b",
+      "sha256": "47a1a18569bc0ebc72d57084a391fd9526affbbae9a010fe40da239864fbcb61",
       "size_bytes": 9031
     },
     {
@@ -2314,14 +2329,19 @@
       "size_bytes": 2655
     },
     {
+      "path": "tools/create_dependency_lock.py",
+      "sha256": "bbf8d61dd064701d8f6610eb32f20f018fc7dbe8fdf0cfb87bcd28eeca3d4dba",
+      "size_bytes": 2208
+    },
+    {
       "path": "tools/create_v22927_fingerprint.py",
       "sha256": "627da87d0e748b73edeabd8d45a6336ff2c1a51b73717b14d9b9db410410806b",
       "size_bytes": 605
     },
     {
       "path": "tools/create_v22928_fingerprint.py",
-      "sha256": "5331da3580019d012db9da5a68e2f41a7c0999a531428d4526bf5be3a010b6f4",
-      "size_bytes": 605
+      "sha256": "c8b907d498218696788a09c6aff32d3c388e362cda50f545dc36ead5513b7b20",
+      "size_bytes": 974
     },
     {
       "path": "tools/evaluate_v2297_candidate.py",
@@ -2360,8 +2380,8 @@
     },
     {
       "path": "tools/finalize_v22928_release.py",
-      "sha256": "5cc504d0ce43964af92ca46963ba51044a4d9b524e1a1f0a1338265fd6dec807",
-      "size_bytes": 13263
+      "sha256": "d25ea976a48c4b5668f19bf018265efe9949b30f24efe26bd69327d28b0a9433",
+      "size_bytes": 21676
     },
     {
       "path": "tools/package_v227.py",
@@ -2605,8 +2625,8 @@
     },
     {
       "path": "tools/v22928_release_integrity.py",
-      "sha256": "4dfb66a2b675e03c2e1beda55e2cf85f734c40e96d0e047f1210d454964fb035",
-      "size_bytes": 5657
+      "sha256": "df82ab68006f0e1acdf69c15e86df3938c7ccc221bb7d881a31372ccf18e2bcc",
+      "size_bytes": 7150
     },
     {
       "path": "tools/validate_sea_ice_fix.py",
@@ -2625,8 +2645,8 @@
     },
     {
       "path": "tools/verify_dependency_lock.py",
-      "sha256": "95a77955b55081479540c7d0f222641c6f9f6cb9e893494d29380c63c615bdfd",
-      "size_bytes": 2554
+      "sha256": "8dab06eb41f6da4de0c6deeccbb849ce6683c406dfde565fa79bfe26acc21b3a",
+      "size_bytes": 3164
     },
     {
       "path": "tools/verify_sea_ice_fix_manifest.py",
@@ -2755,8 +2775,8 @@
     },
     {
       "path": "validate_v22928_coupled.py",
-      "sha256": "15e07b7e17d20e74be5b258c41c41cfce1a9f881d4fb0a0a24628a1f91e8202f",
-      "size_bytes": 4673
+      "sha256": "279a4ccdf860761c60d1e3e028a74171f1abd92b8850b30dd5fa1f9d69cfe2be",
+      "size_bytes": 5721
     },
     {
       "path": "validate_v2293.py",

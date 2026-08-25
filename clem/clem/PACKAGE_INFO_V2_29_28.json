@@ -26,16 +26,16 @@
     "errors": 0,
     "failed": 0,
     "file": "TEST_RESULTS_V2_29_28.json",
-    "nodeid_count": 143,
-    "passed": 143,
+    "nodeid_count": 146,
+    "passed": 146,
     "pytest_version": "9.1.1",
     "python_version": "3.13.13"
   },
   "tested_code_fingerprint": {
-    "aggregate_sha256": "3bd600836ec042b2318853a8eaba3c9b5c8ce94e75a18325903c0e388f12819d",
+    "aggregate_sha256": "6111a0d0a96c764d6c9d01626d8fb47b45b3a45e341c0e293bd1b2ab48cab78d",
     "file": "TESTED_CODE_FINGERPRINT_V2_29_28.json",
-    "file_count": 613,
+    "file_count": 606,
     "profile": "tested-code-and-scientific-inputs",
-    "verified_immediately_before_packaging": true
+    "verified_against_test_execution_and_final_archive": true
   }
 }

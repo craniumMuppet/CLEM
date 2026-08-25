@@ -185,7 +185,7 @@ def test_greenland_combined_diagnostic_obeys_total_rate_and_reservoir_caps() -> 
 def test_release_metadata_and_normal_interfaces_are_synchronized() -> None:
     root = Path(__file__).resolve().parents[1]
     assert 'version = "2.29.28"' in (root / "pyproject.toml").read_text(encoding="utf-8")
-    assert '"model_version": "2.29.23"' in (root / "dependency_integrity.lock.json").read_text(encoding="utf-8")
+    assert '"model_version": "2.29.28"' in (root / "dependency_integrity.lock.json").read_text(encoding="utf-8")
     for filename in ("app.py", "climate_model_gui.py"):
         text = (root / filename).read_text(encoding="utf-8")
         assert "2.26.0" not in text

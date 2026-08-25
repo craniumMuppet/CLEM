@@ -1,13 +1,14 @@
-EGCM v2.29.28 release verification
-Generated: 2026-08-25T14:21:18Z
-
-Python: 3.13.13
-pytest: 9.1.1 (declared pytest==9.1.1)
-
-Compile gate: PASS
-Selected regression suite: 143 passed, 0 failed, 0 errors
-Exact commands and 143 unique node IDs: TEST_RESULTS_V2_29_28.json
-
-Scope: bounded release/recalibration plus broader Arctic physical/coupled regressions; known unmarked long-running nodes are listed explicitly in the JSON and are not claimed as executed.
-
-CLI help and core imports: PASS
+EGCM v2.29.28 unchanged-tree machine-verifiable test evidence
+release_tree_sha256=6111a0d0a96c764d6c9d01626d8fb47b45b3a45e341c0e293bd1b2ab48cab78d
+release_tree_file_count=606
+tree_unchanged_during_pytest=true
+collected=146
+completed=146
+passed=146
+failed=0
+errors=0
+engineering_integrity_passed=true
+pytest_exit_code=0
+runner_exit_code=0
+raw_events=TEST_EVENTS_V2_29_28.ndjson
+junit_xml=TEST_RESULTS_V2_29_28.junit.xml

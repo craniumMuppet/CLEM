@@ -3959,6 +3959,23 @@ class ProcessClimateModel:
             )
         return local
 
+    def _assert_arctic_mechanical_full_cover_supported(
+        self, equivalent_thickness_m: np.ndarray | float, *, context: str
+    ) -> None:
+        """Fail when even complete ice cover cannot satisfy the mechanical limit."""
+
+        if getattr(self, "_arctic_reference_cycle_initializing", False):
+            return
+        equivalent = np.asarray(equivalent_thickness_m, dtype=float)
+        maximum = float(np.max(equivalent)) if equivalent.size else 0.0
+        physical_limit = self.config.arctic_ice_mechanical_max_local_thickness_m
+        if maximum > physical_limit + 1.0e-12:
+            raise FloatingPointError(
+                f"Arctic equivalent thickness {maximum:.6g} m exceeds the "
+                f"{physical_limit:.6g} m mechanical-spreading full-cover limit "
+                f"in {context}"
+            )
+
     def _arctic_thick_pack_resistance(
         self,
         reference_local_thickness_m: np.ndarray | float,
@@ -4162,6 +4179,9 @@ class ProcessClimateModel:
         equivalent = self._assert_arctic_equivalent_thickness_safe(
             -energy / self.arctic_latent_energy_per_m_wyr_m2,
             context="prognostic ice state",
+        )
+        self._assert_arctic_mechanical_full_cover_supported(
+            equivalent, context="prognostic ice state"
         )
         requested = np.broadcast_to(
             np.asarray(concentration, dtype=float), equivalent.shape
@@ -4476,6 +4496,9 @@ class ProcessClimateModel:
             )
             concentration = np.maximum(concentration, reference_minimum)
         concentration_after_upper_support = concentration.copy()
+        self._assert_arctic_mechanical_full_cover_supported(
+            next_volume, context="ice-concentration advance"
+        )
         mechanical_minimum = np.clip(
             next_volume / cfg.arctic_ice_mechanical_max_local_thickness_m,
             0.0,

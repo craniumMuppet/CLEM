@@ -13,6 +13,8 @@ PACKAGE_NAME = "emergent_global_climate_model_v2_29_28"
 FINGERPRINT_JSON = "TESTED_CODE_FINGERPRINT_V2_29_28.json"
 TEST_JSON = "TEST_RESULTS_V2_29_28.json"
 TEST_TXT = "TEST_RESULTS_V2_29_28.txt"
+TEST_EVENTS = "TEST_EVENTS_V2_29_28.ndjson"
+TEST_JUNIT = "TEST_RESULTS_V2_29_28.junit.xml"
 PACKAGE_INFO = "PACKAGE_INFO_V2_29_28.json"
 MANIFEST = "PACKAGE_MANIFEST_V2_29_28.json"
 
@@ -20,8 +22,19 @@ EXCLUDED_DIRS = {".git", ".pytest_cache", "__pycache__", "outputs", "output"}
 EXCLUDED_SUFFIXES = {".pyc", ".pyo", ".tmp", ".bak", ".log", ".pid"}
 FINGERPRINT_EXCLUDED_FILES = {
     FINGERPRINT_JSON,
+    TEST_JSON,
+    TEST_TXT,
+    TEST_EVENTS,
+    TEST_JUNIT,
     PACKAGE_INFO,
     MANIFEST,
+    "SEA_ICE_VALIDATION_V2_29_28_5DEG.json",
+    "SEA_ICE_VALIDATION_V2_29_28_10DEG.json",
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_5DEG.json",
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_10DEG.json",
+    "COUPLED_TIMESERIES_V2_29_28_5DEG.csv",
+    "COUPLED_TIMESERIES_V2_29_28_10DEG.csv",
+    "VALIDATION_SUMMARY_V2_29_28.json",
 }
 
 
@@ -31,6 +44,32 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def artifact_bundle_payload(root: Path, names: tuple[str, ...]) -> dict[str, Any]:
+    """Return a deterministic hash bundle used as the canonical-set commit record."""
+
+    records: dict[str, dict[str, Any]] = {}
+    aggregate = hashlib.sha256()
+    for name in sorted(names):
+        path = root / name
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        digest = sha256_file(path)
+        size = path.stat().st_size
+        records[name] = {"sha256": digest, "size_bytes": size}
+        aggregate.update(name.encode("utf-8"))
+        aggregate.update(b"\0")
+        aggregate.update(str(size).encode("ascii"))
+        aggregate.update(b"\0")
+        aggregate.update(digest.encode("ascii"))
+        aggregate.update(b"\n")
+    return {
+        "schema_version": 1,
+        "publication_protocol": "members-first-summary-last",
+        "generation_id": aggregate.hexdigest(),
+        "files": records,
+    }
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -93,8 +132,9 @@ def create_fingerprint_payload() -> dict[str, Any]:
         "algorithm": "sha256",
         "coverage": (
             "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, "
-            "scientific evaluation JSON/manifests, validation evidence, and release-facing documents; "
-            "the fingerprint itself, package-info/manifest outputs, and transient caches are excluded; test evidence is included"
+            "scientific evaluation inputs, and release-facing documents; generated test/coupled "
+            "evidence, the fingerprint itself, package-info/manifest outputs, and transient caches "
+            "are excluded and are bound separately by raw-evidence and artifact-bundle hashes"
         ),
         "excluded_current_generated_files": sorted(FINGERPRINT_EXCLUDED_FILES),
         "file_count": len(records),

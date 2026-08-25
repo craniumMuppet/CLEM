@@ -13,11 +13,25 @@ import hashlib
 import importlib.metadata as metadata
 import json
 import platform
+import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = json.loads((ROOT / "dependency_integrity.lock.json").read_text(encoding="utf-8"))
 errors: list[str] = []
+
+project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+project_version = str(project["project"]["version"])
+if LOCK.get("model_version") != project_version:
+    errors.append(
+        f"model_version mismatch: lock={LOCK.get('model_version')!r}, project={project_version!r}"
+    )
+canonical_graph = json.dumps(
+    LOCK.get("packages", {}), sort_keys=True, separators=(",", ":")
+).encode("utf-8")
+actual_graph_sha256 = hashlib.sha256(canonical_graph).hexdigest()
+if LOCK.get("graph_sha256") != actual_graph_sha256:
+    errors.append("dependency graph SHA-256 mismatch")
 
 recorded = LOCK.get("generated_for", {})
 current = {

@@ -1,6 +1,6 @@
 # Emergent-Sensitivity Global Climate Model v2.29.28
 
-> **Current corrected source:** fresh current-source 5°/10° coupled evidence and the post-change 143-test fingerprint pass. The package is an engineering release with observational recalibration; scientific predictive validation remains explicitly incomplete.
+> **Current corrected source:** fresh current-source 5°/10° coupled evidence and unchanged-tree, machine-verifiable pytest evidence pass. The package is an engineering release with observational recalibration; scientific predictive validation remains explicitly incomplete.
 
 ## Arctic sea-ice result
 
@@ -38,6 +38,6 @@ Retrospective fold-local evaluation now uses only the valid 1989, 1999 and 2009 
 
 ## Evidence integrity
 
-Processed observational evidence is SHA-256 checked at runtime. `validate_v22928_coupled.py` stages exact 5° and 10° production runs, promotes canonical files only after both runs pass, and invokes a cross-resolution combiner. The finalizer independently requires passing per-resolution, cross-resolution, and current-source-hash evidence. Failed coupled JSON files cannot set completion.
+Processed observational evidence is SHA-256 checked at runtime. `validate_v22928_coupled.py` stages exact 5° and 10° production runs and invokes a cross-resolution combiner. It publishes member artifacts first and commits a hash-binding summary last; interrupted or mixed generations therefore fail closed. The finalizer independently requires passing per-resolution, cross-resolution, current-source-hash, and canonical-bundle evidence. Failed coupled JSON files cannot set completion.
 
-Current 10° recalibration evidence is `ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json`. The canonical 5°/10° result files and `VALIDATION_SUMMARY_V2_29_28.json` pass all engineering, recent-period, structural, coupled-attribution, and cross-resolution gates. The declared regression run is 143/143 passing and `TESTED_CODE_FINGERPRINT_V2_29_28.json` binds that evidence to the final source. Package info, manifest, and ZIP are emitted only by the strict named-root finalizer; their scientific-predictive status remains false.
+Current 10° recalibration evidence is `ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json`. The canonical 5°/10° result files and `VALIDATION_SUMMARY_V2_29_28.json` pass all engineering, recent-period, structural, coupled-attribution, and cross-resolution gates. `run_v22928_engineering_tests.py` records one pre/post-fingerprinted pytest invocation, per-test NDJSON outcomes, and JUnit XML. `TESTED_CODE_FINGERPRINT_V2_29_28.json` can only be published from that passing unchanged-tree record. The finalizer verifies those bindings again against the completed ZIP; scientific-predictive status remains false.

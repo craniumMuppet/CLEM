@@ -215,6 +215,17 @@ def test_mechanical_spreading_precedes_separate_local_thickness_emergency_safegu
     np.testing.assert_allclose(recovered_equivalent, equivalent, rtol=0.0, atol=1e-12)
     np.testing.assert_allclose(concentration * local, recovered_equivalent, rtol=0.0, atol=1e-12)
 
+
+def test_mechanical_spreading_limit_fails_when_full_cover_cannot_hold_volume() -> None:
+    model = small_model()
+    shape = model.grid.lat.shape
+    equivalent = np.full(
+        shape, model.config.arctic_ice_mechanical_max_local_thickness_m + 0.1
+    )
+    energy = -model.arctic_latent_energy_per_m_wyr_m2 * equivalent
+    with pytest.raises(FloatingPointError, match="mechanical-spreading full-cover limit"):
+        model._arctic_state_from_energy_and_concentration(energy, np.ones(shape))
+
 def test_explicit_greenland_smb_uses_modest_dynamic_discharge_default() -> None:
     config = ModelConfig()
     assert config.greenland_surface_mass_balance_enabled is True

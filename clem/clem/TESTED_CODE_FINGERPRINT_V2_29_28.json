@@ -1,13 +1,24 @@
 {
-  "aggregate_sha256": "3bd600836ec042b2318853a8eaba3c9b5c8ce94e75a18325903c0e388f12819d",
+  "aggregate_sha256": "6111a0d0a96c764d6c9d01626d8fb47b45b3a45e341c0e293bd1b2ab48cab78d",
   "algorithm": "sha256",
-  "coverage": "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, scientific evaluation JSON/manifests, validation evidence, and release-facing documents; the fingerprint itself, package-info/manifest outputs, and transient caches are excluded; test evidence is included",
+  "coverage": "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, scientific evaluation inputs, and release-facing documents; generated test/coupled evidence, the fingerprint itself, package-info/manifest outputs, and transient caches are excluded and are bound separately by raw-evidence and artifact-bundle hashes",
   "excluded_current_generated_files": [
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_10DEG.json",
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_5DEG.json",
+    "COUPLED_TIMESERIES_V2_29_28_10DEG.csv",
+    "COUPLED_TIMESERIES_V2_29_28_5DEG.csv",
     "PACKAGE_INFO_V2_29_28.json",
     "PACKAGE_MANIFEST_V2_29_28.json",
-    "TESTED_CODE_FINGERPRINT_V2_29_28.json"
+    "SEA_ICE_VALIDATION_V2_29_28_10DEG.json",
+    "SEA_ICE_VALIDATION_V2_29_28_5DEG.json",
+    "TESTED_CODE_FINGERPRINT_V2_29_28.json",
+    "TEST_EVENTS_V2_29_28.ndjson",
+    "TEST_RESULTS_V2_29_28.json",
+    "TEST_RESULTS_V2_29_28.junit.xml",
+    "TEST_RESULTS_V2_29_28.txt",
+    "VALIDATION_SUMMARY_V2_29_28.json"
   ],
-  "file_count": 613,
+  "file_count": 606,
   "files": {
     ".github/workflows/ci.yml": {
       "sha256": "0f0fa9d59e46588bf5d6c9de31ee8da2c2d6eee2bf5e5ca3f8c1dab8b2d136b5",
@@ -49,14 +60,6 @@
       "sha256": "6910aae37f2361cd9e42e3ac6383415d45efdd3194d1ca0f86cb9f851b8b20d7",
       "size_bytes": 51998
     },
-    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_10DEG.json": {
-      "sha256": "8408a2b774800633a17e761f9b3f2f480656b74c225659205fb898f3481acc26",
-      "size_bytes": 56546
-    },
-    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_5DEG.json": {
-      "sha256": "deee1388a8342653b2fada3ebb6d0ef24218dba84f422a8dbce1a29e5f7b8e92",
-      "size_bytes": 56693
-    },
     "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json": {
       "sha256": "fb52191186c967a80ce5bbaf1c665a9d2c3b96a393a5a7d554e7b5f61d365bd8",
       "size_bytes": 428771
@@ -94,8 +97,8 @@
       "size_bytes": 202
     },
     "CHANGELOG.md": {
-      "sha256": "01572c89d66947535c720551026d7e9583c220e61e00dd38e5bf5e1325c5d443",
-      "size_bytes": 65474
+      "sha256": "d138bfe335ce4c96b6f5b3d549a6b1b93560267079305b47b938fb3270be2ce8",
+      "size_bytes": 66051
     },
     "CO2_TARGET_SWEEP_V2_19_0.md": {
       "sha256": "ef5e62fdf44ebac612c3b41bdfdacf8dbf1680b1730c00e2d543b536d8bfed63",
@@ -116,14 +119,6 @@
     "COUPLED_TIMESERIES_V2_29_23_5DEG.csv": {
       "sha256": "f30467839bac154284381462044dbba27281f9fbd93c0fb55f537df67a57bed5",
       "size_bytes": 3115030
-    },
-    "COUPLED_TIMESERIES_V2_29_28_10DEG.csv": {
-      "sha256": "ef6e14e11c896b020c75dfeb98fbb574e8f09fe6fe2a56e75864afe1042c1567",
-      "size_bytes": 3177740
-    },
-    "COUPLED_TIMESERIES_V2_29_28_5DEG.csv": {
-      "sha256": "17c70ba82677f18a49f8f0d75197a3e4f60010bf39933ca1698b48e88b653e2a",
-      "size_bytes": 3180968
     },
     "CRASH_LOGGING_LAUNCHER_FIX_2026.txt": {
       "sha256": "e236baab9bb0399b8cc33317d94dc12e70a3b9c462b21874508ba39b060e834e",
@@ -430,8 +425,8 @@
       "size_bytes": 1459
     },
     "README.md": {
-      "sha256": "ab9755da85fa2e89eb91f234cb88096e6f849e131b0bde6080f3bfebe47d67a3",
-      "size_bytes": 4155
+      "sha256": "7c29388d54c8a0c33b02a972154fd61486f6d0818de4bc2eb2c4200913b76a0e",
+      "size_bytes": 4347
     },
     "RELEASE_FINGERPRINT_SCIENTIFIC_REVIEW_FIXED_2026.json": {
       "sha256": "db1f86ed0d8b85369da23ac618cc6fe3bb0c75f7310f2b27a9382217773513e6",
@@ -482,8 +477,8 @@
       "size_bytes": 1915
     },
     "SCIENTIFIC_CONSTRAINTS.md": {
-      "sha256": "719ff3b888ee41dfd59eea1ca89f3bc2957e476883a1e21a9a31dab6e58b8ba7",
-      "size_bytes": 19752
+      "sha256": "0ddf319bbe229a9ed8b74b7d7220ddd1eaf76ecd3b8e870cdcc9997ea23045af",
+      "size_bytes": 19913
     },
     "SCIENTIFIC_REVIEW_FIXES_2026.md": {
       "sha256": "d528a0e42a04beb1bfe1f52953d90dc5b0447cb5108a44b9d54870f08e17c4c0",
@@ -512,14 +507,6 @@
     "SEA_ICE_VALIDATION_V2_29_23_5DEG.json": {
       "sha256": "9196f80d738af25c3e7474798b5f20f73a9ff20b54ee19f7b33348bade752cc8",
       "size_bytes": 174057
-    },
-    "SEA_ICE_VALIDATION_V2_29_28_10DEG.json": {
-      "sha256": "7bdae937c03dbbce099010b9c2608bddc502147dabdad322b1c1cf9f40023849",
-      "size_bytes": 466444
-    },
-    "SEA_ICE_VALIDATION_V2_29_28_5DEG.json": {
-      "sha256": "342a21c145968e211f15c898055df22ffbb4b265f7ab5ed4895e51e5cb6f3563",
-      "size_bytes": 466620
     },
     "SETTING_REFERENCE_GUIDE.md": {
       "sha256": "7b06f55b0b2cea6240469e39c5bae5710962b465736856c79be2f62a61bb7702",
@@ -777,14 +764,6 @@
       "sha256": "01c52836f80e5e0cf5824db2a666b5429b438b8fa15ee7d773e4ba53a30f8765",
       "size_bytes": 588
     },
-    "TEST_RESULTS_V2_29_28.json": {
-      "sha256": "9c484ab550c59000bdce99ac3c433c34dc931c17cf32ec0c0bfb8c2d351fb152",
-      "size_bytes": 18680
-    },
-    "TEST_RESULTS_V2_29_28.txt": {
-      "sha256": "fb2c184b966540361d00d6a332664ee5c8a4105deb47c771f8490ca47aa79672",
-      "size_bytes": 490
-    },
     "TEST_RESULTS_V2_29_3.txt": {
       "sha256": "cf7d5250496ec2e3cd27e3e54c796e871e2044edda347b75586bba9699773337",
       "size_bytes": 3479
@@ -966,8 +945,8 @@
       "size_bytes": 1287
     },
     "V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
-      "sha256": "3913ff9d9c15869565a6bbb27f5dc508054edc07e868e9488176307291d20e5b",
-      "size_bytes": 2502
+      "sha256": "1638cf29daf2e01c6e1ed3bb512232e3b267122aee77055e10234b3bf50ac2e4",
+      "size_bytes": 2994
     },
     "V2_29_2_RELEASE_INTEGRITY.md": {
       "sha256": "9241b505a6d73346c70bec912ccc57de0109dc874030471de6faeb06b3707c54",
@@ -1149,10 +1128,6 @@
       "sha256": "c3971c78f043361361a4e2cd735576296d01ddcf0a84c8cf6e0572f865d02e60",
       "size_bytes": 6068
     },
-    "VALIDATION_SUMMARY_V2_29_28.json": {
-      "sha256": "e667c7c1be03655177d6874957936414f8ab667a02ab5ec07036b11ee4e99952",
-      "size_bytes": 109115
-    },
     "VALIDATION_SUMMARY_V2_29_3.json": {
       "sha256": "5be36591b70444f6708dec370dbc9c859826a623aa839ef4f8b76229c8729268",
       "size_bytes": 13827
@@ -1242,8 +1217,8 @@
       "size_bytes": 597
     },
     "climate_model.py": {
-      "sha256": "849cee0a16b8b8f8f60bc777edfad8838a59b41cf7c3ffaefd4d8678353f0102",
-      "size_bytes": 637022
+      "sha256": "4e0bc4ee97e422fb61192d3298daf3c94b3d1d2059d95cde60def118d062c327",
+      "size_bytes": 638114
     },
     "climate_model_gui.py": {
       "sha256": "cd3bd5ac7ecec7231d80a1ac8d3dcf5196730f83dda45202c1becdbd1b6e5ff4",
@@ -1422,8 +1397,8 @@
       "size_bytes": 3654
     },
     "dependency_integrity.lock.json": {
-      "sha256": "c1b6db4999882eb060ff12e0d81a4b61e59238b6b38b15db49fae0cbbc4d8893",
-      "size_bytes": 20685
+      "sha256": "44a5bca577d4865bc34d1e9e407e6997a2fc708d9614adb743ecdd5a54448b8a",
+      "size_bytes": 22007
     },
     "development_regression_benchmarks.json": {
       "sha256": "70f92f5491b6311561f45d80f69f4accaa9672ceb117edbb3fca17d2c3ab22ad",
@@ -1601,6 +1576,10 @@
       "sha256": "5930b9234436c75c09bdefc5bbc2d728686c828a9463dceccfe4431bf2e5b9c8",
       "size_bytes": 8249
     },
+    "run_v22928_engineering_tests.py": {
+      "sha256": "0792adfb67c110893972434724d05c0f6cd0cd5f9216df394b30368525296d03",
+      "size_bytes": 10211
+    },
     "runtime_provenance.py": {
       "sha256": "9887d7a77b696cf0f7146408fbf6839ae95d18b1bb2750f8bc25a02853b3be86",
       "size_bytes": 6507
@@ -1710,7 +1689,7 @@
       "size_bytes": 9785
     },
     "tests/test_v227_structural_arctic_greenland.py": {
-      "sha256": "1e6d33a10fc089a6c24bd70209286abde05bf3b5e1be1c03c546fbe71110f51f",
+      "sha256": "638f026995981f163aa8f49023ceb4224aa4871c407329f4295d1c65ac9db978",
       "size_bytes": 10143
     },
     "tests/test_v2281_interface_maintenance.py": {
@@ -1770,8 +1749,8 @@
       "size_bytes": 7734
     },
     "tests/test_v22920_prognostic_sea_ice.py": {
-      "sha256": "75bcf420ace9855975d7a750b7b4a74bc47cf6e984431d63232094c995c0c6e0",
-      "size_bytes": 8448
+      "sha256": "dd46fc731638139059eb463442c863e4b974087e41ab0940717a3db653e70d83",
+      "size_bytes": 8947
     },
     "tests/test_v22920_review_corrections.py": {
       "sha256": "8fdec3e5c4dbe2519843b780d1cd711c74fe8486994a54eea6e9948889980c7a",
@@ -1790,8 +1769,8 @@
       "size_bytes": 1430
     },
     "tests/test_v22928_coupled_fail_closed.py": {
-      "sha256": "ad473f3894fb7a07a577b757ac81928a3622c9d2e0ad55bfd087e85ef932fd3b",
-      "size_bytes": 3771
+      "sha256": "7632d6310d81f74d3700de697bbea54fdbaf953da8ebb20c01e218e2c570f4d5",
+      "size_bytes": 5822
     },
     "tests/test_v22928_release_finalization.py": {
       "sha256": "7e2b4f4b211c0e89a94d6103d136202501aaac906121e3c08be1e1c3fae63e9d",
@@ -1814,7 +1793,7 @@
       "size_bytes": 7212
     },
     "tests/test_v2296_native_arctic_integrity.py": {
-      "sha256": "03bad7354acf78309270db9dbbc586fc2873b5c3c624c50d33f875aa4443d33b",
+      "sha256": "47a1a18569bc0ebc72d57084a391fd9526affbbae9a010fe40da239864fbcb61",
       "size_bytes": 9031
     },
     "tests/test_v2297_review_fixes.py": {
@@ -1849,13 +1828,17 @@
       "sha256": "8d843e72c8ae78d776c1e4c33f0e5142f0530113f6ae55e5acf6dcba2debbb5c",
       "size_bytes": 2655
     },
+    "tools/create_dependency_lock.py": {
+      "sha256": "bbf8d61dd064701d8f6610eb32f20f018fc7dbe8fdf0cfb87bcd28eeca3d4dba",
+      "size_bytes": 2208
+    },
     "tools/create_v22927_fingerprint.py": {
       "sha256": "627da87d0e748b73edeabd8d45a6336ff2c1a51b73717b14d9b9db410410806b",
       "size_bytes": 605
     },
     "tools/create_v22928_fingerprint.py": {
-      "sha256": "5331da3580019d012db9da5a68e2f41a7c0999a531428d4526bf5be3a010b6f4",
-      "size_bytes": 605
+      "sha256": "c8b907d498218696788a09c6aff32d3c388e362cda50f545dc36ead5513b7b20",
+      "size_bytes": 974
     },
     "tools/evaluate_v2297_candidate.py": {
       "sha256": "73c396b8f6366bba316b67e3eb640ecad520d634bccbab31567dcf24cd6770db",
@@ -1886,8 +1869,8 @@
       "size_bytes": 8252
     },
     "tools/finalize_v22928_release.py": {
-      "sha256": "5cc504d0ce43964af92ca46963ba51044a4d9b524e1a1f0a1338265fd6dec807",
-      "size_bytes": 13263
+      "sha256": "d25ea976a48c4b5668f19bf018265efe9949b30f24efe26bd69327d28b0a9433",
+      "size_bytes": 21676
     },
     "tools/package_v227.py": {
       "sha256": "2a9739c8dc5f1cb3af9096e8fc50ece3a2ccee29ae95c9b0989e5ff2d3426edf",
@@ -2082,8 +2065,8 @@
       "size_bytes": 5585
     },
     "tools/v22928_release_integrity.py": {
-      "sha256": "4dfb66a2b675e03c2e1beda55e2cf85f734c40e96d0e047f1210d454964fb035",
-      "size_bytes": 5657
+      "sha256": "df82ab68006f0e1acdf69c15e86df3938c7ccc221bb7d881a31372ccf18e2bcc",
+      "size_bytes": 7150
     },
     "tools/validate_sea_ice_fix.py": {
       "sha256": "3e0af283fbd0f6f5fa0227aa35a7b0d04ac54687748867cc786aa437f4240c20",
@@ -2098,8 +2081,8 @@
       "size_bytes": 12400
     },
     "tools/verify_dependency_lock.py": {
-      "sha256": "95a77955b55081479540c7d0f222641c6f9f6cb9e893494d29380c63c615bdfd",
-      "size_bytes": 2554
+      "sha256": "8dab06eb41f6da4de0c6deeccbb849ce6683c406dfde565fa79bfe26acc21b3a",
+      "size_bytes": 3164
     },
     "tools/verify_sea_ice_fix_manifest.py": {
       "sha256": "06bad77e76daa110e463ba03680efe05ed35b277d5035ede70fb82b99cc6a65c",
@@ -2202,8 +2185,8 @@
       "size_bytes": 404
     },
     "validate_v22928_coupled.py": {
-      "sha256": "15e07b7e17d20e74be5b258c41c41cfce1a9f881d4fb0a0a24628a1f91e8202f",
-      "size_bytes": 4673
+      "sha256": "279a4ccdf860761c60d1e3e028a74171f1abd92b8850b30dd5fa1f9d69cfe2be",
+      "size_bytes": 5721
     },
     "validate_v2293.py": {
       "sha256": "e0fb93f19a815b4bab113b06ab38e69e962b521f773d6b8e1be2fd468929e8ac",
