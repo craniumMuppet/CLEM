@@ -1,0 +1,108 @@
+{
+  "resolution_deg": 10.0,
+  "runtime_s": 97.10937282600207,
+  "calibration_passed": true,
+  "calibration_gates": {
+    "march_native_area_rmse_le_0p50": true,
+    "september_native_area_rmse_le_0p80": true,
+    "extent_is_multiplier_derived_and_non_independent": true,
+    "march_extent_trend_is_diagnostic_only": true,
+    "raw_march_area_trend_is_not_a_calibration_target": true,
+    "september_native_area_trend_is_negative": true,
+    "september_native_area_trend_error_le_0p20": true,
+    "september_native_area_trend_fraction_ge_0p60": true,
+    "seasonal_native_area_amplitude_error_le_0p60": true,
+    "march_area_mapping_is_identity": true,
+    "september_area_mapping_is_identity": true
+  },
+  "development_evaluation_passed": true,
+  "development_evaluation_gates": {
+    "march_native_area_rmse_le_0p50": true,
+    "september_native_area_rmse_le_0p60": true,
+    "extent_is_multiplier_derived_and_non_independent": true,
+    "march_area_mapping_is_identity": true,
+    "september_area_mapping_is_identity": true
+  },
+  "packaged_observation_hashes_match": true,
+  "scientific_temporal_skill_gate_passed": true,
+  "all_current_sea_ice_engineering_gates_passed": true,
+  "all_current_sea_ice_release_gates_passed": true,
+  "calibration_1979_2020": {
+    "march_area": {
+      "model_mean_million_km2": 13.306552653326424,
+      "observed_mean_million_km2": 13.129761904761903,
+      "rmse_million_km2": 0.46705915113615104,
+      "mae_million_km2": 0.37267443085575397,
+      "bias_million_km2": 0.17679074856451718,
+      "correlation": 0.22931022448868582,
+      "model_trend_million_km2_per_decade": -0.2486043522359954,
+      "observed_trend_million_km2_per_decade": -0.03817356778218968
+    },
+    "september_area": {
+      "model_mean_million_km2": 3.9980119400793344,
+      "observed_mean_million_km2": 4.154999999999999,
+      "rmse_million_km2": 0.521996471305888,
+      "mae_million_km2": 0.42627270607180584,
+      "bias_million_km2": -0.15698805992066647,
+      "correlation": 0.7703470236855778,
+      "model_trend_million_km2_per_decade": -0.49081750544709324,
+      "observed_trend_million_km2_per_decade": -0.49230208248926344
+    },
+    "model_seasonal_amplitude_million_km2": 9.30854071324709,
+    "observed_seasonal_amplitude_million_km2": 8.974761904761904
+  },
+  "development_2021_2025": {
+    "march_area": {
+      "model_mean_million_km2": 12.42363176382744,
+      "observed_mean_million_km2": 12.815999999999999,
+      "rmse_million_km2": 0.49959962483905956,
+      "mae_million_km2": 0.444578631344811,
+      "bias_million_km2": -0.3923682361725575,
+      "correlation": 0.4707883251135548,
+      "model_trend_million_km2_per_decade": -0.5437168551630318,
+      "observed_trend_million_km2_per_decade": -1.2100000000000026
+    },
+    "september_area": {
+      "model_mean_million_km2": 2.5949844486174043,
+      "observed_mean_million_km2": 3.152,
+      "rmse_million_km2": 0.5976432698026941,
+      "mae_million_km2": 0.5570155513825958,
+      "bias_million_km2": -0.5570155513825958,
+      "correlation": 0.7351625113453805,
+      "model_trend_million_km2_per_decade": -0.6072816999789912,
+      "observed_trend_million_km2_per_decade": -1.3400000000000003
+    },
+    "model_seasonal_amplitude_million_km2": 9.828647315210036,
+    "observed_seasonal_amplitude_million_km2": 9.663999999999998
+  },
+  "rolling_origin": {
+    "march_area": {
+      "model_rmse_million_km2": 0.34102264352209544,
+      "one_year_persistence_rmse_million_km2": 0.37403208418530065,
+      "expanding_linear_trend_rmse_million_km2": 0.407188313841476,
+      "model_skill_score_vs_persistence": 0.08825296561150586,
+      "model_skill_score_vs_expanding_linear_trend": 0.16249403057559209
+    },
+    "march_extent": {
+      "model_rmse_million_km2": 0.38404378288881014,
+      "one_year_persistence_rmse_million_km2": 0.33483356091275185,
+      "expanding_linear_trend_rmse_million_km2": 0.2897315972777733,
+      "model_skill_score_vs_persistence": -0.14696920416792114,
+      "model_skill_score_vs_expanding_linear_trend": -0.3255157065959129
+    },
+    "september_area": {
+      "model_rmse_million_km2": 0.5252942852472277,
+      "one_year_persistence_rmse_million_km2": 0.5631283277491139,
+      "expanding_linear_trend_rmse_million_km2": 0.5468596284035647,
+      "model_skill_score_vs_persistence": 0.06718547200975156,
+      "model_skill_score_vs_expanding_linear_trend": 0.03943487878103624
+    },
+    "september_extent": {
+      "model_rmse_million_km2": 0.6833347780312512,
+      "one_year_persistence_rmse_million_km2": 0.7094878244007948,
+      "expanding_linear_trend_rmse_million_km2": 0.6080191451429692,
+      "model_skill_score_vs_persistence": 0.03686186777289868,
+      "model_skill_score_vs_expanding_linear_trend": -0.12387049567423136
+    }
+  }
+}

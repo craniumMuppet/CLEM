@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "arctic_basal_ocean_exchange_wm2_k": 10.0,
+    "arctic_forced_ocean_heat_convergence_onset_warming_c": 1.0,
+    "arctic_forced_ocean_heat_convergence_wm2_per_k": 4.0,
+    "arctic_ice_area_formation_volume_sensitivity": 4.0,
+    "arctic_max_equivalent_thickness_m": 4.5,
+    "arctic_reference_air_temperature_at_full_latitude_c": -9.5
+  },
+  "ice_fractions_within_bounds": true,
+  "march_skill_vs_expanding_linear_trend": 0.1706367083603434,
+  "march_skill_vs_persistence": 0.0971174544548874,
+  "maximum_local_ice_thickness_m": 4.5,
+  "mode": "historical",
+  "not_applicable_nonfinite_diagnostic_columns": [
+    "hybrid_ssp_after_weight"
+  ],
+  "prognostic_state_arrays_finite": true,
+  "resolution_deg": 5.0,
+  "runtime_s": 146.45991482500176,
+  "september_2025_area_million_km2": 2.651664621331813,
+  "september_2025_maximum_local_thickness_m": 4.5,
+  "september_2025_mean_local_thickness_m": 2.598990889849719,
+  "september_2025_volume_thousand_km3": 6.891652193778187,
+  "september_skill_vs_expanding_linear_trend": 0.1083900097167283,
+  "september_skill_vs_persistence": 0.13414849876910107,
+  "september_trend_million_km2_per_decade": -0.45038635753336687,
+  "unexpected_nonfinite_numeric_columns": []
+}

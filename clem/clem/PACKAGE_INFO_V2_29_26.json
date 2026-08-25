@@ -1,0 +1,21 @@
+{
+  "arctic_scientific_status": {
+    "calibration_passed": true,
+    "development_evaluation_passed": true,
+    "nested_fold_specific_hindcasts_run": false,
+    "nsidc_0611_available": false,
+    "osi_saf_september_independent_gate_passed": false,
+    "physical_volume_thickness_gate_passed": true,
+    "scientific_predictive_validation_complete": false
+  },
+  "model_version": "2.29.26",
+  "package_name": "emergent_global_climate_model_v2_29_26",
+  "release_classification": "engineering_release_with_observational_recalibration; scientific_predictive_validation_incomplete",
+  "test_evidence": "TEST_RESULTS_V2_29_26.json",
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "a48b76fb3e147c1bdaa5028629b99d42c4678031a3fa44ab657f808feeee2cc4",
+    "file": "TESTED_CODE_FINGERPRINT_V2_29_26.json",
+    "file_count": 327,
+    "profile": "tested-code"
+  }
+}

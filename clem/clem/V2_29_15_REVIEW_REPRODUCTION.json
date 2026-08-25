@@ -1,0 +1,69 @@
+{
+  "model_version": "2.29.15",
+  "near_zero_volume_reproduction": {
+    "concentration": [
+      0.0,
+      5.000444525020548e-13,
+      5.00002252254488e-10,
+      5.022107706566656e-07,
+      7.205695967508606e-05
+    ],
+    "concentration_at_1e_9_m": 5.00002252254488e-10,
+    "concentration_at_zero_m": 0.0,
+    "diagnosed_equivalent_thickness_m": [
+      -0.0,
+      1e-12,
+      1e-09,
+      1e-06,
+      0.0001
+    ],
+    "equivalent_thickness_m": [
+      0.0,
+      1e-12,
+      1e-09,
+      1e-06,
+      0.0001
+    ],
+    "local_thickness_m": [
+      0.0,
+      1.9998222057985748,
+      1.999990991022629,
+      1.9911958453070413,
+      1.3877909982729308
+    ],
+    "maximum_volume_identity_error_m": 1.3552527156068805e-20,
+    "upper_prior_concentration_at_1e_9_m": 5.000031025946043e-10,
+    "upper_prior_maximum_volume_identity_error_m": 0.0
+  },
+  "run": {
+    "dt_years": 0.05,
+    "end_year": 2101.0,
+    "fully_active_arctic_latitude_deg": 66.0,
+    "resolution_deg": 10.0,
+    "scenario": "ssp245",
+    "start_year": 1850.0
+  },
+  "saved_state_reproduction": {
+    "atlantic": {
+      "saved_concentration_max_error": 2.5268676040468563e-13,
+      "saved_local_thickness_max_error_m": 0.0,
+      "saved_open_water_temperature_max_error_c": 0.0,
+      "saved_volume_identity_max_error_m": 5.970779426434092e-13,
+      "state_concentration_max_error": 2.5268676040468563e-13
+    },
+    "non_atlantic": {
+      "saved_concentration_max_error": 1.3911094498553211e-13,
+      "saved_local_thickness_max_error_m": 0.0,
+      "saved_open_water_temperature_max_error_c": 0.0,
+      "saved_volume_identity_max_error_m": 3.3018032752352156e-13,
+      "state_concentration_max_error": 1.3911094498553211e-13
+    }
+  },
+  "transient_temperature_gate": {
+    "cold_actual_air_temperature_c": -17.0,
+    "cold_weight": 0.65,
+    "reference_air_temperature_c": -17.0,
+    "warm_actual_air_temperature_c": 0.0,
+    "warm_weight": 0.0
+  }
+}

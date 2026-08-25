@@ -1,0 +1,18 @@
+{
+  "duration_years": 200.0,
+  "march": {
+    "drift_million_km2": -2.1114487935847137e-10,
+    "first_20_mean_area_million_km2": 13.946866291023,
+    "last_20_mean_area_million_km2": 13.946866290811855
+  },
+  "maximum_absolute_gmst_c": 2.273920752855566e-15,
+  "maximum_absolute_toa_wm2": 1.309594353003554e-15,
+  "model_version": "2.29.24",
+  "resolution_deg": 10.0,
+  "runtime_seconds": 64.26211596299981,
+  "september": {
+    "drift_million_km2": 1.8982149185831076e-10,
+    "first_20_mean_area_million_km2": 5.586873391688057,
+    "last_20_mean_area_million_km2": 5.586873391877878
+  }
+}

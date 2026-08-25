@@ -1,0 +1,61 @@
+{
+  "schema_version": "2.0",
+  "dataset": "NOAA/NSIDC Sea Ice Index, Version 4",
+  "source": "National Snow and Ice Data Center",
+  "product_id": "G02135",
+  "product_url": "https://nsidc.org/data/g02135/versions/4",
+  "retrieval_date": "2026-07-30",
+  "months": [
+    3,
+    9
+  ],
+  "quantities": [
+    "Northern Hemisphere sea-ice area",
+    "Northern Hemisphere sea-ice extent"
+  ],
+  "units": "million square kilometres",
+  "calibration_period": [
+    1979,
+    2020
+  ],
+  "validation_informed_development_evaluation_period": [
+    2021,
+    2025
+  ],
+  "prospective_untouched_temporal_evaluation_start_year": 2027,
+  "evidence_partition": {
+    "1979-2020": "calibration and validation-informed development; not independent validation",
+    "2021-2025": "previously inspected development-evaluation data; not an independent holdout",
+    "2026": "March record was already available and inspected; not untouched",
+    "2027-onward": "reserved prospectively and must not be used for tuning before evaluation"
+  },
+  "source_product_transition": {
+    "1979-2024": {
+      "source_data_id": "NSIDC-0051",
+      "title": "Sea Ice Concentrations from Nimbus-7 SMMR and DMSP SSM/I-SSMIS Passive Microwave Data, Version 2",
+      "url": "https://nsidc.org/data/nsidc-0051/versions/2"
+    },
+    "2025-onward": {
+      "source_data_id": "NSIDC-0803",
+      "title": "AMSR2 Daily Polar Gridded Sea Ice Concentrations, Version 1",
+      "url": "https://nsidc.org/data/nsidc-0803/versions/1"
+    },
+    "interpretation": "The packaged table preserves the Sea Ice Index v4 source-data identifiers. No claim is made that NSIDC-0051 and NSIDC-0803 are measurement-identical; product transition effects are part of the observational uncertainty."
+  },
+  "packaged_file_sha256": {
+    "N_03_extent_v4.0.csv": "01c4fa25d1a4a35aee9558eeecd652564fc91582e35e7b2fcaf8c19ebf56aff7",
+    "N_09_extent_v4.0.csv": "bdeb4dea8b52f6dc8a8faecfd5d220dc758b6dd2ddea345d7b18897df0d9716f"
+  },
+  "validation_informed_development_period": [
+    2021,
+    2025
+  ],
+  "prospective_untouched_start_year": 2027,
+  "independent_holdout_claimed": false,
+  "raw_area_status": "provenance_only_excluded_from_calibration_and_skill",
+  "raw_area_exclusion_reason": "Changing satellite pole-hole masks make the raw monthly area series inhomogeneous for long-term trend calibration.",
+  "extent_status": "historical_diagnostic_from_more_continuous_extent_series",
+  "required_scientific_area_target": "homogeneous concentration-derived fixed-mask area; see data/validation/sea_ice_fixed_mask/README.md",
+  "required_physical_targets": "independent sea-ice volume and/or thickness; see data/validation/sea_ice_physical/README.md",
+  "calibration_period_note": "The date partition is retained for provenance. Raw NSIDC area is not a calibration target in v2.29.25 scientific-review fixes."
+}

@@ -1,0 +1,34 @@
+Emergent-Sensitivity Global Climate Model v2.16.1 validation
+
+Hybrid SSP correction
+---------------------
+All v2.16.1 hybrid SSP transition tests passed.
+
+Fast model regression
+---------------------
+All climate-model v2.16.1 fast smoke tests passed.
+
+Interface metadata
+------------------
+Tooltip coverage passed: 87 desktop settings, 55 Monte Carlo parameters, 75 Streamlit controls.
+
+Monte Carlo smoke tests
+-----------------------
+Seed resolution, constrained utilities, freshwater adjustors, and selected-scenario execution passed.
+
+AMOC targeted regression
+------------------------
+Control equilibrium, hybrid weakening, SSP5-8.5 comparison, continuous collapse, and active control branch tests passed.
+
+Full 1850-2500 hybrid validation
+--------------------------------
+The identical v2.16.0 and v2.16.1 base configurations were run from 1850 to 2500.
+At the 2120-2130 transition:
+- v2.16.0 CO2: 1397.57 -> 615.18 ppm
+- v2.16.1 CO2: 1397.57 -> 1461.59 ppm
+- v2.16.0 forcing: 11.201 -> 5.292 W/m2
+- v2.16.1 forcing: 11.201 -> 11.480 W/m2
+- v2.16.0 GMST: 6.802 -> 4.906 degC
+- v2.16.1 GMST: 6.802 -> 7.109 degC
+- v2.16.0 AMOC: 13.679 -> 13.591 Sv, followed by rapid recovery
+- v2.16.1 AMOC: 13.679 -> 13.074 Sv, with no switch-driven rebound

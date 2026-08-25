@@ -1,0 +1,87 @@
+EMERGENT GLOBAL CLIMATE MODEL v2.29.6 - FINAL TEST RESULTS
+Generated: 2026-07-31
+
+RELEASE VERDICT: PASS
+
+ISOLATED REGRESSION INVENTORY
+- Current collected inventory: 220 tests
+- Passed: 220
+- Failed: 0
+- Timed out: 0
+- Missing: 0
+- Sum of isolated test runtimes: 10951.511 seconds
+- Wall runtime with 8 workers: 1393.112 seconds
+- Method: each pytest node ran in a separate subprocess with plugin autoload disabled, normal setup/execution/teardown, and an independent 1800-second timeout.
+- Frozen-source integrity: 243/243 persisted source, test, documentation, configuration, and data hashes matched before and after the complete inventory.
+
+VALIDATION PIPELINE
+- Parallel validation tasks: 19/19 passed
+- Release-blocking checks: 35/35 passed
+- Native-area calibration gates: 10/10 passed
+- Validation-informed 2021-2025 evaluation gates: 6/6 passed
+- 2021-2025 is explicitly classified as validation-informed development evidence, not an independent holdout.
+- Prospective untouched temporal evaluation begins in 2027 because March 2026 was inspected during correction work.
+- OISST open-water metadata is treated only as a broad external sanity reference; no reproduced quantitative-validation claim is made without source hashes and processed output.
+- Validation records regenerated from the tested final source tree:
+  - VALIDATION_SUMMARY_V2_29_6.json
+  - DEEP_VALIDATION_V2_29_6.json
+  - IMPLEMENTATION_AUDIT_V2_29_6.json
+
+KEY FINAL METRICS
+- Historical GMST, 2011-2020: 1.111276 C
+- Ocean heat-content change, 1971-2018: 385.921634 ZJ
+- Annual Arctic amplification, 1979-2021: 3.011498x
+- DJF / JJA / SON Arctic amplification: 4.053264x / 1.780605x / 2.863317x
+- SSP2-4.5 AMOC weakening by 2100: 27.700604%
+- SSP5-8.5 AMOC weakening by 2100: 47.006901%
+- Native reference-cycle March / September ice area: 13.392802 / 4.268769 million km2
+- 1979-2020 model / observed March area: 13.106977 / 13.129762 million km2
+- 1979-2020 model / observed September area: 3.695664 / 4.155000 million km2
+- 2021-2025 model / observed March area: 12.747558 / 12.816000 million km2
+- 2021-2025 model / observed September area: 3.178370 / 3.152000 million km2
+- SSP2-4.5 / SSP5-8.5 native September area, 2081-2100: 2.236629 / 1.468855 million km2
+- Maximum native/published area identity error: 0 million km2
+- Maximum reference equivalent ice thickness / emergency guard: 2.061527 / 8.0 m
+- Emergency-thickness-cap occupancy: 0
+- Abrupt-2xCO2 energy residual: -0.025090%
+- Corrected 500-year GMST / AMOC drift: -2.2874e-14 C / +7.10543e-15 Sv
+- Uncorrected 500-year GMST / AMOC drift: +7.60866e-06 C / -3.49473e-06 Sv
+- 500-year final salt residual: 0 ppm
+- Hosing recovery after 100 years: 90.786557%
+- Greenland SSP2-4.5 contribution by 2100: 91.432360 mm sea-level equivalent
+
+V2.29.6 FIXES VERIFIED
+- Published Northern Hemisphere sea-ice area is exactly the native thermodynamic integral; no statistical area correction remains.
+- The extent-only operator is continuous, monotone, zero-intercept, zero-preserving, and bounded.
+- Native March/September area, seasonal amplitude, historical trend, recent-period error, winter coverage, and cap occupancy are release-gated.
+- The active 1.2 m calibration cap is removed; the 8 m emergency guard is inactive in the reference cycle.
+- Northern Hemisphere legacy annual ice is no longer double counted beneath the seasonal Arctic module.
+- AMOC anomalous temperature-density coupling is restored to 1.00 while hydrological and Greenland freshwater defaults remain 0.006 and 0.005 Sv/K.
+- The explicit 0.50 W/m2/K Arctic inversion/lapse-rate closure is documented as tuning-informed, not independent validation.
+- Positive post-collapse hydraulic AMOC targets saturate smoothly toward 20 Sv, eliminating the 25.5 Sv long-hold restart overshoot without altering weakening targets below the control strength.
+- Windows and Ubuntu CI, dependency provenance, native-map roles, overwrite safety, worker supervision, and Monte Carlo safety remain verified.
+- Meinshausen et al. (2020) remains the synchronized default forcing formula.
+
+SCIENTIFIC EVIDENCE ROLES
+- Development calibration: 1979-2020 NSIDC March/September area and extent plus predeclared physical-development ranges.
+- Validation-informed development evaluation: 2021-2025 NSIDC records; not independent because they were inspected during v2.29.5/v2.29.6 work.
+- Prospective temporal evaluation: 2027 onward, reserved before further tuning.
+- External plausibility only: packaged OISST bounds without local source bytes/hashes or processed output.
+- Structural validation: native-area identity, zero preservation, continuity, conservation, energy accounting, control drift, timestep, hosing, resolution, perturbation recovery, interface safety, and package integrity.
+
+LIMITATIONS RETAINED BY DESIGN
+- The model is a reduced-complexity sensitivity emulator, not a spatially resolved GCM.
+- Sea-ice longitude occupancy and extent maps are display/diagnostic reconstructions with no regional forecast skill.
+- Arctic open-water temperatures are reduced-sector diagnostics, not local or coastal forecasts.
+- AMOC collapse timing, the 20 Sv extreme-recovery saturation, and Greenland regional evolution are sensitivity closures rather than precise forecasts.
+
+EXACT ARCHIVE EXTRACTION VERIFICATION
+- SHA-256 checksum verified before extraction.
+- ZIP compressed-data integrity test passed.
+- Mandatory data/world_grid_5deg.npz asset present and nonempty.
+- Extracted source/data audit: 44/44 SHA-256 values matched.
+- Extracted validation records: model version 2.29.6 and 35/35 release checks passed in both summary and deep-validation records.
+- Extracted focused release tests: 58/58 passed.
+- Extracted one-year constant-control startup completed with v2.29.6, finite state, 17 Sv control AMOC, and Meinshausen et al. (2020) as the default forcing formula.
+- Extracted Monte Carlo startup: 2/2 members succeeded with two workers; 0 failed.
+- Archive contains no .git directory, pytest cache, bytecode cache, temporary file, PID/exit artifact, or validation scratch directory.

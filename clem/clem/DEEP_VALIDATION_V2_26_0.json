@@ -1,0 +1,107 @@
+{
+  "model_version": "2.26.0",
+  "generated_utc": "2026-07-28T15:03:21.009773+00:00",
+  "control_500_year": {
+    "model_version": "2.26.0",
+    "years": 500.0,
+    "initial": {
+      "global_surface_warming_c": 0.0,
+      "arctic_warming_c": 0.0,
+      "amoc_sv": 17.0,
+      "toa_imbalance_wm2": -2.880811459327587e-16,
+      "salt_conservation_error_ppm": 0.0,
+      "total_resolved_heat_content_anomaly_zj": 0.0
+    },
+    "final": {
+      "global_surface_warming_c": -3.1199989559304115e-14,
+      "arctic_warming_c": -9.059204312491178e-14,
+      "amoc_sv": 17.00000000000006,
+      "toa_imbalance_wm2": 2.502254521961571e-14,
+      "salt_conservation_error_ppm": 0.0,
+      "total_resolved_heat_content_anomaly_zj": -4.047538218359059e-11
+    },
+    "drift": {
+      "global_surface_warming_c": -3.1199989559304115e-14,
+      "arctic_warming_c": -9.059204312491178e-14,
+      "amoc_sv": 6.039613253960852e-14,
+      "toa_imbalance_wm2": 2.5310626365548468e-14,
+      "salt_conservation_error_ppm": 0.0,
+      "total_resolved_heat_content_anomaly_zj": -4.047538218359059e-11
+    }
+  },
+  "two_sided_arctic_perturbations_and_hosing_recovery": {
+    "model_version": "2.26.0",
+    "perturbations": [
+      {
+        "sign": -1.0,
+        "initial": {
+          "arctic_warming_c": 0.0,
+          "arctic_thermodynamic_sea_ice_fraction": 0.9582976926107164,
+          "amoc_sv": 17.0,
+          "salt_conservation_error_ppm": 0.0
+        },
+        "final": {
+          "arctic_warming_c": -0.0005446577886402632,
+          "arctic_thermodynamic_sea_ice_fraction": 0.9463760053063575,
+          "amoc_sv": 16.992338673101212,
+          "salt_conservation_error_ppm": -3.1086244689504383e-09
+        }
+      },
+      {
+        "sign": 1.0,
+        "initial": {
+          "arctic_warming_c": 0.0,
+          "arctic_thermodynamic_sea_ice_fraction": 0.9338759590696432,
+          "amoc_sv": 17.0,
+          "salt_conservation_error_ppm": 0.0
+        },
+        "final": {
+          "arctic_warming_c": 0.0001605382285167513,
+          "arctic_thermodynamic_sea_ice_fraction": 0.946219012299487,
+          "amoc_sv": 17.00218297581059,
+          "salt_conservation_error_ppm": 0.0
+        }
+      }
+    ],
+    "hosing_recovery": {
+      "initial_amoc_sv": 17.0,
+      "amoc_after_40yr_hosing_sv": 14.628498894923197,
+      "amoc_after_100yr_recovery_sv": 17.074237030646607,
+      "recovery_percent_of_initial_loss": 103.13038144859743
+    }
+  },
+  "energy_closure": {
+    "integrated_toa_zj": 2256.541964785937,
+    "resolved_heat_change_zj": 2255.583874566573,
+    "residual_zj": -0.9580902193642942,
+    "relative_residual_percent": -0.04245833821464879
+  },
+  "timestep_convergence": {
+    "dt_0p025": {
+      "historical_gmst_2011_2020_c": 1.1868374726484758,
+      "historical_ocean_heat_content_change_1971_2018_zj": 363.1205395558038,
+      "historical_arctic_amplification_1979_2021_ratio": 3.487918556738882,
+      "ssp245_amoc_decline_2100_percent": 20.040347936516657
+    },
+    "dt_0p05": {
+      "historical_gmst_2011_2020_c": 1.1869817566003518,
+      "historical_ocean_heat_content_change_1971_2018_zj": 363.05183853875985,
+      "historical_arctic_amplification_1979_2021_ratio": 3.489307714670933,
+      "ssp245_amoc_decline_2100_percent": 20.05410314391436
+    },
+    "dt_0p1": {
+      "historical_gmst_2011_2020_c": 1.1875549806627728,
+      "historical_ocean_heat_content_change_1971_2018_zj": 363.1083382762747,
+      "historical_arctic_amplification_1979_2021_ratio": 3.4931050551477627,
+      "ssp245_amoc_decline_2100_percent": 20.069476779202155
+    },
+    "max_absolute_spread": {
+      "historical_gmst_2011_2020_c": 0.0007175080142969303,
+      "historical_ocean_heat_content_change_1971_2018_zj": 0.06870101704396347,
+      "historical_arctic_amplification_1979_2021_ratio": 0.005186498408880524,
+      "ssp245_amoc_decline_2100_percent": 0.029128842685498313
+    }
+  },
+  "internal_arctic_heat_exchange_test": "passed at <1e-10 normalized energy units",
+  "salt_conservation": "maintained; see control and perturbation records"
+}

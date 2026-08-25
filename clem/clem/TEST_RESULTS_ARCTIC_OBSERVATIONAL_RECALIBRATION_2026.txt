@@ -1,0 +1,23 @@
+Arctic observational recalibration verification - 2026-08-11
+
+Canonical production run:
+- Resolution: 10 degrees
+- Timestep: 0.05 years
+- Exact source-specific observation operators
+- calibration_passed: true
+- validation_informed_development_evaluation_passed: true
+- physical_volume_thickness_validation.passed: true
+- OSI SAF March gate: pass
+- OSI SAF September gate: fail (RMSE 1.124967699973856 million km2 > 1.0)
+- scientific_validation_complete: false (NSIDC-0611 missing; nested fold-specific hindcasts not run; OSI September independent cross-check misses)
+
+Focused regression command:
+pytest -q tests/test_2026_arctic_observational_recalibration.py tests/test_2026_arctic_data_processing_repairs.py tests/test_six_source_arctic_validation_stack.py tests/test_2026_sea_ice_scientific_review_fixes.py tests/test_sea_ice_actual_fix.py tests/test_v2299_scientific_review_fixes.py::test_version_and_reviewed_defaults tests/test_v2299_scientific_review_fixes.py::test_historical_scores_are_explicitly_non_predictive tests/test_v2299_scientific_review_fixes.py::test_five_year_blocks_do_not_overlap tests/test_v22918_release_corrections.py::test_version_and_recalibrated_compactness_default tests/test_v22917_arctic_sweep_integrity.py::test_version_and_revised_arctic_defaults tests/test_v2297_review_fixes.py::test_selected_v22910_physics_defaults_are_frozen tests/test_v228_fractional_arctic.py::test_v228_defaults_and_freshwater_are_preserved
+Result: 45 passed in 20.22s
+
+Reference-cycle integrity:
+pytest -q tests/test_v2295_physical_integrity.py::test_version_native_cycle_and_amoc_physics_defaults
+Result: 1 passed in 20.14s
+
+Total unique checks above: 46 passed.
+Modified modules compile cleanly.

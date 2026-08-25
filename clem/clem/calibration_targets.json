@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "registry_version": "1.0.0",
+  "description": "Quantities used to configure or calibrate the default model. These names are prohibited from the held-out benchmark set.",
+  "calibration_targets": {
+    "initial_amoc_sv": {"role": "initial-condition calibration"},
+    "initial_fovs_sv": {"role": "initial-condition calibration"},
+    "atlantic_heat_transport_pw": {"role": "transport calibration"},
+    "equilibrium_ecs_c": {"role": "feedback calibration"},
+    "tcr_c": {"role": "feedback calibration"},
+    "feedbacks_wm2_k": {"role": "feedback calibration"}
+  }
+}

@@ -1,0 +1,51 @@
+EGCM v2.29.18 targeted release verification
+===========================================
+
+Model version: 2.29.18
+Date: 2026-08-03
+
+PASS — source compilation
+  python -m compileall -q .
+  Result: all packaged Python sources compiled successfully.
+
+PASS — focused v2.29.18 / retained v2.29.17 GUI and integrity suite
+  pytest -q tests/test_v22918_release_corrections.py tests/test_v22917_arctic_sweep_integrity.py tests/test_v22917_gui_startup.py
+  Result: 48 passed in 26.62 s.
+
+PASS — resumable sweep, target baseline, Monte Carlo, and AMOC baseline suites
+  pytest -q tests/test_v2298_resumable_sweeps.py tests/test_v22911_target_baseline_safety.py tests/test_v22912_monte_carlo_integrity.py tests/test_v22913_integrity_amoc_baseline.py
+  Result: 30 passed in 22.68 s.
+
+PASS — recovery, winter sea-ice, and release-integrity suites
+  pytest -q tests/test_v22914_recovery_validation_seaice.py tests/test_v22915_winter_seaice_integrity.py tests/test_v22916_release_integrity.py
+  Result: 18 passed in 29.04 s.
+
+PASS — targeted automated tests
+  Total completed: 96 passed, 0 failed.
+
+PASS — version-matched historical sea-ice calibration
+  5-degree SSP2-4.5 1850–2027: all mandatory calibration gates passed.
+  10-degree SSP2-4.5 1850–2027: all mandatory calibration gates passed.
+  Strict development-only checks did not all pass and remain explicitly non-release-blocking.
+  Independent predictive validation is not claimed.
+
+PASS — representative CO2 target sweep integration
+  2 members x 2 explicit targets (300, 350 ppm), 4/4 target cells completed.
+  Per-target survival gates passed. The two-member uncertainty product was correctly classified exploratory-only.
+  Output: /mnt/data/fix_v22918/small_sweep_v22918 during verification.
+
+PASS — desktop GUI construction
+  Included in tests/test_v22917_gui_startup.py. The complete Tk window, including the new compactness fields, constructed under a virtual display.
+
+PASS — checkpoint and cache regressions
+  One-million-element zero-array safe-checkpoint round trip passed.
+  Longwave/configuration cache-key separation passed.
+  Complete compactness prior-support property tests passed.
+
+Collection scope
+  pytest --collect-only -q
+  Result: 342 tests collected.
+
+Not completed in this review environment
+  The complete 342-test suite was not run end-to-end. Several retained legacy/property batches contain individually isolated long climate integrations and exceeded the per-command review timeout without reporting a specific assertion failure. These are not counted as passes.
+  The user's full 16-member x 10-target, 1000-year-equilibration sweep was not rerun.

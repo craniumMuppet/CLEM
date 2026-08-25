@@ -1,0 +1,42 @@
+Emergent-Sensitivity Global Climate Model v2.26.0
+Final test and validation record
+Generated: 2026-07-28T15:03:21.009773+00:00
+
+MAINTAINED TEST MATRIX
+- 50 default maintained tests passed.
+- 4 continuation tests passed.
+- 1 optional Hypothesis property module skipped because Hypothesis was unavailable.
+- Thermodynamic Arctic suite: 8/8 passed.
+- Accuracy/default suite: 3/3 passed.
+- Migrated AMOC dynamics script: 4/4 passed.
+- GUI command builder: passed.
+- Desktop layout under Xvfb: passed.
+- Python compilation: passed.
+
+ORIGINAL V2.23 TESTS ON V2.26
+- 31/33 unchanged maintained tests passed.
+- Intentional failure 1: v2.23 expects used_for_tuning=false; v2.26 truthfully reports true.
+- Intentional failure 2: v2.23 requires >1.0 C hosing cold-blob contrast; v2.26 produces 0.817635 C after versioned AMOC heat-response recalibration.
+- Optional Hypothesis module skipped because Hypothesis was unavailable.
+
+FINAL DEVELOPMENT METRICS
+- Historical GMST 2011-2020 vs 1850-1900: 1.186982 C
+- Ocean heat gain 1971-2018: 363.051839 ZJ
+- Arctic amplification 1979-2021: 3.489308x
+- SSP2-4.5 AMOC weakening: 20.054103%
+- SSP5-8.5 AMOC weakening: 41.035767%
+- Hybrid minimum/final AMOC: 9.898504/12.665091 Sv
+
+FRESHWATER DEFAULTS
+- Hydrological: 0.006 Sv/K
+- Greenland: 0.005 Sv/K
+- Rejected 0.023/0.017 values are not active defaults or normal uncertainty ranges.
+
+DEEP CHECKS
+- 500-year control GMST drift: -3.120e-14 C
+- 500-year control AMOC drift: 6.040e-14 Sv
+- Energy-closure residual: -0.042458%
+- Hosing recovery after 100 years: 17.074237 Sv
+- Timestep AMOC weakening spread (0.025-0.10 y): 0.029129 percentage points
+
+See VALIDATION_SUMMARY_V2_26_0.json, DEEP_VALIDATION_V2_26_0.json, IMPLEMENTATION_AUDIT_V2_26_0.json, V2_23_COMPATIBILITY_V2_26_0.md, and V2_23_HOSING_COMPARISON.json.

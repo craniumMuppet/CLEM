@@ -1,0 +1,18 @@
+EGCM v2.29.27 release/recalibration verification
+
+Python: 3.13.5
+pytest: 9.0.2 (declared pytest==9.0.2)
+
+Compile gate:
+- python -m compileall -q -f .
+- Result: PASS
+
+Selected pytest suite:
+- 27 passed, 0 failed, 0 errors
+- Exact node IDs are recorded in TEST_RESULTS_V2_29_27.json.
+
+Manual evidence-integrity tamper check:
+- PASS: modified G02202 processed evidence was rejected by SHA-256 enforcement and became available again only after exact restoration.
+
+Scope:
+- Bounded release/recalibration verification; no claim that the complete long-running repository inventory was executed.

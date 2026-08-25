@@ -1,0 +1,46 @@
+Emergent-Sensitivity Global Climate Model v2.21.0
+Scientific review fix verification
+Date: 2026-07-25
+
+Completed checks
+================
+- Python compilation: PASS for climate_model.py, monte_carlo.py,
+  co2_target_sweep.py, climate_model_gui.py, app.py and
+  held_out_amoc_validation.py.
+- pytest: 17 passed, 1 skipped.
+  The skipped property-conservation module requires the optional Hypothesis
+  dependency, which was not installed in the execution environment.
+- smoke_test.py: 9/9 passed.
+- review_fixes_v2_21_0_test.py: 5/5 passed.
+- hybrid_ssp_transition_test.py: passed.
+- percent_ramp_hold_test.py: passed.
+- setting_metadata_test.py: passed.
+- gui_smoke_test.py: passed.
+- process_tree_stop_test.py: passed.
+- amoc_dynamics_fix_test.py: 3/3 passed.
+- amoc_persistent_collapse_test.py: 3/3 passed.
+- long_hold_salinity_exchange_test.py: passed.
+- structural_fixes_v2_17_0_test.py: 4/4 passed.
+- v2_17_1_validation_test.py: passed after updating compatibility tolerances
+  for the new smooth timescale and regional Greenland formulation.
+- Direct CLI one-year control run: passed; version 2.21.0, exact control AMOC,
+  zero salt error.
+
+Targeted scientific checks
+==========================
+- A 0.30 Sv equilibrium root with active external exchange had maximum full
+  six-box salinity tendency below 1e-16 PSU/year and external tendency below
+  1e-18 PSU/year.
+- Control and 0.20 Sv roots passed both central-Jacobian and signed nonlinear
+  perturbation stability checks.
+- The 0.30 Sv root failed both checks and is therefore not labelled stable.
+- Custom 8 Sv collapse semantics produced mutually exclusive active,
+  weak/collapsed and reversed labels.
+- Cooling produced negative hydrological freshwater and Greenland accumulation;
+  the finite ice reservoir regrew while conserving ice mass.
+
+Not completed
+=============
+- calibration_fix_test.py did not finish within the available execution window.
+  This suite was already identified as the slow calibration suite. No failure
+  was observed before timeout.

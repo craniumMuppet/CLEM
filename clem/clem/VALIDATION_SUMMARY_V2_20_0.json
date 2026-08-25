@@ -1,0 +1,40 @@
+{
+  "model_version": "2.20.0",
+  "hybrid_ssp_validation_fixed": true,
+  "ssp460_initialization_summary_fixed": true,
+  "duration_based_amoc_classification": true,
+  "conditional_ensemble_fraction_naming": true,
+  "co2_threshold_monotonicity_checks": true,
+  "co2_threshold_isotonic_projection": true,
+  "co2_threshold_bootstrap_intervals": true,
+  "monte_carlo_physical_parameter_whitelist": true,
+  "meinshausen2020_co2_forcing": true,
+  "amoc_structural_families": {
+    "southern_ocean": [
+      "fixed",
+      "warming_sensitive"
+    ],
+    "indo_pacific_compensation": [
+      "none",
+      "diagnostic",
+      "interactive"
+    ]
+  },
+  "targeted_pytest_passed": 12,
+  "targeted_pytest_skipped_locally": 1,
+  "local_skip_reason": "Hypothesis was not installed in the execution runtime; it is pinned and installed by CI.",
+  "manual_randomized_algebraic_conservation_checks_passed": 750,
+  "manual_short_integration_conservation_checks_passed": 24,
+  "default_compatibility_common_numeric_columns": 102,
+  "default_compatibility_maximum_absolute_difference": 0.0,
+  "legacy_regression_groups_passed": true,
+  "graphical_layout_xvfb_passed": true,
+  "python_compilation_passed": true,
+  "locked_runtime_dependencies": true,
+  "locked_test_dependencies": true,
+  "ci_python_versions": [
+    "3.12",
+    "3.13"
+  ],
+  "default_physics_changed": false
+}

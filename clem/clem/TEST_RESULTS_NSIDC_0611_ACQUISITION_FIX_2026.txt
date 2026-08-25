@@ -1,0 +1,14 @@
+NSIDC-0611 direct HTTPS acquisition fix — 2026-08-08
+
+python compileall: PASS
+
+tests/test_six_source_arctic_validation_stack.py
+16 passed
+
+tests/test_2026_sea_ice_scientific_review_fixes.py + tests/test_sea_ice_actual_fix.py
+12 passed
+
+targeted tests/test_v2299_scientific_review_fixes.py
+2 passed
+
+TOTAL CONFIRMED FOCUSED TESTS: 30 passed, 0 failed

@@ -1,0 +1,14 @@
+EGCM Arctic acquisition crash-logging launcher fix
+
+Run: RUN_ARCTIC_VALIDATION.cmd
+
+This build:
+- never closes the command window automatically after acquisition returns;
+- writes a timestamped PowerShell transcript under logs\;
+- writes the latest log path to ARCTIC_ACQUISITION_LAST_LOG.txt;
+- prints the acquisition exit code;
+- prints caught PowerShell exception details and stack trace;
+- preserves the legacy NSIDC-0611 username/password + cookie acquisition path;
+- preserves the Earthdata-token path for Earthdata Cloud products.
+
+If acquisition fails, upload the .log file named by ARCTIC_ACQUISITION_LAST_LOG.txt.

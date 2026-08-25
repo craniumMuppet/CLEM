@@ -1,0 +1,27 @@
+Emergent-Sensitivity Global Climate Model v2.17.1
+
+PASS: external reservoir volume and salinity validation
+PASS: 2.5, 5 and 10 degree initialization
+PASS: cross-resolution control stability
+PASS: cross-resolution abrupt-2xCO2 response consistency
+PASS: exact 5-degree Euler compatibility with v2.17.0 SSP2-4.5 endpoint
+PASS: optional Heun predictor-corrector execution and salt conservation
+PASS: explicit ECS convergence status and automatic extension logic
+PASS: climate-model fast smoke tests
+PASS: v2.17.0 structural AMOC regression suite
+PASS: calibration and grouped-likelihood regression suite
+PASS: hybrid SSP transition tests
+PASS: AMOC completion-count and 6-Sv reference tests
+PASS: GUI command builder
+PASS: desktop and Streamlit metadata coverage
+PASS: Monte Carlo smoke and utility tests
+PASS: held-out validation tool smoke test
+PASS: structural-family tool smoke test
+PASS: identifiability-analysis tool smoke test
+PASS: full Python compilation
+
+The bundled 4000-year long-ramp regression was not completed in the build
+container because the combined long suite exceeded its execution window.
+Its first equilibrium-continuation test passed. The default 5-degree Euler
+path was separately verified against the v2.17.0 SSP2-4.5 endpoint to
+floating-point precision; the equation-changing Heun path is optional.

@@ -1,0 +1,52 @@
+Emergent-Sensitivity Global Climate Model v2.18.0
+Percent-ramp-to-cap feature validation
+
+PASS: percent_ramp_hold_test.py
+  - exact compounded time-to-cap calculation
+  - automatic duration = time-to-cap + hold years
+  - CO2 cap and hold behavior
+  - validation of growth rate, cap and hold duration
+  - desktop GUI command generation
+  - comparison PNG, CSV and JSON exports
+
+PASS: setting_metadata_test.py
+  - 100 desktop settings covered
+  - 57 Monte Carlo parameter controls covered
+  - 87 Streamlit controls covered
+
+PASS: gui_smoke_test.py
+  - deterministic and Monte Carlo command builders
+
+PASS: monte_carlo_smoke_test.py
+  - selected-scenario ensemble utilities and sampling
+
+PASS: v2_17_1_validation_test.py
+  - 2.5, 5 and 10 degree validation and cross-resolution tests
+
+PASS: hybrid_ssp_transition_test.py
+PASS: amoc_six_sv_reference_test.py
+PASS: amoc_completion_counts_test.py
+PASS: smoke_test.py
+  - control stability, heat conservation, salt conservation, routing,
+    directional advection, nonlinear hosing, initialization and timestep handling
+
+PASS: exact old-versus-new regression comparisons
+  - constant, one_percent and overshoot trajectories: maximum difference 0
+  - SSP2-4.5 1850-2100 at dt=0.05: maximum difference 0 for CO2,
+    global warming, AMOC, Greenland freshwater and northern salinity
+
+PASS: exact requested example
+  - start CO2 278.3 ppm
+  - cap 1200 ppm
+  - hold 200 years
+  - comparison rates 0.5, 1, 2, 3 and 5 percent/year
+  - dt=0.05
+  - combined CO2/temperature/AMOC comparison plot created
+
+PASS: Python compilation for the complete package
+
+NOT COMPLETED IN THIS BUILD PASS:
+  - calibration_fix_test.py and structural_fixes_v2_17_0_test.py exceed the
+    execution window when run as complete long suites. Their fast constituent
+    smoke/regression tests passed, and all pre-existing scenarios were checked
+    for exact numerical backward compatibility.

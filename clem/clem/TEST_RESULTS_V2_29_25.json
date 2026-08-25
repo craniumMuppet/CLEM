@@ -1,0 +1,21 @@
+{
+  "errors": 0,
+  "failed": 0,
+  "generated_at_utc": "2026-08-08T13:40:54.844564+00:00",
+  "model_version": "2.29.25",
+  "passed": 21,
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "python": "3.13.5",
+  "raw_log": "TEST_RESULTS_V2_29_25.txt",
+  "scope": "21 focused review regressions for fixes 1,2,4,5,6; slow inventory intentionally excluded by request",
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "dbb58ab631689ce2ed0399b30465a51229c5a7fb760ddb38ca142d05d66674e9",
+    "algorithm": "sha256",
+    "coverage": "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, and release-facing Markdown inspected by regressions; generated evidence and transient caches excluded",
+    "file_count": 279,
+    "profile": "tested-code",
+    "schema_version": "2.0"
+  },
+  "tested_code_fingerprint_file": "TESTED_CODE_FINGERPRINT_V2_29_25.json",
+  "working_directory": "emergent_global_climate_model_v2_29_25"
+}

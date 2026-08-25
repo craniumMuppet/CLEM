@@ -1,0 +1,93 @@
+{
+  "all_scoped_release_checks_passed": true,
+  "classification": "version-matched tuning-informed release validation; reduced-complexity sensitivity emulator; no independent historical Arctic prediction claim",
+  "development_checks_non_release_blocking": {
+    "strict_sea_ice_development_evaluation_10deg": false,
+    "strict_sea_ice_development_evaluation_5deg": false
+  },
+  "evidence_files": {
+    "implementation_audit": "IMPLEMENTATION_AUDIT_V2_29_18.json",
+    "sea_ice_10deg": "SEA_ICE_VALIDATION_V2_29_18_10DEG.json",
+    "sea_ice_5deg": "SEA_ICE_VALIDATION_V2_29_18_5DEG.json",
+    "test_results": "TEST_RESULTS_V2_29_18.txt",
+    "validation_summary": "VALIDATION_SUMMARY_V2_29_18.json"
+  },
+  "generated_at": "2026-08-03T14:30:00+02:00",
+  "limitations": [
+    "Historical sea-ice records were inspected during development; passing gates are calibration evidence, not independent predictive validation.",
+    "The complete 342-test suite was not completed in this review environment; 96 targeted tests passed and long retained batches timed out without a specific assertion failure.",
+    "The full 16-member by 10-target 1000-year-equilibration user experiment was not rerun."
+  ],
+  "model_version": "2.29.18",
+  "schema_version": "1.0",
+  "scoped_release_checks": {
+    "arctic_reference_cache_identity": true,
+    "co2_target_independent_survival_gate": true,
+    "compactness_complete_prior_support": true,
+    "desktop_gui_construction": true,
+    "representative_co2_sweep_integration": true,
+    "safe_checkpoint_high_compression_round_trip": true,
+    "sea_ice_mandatory_calibration_10deg": true,
+    "sea_ice_mandatory_calibration_5deg": true,
+    "source_compilation": true,
+    "targeted_96_test_suite": true
+  },
+  "sea_ice_validation": {
+    "all_mandatory_calibration_gates_passed": true,
+    "classification": "tuning-informed historical calibration evidence; not independent predictive validation",
+    "common_calibration": {
+      "arctic_full_cover_equivalent_thickness_m": 3.7,
+      "arctic_ice_concentration_exponent": 2.0,
+      "arctic_ice_surface_exchange_wm2_k": 5.0,
+      "arctic_interface_longwave_damping_wm2_k": 2.2,
+      "arctic_new_ice_local_thickness_m": 0.15,
+      "arctic_transient_shortwave_scale": 0.4,
+      "arctic_winter_lead_closure_fraction": 0.0,
+      "arctic_winter_transport_enhancement": 88.0,
+      "arctic_winter_transport_temperature_scale_c": 15.0
+    },
+    "generated_at": "2026-08-03T14:30:00+02:00",
+    "model_version": "2.29.18",
+    "resolutions": {
+      "10": {
+        "failed_mandatory_gates": [],
+        "mandatory_calibration_passed": true,
+        "march_area_mean_million_km2": 13.266514966349948,
+        "march_area_rmse_million_km2": 0.4608691895192758,
+        "march_extent_mean_million_km2": 15.42752884391294,
+        "march_extent_rmse_million_km2": 0.3322123331734735,
+        "march_extent_robust_trend_passed": true,
+        "march_extent_trend_million_km2_per_decade": -0.291364873017943,
+        "march_extent_trend_observed_million_km2_per_decade": -0.4059395510898631,
+        "seasonal_area_amplitude_million_km2": 9.525076175801278,
+        "seasonal_area_amplitude_observed_million_km2": 8.974761904761904,
+        "september_area_mean_million_km2": 3.7414387905486706,
+        "september_area_rmse_million_km2": 0.6351795219084406,
+        "september_area_trend_million_km2_per_decade": -0.582989716222336,
+        "september_area_trend_observed_million_km2_per_decade": -0.49230208248926344,
+        "september_extent_rmse_million_km2": 0.796855655522771,
+        "strict_development_evaluation_passed": false
+      },
+      "5": {
+        "failed_mandatory_gates": [],
+        "mandatory_calibration_passed": true,
+        "march_area_mean_million_km2": 13.018163991008283,
+        "march_area_rmse_million_km2": 0.4446697720089698,
+        "march_extent_mean_million_km2": 15.138723393105723,
+        "march_extent_rmse_million_km2": 0.3321559383623827,
+        "march_extent_robust_trend_passed": true,
+        "march_extent_trend_million_km2_per_decade": -0.27370515108184357,
+        "march_extent_trend_observed_million_km2_per_decade": -0.4059395510898631,
+        "seasonal_area_amplitude_million_km2": 9.332972052187031,
+        "seasonal_area_amplitude_observed_million_km2": 8.974761904761904,
+        "september_area_mean_million_km2": 3.6851919388212506,
+        "september_area_rmse_million_km2": 0.6709247136262487,
+        "september_area_trend_million_km2_per_decade": -0.5615006752007711,
+        "september_area_trend_observed_million_km2_per_decade": -0.49230208248926344,
+        "september_extent_rmse_million_km2": 0.8626902652507338,
+        "strict_development_evaluation_passed": false
+      }
+    },
+    "schema_version": "1.0"
+  }
+}

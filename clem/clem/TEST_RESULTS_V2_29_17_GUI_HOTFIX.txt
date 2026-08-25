@@ -1,0 +1,38 @@
+EGCM v2.29.17 desktop-GUI startup hotfix verification
+======================================================
+
+Failure reproduced before patch
+--------------------------------
+Command:
+  xvfb-run -a python climate_model_gui.py
+
+Result:
+  FAIL during ClimateModelGUI construction
+  KeyError: No tooltip metadata is defined for setting
+  'arctic_new_ice_local_thickness'
+
+Automated regression suite after patch
+--------------------------------------
+Command:
+  python -m pytest -q tests/test_v22917_gui_startup.py \
+    tests/test_v22917_arctic_sweep_integrity.py gui_smoke_test.py
+
+Result:
+  15 passed
+
+Full Tk window-construction smoke test
+--------------------------------------
+Command:
+  xvfb-run -a python gui_startup_smoke_test.py
+
+Result:
+  PASS: desktop GUI constructed successfully:
+  Emergent-Sensitivity Global Climate Model 2.29.17
+
+Compilation
+-----------
+Command:
+  python -m py_compile launch_gui.pyw climate_model_gui.py setting_metadata.py
+
+Result:
+  PASS

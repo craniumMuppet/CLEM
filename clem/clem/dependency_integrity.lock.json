@@ -1,0 +1,649 @@
+{
+  "generated_for": {
+    "implementation": "CPython",
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "graph_sha256": "e65977301e6ca5ff195379f3a24da3577efb2623880324bb52c00ac427e32659",
+  "model_version": "2.29.23",
+  "packages": {
+    "altair": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "jinja2",
+          "specifier": ""
+        },
+        {
+          "marker": "",
+          "name": "jsonschema",
+          "specifier": ">=3.0"
+        },
+        {
+          "marker": "",
+          "name": "narwhals",
+          "specifier": ">=1.27.1"
+        },
+        {
+          "marker": "",
+          "name": "packaging",
+          "specifier": ""
+        },
+        {
+          "marker": "python_version < \"3.14\"",
+          "name": "typing-extensions",
+          "specifier": ">=4.10.0"
+        }
+      ],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "6.0.0"
+    },
+    "attrs": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 439966,
+      "hashed_file_count": 56,
+      "installed_content_sha256": "9656e4bf369dfb6afa6977c3599c91613907a9e2595a99e3a47bdc7ffc7dbd49",
+      "metadata_source": "tested environment metadata",
+      "version": "26.1.0"
+    },
+    "blinker": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "1.9.0"
+    },
+    "certifi": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 247431,
+      "hashed_file_count": 15,
+      "installed_content_sha256": "20064d16b43427b43ccc51bb99d07cd30dc367a9574b7b9593cd84eb6e95a40d",
+      "metadata_source": "tested environment metadata",
+      "version": "2026.5.20"
+    },
+    "charset-normalizer": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 845799,
+      "hashed_file_count": 37,
+      "installed_content_sha256": "f0220efa7520f35c96af5db06d2626c74f206206363ea6454c496ee07b73885a",
+      "metadata_source": "tested environment metadata",
+      "version": "3.4.7"
+    },
+    "click": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 801776,
+      "hashed_file_count": 39,
+      "installed_content_sha256": "0fa02812c58c57a8cd87b223a3153df4d9540ce2379f00d870e4e5f73fadd3b5",
+      "metadata_source": "tested environment metadata",
+      "version": "8.1.8"
+    },
+    "contourpy": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": ">=1.25"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 1236614,
+      "hashed_file_count": 43,
+      "installed_content_sha256": "a5766d6a1d0f870a055ab431aba6cec3c8ab37b5cfbf9aea38000e5c585dc7c5",
+      "metadata_source": "tested environment metadata",
+      "version": "1.3.3"
+    },
+    "cycler": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 45200,
+      "hashed_file_count": 10,
+      "installed_content_sha256": "f579c0e7f2038c699aa9c837fc7455a7d474b426a17f19d8ec4fa3e04f1677e2",
+      "metadata_source": "tested environment metadata",
+      "version": "0.12.1"
+    },
+    "fonttools": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 26135511,
+      "hashed_file_count": 702,
+      "installed_content_sha256": "da39150e67bfbbdef3241b9156df1590d8d0200e56e26cd79d65712be247892a",
+      "metadata_source": "tested environment metadata",
+      "version": "4.63.0"
+    },
+    "gitdb": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "smmap",
+          "specifier": "<6,>=3.0.1"
+        }
+      ],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "4.0.12"
+    },
+    "gitpython": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "gitdb",
+          "specifier": "<5,>=4.0.1"
+        }
+      ],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "3.1.45"
+    },
+    "idna": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 490604,
+      "hashed_file_count": 29,
+      "installed_content_sha256": "8d3f78bac6155b6fa2184428a53aa9fbd030bbac4258f77ce19693b43581a11c",
+      "metadata_source": "tested environment metadata",
+      "version": "3.17"
+    },
+    "jinja2": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "markupsafe",
+          "specifier": ">=2.0"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 1175490,
+      "hashed_file_count": 57,
+      "installed_content_sha256": "fa46ab9ba77ca06387157591fc39feda891e1bbe93d1b37fd8c3fa1393574b82",
+      "metadata_source": "tested environment metadata",
+      "version": "3.1.6"
+    },
+    "jsonschema": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "attrs",
+          "specifier": ">=22.2.0"
+        },
+        {
+          "marker": "",
+          "name": "jsonschema-specifications",
+          "specifier": ">=2023.03.6"
+        },
+        {
+          "marker": "",
+          "name": "referencing",
+          "specifier": ">=0.28.4"
+        },
+        {
+          "marker": "",
+          "name": "rpds-py",
+          "specifier": ">=0.25.0"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 948217,
+      "hashed_file_count": 83,
+      "installed_content_sha256": "a80a1d72329bac278cad12a526bfa5359278533dbd335245000f2eca4abd59e8",
+      "metadata_source": "tested environment metadata",
+      "version": "4.26.0"
+    },
+    "jsonschema-specifications": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "referencing",
+          "specifier": ">=0.31.0"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 51925,
+      "hashed_file_count": 34,
+      "installed_content_sha256": "fc6b80da9b43dd57b021248fa7357a4b516731d597663af03d228f315c548781",
+      "metadata_source": "tested environment metadata",
+      "version": "2025.9.1"
+    },
+    "kiwisolver": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 5763255,
+      "hashed_file_count": 14,
+      "installed_content_sha256": "9c4a9860815ed2c1cd72422c9c51b8927187152f376beac5f58842d18004eb34",
+      "metadata_source": "tested environment metadata",
+      "version": "1.5.0"
+    },
+    "markupsafe": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 89214,
+      "hashed_file_count": 14,
+      "installed_content_sha256": "e96cc2524b2515cf473c3ed8c7459d9ab66641714ecd1e6ea1e31abcd28e2e0a",
+      "metadata_source": "tested environment metadata",
+      "version": "3.0.3"
+    },
+    "matplotlib": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "contourpy",
+          "specifier": ">=1.0.1"
+        },
+        {
+          "marker": "",
+          "name": "cycler",
+          "specifier": ">=0.10"
+        },
+        {
+          "marker": "",
+          "name": "fonttools",
+          "specifier": ">=4.22.0"
+        },
+        {
+          "marker": "",
+          "name": "kiwisolver",
+          "specifier": ">=1.3.1"
+        },
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": ">=1.23"
+        },
+        {
+          "marker": "",
+          "name": "packaging",
+          "specifier": ">=20.0"
+        },
+        {
+          "marker": "",
+          "name": "pillow",
+          "specifier": ">=8"
+        },
+        {
+          "marker": "",
+          "name": "pyparsing",
+          "specifier": ">=3"
+        },
+        {
+          "marker": "",
+          "name": "python-dateutil",
+          "specifier": ">=2.7"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 31809747,
+      "hashed_file_count": 884,
+      "installed_content_sha256": "1ee9ad43c7569b65666f5a956df4d785558718c754d3e33b193642fdd02be42a",
+      "metadata_source": "tested environment metadata",
+      "version": "3.10.8"
+    },
+    "narwhals": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 4391942,
+      "hashed_file_count": 331,
+      "installed_content_sha256": "8008bd1b523e5d79809c484e399e79296ddc74a654cca458808f75c26e007e78",
+      "metadata_source": "tested environment metadata",
+      "version": "2.21.2"
+    },
+    "numpy": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 68892186,
+      "hashed_file_count": 1313,
+      "installed_content_sha256": "3252bcb3fcc6ac96b2135c48037273493721a3e3531ef1f7b84daf5e3ce79ac9",
+      "metadata_source": "tested environment metadata",
+      "version": "2.3.5"
+    },
+    "packaging": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 471064,
+      "hashed_file_count": 41,
+      "installed_content_sha256": "4a653d00bff931a9a36799b313660200b27385f1c00acf13cdd8e0e604967669",
+      "metadata_source": "tested environment metadata",
+      "version": "25.0"
+    },
+    "pandas": {
+      "dependencies": [
+        {
+          "marker": "python_version >= \"3.12\"",
+          "name": "numpy",
+          "specifier": ">=1.26.0"
+        },
+        {
+          "marker": "",
+          "name": "python-dateutil",
+          "specifier": ">=2.8.2"
+        },
+        {
+          "marker": "",
+          "name": "pytz",
+          "specifier": ">=2020.1"
+        },
+        {
+          "marker": "",
+          "name": "tzdata",
+          "specifier": ">=2022.7"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 70670271,
+      "hashed_file_count": 2922,
+      "installed_content_sha256": "b0cb4845775a10197f8c65ad708d9a6d9296dd3f4ce8e33b75ff631e9ad04a1c",
+      "metadata_source": "tested environment metadata",
+      "version": "2.2.3"
+    },
+    "pillow": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 20908226,
+      "hashed_file_count": 239,
+      "installed_content_sha256": "b6b3b16d67e59f120ccc18f0650581d5e2a7e0acac878508f1a15ad1784398ab",
+      "metadata_source": "tested environment metadata",
+      "version": "12.2.0"
+    },
+    "protobuf": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 2297478,
+      "hashed_file_count": 115,
+      "installed_content_sha256": "936cd246ed29d6a3c94790b944577fee64e23bdbf31735ead02e56cfb8d7fe9d",
+      "metadata_source": "tested environment metadata",
+      "version": "6.33.6"
+    },
+    "pyarrow": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "23.0.0"
+    },
+    "pydeck": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "jinja2",
+          "specifier": ">=2.10.1"
+        },
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": ">=1.16.4"
+        }
+      ],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "0.9.1"
+    },
+    "pyparsing": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 980285,
+      "hashed_file_count": 42,
+      "installed_content_sha256": "624153ec3940348461631604ee09e6d7d81fae2ccd18025103f8c499a1f9ac22",
+      "metadata_source": "tested environment metadata",
+      "version": "3.3.2"
+    },
+    "python-dateutil": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "six",
+          "specifier": ">=1.5"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 743360,
+      "hashed_file_count": 45,
+      "installed_content_sha256": "7f27357bc3208472f1165ec394f6eea4eb8a244b0ff26bb3be1a122bfb06f05d",
+      "metadata_source": "tested environment metadata",
+      "version": "2.9.0.post0"
+    },
+    "pytz": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 1082428,
+      "hashed_file_count": 624,
+      "installed_content_sha256": "3713397230f5b81646335952885da9dd0bcf47fa4dfbb2628297dd88e6cc2ca4",
+      "metadata_source": "tested environment metadata",
+      "version": "2026.2"
+    },
+    "referencing": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "attrs",
+          "specifier": ">=22.2.0"
+        },
+        {
+          "marker": "",
+          "name": "rpds-py",
+          "specifier": ">=0.7.0"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 265199,
+      "hashed_file_count": 34,
+      "installed_content_sha256": "3c8a7e0e760bb82fdacd8f95228ef4969b6c5298a4fd6786b788e6809c609329",
+      "metadata_source": "tested environment metadata",
+      "version": "0.37.0"
+    },
+    "requests": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "certifi",
+          "specifier": ">=2017.4.17"
+        },
+        {
+          "marker": "",
+          "name": "charset-normalizer",
+          "specifier": "<4,>=2"
+        },
+        {
+          "marker": "",
+          "name": "idna",
+          "specifier": "<4,>=2.5"
+        },
+        {
+          "marker": "",
+          "name": "urllib3",
+          "specifier": "<3,>=1.21.1"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 414679,
+      "hashed_file_count": 43,
+      "installed_content_sha256": "e85d02c77997002caa742594152ffa9b06d2ed374e92f68a4cc656e5a200ccf1",
+      "metadata_source": "tested environment metadata",
+      "version": "2.32.5"
+    },
+    "rpds-py": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 1024011,
+      "hashed_file_count": 12,
+      "installed_content_sha256": "f80454bfbf8050aab4140f91078523f231c9333aa31083d0b35a7107c3a5429c",
+      "metadata_source": "tested environment metadata",
+      "version": "2026.5.1"
+    },
+    "scipy": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": "<2.7,>=1.26.4"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 139213388,
+      "hashed_file_count": 2400,
+      "installed_content_sha256": "29d7955adde75e6267de4cfbc4e1d3d0bba6c185eb1ebdfbe49d69b1a17a317a",
+      "metadata_source": "tested environment metadata",
+      "version": "1.17.0"
+    },
+    "six": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 80272,
+      "hashed_file_count": 9,
+      "installed_content_sha256": "0aeac699215c4abd3de62699094385c9f41dc25580dbf8f702772b25166290c5",
+      "metadata_source": "tested environment metadata",
+      "version": "1.17.0"
+    },
+    "smmap": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "5.0.3"
+    },
+    "streamlit": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "altair",
+          "specifier": "!=5.4.0,!=5.4.1,<7,>=4.0"
+        },
+        {
+          "marker": "",
+          "name": "blinker",
+          "specifier": "<2,>=1.5.0"
+        },
+        {
+          "marker": "",
+          "name": "click",
+          "specifier": "<9,>=7.0"
+        },
+        {
+          "marker": "",
+          "name": "gitpython",
+          "specifier": "!=3.1.19,<4,>=3.0.7"
+        },
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": "<3,>=1.23"
+        },
+        {
+          "marker": "",
+          "name": "packaging",
+          "specifier": ">=20"
+        },
+        {
+          "marker": "",
+          "name": "pandas",
+          "specifier": "<4,>=1.4.0"
+        },
+        {
+          "marker": "",
+          "name": "pillow",
+          "specifier": "<13,>=7.1.0"
+        },
+        {
+          "marker": "",
+          "name": "protobuf",
+          "specifier": "<8,>=3.20"
+        },
+        {
+          "marker": "",
+          "name": "pyarrow",
+          "specifier": "<25,>=7.0"
+        },
+        {
+          "marker": "",
+          "name": "pydeck",
+          "specifier": "<1,>=0.8.0b4"
+        },
+        {
+          "marker": "",
+          "name": "requests",
+          "specifier": "<3,>=2.27"
+        },
+        {
+          "marker": "",
+          "name": "tenacity",
+          "specifier": "<10,>=8.1.0"
+        },
+        {
+          "marker": "",
+          "name": "toml",
+          "specifier": "<2,>=0.10.1"
+        },
+        {
+          "marker": "",
+          "name": "typing-extensions",
+          "specifier": "<5,>=4.10.0"
+        },
+        {
+          "marker": "platform_system != \"Darwin\"",
+          "name": "watchdog",
+          "specifier": "<7,>=2.1.5"
+        }
+      ],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "1.60.0"
+    },
+    "tenacity": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "9.1.2"
+    },
+    "toml": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "0.10.2"
+    },
+    "typing-extensions": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 341132,
+      "hashed_file_count": 7,
+      "installed_content_sha256": "2edbff87ceac0c2c8ce84aafe7890be062ace00950cea60453089da8097e9688",
+      "metadata_source": "tested environment metadata",
+      "version": "4.15.0"
+    },
+    "tzdata": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 592231,
+      "hashed_file_count": 657,
+      "installed_content_sha256": "402fdbf57219cf8ad50fe5b46d810baa01e3723d1872a98101ee4419ce7cd2b9",
+      "metadata_source": "tested environment metadata",
+      "version": "2026.2"
+    },
+    "urllib3": {
+      "dependencies": [],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 897868,
+      "hashed_file_count": 80,
+      "installed_content_sha256": "d6e29f50153dd15f92e8e6a8ca0a67cdfa22c9e9d40689d23d6c232f633bdbcd",
+      "metadata_source": "tested environment metadata",
+      "version": "2.7.0"
+    },
+    "watchdog": {
+      "dependencies": [],
+      "hash_source": "not installed in test environment; exact version and dependency metadata frozen",
+      "installed_content_sha256": null,
+      "metadata_source": "PyPI metadata snapshot",
+      "version": "6.0.0"
+    }
+  },
+  "schema_version": "1.0",
+  "scope": "Exact resolved runtime graph. Installed-package hashes cover all distribution files in the tested environment; metadata-only packages are version-pinned and must be verified by the standard hash-lock generation command when the package index is available."
+}

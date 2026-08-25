@@ -1,0 +1,77 @@
+EGCM v2.29.16 - Final Release Test Results
+Review date: 2026-08-03
+
+OVERALL RESULT
+- Release status: PASS
+- Modern fast inventory: 236/236 PASS; 58 marked long/continuation/calibration/GUI cases deselected from this inventory
+- Extended marked inventory: 58/58 PASS, executed as verified isolated groups
+- Focused v2.29.12/v2.29.15/v2.29.16 integrity suite: 21/21 PASS
+- Scientific validation tasks: 22/22 PASS
+- Release checks: 39/39 PASS
+- Fresh Python source compilation: 141/141 PASS
+
+FIX 1 - RESUMABLE VALIDATION PROVENANCE
+- Each task freezes its provenance snapshot before execution.
+- Each task record binds task name, model version, validator SHA-256, source-tree SHA-256, and task-configuration SHA-256.
+- Final validator SHA-256: d7d38339794a31d54a5d33198aff05890d2cd6c097217b118b13dd21338c3f99
+- Final source-tree SHA-256: 850c72930851fea46ca5c20d6ec72cbb0c9f0b237e988e40ca3a1f8b19b3e1e1
+- Adversarial resume result: 21 valid task records reused; one altered v2.29.15/stale record rejected and rerun.
+- Result: PASS. Stale, renamed, source-mismatched, validator-mismatched, or post-start source-mutated task records cannot be certified as current output.
+
+FIX 2 - SUBANNUAL WINTER SEA-ICE DIAGNOSTICS
+- Exact 1850-2101 SSP2-4.5 reproduction at 10-degree resolution: PASS.
+- Atlantic saved concentration maximum error: 0
+- Atlantic saved local-thickness maximum error: 0 m
+- Atlantic saved open-water-temperature maximum error: 0 C
+- Atlantic saved volume-identity maximum error: 2.220446049250313e-16 m
+- Non-Atlantic saved concentration maximum error: 0
+- Non-Atlantic saved local-thickness maximum error: 0 m
+- Non-Atlantic saved open-water-temperature maximum error: 0 C
+- Non-Atlantic saved volume-identity maximum error: 0 m
+- Quarterly validation across all saved subannual records: PASS.
+- Invariant unforced reference manifold uses the same closure-adjusted concentration mapping as live integration.
+- 300-year unforced AMOC remains 17 Sv to numerical roundoff.
+
+FIX 3 - NEAR-ZERO WINTER ICE VOLUME
+- Equivalent thickness 1e-9 m -> concentration 5.00002252254488e-10
+- Equivalent thickness 0 m -> concentration 0
+- Upper closure-prior concentration at 1e-9 m: 5.000031025946043e-10
+- Maximum mapping volume-identity error: 1.3552527156068805e-20 m
+- Cold transient closure weight: 0.65
+- Warm near-melt transient closure weight: 0
+- Result: PASS. Mapping is continuous, volume limited, and temperature gated.
+
+REQUESTED AMOC OUTPUT CHANGES
+- monte_carlo_amoc_decline_percent_all.png is written in the main output folder beside the AMOC-Sv figure.
+- Signed convention verified: 50% weakening is stored and plotted as -50%; strengthening is positive.
+- The stored amoc_decline_percent time series uses the same signed convention.
+- Result: PASS.
+
+REQUESTED DIAGNOSTIC MAP LAYOUT
+- Weighted mean and weighted median final maps are written directly in diagnostics/.
+- 1st-percentile, 99th-percentile, and p99-p01 width maps are written in diagnostics/1_99_percentiles/.
+- 5th-percentile, 95th-percentile, and p95-p05 width maps remain directly in diagnostics/.
+- Output-layout probe: PASS.
+
+IMPLEMENTATION AUDIT
+- Audited source files: 43
+- Audit now includes validation_provenance.py, tools/package_v22916.py, tools/run_v22916_validation_parallel.py, tools/reproduce_v22916_winter_review.py, tests/test_v22916_release_integrity.py, and tests/test_v22912_monte_carlo_integrity.py.
+- Result: PASS.
+
+SCIENTIFIC VALIDATION SUMMARY
+- SSP2-4.5 AMOC decline in 2100: 27.471691990763404%
+- SSP5-8.5 AMOC decline in 2100: 37.067537883441645%
+- March native-area trend, 1979-2020: -0.055997565064535786 million km2/decade
+- Observed fitted March trend: -0.03817356778218968 million km2/decade
+- Trend-magnitude ratio: 1.4669198693726002
+- March interannual correlation: 0.14321577570768143
+- The historical March temporal response remains explicitly classified as tuning-informed and not independently predictive because the correlation criterion is not met.
+
+TEST EXECUTION DETAIL
+- Modern fast inventory: 236 passed, 58 deselected, 2 expected deprecation warnings, 538.90 seconds.
+- Extended inventory: first 36 cases passed serially; the remaining cases were completed in isolated parallel groups with 2/2, 5/5, 7/7, and 8/8 passes, totaling 58/58.
+- Focused integrity suite: 21 passed in 21.79 seconds.
+- Scientific validation: 22/22 task records and 39/39 release checks passed under the final frozen source digest.
+- Fresh compileall: PASS for 141 Python files.
+
+No P0 or P1 release defect remains from the v2.29.15 independent review.

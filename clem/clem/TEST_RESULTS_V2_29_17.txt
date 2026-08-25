@@ -1,0 +1,21 @@
+EGCM v2.29.17 - Focused Arctic and CO2 Sweep Integrity Results
+
+PASS: tests/test_v22917_arctic_sweep_integrity.py (8)
+PASS: tests/test_v22912_monte_carlo_integrity.py (9)
+PASS: tests/test_v2298_resumable_sweeps.py (8)
+PASS: tests/test_v22911_target_baseline_safety.py (8)
+PASS: tests/test_v22914_recovery_validation_seaice.py (6)
+PASS: tests/test_v22915_winter_seaice_integrity.py (5)
+PASS: tests/test_v2299_scientific_review_fixes.py excluding the long native-AMOC convergence test (8)
+
+Total focused assertions passed: 52
+
+Additional execution checks:
+- Safe checkpoint round trip with 1,000,000 float64 zeros: PASS
+- Representative 2-member x 2-target end-to-end sweep: PASS
+- One-year seasonal-Arctic SSP245 run at 10-degree resolution: PASS
+
+Not claimed:
+- The full 294-test historical suite was not completed in this constrained environment.
+- The user's full 16-member x 10-target, 1000-year-equilibration sweep was not rerun here.
+- Quantitative March sea-ice prediction skill is not established.

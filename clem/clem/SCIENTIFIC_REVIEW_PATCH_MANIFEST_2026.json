@@ -1,0 +1,168 @@
+{
+  "artifact": "emergent_global_climate_model_v2_29_25 scientific-review patch",
+  "patch_date": "2026-08-08",
+  "base_model_version": "2.29.25",
+  "scientific_status": "validation_incomplete_fail_closed",
+  "headline_claims": {
+    "raw_nsidc_area_used_for_calibration": false,
+    "fitted_area_to_extent_operator_active": false,
+    "coarse_native_extent_used_as_release_gate": false,
+    "independent_volume_thickness_required": true,
+    "homogeneous_fixed_mask_area_required": true,
+    "thick_pack_resistance_default_exponent": 0.0,
+    "forced_ocean_heat_ice_fraction_default_exponent": 0.0,
+    "nested_hindcast_infrastructure_added": true,
+    "nested_hindcasts_completed": false,
+    "predictive_skill_claim_allowed": false
+  },
+  "tests": [
+    {
+      "suite": "2026 scientific review fixes",
+      "result": "6 passed",
+      "status": "pass"
+    },
+    {
+      "suite": "focused final regression after operator/UI cleanup",
+      "result": "11 passed in 2.46s",
+      "status": "pass"
+    },
+    {
+      "suite": "targeted compatibility checks",
+      "result": "6 passed in 2.24s",
+      "status": "pass"
+    },
+    {
+      "suite": "additional mapping/integrity checks",
+      "result": "3 passed in 30.49s",
+      "status": "pass"
+    },
+    {
+      "suite": "targeted physical behavior checks",
+      "result": "14 passed in 31.70s",
+      "status": "pass"
+    },
+    {
+      "suite": "broad sea-ice regression group",
+      "result": "12 tests reported passing before long-running group timed out",
+      "status": "partial_not_claimed_complete"
+    }
+  ],
+  "smoke_test": {
+    "resolution_deg": 10.0,
+    "duration_years": 0.1,
+    "native_area_million_km2": 15.471593,
+    "thresholded_area_million_km2": 15.471593,
+    "coarse_zonal_extent_million_km2": 28.535715,
+    "volume_million_km3": 0.0269368,
+    "mean_thickness_m": 1.74105,
+    "scientific_validation_complete": false,
+    "note": "The coarse-zonal extent magnitude demonstrates why it is diagnostic-only and excluded from scientific release gates."
+  },
+  "changed_files": [
+    {
+      "path": "SCIENTIFIC_REVIEW_FIXES_2026.md",
+      "status": "added",
+      "sha256": "78f36b17a3979e7de757b50496ac65de3daeb4f63c144162e1d41d3fb300ae60"
+    },
+    {
+      "path": "V2_29_25_REVIEW_FIXES.md",
+      "status": "modified",
+      "sha256": "4337c334dbfa8c3cd722ed427ebfd44e4f835c4ad6af311ae0cd8e1f120c9847"
+    },
+    {
+      "path": "app.py",
+      "status": "modified",
+      "sha256": "be1818e04724966c70a10c446583f3830811b341e2d47d82b525d630ee958b00"
+    },
+    {
+      "path": "climate_model.py",
+      "status": "modified",
+      "sha256": "51b586f1b6f1e5794806cc4cb76fd2d74afabaeb11d9d833aaf68c26558fb608"
+    },
+    {
+      "path": "climate_model_gui.py",
+      "status": "modified",
+      "sha256": "446f960174666e6dfb65c41117997917c2911cfc110b8a1f229c080a3300c175"
+    },
+    {
+      "path": "data/validation/nsidc/METADATA.json",
+      "status": "modified",
+      "sha256": "fcc3289ba3340bb5d8736c324e9ef14857b68d1d74767ea15c71b447c3717808"
+    },
+    {
+      "path": "data/validation/sea_ice_fixed_mask/README.md",
+      "status": "added",
+      "sha256": "3db6f964cf75c7328ac05141ddc11b364862922bc60e76887686321f1d894d1e"
+    },
+    {
+      "path": "data/validation/sea_ice_physical/README.md",
+      "status": "added",
+      "sha256": "74429fb5df6d5a1de36a6237cc59a4760914daf2d61bc57a696f790082dfc621"
+    },
+    {
+      "path": "monte_carlo.py",
+      "status": "modified",
+      "sha256": "0f2814ef3e605ef3374d07f786dcc838853ba51d8c054112c5370300b23df19e"
+    },
+    {
+      "path": "scientific_evidence.py",
+      "status": "modified",
+      "sha256": "8804b4b89332f4d05ed53ec231b508ec5584af8fd334e4669bfd47ddecfb7895"
+    },
+    {
+      "path": "sea_ice_nested_hindcast.py",
+      "status": "added",
+      "sha256": "bf79c4124f8cfe7a7cc7f8663e5f5d0997fe971d188080e339bf6fc5254e7e60"
+    },
+    {
+      "path": "sea_ice_observation.py",
+      "status": "modified",
+      "sha256": "3147ce62a5f1b90af2efe445ce8971c31533d56a156a0f7e398cdc8263f10bca"
+    },
+    {
+      "path": "sea_ice_validation.py",
+      "status": "modified",
+      "sha256": "73652c2d1d2f71626068299a5b14a8407360dd8312fd992d65cc4c29982b5a65"
+    },
+    {
+      "path": "setting_metadata.py",
+      "status": "modified",
+      "sha256": "1d69edbb42b744275b9dcbaeea2a1a319243370d07e0e7f9b1279e954739952d"
+    },
+    {
+      "path": "tests/test_2026_sea_ice_scientific_review_fixes.py",
+      "status": "added",
+      "sha256": "0b6ea492ba3d7ecbbea998e5f59c5881c66c6abdbdf4787dc0489701fdf7f1b8"
+    },
+    {
+      "path": "tests/test_sea_ice_actual_fix.py",
+      "status": "modified",
+      "sha256": "01a2173f738ef07cceb86c022167322992d446c3a46622f9ef0dc1979955ebec"
+    },
+    {
+      "path": "tests/test_v22920_review_corrections.py",
+      "status": "modified",
+      "sha256": "8fdec3e5c4dbe2519843b780d1cd711c74fe8486994a54eea6e9948889980c7a"
+    },
+    {
+      "path": "tests/test_v2294_accuracy_integrity.py",
+      "status": "modified",
+      "sha256": "2692ecfefda2fc85c6bf993e6c0c90b315e7dfb1921185ac12e19cc17fd63883"
+    },
+    {
+      "path": "tests/test_v2295_physical_integrity.py",
+      "status": "modified",
+      "sha256": "42830dac5744811fe84ef6391aa25a7034609c5ca07a9d588379b3d45c994865"
+    },
+    {
+      "path": "tests/test_v2297_review_fixes.py",
+      "status": "modified",
+      "sha256": "678e052a1227027191da58aee1ef835f165562ed48aa5c547a1cc4bb8416e521"
+    },
+    {
+      "path": "tools/validate_v22925_lean.py",
+      "status": "modified",
+      "sha256": "5907bd79527cfcbc1625d868d1bf5bf23d4869e5aeb91d4115606d8acd2df6d2"
+    }
+  ]
+}

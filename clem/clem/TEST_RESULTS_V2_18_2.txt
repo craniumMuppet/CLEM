@@ -1,0 +1,40 @@
+Emergent-Sensitivity Global Climate Model v2.18.2
+Long-hold salinity-exchange fix validation
+
+PASSED
+- Python compilation for climate_model.py, monte_carlo.py, app.py, desktop GUI, metadata, and new regression test
+- Fast climate-model smoke suite
+- Percent-ramp hold tests
+- Setting-metadata coverage: 101 desktop settings, 57 Monte Carlo parameters, 88 Streamlit controls
+- Desktop GUI command-builder smoke tests
+- Desktop GUI layout test under Xvfb
+- v2.17.1 cross-resolution and compatibility tests, updated so zero external-anomaly exchange reproduces the legacy trajectory exactly
+- Monte Carlo seed, constrained-utility, freshwater-adjustor, and selected-scenario smoke tests
+- Finite Greenland reservoir test
+- Absolute AMOC density-margin screening test
+- Reversal opt-in test
+- New long-hold salinity-exchange regression test
+
+NORMAL-TIMESTEP LONG-HOLD STRESS TEST
+Scenario: 1%/yr CO2 growth from 278.3 ppm to 1200 ppm, then 1000-year hold
+Time step: 0.05 yr
+Minimum AMOC: 0.2336697991 Sv
+Maximum AMOC after first <=6 Sv crossing: 5.8478698811 Sv
+Final AMOC: 1.6293201597 Sv
+Minimum Southern Ocean salinity: 32.9660497492 PSU
+Maximum absolute salt error: 3.7747582837e-09 ppm
+Final global warming: 6.6614675781 C
+Result: old approximately 36.7 Sv artificial restart pulse is removed.
+
+CALIBRATION CHECKS WITH v2.18.2 DEFAULTS
+SSP5-8.5 AMOC decline, 1995-2014 to 2081-2100: 21.086449%
+0.1 Sv hosing AMOC decline after about 40 years: 12.310362%
+Both remain inside their configured calibration intervals.
+
+LONG SSP2-4.5 CHECK
+A 650-year SSP2-4.5 check at dt=0.1 yr retained an active AMOC:
+minimum 14.257968 Sv; final 16.111130 Sv; Greenland remaining fraction 0.929437.
+
+NOTES
+- The old and new 1850-2100 responses differ only slightly, but multi-century AMOC dynamics are structurally changed.
+- The attempted six-rate 1000-year comparison rendering exceeded the build execution window. The normal-timestep 1% stress test and additional 0.5%, 1%, and 5% coarser-timestep stress tests all removed the restart overshoot.

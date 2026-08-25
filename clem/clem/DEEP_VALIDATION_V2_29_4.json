@@ -1,0 +1,486 @@
+{
+  "model_version": "2.29.4",
+  "provenance": {
+    "processing_script": "validate_v2294.py",
+    "processing_script_sha256": "afeb1773913e48678e8b02d1c96a3ee8168cfe10c6dc7863bf6a6f0c9844adcb",
+    "climate_model_sha256": "25159a4f4204ccfec13792084af54d7099dd1b38cf6b78dfd147513f965bfb1b"
+  },
+  "control": {
+    "years": 500.0,
+    "initial_gmst_c": 0.0,
+    "final_gmst_c": -2.585115584891573e-14,
+    "gmst_drift_c": -2.585115584891573e-14,
+    "initial_amoc_sv": 17.0,
+    "final_amoc_sv": 16.999999999999982,
+    "amoc_drift_sv": -1.7763568394002505e-14,
+    "final_toa_imbalance_wm2": 3.6370799659947057e-14,
+    "final_salt_conservation_error_ppm": 0.0,
+    "maximum_pre_projection_salt_conservation_error_ppm": 1.7341381997221297e-10,
+    "cumulative_absolute_salt_projection_correction_psu_m3": 17334272.0,
+    "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+    "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+    "arctic_reference_spinup_years_completed": 80,
+    "final_total_resolved_heat_content_anomaly_zj": -3.2420144902785194e-11
+  },
+  "arctic_reference_public_range_stress": {
+    "minimum_spinup_years": 80,
+    "maximum_spinup_years": 320,
+    "spinup_years_completed": 157,
+    "periodic_closure_wyr_m2": 8.620610891796332e-09,
+    "spinup_convergence_wyr_m2": 9.626033303788972e-09,
+    "tolerance_wyr_m2": 1e-08,
+    "adapted_beyond_minimum": true
+  },
+  "disabled_arctic_initialization": {
+    "spinup_years_completed": 0,
+    "periodic_closure_wyr_m2": 0.0,
+    "maximum_pre_projection_salt_conservation_error_ppm": 1.7341381997221297e-10
+  },
+  "monte_carlo_safety": {
+    "weights": [
+      1.0,
+      0.0
+    ],
+    "logweights": [
+      0.0,
+      -Infinity
+    ],
+    "reasons": [
+      "",
+      "pre-projection salt residual exceeds the roundoff ceiling"
+    ],
+    "targets": [],
+    "invalid_member_rejected": true
+  },
+  "arctic_perturbations": [
+    {
+      "sign": -1.0,
+      "years": 160.0,
+      "final_arctic_air_c": -0.0007967657950631806,
+      "final_amoc_sv": 17.000431012699217,
+      "final_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_psu_m3": 7667712.0
+    },
+    {
+      "sign": 1.0,
+      "years": 160.0,
+      "final_arctic_air_c": 9.854036602116339e-05,
+      "final_amoc_sv": 17.000256846699276,
+      "final_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_psu_m3": 7716864.0
+    }
+  ],
+  "hosing_recovery": {
+    "initial_amoc_sv": 17.0,
+    "amoc_after_40yr_hosing_sv": 14.652007957072872,
+    "amoc_after_100yr_recovery_sv": 16.561935569404955,
+    "recovery_percent_of_initial_loss": 81.34301894614042
+  },
+  "cross_resolution": [
+    {
+      "resolution_deg": 2.5,
+      "initial_density_driver_ratio": 0.6944768000463472,
+      "control_gmst_c": 4.9543547393931085e-15,
+      "control_amoc_sv": 17.0,
+      "control_toa_imbalance_wm2": -5.281404332173799e-16,
+      "abrupt_2x_100yr_gmst_c": 2.5392430046934384,
+      "abrupt_2x_100yr_amoc_sv": 13.98407869053479,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.7568628807696209,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6127615550794371,
+          "maximum_area_mean_open_water_temperature_c": 4.604371173153311,
+          "interface_temperature_seasonal_range_c": 2.4390586725278194,
+          "maximum_ice_weighted_local_thickness_m": 2.1763622863856855,
+          "shallow_ocean_seasonal_range_c": 0.0701063600166955
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.8859186695140827,
+          "maximum_area_mean_open_water_temperature_c": 0.05441929490016234,
+          "interface_temperature_seasonal_range_c": 0.3925404353302555,
+          "maximum_ice_weighted_local_thickness_m": 2.6195261646700247,
+          "shallow_ocean_seasonal_range_c": 0.011414169381507189
+        }
+      },
+      "abrupt_2x_arctic_transient": {
+        "maximum_arctic_open_water_temperature_c": 11.638669956227645,
+        "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.638669956227645,
+        "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.638669956227645,
+        "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.638669956227645,
+        "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+        "maximum_absolute_salt_conservation_error_ppm": 0.0,
+        "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+        "cumulative_absolute_salt_projection_correction_ppm": 1.1532019028152162e-07,
+        "arctic_reference_periodic_closure_wyr_m2": 1.830002815950138e-11,
+        "arctic_reference_spinup_convergence_wyr_m2": 2.5210056264768355e-11,
+        "arctic_reference_spinup_years_completed": 80.0,
+        "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+      }
+    },
+    {
+      "resolution_deg": 5.0,
+      "initial_density_driver_ratio": 0.7493348337403365,
+      "control_gmst_c": 1.6804816852089055e-15,
+      "control_amoc_sv": 16.99999999999997,
+      "control_toa_imbalance_wm2": -1.4569631197238483e-15,
+      "abrupt_2x_100yr_gmst_c": 2.5413663222364278,
+      "abrupt_2x_100yr_amoc_sv": 13.979919026616393,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.7607500882102949,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6144511804576245,
+          "maximum_area_mean_open_water_temperature_c": 4.576791726021789,
+          "interface_temperature_seasonal_range_c": 2.413124452959788,
+          "maximum_ice_weighted_local_thickness_m": 2.178732616774994,
+          "shallow_ocean_seasonal_range_c": 0.06935232405978001
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.8897084323859342,
+          "maximum_area_mean_open_water_temperature_c": -0.00710671595278895,
+          "interface_temperature_seasonal_range_c": 0.35649338968965427,
+          "maximum_ice_weighted_local_thickness_m": 2.6329660691185914,
+          "shallow_ocean_seasonal_range_c": 0.010706761313727053
+        }
+      },
+      "abrupt_2x_arctic_transient": {
+        "maximum_arctic_open_water_temperature_c": 11.637348500204261,
+        "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.637348500204261,
+        "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.637348500204261,
+        "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.637348500204261,
+        "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+        "maximum_absolute_salt_conservation_error_ppm": 0.0,
+        "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+        "cumulative_absolute_salt_projection_correction_ppm": 1.043951196232722e-07,
+        "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+        "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+        "arctic_reference_spinup_years_completed": 80.0,
+        "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+      }
+    },
+    {
+      "resolution_deg": 10.0,
+      "initial_density_driver_ratio": 0.8740292447094423,
+      "control_gmst_c": 1.797872362990014e-14,
+      "control_amoc_sv": 17.000000000000025,
+      "control_toa_imbalance_wm2": -1.4223754556408196e-15,
+      "abrupt_2x_100yr_gmst_c": 2.5316250939489575,
+      "abrupt_2x_100yr_amoc_sv": 14.504974223741131,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.7658006800124608,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6843759976385192,
+          "maximum_area_mean_open_water_temperature_c": 3.535146389516631,
+          "interface_temperature_seasonal_range_c": 1.6522767585033582,
+          "maximum_ice_weighted_local_thickness_m": 2.2857345505626414,
+          "shallow_ocean_seasonal_range_c": 0.04455941232411552
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.911271471912645,
+          "maximum_area_mean_open_water_temperature_c": -0.2949226609663839,
+          "interface_temperature_seasonal_range_c": 0.20001053462766216,
+          "maximum_ice_weighted_local_thickness_m": 2.701942875327957,
+          "shallow_ocean_seasonal_range_c": 0.006195283635795246
+        }
+      },
+      "abrupt_2x_arctic_transient": {
+        "maximum_arctic_open_water_temperature_c": 11.596561724121626,
+        "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.596561724121626,
+        "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.596561724121626,
+        "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.596561724121626,
+        "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+        "maximum_absolute_salt_conservation_error_ppm": 0.0,
+        "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+        "cumulative_absolute_salt_projection_correction_ppm": 1.0873046512257753e-07,
+        "arctic_reference_periodic_closure_wyr_m2": 1.0658141036401503e-13,
+        "arctic_reference_spinup_convergence_wyr_m2": 1.8118839761882555e-13,
+        "arctic_reference_spinup_years_completed": 80.0,
+        "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+      }
+    }
+  ],
+  "arctic_resolution_spreads": {
+    "atlantic": {
+      "minimum_area_mean_ice_fraction_spread": 0.07161444255908211,
+      "maximum_area_mean_open_water_temperature_spread_c": 1.0692247836366797,
+      "interface_temperature_seasonal_range_spread_c": 0.7867819140244612,
+      "maximum_ice_weighted_local_thickness_spread_m": 0.10937226417695589,
+      "values_by_resolution": {
+        "2.5": {
+          "minimum_area_mean_ice_fraction": 0.6127615550794371,
+          "maximum_area_mean_open_water_temperature_c": 4.604371173153311,
+          "interface_temperature_seasonal_range_c": 2.4390586725278194,
+          "maximum_ice_weighted_local_thickness_m": 2.1763622863856855,
+          "shallow_ocean_seasonal_range_c": 0.0701063600166955
+        },
+        "5.0": {
+          "minimum_area_mean_ice_fraction": 0.6144511804576245,
+          "maximum_area_mean_open_water_temperature_c": 4.576791726021789,
+          "interface_temperature_seasonal_range_c": 2.413124452959788,
+          "maximum_ice_weighted_local_thickness_m": 2.178732616774994,
+          "shallow_ocean_seasonal_range_c": 0.06935232405978001
+        },
+        "10.0": {
+          "minimum_area_mean_ice_fraction": 0.6843759976385192,
+          "maximum_area_mean_open_water_temperature_c": 3.535146389516631,
+          "interface_temperature_seasonal_range_c": 1.6522767585033582,
+          "maximum_ice_weighted_local_thickness_m": 2.2857345505626414,
+          "shallow_ocean_seasonal_range_c": 0.04455941232411552
+        }
+      }
+    },
+    "non_atlantic": {
+      "minimum_area_mean_ice_fraction_spread": 0.025352802398562302,
+      "maximum_area_mean_open_water_temperature_spread_c": 0.34934195586654626,
+      "interface_temperature_seasonal_range_spread_c": 0.19252990070259335,
+      "maximum_ice_weighted_local_thickness_spread_m": 0.08241671065793232,
+      "values_by_resolution": {
+        "2.5": {
+          "minimum_area_mean_ice_fraction": 0.8859186695140827,
+          "maximum_area_mean_open_water_temperature_c": 0.05441929490016234,
+          "interface_temperature_seasonal_range_c": 0.3925404353302555,
+          "maximum_ice_weighted_local_thickness_m": 2.6195261646700247,
+          "shallow_ocean_seasonal_range_c": 0.011414169381507189
+        },
+        "5.0": {
+          "minimum_area_mean_ice_fraction": 0.8897084323859342,
+          "maximum_area_mean_open_water_temperature_c": -0.00710671595278895,
+          "interface_temperature_seasonal_range_c": 0.35649338968965427,
+          "maximum_ice_weighted_local_thickness_m": 2.6329660691185914,
+          "shallow_ocean_seasonal_range_c": 0.010706761313727053
+        },
+        "10.0": {
+          "minimum_area_mean_ice_fraction": 0.911271471912645,
+          "maximum_area_mean_open_water_temperature_c": -0.2949226609663839,
+          "interface_temperature_seasonal_range_c": 0.20001053462766216,
+          "maximum_ice_weighted_local_thickness_m": 2.701942875327957,
+          "shallow_ocean_seasonal_range_c": 0.006195283635795246
+        }
+      }
+    },
+    "abrupt_2x_transient": {
+      "maximum_open_water_temperature_at_5pct_open_spread_c": 0.04210823210601866,
+      "values_by_resolution": {
+        "2.5": {
+          "maximum_arctic_open_water_temperature_c": 11.638669956227645,
+          "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.638669956227645,
+          "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.638669956227645,
+          "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.638669956227645,
+          "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+          "maximum_absolute_salt_conservation_error_ppm": 0.0,
+          "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+          "cumulative_absolute_salt_projection_correction_ppm": 1.1532019028152162e-07,
+          "arctic_reference_periodic_closure_wyr_m2": 1.830002815950138e-11,
+          "arctic_reference_spinup_convergence_wyr_m2": 2.5210056264768355e-11,
+          "arctic_reference_spinup_years_completed": 80.0,
+          "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+        },
+        "5.0": {
+          "maximum_arctic_open_water_temperature_c": 11.637348500204261,
+          "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.637348500204261,
+          "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.637348500204261,
+          "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.637348500204261,
+          "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+          "maximum_absolute_salt_conservation_error_ppm": 0.0,
+          "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+          "cumulative_absolute_salt_projection_correction_ppm": 1.043951196232722e-07,
+          "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+          "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+          "arctic_reference_spinup_years_completed": 80.0,
+          "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+        },
+        "10.0": {
+          "maximum_arctic_open_water_temperature_c": 11.596561724121626,
+          "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.596561724121626,
+          "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.596561724121626,
+          "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.596561724121626,
+          "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+          "maximum_absolute_salt_conservation_error_ppm": 0.0,
+          "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+          "cumulative_absolute_salt_projection_correction_ppm": 1.0873046512257753e-07,
+          "arctic_reference_periodic_closure_wyr_m2": 1.0658141036401503e-13,
+          "arctic_reference_spinup_convergence_wyr_m2": 1.8118839761882555e-13,
+          "arctic_reference_spinup_years_completed": 80.0,
+          "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+        }
+      }
+    }
+  },
+  "energy_audit": {
+    "years": 20.0,
+    "actual_resolved_heat_gain_zj": 623.6694632544849,
+    "resolved_system_toa_integrated_zj": 623.9167515264763,
+    "bulk_radiative_toa_integrated_zj": 620.5258522749986,
+    "explicit_arctic_toa_integrated_zj": 3.3908992514778493,
+    "residual_zj": -0.24728827199146508,
+    "relative_residual_percent": -0.03963481848923738
+  },
+  "supplementary_pathways": {
+    "ssp126": {
+      "scenario": "ssp126",
+      "warming_2081_2100_c": 2.105745778752319,
+      "amoc_decline_2100_percent": 10.692950069844986,
+      "final_arctic_sea_ice_fraction": 0.7301767198764171,
+      "maximum_arctic_open_water_temperature_c": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 10.861078029059952,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.554385568190697e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    },
+    "ssp460": {
+      "scenario": "ssp460",
+      "warming_2081_2100_c": 3.519950324855433,
+      "amoc_decline_2100_percent": 26.21621911038997,
+      "final_arctic_sea_ice_fraction": 0.5634104781785383,
+      "maximum_arctic_open_water_temperature_c": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 13.807330861064186,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.569992811988196e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    }
+  },
+  "timestep_metrics": [
+    {
+      "dt_years": 0.1,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1085209993024696,
+      "historical_ocean_heat_content_change_1971_2018_zj": 383.65488736002453,
+      "historical_arctic_amplification_1979_2021_ratio": 3.4122538499034762,
+      "ssp245_amoc_decline_2100_percent": 20.779379182092107,
+      "maximum_arctic_open_water_temperature_c": 12.876563820870823,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 12.876563820870823,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 12.876563820870823,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 12.876563820870823,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 1.6873164683296325e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    },
+    {
+      "dt_years": 0.05,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1081067305872385,
+      "historical_ocean_heat_content_change_1971_2018_zj": 383.71682337322864,
+      "historical_arctic_amplification_1979_2021_ratio": 3.4085168046511836,
+      "ssp245_amoc_decline_2100_percent": 20.848662371160753,
+      "maximum_arctic_open_water_temperature_c": 12.769080696479275,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 12.769080696479275,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 12.769080696479275,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 12.769080696479275,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.545714877192086e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    },
+    {
+      "dt_years": 0.025,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1076518245596607,
+      "historical_ocean_heat_content_change_1971_2018_zj": 383.6614536866905,
+      "historical_arctic_amplification_1979_2021_ratio": 3.405012874430113,
+      "ssp245_amoc_decline_2100_percent": 20.804929524385695,
+      "maximum_arctic_open_water_temperature_c": 12.658886874142455,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 12.658886874142455,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 12.658886874142455,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 12.658886874142455,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.769418704956241e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    }
+  ],
+  "timestep_differences_from_0p05": {
+    "0.1": {
+      "historical_gmst_2011_2020_c": 0.000414268715231092,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.0619360132041038,
+      "historical_arctic_amplification_1979_2021_ratio": 0.003737045252292681,
+      "ssp245_amoc_decline_2100_percent": -0.06928318906864561,
+      "maximum_arctic_open_water_temperature_c": 0.10748312439154795,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 0.10748312439154795,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 0.10748312439154795,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 0.10748312439154795,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 0.0,
+      "cumulative_absolute_salt_projection_correction_ppm": -8.583984088624537e-08,
+      "arctic_reference_periodic_closure_wyr_m2": 0.0,
+      "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+      "arctic_reference_spinup_years_completed": 0.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 0.0
+    },
+    "0.025": {
+      "historical_gmst_2011_2020_c": -0.00045490602757780607,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.05536968653814256,
+      "historical_arctic_amplification_1979_2021_ratio": -0.0035039302210706502,
+      "ssp245_amoc_decline_2100_percent": -0.04373284677505751,
+      "maximum_arctic_open_water_temperature_c": -0.11019382233681974,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": -0.11019382233681974,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": -0.11019382233681974,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": -0.11019382233681974,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 0.0,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.237038277641551e-08,
+      "arctic_reference_periodic_closure_wyr_m2": 0.0,
+      "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+      "arctic_reference_spinup_years_completed": 0.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 0.0
+    }
+  },
+  "release_checks": {
+    "v2294_version": true,
+    "meinshausen2020_default": true,
+    "five_percent_unresolved_lead_threshold": true,
+    "development_benchmarks": true,
+    "independent_sea_ice_holdout": true,
+    "nondegenerate_sea_ice_extent": true,
+    "ssp245_late_century_sea_ice_area": true,
+    "ssp585_late_century_sea_ice_area": true,
+    "sea_ice_forcing_ordering": true,
+    "future_sea_ice_evidence_role": true,
+    "open_water_observational_plausibility": true,
+    "continuous_control_balance": true,
+    "ssp245_arctic_temperature": true,
+    "ssp585_arctic_temperature": true,
+    "energy_budget": true,
+    "control_stability": true,
+    "reference_cycle_closure": true,
+    "public_range_reference_cycle_convergence": true,
+    "disabled_arctic_skips_reference_spinup": true,
+    "unconditional_monte_carlo_safety": true,
+    "pre_projection_salt_integrity": true,
+    "timestep_local_arctic_convergence": true,
+    "resolution_local_arctic_convergence": true,
+    "hosing_recovery": true,
+    "perturbation_recovery": true,
+    "perturbation_salt_conservation": true
+  },
+  "all_release_checks_passed": true
+}

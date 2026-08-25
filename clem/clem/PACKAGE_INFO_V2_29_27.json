@@ -1,0 +1,37 @@
+{
+  "arctic_scientific_status": {
+    "calibration_passed": true,
+    "development_evaluation_passed": true,
+    "nested_fold_specific_hindcasts_run": true,
+    "nested_predictive_skill_gate_passed": false,
+    "nsidc_0611_available": false,
+    "osi_saf_march_independent_gate_passed": true,
+    "osi_saf_september_independent_gate_passed": true,
+    "physical_volume_thickness_gate_passed": true,
+    "prospective_untouched_validation_complete": false,
+    "scientific_predictive_validation_complete": false
+  },
+  "model_version": "2.29.27",
+  "package_name": "emergent_global_climate_model_v2_29_27",
+  "release_classification": "engineering_release_with_observational_recalibration; scientific_predictive_validation_incomplete",
+  "scientific_status_sources": [
+    "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json",
+    "NESTED_ARCTIC_HINDCAST_V2_29_27.json"
+  ],
+  "test_evidence": {
+    "errors": 0,
+    "failed": 0,
+    "file": "TEST_RESULTS_V2_29_27.json",
+    "nodeid_count": 27,
+    "passed": 27,
+    "pytest_version": "9.0.2",
+    "python_version": "3.13.5"
+  },
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "27e794eee1880db53d320101d5112fe5bc574b9b63840c9e06792a7ddd46d448",
+    "file": "TESTED_CODE_FINGERPRINT_V2_29_27.json",
+    "file_count": 590,
+    "profile": "tested-code-and-scientific-inputs",
+    "verified_immediately_before_packaging": true
+  }
+}

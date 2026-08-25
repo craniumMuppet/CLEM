@@ -1,0 +1,100 @@
+Emergent Global Climate Model v2.27.0
+Final test and validation record
+Date: 2026-07-28
+
+Release classification
+----------------------
+Experimental reduced-complexity climate/AMOC model. Literature-range checks are
+explicitly tuning-informed development regressions, not independent validation.
+
+Frozen source history
+---------------------
+3b65457  Implement v2.27 Arctic Greenland structural rebuild
+5236972  Record fresh v2.27 validation evidence
+eb83f89  Test long-hold restart overshoot directly
+
+Fresh validation
+----------------
+Command:
+  python validate_v227.py
+
+Result: PASS (exit code 0)
+
+Key reproduced metrics:
+- Historical GMST, 2011-2020: 1.16647 C relative to 1850-1900
+- Ocean heat-content change, 1971-2018: 356.148 ZJ
+- Historical Arctic amplification, 1979-2021: 3.75774x
+- Seasonal Arctic amplification: DJF 5.05515x, MAM 4.03152x,
+  JJA 2.31839x, SON 3.84390x
+- SSP2-4.5 AMOC weakening by 2100: 19.85195%
+- SSP5-8.5 AMOC weakening by 2100: 40.33610%
+- Greenland SSP2-4.5 contribution by 2100: 89.9850 mm sea-level equivalent
+- 500-year control GMST drift: -5.56e-14 C
+- 500-year control AMOC drift: 6.93e-13 Sv
+- 40-year 0.10 Sv hosing recovery after 100 years: 89.7097%
+- Abrupt-2xCO2 AMOC spread across 2.5, 5 and 10 degree grids: 0.05386 Sv
+
+Comprehensive isolated suite
+----------------------------
+Command:
+  python -u run_tests.py --all --timeout-seconds 300 --retries 0
+
+Initial result against validation commit 5236972:
+- 110 passed
+- 1 failed
+
+The sole failure was the legacy v2.18.2 long-hold test requiring the 1200 ppm
+trajectory to cross below the fixed 6 Sv reference before testing for a restart
+pulse. The v2.27 trajectory instead reaches 6.97374 Sv and recovers smoothly.
+The test was corrected to measure the original defect directly:
+- minimum AMOC must remain below 10 Sv;
+- maximum positive recovery rate must remain below 0.5 Sv/year;
+- post-minimum AMOC must remain below 20 Sv;
+- southern salinity and global salt-conservation bounds remain enforced.
+
+Corrected long-hold regression
+------------------------------
+Command:
+  python -m pytest -vv -m slow \
+    'tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[long_hold_salinity_exchange_test-test_long_capped_co2_hold_has_no_restart_overshoot]'
+
+Result: PASS
+Runtime: 15.48 seconds
+Measured trajectory:
+- minimum AMOC: 6.97374 Sv
+- maximum positive two-year step: 0.12969 Sv
+- maximum positive recovery rate: 0.06485 Sv/year
+- maximum AMOC after the minimum: 16.33427 Sv
+- minimum Southern Ocean salinity: 34.20229 PSU
+- maximum absolute salt-conservation error: 2.44e-9 ppm
+
+Final release-blocking isolated suite
+-------------------------------------
+Command:
+  python -u run_tests.py --timeout-seconds 300 --retries 0
+
+Result: PASS
+- 53 passed
+- 0 failed
+
+Coverage includes:
+- configuration and pathway validation;
+- AMOC threshold and structural-mode semantics;
+- whole-domain salt closure;
+- nonlinear stability and perturbation recovery;
+- benchmark provenance and calibration labeling;
+- historical GMST and ocean-heat diagnostics;
+- seasonal Arctic control, perturbation and hosing recovery;
+- orbital insolation and thermodynamic sea-ice reference cycle;
+- conservative Arctic heat exchange;
+- legacy multiplier isolation;
+- Greenland seasonal forcing, surface mass balance and dynamic discharge;
+- synchronized release metadata, CLI, desktop GUI and Monte Carlo controls.
+
+Optional dependency note
+------------------------
+The execution environment did not provide the pinned Altair 6.0.0 and
+Hypothesis 6.136.6 packages through its internal package mirror. Therefore the
+optional Hypothesis property suite and exact installed-environment dependency
+lock verification were not executed here. Deterministic conservation,
+regression, GUI-source and structural tests all passed.

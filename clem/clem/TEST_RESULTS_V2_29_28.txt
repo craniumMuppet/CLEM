@@ -1,0 +1,10 @@
+EGCM v2.29.28 release verification
+
+Python: 3.13.5
+pytest: 9.0.2 (declared pytest==9.0.2)
+
+Compile gate: PASS
+Selected regression suite: 140 passed, 0 failed, 0 errors
+Exact commands and 140 unique node IDs: TEST_RESULTS_V2_29_28.json
+
+Scope: bounded release/recalibration plus broader Arctic physical/coupled regressions; known unmarked long-running nodes are listed explicitly in the JSON and are not claimed as executed.

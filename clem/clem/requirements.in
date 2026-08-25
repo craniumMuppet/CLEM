@@ -1,0 +1,6 @@
+# Direct runtime dependencies. Compile and validate changes into requirements.lock.
+numpy>=1.26
+pandas>=2.1
+matplotlib>=3.8
+streamlit>=1.33
+scipy>=1.11

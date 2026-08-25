@@ -1,0 +1,39 @@
+{
+  "direct_regression_evidence": {
+    "focused_review_test_errors": 0,
+    "focused_review_tests_failed": 0,
+    "focused_review_tests_passed": 21,
+    "test_results_file": "TEST_RESULTS_V2_29_25.json",
+    "tested_code_aggregate_sha256": "dbb58ab631689ce2ed0399b30465a51229c5a7fb760ddb38ca142d05d66674e9",
+    "tested_code_fingerprint_file": "TESTED_CODE_FINGERPRINT_V2_29_25.json",
+    "working_directory": "emergent_global_climate_model_v2_29_25"
+  },
+  "model_version": "2.29.25",
+  "production_safeguards": {
+    "equivalent_thickness": {
+      "default_m": 20.0,
+      "monte_carlo_sampled": false,
+      "semantics": "fail-fast emergency threshold; does not clip or redistribute latent energy"
+    },
+    "local_thickness": {
+      "default_m": 500.0,
+      "monte_carlo_sampled": false,
+      "semantics": "fail-fast emergency threshold; does not remap concentration or sea-ice area"
+    },
+    "reference_cycle_private_regularizer_m": 12.0,
+    "reference_cycle_regularizer_scope": "periodic reference-cycle initialization only; not a production transient parameter"
+  },
+  "projection_statement": {
+    "claim": "The production local emergency threshold cannot influence valid projected sea-ice area because it is not used in the production area/concentration equation. It can only terminate an invalid run if breached.",
+    "new_full_5deg_ssp585_rerun_performed_for_v22925": false,
+    "reason": "The selected fix is structural non-interference by construction; no new v2.29.25 scenario metric is claimed."
+  },
+  "scope": "Review fixes 1, 2, 4, 5 and 6; slow-suite review item 3 intentionally excluded by user request.",
+  "static_source_audit": {
+    "equivalent_guard_absent_from_monte_carlo": true,
+    "forbidden_area_floor_patterns_found": [],
+    "local_guard_absent_from_monte_carlo": true,
+    "local_guard_absent_from_production_area_floor": true,
+    "local_guard_reference_count": 9
+  }
+}

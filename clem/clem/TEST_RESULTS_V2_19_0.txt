@@ -1,0 +1,39 @@
+Emergent-Sensitivity Global Climate Model v2.19.0
+CO2 target-sweep implementation and regression results
+
+NEW FEATURE TESTS
+- linear_ramp_hold reaches the exact target at the configured ramp endpoint: PASS
+- linear_ramp_hold keeps CO2 fixed throughout the hold phase: PASS
+- resolved duration equals ramp years plus hold years: PASS
+- target generation includes the starting control concentration: PASS
+- regular concentration increments are retained: PASS
+- exact maximum target is appended when the increment does not land on it: PASS
+- paired parameter members are reused at every target: PASS
+- per-member collapse classifications are written: PASS
+- per-target ever-collapse and persistent-collapse probabilities are written: PASS
+- weighted AMOC and warming percentile ranges are written: PASS
+- compressed member x target x time trajectory archive is written: PASS
+- mean trajectory plot mode: PASS
+- all-member trajectory plot mode: PASS
+- desktop GUI command generation and validation: PASS
+
+SMALL PAIRED ENSEMBLE REGRESSION
+- 4 paired members
+- 4 targets: 278.3, 378.3, 478.3, 500 ppm
+- 16 target-member transient simulations
+- all members completed successfully
+- summary/member/timeseries/plot outputs verified
+
+EXISTING REGRESSIONS
+- fast climate-model conservation and invariance smoke suite: PASS
+- percent-ramp-to-cap scenario tests: PASS
+- v2.18.2 long-hold salinity-exchange regression: PASS
+- desktop GUI command-builder smoke suite: PASS
+- setting metadata coverage: PASS
+- Monte Carlo seed, constrained utilities, freshwater adjustors and selected-scenario smoke ensemble: PASS
+- complete Python compilation: PASS
+
+SCOPE
+No default climate or AMOC process coefficient changed in v2.19.0. The new
+linear_ramp_hold pathway and paired target-sweep runner are additive. Existing
+v2.18.2 scenarios retain their previous equations and defaults.

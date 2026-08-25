@@ -1,0 +1,43 @@
+Emergent-Sensitivity Global Climate Model v2.29.8
+Resumable long-run and explicit-target maintenance release
+Test date: 2026-08-01 UTC
+
+Scope
+-----
+v2.29.8 changes long-run orchestration, checkpoint persistence, CO2 target
+selection, GUI loading, and AMOC percentage-decline outputs. The v2.29.7
+climate equations and physical defaults are unchanged.
+
+Completed checks
+----------------
+PASS  Python compilation of all modified runtime modules, GUI modules, and new tests.
+PASS  8/8 focused v2.29.8 tests:
+      - explicit target parsing and GUI command generation
+      - AMOC initial-baseline percentage decline
+      - atomic state and seed-0 persistence
+      - failed outer-member retry
+      - per-target checkpoint resume without rerunning completed targets
+      - exact GUI saved-command restoration
+      - synthetic specific-target sweep interval/output generation
+      - standard Monte Carlo state persistence and saved-seed reuse
+PASS  37/37 focused release/integrity tests across v2.29.5-v2.29.8.
+PASS  5/5 selected version/dependency metadata checks.
+PASS  Active v2.29.8 validation-provenance record check.
+PASS  Desktop GUI command-builder smoke test (4/4 cases).
+PASS  CLI help exposes --sweep-target-mode, --sweep-specific-targets, and --mc-resume.
+
+Long-running inventory status
+-----------------------------
+The broad multi-file retained suite was started but exceeded the 30-minute
+execution limit before completion; no failure was reported before timeout and
+no worker process remained. A real-model CO2 sweep test was also started; its
+first member saved all four target checkpoints before the 15-minute execution
+limit, but the full test did not complete in this environment. These incomplete
+runs are not counted as passes.
+
+Validation inheritance
+----------------------
+VALIDATION_SUMMARY_V2_29_8.json and DEEP_VALIDATION_V2_29_8.json retain the
+v2.29.7 numerical scientific metrics with updated v2.29.8 source provenance.
+This is valid because only the MODEL_VERSION constant changed in climate_model.py;
+the climate equations and calibrated physical defaults are unchanged.

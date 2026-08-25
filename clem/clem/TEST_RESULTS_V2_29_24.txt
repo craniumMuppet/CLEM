@@ -1,0 +1,16 @@
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 66%]
+........................................................................ [ 89%]
+...................................                                      [100%]
+=============================== warnings summary ===============================
+tests/test_v226_thermodynamic_arctic.py::test_internal_arctic_heat_exchange_is_conservative
+  /mnt/data/egcm_finish/emergent_global_climate_model_v2_29_23_sea_ice_fix/climate_model.py:3129: UserWarning: Deprecated Arctic compatibility fields have no effect in v2.29.6: arctic_open_water_heat_release_wm2_per_fraction, arctic_ice_anomaly_relaxation_years, arctic_winter_thin_ice_relaxation_years, arctic_atlantic_basal_ocean_heat_flux_wm2, arctic_non_atlantic_basal_ocean_heat_flux_wm2
+    config.validate()
+
+tests/test_v228_fractional_arctic.py::test_hidden_legacy_arctic_controls_have_zero_dynamical_effect
+  /mnt/data/egcm_finish/emergent_global_climate_model_v2_29_23_sea_ice_fix/climate_model.py:3129: UserWarning: Deprecated Arctic compatibility fields have no effect in v2.29.6: arctic_open_water_heat_release_wm2_per_fraction, arctic_ice_air_exchange_wm2_k, arctic_ice_ocean_exchange_wm2_k, arctic_ice_anomaly_relaxation_years, arctic_winter_thin_ice_relaxation_years
+    config.validate()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+323 passed, 52 deselected, 2 warnings in 1065.01s (0:17:45)

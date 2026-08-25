@@ -1,0 +1,99 @@
+EMERGENT GLOBAL CLIMATE MODEL v2.29.7 - FINAL TEST RESULTS
+Generated: 2026-08-01
+
+RELEASE VERDICT: PASS FOR PACKAGING
+
+ISOLATED REGRESSION INVENTORY
+- Current collected inventory: 229 tests
+- Passed: 229
+- Failed: 0
+- Timed out: 0
+- Missing: 0
+- Sum of isolated test runtimes: 6775.301 seconds
+- Wall runtime with 4 workers: 1718.085 seconds
+- Method: every pytest node ran in a separate subprocess with plugin autoload disabled, normal setup/execution/teardown, and an independent 1800-second timeout.
+- Frozen-source integrity: 261/261 Git-tracked source, test, documentation, configuration, and data hashes matched before and after the complete inventory.
+- Certified Git commit before this report: 1c9cf15ebef4e327452f9835c26a52a3488e9ecf.
+
+VALIDATION PIPELINE
+- Parallel scientific validation tasks: 19/19 passed
+- Release-blocking checks: 38/38 passed
+- Native sea-ice calibration and validation-informed development gates passed.
+- All four raw rolling-origin historical skill scores are positive relative to one-year persistence.
+- The 2021-2025 period is explicitly classified as validation-informed development evidence, not an independent holdout.
+- March 2026 is reported explicitly as inspected, tuning-informed evidence and is not called independent.
+- OISST open-water bounds: 4/4 passed, but they were inspected during v2.29.7 tuning and are development sanity checks rather than independent quantitative validation.
+- OISST source files are not redistributed and no source-file hashes are fabricated; the deterministic acquisition/provenance workflow is packaged.
+- Validation records regenerated from the exact final source tree:
+  - VALIDATION_SUMMARY_V2_29_7.json
+  - DEEP_VALIDATION_V2_29_7.json
+  - IMPLEMENTATION_AUDIT_V2_29_7.json
+
+KEY FINAL METRICS
+- Historical GMST, 2011-2020: 1.182378 C
+- Ocean heat-content change, 1971-2018: 406.287439 ZJ
+- Annual Arctic amplification, 1979-2021: 3.125261x
+- DJF / MAM / JJA / SON Arctic amplification: 4.018047x / 3.255826x / 1.995796x / 3.082416x
+- SSP2-4.5 AMOC weakening, 2081-2100 mean relative to the initial decade: 42.242054%
+- SSP5-8.5 AMOC weakening, 2081-2100 mean relative to the initial decade: 59.093292%
+- Native preindustrial reference-cycle March / September ice area: 13.554938 / 5.036053 million km2
+- 1979-2020 model / observed March area: 13.125395 / 13.129762 million km2
+- 1979-2020 model / observed September area: 4.006343 / 4.155000 million km2
+- 1979-2020 modeled / observed September-area trend: -0.333562 / -0.492302 million km2 per decade
+- Historical September-area trend fraction reproduced: 67.75%
+- 2021-2025 model / observed March area: 12.638364 / 12.816000 million km2
+- 2021-2025 model / observed September area: 3.175321 / 3.152000 million km2
+- 2021-2025 September-area RMSE: 0.238000 million km2
+- Rolling-origin skill versus one-year persistence:
+  - March area: +0.097245
+  - March extent: +0.059260
+  - September area: +0.101079
+  - September extent: +0.116226
+- March 2026 model / observed area: 12.573071 / 12.430000 million km2
+- March 2026 model / observed extent: 14.621128 / 14.130000 million km2
+- SSP2-4.5 / SSP5-8.5 native September area, 2081-2100: 1.790530 / 0.985520 million km2
+- SSP5-8.5 first native September area below 1 million km2: 2090
+- Maximum native/published area identity error: 0 million km2
+- Maximum reference equivalent ice thickness / emergency guard: 1.979202 / 8.0 m
+- Emergency-thickness-cap occupancy: 0
+- OISST development sanity values, all passing:
+  - Atlantic JJA: 3.763206 C
+  - Non-Atlantic JJA: 3.050907 C
+  - Atlantic September: 1.286032 C
+  - Non-Atlantic September: 0.123976 C
+- Abrupt-2xCO2 energy residual: -0.055028%
+- Corrected 500-year GMST / AMOC drift: +9.0478e-17 C / 0 Sv
+- Uncorrected 500-year GMST / AMOC drift: -4.7327e-15 C / 0 Sv
+- 500-year final salt residual: 0 ppm
+- Hosing recovery after 100 years: 80.150834%
+- Greenland SSP2-4.5 contribution by 2100: 114.114517 mm sea-level equivalent
+
+V2.29.7 REVIEW FIXES VERIFIED
+- Historical September-area trend reproduction improved from about 41% in v2.29.6 to 67.75% without a statistical trend correction.
+- Raw rolling-origin skill relative to one-year persistence is positive for March area, March extent, September area, and September extent.
+- All four OISST development bounds pass after physical open-water/ocean exchange retuning.
+- Native thermodynamic area remains the primary published area; the area operator is exact identity and the 15% extent mapping remains continuous, monotone, zero-intercept, zero-preserving, and bounded.
+- The emergency thickness guard remains inactive and winter coverage is not clipping-dominated.
+- The selected Arctic lapse-rate closure, module latitude, prescribed seasonal amplitude, basal coupling, open-water/ocean exchange, lateral winter transport, and AMOC hydraulic ceiling are exposed consistently and sampled by the science-prior system.
+- The AMOC convection-recovery timescale is 150 years and the unchanged 80% hosing-recovery gate passes at 80.15%.
+- Retained legacy tests now preserve their scientific intent while distinguishing single-year AMOC endpoints from 20-year validation means.
+- Desktop, Streamlit, CLI, metadata, and Monte Carlo defaults are synchronized.
+- Development dependency input and lock files are consistent.
+- The packager generates a complete archive-file manifest covering every packaged file except the manifest itself, which is protected by the archive checksum.
+
+SCIENTIFIC EVIDENCE ROLES
+- Development calibration and validation-informed evaluation: NSIDC 1979-2025, because these records were inspected during model development.
+- Inspected non-independent evidence: March 2026 NSIDC record.
+- Tuning-informed external development sanity check: packaged OISST bounds.
+- Future scenario sea ice: native thermodynamic projections, not independently validated regional forecasts.
+- Structural validation: native-area identity, zero preservation, continuity, energy and salt conservation, control drift, timestep convergence, hosing recovery, resolution behavior, perturbation recovery, interface safety, and package integrity.
+
+LIMITATIONS RETAINED BY DESIGN
+- The model is a reduced-complexity sensitivity emulator, not a spatially resolved GCM.
+- The Arctic control atmosphere remains a prescribed reduced seasonal climatology with documented tuning-informed closures.
+- Sea-ice longitude occupancy and extent maps are display/diagnostic reconstructions with no regional forecast skill.
+- Arctic open-water temperatures are reduced-sector diagnostics, not local or coastal forecasts.
+- AMOC collapse timing, hydraulic saturation, Greenland regional evolution, and quantitative future sea-ice timing remain sensitivity outputs rather than precise forecasts.
+
+EXACT ARCHIVE EXTRACTION VERIFICATION
+- Recorded separately in V2_29_7_PACKAGE_VERIFICATION.json after the final archive is built and tested from a clean extraction.

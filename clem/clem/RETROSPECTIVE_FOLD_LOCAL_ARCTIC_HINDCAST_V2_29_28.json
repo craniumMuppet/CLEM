@@ -1,0 +1,78 @@
+{
+  "all_folds_have_minimum_baselines": true,
+  "all_folds_scored": true,
+  "all_scored_folds_beat_all_available_baselines": false,
+  "candidate_bank": "ARCTIC_FOLD_LOCAL_CANDIDATES_V2_29_28.json",
+  "candidate_bank_independent_of_future_method_development": false,
+  "candidate_bank_predeclared_before_this_bank_was_scored": true,
+  "candidate_grid_definition_sha256": "94a892a48b24cf1045092674c9f530a93cd8760aaedbe2b1f324574fc4096b79",
+  "candidate_grid_uses_post_cutoff_observations_for_fold_selection": false,
+  "fold_local_candidate_selection_from_predeclared_prior_grid": true,
+  "folds": [
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 0.658077,
+        "expanding_linear_trend": 0.507254,
+        "persistence": 0.470949,
+        "temperature_driven_regression": 0.608766
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 1989,
+      "forecast_end": 2000,
+      "forecast_start": 1990,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.673234,
+      "selected_candidate": "prior_low_response"
+    },
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 1.187458,
+        "expanding_linear_trend": 0.659442,
+        "persistence": 0.669367,
+        "temperature_driven_regression": 1.300688
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 1999,
+      "forecast_end": 2010,
+      "forecast_start": 2000,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.719704,
+      "selected_candidate": "prior_early_bounded"
+    },
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 1.251283,
+        "expanding_linear_trend": 0.450517,
+        "persistence": 0.671907,
+        "temperature_driven_regression": 1.631307
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 2009,
+      "forecast_end": 2020,
+      "forecast_start": 2010,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.482566,
+      "selected_candidate": "prior_early_bounded"
+    }
+  ],
+  "full_continuous_recalibration_inside_each_fold": false,
+  "independent_prospective_validation": false,
+  "invalid_1979_fold_removed": true,
+  "minimum_baselines": [
+    "persistence",
+    "expanding_linear_trend",
+    "temperature_driven_regression",
+    "autoregressive_model"
+  ],
+  "model_architecture_previously_developed_with_historical_record_visible": true,
+  "model_version": "2.29.28",
+  "prospective_untouched_period": "2027 onward",
+  "prospective_untouched_validation_complete": false,
+  "protocol": "retrospective_fold_local_candidate_selection_method_development",
+  "provenance_note": "Scores are the completed v2.29.28 fold-local method-development results; no claim of untouched independence is made.",
+  "retrospective_development_validation": true,
+  "schema_version": 1,
+  "scientific_predictive_skill_claim_allowed": false,
+  "status": "retrospective_fold_local_development_check_complete_no_independent_skill_claim",
+  "temperature_baseline_evidence": "data/validation/temperature/HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv"
+}

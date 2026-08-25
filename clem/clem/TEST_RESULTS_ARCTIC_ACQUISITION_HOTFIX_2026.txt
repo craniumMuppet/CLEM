@@ -1,0 +1,14 @@
+Arctic validation acquisition hotfix — 2026-08-08
+
+compileall: PASS
+
+tests/test_six_source_arctic_validation_stack.py
+13 passed
+
+tests/test_2026_sea_ice_scientific_review_fixes.py + tests/test_sea_ice_actual_fix.py
+12 passed
+
+targeted tests/test_v2299_scientific_review_fixes.py
+2 passed, 7 deselected
+
+TOTAL CONFIRMED FOCUSED TESTS: 27 passed, 0 failed

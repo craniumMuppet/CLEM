@@ -1,0 +1,25 @@
+{
+  "all_run_times_s": [
+    18.37784389599983,
+    4.925635180001336,
+    4.681999270000233,
+    4.835016840001117
+  ],
+  "configuration": {
+    "dt_years": 0.05,
+    "duration_years": 20.0,
+    "record_every_years": 1.0,
+    "resolution_deg": 10.0,
+    "scenario": "ssp245"
+  },
+  "final_gmst_values_c": [
+    0.14190657609131502,
+    0.14190657609131502,
+    0.14190657609131502,
+    0.14190657609131502
+  ],
+  "label": "fixed",
+  "root": "/mnt/data/egcm_actual_fix/release_candidate/emergent_global_climate_model_v2_29_23_sea_ice_fix",
+  "steady_state_mean_s": 4.814217096667562,
+  "steady_state_median_s": 4.835016840001117
+}

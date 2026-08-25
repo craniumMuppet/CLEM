@@ -1,0 +1,603 @@
+#!/usr/bin/env python3
+"""Generate synchronized v2.28.1 interface-maintenance validation records."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import tempfile
+from dataclasses import asdict, replace
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+
+from climate_model import (
+    MODEL_VERSION,
+    ModelConfig,
+    ProcessClimateModel,
+    SV_TO_GT_PER_YEAR,
+)
+from held_out_amoc_validation import (
+    annual_mean_frame,
+    cross_resolution,
+    historical_external_metrics,
+    hosing_recovery,
+    window_mean,
+)
+
+ROOT = Path(__file__).resolve().parent
+BENCHMARK_PATH = ROOT / "held_out_amoc_benchmarks.json"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def write_json(name: str, value: Any) -> None:
+    (ROOT / name).write_text(json.dumps(value, indent=2, sort_keys=False) + "\n", encoding="utf-8")
+
+
+def seasonal_slope_ratio(frame, months: tuple[int, ...]) -> float:
+    data = frame.copy()
+    data["month"] = data["arctic_calendar_month"].round().astype(int)
+    data = data[(data["year"] >= 1979.0) & (data["year"] <= 2021.999)]
+    data = data[data["month"].isin(months)]
+    if len(data) < 6:
+        return float("nan")
+    global_slope = float(np.polyfit(data["year"], data["global_instantaneous_near_surface_air_warming_c"], 1)[0])
+    arctic_slope = float(np.polyfit(data["year"], data["arctic_instantaneous_near_surface_air_warming_c"], 1)[0])
+    return arctic_slope / global_slope if abs(global_slope) > 1.0e-14 else float("nan")
+
+
+def scenario_run(
+    scenario: str,
+    dt: float = 0.05,
+    record_every: float = 1.0,
+):
+    cfg = replace(
+        ModelConfig(),
+        start_year=1850.0,
+        duration_years=251.0,
+        scenario=scenario,
+        dt_years=dt,
+        record_every_years=record_every,
+        auto_initialize_from_1850=False,
+    )
+    return cfg, ProcessClimateModel(cfg).run().dataframe
+
+
+COMMON_VALIDATION_SAMPLE_YEARS = 0.1
+
+
+def common_validation_sample(frame, cadence: float = COMMON_VALIDATION_SAMPLE_YEARS):
+    """Return records on one identical subannual time grid.
+
+    All supported validation timesteps divide the 0.1-year cadence exactly.
+    Using this common grid prevents fixed-season annual snapshots from being
+    compared with time-weighted subannual means.
+    """
+    elapsed = frame["elapsed_years"].to_numpy(dtype=float)
+    nearest = np.rint(elapsed / cadence) * cadence
+    keep = np.isclose(elapsed, nearest, rtol=0.0, atol=1.0e-8)
+    sampled = frame.loc[keep].copy().reset_index(drop=True)
+    if sampled.empty:
+        raise ValueError("Common validation sampling produced no records")
+    return sampled
+
+
+def amoc_decline(annual) -> float:
+    baseline = window_mean(annual, "amoc_sv", 1995.0, 2014.0)
+    endpoint = window_mean(annual, "amoc_sv", 2081.0, 2100.0)
+    return 100.0 * (1.0 - endpoint / baseline)
+
+
+def control_check() -> dict[str, float]:
+    cfg = replace(
+        ModelConfig(),
+        scenario="constant",
+        duration_years=500.0,
+        record_every_years=100.0,
+        auto_initialize_from_1850=False,
+    )
+    model = ProcessClimateModel(cfg)
+    initial = model.record(0.0)
+    final = model.run().dataframe.iloc[-1]
+    return {
+        "years": 500.0,
+        "initial_gmst_c": float(initial["global_surface_warming_c"]),
+        "final_gmst_c": float(final["global_surface_warming_c"]),
+        "gmst_drift_c": float(final["global_surface_warming_c"] - initial["global_surface_warming_c"]),
+        "initial_amoc_sv": float(initial["amoc_sv"]),
+        "final_amoc_sv": float(final["amoc_sv"]),
+        "amoc_drift_sv": float(final["amoc_sv"] - initial["amoc_sv"]),
+        "final_toa_imbalance_wm2": float(final["toa_imbalance_wm2"]),
+        "final_salt_conservation_error_ppm": float(final["salt_conservation_error_ppm"]),
+        "final_total_resolved_heat_content_anomaly_zj": float(final["total_resolved_heat_content_anomaly_zj"]),
+    }
+
+
+def perturbation_check(sign: float) -> dict[str, float]:
+    cfg = replace(ModelConfig(), scenario="constant", duration_years=1.0, auto_initialize_from_1850=False)
+    model = ProcessClimateModel(cfg)
+    mask = model.arctic_module_blend
+    model.state.arctic_atlantic_air_anomaly_c += sign * 0.5 * mask
+    model.state.arctic_non_atlantic_air_anomaly_c += sign * 0.5 * mask
+    model.state.arctic_atlantic_ice_energy_anomaly_wyr_m2 += sign * 0.25 * mask
+    model.state.arctic_non_atlantic_ice_energy_anomaly_wyr_m2 += sign * 0.25 * mask
+    model.state.arctic_atlantic_open_water_heat_anomaly_wyr_m2 += sign * 0.10 * mask
+    model.state.arctic_non_atlantic_open_water_heat_anomaly_wyr_m2 += sign * 0.10 * mask
+    elapsed = 0.0
+    while elapsed < 160.0 - 1.0e-12:
+        step = min(cfg.dt_years, 160.0 - elapsed)
+        model.step(elapsed, step)
+        elapsed += step
+    row = model.record(elapsed)
+    return {
+        "sign": sign,
+        "years": elapsed,
+        "final_arctic_air_c": float(row["arctic_warming_c"]),
+        "final_amoc_sv": float(row["amoc_sv"]),
+        "final_salt_conservation_error_ppm": float(row["salt_conservation_error_ppm"]),
+    }
+
+
+def timestep_metrics(dt: float) -> dict[str, float]:
+    _, frame = scenario_run(
+        "ssp245", dt, record_every=COMMON_VALIDATION_SAMPLE_YEARS
+    )
+    sampled = common_validation_sample(frame)
+    return {
+        "dt_years": dt,
+        "sample_cadence_years": COMMON_VALIDATION_SAMPLE_YEARS,
+        **historical_external_metrics(annual_mean_frame(sampled)),
+    }
+
+
+def evaluate_benchmarks(metrics: dict[str, float], benchmark_doc: dict[str, Any]) -> dict[str, Any]:
+    results: dict[str, Any] = {}
+    for key, benchmark in benchmark_doc["benchmarks"].items():
+        value = float(metrics[key])
+        low = float(benchmark["minimum"])
+        high = float(benchmark["maximum"])
+        results[key] = {
+            "value": value,
+            "minimum": low,
+            "maximum": high,
+            "units": benchmark["units"],
+            "passed": low <= value <= high,
+            "evidence_role": benchmark["evidence_role"],
+            "used_for_tuning": bool(benchmark["used_for_tuning"]),
+            "source_reference": benchmark["source_reference"],
+        }
+    return results
+
+
+def _summary_ssp245_task() -> dict[str, Any]:
+    cfg, raw = scenario_run("ssp245", dt=0.05, record_every=0.05)
+    sampled = common_validation_sample(raw)
+    annual = annual_mean_frame(sampled)
+    metrics = historical_external_metrics(annual)
+    seasonal = {
+        "DJF": seasonal_slope_ratio(raw, (12, 1, 2)),
+        "MAM": seasonal_slope_ratio(raw, (3, 4, 5)),
+        "JJA": seasonal_slope_ratio(raw, (6, 7, 8)),
+        "SON": seasonal_slope_ratio(raw, (9, 10, 11)),
+        "annual": metrics["historical_arctic_amplification_1979_2021_ratio"],
+    }
+    recent = annual[(annual["year"] >= 2011.0) & (annual["year"] <= 2020.0)]
+    greenland = {
+        "mean_total_loss_2011_2020_gt_per_year": (
+            float(recent["greenland_annual_mean_freshwater_sv"].mean())
+            * SV_TO_GT_PER_YEAR
+        ),
+        "mean_dynamic_discharge_2011_2020_gt_per_year": (
+            float(recent["greenland_dynamic_discharge_sv"].mean())
+            * SV_TO_GT_PER_YEAR
+        ),
+        "mean_surface_mass_balance_loss_2011_2020_gt_per_year": (
+            float(
+                recent[
+                    "greenland_annual_mean_surface_mass_balance_freshwater_sv"
+                ].mean()
+            )
+            * SV_TO_GT_PER_YEAR
+        ),
+        "cumulative_net_ice_loss_2100_gt": float(
+            annual.iloc[-1]["greenland_cumulative_net_ice_loss_gt"]
+        ),
+        "cumulative_sea_level_2100_mm": float(
+            annual.iloc[-1]["greenland_cumulative_sea_level_mm"]
+        ),
+    }
+    return {
+        "config": {
+            "hydrological_freshwater_sv_per_k": cfg.hydrological_freshwater_sv_per_k,
+            "greenland_freshwater_sv_per_k": cfg.greenland_freshwater_sv_per_k,
+            "greenland_dynamic_discharge_fraction": cfg.greenland_dynamic_discharge_fraction,
+            "greenland_pdd_melt_factor_gt_per_degree_day": (
+                cfg.greenland_pdd_melt_factor_gt_per_degree_day
+            ),
+            "greenland_max_freshwater_sv": cfg.greenland_max_freshwater_sv,
+            "amoc_temperature_density_coupling": cfg.amoc_temperature_density_coupling,
+            "amoc_convection_density_scale_factor": (
+                cfg.amoc_convection_density_scale_factor
+            ),
+            "amoc_reference_density_driver": cfg.amoc_reference_density_driver,
+            "ocean_heat_exchange_wm2_k": cfg.ocean_heat_exchange_wm2_k,
+            "arctic_winter_transport_enhancement": cfg.arctic_winter_transport_enhancement,
+            "arctic_open_water_stable_exchange_wm2_k": cfg.arctic_open_water_stable_exchange_wm2_k,
+            "arctic_open_water_unstable_exchange_wm2_k": cfg.arctic_open_water_unstable_exchange_wm2_k,
+            "arctic_open_water_exchange_transition_c": cfg.arctic_open_water_exchange_transition_c,
+            "arctic_transient_shortwave_scale": cfg.arctic_transient_shortwave_scale,
+            "arctic_air_low_pass_years": cfg.arctic_air_low_pass_years,
+        },
+        "metrics": metrics,
+        "seasonal": seasonal,
+        "greenland": greenland,
+    }
+
+
+def _summary_ssp585_task() -> dict[str, float]:
+    _, raw = scenario_run("ssp585", dt=0.05, record_every=1.0)
+    return {"ssp585_amoc_decline_2100_percent": amoc_decline(annual_mean_frame(raw))}
+
+
+def _arctic_reference_task() -> dict[str, Any]:
+    model = ProcessClimateModel(
+        replace(
+            ModelConfig(),
+            scenario="constant",
+            duration_years=1.0,
+            auto_initialize_from_1850=False,
+        )
+    )
+    mask = model.grid.lat >= model.config.arctic_module_full_latitude_deg
+    result: dict[str, Any] = {
+        "global_baseline_mean_c": float(
+            np.sum(model.baseline_map_c * model.grid.map_area_weights)
+        ),
+        "arctic_ocean_baseline_mean_c_north_of_full_latitude": float(
+            np.mean(model.baseline_ocean_c[mask])
+        ),
+        "arctic_ocean_baseline_min_c_north_of_full_latitude": float(
+            np.min(model.baseline_ocean_c[mask])
+        ),
+        "arctic_ocean_baseline_max_c_north_of_full_latitude": float(
+            np.max(model.baseline_ocean_c[mask])
+        ),
+        "freezing_temperature_c": model.config.arctic_interface_freezing_temperature_c,
+        "periodic_closure_wyr_m2": float(
+            model.arctic_reference_periodic_closure_wyr_m2
+        ),
+        "spinup_convergence_wyr_m2": float(
+            model.arctic_reference_spinup_convergence_wyr_m2
+        ),
+        "spinup_years_completed": int(model.arctic_reference_spinup_years_completed),
+    }
+    weights = model.grid.band_area_weights[mask] * model.grid.ocean_fraction[mask]
+    monthly_ice: list[float] = []
+    monthly_interface: list[float] = []
+    for month in range(1, 13):
+        state = model._arctic_reference_state((month - 0.5) / 12.0)
+        monthly_ice.append(
+            float(np.average(state["ice_fraction"][mask], weights=weights))
+        )
+        monthly_interface.append(
+            float(
+                np.average(state["interface_temperature_c"][mask], weights=weights)
+            )
+        )
+    result["monthly_ocean_area_weighted_ice_fraction"] = monthly_ice
+    result["monthly_ocean_area_weighted_interface_temperature_c"] = monthly_interface
+    result["minimum_ice_month"] = int(np.argmin(monthly_ice)) + 1
+    sectors: dict[str, Any] = {}
+    for prefix, fraction in (
+        ("atlantic", model.grid.atlantic_ocean_fraction),
+        ("non_atlantic", model.non_atlantic_ocean_fraction),
+    ):
+        sector_weights = model.grid.band_area_weights[mask] * fraction[mask]
+        sector_monthly_ice: list[float] = []
+        sector_monthly_interface: list[float] = []
+        sector_monthly_open_water: list[float] = []
+        for month in range(1, 13):
+            state = model._arctic_reference_state((month - 0.5) / 12.0)
+            sector_monthly_ice.append(float(np.average(state[f"{prefix}_ice_fraction"][mask], weights=sector_weights)))
+            sector_monthly_interface.append(float(np.average(state[f"{prefix}_interface_temperature_c"][mask], weights=sector_weights)))
+            sector_monthly_open_water.append(float(np.average(state[f"{prefix}_open_water_temperature_c"][mask], weights=sector_weights)))
+        sectors[prefix] = {
+            "monthly_ice_fraction": sector_monthly_ice,
+            "monthly_interface_temperature_c": sector_monthly_interface,
+            "monthly_open_water_temperature_c": sector_monthly_open_water,
+            "minimum_ice_fraction": min(sector_monthly_ice),
+            "minimum_ice_month": int(np.argmin(sector_monthly_ice)) + 1,
+        }
+    result["sectors"] = sectors
+    return result
+
+
+def _cross_resolution_task(resolution: float) -> dict[str, float]:
+    control_config = replace(
+        ModelConfig(),
+        resolution_deg=resolution,
+        scenario="constant",
+        duration_years=100.0,
+        additional_forcing_wm2=0.0,
+        record_every_years=100.0,
+        auto_initialize_from_1850=False,
+    )
+    control_model = ProcessClimateModel(control_config)
+    initial_ratio = control_model.baseline_density_driver_ratio
+    control = control_model.run().dataframe.iloc[-1]
+    forced = ProcessClimateModel(
+        replace(control_config, scenario="step_2x")
+    ).run().dataframe.iloc[-1]
+    return {
+        "resolution_deg": resolution,
+        "initial_density_driver_ratio": initial_ratio,
+        "control_gmst_c": float(control["global_surface_warming_c"]),
+        "control_amoc_sv": float(control["amoc_sv"]),
+        "control_toa_imbalance_wm2": float(control["toa_imbalance_wm2"]),
+        "abrupt_2x_100yr_gmst_c": float(forced["global_surface_warming_c"]),
+        "abrupt_2x_100yr_amoc_sv": float(forced["amoc_sv"]),
+        "abrupt_2x_100yr_toa_imbalance_wm2": float(
+            forced["toa_imbalance_wm2"]
+        ),
+    }
+
+
+def _run_named_task(name: str) -> Any:
+    if name == "summary_ssp245":
+        return _summary_ssp245_task()
+    if name == "summary_ssp585":
+        return _summary_ssp585_task()
+    if name == "arctic_reference":
+        return _arctic_reference_task()
+    if name == "control":
+        return control_check()
+    if name == "perturbation_cold":
+        return perturbation_check(-1.0)
+    if name == "perturbation_warm":
+        return perturbation_check(1.0)
+    if name == "hosing_recovery":
+        return hosing_recovery(ModelConfig())
+    if name.startswith("timestep_"):
+        return timestep_metrics(float(name.split("_", 1)[1].replace("p", ".")))
+    if name.startswith("resolution_"):
+        return _cross_resolution_task(
+            float(name.split("_", 1)[1].replace("p", "."))
+        )
+    raise ValueError(f"Unknown validation task: {name}")
+
+
+def _run_task_subprocess(name: str, directory: Path) -> Any:
+    output = directory / f"{name}.json"
+    command = [
+        sys.executable,
+        "-u",
+        str(Path(__file__).resolve()),
+        "--task",
+        name,
+        "--task-output",
+        str(output),
+    ]
+    env = os.environ.copy()
+    env.setdefault("OPENBLAS_NUM_THREADS", "1")
+    env.setdefault("OMP_NUM_THREADS", "1")
+    env.setdefault("MKL_NUM_THREADS", "1")
+    env.setdefault("NUMEXPR_NUM_THREADS", "1")
+    print(f"Running validation task: {name}", flush=True)
+    subprocess.run(command, cwd=ROOT, env=env, check=True, timeout=1800)
+    return json.loads(output.read_text(encoding="utf-8"))
+
+
+def _assemble_records(tasks: dict[str, Any]) -> None:
+    ssp245 = tasks["summary_ssp245"]
+    benchmark_doc = json.loads(BENCHMARK_PATH.read_text(encoding="utf-8"))
+    benchmark_results = evaluate_benchmarks(ssp245["metrics"], benchmark_doc)
+    cfg = ssp245["config"]
+    summary = {
+        "model_version": MODEL_VERSION,
+        "classification": (
+            "tuning-informed development regression checks; not independent validation"
+        ),
+        "default_freshwater_coefficients_sv_per_k": {
+            "hydrological": cfg["hydrological_freshwater_sv_per_k"],
+            "greenland_public_coefficient": cfg["greenland_freshwater_sv_per_k"],
+        },
+        "structural_defaults": {
+            key: cfg[key]
+            for key in (
+                "greenland_dynamic_discharge_fraction",
+                "greenland_pdd_melt_factor_gt_per_degree_day",
+                "greenland_max_freshwater_sv",
+                "amoc_temperature_density_coupling",
+                "amoc_convection_density_scale_factor",
+                "amoc_reference_density_driver",
+                "ocean_heat_exchange_wm2_k",
+                "arctic_winter_transport_enhancement",
+                "arctic_open_water_stable_exchange_wm2_k",
+                "arctic_open_water_unstable_exchange_wm2_k",
+                "arctic_open_water_exchange_transition_c",
+                "arctic_transient_shortwave_scale",
+                "arctic_air_low_pass_years",
+            )
+        },
+        "development_metrics": ssp245["metrics"],
+        "benchmark_results": benchmark_results,
+        "all_development_checks_passed": all(
+            item["passed"] for item in benchmark_results.values()
+        ),
+        "seasonal_arctic_amplification_1979_2021": ssp245["seasonal"],
+        "ssp585_amoc_decline_2100_percent": tasks["summary_ssp585"][
+            "ssp585_amoc_decline_2100_percent"
+        ],
+        "greenland_ssp245": ssp245["greenland"],
+        "arctic_reference_cycle": tasks["arctic_reference"],
+        "provenance": {
+            "benchmark_file": BENCHMARK_PATH.name,
+            "benchmark_file_sha256": sha256_file(BENCHMARK_PATH),
+            "benchmark_set_version": benchmark_doc["benchmark_set_version"],
+            "processing_script": Path(__file__).name,
+            "processing_script_sha256": sha256_file(Path(__file__)),
+            "climate_model_sha256": sha256_file(ROOT / "climate_model.py"),
+        },
+    }
+    write_json("VALIDATION_SUMMARY_V2_28_1.json", summary)
+
+    timestep = [
+        tasks["timestep_0p1"],
+        tasks["timestep_0p05"],
+        tasks["timestep_0p025"],
+    ]
+    reference = timestep[1]
+    deep = {
+        "model_version": MODEL_VERSION,
+        "provenance": {
+            "processing_script": Path(__file__).name,
+            "processing_script_sha256": sha256_file(Path(__file__)),
+            "climate_model_sha256": sha256_file(ROOT / "climate_model.py"),
+        },
+        "control": tasks["control"],
+        "arctic_perturbations": [
+            tasks["perturbation_cold"],
+            tasks["perturbation_warm"],
+        ],
+        "hosing_recovery": tasks["hosing_recovery"],
+        "cross_resolution": [
+            tasks["resolution_2p5"],
+            tasks["resolution_5p0"],
+            tasks["resolution_10p0"],
+        ],
+        "timestep_metrics": timestep,
+        "timestep_differences_from_0p05": {
+            str(item["dt_years"]): {
+                key: float(item[key] - reference[key])
+                for key in reference
+                if key not in {"dt_years", "sample_cadence_years"}
+            }
+            for item in timestep
+            if item["dt_years"] != 0.05
+        },
+    }
+    write_json("DEEP_VALIDATION_V2_28_1.json", deep)
+
+    audit = {
+        "model_version": MODEL_VERSION,
+        "source_files": {
+            name: sha256_file(ROOT / name)
+            for name in (
+                "climate_model.py",
+                "app.py",
+                "climate_model_gui.py",
+                "monte_carlo.py",
+                "setting_metadata.py",
+                "pyproject.toml",
+                "requirements.lock",
+                "requirements-dev.lock",
+                "dependency_integrity.lock.json",
+            )
+        },
+        "implemented_structural_changes": {
+            "fractional_ice_and_open_water_flux_partition": True,
+            "separate_conserved_ice_latent_and_open_water_sensible_reservoirs": True,
+            "local_ice_thickness_used_for_conduction": True,
+            "separate_atlantic_and_central_arctic_reference_cycles": True,
+            "full_surface_energy_balance_used_in_transient_arctic": True,
+            "stability_dependent_open_water_air_exchange": True,
+            "conservative_surface_reservoir_overflow_to_bulk_ocean": True,
+            "transient_arctic_shortwave_cloud_masking": True,
+            "coherent_global_and_arctic_near_surface_air_products": True,
+            "explicit_open_water_temperature_and_local_ice_thickness_products": True,
+            "arctic_ocean_freezing_bounded_through_55_66n_transition": True,
+            "bounded_lru_arctic_reference_cache": True,
+            "cache_key_includes_all_reference_cycle_inputs": True,
+            "reduced_greenland_surface_mass_balance": True,
+            "separate_greenland_dynamic_discharge": True,
+            "multi_resolution_fractional_arctic_regressions": True,
+            "isolated_test_runner": True,
+            "isolated_validation_runner": True,
+            "public_interface_defaults_synchronized": True,
+            "desktop_monte_carlo_startup_regression": True,
+            "science_prior_support_contains_validated_defaults": True,
+            "explicit_arctic_external_flux_included_in_toa": True,
+            "common_subannual_timestep_validation_sampling": True,
+            "inactive_legacy_arctic_controls_removed_from_active_interfaces": True,
+            "open_water_maps_mask_fully_ice_covered_cells": True,
+            "arctic_sat_memory_label_matches_configured_timescale": True,
+        },
+        "known_scope_limits": [
+            "Sea-ice dynamics, ridging, leads, and mechanical export are not represented.",
+            "The two Arctic sectors are zonal reduced-complexity regions rather than a resolved ocean-basin geometry.",
+            "Cloud masking and atmosphere-surface exchange remain calibrated closures.",
+            "Greenland firn hydrology, outlet-glacier dynamics, and regional geometry are reduced to emulator terms.",
+            "Development benchmark ranges were used during tuning and are not independent validation.",
+        ],
+        "configuration_snapshot": asdict(ModelConfig()),
+    }
+    write_json("IMPLEMENTATION_AUDIT_V2_28_1.json", audit)
+    print(
+        json.dumps(
+            {
+                "development_metrics": summary["development_metrics"],
+                "seasonal_arctic": summary[
+                    "seasonal_arctic_amplification_1979_2021"
+                ],
+                "ssp585_amoc_decline_2100_percent": summary[
+                    "ssp585_amoc_decline_2100_percent"
+                ],
+                "greenland_ssp245": summary["greenland_ssp245"],
+                "control": deep["control"],
+                "hosing_recovery": deep["hosing_recovery"],
+            },
+            indent=2,
+        ),
+        flush=True,
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--task")
+    parser.add_argument("--task-output", type=Path)
+    args = parser.parse_args()
+    if args.task:
+        if args.task_output is None:
+            raise SystemExit("--task-output is required with --task")
+        value = _run_named_task(args.task)
+        args.task_output.write_text(
+            json.dumps(value, indent=2) + "\n", encoding="utf-8"
+        )
+        print(f"Completed validation task: {args.task}", flush=True)
+        os._exit(0)
+
+    task_names = [
+        "summary_ssp245",
+        "summary_ssp585",
+        "arctic_reference",
+        "timestep_0p1",
+        "timestep_0p05",
+        "timestep_0p025",
+        "control",
+        "perturbation_cold",
+        "perturbation_warm",
+        "hosing_recovery",
+        "resolution_2p5",
+        "resolution_5p0",
+        "resolution_10p0",
+    ]
+    with tempfile.TemporaryDirectory(prefix="validation_v228_") as directory:
+        root = Path(directory)
+        tasks = {name: _run_task_subprocess(name, root) for name in task_names}
+    _assemble_records(tasks)
+
+
+if __name__ == "__main__":
+    main()

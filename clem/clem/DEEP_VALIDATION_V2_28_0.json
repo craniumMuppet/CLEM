@@ -1,0 +1,111 @@
+{
+  "model_version": "2.28.0",
+  "provenance": {
+    "processing_script": "validate_v228.py",
+    "processing_script_sha256": "81c06cfc5c4c99e00b1413e32f64ece1ba5711ee97683fd048db00d9ffee72c5",
+    "climate_model_sha256": "3befe0f6614d1288ee5798ae3e9070756c7c00824b1bc5b78c60a8f06bfd20a2"
+  },
+  "control": {
+    "years": 500.0,
+    "initial_gmst_c": 0.0,
+    "final_gmst_c": 9.025374013422791e-06,
+    "gmst_drift_c": 9.025374013422791e-06,
+    "initial_amoc_sv": 17.0,
+    "final_amoc_sv": 16.99999707511728,
+    "amoc_drift_sv": -2.9248827182470905e-06,
+    "final_toa_imbalance_wm2": -1.0499439840865873e-05,
+    "final_salt_conservation_error_ppm": -3.6637359812630166e-09,
+    "final_total_resolved_heat_content_anomaly_zj": 0.01218029115316056
+  },
+  "arctic_perturbations": [
+    {
+      "sign": -1.0,
+      "years": 160.0,
+      "final_arctic_air_c": 0.0001274254901811682,
+      "final_amoc_sv": 16.999786876521995,
+      "final_salt_conservation_error_ppm": 0.0
+    },
+    {
+      "sign": 1.0,
+      "years": 160.0,
+      "final_arctic_air_c": 0.00030059299571269337,
+      "final_amoc_sv": 17.00018978903978,
+      "final_salt_conservation_error_ppm": -5.551115123125783e-09
+    }
+  ],
+  "hosing_recovery": {
+    "initial_amoc_sv": 17.0,
+    "amoc_after_40yr_hosing_sv": 14.670855750407645,
+    "amoc_after_100yr_recovery_sv": 16.75607477265348,
+    "recovery_percent_of_initial_loss": 89.52725974832984
+  },
+  "cross_resolution": [
+    {
+      "resolution_deg": 2.5,
+      "initial_density_driver_ratio": 0.6944768000463472,
+      "control_gmst_c": 2.9100039634547417e-06,
+      "control_amoc_sv": 16.999988605593494,
+      "control_toa_imbalance_wm2": -3.3259627927238868e-06,
+      "abrupt_2x_100yr_gmst_c": 2.5191925612143238,
+      "abrupt_2x_100yr_amoc_sv": 14.279557048771576,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.9429236677419434
+    },
+    {
+      "resolution_deg": 5.0,
+      "initial_density_driver_ratio": 0.7493348337403365,
+      "control_gmst_c": 6.888771335628074e-06,
+      "control_amoc_sv": 16.999991719211106,
+      "control_toa_imbalance_wm2": -8.133626640008917e-06,
+      "abrupt_2x_100yr_gmst_c": 2.5210748114481434,
+      "abrupt_2x_100yr_amoc_sv": 14.313849671866674,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.945069318014812
+    },
+    {
+      "resolution_deg": 10.0,
+      "initial_density_driver_ratio": 0.8740292447094423,
+      "control_gmst_c": -4.985219218902217e-08,
+      "control_amoc_sv": 17.00000659423835,
+      "control_toa_imbalance_wm2": 4.678124891447287e-07,
+      "abrupt_2x_100yr_gmst_c": 2.5147383621662676,
+      "abrupt_2x_100yr_amoc_sv": 14.527954856870874,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.9407025124450111
+    }
+  ],
+  "timestep_metrics": [
+    {
+      "dt_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1032876862128573,
+      "historical_ocean_heat_content_change_1971_2018_zj": 372.5333852056303,
+      "historical_arctic_amplification_1979_2021_ratio": 4.329397842447633,
+      "ssp245_amoc_decline_2100_percent": 18.89744662634295
+    },
+    {
+      "dt_years": 0.05,
+      "historical_gmst_2011_2020_c": 1.0863014757478469,
+      "historical_ocean_heat_content_change_1971_2018_zj": 372.6176629925612,
+      "historical_arctic_amplification_1979_2021_ratio": 4.314121109646179,
+      "ssp245_amoc_decline_2100_percent": 18.899862928226806
+    },
+    {
+      "dt_years": 0.025,
+      "historical_gmst_2011_2020_c": 1.0859911816348946,
+      "historical_ocean_heat_content_change_1971_2018_zj": 372.59814964684415,
+      "historical_arctic_amplification_1979_2021_ratio": 4.303071636278094,
+      "ssp245_amoc_decline_2100_percent": 18.905868642282165
+    }
+  ],
+  "timestep_differences_from_0p05": {
+    "0.1": {
+      "historical_gmst_2011_2020_c": 0.016986210465010476,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.08427778693089749,
+      "historical_arctic_amplification_1979_2021_ratio": 0.015276732801453363,
+      "ssp245_amoc_decline_2100_percent": -0.0024163018838549988
+    },
+    "0.025": {
+      "historical_gmst_2011_2020_c": -0.0003102941129522474,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.019513345717030006,
+      "historical_arctic_amplification_1979_2021_ratio": -0.011049473368085039,
+      "ssp245_amoc_decline_2100_percent": 0.0060057140553588795
+    }
+  }
+}

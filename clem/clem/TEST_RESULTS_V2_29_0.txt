@@ -1,0 +1,120 @@
+Emergent-Sensitivity Global Climate Model v2.29.0
+Final isolated regression test record
+Date: 2026-07-29
+
+Command:
+  env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 \
+    python -u run_tests.py --timeout-seconds 360 --retries 1
+
+Result:
+  PASS: 96/96 selected isolated pytest cases passed.
+  Exit code: 0
+
+Selection:
+  Default release suite excluding tests marked slow, continuation, calibration, or gui.
+
+Notes:
+  Each selected node ran in a fresh Python process through run_tests.py.
+  The v2.26 seasonal heat-exchange regression was updated to test bidirectional
+  ocean/surface exchange after v2.29 removed the one-way delayed-release closure.
+
+Raw runner output follows.
+
+[1/96] tests/test_review_fixes.py::test_hybrid_switch_must_be_inside_requested_run
+.[2/96] tests/test_review_fixes.py::test_ssp460_summary_reports_automatic_initialization
+.[3/96] tests/test_review_fixes.py::test_meinshausen_forcing_is_zero_at_reference_and_exact_at_doubling
+.[4/96] tests/test_review_fixes.py::test_meinshausen_high_co2_curvature_differs_from_logarithmic
+.[5/96] tests/test_review_fixes.py::test_monte_carlo_rejects_experiment_controls
+.[6/96] tests/test_review_fixes.py::test_monte_carlo_accepts_whitelisted_physical_parameters
+.[7/96] tests/test_review_fixes.py::test_duration_classifier_rejects_sustained_recovery
+.[8/96] tests/test_review_fixes.py::test_zero_recovery_threshold_allows_no_recovery_but_rejects_any_recovery
+.[9/96] tests/test_review_fixes.py::test_duration_classifier_accepts_persistent_weak_state
+.[10/96] tests/test_review_fixes.py::test_monotonicity_check_and_isotonic_projection
+.[11/96] tests/test_review_fixes.py::test_threshold_estimates_include_bootstrap_interval
+.[12/96] tests/test_review_fixes.py::test_structural_amoc_modes_are_explicit_and_operational
+.[13/96] tests/test_v221_scientific_fixes.py::test_whole_domain_equilibrium_salt_closure
+.[14/96] tests/test_v221_scientific_fixes.py::test_smooth_stability_and_transient_validation
+.[15/96] tests/test_v221_scientific_fixes.py::test_collapse_threshold_semantics
+.[16/96] tests/test_v221_scientific_fixes.py::test_calibration_outputs_are_not_labeled_validation
+.[17/96] tests/test_v221_scientific_fixes.py::test_reversible_regional_freshwater_and_regrowth
+.[18/96] tests/test_v222_remaining_fixes.py::test_equilibrium_bounds_are_configurable
+.[19/96] tests/test_v222_remaining_fixes.py::test_greenland_specific_driver_and_separate_mass_counters
+.[20/96] tests/test_v222_remaining_fixes.py::test_held_out_benchmark_metadata_and_evaluation
+.[21/96] tests/test_v222_remaining_fixes.py::test_summary_rejects_incomplete_frames_and_reports_gaps
+.[22/96] tests/test_v223_final_fixes.py::test_branch_assignment_uses_global_secant_prediction
+.[23/96] tests/test_v223_final_fixes.py::test_pseudo_arclength_predictor_can_turn_parameter_direction
+.[24/96] tests/test_v223_final_fixes.py::test_root_search_reports_saturation_separately_from_seed_failures
+.[25/96] tests/test_v223_final_fixes.py::test_unexpected_solver_exceptions_are_not_swallowed
+.[26/96] tests/test_v223_final_fixes.py::test_complex_dominant_mode_tests_real_and_imaginary_components
+.[27/96] tests/test_v223_final_fixes.py::test_frozen_validation_has_multiple_provenance_complete_benchmarks
+.[28/96] tests/test_v223_final_fixes.py::test_ocean_heat_content_diagnostic_is_finite
+.[29/96] tests/test_v224_accuracy_fixes.py::test_v224_default_parameters
+.[30/96] tests/test_v224_accuracy_fixes.py::test_historical_gmst_uses_1850_1900_reference
+.[31/96] tests/test_v224_accuracy_fixes.py::test_arctic_air_diagnostic_is_distinct_from_surface_state
+.[32/96] tests/test_v2252_seasonal_arctic.py::test_v2252_physical_defaults_do_not_use_freshwater_compensation
+.[33/96] tests/test_v2252_seasonal_arctic.py::test_unforced_seasonal_arctic_control_is_stable
+.[34/96] tests/test_v2252_seasonal_arctic.py::test_warm_and_cold_arctic_perturbations_recover
+.[35/96] tests/test_v2252_seasonal_arctic.py::test_time_weighted_development_regression_ranges
+.[36/96] tests/test_v2252_seasonal_arctic.py::test_transient_hosing_recovers_without_density_memory_feedback
+.[37/96] tests/test_v2252_seasonal_arctic.py::test_arctic_heat_states_are_finite_and_distinct
+.[38/96] tests/test_v226_thermodynamic_arctic.py::test_v226_defaults_are_physical_and_freshwater_is_not_inflated
+.[39/96] tests/test_v226_thermodynamic_arctic.py::test_orbital_insolation_resolves_polar_night_and_midnight_sun
+.[40/96] tests/test_v226_thermodynamic_arctic.py::test_generated_reference_cycle_has_thermodynamic_ice_and_freezing_interface
+.[41/96] tests/test_v226_thermodynamic_arctic.py::test_internal_arctic_heat_exchange_is_conservative
+.[42/96] tests/test_v226_thermodynamic_arctic.py::test_legacy_multiplier_controls_do_not_affect_enabled_seasonal_physics
+.[43/96] tests/test_v226_thermodynamic_arctic.py::test_normal_interfaces_do_not_expose_legacy_multiplier_controls
+.[44/96] tests/test_v226_thermodynamic_arctic.py::test_greenland_seasonal_forcing_is_summer_dominant_and_annually_normalized
+.[45/96] tests/test_v226_thermodynamic_arctic.py::test_ssp245_generates_winter_autumn_amplification_and_bidirectional_ocean_exchange
+.[46/96] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[2.5]
+.[47/96] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[5.0]
+.[48/96] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[10.0]
+.[49/96] tests/test_v2271_maintenance_arctic.py::test_reference_cycle_cache_keys_start_latitude_and_greenland_floor
+.[50/96] tests/test_v2271_maintenance_arctic.py::test_reference_cycle_cache_is_bounded_lru
+.[51/96] tests/test_v2271_maintenance_arctic.py::test_temperature_products_are_explicit_and_map_consistent
+.[52/96] tests/test_v2271_maintenance_arctic.py::test_arctic_amplification_uses_like_for_like_near_surface_air
+.[53/96] tests/test_v2271_maintenance_arctic.py::test_arctic_exchange_priors_and_tooltips_include_defaults
+.[54/96] tests/test_v2271_maintenance_arctic.py::test_v229_validation_records_match_current_sources
+.[55/96] tests/test_v227_structural_arctic_greenland.py::test_v227_defaults_keep_freshwater_rates_and_use_structural_amoc_settings
+.[56/96] tests/test_v227_structural_arctic_greenland.py::test_arctic_ocean_baseline_is_freezing_bounded_and_global_mean_is_preserved
+.[57/96] tests/test_v227_structural_arctic_greenland.py::test_reference_ice_cycle_is_periodic_and_energy_budget_generated
+.[58/96] tests/test_v227_structural_arctic_greenland.py::test_greenland_surface_mass_balance_is_zero_in_control_and_signed_under_anomalies
+.[59/96] tests/test_v227_structural_arctic_greenland.py::test_greenland_dynamic_discharge_is_separate_from_surface_mass_balance
+.[60/96] tests/test_v227_structural_arctic_greenland.py::test_greenland_combined_diagnostic_obeys_total_rate_and_reservoir_caps
+.[61/96] tests/test_v227_structural_arctic_greenland.py::test_release_metadata_and_normal_interfaces_are_synchronized
+.[62/96] tests/test_v227_structural_arctic_greenland.py::test_desktop_gui_and_monte_carlo_expose_structural_controls
+.[63/96] tests/test_v2281_interface_maintenance.py::test_release_version_is_v2290
+.[64/96] tests/test_v2281_interface_maintenance.py::test_desktop_defaults_match_model_config
+.[65/96] tests/test_v2281_interface_maintenance.py::test_desktop_monte_carlo_ranges_contain_validated_defaults
+.[66/96] tests/test_v2281_interface_maintenance.py::test_desktop_monte_carlo_command_constructs_valid_reference_model
+.[67/96] tests/test_v2281_interface_maintenance.py::test_science_priors_contain_and_center_validated_amoc_defaults
+.[68/96] tests/test_v2281_interface_maintenance.py::test_streamlit_uses_canonical_model_defaults_for_amoc_controls
+.[69/96] tests/test_v2281_interface_maintenance.py::test_v229_arctic_coupling_defaults_match_cli_and_desktop
+.[70/96] tests/test_v2281_remaining_maintenance.py::test_toa_includes_global_arctic_external_flux_anomaly
+.[71/96] tests/test_v2281_remaining_maintenance.py::test_corrected_toa_closes_short_abrupt_2x_heat_budget
+.[72/96] tests/test_v2281_remaining_maintenance.py::test_open_water_map_is_masked_where_open_water_is_absent
+.[73/96] tests/test_v2281_remaining_maintenance.py::test_inactive_arctic_controls_are_not_active_gui_or_monte_carlo_inputs
+.[74/96] tests/test_v2281_remaining_maintenance.py::test_filtered_sat_output_and_tooltip_use_actual_memory_timescale
+.[75/96] tests/test_v2281_remaining_maintenance.py::test_common_validation_sampling_is_identical_for_all_supported_timesteps
+.[76/96] tests/test_v2281_remaining_maintenance.py::test_validation_script_uses_common_subannual_sampling_for_headline_and_timesteps
+.[77/96] tests/test_v228_fractional_arctic.py::test_v228_defaults_and_freshwater_are_preserved
+.[78/96] tests/test_v228_fractional_arctic.py::test_fractional_reference_contains_simultaneous_ice_and_open_water_heat
+.[79/96] tests/test_v228_fractional_arctic.py::test_local_ice_thickness_not_grid_equivalent_thickness_controls_conduction
+.[80/96] tests/test_v228_fractional_arctic.py::test_atlantic_and_central_arctic_reference_cycles_are_distinct_and_periodic
+.[81/96] tests/test_v228_fractional_arctic.py::test_unforced_two_reservoir_control_is_stable
+.[82/96] tests/test_v228_fractional_arctic.py::test_reference_cycle_is_independent_of_transient_shortwave_scaling
+.[83/96] tests/test_v228_fractional_arctic.py::test_phase_aware_maps_expose_open_water_and_local_ice_products
+.[84/96] tests/test_v228_fractional_arctic.py::test_reference_cycle_bounds_and_closure_at_all_supported_resolutions
+.[85/96] tests/test_v228_fractional_arctic.py::test_surface_reservoir_normalization_has_no_active_open_water_ceiling
+.[86/96] tests/test_v228_fractional_arctic.py::test_stability_dependent_open_water_exchange_reaches_physical_limits
+.[87/96] tests/test_v228_fractional_arctic.py::test_transient_shortwave_scaling_changes_only_the_anomaly
+.[88/96] tests/test_v228_fractional_arctic.py::test_hidden_legacy_arctic_controls_have_zero_dynamical_effect
+.[89/96] tests/test_v228_fractional_arctic.py::test_normal_interfaces_expose_structural_not_empirical_arctic_controls
+.[90/96] tests/test_v228_fractional_arctic.py::test_diagnostics_use_area_weighted_local_ice_and_effective_fluxes
+.[91/96] tests/test_v228_fractional_arctic.py::test_cache_is_bounded_and_sensitive_to_sector_and_exchange_inputs
+.[92/96] tests/test_v229_coupled_arctic_ocean.py::test_reference_cycle_contains_periodic_sector_ocean_states
+.[93/96] tests/test_v229_coupled_arctic_ocean.py::test_basal_heat_flux_increases_with_ocean_temperature
+.[94/96] tests/test_v229_coupled_arctic_ocean.py::test_open_water_exchange_is_two_way
+.[95/96] tests/test_v229_coupled_arctic_ocean.py::test_transient_ocean_surface_exchange_is_equal_and_opposite
+.[96/96] tests/test_v229_coupled_arctic_ocean.py::test_reference_area_mean_resolution_spread_is_reduced
+.
+All 96 isolated test cases passed.

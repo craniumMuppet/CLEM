@@ -1,0 +1,47 @@
+EGCM v2.27.1 Arctic maintenance test and validation record
+===========================================================
+
+Maintenance scope
+-----------------
+- Bounded and fully keyed Arctic reference-cycle LRU cache.
+- Seawater-freezing lower bound throughout the 55-66 N transition.
+- Separate bulk-surface, near-surface-air, and Arctic-interface products.
+- Like-for-like near-surface-air Arctic amplification.
+- Corrected priors, tooltips, aliases, version metadata, and documentation.
+- Added 2.5, 5, and 10 degree reference-cycle and cache regressions.
+
+Deterministic tests
+-------------------
+- Complete default isolated suite: 62/62 passed.
+- v2.27.1 maintenance tests: 9 collected after provenance test addition.
+- Retained v2.27 structural tests: 8/8 passed.
+- Retained v2.26 thermodynamic-Arctic tests: 8/8 passed.
+- Tooltip coverage: 145 desktop settings, 60 Monte Carlo parameters, and 111 Streamlit controls.
+
+Fresh validation
+----------------
+- Validator: validate_v2271.py
+- Historical GMST, 2011-2020 relative to 1850-1900: 1.1667398229 C
+- Ocean heat-content change, 1971-2018: 356.2312956691 ZJ
+- Arctic amplification, 1979-2021, SAT/SAT: 3.3184938434 x
+- DJF Arctic amplification: 4.2211915975 x
+- JJA Arctic amplification: 2.1843976511 x
+- SSP2-4.5 AMOC weakening, 2081-2100: 19.8264358188%
+- SSP5-8.5 AMOC weakening, 2081-2100: 40.3072707701%
+- Greenland SSP2-4.5 sea-level equivalent by 2100: 89.9934044610 mm
+- 500-year GMST drift: -5.71e-14 C
+- 500-year AMOC drift: 6.47e-13 Sv
+- Hosing recovery after 100 years: 89.7139880368% of initial loss
+
+Interpretation
+--------------
+The Arctic amplification reduction relative to v2.27.0 is a diagnostic-definition
+correction. The Arctic numerator and global denominator now use the same
+near-surface-air product. No Arctic, AMOC, or freshwater parameter was
+recalibrated for v2.27.1.
+
+Known deferred v2.28 work
+-------------------------
+- Split partial cells into simultaneous ice-covered and open-water fluxes.
+- Use local ice thickness for conduction.
+- Apply the full snow/pond/conduction energy balance to transient anomalies.

@@ -1,0 +1,26 @@
+{
+  "authoritative_records": [
+    "ACTUAL_SEA_ICE_FIX.md",
+    "SEA_ICE_FIX_VALIDATION.json",
+    "TEST_RESULTS_SEA_ICE_FIX.json",
+    "RUNTIME_BENCHMARK_SEA_ICE_FIX.json",
+    "INHERITED_LEGACY_TEST_STATUS.json",
+    "validation/sea_ice_fix/scenario_matrix.json"
+  ],
+  "generated_at_utc": "2026-08-07T15:12:57.317388+00:00",
+  "historical_release_gates_passed": {
+    "10deg": true,
+    "5deg": true
+  },
+  "known_inherited_legacy_wrapper_failures": 4,
+  "known_regressions_from_this_fix": 0,
+  "model_version": "2.29.23",
+  "normal_regression_suite_passed": true,
+  "package": "emergent_global_climate_model_v2_29_23_sea_ice_fix",
+  "physics_acceptance_passed": true,
+  "post_documentation_interface_smoke_passed": true,
+  "requested_scope": "Correct the concrete September sea-ice behavior failures, protect March and historical gates, verify scenarios, stability, conservation, cross-resolution behavior, regression safety, and runtime, then package a ZIP.",
+  "requested_scope_status": "complete",
+  "runtime_acceptance_passed": true,
+  "schema_version": "1.0"
+}

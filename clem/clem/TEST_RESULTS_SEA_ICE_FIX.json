@@ -1,0 +1,70 @@
+{
+  "affected_4p5m_batch": {
+    "failed": 0,
+    "note": "Included inherited reference-cycle cap safety, conservation, defaults, priors, CLI, GUI, metadata, and fix-specific tests. Overlaps with the complete normal suite.",
+    "passed": 33,
+    "tests": 33
+  },
+  "focused_release_batch": {
+    "evidence": "validation/sea_ice_fix/tests/targeted_release_tests.txt",
+    "failed": 0,
+    "note": "Overlaps with the complete 320-test normal suite and is not added to its total.",
+    "passed": 72,
+    "tests": 72
+  },
+  "generated_at_utc": "2026-08-07T15:12:57.317388+00:00",
+  "legacy_wrappers": {
+    "counted_as_regressions": false,
+    "known_inherited_failures": 4,
+    "status_file": "INHERITED_LEGACY_TEST_STATUS.json"
+  },
+  "normal_repository_suite": {
+    "groups": {
+      "a": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 88,
+        "time": 788.194
+      },
+      "b": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 74,
+        "time": 204.672
+      },
+      "c": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 73,
+        "time": 175.305
+      },
+      "d": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 85,
+        "time": 244.537
+      }
+    },
+    "total": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 320,
+      "time": 1412.708
+    }
+  },
+  "normal_repository_suite_passed": true,
+  "post_documentation_interface_smoke": {
+    "failed": 0,
+    "note": "Run after final evidence/document updates; overlaps with the complete normal suite except for the final document state.",
+    "passed": 10,
+    "scope": "README/changelog semantics, release workflow, CLI/GUI metadata, documented entrypoints, packaging smoke, defaults, and Monte Carlo prior exposure",
+    "tests": 10
+  },
+  "schema_version": "1.0",
+  "source_sha256_climate_model_py": "e1983a49df0a752beb4acb86036372cee05f4aaa231a487939228f4f114d2039"
+}

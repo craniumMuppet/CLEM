@@ -1,0 +1,58 @@
+EGCM v2.28.0 fractional Arctic rebuild test and validation record
+=================================================================
+
+Structural scope
+----------------
+- Replaced the single signed Arctic enthalpy state with separate conserved
+  sea-ice latent-energy and open-water sensible-heat reservoirs.
+- Allows simultaneous fractional sea ice and open water in each Arctic sector cell.
+- Uses local ice thickness for ice/snow conduction.
+- Solves separate Atlantic-influenced and central-Arctic periodic control cycles.
+- Reuses the fractional surface energy balance during transient integrations.
+- Uses stability-dependent open-water exchange: 0.5 W m-2 K-1 under stable
+  conditions and 5.0 W m-2 K-1 under unstable conditions, with a 0.5 C transition.
+- Transfers energy outside the explicit surface-reservoir range conservatively
+  to the bulk mixed-layer ocean.
+- Preserves hydrological and Greenland freshwater defaults at 0.006 and 0.005 Sv/K.
+
+Deterministic tests
+-------------------
+- Complete default isolated suite: 77/77 passed.
+- v2.28-native fractional-Arctic tests: 15/15 passed.
+- Tests cover 2.5, 5, and 10 degree grids, reference-cycle closure, local-thickness
+  conduction, simultaneous ice/open-water states, cache behavior, stability-dependent
+  exchange, conservative overflow, hidden legacy controls, interface exposure,
+  energy accounting, AMOC, Greenland, and retained compatibility contracts.
+- Final suite log: /mnt/data/v228_full_tests_final.log
+- Final suite exit code: 0.
+
+Fresh validation
+----------------
+- Validator: validate_v228.py
+- All 13 validation tasks passed.
+- Historical GMST, 2011-2020 relative to 1850-1900: 1.1044586711 C
+- Ocean heat-content change, 1971-2018: 380.3040239837 ZJ
+- Arctic amplification, 1979-2021, SAT/SAT: 3.5358485980 x
+- DJF Arctic amplification: 4.8061454410 x
+- MAM Arctic amplification: 3.5851811962 x
+- JJA Arctic amplification: 1.7184822184 x
+- SON Arctic amplification: 3.7848114142 x
+- SSP2-4.5 AMOC weakening, 2081-2100: 19.0213656844%
+- SSP5-8.5 AMOC weakening, 2081-2100: 39.7186224408%
+- Greenland SSP2-4.5 sea-level equivalent by 2100: 85.7702982163 mm
+- 500-year GMST drift: 9.0253740134e-06 C
+- 500-year AMOC drift: -2.9248827182e-06 Sv
+- Final salt-conservation error: -3.6637359813e-09 ppm
+- Hosing recovery after 100 years: 89.5272597483% of initial loss
+- Abrupt-2xCO2 100-year AMOC values:
+  - 2.5 degree: 14.2795570488 Sv
+  - 5.0 degree: 14.3138496719 Sv
+  - 10.0 degree: 14.5279548569 Sv
+  - Maximum spread: 0.2483978081 Sv
+
+Interpretation
+--------------
+The literature ranges in the validation files were used during development and
+are tuning-informed regression checks, not independent validation. v2.28 is a
+reduced-complexity emulator and does not resolve sea-ice dynamics, mechanical
+export, ridging, leads, Arctic gateways, or three-dimensional circulation.

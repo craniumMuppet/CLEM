@@ -1,0 +1,196 @@
+{
+  "rejected_unstable_candidates": {
+    "cand1": "young-ice local thickness 0.15 m; local thickness hit 896.187 m safeguard",
+    "cand3": "lateral-melt efficiency 0.45 with geometry candidate; local thickness hit 995.638 m safeguard",
+    "cand4": "concentration exponent 1.0; local thickness hit 1102.04 m safeguard",
+    "cand6": "lateral-melt efficiency 0.50 with geometry candidate; local thickness hit 1508.06 m safeguard",
+    "cand9": "young-ice 0.20 m plus lower forced OHT; local thickness hit 748.555 m safeguard"
+  },
+  "selected_candidate": "cand14",
+  "selected_reason": "First stable searched candidate to pass both G02202 seasonal area gates and PIOMAS volume gate while retaining the reviewed no-thick-pack-resistance and no-ice-fraction-OHT-attenuation structure. It also passes both thickness product gates and 2021-2025 G02202 development evaluation.",
+  "selection_rule": "First require G02202 March RMSE <=1.0, G02202 September RMSE <=1.0, and PIOMAS normalized RMSE <=0.25 on a dynamically stable historical integration. Among feasible candidates, retain the least structurally invasive set. Satellite/OSI diagnostics are reported but are not used to force the independent OSI cross-check to pass.",
+  "stable_candidates": [
+    {
+      "calibration_hard_gates_pass": true,
+      "candidate": "cand14",
+      "cryosat2_nrmse": 0.05415129406011386,
+      "development_objective_sum_squared_gate_ratios": 2.7368012225929066,
+      "g02202_2021_2025_march_rmse_million_km2": 0.4758640735697733,
+      "g02202_2021_2025_september_rmse_million_km2": 0.2862356312219401,
+      "g02202_march_rmse_million_km2": 0.8841403155632102,
+      "g02202_september_rmse_million_km2": 0.9776044143006566,
+      "icesat2_nrmse": 0.27285964149241937,
+      "osi_march_rmse_million_km2": 0.510359919066803,
+      "osi_september_rmse_million_km2": 1.1261324899163598,
+      "overrides": {
+        "arctic_basal_ocean_exchange_wm2_k": 6.0,
+        "arctic_forced_ocean_heat_convergence_onset_warming_c": 2.0,
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5,
+        "arctic_new_ice_local_thickness_m": 0.23
+      },
+      "piomas_nrmse": 0.2499233300094956,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand13",
+      "cryosat2_nrmse": 0.05440464882248084,
+      "development_objective_sum_squared_gate_ratios": 2.64166487248652,
+      "g02202_2021_2025_march_rmse_million_km2": 0.4154324062608108,
+      "g02202_2021_2025_september_rmse_million_km2": 0.2801982051223061,
+      "g02202_march_rmse_million_km2": 0.8145361862021823,
+      "g02202_september_rmse_million_km2": 0.9735726691762877,
+      "icesat2_nrmse": 0.25332093268328754,
+      "osi_march_rmse_million_km2": 0.4588721522155085,
+      "osi_september_rmse_million_km2": 1.1203352169407201,
+      "overrides": {
+        "arctic_basal_ocean_exchange_wm2_k": 6.0,
+        "arctic_forced_ocean_heat_convergence_onset_warming_c": 2.0,
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5,
+        "arctic_new_ice_local_thickness_m": 0.22
+      },
+      "piomas_nrmse": 0.2537656314996529,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand12",
+      "cryosat2_nrmse": 0.05366087989725956,
+      "development_objective_sum_squared_gate_ratios": 2.6676089163826555,
+      "g02202_2021_2025_march_rmse_million_km2": 1.4820060341623356,
+      "g02202_2021_2025_september_rmse_million_km2": 2.2254893391509354,
+      "g02202_march_rmse_million_km2": 0.8325885527849054,
+      "g02202_september_rmse_million_km2": 0.9821434150909745,
+      "icesat2_nrmse": 0.27444035923688737,
+      "osi_march_rmse_million_km2": 0.4637783415485282,
+      "osi_september_rmse_million_km2": 1.2229779705272041,
+      "overrides": {
+        "arctic_basal_ocean_exchange_wm2_k": 6.0,
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5,
+        "arctic_new_ice_local_thickness_m": 0.22
+      },
+      "piomas_nrmse": 0.25122195494567523,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand11",
+      "cryosat2_nrmse": 0.07302746135774228,
+      "development_objective_sum_squared_gate_ratios": 3.031928120449009,
+      "g02202_2021_2025_march_rmse_million_km2": 2.31911712030622,
+      "g02202_2021_2025_september_rmse_million_km2": 2.03737271712347,
+      "g02202_march_rmse_million_km2": 1.0656796587530128,
+      "g02202_september_rmse_million_km2": 0.9863832582787674,
+      "icesat2_nrmse": 0.33314678176991636,
+      "osi_march_rmse_million_km2": 0.6839771532422221,
+      "osi_september_rmse_million_km2": 1.2243006334413062,
+      "overrides": {
+        "arctic_basal_ocean_exchange_wm2_k": 6.0,
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5
+      },
+      "piomas_nrmse": 0.24022164936216114,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand8",
+      "cryosat2_nrmse": 0.06608481797435568,
+      "development_objective_sum_squared_gate_ratios": 3.7752778456492164,
+      "g02202_2021_2025_march_rmse_million_km2": 0.7577746886351978,
+      "g02202_2021_2025_september_rmse_million_km2": 2.7581123866477304,
+      "g02202_march_rmse_million_km2": 0.6950321274370056,
+      "g02202_september_rmse_million_km2": 1.4106903836049793,
+      "icesat2_nrmse": 0.2201105507506424,
+      "osi_march_rmse_million_km2": 0.3748424544943685,
+      "osi_september_rmse_million_km2": 1.7540102703235678,
+      "overrides": {
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5,
+        "arctic_new_ice_local_thickness_m": 0.2
+      },
+      "piomas_nrmse": 0.28528065447511974,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand10",
+      "cryosat2_nrmse": 0.06545894195395484,
+      "development_objective_sum_squared_gate_ratios": 3.814964538857655,
+      "g02202_2021_2025_march_rmse_million_km2": 1.72051408074776,
+      "g02202_2021_2025_september_rmse_million_km2": 2.182902360909525,
+      "g02202_march_rmse_million_km2": 1.0530537657318317,
+      "g02202_september_rmse_million_km2": 1.2675820306760366,
+      "icesat2_nrmse": 0.3140573985000074,
+      "osi_march_rmse_million_km2": 0.6599563196118176,
+      "osi_september_rmse_million_km2": 1.5763984548380816,
+      "overrides": {
+        "arctic_forced_ocean_heat_convergence_wm2_per_k": 2.5,
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5
+      },
+      "piomas_nrmse": 0.2621161599418852,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand7",
+      "cryosat2_nrmse": 0.06737975528244157,
+      "development_objective_sum_squared_gate_ratios": 4.115984183984077,
+      "g02202_2021_2025_march_rmse_million_km2": 2.2858193530492135,
+      "g02202_2021_2025_september_rmse_million_km2": 2.7577782602683856,
+      "g02202_march_rmse_million_km2": 1.0841042541748707,
+      "g02202_september_rmse_million_km2": 1.358802974297982,
+      "icesat2_nrmse": 0.320233994768568,
+      "osi_march_rmse_million_km2": 0.7063113397839204,
+      "osi_september_rmse_million_km2": 1.6962602437375853,
+      "overrides": {
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_area_thin_pack_divergence_fraction_per_year": 0.6,
+        "arctic_ice_concentration_exponent": 0.5
+      },
+      "piomas_nrmse": 0.26152875404807097,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand5",
+      "cryosat2_nrmse": 0.06794773561049733,
+      "development_objective_sum_squared_gate_ratios": 4.129357876894234,
+      "g02202_2021_2025_march_rmse_million_km2": 2.297175966165312,
+      "g02202_2021_2025_september_rmse_million_km2": 2.7579524060006206,
+      "g02202_march_rmse_million_km2": 1.0879912334137254,
+      "g02202_september_rmse_million_km2": 1.360835086198684,
+      "icesat2_nrmse": 0.3215398047065749,
+      "osi_march_rmse_million_km2": 0.7101628120475522,
+      "osi_september_rmse_million_km2": 1.6988801077599551,
+      "overrides": {
+        "arctic_full_cover_equivalent_thickness_m": 3.7,
+        "arctic_ice_concentration_exponent": 0.5
+      },
+      "piomas_nrmse": 0.26145755165510803,
+      "stable": true
+    },
+    {
+      "calibration_hard_gates_pass": false,
+      "candidate": "cand2",
+      "cryosat2_nrmse": 0.08040995599918019,
+      "development_objective_sum_squared_gate_ratios": 4.398475483191853,
+      "g02202_2021_2025_march_rmse_million_km2": 2.6257840806085575,
+      "g02202_2021_2025_september_rmse_million_km2": 2.757601717436821,
+      "g02202_march_rmse_million_km2": 1.2142188084652026,
+      "g02202_september_rmse_million_km2": 1.3674865176681106,
+      "icesat2_nrmse": 0.34435005827415427,
+      "osi_march_rmse_million_km2": 0.8585437461729145,
+      "osi_september_rmse_million_km2": 1.7061034639295696,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.5
+      },
+      "piomas_nrmse": 0.2566769360934506,
+      "stable": true
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+Items 1-4 Arctic observation-operator validation — 2026-08-08
+
+compileall: PASS
+
+tests/test_six_source_arctic_validation_stack.py
+10 passed
+
+tests/test_2026_sea_ice_scientific_review_fixes.py + tests/test_sea_ice_actual_fix.py
+12 passed
+
+targeted tests/test_v2299_scientific_review_fixes.py historical non-predictive/five-year block checks
+2 passed
+
+TOTAL CONFIRMED FOCUSED TESTS: 24 passed, 0 failed
+
+Data gate rerun: 0/6 operator-complete observational sources available.
+This is expected because raw observation inputs required to construct the new spatial operators are absent from the package.

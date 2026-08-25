@@ -1,0 +1,49 @@
+{
+  "compileall": "passed",
+  "focused_tests": {
+    "historical_label_compatibility_tests": {
+      "failed": 0,
+      "passed": 2
+    },
+    "prior_scientific_review_and_actual_fix_tests": {
+      "failed": 0,
+      "passed": 12
+    },
+    "six_source_observation_operator_tests": {
+      "failed": 0,
+      "passed": 10
+    },
+    "total_confirmed_failed": 0,
+    "total_confirmed_passed": 24
+  },
+  "historical_10deg_runner": {
+    "last_observed_progress_year": 1925.0,
+    "note": "The full historical integration was started during this patch review but exceeded the execution window before observation scoring.",
+    "scientific_score_claimed": false,
+    "status": "incomplete_execution_window"
+  },
+  "patch": "items_1_4_arctic_observation_operator_fixes_2026",
+  "process_existing": {
+    "cryosat2_rdeft4_v1": "not_processed: No CryoSat2_RDEFT4_v1 March thickness records were produced",
+    "icesat2_is2sitmogr4_v4": "not_processed: No ICESat2_IS2SITMOGR4_v4 March thickness records were produced",
+    "nsidc_0611_v4": "not_processed: No NSIDC-0611 March/September sea-ice-age records were produced",
+    "nsidc_g02202_v6": "not_processed: Missing G02202 v6 ancillary file G02202-ancillary-psn25-v06r00.nc; it is required for the permanent pole-hole mask",
+    "osi_saf_osi450a1_v3_1": "not_processed: No March/September concentration fields found for osi_saf_osi450a1_v3_1",
+    "piomas_v2_1": "not_processed: No gridded PIOMAS heff.H<year>.nc(.gz) files are available"
+  },
+  "scientific_gate_open": false,
+  "validation_stack": {
+    "all_six_observational_products_available": false,
+    "available_source_count": 0,
+    "available_sources": [],
+    "missing_sources": [
+      "nsidc_g02202_v6",
+      "piomas_v2_1",
+      "cryosat2_rdeft4_v1",
+      "icesat2_is2sitmogr4_v4",
+      "osi_saf_osi450a1_v3_1",
+      "nsidc_0611_v4"
+    ],
+    "required_source_count": 6
+  }
+}

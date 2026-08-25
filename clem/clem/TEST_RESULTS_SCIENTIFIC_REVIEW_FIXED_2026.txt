@@ -1,0 +1,51 @@
+EGCM v2.29.25 scientific-review patch test record
+Date: 2026-08-08
+
+Scientific state
+----------------
+Arctic scientific validation remains FAIL-CLOSED / INCOMPLETE.
+No predictive sea-ice skill claim is enabled. Missing homogeneous fixed-mask
+area and independent volume/thickness observations are not fabricated.
+
+Verified changes
+----------------
+- Raw discontinuous NSIDC area is provenance-only and excluded from calibration/skill.
+- Historical fitted area-to-extent multiplier is not used by production outputs or release gates.
+- Coarse native 15% extent is diagnostic-only and excluded from scientific pass/fail gates.
+- Fixed-mask area validation schema and independent volume/thickness validation are implemented.
+- Empirical thick-pack resistance exponent defaults to 0.0.
+- Forced ocean-heat ice-fraction attenuation exponent defaults to 0.0.
+- Existing conservative ice-export sink is retained rather than duplicated.
+- Strict per-fold nested hindcast infrastructure is present; folds have not been scientifically executed because corrected observations are absent.
+
+Tests completed
+---------------
+1. New 2026 review-fix suite: 6 passed.
+2. Final focused regression after operator/UI cleanup: 11 passed in 2.46 s.
+3. Targeted compatibility checks: 6 passed in 2.24 s.
+4. Additional mapping/integrity checks: 3 passed in 30.49 s.
+5. Targeted physical-behavior checks: 14 passed in 31.70 s.
+6. Broader sea-ice regression group: 12 tests had reported passing before the
+   long-running group exceeded the execution window. This is intentionally NOT
+   reported as a complete-suite pass.
+
+Compilation
+-----------
+Current core modules compile successfully with Python py_compile.
+
+Core smoke test
+---------------
+10 degree, 0.1 y run completed.
+Native NH area:       15.471593 M km2
+Thresholded NH area:  15.471593 M km2
+Coarse-zonal extent:  28.535715 M km2
+NH volume:             0.0269368 M km3
+Mean thickness:        1.74105 m
+Scientific validation complete: False
+
+Interpretation
+--------------
+The large coarse-zonal extent is not hidden or tuned away. It is evidence that
+the reduced two-sector geometry cannot serve as a satellite-equivalent extent
+operator, so extent is retained only as a structural diagnostic until a more
+spatially adequate formulation is introduced.

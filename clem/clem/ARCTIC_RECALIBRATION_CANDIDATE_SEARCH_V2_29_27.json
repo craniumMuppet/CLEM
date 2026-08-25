@@ -1,0 +1,217 @@
+{
+  "model_version": "2.29.27",
+  "records": [
+    {
+      "calibration_passed": true,
+      "candidate_id": "cand14",
+      "cryosat2_normalized_rmse_fraction": 0.05417896740872115,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.27315344457351476,
+      "osi_saf_march_rmse_million_km2": 0.5100706479203944,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.1249677000059757,
+      "overrides": {},
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.2498923807619046,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": false,
+      "candidate_id": "cand15",
+      "cryosat2_normalized_rmse_fraction": 0.054011681619167966,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.25688959082048063,
+      "osi_saf_march_rmse_million_km2": 0.4679567967268485,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.1218823403487463,
+      "overrides": {
+        "arctic_full_cover_equivalent_thickness_m": 3.75,
+        "arctic_new_ice_local_thickness_m": 0.22
+      },
+      "physical_passed": false,
+      "piomas_normalized_rmse_fraction": 0.2529885803477558,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": false,
+      "candidate_id": "combo2",
+      "cryosat2_normalized_rmse_fraction": 0.05401593091131991,
+      "development_passed": false,
+      "icesat2_normalized_rmse_fraction": 0.27392800179328597,
+      "osi_saf_march_rmse_million_km2": 0.5279190312034793,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 2.885531140612795,
+      "overrides": {
+        "arctic_forced_ocean_heat_convergence_wm2_per_k": 0.0,
+        "arctic_ice_area_lateral_melt_efficiency": 1.0,
+        "arctic_ice_area_thinning_melt_amplification": 10.0,
+        "arctic_ice_concentration_exponent": 0.6
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.23584765755068296,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": false,
+      "candidate_id": "exp060",
+      "cryosat2_normalized_rmse_fraction": 0.0561327776523052,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.24490851817563603,
+      "osi_saf_march_rmse_million_km2": 0.4328709002936307,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.1035424882126654,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6
+      },
+      "physical_passed": false,
+      "piomas_normalized_rmse_fraction": 0.2559380158084852,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": false,
+      "candidate_id": "exp060_heat3_amp6",
+      "cryosat2_normalized_rmse_fraction": 0.05574159205443367,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.24709337130543962,
+      "osi_saf_march_rmse_million_km2": 0.44183380412834017,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.1921806754797155,
+      "overrides": {
+        "arctic_forced_ocean_heat_convergence_wm2_per_k": 3.0,
+        "arctic_ice_area_thinning_melt_amplification": 6.0,
+        "arctic_ice_concentration_exponent": 0.6
+      },
+      "physical_passed": false,
+      "piomas_normalized_rmse_fraction": 0.2540486852508666,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": false,
+      "candidate_id": "exp060_loss46",
+      "cryosat2_normalized_rmse_fraction": 0.0551769564014469,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.24958268378607482,
+      "osi_saf_march_rmse_million_km2": 0.43847348543530806,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.0460892030564657,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 46.0
+      },
+      "physical_passed": false,
+      "piomas_normalized_rmse_fraction": 0.25110518347500116,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": true,
+      "candidate_id": "exp060_loss475",
+      "cryosat2_normalized_rmse_fraction": 0.05453082173117939,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.2536590020156629,
+      "osi_saf_march_rmse_million_km2": 0.44368989571044176,
+      "osi_saf_passed": true,
+      "osi_saf_september_rmse_million_km2": 0.9992747315331179,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 47.5
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.2472215736009148,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": true,
+      "candidate_id": "exp060_loss485",
+      "cryosat2_normalized_rmse_fraction": 0.05418176419122063,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.25651604860231497,
+      "osi_saf_march_rmse_million_km2": 0.4475357563818226,
+      "osi_saf_passed": true,
+      "osi_saf_september_rmse_million_km2": 0.9688681809681692,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 48.5
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.24470707694361224,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": true,
+      "candidate_id": "final_amp6",
+      "cryosat2_normalized_rmse_fraction": 0.05403159871419652,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.2585591042495662,
+      "osi_saf_march_rmse_million_km2": 0.4586714184841058,
+      "osi_saf_passed": false,
+      "osi_saf_september_rmse_million_km2": 1.0725734909996723,
+      "overrides": {
+        "arctic_ice_area_thinning_melt_amplification": 6.0,
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 48.5
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.24360968344616332,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": true,
+      "candidate_id": "final_new022",
+      "cryosat2_normalized_rmse_fraction": 0.05799742544323114,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.23814019615540177,
+      "osi_saf_march_rmse_million_km2": 0.41116737592299246,
+      "osi_saf_passed": true,
+      "osi_saf_september_rmse_million_km2": 0.9626763593196139,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 48.5,
+        "arctic_new_ice_local_thickness_m": 0.22
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.24835628958867667,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    },
+    {
+      "calibration_passed": true,
+      "candidate_id": "final_new022_loss495",
+      "cryosat2_normalized_rmse_fraction": 0.05718101731986367,
+      "development_passed": true,
+      "icesat2_normalized_rmse_fraction": 0.24098998678704556,
+      "osi_saf_march_rmse_million_km2": 0.41387273243354084,
+      "osi_saf_passed": true,
+      "osi_saf_september_rmse_million_km2": 0.9323508544804656,
+      "overrides": {
+        "arctic_ice_concentration_exponent": 0.6,
+        "arctic_ice_nonsolar_heat_loss_wm2": 49.5,
+        "arctic_new_ice_local_thickness_m": 0.22
+      },
+      "physical_passed": true,
+      "piomas_normalized_rmse_fraction": 0.24583390491287416,
+      "record_count": 95,
+      "trajectory_through_calendar_year": 2026.2
+    }
+  ],
+  "runner": "tools/run_checkpointed_arctic_candidate.py",
+  "selected_candidate": "final_new022_loss495",
+  "selected_parameters": {
+    "arctic_ice_concentration_exponent": 0.6,
+    "arctic_ice_nonsolar_heat_loss_wm2": 49.5,
+    "arctic_new_ice_local_thickness_m": 0.22
+  },
+  "simulation": {
+    "dt_years": 0.05,
+    "resolution_deg": 10.0,
+    "start_year": 1850.0
+  }
+}

@@ -1,0 +1,21 @@
+Emergent Global Climate Model v2.29.11
+Target baseline and checkpoint safety verification
+
+Scientific validator
+--------------------
+21/21 isolated validation tasks passed.
+All release checks passed.
+
+Full retained regression suite
+------------------------------
+........................................................................ [ 27%]
+........................................................................ [ 54%]
+........................................................................ [ 82%]
+..............................................                           [100%]
+262 passed, 2 warnings in 2722.67s (0:45:22)
+
+Focused pre-release checks
+--------------------------
+- v2.29.11 target/baseline/state/checkpoint tests passed before the full suite.
+- Active validation-record source hashes passed after record regeneration.
+- Current packager/manifest workflow tests passed.

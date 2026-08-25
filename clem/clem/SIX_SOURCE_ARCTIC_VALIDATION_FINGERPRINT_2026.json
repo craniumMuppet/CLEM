@@ -1,0 +1,31 @@
+{
+  "file_count": 20,
+  "files": {
+    "ARCTIC_VALIDATION_STACK_STATUS_2026.json": "b6880b6e69b2c60c03d8cecf1ed6e1dbb298652023c8724160bfd92c2e7219d1",
+    "SCIENTIFIC_REVIEW_FIXES_2026.md": "d528a0e42a04beb1bfe1f52953d90dc5b0447cb5108a44b9d54870f08e17c4c0",
+    "SIX_SOURCE_ARCTIC_VALIDATION_2026.md": "a4b15fe27982ea8524c635dded3ff932488715b11660328c6ba20171b624ff69",
+    "TEST_RESULTS_SIX_SOURCE_ARCTIC_VALIDATION_2026.txt": "4d65e66eeb83ce4196ce89244070980a0b8a820c3f5603de1df832235137105d",
+    "arctic_validation_stack.py": "e22a3f7f7215dda2e7fd4863ac0c741a045e89245e4bb46f0f8f89264a290d6d",
+    "data/validation/ARCTIC_VALIDATION_STACK.md": "53bbbe7a9f2b0ff35d1edf76a205dc55c64ebfe54fd6ccee65820b0db39caf8a",
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/README.md": "1b0dfca5fc22c4be6d02c2871042a4f9841aee1f7d7d7e695f692e5729aaacb2",
+    "data/validation/sea_ice_fixed_mask/README.md": "5b82a8b0e2037e2ccf43e43a3d5368f444940f4ee5ec2988b871d1b4dc8e8683",
+    "data/validation/sea_ice_physical/README.md": "4c8d646ab5d15edd318eb6cddba62b827805bbdf0e132b46add473f4b29ffb88",
+    "data/validation/sea_ice_physical/SOURCES.json": "45fc3a39904eec47205aac8f9dc9850fc6eaba74615e5e3f74edd94f62821982",
+    "data/validation/sea_ice_physical/piomas_v2_1_metadata.json": "0db05bfaaffe4883c232783cbf008b654c79726cb13ccecb8e64cd04b6e749a4",
+    "data/validation/sea_ice_physical/piomas_volume_monthly.csv": "a62233fe8ef44e7020f74b26929fcd832284f52045651cdd2c4c78b5d6fc12da",
+    "data/validation/sea_ice_structural/nsidc_0611_v4/README.md": "0eb9a223df15c0c9b93c3ee66fb6728e93bb260c1d9342ee2dfbb0ffa63f2f9b",
+    "requirements-validation-data.txt": "951254595184e15f8fd5f724a1b79fded2920e6e2d8f544d617203793c26ef5c",
+    "sea_ice_validation.py": "8a9132a3234601a991e930eb14804aa5357f0e38ae2419cc9a335a75c467616d",
+    "tests/test_2026_sea_ice_scientific_review_fixes.py": "d6d1635c59415c42e223fd0bb45699774ade28e4a3f1176b36e9c6c0795c1f2b",
+    "tests/test_six_source_arctic_validation_stack.py": "0032ab412bf83f9853d12f981eefbf51ab31ddea970a63d64e9d798a6af522c6",
+    "tools/acquire_arctic_validation_stack.ps1": "570eba66289d56a0d4a8b8dc4a6f59ab9ac989bc02eb3ab2b61509efc93bbf6d",
+    "tools/acquire_arctic_validation_stack.py": "bf55d2b26ebb877a90fe5ed6f8eeeaf2167220f6ba2c2ef440034ff4d7309d30",
+    "tools/export_arctic_validation_bundle.py": "5abb09142b3247093f4ff127c60bf1b962206f4b88868e8f78f38bf822142a3f"
+  },
+  "focused_test_result": "16 passed",
+  "generated_utc": "2026-08-08T16:24:58Z",
+  "observational_stack_available_sources": 1,
+  "observational_stack_required_sources": 6,
+  "purpose": "six_source_arctic_validation_patch_reproducibility",
+  "tree_sha256": "d8ae18d9393914b5506a41ca99b726c88fb58242743b00c0d05d4932da9d071e"
+}

@@ -1,0 +1,52 @@
+Emergent-Sensitivity Global Climate Model v2.29.1
+Final release verification
+
+Regression suite
+----------------
+Runner: python -u run_tests.py --timeout-seconds 900 --retries 1
+Result: 104/104 isolated test cases passed
+Exit status: 0
+
+Release validation
+------------------
+Result: 16/16 isolated validation tasks completed
+Combined release gates: 11/11 passed
+
+Key validated diagnostics
+-------------------------
+Historical GMST: 1.106007 C
+Historical ocean heat gain: 381.514936 ZJ
+Annual Arctic amplification: 3.586194 x
+DJF Arctic amplification: 4.850583 x
+JJA Arctic amplification: 1.743750 x
+SSP2-4.5 AMOC weakening: 21.198939 %
+SSP5-8.5 AMOC weakening: 39.983332 %
+SSP2-4.5 peak internal Arctic open-water temperature: 13.049763 C
+SSP5-8.5 peak internal Arctic open-water temperature: 17.885176 C
+Dormant open-water sensible heat: 0
+Abrupt-2xCO2 resolved energy residual: -0.046673 %
+500-year GMST drift: 9.9741e-6 C
+500-year AMOC drift: -3.2887e-6 Sv
+500-year salt error: 0.0 ppm
+Hosing recovery: 85.810819 %
+Cold Arctic perturbation residual: -0.000409 C
+Warm Arctic perturbation residual: 0.000315 C
+
+Timestep convergence, SSP2-4.5 peak open-water temperature
+-----------------------------------------------------------
+dt=0.100 yr: 13.149298 C
+dt=0.050 yr: 13.049763 C
+dt=0.025 yr: 12.933484 C
+Dormant heat at every timestep: 0
+
+Resolution convergence, abrupt-2xCO2 peak open-water temperature
+-----------------------------------------------------------------
+2.5 degree: 11.896337 C
+5.0 degree: 11.896484 C
+10.0 degree: 11.831817 C
+Spread: 0.064668 C
+
+The complete machine-readable records are in:
+- VALIDATION_SUMMARY_V2_29_1.json
+- DEEP_VALIDATION_V2_29_1.json
+- IMPLEMENTATION_AUDIT_V2_29_1.json

@@ -1,0 +1,64 @@
+{
+  "checks": {
+    "below_quantitative_target_count_forces_exploratory_classification": true,
+    "compactness_controls_exposed_cli_desktop_streamlit": true,
+    "compactness_full_cover_only_at_declared_thickness_tested": true,
+    "compactness_two_regime_mapping_present": true,
+    "complete_compactness_prior_support_tested": true,
+    "gui_tooltip_metadata_complete_for_new_fields": true,
+    "per_target_survival_gate_enforced": true,
+    "reference_cache_identity_covers_all_arctic_fields_and_grid": true,
+    "thin_ice_local_thickness_limit_tested": true,
+    "version_matched_10deg_calibration_present": true,
+    "version_matched_5deg_calibration_present": true,
+    "version_matched_evidence_matches_current_defaults_tested": true,
+    "winter_transport_uses_darkness_and_cold_state": true
+  },
+  "full_test_collection_count": 342,
+  "full_test_suite_completed": false,
+  "generated_at": "2026-08-03T14:30:00+02:00",
+  "independent_predictive_validation_claimed": false,
+  "mandatory_sea_ice_calibration_passed_both_resolutions": true,
+  "model_version": "2.29.18",
+  "schema_version": "1.0",
+  "scope": "v2.29.18 changed-source implementation audit",
+  "source_files": {
+    "app.py": {
+      "sha256": "3c670e530197a49d86a18e86b6dd2ef557be60cf876b220ba27ad3cda9482dcb",
+      "size_bytes": 62066
+    },
+    "climate_model.py": {
+      "sha256": "0b2cfbe753a4f80a9f7b8322bcb1df3c0d74d0ee6c8c0f1f3ab62170341f21b7",
+      "size_bytes": 562131
+    },
+    "climate_model_gui.py": {
+      "sha256": "91a185ec2b20145c5ac24f21d246b9072d93881bc05f078efef5406b17970d93",
+      "size_bytes": 126337
+    },
+    "co2_target_sweep.py": {
+      "sha256": "0d7d6ae0dc27f3a3ac821ecef7fd3cd913b6193e7f77bfcebe4464dae8ce7195",
+      "size_bytes": 95961
+    },
+    "monte_carlo.py": {
+      "sha256": "720cf7b8a0a86aa79f8bb5963c63120f101ed75e52ae13d6865964e7dab7bdd2",
+      "size_bytes": 160119
+    },
+    "safe_checkpoint.py": {
+      "sha256": "b9060dc8b1c76a418626a4f4464dd44b5942a30c282a748e9de709f7d05751e0",
+      "size_bytes": 16902
+    },
+    "setting_metadata.py": {
+      "sha256": "a07efcec459c1c7a6707ca95d3f211884d31a196ee23009e23645cb93b5de3d2",
+      "size_bytes": 86627
+    },
+    "tests/test_v22918_release_corrections.py": {
+      "sha256": "25c6b712f62b67680e262e7e0bd12916169a380701cc78f1d7c088a9931b546c",
+      "size_bytes": 7664
+    },
+    "validate_v22918.py": {
+      "sha256": "d163edc6646fc12863c2f18428be10b20589dd2c7cbe34c0bf5a31cdcbc0ef93",
+      "size_bytes": 7593
+    }
+  },
+  "targeted_test_count_passed": 96
+}

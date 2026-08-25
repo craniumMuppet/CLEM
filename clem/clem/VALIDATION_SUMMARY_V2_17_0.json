@@ -1,0 +1,29 @@
+{
+  "model_version": "2.17.0",
+  "central_response": {
+    "ssp585_amoc_decline_1995_2014_to_2081_2100_percent": 20.94045,
+    "hosing_0p1_sv_decline_after_approximately_40_years_percent": 12.26395,
+    "ssp245_minimum_amoc_through_2500_sv": 14.4235,
+    "ssp245_final_amoc_2500_sv": 16.1921,
+    "ssp585_minimum_amoc_through_2500_sv": 0.165,
+    "ssp585_final_amoc_2500_sv": 0.644
+  },
+  "default_structural_settings": {
+    "finite_greenland_reservoir": true,
+    "greenland_initial_ice_mass_gt": 2850000.0,
+    "greenland_depletion_exponent": 1.0,
+    "greenland_max_freshwater_sv": 0.05,
+    "absolute_initial_density_constraint": true,
+    "initial_density_ratio_minimum": 0.75,
+    "initial_density_ratio_maximum": 1.25,
+    "negative_amoc_allowed": false,
+    "collapsed_weak_range_sv": [0.0, 6.0]
+  },
+  "tests": {
+    "automated_nonvisual_tests": "passed",
+    "gui_command_builder": "passed",
+    "setting_metadata_coverage": "passed",
+    "tk_visual_layout": "not run: headless environment"
+  },
+  "posterior_note": "All v2.16.x posterior weights and probabilities must be recomputed under v2.17.0."
+}

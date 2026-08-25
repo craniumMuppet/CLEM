@@ -1,0 +1,4 @@
+EGCM_ARCTIC_FINAL_SHORT_PATH_BUILD
+Includes original valid G02202/CryoSat-2/ICESat-2 processed evidence.
+Refreshes corrected PIOMAS/OSI SAF only.
+pytest is included in requirements-validation-data.txt.

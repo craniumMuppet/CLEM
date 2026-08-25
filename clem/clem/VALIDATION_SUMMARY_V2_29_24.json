@@ -1,0 +1,131 @@
+{
+  "acceptance": {
+    "positive_march_skill_both_baselines_both_resolutions": true,
+    "positive_september_skill_both_baselines_both_resolutions": true,
+    "ssp245_local_safeguard_contact_below_0_1_percent_both_resolutions": true,
+    "strict_future_scenario_ordering_both_resolutions": true,
+    "unforced_stability_roundoff_scale": true
+  },
+  "future": {
+    "10": {
+      "ssp126": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 7.609723882096144,
+        "mean_local_thickness_m": 2.653223308027922,
+        "september_area_million_km2": 2.2516291771584167,
+        "september_extent_million_km2": 3.2547760142417888,
+        "september_volume_thousand_km3": 5.974075013872444
+      },
+      "ssp245": {
+        "local_safeguard_contact_area_fraction": 5.009447195278644e-06,
+        "maximum_local_thickness_m": 12.0,
+        "mean_local_thickness_m": 2.673906153989537,
+        "september_area_million_km2": 1.4127027181880356,
+        "september_extent_million_km2": 2.042090664420758,
+        "september_volume_thousand_km3": 3.7774344919207348
+      },
+      "ssp460": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 4.22274597152864,
+        "mean_local_thickness_m": 2.766264810391272,
+        "september_area_million_km2": 1.1406365954919255,
+        "september_extent_million_km2": 1.648813521176153,
+        "september_volume_thousand_km3": 3.1553028755538164
+      },
+      "ssp585": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 8.689629029413304,
+        "mean_local_thickness_m": 3.062634008365021,
+        "september_area_million_km2": 0.5559391070457687,
+        "september_extent_million_km2": 0.803621346422204,
+        "september_volume_thousand_km3": 1.702638015818453
+      },
+      "strict_area_ordering_ssp126_gt_ssp245_gt_ssp460_gt_ssp585": true
+    },
+    "5": {
+      "ssp126": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 4.285959494688339,
+        "mean_local_thickness_m": 2.5040308536200935,
+        "september_area_million_km2": 2.3645976203179386,
+        "september_extent_million_km2": 3.4180742086744416,
+        "september_volume_thousand_km3": 5.92102539767277
+      },
+      "ssp245": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 5.943388138882253,
+        "mean_local_thickness_m": 2.673072369783498,
+        "september_area_million_km2": 1.5164472815961334,
+        "september_extent_million_km2": 2.1920555520737066,
+        "september_volume_thousand_km3": 4.05357332866792
+      },
+      "ssp460": {
+        "local_safeguard_contact_area_fraction": 0.0,
+        "maximum_local_thickness_m": 8.244141800369047,
+        "mean_local_thickness_m": 2.720776749065842,
+        "september_area_million_km2": 1.2040754474234734,
+        "september_extent_million_km2": 1.740515678766071,
+        "september_volume_thousand_km3": 3.2760204814708365
+      },
+      "ssp585": {
+        "local_safeguard_contact_area_fraction": 0.011995552473743495,
+        "maximum_local_thickness_m": 11.99999999922636,
+        "mean_local_thickness_m": 2.8518368990563223,
+        "september_area_million_km2": 0.5951991080942391,
+        "september_extent_million_km2": 0.8603724806799916,
+        "september_volume_thousand_km3": 1.6974107787485637
+      },
+      "strict_area_ordering_ssp126_gt_ssp245_gt_ssp460_gt_ssp585": true
+    }
+  },
+  "generated_at_utc": "2026-08-08T12:45:20.088177+00:00",
+  "historical": {
+    "10": {
+      "calibration_september_trend_million_km2_per_decade": -0.4109128428732498,
+      "development_2021_2025_september_rmse_million_km2": 0.265728779224719,
+      "evidence_role": "rolling_origin_historical_evaluation_used_for_development",
+      "independent_predictive_validation": false,
+      "march_skill_vs_expanding_linear_trend": 0.21024624614189402,
+      "march_skill_vs_persistence": 0.12730655701369542,
+      "observed_calibration_september_trend_million_km2_per_decade": -0.49230208248926344,
+      "september_model_rmse_million_km2": 0.4717230550800122,
+      "september_skill_vs_expanding_linear_trend": 0.13739645316824178,
+      "september_skill_vs_persistence": 0.16231695008926061
+    },
+    "5": {
+      "calibration_september_trend_million_km2_per_decade": -0.380118195498249,
+      "development_2021_2025_september_rmse_million_km2": 0.22318032937129703,
+      "evidence_role": "rolling_origin_historical_evaluation_used_for_development",
+      "independent_predictive_validation": false,
+      "march_skill_vs_expanding_linear_trend": 0.19720846068023357,
+      "march_skill_vs_persistence": 0.11289954745170294,
+      "observed_calibration_september_trend_million_km2_per_decade": -0.49230208248926344,
+      "september_model_rmse_million_km2": 0.49849345013912527,
+      "september_skill_vs_expanding_linear_trend": 0.08844349765886683,
+      "september_skill_vs_persistence": 0.11477823868023362
+    }
+  },
+  "model_version": "2.29.24",
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "0683747337c1f43eb572201fffba18c8c0f0596f8c4b59889423dda19c51161a",
+    "algorithm": "sha256",
+    "coverage": "Python source/tests/tools, dependency/config metadata, and packaged runtime data/benchmarks; documentation and generated evidence excluded so post-test evidence writing does not change the tested-code identity.",
+    "file_count": 190
+  },
+  "unforced": {
+    "10": {
+      "duration_years": 200.0,
+      "march_area_drift_million_km2": -2.1114487935847137e-10,
+      "maximum_absolute_gmst_c": 2.273920752855566e-15,
+      "maximum_absolute_toa_wm2": 1.309594353003554e-15,
+      "september_area_drift_million_km2": 1.8982149185831076e-10
+    },
+    "5": {
+      "duration_years": 200.0,
+      "march_area_drift_million_km2": -2.1428370189369161e-10,
+      "maximum_absolute_gmst_c": 1.6485147431300754e-15,
+      "maximum_absolute_toa_wm2": 1.2082882036050623e-15,
+      "september_area_drift_million_km2": 3.4209168831011993e-10
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "concentration_variables_used": [
+    "sea_ice_conc"
+  ],
+  "dataset_id": "IS2SITMOGR4",
+  "doi": "10.5067/TXDHDJ1JT0CG",
+  "generated_utc": "2026-08-09T07:49:23Z",
+  "maximum_latitude_deg": 88.0,
+  "mean_definition": "concentration-and-cell-area weighted thickness over the exact valid satellite retrieval footprint",
+  "minimum_concentration_fraction": 0.15,
+  "model_comparison_rule": "EGCM local ice thickness is sampled at identical cell centers and averaged with the identical per-record observation weights",
+  "months_used": [
+    3
+  ],
+  "operator_file": "icesat2_is2sitmogr4_operator.npz",
+  "operator_file_sha256": "7503913a78ea2e3511a5bc9ded158f2e001553ac80da4f3ba93479175853df31",
+  "processed_file_sha256": "62ac3f07403fb91994ba7137249ad5a31822962a94942e0b355558b4df49e3b5",
+  "role": "independent_satellite_thickness_validation",
+  "source_files_sha256": {
+    "IS2SITMOGR4_01_201903_007_004.nc": "aa615ba7f1b357ca3c4085f310734c5633a44a538942ddc46af3bbc52e10ed0b",
+    "IS2SITMOGR4_01_202003_007_004.nc": "116346acb29f48a7a9d1ea73e2e6496bd6cbd74befa9176823599b45bb163b98",
+    "IS2SITMOGR4_01_202103_007_004.nc": "b6b9d15089a079830e05670a4e9aa6cede303403ff3bf5b2c9b023ee1a306836",
+    "IS2SITMOGR4_01_202203_007_004.nc": "58feb309cd381e88c6466694d230f6417f6e9a4d2aa9abb6ba6a4c131b2cff09",
+    "IS2SITMOGR4_01_202303_007_004.nc": "62d9b77b40643a855c8b2ac2532459735a4db90f5d1355ff247a33227e4ad416",
+    "IS2SITMOGR4_01_202403_007_004.nc": "fe8aa83340bb1e67d091a5b9594caeec77cb10f6d52be0741386b1e123dbd570",
+    "IS2SITMOGR4_01_202503_007_004.nc": "c17159596c78ac2666b6cddfa0a445b19414f4f1c7769552cd877929fd8aab95"
+  },
+  "source_id": "icesat2_is2sitmogr4_v4",
+  "thickness_variables_used": [
+    "ice_thickness"
+  ],
+  "version": "4"
+}

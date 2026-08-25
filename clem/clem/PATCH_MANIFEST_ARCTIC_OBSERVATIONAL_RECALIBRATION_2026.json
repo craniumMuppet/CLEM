@@ -1,0 +1,51 @@
+{
+  "files": {
+    "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json": "a9a31d804cdb441de19831154aaa03ce79093e99080e0b081f2da4c59e777dd5",
+    "ARCTIC_OBSERVATIONAL_RECALIBRATION_2026.md": "8b04f860bbdd4c367c63b5b9b2eb23d71c6f839efb5a339e8d4a024e42c9c4b6",
+    "ARCTIC_RECALIBRATION_CANDIDATE_SEARCH_2026.json": "fd10b7b2d57ab8098e8e627f006d526dc582f97d6e22e6c837e2352c665687ee",
+    "ARCTIC_VALIDATION_STACK_STATUS_2026.json": "2bdf04536ee37558b2d7bc13ee4692104e4b8e780cc8aa7d2bd5f51321fcebfc",
+    "CHANGELOG.md": "5f2bb1052088804f97e12f0c5709781f88e64dc47b59ab6ca8a366d7844310b8",
+    "README.md": "a19fd7be92fb003fb843eaedcfc5c22a03ea401e116788cc8ae980ae9182a273",
+    "TEST_RESULTS_ARCTIC_OBSERVATIONAL_RECALIBRATION_2026.txt": "b13eb2379839db514161f029c163243b46355cf779d7b76a9202722baa8e386c",
+    "arctic_validation_stack.py": "4c651d536d6db29739e0d73eb6c08afff9d555c9387ed9ac8e206a3fd2e0f936",
+    "climate_model.py": "2dba2169e70982068755592ab1c9c5ff755c203eaaf8572cf5b8b504200e0dcb",
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/METADATA.json": "19fc4d25a3eb7520beaa96eef8c5eb2d8bc1355c411839da096a09b625bf7830",
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/MODEL_OBSERVATION_OPERATOR.npz": "0b91e97b12db4d7e3f98f49cc4b7e3123db614bd7deb5aa29b02c5f6e3092529",
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_03_fixed_mask_crosscheck.csv": "c541ee385615e8162516087b5acee0d6632b99b1e0a85b170058642c84f76200",
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_09_fixed_mask_crosscheck.csv": "99aac602ebc70396244778b3bf7c8f1b852fc24cfbf5580b1e0ba1ae3cbf71fb",
+    "data/validation/sea_ice_physical/piomas_common_domain_operator.npz": "0e8645d97cec32010aa3374df5b570fb14c0a405eb2bc7ea257800a90e133238",
+    "data/validation/sea_ice_physical/piomas_v2_1_metadata.json": "9502f91c2cc78c02e1609cc2fa3a2faa693118f115ebf0baaec845e050de7fb0",
+    "data/validation/sea_ice_physical/piomas_volume_monthly.csv": "409558ecff12bef7c8db4a9f6044bead22a3b7ea24092ce1a6baac85e488a7ca",
+    "sea_ice_validation.py": "a94956444e29ededa9b7508098bd8055cc5c635c1ebc66e741f47f2758138c45",
+    "tests/test_2026_arctic_observational_recalibration.py": "6a4dfb5b3581826159d957337c4fd60b8a7c9bb9d06115cae99699af4f2a60d9",
+    "tests/test_2026_sea_ice_scientific_review_fixes.py": "4acb6d4c1542418d511a1bc0690575f528d28e2d499a74d901bd6e4e44b8a510",
+    "tests/test_sea_ice_actual_fix.py": "ca5e95253290783294adc3ce8789aa0948175acf8f0d66675c4e96d7b2e18daf",
+    "tests/test_six_source_arctic_validation_stack.py": "76a4383f5982dee591eec370d23137b29fdcff00e60ce96323e9273e6521d60f",
+    "tests/test_v228_fractional_arctic.py": "72661dc602ba5ce78aa134d9a0f64900f820b8ceed8fee2b4dd4ef53ee6d22fe",
+    "tests/test_v22917_arctic_sweep_integrity.py": "c511173d84b2a88185851f5eda0f2bae5950f8a62871273155bbffd92389f9a5",
+    "tests/test_v22918_release_corrections.py": "e3b9625c805aed4616094376f1b81034294955e596e9e51b58918ffe199314bc",
+    "tests/test_v2295_physical_integrity.py": "b843314f45a9a1b4226a1a43b0c7f6f337e52616e49f791ebf765d80af521ec5",
+    "tests/test_v2297_review_fixes.py": "ab55c067f18e60dd66794dd8343940c88d942b572840c405b295f433d4c9ac76",
+    "tests/test_v2299_scientific_review_fixes.py": "e8ae9efb3943fddb147045afd255c145e685af3add1b80830157933c4b5fe41a",
+    "tools/acquire_arctic_validation_stack.py": "df9f32385ebfaa86e725365b650f611d5ae0ff51849a3a66265f448535092a9e",
+    "tools/export_arctic_validation_bundle.py": "7abe59c7da995f8e3545f616183165247ddf9318443615ba3b1e7331e79ecdae"
+  },
+  "generated_utc": "2026-08-11",
+  "purpose": "Arctic observation-operator data repair integration and observational recalibration",
+  "scientific_claim_status": {
+    "calibration_passed": true,
+    "development_evaluation_passed": true,
+    "nested_hindcast_run": false,
+    "nsidc_0611_available": false,
+    "osi_saf_september_independent_gate_passed": false,
+    "physical_volume_thickness_gate_passed": true,
+    "scientific_predictive_validation_complete": false
+  },
+  "selected_defaults": {
+    "arctic_basal_ocean_exchange_wm2_k": 6.0,
+    "arctic_forced_ocean_heat_convergence_onset_warming_c": 2.0,
+    "arctic_full_cover_equivalent_thickness_m": 3.7,
+    "arctic_ice_concentration_exponent": 0.5,
+    "arctic_new_ice_local_thickness_m": 0.23
+  }
+}

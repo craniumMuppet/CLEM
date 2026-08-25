@@ -1,0 +1,43 @@
+{
+  "generated_at_utc": "2026-08-07T15:12:57.317388+00:00",
+  "known_reproduced_inherited_failures": [
+    {
+      "assertion": "6.5 < minimum_amoc_sv < 11.0",
+      "classification": "inherited standalone legacy assertion; outside the sea-ice-fix scope",
+      "final_candidate_result": "failed; minimum AMOC 12.462351508851476 Sv",
+      "node": "amoc_dynamics_fix_test.test_hybrid_ssp_has_material_2100_weakening_and_bounded_long_horizon",
+      "untouched_original_result": "failed; minimum AMOC 12.633740873108403 Sv"
+    },
+    {
+      "assertion": "minimum AMOC < 0.5 Sv",
+      "classification": "inherited standalone legacy assertion; outside the sea-ice-fix scope",
+      "final_candidate_result": "failed with the same assertion",
+      "node": "amoc_persistent_collapse_test.test_one_percent_ramp_collapses_continuously",
+      "untouched_original_result": "failed with the same assertion"
+    },
+    {
+      "assertion": "final remaining Greenland mass < 2% of initial mass",
+      "classification": "inherited standalone legacy assertion; outside the sea-ice-fix scope",
+      "final_candidate_result": "failed with the same assertion",
+      "node": "structural_fixes_v2_17_0_test.test_finite_greenland_reservoir",
+      "untouched_original_result": "failed with the same assertion"
+    },
+    {
+      "assertion": "8.5 < legacy endpoint AMOC < 12.0 Sv",
+      "classification": "inherited standalone legacy assertion; outside the sea-ice-fix scope",
+      "final_candidate_result": "failed with the same assertion",
+      "node": "v2_17_1_validation_test.test_default_five_degree_migrated_compatibility",
+      "untouched_original_result": "failed with the same assertion"
+    }
+  ],
+  "legacy_wrapper_file": "tests/test_legacy_entrypoints.py",
+  "normal_suite_result": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 320,
+    "time": 1412.708
+  },
+  "regression_conclusion": "These four assertions reproduce on the untouched uploaded v2.29.23 tree and on the final sea-ice candidate. They are not regressions caused by the sea-ice changes.",
+  "schema_version": "1.0"
+}

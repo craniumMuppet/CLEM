@@ -1,0 +1,10 @@
+START HERE
+
+1. Open this extracted project folder.
+2. Double-click RUN_ARCTIC_VALIDATION.cmd, or run it from Command Prompt/PowerShell.
+3. The first banner MUST say:
+   EGCM ARCTIC ACQUISITION BUILD: LEGACY-AUTH-FIX-2026-08-08
+4. Enter your Earthdata token, username, and password when prompted.
+5. On success, upload ARCTIC_VALIDATION_DATA_BUNDLE.zip.
+
+Do not run an older folder named nsidc0611_direct_acquisition_fix.

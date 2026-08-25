@@ -1,0 +1,5170 @@
+{
+  "model_version": "2.29.8",
+  "classification": "native-state calibration and validation-informed development checks; no current independent temporal holdout",
+  "default_freshwater_coefficients_sv_per_k": {
+    "hydrological": 0.006,
+    "greenland": 0.005
+  },
+  "default_structural_parameters": {
+    "greenland_dynamic_discharge_fraction": 0.4,
+    "greenland_pdd_melt_factor_gt_per_degree_day": 0.7,
+    "greenland_max_freshwater_sv": 0.025,
+    "amoc_temperature_density_coupling": 1.0,
+    "amoc_convection_density_scale_factor": 4.0,
+    "amoc_reference_density_driver": 0.00075,
+    "ocean_heat_exchange_wm2_k": 1.45,
+    "arctic_winter_transport_enhancement": 16.0,
+    "arctic_open_water_stable_exchange_wm2_k": 0.5,
+    "arctic_open_water_unstable_exchange_wm2_k": 10.0,
+    "arctic_open_water_exchange_transition_c": 0.5,
+    "arctic_transient_shortwave_scale": 1.0,
+    "arctic_basal_ocean_exchange_wm2_k": 4.0,
+    "arctic_open_water_ocean_exchange_wm2_k": 30.0,
+    "arctic_lateral_ocean_heat_transport_wm2_per_ice_fraction": 27.5,
+    "arctic_atlantic_reference_ocean_temperature_c": 0.2,
+    "arctic_non_atlantic_reference_ocean_temperature_c": -0.8,
+    "arctic_reference_ocean_heat_capacity_wyr_m2_k": 6.0,
+    "arctic_reference_ocean_restoring_wm2_k": 12.0,
+    "arctic_air_low_pass_years": 0.15
+  },
+  "development_metrics": {
+    "historical_gmst_2011_2020_c": 1.1823775580999576,
+    "historical_ocean_heat_content_change_1971_2018_zj": 406.2874388524224,
+    "historical_arctic_amplification_1979_2021_ratio": 3.125260981347708,
+    "ssp245_amoc_decline_2100_percent": 42.24205417243636
+  },
+  "benchmark_results": {
+    "historical_gmst_2011_2020_c": {
+      "value": 1.1823775580999576,
+      "minimum": 0.95,
+      "maximum": 1.2,
+      "units": "degC relative to 1850-1900",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI SPM, statement A.1.2"
+    },
+    "historical_ocean_heat_content_change_1971_2018_zj": {
+      "value": 406.2874388524224,
+      "minimum": 350.0,
+      "maximum": 500.0,
+      "units": "ZJ",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 7, Section 7.2.2 and Table 7.1"
+    },
+    "historical_arctic_amplification_1979_2021_ratio": {
+      "value": 3.125260981347708,
+      "minimum": 3.0,
+      "maximum": 4.5,
+      "units": "Arctic trend divided by global trend",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "Rantanen et al. 2022, Communications Earth & Environment, doi:10.1038/s43247-022-00498-3"
+    },
+    "ssp245_amoc_decline_2100_percent": {
+      "value": 42.24205417243636,
+      "minimum": 15.0,
+      "maximum": 50.0,
+      "units": "percent",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 4, AMOC projections across SSP scenarios"
+    }
+  },
+  "all_development_checks_passed": true,
+  "seasonal_arctic_amplification_1979_2021": {
+    "DJF": 4.018047093455332,
+    "MAM": 3.255825903738924,
+    "JJA": 1.9957963977257762,
+    "SON": 3.0824164130492893,
+    "annual": 3.125260981347708
+  },
+  "ssp245_arctic_transient": {
+    "maximum_arctic_open_water_temperature_c": 10.255782034321461,
+    "maximum_arctic_open_water_temperature_c_at_1pct_open": 10.255782034321461,
+    "maximum_arctic_open_water_temperature_c_at_5pct_open": 10.255782034321461,
+    "maximum_arctic_open_water_temperature_c_at_10pct_open": 10.255782034321461,
+    "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+    "maximum_absolute_salt_conservation_error_ppm": 0.0,
+    "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+    "cumulative_absolute_salt_projection_correction_ppm": 9.156249694532844e-08,
+    "arctic_reference_periodic_closure_wyr_m2": 0.0,
+    "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+    "arctic_reference_spinup_years_completed": 80.0,
+    "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+  },
+  "ssp585_amoc_decline_2100_percent": 59.09329199442165,
+  "ssp585_arctic_transient": {
+    "maximum_arctic_open_water_temperature_c": 15.23670906949802,
+    "maximum_arctic_open_water_temperature_c_at_1pct_open": 15.23670906949802,
+    "maximum_arctic_open_water_temperature_c_at_5pct_open": 15.23670906949802,
+    "maximum_arctic_open_water_temperature_c_at_10pct_open": 15.23670906949802,
+    "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+    "maximum_absolute_salt_conservation_error_ppm": 0.0,
+    "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+    "cumulative_absolute_salt_projection_correction_ppm": 9.451053188485606e-08,
+    "arctic_reference_periodic_closure_wyr_m2": 0.0,
+    "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+    "arctic_reference_spinup_years_completed": 80.0,
+    "arctic_reference_convergence_tolerance_wyr_m2": 1e-08,
+    "future_sea_ice": {
+      "september_area_2081_2100_million_km2": 0.9855195537198684,
+      "september_extent_2081_2100_million_km2": 1.42458866564318,
+      "native_september_area_2081_2100_million_km2": 0.9855195537198684,
+      "first_september_below_1_million_km2_native_area": 2090,
+      "september_2100_area_million_km2": 0.7786598714836188,
+      "september_2100_extent_million_km2": 1.1255687653479507,
+      "native_september_2100_area_million_km2": 0.7786598714836188,
+      "maximum_area_identity_error_million_km2": 0.0,
+      "evidence_role": "native_thermodynamic_area_projection_with_extent_only_operator",
+      "used_for_tuning": false,
+      "independent_predictive_validation": false,
+      "interpretation": "Native prognostic thermodynamic area is the primary future output. The fixed zero-intercept historical operator is used only for 15% extent. No post-2020 trend, scenario closure, or future-target adjustment is applied. Longitude reconstruction is display-only and has no regional forecast skill."
+    }
+  },
+  "greenland_ssp245": {
+    "mean_total_loss_2011_2020_gt_per_year": 252.30278926807867,
+    "mean_dynamic_discharge_2011_2020_gt_per_year": 111.7059670791565,
+    "mean_surface_mass_balance_loss_2011_2020_gt_per_year": 262.5729841654511,
+    "cumulative_net_ice_loss_2100_gt": 41309.4550552248,
+    "cumulative_sea_level_2100_mm": 114.11451672714033
+  },
+  "supplementary_pathways_not_used_for_native_arctic_tuning": {
+    "ssp126": {
+      "scenario": "ssp126",
+      "warming_2081_2100_c": 2.2826211259434546,
+      "amoc_decline_2100_percent": 25.47477957582466,
+      "final_arctic_sea_ice_fraction": 0.4102438504364273,
+      "maximum_arctic_open_water_temperature_c": 7.745977389205451,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 7.745977389205451,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 7.745977389205451,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 7.745977389205451,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 9.329663514505057e-08,
+      "arctic_reference_periodic_closure_wyr_m2": 0.0,
+      "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    },
+    "ssp460": {
+      "scenario": "ssp460",
+      "warming_2081_2100_c": 3.803434451635191,
+      "amoc_decline_2100_percent": 48.13340949234923,
+      "final_arctic_sea_ice_fraction": 0.36238760561407224,
+      "maximum_arctic_open_water_temperature_c": 11.590238704107914,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 11.590238704107914,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 11.590238704107914,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 11.590238704107914,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 0.0,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 9.242956604518951e-08,
+      "arctic_reference_periodic_closure_wyr_m2": 0.0,
+      "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    }
+  },
+  "energy_audit": {
+    "years": 20.0,
+    "actual_resolved_heat_gain_zj": 654.4165046414377,
+    "resolved_system_toa_integrated_zj": 654.7768143448798,
+    "bulk_radiative_toa_integrated_zj": 622.6667672635659,
+    "explicit_arctic_toa_integrated_zj": 32.11004708131381,
+    "residual_zj": -0.36030970344211255,
+    "relative_residual_percent": -0.055027865304395546
+  },
+  "arctic_reference_cycle": {
+    "global_baseline_mean_c": 13.999999999999998,
+    "arctic_ocean_baseline_mean_c_north_of_full_latitude": -1.8,
+    "arctic_ocean_baseline_min_c_north_of_full_latitude": -1.8000000000000003,
+    "arctic_ocean_baseline_max_c_north_of_full_latitude": -1.7999999999999998,
+    "freezing_temperature_c": -1.8,
+    "periodic_closure_wyr_m2": 0.0,
+    "spinup_convergence_wyr_m2": 0.0,
+    "periodic_closure_temperature_c": 0.0,
+    "spinup_convergence_temperature_c": 0.0,
+    "spinup_years_completed": 80,
+    "monthly_ocean_area_weighted_ice_fraction": [
+      0.7514103229641032,
+      0.7606120222582202,
+      0.7326355476296738,
+      0.6493939607429572,
+      0.5130393523290493,
+      0.39429166075611893,
+      0.3144888847002178,
+      0.2779450641710897,
+      0.27731846716558795,
+      0.4045822645309297,
+      0.5881374351670019,
+      0.701370911427073
+    ],
+    "monthly_ocean_area_weighted_interface_temperature_c": [
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.7999999999999998,
+      -1.7999174104569935,
+      -1.160272449799131,
+      0.2996036039541814,
+      1.087893360650009,
+      0.47155758731519615,
+      -1.320343910871439,
+      -1.8000000000000003,
+      -1.7999999999999998,
+      -1.8000000000000003
+    ],
+    "monthly_native_northern_ice_area_million_km2": [
+      13.958027727035345,
+      14.14845277547754,
+      13.55493829822863,
+      11.88985615253654,
+      9.41699059851439,
+      7.270031384098246,
+      5.833664145321741,
+      5.115811003212836,
+      5.03605340368787,
+      6.916644025440995,
+      10.432155508133027,
+      12.864280809557803
+    ],
+    "native_march_ice_area_million_km2": 13.55493829822863,
+    "native_september_ice_area_million_km2": 5.03605340368787,
+    "exact_zero_diagnosed_area_million_km2": 0.0,
+    "exact_zero_diagnosed_extent_million_km2": 0.0,
+    "minimum_ice_month": 9,
+    "maximum_equivalent_ice_thickness_m": 1.979201965498227,
+    "configured_emergency_thickness_cap_m": 8.0,
+    "emergency_thickness_cap_hits": 0,
+    "emergency_thickness_cap_samples": 864,
+    "emergency_thickness_cap_occupancy_fraction": 0.0,
+    "sectors": {
+      "atlantic": {
+        "monthly_ice_fraction": [
+          0.7167985443655132,
+          0.7303230605485037,
+          0.6967054491112481,
+          0.6009417154077535,
+          0.4737288657872668,
+          0.36318367837018817,
+          0.2925539661682588,
+          0.2526807228153487,
+          0.2425357630909615,
+          0.29969082635271116,
+          0.5045902106803851,
+          0.6500590046214598
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.7999999999999998,
+          -1.7996006647745049,
+          -0.7700412478381164,
+          0.8401911738270891,
+          1.641408848283014,
+          1.2024736101112983,
+          -0.5249344921366794,
+          -1.8,
+          -1.7999999999999998,
+          -1.8
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.7990639062560376,
+          0.15031047197407185,
+          2.343730805742004,
+          3.0644390891041144,
+          2.2153992706588657,
+          -0.12420787760020532,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "monthly_shallow_ocean_temperature_c": [
+          -0.5411405049796053,
+          -0.6015976431303985,
+          -0.6489502644051709,
+          -0.7050150008207396,
+          -0.6467518320955988,
+          -0.14537599734276394,
+          0.560217898790042,
+          1.0125169582551363,
+          0.89254340716686,
+          0.23280204452409947,
+          -0.22300071877411565,
+          -0.4360758952125304
+        ],
+        "maximum_open_water_temperature_c": 3.0644390891041144,
+        "shallow_ocean_seasonal_range_c": 1.717531959075876,
+        "minimum_ice_fraction": 0.2425357630909615,
+        "minimum_ice_month": 9
+      },
+      "non_atlantic": {
+        "monthly_ice_fraction": [
+          0.7604351373029615,
+          0.7685096879377906,
+          0.7420041060058936,
+          0.6620275940364756,
+          0.5232893266722988,
+          0.40240288118039785,
+          0.3202082835668504,
+          0.2845325901336646,
+          0.2863878493004242,
+          0.4319320799296921,
+          0.6099218744546541,
+          0.7147501843521671
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.2620229026658094,
+          0.15864862707829194,
+          0.9435675065093013,
+          0.28097560424136564,
+          -1.5277421613546702,
+          -1.8,
+          -1.8,
+          -1.8000000000000003
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8000000000000003,
+          -1.8,
+          -1.8,
+          -1.8,
+          -0.6788130460726481,
+          1.4744200072723876,
+          2.234317865439686,
+          1.1048588121176004,
+          -1.4277032526817912,
+          -1.8,
+          -1.8,
+          -1.8000000000000003
+        ],
+        "monthly_shallow_ocean_temperature_c": [
+          -1.0564329624661315,
+          -1.1093336869256945,
+          -1.1499954194344189,
+          -1.189815192865135,
+          -1.1938570051644217,
+          -0.8270171757969859,
+          -0.22036233934638333,
+          0.15445892821634608,
+          -0.08363794816272187,
+          -0.5734790977678424,
+          -0.8371261239701558,
+          -0.9758534619749557
+        ],
+        "maximum_open_water_temperature_c": 2.234317865439686,
+        "shallow_ocean_seasonal_range_c": 1.3483159333807677,
+        "minimum_ice_fraction": 0.2845325901336646,
+        "minimum_ice_month": 8
+      }
+    }
+  },
+  "sea_ice_native_calibration_and_development_evaluation": {
+    "dataset_metadata": {
+      "schema_version": "2.0",
+      "dataset": "NOAA/NSIDC Sea Ice Index, Version 4",
+      "source": "National Snow and Ice Data Center",
+      "product_id": "G02135",
+      "product_url": "https://nsidc.org/data/g02135/versions/4",
+      "retrieval_date": "2026-07-30",
+      "months": [
+        3,
+        9
+      ],
+      "quantities": [
+        "Northern Hemisphere sea-ice area",
+        "Northern Hemisphere sea-ice extent"
+      ],
+      "units": "million square kilometres",
+      "calibration_period": [
+        1979,
+        2020
+      ],
+      "validation_informed_development_evaluation_period": [
+        2021,
+        2025
+      ],
+      "prospective_untouched_temporal_evaluation_start_year": 2027,
+      "evidence_partition": {
+        "1979-2020": "calibration and validation-informed development; not independent validation",
+        "2021-2025": "previously inspected development-evaluation data; not an independent holdout",
+        "2026": "March record was already available and inspected; not untouched",
+        "2027-onward": "reserved prospectively and must not be used for tuning before evaluation"
+      },
+      "source_product_transition": {
+        "1979-2024": {
+          "source_data_id": "NSIDC-0051",
+          "title": "Sea Ice Concentrations from Nimbus-7 SMMR and DMSP SSM/I-SSMIS Passive Microwave Data, Version 2",
+          "url": "https://nsidc.org/data/nsidc-0051/versions/2"
+        },
+        "2025-onward": {
+          "source_data_id": "NSIDC-0803",
+          "title": "AMSR2 Daily Polar Gridded Sea Ice Concentrations, Version 1",
+          "url": "https://nsidc.org/data/nsidc-0803/versions/1"
+        },
+        "interpretation": "The packaged table preserves the Sea Ice Index v4 source-data identifiers. No claim is made that NSIDC-0051 and NSIDC-0803 are measurement-identical; product transition effects are part of the observational uncertainty."
+      },
+      "packaged_file_sha256": {
+        "N_03_extent_v4.0.csv": "01c4fa25d1a4a35aee9558eeecd652564fc91582e35e7b2fcaf8c19ebf56aff7",
+        "N_09_extent_v4.0.csv": "bdeb4dea8b52f6dc8a8faecfd5d220dc758b6dd2ddea345d7b18897df0d9716f"
+      },
+      "validation_informed_development_period": [
+        2021,
+        2025
+      ],
+      "prospective_untouched_start_year": 2027,
+      "independent_holdout_claimed": false,
+      "actual_packaged_file_sha256": {
+        "N_03_extent_v4.0.csv": "01c4fa25d1a4a35aee9558eeecd652564fc91582e35e7b2fcaf8c19ebf56aff7",
+        "N_09_extent_v4.0.csv": "bdeb4dea8b52f6dc8a8faecfd5d220dc758b6dd2ddea345d7b18897df0d9716f"
+      },
+      "packaged_file_hashes_match": true
+    },
+    "area_operator": {
+      "mapping": "identity",
+      "zero_preserving": true,
+      "continuous": true,
+      "monotone": true,
+      "warming_dependent": false,
+      "statistical_area_correction": false
+    },
+    "calibration": {
+      "name": "calibration_1979_2020",
+      "period": [
+        1979,
+        2020
+      ],
+      "evidence_role": "calibration_and_validation_informed_development",
+      "used_for_tuning": true,
+      "records": 84,
+      "months": {
+        "3": {
+          "area": {
+            "model_mean_million_km2": 13.125394521096466,
+            "observed_mean_million_km2": 13.129761904761903,
+            "rmse_million_km2": 0.40365945810416354,
+            "mae_million_km2": 0.3410631727941773,
+            "bias_million_km2": -0.004367383665438868,
+            "correlation": 0.18641500238600112,
+            "model_trend_million_km2_per_decade": -0.18722185905876962,
+            "observed_trend_million_km2_per_decade": -0.0381735677821891
+          },
+          "extent": {
+            "model_mean_million_km2": 15.263420956865316,
+            "observed_mean_million_km2": 15.271666666666668,
+            "rmse_million_km2": 0.3416641870288551,
+            "mae_million_km2": 0.2766240109518837,
+            "bias_million_km2": -0.008245709801348401,
+            "correlation": 0.8750826949667466,
+            "model_trend_million_km2_per_decade": -0.21771886875840182,
+            "observed_trend_million_km2_per_decade": -0.4059395510898619
+          },
+          "maximum_absolute_area_identity_error_million_km2": 0.0,
+          "source_products": [
+            "NSIDC-0051"
+          ]
+        },
+        "9": {
+          "area": {
+            "model_mean_million_km2": 4.00634306634035,
+            "observed_mean_million_km2": 4.154999999999999,
+            "rmse_million_km2": 0.5377232759083956,
+            "mae_million_km2": 0.4099294227100141,
+            "bias_million_km2": -0.14865693365964938,
+            "correlation": 0.7943563144569018,
+            "model_trend_million_km2_per_decade": -0.33356187959704986,
+            "observed_trend_million_km2_per_decade": -0.49230208248925794
+          },
+          "extent": {
+            "model_mean_million_km2": 5.791250819371306,
+            "observed_mean_million_km2": 6.019047619047619,
+            "rmse_million_km2": 0.694903409172556,
+            "mae_million_km2": 0.5726827797250834,
+            "bias_million_km2": -0.22779679967631306,
+            "correlation": 0.8926039592023537,
+            "model_trend_million_km2_per_decade": -0.4821705172373147,
+            "observed_trend_million_km2_per_decade": -0.8342597844583015
+          },
+          "maximum_absolute_area_identity_error_million_km2": 0.0,
+          "source_products": [
+            "NSIDC-0051"
+          ]
+        }
+      },
+      "model_march_minus_september_area_million_km2": 9.119051454756114,
+      "observed_march_minus_september_area_million_km2": 8.974761904761904
+    },
+    "calibration_gates": {
+      "march_native_area_rmse_le_0p50": true,
+      "september_native_area_rmse_le_0p80": true,
+      "march_extent_rmse_le_0p55": true,
+      "september_extent_rmse_le_1p15": true,
+      "march_native_area_trend_error_le_0p15": true,
+      "september_native_area_trend_is_negative": true,
+      "september_native_area_trend_error_le_0p20": true,
+      "september_native_area_trend_fraction_ge_0p60": true,
+      "seasonal_native_area_amplitude_error_le_0p60": true,
+      "march_area_mapping_is_identity": true,
+      "september_area_mapping_is_identity": true
+    },
+    "calibration_passed": true,
+    "validation_informed_development_evaluation": {
+      "name": "validation_informed_development_evaluation_2021_2025",
+      "period": [
+        2021,
+        2025
+      ],
+      "evidence_role": "validation_informed_development_evaluation_not_independent",
+      "used_for_tuning": true,
+      "records": 10,
+      "months": {
+        "3": {
+          "area": {
+            "model_mean_million_km2": 12.638364031977385,
+            "observed_mean_million_km2": 12.815999999999999,
+            "rmse_million_km2": 0.3685998829648004,
+            "mae_million_km2": 0.33850603730470075,
+            "bias_million_km2": -0.17763596802261397,
+            "correlation": 0.48522759972141755,
+            "model_trend_million_km2_per_decade": -0.23804619092732954,
+            "observed_trend_million_km2_per_decade": -1.2099999999999285
+          },
+          "extent": {
+            "model_mean_million_km2": 14.697056923974404,
+            "observed_mean_million_km2": 14.534,
+            "rmse_million_km2": 0.2870487421742641,
+            "mae_million_km2": 0.24376069826456437,
+            "bias_million_km2": 0.16305692397440233,
+            "correlation": 0.4353859638920508,
+            "model_trend_million_km2_per_decade": -0.27682209578249717,
+            "observed_trend_million_km2_per_decade": -0.7999999999999508
+          },
+          "maximum_absolute_area_identity_error_million_km2": 0.0,
+          "source_products": [
+            "NSIDC-0051",
+            "NSIDC-0803"
+          ]
+        },
+        "9": {
+          "area": {
+            "model_mean_million_km2": 3.1753209903460005,
+            "observed_mean_million_km2": 3.152,
+            "rmse_million_km2": 0.23799962729771645,
+            "mae_million_km2": 0.21370164080993,
+            "bias_million_km2": 0.02332099034600015,
+            "correlation": 0.7189089090707608,
+            "model_trend_million_km2_per_decade": -0.3725613275764989,
+            "observed_trend_million_km2_per_decade": -1.33999999999978
+          },
+          "extent": {
+            "model_mean_million_km2": 4.589991416762506,
+            "observed_mean_million_km2": 4.6659999999999995,
+            "rmse_million_km2": 0.23396113367286558,
+            "mae_million_km2": 0.23183944995760797,
+            "bias_million_km2": -0.07600858323749442,
+            "correlation": 0.5583797536445394,
+            "model_trend_million_km2_per_decade": -0.5385450167063031,
+            "observed_trend_million_km2_per_decade": -0.9499999999998301
+          },
+          "maximum_absolute_area_identity_error_million_km2": 0.0,
+          "source_products": [
+            "NSIDC-0051",
+            "NSIDC-0803"
+          ]
+        }
+      },
+      "model_march_minus_september_area_million_km2": 9.463043041631385,
+      "observed_march_minus_september_area_million_km2": 9.663999999999998
+    },
+    "validation_informed_development_evaluation_gates": {
+      "march_native_area_rmse_le_0p50": true,
+      "september_native_area_rmse_le_0p60": true,
+      "march_extent_rmse_le_0p50": true,
+      "september_extent_rmse_le_0p60": true,
+      "march_area_mapping_is_identity": true,
+      "september_area_mapping_is_identity": true
+    },
+    "validation_informed_development_evaluation_passed": true,
+    "rolling_origin_historical_evaluation": {
+      "evidence_role": "rolling_origin_historical_evaluation_used_for_development",
+      "used_for_tuning": true,
+      "independent_predictive_validation": false,
+      "method": "Each target year is compared with the fixed emulator trajectory, one-year observed persistence, and an expanding observed linear trend estimated only from prior years.",
+      "metrics": {
+        "march_area": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "model_rmse_million_km2": 0.3376594775084233,
+          "one_year_persistence_rmse_million_km2": 0.37403208418530065,
+          "expanding_linear_trend_rmse_million_km2": 0.407188313841476,
+          "model_skill_score_vs_persistence": 0.09724461674485085,
+          "model_skill_score_vs_expanding_linear_trend": 0.17075351617316126,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 13.21,
+              "model": 13.30363402139711,
+              "persistence": 13.9,
+              "expanding_linear_trend": 13.092666666666645
+            },
+            {
+              "year": 1990,
+              "observed": 13.51,
+              "model": 13.27099497260588,
+              "persistence": 13.21,
+              "expanding_linear_trend": 13.158363636363624
+            },
+            {
+              "year": 1991,
+              "observed": 13.42,
+              "model": 13.265035646694514,
+              "persistence": 13.51,
+              "expanding_linear_trend": 13.30393939393943
+            },
+            {
+              "year": 1992,
+              "observed": 13.48,
+              "model": 13.32742441982308,
+              "persistence": 13.42,
+              "expanding_linear_trend": 13.381538461538454
+            },
+            {
+              "year": 1993,
+              "observed": 13.77,
+              "model": 13.389001159934464,
+              "persistence": 13.48,
+              "expanding_linear_trend": 13.45538461538463
+            },
+            {
+              "year": 1994,
+              "observed": 13.55,
+              "model": 13.375710041255862,
+              "persistence": 13.77,
+              "expanding_linear_trend": 13.587809523809554
+            },
+            {
+              "year": 1995,
+              "observed": 13.34,
+              "model": 13.32527791513671,
+              "persistence": 13.55,
+              "expanding_linear_trend": 13.634749999999983
+            },
+            {
+              "year": 1996,
+              "observed": 12.9,
+              "model": 13.273182358760527,
+              "persistence": 13.34,
+              "expanding_linear_trend": 13.620955882352987
+            },
+            {
+              "year": 1997,
+              "observed": 13.3,
+              "model": 13.227298494626593,
+              "persistence": 12.9,
+              "expanding_linear_trend": 13.510522875816982
+            },
+            {
+              "year": 1998,
+              "observed": 13.57,
+              "model": 13.184555974494451,
+              "persistence": 13.3,
+              "expanding_linear_trend": 13.503333333333359
+            },
+            {
+              "year": 1999,
+              "observed": 13.54,
+              "model": 13.141511048189832,
+              "persistence": 13.57,
+              "expanding_linear_trend": 13.550473684210523
+            },
+            {
+              "year": 2000,
+              "observed": 13.17,
+              "model": 13.101160656960353,
+              "persistence": 13.54,
+              "expanding_linear_trend": 13.583238095238109
+            },
+            {
+              "year": 2001,
+              "observed": 13.64,
+              "model": 13.067163310293953,
+              "persistence": 13.17,
+              "expanding_linear_trend": 13.54272727272727
+            },
+            {
+              "year": 2002,
+              "observed": 13.42,
+              "model": 13.038031775473524,
+              "persistence": 13.64,
+              "expanding_linear_trend": 13.589367588932816
+            },
+            {
+              "year": 2003,
+              "observed": 13.42,
+              "model": 13.0151495521299,
+              "persistence": 13.42,
+              "expanding_linear_trend": 13.591920289855082
+            },
+            {
+              "year": 2004,
+              "observed": 12.99,
+              "model": 12.999684341619828,
+              "persistence": 13.42,
+              "expanding_linear_trend": 13.593499999999992
+            },
+            {
+              "year": 2005,
+              "observed": 12.74,
+              "model": 12.98971885969602,
+              "persistence": 12.99,
+              "expanding_linear_trend": 13.528153846153849
+            },
+            {
+              "year": 2006,
+              "observed": 12.52,
+              "model": 12.982992801210305,
+              "persistence": 12.74,
+              "expanding_linear_trend": 13.433732193732201
+            },
+            {
+              "year": 2007,
+              "observed": 12.56,
+              "model": 12.976030827929996,
+              "persistence": 12.52,
+              "expanding_linear_trend": 13.31928571428572
+            },
+            {
+              "year": 2008,
+              "observed": 13.53,
+              "model": 12.966096279784527,
+              "persistence": 12.56,
+              "expanding_linear_trend": 13.223891625615765
+            },
+            {
+              "year": 2009,
+              "observed": 13.43,
+              "model": 12.953524011055011,
+              "persistence": 13.53,
+              "expanding_linear_trend": 13.268804597701152
+            },
+            {
+              "year": 2010,
+              "observed": 13.53,
+              "model": 12.937250041267433,
+              "persistence": 13.43,
+              "expanding_linear_trend": 13.295677419354838
+            },
+            {
+              "year": 2011,
+              "observed": 12.83,
+              "model": 12.918480521511649,
+              "persistence": 13.53,
+              "expanding_linear_trend": 13.332016129032258
+            },
+            {
+              "year": 2012,
+              "observed": 13.41,
+              "model": 12.898221995096373,
+              "persistence": 12.83,
+              "expanding_linear_trend": 13.279545454545454
+            },
+            {
+              "year": 2013,
+              "observed": 13.45,
+              "model": 12.875296406034135,
+              "persistence": 13.41,
+              "expanding_linear_trend": 13.300588235294118
+            },
+            {
+              "year": 2014,
+              "observed": 12.95,
+              "model": 12.852493155673562,
+              "persistence": 13.45,
+              "expanding_linear_trend": 13.32401680672269
+            },
+            {
+              "year": 2015,
+              "observed": 12.78,
+              "model": 12.828899815977271,
+              "persistence": 12.95,
+              "expanding_linear_trend": 13.289523809523818
+            },
+            {
+              "year": 2016,
+              "observed": 12.61,
+              "model": 12.804866107878619,
+              "persistence": 12.78,
+              "expanding_linear_trend": 13.239819819819822
+            },
+            {
+              "year": 2017,
+              "observed": 12.61,
+              "model": 12.781962264078285,
+              "persistence": 12.61,
+              "expanding_linear_trend": 13.176728307254626
+            },
+            {
+              "year": 2018,
+              "observed": 12.69,
+              "model": 12.75902184358772,
+              "persistence": 12.61,
+              "expanding_linear_trend": 13.119257759784071
+            },
+            {
+              "year": 2019,
+              "observed": 12.89,
+              "model": 12.735671603337094,
+              "persistence": 12.69,
+              "expanding_linear_trend": 13.074807692307688
+            },
+            {
+              "year": 2020,
+              "observed": 13.03,
+              "model": 12.711672664346889,
+              "persistence": 12.89,
+              "expanding_linear_trend": 13.053682926829268
+            },
+            {
+              "year": 2021,
+              "observed": 12.99,
+              "model": 12.687023875294816,
+              "persistence": 13.03,
+              "expanding_linear_trend": 13.0476887340302
+            },
+            {
+              "year": 2022,
+              "observed": 12.8,
+              "model": 12.661932915793521,
+              "persistence": 12.99,
+              "expanding_linear_trend": 13.038504983388709
+            },
+            {
+              "year": 2023,
+              "observed": 12.91,
+              "model": 12.637104066548018,
+              "persistence": 12.8,
+              "expanding_linear_trend": 13.012822410147988
+            },
+            {
+              "year": 2024,
+              "observed": 13.19,
+              "model": 12.613584129045359,
+              "persistence": 12.91,
+              "expanding_linear_trend": 12.998959595959594
+            },
+            {
+              "year": 2025,
+              "observed": 12.19,
+              "model": 12.592175173205217,
+              "persistence": 13.19,
+              "expanding_linear_trend": 13.010550724637683
+            }
+          ]
+        },
+        "march_extent": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "model_rmse_million_km2": 0.314991348658582,
+          "one_year_persistence_rmse_million_km2": 0.33483356091275185,
+          "expanding_linear_trend_rmse_million_km2": 0.2897315972777733,
+          "model_skill_score_vs_persistence": 0.059259926633639104,
+          "model_skill_score_vs_expanding_linear_trend": -0.08718328141680565,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 15.42,
+              "model": 15.470694309285873,
+              "persistence": 15.96,
+              "expanding_linear_trend": 15.779333333333312
+            },
+            {
+              "year": 1990,
+              "observed": 15.87,
+              "model": 15.432738608942431,
+              "persistence": 15.42,
+              "expanding_linear_trend": 15.62127272727274
+            },
+            {
+              "year": 1991,
+              "observed": 15.42,
+              "model": 15.425808554393736,
+              "persistence": 15.87,
+              "expanding_linear_trend": 15.660454545454584
+            },
+            {
+              "year": 1992,
+              "observed": 15.48,
+              "model": 15.49835998175945,
+              "persistence": 15.42,
+              "expanding_linear_trend": 15.552307692307622
+            },
+            {
+              "year": 1993,
+              "observed": 15.81,
+              "model": 15.569967102136738,
+              "persistence": 15.48,
+              "expanding_linear_trend": 15.48956043956045
+            },
+            {
+              "year": 1994,
+              "observed": 15.55,
+              "model": 15.55451096182392,
+              "persistence": 15.81,
+              "expanding_linear_trend": 15.530857142857101
+            },
+            {
+              "year": 1995,
+              "observed": 15.26,
+              "model": 15.495863827867748,
+              "persistence": 15.55,
+              "expanding_linear_trend": 15.499499999999983
+            },
+            {
+              "year": 1996,
+              "observed": 15.12,
+              "model": 15.43528230358109,
+              "persistence": 15.26,
+              "expanding_linear_trend": 15.407426470588263
+            },
+            {
+              "year": 1997,
+              "observed": 15.47,
+              "model": 15.381924308720198,
+              "persistence": 15.12,
+              "expanding_linear_trend": 15.30313725490197
+            },
+            {
+              "year": 1998,
+              "observed": 15.6,
+              "model": 15.332219358786267,
+              "persistence": 15.47,
+              "expanding_linear_trend": 15.292807017543893
+            },
+            {
+              "year": 1999,
+              "observed": 15.4,
+              "model": 15.282162743025985,
+              "persistence": 15.6,
+              "expanding_linear_trend": 15.311421052631545
+            },
+            {
+              "year": 2000,
+              "observed": 15.22,
+              "model": 15.23523958150717,
+              "persistence": 15.4,
+              "expanding_linear_trend": 15.28985714285713
+            },
+            {
+              "year": 2001,
+              "observed": 15.52,
+              "model": 15.195704326947645,
+              "persistence": 15.22,
+              "expanding_linear_trend": 15.239870129870127
+            },
+            {
+              "year": 2002,
+              "observed": 15.35,
+              "model": 15.161827487789088,
+              "persistence": 15.52,
+              "expanding_linear_trend": 15.250474308300383
+            },
+            {
+              "year": 2003,
+              "observed": 15.48,
+              "model": 15.135217925176738,
+              "persistence": 15.35,
+              "expanding_linear_trend": 15.23199275362316
+            },
+            {
+              "year": 2004,
+              "observed": 14.99,
+              "model": 15.11723355009206,
+              "persistence": 15.48,
+              "expanding_linear_trend": 15.237599999999965
+            },
+            {
+              "year": 2005,
+              "observed": 14.69,
+              "model": 15.10564476733992,
+              "persistence": 14.99,
+              "expanding_linear_trend": 15.167723076923082
+            },
+            {
+              "year": 2006,
+              "observed": 14.42,
+              "model": 15.09782308534149,
+              "persistence": 14.69,
+              "expanding_linear_trend": 15.063048433048436
+            },
+            {
+              "year": 2007,
+              "observed": 14.54,
+              "model": 15.089727059831919,
+              "persistence": 14.42,
+              "expanding_linear_trend": 14.93349206349204
+            },
+            {
+              "year": 2008,
+              "observed": 15.18,
+              "model": 15.078174249734147,
+              "persistence": 14.54,
+              "expanding_linear_trend": 14.836773399014817
+            },
+            {
+              "year": 2009,
+              "observed": 14.98,
+              "model": 15.063554054532167,
+              "persistence": 15.18,
+              "expanding_linear_trend": 14.8373793103448
+            },
+            {
+              "year": 2010,
+              "observed": 15.14,
+              "model": 15.04462917946577,
+              "persistence": 14.98,
+              "expanding_linear_trend": 14.812838709677393
+            },
+            {
+              "year": 2011,
+              "observed": 14.55,
+              "model": 15.022802248417698,
+              "persistence": 15.14,
+              "expanding_linear_trend": 14.811653225806452
+            },
+            {
+              "year": 2012,
+              "observed": 15.2,
+              "model": 14.999243762907403,
+              "persistence": 14.55,
+              "expanding_linear_trend": 14.739715909090904
+            },
+            {
+              "year": 2013,
+              "observed": 15.03,
+              "model": 14.97258377063223,
+              "persistence": 15.2,
+              "expanding_linear_trend": 14.752245989304825
+            },
+            {
+              "year": 2014,
+              "observed": 14.76,
+              "model": 14.946066045098053,
+              "persistence": 15.03,
+              "expanding_linear_trend": 14.744689075630248
+            },
+            {
+              "year": 2015,
+              "observed": 14.37,
+              "model": 14.918629530714886,
+              "persistence": 14.76,
+              "expanding_linear_trend": 14.708412698412673
+            },
+            {
+              "year": 2016,
+              "observed": 14.4,
+              "model": 14.890680915282829,
+              "persistence": 14.37,
+              "expanding_linear_trend": 14.633918918918909
+            },
+            {
+              "year": 2017,
+              "observed": 14.29,
+              "model": 14.8640462104065,
+              "persistence": 14.4,
+              "expanding_linear_trend": 14.569943100995715
+            },
+            {
+              "year": 2018,
+              "observed": 14.3,
+              "model": 14.837368970776696,
+              "persistence": 14.29,
+              "expanding_linear_trend": 14.500931174089061
+            },
+            {
+              "year": 2019,
+              "observed": 14.57,
+              "model": 14.81021515488062,
+              "persistence": 14.3,
+              "expanding_linear_trend": 14.439461538461558
+            },
+            {
+              "year": 2020,
+              "observed": 14.73,
+              "model": 14.782306972178997,
+              "persistence": 14.57,
+              "expanding_linear_trend": 14.410085365853632
+            },
+            {
+              "year": 2021,
+              "observed": 14.66,
+              "model": 14.753643083807942,
+              "persistence": 14.73,
+              "expanding_linear_trend": 14.398896631823419
+            },
+            {
+              "year": 2022,
+              "observed": 14.59,
+              "model": 14.72446499880148,
+              "persistence": 14.66,
+              "expanding_linear_trend": 14.382591362126249
+            },
+            {
+              "year": 2023,
+              "observed": 14.43,
+              "model": 14.695591719807881,
+              "persistence": 14.59,
+              "expanding_linear_trend": 14.361680761099407
+            },
+            {
+              "year": 2024,
+              "observed": 14.87,
+              "model": 14.668240564274594,
+              "persistence": 14.43,
+              "expanding_linear_trend": 14.328616161616168
+            },
+            {
+              "year": 2025,
+              "observed": 14.12,
+              "model": 14.643344253180112,
+              "persistence": 14.87,
+              "expanding_linear_trend": 14.336753623188415
+            }
+          ]
+        },
+        "september_area": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "model_rmse_million_km2": 0.5062079166448992,
+          "one_year_persistence_rmse_million_km2": 0.5631283277491139,
+          "expanding_linear_trend_rmse_million_km2": 0.5468596284035647,
+          "model_skill_score_vs_persistence": 0.10107893405350765,
+          "model_skill_score_vs_expanding_linear_trend": 0.07433664810353469,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 4.86,
+              "model": 4.306136472871018,
+              "persistence": 5.36,
+              "expanding_linear_trend": 5.128666666666675
+            },
+            {
+              "year": 1990,
+              "observed": 4.55,
+              "model": 4.253364720339735,
+              "persistence": 4.86,
+              "expanding_linear_trend": 5.10745454545453
+            },
+            {
+              "year": 1991,
+              "observed": 4.51,
+              "model": 4.27548368465113,
+              "persistence": 4.55,
+              "expanding_linear_trend": 4.9859090909090895
+            },
+            {
+              "year": 1992,
+              "observed": 5.43,
+              "model": 4.433820577648965,
+              "persistence": 4.51,
+              "expanding_linear_trend": 4.882307692307705
+            },
+            {
+              "year": 1993,
+              "observed": 4.58,
+              "model": 4.508962845693478,
+              "persistence": 5.43,
+              "expanding_linear_trend": 5.065934065934087
+            },
+            {
+              "year": 1994,
+              "observed": 5.13,
+              "model": 4.439013162375285,
+              "persistence": 4.58,
+              "expanding_linear_trend": 4.979142857142882
+            },
+            {
+              "year": 1995,
+              "observed": 4.43,
+              "model": 4.3336473610271025,
+              "persistence": 5.13,
+              "expanding_linear_trend": 5.047499999999992
+            },
+            {
+              "year": 1996,
+              "observed": 5.62,
+              "model": 4.2388301264938955,
+              "persistence": 4.43,
+              "expanding_linear_trend": 4.936176470588244
+            },
+            {
+              "year": 1997,
+              "observed": 4.89,
+              "model": 4.159266474271319,
+              "persistence": 5.62,
+              "expanding_linear_trend": 5.109999999999971
+            },
+            {
+              "year": 1998,
+              "observed": 4.3,
+              "model": 4.082516006872921,
+              "persistence": 4.89,
+              "expanding_linear_trend": 5.0975438596491145
+            },
+            {
+              "year": 1999,
+              "observed": 4.29,
+              "model": 4.006176016509845,
+              "persistence": 4.3,
+              "expanding_linear_trend": 4.968421052631591
+            },
+            {
+              "year": 2000,
+              "observed": 4.35,
+              "model": 3.9385023755755513,
+              "persistence": 4.29,
+              "expanding_linear_trend": 4.858190476190478
+            },
+            {
+              "year": 2001,
+              "observed": 4.59,
+              "model": 3.8834909532939443,
+              "persistence": 4.35,
+              "expanding_linear_trend": 4.775974025974028
+            },
+            {
+              "year": 2002,
+              "observed": 4.03,
+              "model": 3.835919614165813,
+              "persistence": 4.59,
+              "expanding_linear_trend": 4.747786561264812
+            },
+            {
+              "year": 2003,
+              "observed": 4.05,
+              "model": 3.801634075252253,
+              "persistence": 4.03,
+              "expanding_linear_trend": 4.630289855072464
+            },
+            {
+              "year": 2004,
+              "observed": 4.39,
+              "model": 3.778783132604517,
+              "persistence": 4.05,
+              "expanding_linear_trend": 4.532400000000003
+            },
+            {
+              "year": 2005,
+              "observed": 4.07,
+              "model": 3.7645993170694085,
+              "persistence": 4.39,
+              "expanding_linear_trend": 4.500092307692313
+            },
+            {
+              "year": 2006,
+              "observed": 4.01,
+              "model": 3.753814291980731,
+              "persistence": 4.07,
+              "expanding_linear_trend": 4.4247578347578305
+            },
+            {
+              "year": 2007,
+              "observed": 2.82,
+              "model": 3.7407006801447973,
+              "persistence": 4.01,
+              "expanding_linear_trend": 4.3504761904761935
+            },
+            {
+              "year": 2008,
+              "observed": 3.26,
+              "model": 3.721313895342903,
+              "persistence": 2.82,
+              "expanding_linear_trend": 4.121280788177344
+            },
+            {
+              "year": 2009,
+              "observed": 3.76,
+              "model": 3.6980841663315087,
+              "persistence": 3.26,
+              "expanding_linear_trend": 3.977793103448249
+            },
+            {
+              "year": 2010,
+              "observed": 3.34,
+              "model": 3.66738450787807,
+              "persistence": 3.76,
+              "expanding_linear_trend": 3.9154838709677193
+            },
+            {
+              "year": 2011,
+              "observed": 3.21,
+              "model": 3.6349898510366287,
+              "persistence": 3.34,
+              "expanding_linear_trend": 3.808024193548377
+            },
+            {
+              "year": 2012,
+              "observed": 2.41,
+              "model": 3.599264203813,
+              "persistence": 3.21,
+              "expanding_linear_trend": 3.696742424242416
+            },
+            {
+              "year": 2013,
+              "observed": 3.78,
+              "model": 3.5599950041373454,
+              "persistence": 2.41,
+              "expanding_linear_trend": 3.5033689839572304
+            },
+            {
+              "year": 2014,
+              "observed": 3.74,
+              "model": 3.522643937573835,
+              "persistence": 3.78,
+              "expanding_linear_trend": 3.4865042016807024
+            },
+            {
+              "year": 2015,
+              "observed": 3.42,
+              "model": 3.482650570135981,
+              "persistence": 3.74,
+              "expanding_linear_trend": 3.4675079365079142
+            },
+            {
+              "year": 2016,
+              "observed": 2.91,
+              "model": 3.444104096700417,
+              "persistence": 3.42,
+              "expanding_linear_trend": 3.4163513513513237
+            },
+            {
+              "year": 2017,
+              "observed": 3.35,
+              "model": 3.4068873588655797,
+              "persistence": 2.91,
+              "expanding_linear_trend": 3.3168278805120366
+            },
+            {
+              "year": 2018,
+              "observed": 3.35,
+              "model": 3.369250965707851,
+              "persistence": 3.35,
+              "expanding_linear_trend": 3.271956815114706
+            },
+            {
+              "year": 2019,
+              "observed": 3.17,
+              "model": 3.3310707601254825,
+              "persistence": 3.35,
+              "expanding_linear_trend": 3.231615384615395
+            },
+            {
+              "year": 2020,
+              "observed": 2.83,
+              "model": 3.2918737358883985,
+              "persistence": 3.17,
+              "expanding_linear_trend": 3.177743902439005
+            },
+            {
+              "year": 2021,
+              "observed": 3.47,
+              "model": 3.2520747293635033,
+              "persistence": 2.83,
+              "expanding_linear_trend": 3.0965505226480587
+            },
+            {
+              "year": 2022,
+              "observed": 3.47,
+              "model": 3.2119736444766724,
+              "persistence": 3.47,
+              "expanding_linear_trend": 3.082059800664439
+            },
+            {
+              "year": 2023,
+              "observed": 2.83,
+              "model": 3.1726975781456486,
+              "persistence": 3.47,
+              "expanding_linear_trend": 3.0692811839323753
+            },
+            {
+              "year": 2024,
+              "observed": 2.91,
+              "model": 3.1361562238612244,
+              "persistence": 2.83,
+              "expanding_linear_trend": 3.001141414141401
+            },
+            {
+              "year": 2025,
+              "observed": 3.08,
+              "model": 3.1037027758829527,
+              "persistence": 2.91,
+              "expanding_linear_trend": 2.9456521739130466
+            }
+          ]
+        },
+        "september_extent": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "model_rmse_million_km2": 0.6270267927507934,
+          "one_year_persistence_rmse_million_km2": 0.7094878244007948,
+          "expanding_linear_trend_rmse_million_km2": 0.6080191451429692,
+          "model_skill_score_vs_persistence": 0.11622614062425207,
+          "model_skill_score_vs_expanding_linear_trend": -0.031261593914702734,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 7.01,
+              "model": 6.224608318333268,
+              "persistence": 7.37,
+              "expanding_linear_trend": 7.182666666666664
+            },
+            {
+              "year": 1990,
+              "observed": 6.14,
+              "model": 6.148325671034763,
+              "persistence": 7.01,
+              "expanding_linear_trend": 7.114545454545457
+            },
+            {
+              "year": 1991,
+              "observed": 6.47,
+              "model": 6.18029908620937,
+              "persistence": 6.14,
+              "expanding_linear_trend": 6.776515151515127
+            },
+            {
+              "year": 1992,
+              "observed": 7.47,
+              "model": 6.409178302523722,
+              "persistence": 6.47,
+              "expanding_linear_trend": 6.63153846153844
+            },
+            {
+              "year": 1993,
+              "observed": 6.4,
+              "model": 6.517797987402511,
+              "persistence": 7.47,
+              "expanding_linear_trend": 6.810329670329665
+            },
+            {
+              "year": 1994,
+              "observed": 7.14,
+              "model": 6.416684289917464,
+              "persistence": 6.4,
+              "expanding_linear_trend": 6.6640952380952285
+            },
+            {
+              "year": 1995,
+              "observed": 6.08,
+              "model": 6.264375869673072,
+              "persistence": 7.14,
+              "expanding_linear_trend": 6.736000000000004
+            },
+            {
+              "year": 1996,
+              "observed": 7.58,
+              "model": 6.127315618444374,
+              "persistence": 6.08,
+              "expanding_linear_trend": 6.545073529411738
+            },
+            {
+              "year": 1997,
+              "observed": 6.69,
+              "model": 6.012304732332948,
+              "persistence": 7.58,
+              "expanding_linear_trend": 6.7256209150326995
+            },
+            {
+              "year": 1998,
+              "observed": 6.54,
+              "model": 5.9013603624055575,
+              "persistence": 6.69,
+              "expanding_linear_trend": 6.686842105263153
+            },
+            {
+              "year": 1999,
+              "observed": 6.12,
+              "model": 5.791009345425675,
+              "persistence": 6.54,
+              "expanding_linear_trend": 6.625631578947363
+            },
+            {
+              "year": 2000,
+              "observed": 6.25,
+              "model": 5.693185713744425,
+              "persistence": 6.12,
+              "expanding_linear_trend": 6.495380952380941
+            },
+            {
+              "year": 2001,
+              "observed": 6.73,
+              "model": 5.613665578027701,
+              "persistence": 6.25,
+              "expanding_linear_trend": 6.410259740259747
+            },
+            {
+              "year": 2002,
+              "observed": 5.83,
+              "model": 5.544900234635329,
+              "persistence": 6.73,
+              "expanding_linear_trend": 6.422450592885355
+            },
+            {
+              "year": 2003,
+              "observed": 6.12,
+              "model": 5.495339787105529,
+              "persistence": 5.83,
+              "expanding_linear_trend": 6.283768115942024
+            },
+            {
+              "year": 2004,
+              "observed": 5.98,
+              "model": 5.4623082822791105,
+              "persistence": 6.12,
+              "expanding_linear_trend": 6.211699999999993
+            },
+            {
+              "year": 2005,
+              "observed": 5.5,
+              "model": 5.441805286909186,
+              "persistence": 5.98,
+              "expanding_linear_trend": 6.128676923076924
+            },
+            {
+              "year": 2006,
+              "observed": 5.86,
+              "model": 5.426215312623993,
+              "persistence": 5.5,
+              "expanding_linear_trend": 5.98618233618231
+            },
+            {
+              "year": 2007,
+              "observed": 4.27,
+              "model": 5.407259318583488,
+              "persistence": 5.86,
+              "expanding_linear_trend": 5.913809523809505
+            },
+            {
+              "year": 2008,
+              "observed": 4.69,
+              "model": 5.379235324754247,
+              "persistence": 4.27,
+              "expanding_linear_trend": 5.631798029556677
+            },
+            {
+              "year": 2009,
+              "observed": 5.26,
+              "model": 5.345656276494185,
+              "persistence": 4.69,
+              "expanding_linear_trend": 5.439609195402227
+            },
+            {
+              "year": 2010,
+              "observed": 4.87,
+              "model": 5.301279292489382,
+              "persistence": 5.26,
+              "expanding_linear_trend": 5.34374193548382
+            },
+            {
+              "year": 2011,
+              "observed": 4.56,
+              "model": 5.254452153657354,
+              "persistence": 4.87,
+              "expanding_linear_trend": 5.2107459677419286
+            },
+            {
+              "year": 2012,
+              "observed": 3.57,
+              "model": 5.202810000119714,
+              "persistence": 4.56,
+              "expanding_linear_trend": 5.055397727272691
+            },
+            {
+              "year": 2013,
+              "observed": 5.21,
+              "model": 5.14604556905829,
+              "persistence": 3.57,
+              "expanding_linear_trend": 4.800695187165786
+            },
+            {
+              "year": 2014,
+              "observed": 5.22,
+              "model": 5.092053838630194,
+              "persistence": 5.21,
+              "expanding_linear_trend": 4.760033613445444
+            },
+            {
+              "year": 2015,
+              "observed": 4.62,
+              "model": 5.034242608261582,
+              "persistence": 5.22,
+              "expanding_linear_trend": 4.725650793650743
+            },
+            {
+              "year": 2016,
+              "observed": 4.53,
+              "model": 4.978522892757663,
+              "persistence": 4.62,
+              "expanding_linear_trend": 4.630810810810772
+            },
+            {
+              "year": 2017,
+              "observed": 4.82,
+              "model": 4.9247253372534585,
+              "persistence": 4.53,
+              "expanding_linear_trend": 4.536330014224717
+            },
+            {
+              "year": 2018,
+              "observed": 4.79,
+              "model": 4.870321161399398,
+              "persistence": 4.82,
+              "expanding_linear_trend": 4.481147098515436
+            },
+            {
+              "year": 2019,
+              "observed": 4.36,
+              "model": 4.815130893566286,
+              "persistence": 4.79,
+              "expanding_linear_trend": 4.428846153846166
+            },
+            {
+              "year": 2020,
+              "observed": 4.0,
+              "model": 4.758470793577074,
+              "persistence": 4.36,
+              "expanding_linear_trend": 4.340073170731671
+            },
+            {
+              "year": 2021,
+              "observed": 4.95,
+              "model": 4.700940515882207,
+              "persistence": 4.0,
+              "expanding_linear_trend": 4.225389082462215
+            },
+            {
+              "year": 2022,
+              "observed": 4.9,
+              "model": 4.642973577738621,
+              "persistence": 4.95,
+              "expanding_linear_trend": 4.209368770764144
+            },
+            {
+              "year": 2023,
+              "observed": 4.38,
+              "model": 4.58619922078646,
+              "persistence": 4.9,
+              "expanding_linear_trend": 4.191025369978917
+            },
+            {
+              "year": 2024,
+              "observed": 4.35,
+              "model": 4.5333779460138235,
+              "persistence": 4.38,
+              "expanding_linear_trend": 4.128787878787875
+            },
+            {
+              "year": 2025,
+              "observed": 4.75,
+              "model": 4.486465823391416,
+              "persistence": 4.35,
+              "expanding_linear_trend": 4.069536231884058
+            }
+          ]
+        }
+      }
+    },
+    "enhanced_historical_evaluation": {
+      "prior_only_bias_corrected_annual": {
+        "march_area": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "rmse_million_km2": 0.41445490344815716,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 13.21,
+              "raw_model": 13.30363402139711,
+              "prior_only_bias_correction": 0.43295549981900977,
+              "bias_corrected_model": 12.870678521578101
+            },
+            {
+              "year": 1990,
+              "observed": 13.51,
+              "raw_model": 13.27099497260588,
+              "prior_only_bias_correction": 0.4021080926897461,
+              "bias_corrected_model": 12.868886879916134
+            },
+            {
+              "year": 1991,
+              "observed": 13.42,
+              "raw_model": 13.265035646694514,
+              "prior_only_bias_correction": 0.34868199934942395,
+              "bias_corrected_model": 12.91635364734509
+            },
+            {
+              "year": 1992,
+              "observed": 13.48,
+              "raw_model": 13.32742441982308,
+              "prior_only_bias_correction": 0.3099399722221232,
+              "bias_corrected_model": 13.017484447600957
+            },
+            {
+              "year": 1993,
+              "observed": 13.77,
+              "raw_model": 13.389001159934464,
+              "prior_only_bias_correction": 0.27690314705076297,
+              "bias_corrected_model": 13.1120980128837
+            },
+            {
+              "year": 1994,
+              "observed": 13.55,
+              "raw_model": 13.375710041255862,
+              "prior_only_bias_correction": 0.23304301457634308,
+              "bias_corrected_model": 13.14266702667952
+            },
+            {
+              "year": 1995,
+              "observed": 13.34,
+              "raw_model": 13.32527791513671,
+              "prior_only_bias_correction": 0.207584703743813,
+              "bias_corrected_model": 13.117693211392897
+            },
+            {
+              "year": 1996,
+              "observed": 12.9,
+              "raw_model": 13.273182358760527,
+              "prior_only_bias_correction": 0.19450783382574807,
+              "bias_corrected_model": 13.07867452493478
+            },
+            {
+              "year": 1997,
+              "observed": 13.3,
+              "raw_model": 13.227298494626593,
+              "prior_only_bias_correction": 0.20443419632212467,
+              "bias_corrected_model": 13.02286429830447
+            },
+            {
+              "year": 1998,
+              "observed": 13.57,
+              "raw_model": 13.184555974494451,
+              "prior_only_bias_correction": 0.18984810675920194,
+              "bias_corrected_model": 12.994707867735249
+            },
+            {
+              "year": 1999,
+              "observed": 13.54,
+              "raw_model": 13.141511048189832,
+              "prior_only_bias_correction": 0.16108350014596437,
+              "bias_corrected_model": 12.980427548043867
+            },
+            {
+              "year": 2000,
+              "observed": 13.17,
+              "raw_model": 13.101160656960353,
+              "prior_only_bias_correction": 0.13443719290995812,
+              "bias_corrected_model": 12.966723464050395
+            },
+            {
+              "year": 2001,
+              "observed": 13.64,
+              "raw_model": 13.067163310293953,
+              "prior_only_bias_correction": 0.12519735036679425,
+              "bias_corrected_model": 12.94196595992716
+            },
+            {
+              "year": 2002,
+              "observed": 13.42,
+              "raw_model": 13.038031775473524,
+              "prior_only_bias_correction": 0.09484804427667069,
+              "bias_corrected_model": 12.943183731196854
+            },
+            {
+              "year": 2003,
+              "observed": 13.42,
+              "raw_model": 13.0151495521299,
+              "prior_only_bias_correction": 0.07498069974320624,
+              "bias_corrected_model": 12.940168852386694
+            },
+            {
+              "year": 2004,
+              "observed": 12.99,
+              "raw_model": 12.999684341619828,
+              "prior_only_bias_correction": 0.055787453838674,
+              "bias_corrected_model": 12.943896887781154
+            },
+            {
+              "year": 2005,
+              "observed": 12.74,
+              "raw_model": 12.98971885969602,
+              "prior_only_bias_correction": 0.05401425721487221,
+              "bias_corrected_model": 12.935704602481147
+            },
+            {
+              "year": 2006,
+              "observed": 12.52,
+              "raw_model": 12.982992801210305,
+              "prior_only_bias_correction": 0.061262575825285055,
+              "bias_corrected_model": 12.92173022538502
+            },
+            {
+              "year": 2007,
+              "observed": 12.56,
+              "raw_model": 12.976030827929996,
+              "prior_only_bias_correction": 0.07561008387475006,
+              "bias_corrected_model": 12.900420744055246
+            },
+            {
+              "year": 2008,
+              "observed": 13.53,
+              "raw_model": 12.966096279784527,
+              "prior_only_bias_correction": 0.08734873022148266,
+              "bias_corrected_model": 12.878747549563045
+            },
+            {
+              "year": 2009,
+              "observed": 13.43,
+              "raw_model": 12.953524011055011,
+              "prior_only_bias_correction": 0.06564031520691747,
+              "bias_corrected_model": 12.887883695848094
+            },
+            {
+              "year": 2010,
+              "observed": 13.53,
+              "raw_model": 12.937250041267433,
+              "prior_only_bias_correction": 0.04815269249233986,
+              "bias_corrected_model": 12.889097348775094
+            },
+            {
+              "year": 2011,
+              "observed": 12.83,
+              "raw_model": 12.918480521511649,
+              "prior_only_bias_correction": 0.02812448464156153,
+              "bias_corrected_model": 12.890356036870088
+            },
+            {
+              "year": 2012,
+              "observed": 13.41,
+              "raw_model": 12.898221995096373,
+              "prior_only_bias_correction": 0.029953455455806594,
+              "bias_corrected_model": 12.868268539640566
+            },
+            {
+              "year": 2013,
+              "observed": 13.45,
+              "raw_model": 12.875296406034135,
+              "prior_only_bias_correction": 0.014020177209940891,
+              "bias_corrected_model": 12.861276228824194
+            },
+            {
+              "year": 2014,
+              "observed": 12.95,
+              "raw_model": 12.852493155673562,
+              "prior_only_bias_correction": -0.00280050196651069,
+              "bias_corrected_model": 12.855293657640072
+            },
+            {
+              "year": 2015,
+              "observed": 12.78,
+              "raw_model": 12.828899815977271,
+              "prior_only_bias_correction": -0.005431233698730874,
+              "bias_corrected_model": 12.834331049676003
+            },
+            {
+              "year": 2016,
+              "observed": 12.61,
+              "raw_model": 12.804866107878619,
+              "prior_only_bias_correction": -0.003962826950730796,
+              "bias_corrected_model": 12.80882893482935
+            },
+            {
+              "year": 2017,
+              "observed": 12.61,
+              "raw_model": 12.781962264078285,
+              "prior_only_bias_correction": 0.0012695134395152546,
+              "bias_corrected_model": 12.780692750638769
+            },
+            {
+              "year": 2018,
+              "observed": 12.69,
+              "raw_model": 12.75902184358772,
+              "prior_only_bias_correction": 0.00564625063538115,
+              "bias_corrected_model": 12.753375592952338
+            },
+            {
+              "year": 2019,
+              "observed": 12.89,
+              "raw_model": 12.735671603337094,
+              "prior_only_bias_correction": 0.007230640459189619,
+              "bias_corrected_model": 12.728440962877904
+            },
+            {
+              "year": 2020,
+              "observed": 13.03,
+              "raw_model": 12.711672664346889,
+              "prior_only_bias_correction": 0.003290176139138493,
+              "bias_corrected_model": 12.70838248820775
+            },
+            {
+              "year": 2021,
+              "observed": 12.99,
+              "raw_model": 12.687023875294816,
+              "prior_only_bias_correction": -0.004367383665438868,
+              "bias_corrected_model": 12.691391258960255
+            },
+            {
+              "year": 2022,
+              "observed": 12.8,
+              "raw_model": 12.661932915793521,
+              "prior_only_bias_correction": -0.011311772991944571,
+              "bias_corrected_model": 12.673244688785466
+            },
+            {
+              "year": 2023,
+              "observed": 12.91,
+              "raw_model": 12.637104066548018,
+              "prior_only_bias_correction": -0.014192575519547638,
+              "bias_corrected_model": 12.651296642067566
+            },
+            {
+              "year": 2024,
+              "observed": 13.19,
+              "raw_model": 12.613584129045359,
+              "prior_only_bias_correction": -0.0199415390291573,
+              "bias_corrected_model": 12.633525668074515
+            },
+            {
+              "year": 2025,
+              "observed": 12.19,
+              "raw_model": 12.592175173205217,
+              "prior_only_bias_correction": -0.032038807114493896,
+              "bias_corrected_model": 12.62421398031971
+            }
+          ],
+          "interpretation": "The correction for each target year is the mean model-minus-observed error from earlier years only; no target or future observation is used."
+        },
+        "march_extent": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "rmse_million_km2": 0.37021384682801667,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 15.42,
+              "raw_model": 15.470694309285873,
+              "prior_only_bias_correction": -0.3484570721034094,
+              "bias_corrected_model": 15.819151381389283
+            },
+            {
+              "year": 1990,
+              "observed": 15.87,
+              "raw_model": 15.432738608942431,
+              "prior_only_bias_correction": -0.3121705828862019,
+              "bias_corrected_model": 15.744909191828633
+            },
+            {
+              "year": 1991,
+              "observed": 15.42,
+              "raw_model": 15.425808554393736,
+              "prior_only_bias_correction": -0.3225948169004824,
+              "bias_corrected_model": 15.748403371294218
+            },
+            {
+              "year": 1992,
+              "observed": 15.48,
+              "raw_model": 15.49835998175945,
+              "prior_only_bias_correction": -0.2973330191086194,
+              "bias_corrected_model": 15.795693000868068
+            },
+            {
+              "year": 1993,
+              "observed": 15.81,
+              "raw_model": 15.569967102136738,
+              "prior_only_bias_correction": -0.2747835190466145,
+              "bias_corrected_model": 15.844750621183353
+            },
+            {
+              "year": 1994,
+              "observed": 15.55,
+              "raw_model": 15.55451096182392,
+              "prior_only_bias_correction": -0.2724668109677244,
+              "bias_corrected_model": 15.826977772791645
+            },
+            {
+              "year": 1995,
+              "observed": 15.26,
+              "raw_model": 15.495863827867748,
+              "prior_only_bias_correction": -0.2551557001682466,
+              "bias_corrected_model": 15.751019528035995
+            },
+            {
+              "year": 1996,
+              "observed": 15.12,
+              "raw_model": 15.43528230358109,
+              "prior_only_bias_correction": -0.2262721985190705,
+              "bias_corrected_model": 15.661554502100161
+            },
+            {
+              "year": 1997,
+              "observed": 15.47,
+              "raw_model": 15.381924308720198,
+              "prior_only_bias_correction": -0.19618583729128375,
+              "bias_corrected_model": 15.57811014601148
+            },
+            {
+              "year": 1998,
+              "observed": 15.6,
+              "raw_model": 15.332219358786267,
+              "prior_only_bias_correction": -0.19049582960646896,
+              "bias_corrected_model": 15.522715188392736
+            },
+            {
+              "year": 1999,
+              "observed": 15.4,
+              "raw_model": 15.282162743025985,
+              "prior_only_bias_correction": -0.19436007018683216,
+              "bias_corrected_model": 15.476522813212817
+            },
+            {
+              "year": 2000,
+              "observed": 15.22,
+              "raw_model": 15.23523958150717,
+              "prior_only_bias_correction": -0.19071612670050755,
+              "bias_corrected_model": 15.425955708207677
+            },
+            {
+              "year": 2001,
+              "observed": 15.52,
+              "raw_model": 15.195704326947645,
+              "prior_only_bias_correction": -0.18135450360015862,
+              "bias_corrected_model": 15.377058830547803
+            },
+            {
+              "year": 2002,
+              "observed": 15.35,
+              "raw_model": 15.161827487789088,
+              "prior_only_bias_correction": -0.1875693370546019,
+              "bias_corrected_model": 15.34939682484369
+            },
+            {
+              "year": 2003,
+              "observed": 15.48,
+              "raw_model": 15.135217925176738,
+              "prior_only_bias_correction": -0.18759446935278148,
+              "bias_corrected_model": 15.32281239452952
+            },
+            {
+              "year": 2004,
+              "observed": 14.99,
+              "raw_model": 15.11723355009206,
+              "prior_only_bias_correction": -0.19388197357160075,
+              "bias_corrected_model": 15.311115523663661
+            },
+            {
+              "year": 2005,
+              "observed": 14.69,
+              "raw_model": 15.10564476733992,
+              "prior_only_bias_correction": -0.1815313765076138,
+              "bias_corrected_model": 15.287176143847534
+            },
+            {
+              "year": 2006,
+              "observed": 14.42,
+              "raw_model": 15.09782308534149,
+              "prior_only_bias_correction": -0.15941374155029775,
+              "bias_corrected_model": 15.257236826891788
+            },
+            {
+              "year": 2007,
+              "observed": 14.54,
+              "raw_model": 15.089727059831919,
+              "prior_only_bias_correction": -0.12951242630416246,
+              "bias_corrected_model": 15.21923948613608
+            },
+            {
+              "year": 2008,
+              "observed": 15.18,
+              "raw_model": 15.078174249734147,
+              "prior_only_bias_correction": -0.10609037505809066,
+              "bias_corrected_model": 15.184264624792238
+            },
+            {
+              "year": 2009,
+              "observed": 14.98,
+              "raw_model": 15.063554054532167,
+              "prior_only_bias_correction": -0.10594822089834939,
+              "bias_corrected_model": 15.169502275430517
+            },
+            {
+              "year": 2010,
+              "observed": 15.14,
+              "raw_model": 15.04462917946577,
+              "prior_only_bias_correction": -0.09983524427155856,
+              "bias_corrected_model": 15.144464423737329
+            },
+            {
+              "year": 2011,
+              "observed": 14.55,
+              "raw_model": 15.022802248417698,
+              "prior_only_bias_correction": -0.09969573102976703,
+              "bias_corrected_model": 15.122497979447465
+            },
+            {
+              "year": 2012,
+              "observed": 15.2,
+              "raw_model": 14.999243762907403,
+              "prior_only_bias_correction": -0.08234730741014691,
+              "bias_corrected_model": 15.08159107031755
+            },
+            {
+              "year": 2013,
+              "observed": 15.03,
+              "raw_model": 14.97258377063223,
+              "prior_only_bias_correction": -0.08582992298904249,
+              "bias_corrected_model": 15.058413693621272
+            },
+            {
+              "year": 2014,
+              "observed": 14.76,
+              "raw_model": 14.946066045098053,
+              "prior_only_bias_correction": -0.08501810317129183,
+              "bias_corrected_model": 15.031084148269345
+            },
+            {
+              "year": 2015,
+              "observed": 14.37,
+              "raw_model": 14.918629530714886,
+              "prior_only_bias_correction": -0.07748798794158779,
+              "bias_corrected_model": 14.996117518656474
+            },
+            {
+              "year": 2016,
+              "observed": 14.4,
+              "raw_model": 14.890680915282829,
+              "prior_only_bias_correction": -0.06056589284276413,
+              "bias_corrected_model": 14.951246808125592
+            },
+            {
+              "year": 2017,
+              "observed": 14.29,
+              "raw_model": 14.8640462104065,
+              "prior_only_bias_correction": -0.046059397892090646,
+              "bias_corrected_model": 14.91010560829859
+            },
+            {
+              "year": 2018,
+              "observed": 14.3,
+              "raw_model": 14.837368970776696,
+              "prior_only_bias_correction": -0.030159254089562673,
+              "bias_corrected_model": 14.867528224866259
+            },
+            {
+              "year": 2019,
+              "observed": 14.57,
+              "raw_model": 14.81021515488062,
+              "prior_only_bias_correction": -0.015971048467906222,
+              "bias_corrected_model": 14.826186203348525
+            },
+            {
+              "year": 2020,
+              "observed": 14.73,
+              "raw_model": 14.782306972178997,
+              "prior_only_bias_correction": -0.00972260448379584,
+              "bias_corrected_model": 14.792029576662793
+            },
+            {
+              "year": 2021,
+              "observed": 14.66,
+              "raw_model": 14.753643083807942,
+              "prior_only_bias_correction": -0.008245709801348401,
+              "bias_corrected_model": 14.761888793609291
+            },
+            {
+              "year": 2022,
+              "observed": 14.59,
+              "raw_model": 14.72446499880148,
+              "prior_only_bias_correction": -0.005876202973225367,
+              "bias_corrected_model": 14.730341201774705
+            },
+            {
+              "year": 2023,
+              "observed": 14.43,
+              "raw_model": 14.695591719807881,
+              "prior_only_bias_correction": -0.0026866302056184244,
+              "bias_corrected_model": 14.6982783500135
+            },
+            {
+              "year": 2024,
+              "observed": 14.87,
+              "raw_model": 14.668240564274594,
+              "prior_only_bias_correction": 0.003275110905792684,
+              "bias_corrected_model": 14.6649654533688
+            },
+            {
+              "year": 2025,
+              "observed": 14.12,
+              "raw_model": 14.643344253180112,
+              "prior_only_bias_correction": -0.0011821618470594423,
+              "bias_corrected_model": 14.644526415027173
+            }
+          ],
+          "interpretation": "The correction for each target year is the mean model-minus-observed error from earlier years only; no target or future observation is used."
+        },
+        "september_area": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "rmse_million_km2": 0.5060348143059924,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 4.86,
+              "raw_model": 4.306136472871018,
+              "prior_only_bias_correction": -0.2077766156083986,
+              "bias_corrected_model": 4.513913088479417
+            },
+            {
+              "year": 1990,
+              "observed": 4.55,
+              "raw_model": 4.253364720339735,
+              "prior_only_bias_correction": -0.23923906211026982,
+              "bias_corrected_model": 4.492603782450005
+            },
+            {
+              "year": 1991,
+              "observed": 4.51,
+              "raw_model": 4.27548368465113,
+              "prior_only_bias_correction": -0.24402208023943608,
+              "bias_corrected_model": 4.519505764890566
+            },
+            {
+              "year": 1992,
+              "observed": 5.43,
+              "raw_model": 4.433820577648965,
+              "prior_only_bias_correction": -0.24329086755554638,
+              "bias_corrected_model": 4.6771114452045115
+            },
+            {
+              "year": 1993,
+              "observed": 4.58,
+              "raw_model": 4.508962845693478,
+              "prior_only_bias_correction": -0.29706862146950985,
+              "bias_corrected_model": 4.806031467162988
+            },
+            {
+              "year": 1994,
+              "observed": 5.13,
+              "raw_model": 4.439013162375285,
+              "prior_only_bias_correction": -0.2819998569919773,
+              "bias_corrected_model": 4.721013019367263
+            },
+            {
+              "year": 1995,
+              "observed": 4.43,
+              "raw_model": 4.3336473610271025,
+              "prior_only_bias_correction": -0.3075615432815234,
+              "bias_corrected_model": 4.641208904308626
+            },
+            {
+              "year": 1996,
+              "observed": 5.62,
+              "raw_model": 4.2388301264938955,
+              "prior_only_bias_correction": -0.2951374900868983,
+              "bias_corrected_model": 4.533967616580794
+            },
+            {
+              "year": 1997,
+              "observed": 4.89,
+              "raw_model": 4.159266474271319,
+              "prior_only_bias_correction": -0.35547262249907646,
+              "bias_corrected_model": 4.514739096770395
+            },
+            {
+              "year": 1998,
+              "observed": 4.3,
+              "raw_model": 4.082516006872921,
+              "prior_only_bias_correction": -0.3752231963532662,
+              "bias_corrected_model": 4.457739203226187
+            },
+            {
+              "year": 1999,
+              "observed": 4.29,
+              "raw_model": 4.006176016509845,
+              "prior_only_bias_correction": -0.3673362361919568,
+              "bias_corrected_model": 4.3735122527018016
+            },
+            {
+              "year": 2000,
+              "observed": 4.35,
+              "raw_model": 3.9385023755755513,
+              "prior_only_bias_correction": -0.3633594622537758,
+              "bias_corrected_model": 4.301861837829327
+            },
+            {
+              "year": 2001,
+              "observed": 4.59,
+              "raw_model": 3.8834909532939443,
+              "prior_only_bias_correction": -0.3655475605342609,
+              "bias_corrected_model": 4.249038513828205
+            },
+            {
+              "year": 2002,
+              "observed": 4.03,
+              "raw_model": 3.835919614165813,
+              "prior_only_bias_correction": -0.3803719729765128,
+              "bias_corrected_model": 4.216291587142326
+            },
+            {
+              "year": 2003,
+              "observed": 4.05,
+              "raw_model": 3.801634075252253,
+              "prior_only_bias_correction": -0.37260982351224925,
+              "bias_corrected_model": 4.174243898764502
+            },
+            {
+              "year": 2004,
+              "observed": 4.39,
+              "raw_model": 3.778783132604517,
+              "prior_only_bias_correction": -0.3676400675616691,
+              "bias_corrected_model": 4.146423200166186
+            },
+            {
+              "year": 2005,
+              "observed": 4.07,
+              "raw_model": 3.7645993170694085,
+              "prior_only_bias_correction": -0.3770084060168158,
+              "bias_corrected_model": 4.141607723086224
+            },
+            {
+              "year": 2006,
+              "observed": 4.01,
+              "raw_model": 3.753814291980731,
+              "prior_only_bias_correction": -0.37435626812473344,
+              "bias_corrected_model": 4.128170560105464
+            },
+            {
+              "year": 2007,
+              "observed": 2.82,
+              "raw_model": 3.7407006801447973,
+              "prior_only_bias_correction": -0.3701358909781097,
+              "bias_corrected_model": 4.110836571122907
+            },
+            {
+              "year": 2008,
+              "observed": 3.26,
+              "raw_model": 3.721313895342903,
+              "prior_only_bias_correction": -0.32562428507731983,
+              "bias_corrected_model": 4.046938180420223
+            },
+            {
+              "year": 2009,
+              "observed": 3.76,
+              "raw_model": 3.6980841663315087,
+              "prior_only_bias_correction": -0.29939301239664573,
+              "bias_corrected_model": 3.9974771787281544
+            },
+            {
+              "year": 2010,
+              "observed": 3.34,
+              "raw_model": 3.66738450787807,
+              "prior_only_bias_correction": -0.29173245824412464,
+              "bias_corrected_model": 3.9591169661221945
+            },
+            {
+              "year": 2011,
+              "observed": 3.21,
+              "raw_model": 3.6349898510366287,
+              "prior_only_bias_correction": -0.272385053052806,
+              "bias_corrected_model": 3.9073749040894348
+            },
+            {
+              "year": 2012,
+              "observed": 2.41,
+              "raw_model": 3.599264203813,
+              "prior_only_bias_correction": -0.25125248020161106,
+              "bias_corrected_model": 3.850516684014611
+            },
+            {
+              "year": 2013,
+              "observed": 3.78,
+              "raw_model": 3.5599950041373454,
+              "prior_only_bias_correction": -0.20888434243647544,
+              "bias_corrected_model": 3.768879346573821
+            },
+            {
+              "year": 2014,
+              "observed": 3.74,
+              "raw_model": 3.522643937573835,
+              "prior_only_bias_correction": -0.20920207539150912,
+              "bias_corrected_model": 3.731846012965344
+            },
+            {
+              "year": 2015,
+              "observed": 3.42,
+              "raw_model": 3.482650570135981,
+              "prior_only_bias_correction": -0.20942857503136067,
+              "bias_corrected_model": 3.692079145167342
+            },
+            {
+              "year": 2016,
+              "observed": 2.91,
+              "raw_model": 3.444104096700417,
+              "prior_only_bias_correction": -0.2020750846214325,
+              "bias_corrected_model": 3.646179181321849
+            },
+            {
+              "year": 2017,
+              "observed": 3.35,
+              "raw_model": 3.4068873588655797,
+              "prior_only_bias_correction": -0.18270194827085753,
+              "bias_corrected_model": 3.5895893071364373
+            },
+            {
+              "year": 2018,
+              "observed": 3.35,
+              "raw_model": 3.369250965707851,
+              "prior_only_bias_correction": -0.17655863270325658,
+              "bias_corrected_model": 3.5458095984111075
+            },
+            {
+              "year": 2019,
+              "observed": 3.17,
+              "raw_model": 3.3310707601254825,
+              "prior_only_bias_correction": -0.17166339274297887,
+              "bias_corrected_model": 3.5027341528684612
+            },
+            {
+              "year": 2020,
+              "observed": 2.83,
+              "raw_model": 3.2918737358883985,
+              "prior_only_bias_correction": -0.16354792559984566,
+              "bias_corrected_model": 3.455421661488244
+            },
+            {
+              "year": 2021,
+              "observed": 3.47,
+              "raw_model": 3.2520747293635033,
+              "prior_only_bias_correction": -0.14865693365964938,
+              "bias_corrected_model": 3.4007316630231528
+            },
+            {
+              "year": 2022,
+              "observed": 3.47,
+              "raw_model": 3.2119736444766724,
+              "prior_only_bias_correction": -0.1502678252172505,
+              "bias_corrected_model": 3.362241469693923
+            },
+            {
+              "year": 2023,
+              "observed": 2.83,
+              "raw_model": 3.1726975781456486,
+              "prior_only_bias_correction": -0.1527168827242068,
+              "bias_corrected_model": 3.3254144608698555
+            },
+            {
+              "year": 2024,
+              "observed": 2.91,
+              "raw_model": 3.1361562238612244,
+              "prior_only_bias_correction": -0.14170767248265445,
+              "bias_corrected_model": 3.2778638963438786
+            },
+            {
+              "year": 2025,
+              "observed": 3.08,
+              "raw_model": 3.1037027758829527,
+              "prior_only_bias_correction": -0.13371063125778754,
+              "bias_corrected_model": 3.2374134071407403
+            }
+          ],
+          "interpretation": "The correction for each target year is the mean model-minus-observed error from earlier years only; no target or future observation is used."
+        },
+        "september_extent": {
+          "first_target_year": 1989,
+          "last_target_year": 2025,
+          "folds": 37,
+          "minimum_training_years": 10,
+          "rmse_million_km2": 0.6992859426912246,
+          "records": [
+            {
+              "year": 1989,
+              "observed": 7.01,
+              "raw_model": 6.224608318333268,
+              "prior_only_bias_correction": -0.7068350826035463,
+              "bias_corrected_model": 6.931443400936814
+            },
+            {
+              "year": 1990,
+              "observed": 6.14,
+              "raw_model": 6.148325671034763,
+              "prior_only_bias_correction": -0.7139765916092904,
+              "bias_corrected_model": 6.862302262644053
+            },
+            {
+              "year": 1991,
+              "observed": 6.47,
+              "raw_model": 6.18029908620937,
+              "prior_only_bias_correction": -0.6537847363889526,
+              "bias_corrected_model": 6.8340838225983225
+            },
+            {
+              "year": 1992,
+              "observed": 7.47,
+              "raw_model": 6.409178302523722,
+              "prior_only_bias_correction": -0.625778288496774,
+              "bias_corrected_model": 7.034956591020496
+            },
+            {
+              "year": 1993,
+              "observed": 6.4,
+              "raw_model": 6.517797987402511,
+              "prior_only_bias_correction": -0.6568528177095957,
+              "bias_corrected_model": 7.1746508051121065
+            },
+            {
+              "year": 1994,
+              "observed": 7.14,
+              "raw_model": 6.416684289917464,
+              "prior_only_bias_correction": -0.6052094307021219,
+              "bias_corrected_model": 7.021893720619586
+            },
+            {
+              "year": 1995,
+              "observed": 6.08,
+              "raw_model": 6.264375869673072,
+              "prior_only_bias_correction": -0.6125910731633977,
+              "bias_corrected_model": 6.87696694283647
+            },
+            {
+              "year": 1996,
+              "observed": 7.58,
+              "raw_model": 6.127315618444374,
+              "prior_only_bias_correction": -0.5657106647612524,
+              "bias_corrected_model": 6.693026283205627
+            },
+            {
+              "year": 1997,
+              "observed": 6.69,
+              "raw_model": 6.012304732332948,
+              "prior_only_bias_correction": -0.6149869823609397,
+              "bias_corrected_model": 6.627291714693888
+            },
+            {
+              "year": 1998,
+              "observed": 6.54,
+              "raw_model": 5.9013603624055575,
+              "prior_only_bias_correction": -0.6182874184296826,
+              "bias_corrected_model": 6.51964778083524
+            },
+            {
+              "year": 1999,
+              "observed": 6.12,
+              "raw_model": 5.791009345425675,
+              "prior_only_bias_correction": -0.6193050293879205,
+              "bias_corrected_model": 6.410314374813595
+            },
+            {
+              "year": 2000,
+              "observed": 6.25,
+              "raw_model": 5.693185713744425,
+              "prior_only_bias_correction": -0.6054805353491779,
+              "bias_corrected_model": 6.298666249093603
+            },
+            {
+              "year": 2001,
+              "observed": 6.73,
+              "raw_model": 5.613665578027701,
+              "prior_only_bias_correction": -0.6032684331176505,
+              "bias_corrected_model": 6.2169340111453515
+            },
+            {
+              "year": 2002,
+              "observed": 5.83,
+              "raw_model": 5.544900234635329,
+              "prior_only_bias_correction": -0.6255756500243743,
+              "bias_corrected_model": 6.170475884659703
+            },
+            {
+              "year": 2003,
+              "observed": 6.12,
+              "raw_model": 5.495339787105529,
+              "prior_only_bias_correction": -0.6113891548302202,
+              "bias_corrected_model": 6.106728941935749
+            },
+            {
+              "year": 2004,
+              "observed": 5.98,
+              "raw_model": 5.4623082822791105,
+              "prior_only_bias_correction": -0.6119199971527902,
+              "bias_corrected_model": 6.0742282794319005
+            },
+            {
+              "year": 2005,
+              "observed": 5.5,
+              "raw_model": 5.441805286909186,
+              "prior_only_bias_correction": -0.6082958325592556,
+              "bias_corrected_model": 6.050101119468441
+            },
+            {
+              "year": 2006,
+              "observed": 5.86,
+              "raw_model": 5.426215312623993,
+              "prior_only_bias_correction": -0.5879217170233874,
+              "bias_corrected_model": 6.01413702964738
+            },
+            {
+              "year": 2007,
+              "observed": 4.27,
+              "raw_model": 5.407259318583488,
+              "prior_only_bias_correction": -0.5824168231074095,
+              "bias_corrected_model": 5.9896761416908975
+            },
+            {
+              "year": 2008,
+              "observed": 4.69,
+              "raw_model": 5.379235324754247,
+              "prior_only_bias_correction": -0.5231176458077234,
+              "bias_corrected_model": 5.902352970561971
+            },
+            {
+              "year": 2009,
+              "observed": 5.26,
+              "raw_model": 5.345656276494185,
+              "prior_only_bias_correction": -0.4827058801223244,
+              "bias_corrected_model": 5.828362156616509
+            },
+            {
+              "year": 2010,
+              "observed": 4.87,
+              "raw_model": 5.301279292489382,
+              "prior_only_bias_correction": -0.4643716170056628,
+              "bias_corrected_model": 5.7656509094950446
+            },
+            {
+              "year": 2011,
+              "observed": 4.56,
+              "raw_model": 5.254452153657354,
+              "prior_only_bias_correction": -0.4363825260839426,
+              "bias_corrected_model": 5.690834679741297
+            },
+            {
+              "year": 2012,
+              "observed": 3.57,
+              "raw_model": 5.202810000119714,
+              "prior_only_bias_correction": -0.40211480851602455,
+              "bias_corrected_model": 5.604924808635739
+            },
+            {
+              "year": 2013,
+              "observed": 5.21,
+              "raw_model": 5.14604556905829,
+              "prior_only_bias_correction": -0.3422640788502675,
+              "bias_corrected_model": 5.488309647908558
+            },
+            {
+              "year": 2014,
+              "observed": 5.22,
+              "raw_model": 5.092053838630194,
+              "prior_only_bias_correction": -0.33431237462430874,
+              "bias_corrected_model": 5.426366213254503
+            },
+            {
+              "year": 2015,
+              "observed": 4.62,
+              "raw_model": 5.034242608261582,
+              "prior_only_bias_correction": -0.32857997981168363,
+              "bias_corrected_model": 5.362822588073266
+            },
+            {
+              "year": 2016,
+              "observed": 4.53,
+              "raw_model": 4.978522892757663,
+              "prior_only_bias_correction": -0.3085036936475413,
+              "bias_corrected_model": 5.287026586405204
+            },
+            {
+              "year": 2017,
+              "observed": 4.82,
+              "raw_model": 4.9247253372534585,
+              "prior_only_bias_correction": -0.28858194137372023,
+              "bias_corrected_model": 5.213307278627179
+            },
+            {
+              "year": 2018,
+              "observed": 4.79,
+              "raw_model": 4.870321161399398,
+              "prior_only_bias_correction": -0.2784971393576387,
+              "bias_corrected_model": 5.148818300757037
+            },
+            {
+              "year": 2019,
+              "observed": 4.36,
+              "raw_model": 4.815130893566286,
+              "prior_only_bias_correction": -0.2695266818387127,
+              "bias_corrected_model": 5.084657575404998
+            },
+            {
+              "year": 2020,
+              "observed": 4.0,
+              "raw_model": 4.758470793577074,
+              "prior_only_bias_correction": -0.25185210682883474,
+              "bias_corrected_model": 5.010322900405909
+            },
+            {
+              "year": 2021,
+              "observed": 4.95,
+              "raw_model": 4.700940515882207,
+              "prior_only_bias_correction": -0.22779679967631306,
+              "bias_corrected_model": 4.928737315558521
+            },
+            {
+              "year": 2022,
+              "observed": 4.9,
+              "raw_model": 4.642973577738621,
+              "prior_only_bias_correction": -0.22829128070983587,
+              "bias_corrected_model": 4.871264858448457
+            },
+            {
+              "year": 2023,
+              "observed": 4.38,
+              "raw_model": 4.58619922078646,
+              "prior_only_bias_correction": -0.2289443521087346,
+              "bias_corrected_model": 4.815143572895194
+            },
+            {
+              "year": 2024,
+              "observed": 4.35,
+              "raw_model": 4.5333779460138235,
+              "prior_only_bias_correction": -0.21927449493328585,
+              "bias_corrected_model": 4.752652440947109
+            },
+            {
+              "year": 2025,
+              "observed": 4.75,
+              "raw_model": 4.486465823391416,
+              "prior_only_bias_correction": -0.21052118099965303,
+              "bias_corrected_model": 4.69698700439107
+            }
+          ],
+          "interpretation": "The correction for each target year is the mean model-minus-observed error from earlier years only; no target or future observation is used."
+        }
+      },
+      "five_year_forced_signal": {
+        "march_area": {
+          "first_target_year": 1994,
+          "last_target_year": 2025,
+          "folds": 32,
+          "window_years": 5,
+          "model_rmse_million_km2": 0.21519102743076435,
+          "prior_five_year_persistence_rmse_million_km2": 0.10238713298066324,
+          "prior_expanding_five_year_trend_rmse_million_km2": 0.2969976010421148,
+          "model_skill_score_vs_persistence": -1.101738970182954,
+          "model_skill_score_vs_expanding_linear_trend": 0.27544523364601237,
+          "records": [
+            {
+              "year": 1994,
+              "observed_five_year_mean": 13.545999999999998,
+              "model_five_year_mean": 13.325633248062761,
+              "prior_five_year_persistence": 13.478,
+              "prior_expanding_five_year_trend": 13.510436363636387
+            },
+            {
+              "year": 1995,
+              "observed_five_year_mean": 13.512,
+              "model_five_year_mean": 13.336489836568926,
+              "prior_five_year_persistence": 13.545999999999998,
+              "prior_expanding_five_year_trend": 13.594999999999999
+            },
+            {
+              "year": 1996,
+              "observed_five_year_mean": 13.408000000000001,
+              "model_five_year_mean": 13.33811917898213,
+              "prior_five_year_persistence": 13.512,
+              "prior_expanding_five_year_trend": 13.643538461538526
+            },
+            {
+              "year": 1997,
+              "observed_five_year_mean": 13.372,
+              "model_five_year_mean": 13.31809399394283,
+              "prior_five_year_persistence": 13.408000000000001,
+              "prior_expanding_five_year_trend": 13.647582417582484
+            },
+            {
+              "year": 1998,
+              "observed_five_year_mean": 13.331999999999999,
+              "model_five_year_mean": 13.277204956854831,
+              "prior_five_year_persistence": 13.372,
+              "prior_expanding_five_year_trend": 13.638704761904762
+            },
+            {
+              "year": 1999,
+              "observed_five_year_mean": 13.330000000000002,
+              "model_five_year_mean": 13.230365158241622,
+              "prior_five_year_persistence": 13.331999999999999,
+              "prior_expanding_five_year_trend": 13.61975000000001
+            },
+            {
+              "year": 2000,
+              "observed_five_year_mean": 13.296000000000001,
+              "model_five_year_mean": 13.185541706606353,
+              "prior_five_year_persistence": 13.330000000000002,
+              "prior_expanding_five_year_trend": 13.602529411764749
+            },
+            {
+              "year": 2001,
+              "observed_five_year_mean": 13.443999999999999,
+              "model_five_year_mean": 13.144337896913038,
+              "prior_five_year_persistence": 13.296000000000001,
+              "prior_expanding_five_year_trend": 13.579686274509811
+            },
+            {
+              "year": 2002,
+              "observed_five_year_mean": 13.468,
+              "model_five_year_mean": 13.106484553082424,
+              "prior_five_year_persistence": 13.443999999999999,
+              "prior_expanding_five_year_trend": 13.591017543859664
+            },
+            {
+              "year": 2003,
+              "observed_five_year_mean": 13.437999999999999,
+              "model_five_year_mean": 13.072603268609512,
+              "prior_five_year_persistence": 13.468,
+              "prior_expanding_five_year_trend": 13.604168421052634
+            },
+            {
+              "year": 2004,
+              "observed_five_year_mean": 13.328,
+              "model_five_year_mean": 13.044237927295512,
+              "prior_five_year_persistence": 13.437999999999999,
+              "prior_expanding_five_year_trend": 13.608514285714271
+            },
+            {
+              "year": 2005,
+              "observed_five_year_mean": 13.242,
+              "model_five_year_mean": 13.021949567842643,
+              "prior_five_year_persistence": 13.328,
+              "prior_expanding_five_year_trend": 13.591350649350659
+            },
+            {
+              "year": 2006,
+              "observed_five_year_mean": 13.018,
+              "model_five_year_mean": 13.005115466025917,
+              "prior_five_year_persistence": 13.242,
+              "prior_expanding_five_year_trend": 13.561106719367565
+            },
+            {
+              "year": 2007,
+              "observed_five_year_mean": 12.846,
+              "model_five_year_mean": 12.992715276517208,
+              "prior_five_year_persistence": 13.018,
+              "prior_expanding_five_year_trend": 13.497304347826102
+            },
+            {
+              "year": 2008,
+              "observed_five_year_mean": 12.868,
+              "model_five_year_mean": 12.982904622048135,
+              "prior_five_year_persistence": 12.846,
+              "prior_expanding_five_year_trend": 13.414380000000005
+            },
+            {
+              "year": 2009,
+              "observed_five_year_mean": 12.956,
+              "model_five_year_mean": 12.97367255593517,
+              "prior_five_year_persistence": 12.868,
+              "prior_expanding_five_year_trend": 13.34559384615384
+            },
+            {
+              "year": 2010,
+              "observed_five_year_mean": 13.113999999999999,
+              "model_five_year_mean": 12.963178792249455,
+              "prior_five_year_persistence": 12.956,
+              "prior_expanding_five_year_trend": 13.298478632478627
+            },
+            {
+              "year": 2011,
+              "observed_five_year_mean": 13.175999999999998,
+              "model_five_year_mean": 12.950276336309724,
+              "prior_five_year_persistence": 13.113999999999999,
+              "prior_expanding_five_year_trend": 13.279634920634923
+            },
+            {
+              "year": 2012,
+              "observed_five_year_mean": 13.346,
+              "model_five_year_mean": 12.934714569742999,
+              "prior_five_year_persistence": 13.175999999999998,
+              "prior_expanding_five_year_trend": 13.271487684729067
+            },
+            {
+              "year": 2013,
+              "observed_five_year_mean": 13.330000000000002,
+              "model_five_year_mean": 12.91655459499292,
+              "prior_five_year_persistence": 13.346,
+              "prior_expanding_five_year_trend": 13.286855172413794
+            },
+            {
+              "year": 2014,
+              "observed_five_year_mean": 13.234,
+              "model_five_year_mean": 12.89634842391663,
+              "prior_five_year_persistence": 13.330000000000002,
+              "prior_expanding_five_year_trend": 13.298335483870972
+            },
+            {
+              "year": 2015,
+              "observed_five_year_mean": 13.084,
+              "model_five_year_mean": 12.874678378858599,
+              "prior_five_year_persistence": 13.234,
+              "prior_expanding_five_year_trend": 13.296467741935487
+            },
+            {
+              "year": 2016,
+              "observed_five_year_mean": 13.040000000000001,
+              "model_five_year_mean": 12.851955496131993,
+              "prior_five_year_persistence": 13.084,
+              "prior_expanding_five_year_trend": 13.27652272727272
+            },
+            {
+              "year": 2017,
+              "observed_five_year_mean": 12.88,
+              "model_five_year_mean": 12.828703549928374,
+              "prior_five_year_persistence": 13.040000000000001,
+              "prior_expanding_five_year_trend": 13.253368983957216
+            },
+            {
+              "year": 2018,
+              "observed_five_year_mean": 12.727999999999998,
+              "model_five_year_mean": 12.80544863743909,
+              "prior_five_year_persistence": 12.88,
+              "prior_expanding_five_year_trend": 13.214178151260503
+            },
+            {
+              "year": 2019,
+              "observed_five_year_mean": 12.716,
+              "model_five_year_mean": 12.782084326971798,
+              "prior_five_year_persistence": 12.727999999999998,
+              "prior_expanding_five_year_trend": 13.161860317460313
+            },
+            {
+              "year": 2020,
+              "observed_five_year_mean": 12.766,
+              "model_five_year_mean": 12.75863889664572,
+              "prior_five_year_persistence": 12.716,
+              "prior_expanding_five_year_trend": 13.113171171171176
+            },
+            {
+              "year": 2021,
+              "observed_five_year_mean": 12.841999999999999,
+              "model_five_year_mean": 12.735070450128962,
+              "prior_five_year_persistence": 12.766,
+              "prior_expanding_five_year_trend": 13.07423613086771
+            },
+            {
+              "year": 2022,
+              "observed_five_year_mean": 12.88,
+              "model_five_year_mean": 12.711064580472009,
+              "prior_five_year_persistence": 12.841999999999999,
+              "prior_expanding_five_year_trend": 13.046620782726041
+            },
+            {
+              "year": 2023,
+              "observed_five_year_mean": 12.924000000000001,
+              "model_five_year_mean": 12.686681025064068,
+              "prior_five_year_persistence": 12.88,
+              "prior_expanding_five_year_trend": 13.02526923076923
+            },
+            {
+              "year": 2024,
+              "observed_five_year_mean": 12.984,
+              "model_five_year_mean": 12.66226353020572,
+              "prior_five_year_persistence": 12.924000000000001,
+              "prior_expanding_five_year_trend": 13.010090243902443
+            },
+            {
+              "year": 2025,
+              "observed_five_year_mean": 12.815999999999999,
+              "model_five_year_mean": 12.638364031977385,
+              "prior_five_year_persistence": 12.984,
+              "prior_expanding_five_year_trend": 13.001953542392563
+            }
+          ],
+          "interpretation": "Five-year means reduce interannual weather noise and test the forced signal of the deterministic emulator. All baseline information is prior-only."
+        },
+        "march_extent": {
+          "first_target_year": 1994,
+          "last_target_year": 2025,
+          "folds": 32,
+          "window_years": 5,
+          "model_rmse_million_km2": 0.21832343874330845,
+          "prior_five_year_persistence_rmse_million_km2": 0.09114480237512156,
+          "prior_expanding_five_year_trend_rmse_million_km2": 0.14735310438013166,
+          "model_skill_score_vs_persistence": -1.3953471076141248,
+          "model_skill_score_vs_expanding_linear_trend": -0.48163447021850514,
+          "records": [
+            {
+              "year": 1994,
+              "observed_five_year_mean": 15.626,
+              "model_five_year_mean": 15.496277041811254,
+              "prior_five_year_persistence": 15.6,
+              "prior_expanding_five_year_trend": 15.596654545454527
+            },
+            {
+              "year": 1995,
+              "observed_five_year_mean": 15.504000000000001,
+              "model_five_year_mean": 15.508902085596318,
+              "prior_five_year_persistence": 15.626,
+              "prior_expanding_five_year_trend": 15.57154545454543
+            },
+            {
+              "year": 1996,
+              "observed_five_year_mean": 15.443999999999999,
+              "model_five_year_mean": 15.510796835433789,
+              "prior_five_year_persistence": 15.504000000000001,
+              "prior_expanding_five_year_trend": 15.516999999999967
+            },
+            {
+              "year": 1997,
+              "observed_five_year_mean": 15.441999999999998,
+              "model_five_year_mean": 15.487509700825939,
+              "prior_five_year_persistence": 15.443999999999999,
+              "prior_expanding_five_year_trend": 15.460153846153801
+            },
+            {
+              "year": 1998,
+              "observed_five_year_mean": 15.4,
+              "model_five_year_mean": 15.439960152155843,
+              "prior_five_year_persistence": 15.441999999999998,
+              "prior_expanding_five_year_trend": 15.417238095238105
+            },
+            {
+              "year": 1999,
+              "observed_five_year_mean": 15.370000000000001,
+              "model_five_year_mean": 15.38549050839626,
+              "prior_five_year_persistence": 15.4,
+              "prior_expanding_five_year_trend": 15.374399999999966
+            },
+            {
+              "year": 2000,
+              "observed_five_year_mean": 15.362,
+              "model_five_year_mean": 15.33336565912414,
+              "prior_five_year_persistence": 15.370000000000001,
+              "prior_expanding_five_year_trend": 15.334455882352913
+            },
+            {
+              "year": 2001,
+              "observed_five_year_mean": 15.441999999999998,
+              "model_five_year_mean": 15.285450063797452,
+              "prior_five_year_persistence": 15.362,
+              "prior_expanding_five_year_trend": 15.301581699346372
+            },
+            {
+              "year": 2002,
+              "observed_five_year_mean": 15.417999999999997,
+              "model_five_year_mean": 15.241430699611232,
+              "prior_five_year_persistence": 15.441999999999998,
+              "prior_expanding_five_year_trend": 15.29263157894735
+            },
+            {
+              "year": 2003,
+              "observed_five_year_mean": 15.394,
+              "model_five_year_mean": 15.202030412889325,
+              "prior_five_year_persistence": 15.417999999999997,
+              "prior_expanding_five_year_trend": 15.281410526315767
+            },
+            {
+              "year": 2004,
+              "observed_five_year_mean": 15.312000000000001,
+              "model_five_year_mean": 15.169044574302541,
+              "prior_five_year_persistence": 15.394,
+              "prior_expanding_five_year_trend": 15.268352380952365
+            },
+            {
+              "year": 2005,
+              "observed_five_year_mean": 15.206,
+              "model_five_year_mean": 15.143125611469092,
+              "prior_five_year_persistence": 15.312000000000001,
+              "prior_expanding_five_year_trend": 15.243246753246737
+            },
+            {
+              "year": 2006,
+              "observed_five_year_mean": 14.985999999999999,
+              "model_five_year_mean": 15.123549363147859,
+              "prior_five_year_persistence": 15.206,
+              "prior_expanding_five_year_trend": 15.204245059288525
+            },
+            {
+              "year": 2007,
+              "observed_five_year_mean": 14.824000000000002,
+              "model_five_year_mean": 15.109129277556425,
+              "prior_five_year_persistence": 14.985999999999999,
+              "prior_expanding_five_year_trend": 15.134942028985478
+            },
+            {
+              "year": 2008,
+              "observed_five_year_mean": 14.764,
+              "model_five_year_mean": 15.097720542467906,
+              "prior_five_year_persistence": 14.824000000000002,
+              "prior_expanding_five_year_trend": 15.05007999999998
+            },
+            {
+              "year": 2009,
+              "observed_five_year_mean": 14.762,
+              "model_five_year_mean": 15.086984643355928,
+              "prior_five_year_persistence": 14.764,
+              "prior_expanding_five_year_trend": 14.968086153846158
+            },
+            {
+              "year": 2010,
+              "observed_five_year_mean": 14.852,
+              "model_five_year_mean": 15.0747815257811,
+              "prior_five_year_persistence": 14.762,
+              "prior_expanding_five_year_trend": 14.897128205128197
+            },
+            {
+              "year": 2011,
+              "observed_five_year_mean": 14.878,
+              "model_five_year_mean": 15.05977735839634,
+              "prior_five_year_persistence": 14.852,
+              "prior_expanding_five_year_trend": 14.848619047619039
+            },
+            {
+              "year": 2012,
+              "observed_five_year_mean": 15.01,
+              "model_five_year_mean": 15.041680699011437,
+              "prior_five_year_persistence": 14.878,
+              "prior_expanding_five_year_trend": 14.810275862068963
+            },
+            {
+              "year": 2013,
+              "observed_five_year_mean": 14.98,
+              "model_five_year_mean": 15.020562603191056,
+              "prior_five_year_persistence": 15.01,
+              "prior_expanding_five_year_trend": 14.794712643678153
+            },
+            {
+              "year": 2014,
+              "observed_five_year_mean": 14.936000000000002,
+              "model_five_year_mean": 14.99706500130423,
+              "prior_five_year_persistence": 14.98,
+              "prior_expanding_five_year_trend": 14.777716129032257
+            },
+            {
+              "year": 2015,
+              "observed_five_year_mean": 14.782,
+              "model_five_year_mean": 14.971865071554053,
+              "prior_five_year_persistence": 14.936000000000002,
+              "prior_expanding_five_year_trend": 14.757717741935437
+            },
+            {
+              "year": 2016,
+              "observed_five_year_mean": 14.751999999999999,
+              "model_five_year_mean": 14.94544080492708,
+              "prior_five_year_persistence": 14.782,
+              "prior_expanding_five_year_trend": 14.721776515151504
+            },
+            {
+              "year": 2017,
+              "observed_five_year_mean": 14.569999999999999,
+              "model_five_year_mean": 14.9184012944269,
+              "prior_five_year_persistence": 14.751999999999999,
+              "prior_expanding_five_year_trend": 14.686577540106981
+            },
+            {
+              "year": 2018,
+              "observed_five_year_mean": 14.424000000000001,
+              "model_five_year_mean": 14.891358334455793,
+              "prior_five_year_persistence": 14.569999999999999,
+              "prior_expanding_five_year_trend": 14.634652100840299
+            },
+            {
+              "year": 2019,
+              "observed_five_year_mean": 14.386000000000001,
+              "model_five_year_mean": 14.864188156412306,
+              "prior_five_year_persistence": 14.424000000000001,
+              "prior_expanding_five_year_trend": 14.572088888888857
+            },
+            {
+              "year": 2020,
+              "observed_five_year_mean": 14.457999999999998,
+              "model_five_year_mean": 14.836923644705129,
+              "prior_five_year_persistence": 14.386000000000001,
+              "prior_expanding_five_year_trend": 14.511864864864876
+            },
+            {
+              "year": 2021,
+              "observed_five_year_mean": 14.51,
+              "model_five_year_mean": 14.809516078410152,
+              "prior_five_year_persistence": 14.457999999999998,
+              "prior_expanding_five_year_trend": 14.46529445234708
+            },
+            {
+              "year": 2022,
+              "observed_five_year_mean": 14.570000000000002,
+              "model_five_year_mean": 14.781599836089148,
+              "prior_five_year_persistence": 14.51,
+              "prior_expanding_five_year_trend": 14.428761133603231
+            },
+            {
+              "year": 2023,
+              "observed_five_year_mean": 14.595999999999998,
+              "model_five_year_mean": 14.753244385895385,
+              "prior_five_year_persistence": 14.570000000000002,
+              "prior_expanding_five_year_trend": 14.401938461538435
+            },
+            {
+              "year": 2024,
+              "observed_five_year_mean": 14.656,
+              "model_five_year_mean": 14.724849467774177,
+              "prior_five_year_persistence": 14.595999999999998,
+              "prior_expanding_five_year_trend": 14.380441463414641
+            },
+            {
+              "year": 2025,
+              "observed_five_year_mean": 14.534,
+              "model_five_year_mean": 14.697056923974404,
+              "prior_five_year_persistence": 14.656,
+              "prior_expanding_five_year_trend": 14.366931475029006
+            }
+          ],
+          "interpretation": "Five-year means reduce interannual weather noise and test the forced signal of the deterministic emulator. All baseline information is prior-only."
+        },
+        "september_area": {
+          "first_target_year": 1994,
+          "last_target_year": 2025,
+          "folds": 32,
+          "window_years": 5,
+          "model_rmse_million_km2": 0.35908094986416034,
+          "prior_five_year_persistence_rmse_million_km2": 0.11912440975719459,
+          "prior_expanding_five_year_trend_rmse_million_km2": 0.37699572809979487,
+          "model_skill_score_vs_persistence": -2.014335605910303,
+          "model_skill_score_vs_expanding_linear_trend": 0.04751984412643606,
+          "records": [
+            {
+              "year": 1994,
+              "observed_five_year_mean": 4.84,
+              "model_five_year_mean": 4.382128998141718,
+              "prior_five_year_persistence": 4.786,
+              "prior_expanding_five_year_trend": 5.060654545454568
+            },
+            {
+              "year": 1995,
+              "observed_five_year_mean": 4.816,
+              "model_five_year_mean": 4.3981855262791925,
+              "prior_five_year_persistence": 4.84,
+              "prior_expanding_five_year_trend": 5.040757575757581
+            },
+            {
+              "year": 1996,
+              "observed_five_year_mean": 5.038,
+              "model_five_year_mean": 4.390854814647746,
+              "prior_five_year_persistence": 4.816,
+              "prior_expanding_five_year_trend": 5.016769230769256
+            },
+            {
+              "year": 1997,
+              "observed_five_year_mean": 4.930000000000001,
+              "model_five_year_mean": 4.335943993972217,
+              "prior_five_year_persistence": 5.038,
+              "prior_expanding_five_year_trend": 5.060593406593426
+            },
+            {
+              "year": 1998,
+              "observed_five_year_mean": 4.8740000000000006,
+              "model_five_year_mean": 4.250654626208105,
+              "prior_five_year_persistence": 4.930000000000001,
+              "prior_expanding_five_year_trend": 5.064133333333331
+            },
+            {
+              "year": 1999,
+              "observed_five_year_mean": 4.706,
+              "model_five_year_mean": 4.164087197035017,
+              "prior_five_year_persistence": 4.8740000000000006,
+              "prior_expanding_five_year_trend": 5.051700000000018
+            },
+            {
+              "year": 2000,
+              "observed_five_year_mean": 4.6899999999999995,
+              "model_five_year_mean": 4.085058199944706,
+              "prior_five_year_persistence": 4.706,
+              "prior_expanding_five_year_trend": 5.001264705882377
+            },
+            {
+              "year": 2001,
+              "observed_five_year_mean": 4.484,
+              "model_five_year_mean": 4.013990365304716,
+              "prior_five_year_persistence": 4.6899999999999995,
+              "prior_expanding_five_year_trend": 4.95622222222223
+            },
+            {
+              "year": 2002,
+              "observed_five_year_mean": 4.312,
+              "model_five_year_mean": 3.949320993283615,
+              "prior_five_year_persistence": 4.484,
+              "prior_expanding_five_year_trend": 4.87547368421054
+            },
+            {
+              "year": 2003,
+              "observed_five_year_mean": 4.2620000000000005,
+              "model_five_year_mean": 3.8931446069594813,
+              "prior_five_year_persistence": 4.312,
+              "prior_expanding_five_year_trend": 4.773989473684212
+            },
+            {
+              "year": 2004,
+              "observed_five_year_mean": 4.282,
+              "model_five_year_mean": 3.8476660301784156,
+              "prior_five_year_persistence": 4.2620000000000005,
+              "prior_expanding_five_year_trend": 4.679628571428567
+            },
+            {
+              "year": 2005,
+              "observed_five_year_mean": 4.226000000000001,
+              "model_five_year_mean": 3.8128854184771868,
+              "prior_five_year_persistence": 4.282,
+              "prior_expanding_five_year_trend": 4.603844155844158
+            },
+            {
+              "year": 2006,
+              "observed_five_year_mean": 4.109999999999999,
+              "model_five_year_mean": 3.7869500862145444,
+              "prior_five_year_persistence": 4.226000000000001,
+              "prior_expanding_five_year_trend": 4.529928853754932
+            },
+            {
+              "year": 2007,
+              "observed_five_year_mean": 3.868,
+              "model_five_year_mean": 3.767906299410341,
+              "prior_five_year_persistence": 4.109999999999999,
+              "prior_expanding_five_year_trend": 4.447630434782596
+            },
+            {
+              "year": 2008,
+              "observed_five_year_mean": 3.71,
+              "model_five_year_mean": 3.751842263428472,
+              "prior_five_year_persistence": 3.868,
+              "prior_expanding_five_year_trend": 4.338380000000008
+            },
+            {
+              "year": 2009,
+              "observed_five_year_mean": 3.5840000000000005,
+              "model_five_year_mean": 3.7357024701738695,
+              "prior_five_year_persistence": 3.71,
+              "prior_expanding_five_year_trend": 4.219846153846149
+            },
+            {
+              "year": 2010,
+              "observed_five_year_mean": 3.4379999999999997,
+              "model_five_year_mean": 3.7162595083356016,
+              "prior_five_year_persistence": 3.5840000000000005,
+              "prior_expanding_five_year_trend": 4.098415954415955
+            },
+            {
+              "year": 2011,
+              "observed_five_year_mean": 3.278,
+              "model_five_year_mean": 3.692494620146782,
+              "prior_five_year_persistence": 3.4379999999999997,
+              "prior_expanding_five_year_trend": 3.971793650793657
+            },
+            {
+              "year": 2012,
+              "observed_five_year_mean": 3.196,
+              "model_five_year_mean": 3.6642073248804223,
+              "prior_five_year_persistence": 3.278,
+              "prior_expanding_five_year_trend": 3.838940886699504
+            },
+            {
+              "year": 2013,
+              "observed_five_year_mean": 3.3,
+              "model_five_year_mean": 3.6319435466393104,
+              "prior_five_year_persistence": 3.196,
+              "prior_expanding_five_year_trend": 3.7112735632183984
+            },
+            {
+              "year": 2014,
+              "observed_five_year_mean": 3.2960000000000003,
+              "model_five_year_mean": 3.596855500887776,
+              "prior_five_year_persistence": 3.3,
+              "prior_expanding_five_year_trend": 3.6121161290322306
+            },
+            {
+              "year": 2015,
+              "observed_five_year_mean": 3.3120000000000003,
+              "model_five_year_mean": 3.5599087133393583,
+              "prior_five_year_persistence": 3.2960000000000003,
+              "prior_expanding_five_year_trend": 3.5240241935483567
+            },
+            {
+              "year": 2016,
+              "observed_five_year_mean": 3.252,
+              "model_five_year_mean": 3.521731562472116,
+              "prior_five_year_persistence": 3.3120000000000003,
+              "prior_expanding_five_year_trend": 3.4479507575757395
+            },
+            {
+              "year": 2017,
+              "observed_five_year_mean": 3.44,
+              "model_five_year_mean": 3.4832561934826316,
+              "prior_five_year_persistence": 3.252,
+              "prior_expanding_five_year_trend": 3.3733903743315494
+            },
+            {
+              "year": 2018,
+              "observed_five_year_mean": 3.354,
+              "model_five_year_mean": 3.445107385796733,
+              "prior_five_year_persistence": 3.44,
+              "prior_expanding_five_year_trend": 3.3285075630251697
+            },
+            {
+              "year": 2019,
+              "observed_five_year_mean": 3.2399999999999998,
+              "model_five_year_mean": 3.406792750307062,
+              "prior_five_year_persistence": 3.354,
+              "prior_expanding_five_year_trend": 3.2791619047618923
+            },
+            {
+              "year": 2020,
+              "observed_five_year_mean": 3.122,
+              "model_five_year_mean": 3.3686373834575454,
+              "prior_five_year_persistence": 3.2399999999999998,
+              "prior_expanding_five_year_trend": 3.2228648648648743
+            },
+            {
+              "year": 2021,
+              "observed_five_year_mean": 3.2340000000000004,
+              "model_five_year_mean": 3.3302315099901634,
+              "prior_five_year_persistence": 3.122,
+              "prior_expanding_five_year_trend": 3.160017069701297
+            },
+            {
+              "year": 2022,
+              "observed_five_year_mean": 3.258,
+              "model_five_year_mean": 3.291248767112381,
+              "prior_five_year_persistence": 3.2340000000000004,
+              "prior_expanding_five_year_trend": 3.1149662618083624
+            },
+            {
+              "year": 2023,
+              "observed_five_year_mean": 3.1540000000000004,
+              "model_five_year_mean": 3.2519380895999412,
+              "prior_five_year_persistence": 3.258,
+              "prior_expanding_five_year_trend": 3.0769153846153756
+            },
+            {
+              "year": 2024,
+              "observed_five_year_mean": 3.1020000000000003,
+              "model_five_year_mean": 3.212955182347089,
+              "prior_five_year_persistence": 3.1540000000000004,
+              "prior_expanding_five_year_trend": 3.032604878048801
+            },
+            {
+              "year": 2025,
+              "observed_five_year_mean": 3.152,
+              "model_five_year_mean": 3.1753209903460005,
+              "prior_five_year_persistence": 3.1020000000000003,
+              "prior_expanding_five_year_trend": 2.9876515679442406
+            }
+          ],
+          "interpretation": "Five-year means reduce interannual weather noise and test the forced signal of the deterministic emulator. All baseline information is prior-only."
+        },
+        "september_extent": {
+          "first_target_year": 1994,
+          "last_target_year": 2025,
+          "folds": 32,
+          "window_years": 5,
+          "model_rmse_million_km2": 0.45803066219510613,
+          "prior_five_year_persistence_rmse_million_km2": 0.14837873836908044,
+          "prior_expanding_five_year_trend_rmse_million_km2": 0.35666108743096,
+          "model_skill_score_vs_persistence": -2.0869022558730137,
+          "model_skill_score_vs_expanding_linear_trend": -0.2842182069659298,
+          "records": [
+            {
+              "year": 1994,
+              "observed_five_year_mean": 6.723999999999999,
+              "model_five_year_mean": 6.334457067417565,
+              "prior_five_year_persistence": 6.697999999999999,
+              "prior_expanding_five_year_trend": 6.768218181818156
+            },
+            {
+              "year": 1995,
+              "observed_five_year_mean": 6.712000000000001,
+              "model_five_year_mean": 6.357667107145227,
+              "prior_five_year_persistence": 6.723999999999999,
+              "prior_expanding_five_year_trend": 6.7052424242424
+            },
+            {
+              "year": 1996,
+              "observed_five_year_mean": 6.934,
+              "model_five_year_mean": 6.347070413592229,
+              "prior_five_year_persistence": 6.712000000000001,
+              "prior_expanding_five_year_trend": 6.657384615384558
+            },
+            {
+              "year": 1997,
+              "observed_five_year_mean": 6.777999999999999,
+              "model_five_year_mean": 6.267695699554073,
+              "prior_five_year_persistence": 6.934,
+              "prior_expanding_five_year_trend": 6.686703296703271
+            },
+            {
+              "year": 1998,
+              "observed_five_year_mean": 6.806,
+              "model_five_year_mean": 6.144408174554683,
+              "prior_five_year_persistence": 6.777999999999999,
+              "prior_expanding_five_year_trend": 6.6692380952381
+            },
+            {
+              "year": 1999,
+              "observed_five_year_mean": 6.601999999999999,
+              "model_five_year_mean": 6.019273185656326,
+              "prior_five_year_persistence": 6.806,
+              "prior_expanding_five_year_trend": 6.663899999999998
+            },
+            {
+              "year": 2000,
+              "observed_five_year_mean": 6.636,
+              "model_five_year_mean": 5.905035154470596,
+              "prior_five_year_persistence": 6.601999999999999,
+              "prior_expanding_five_year_trend": 6.6128235294117275
+            },
+            {
+              "year": 2001,
+              "observed_five_year_mean": 6.465999999999999,
+              "model_five_year_mean": 5.80230514638726,
+              "prior_five_year_persistence": 6.636,
+              "prior_expanding_five_year_trend": 6.580248366013038
+            },
+            {
+              "year": 2002,
+              "observed_five_year_mean": 6.294,
+              "model_five_year_mean": 5.708824246847738,
+              "prior_five_year_persistence": 6.465999999999999,
+              "prior_expanding_five_year_trend": 6.51887719298243
+            },
+            {
+              "year": 2003,
+              "observed_five_year_mean": 6.21,
+              "model_five_year_mean": 5.627620131787731,
+              "prior_five_year_persistence": 6.294,
+              "prior_expanding_five_year_trend": 6.4347789473684145
+            },
+            {
+              "year": 2004,
+              "observed_five_year_mean": 6.182,
+              "model_five_year_mean": 5.561879919158419,
+              "prior_five_year_persistence": 6.21,
+              "prior_expanding_five_year_trend": 6.349628571428568
+            },
+            {
+              "year": 2005,
+              "observed_five_year_mean": 6.032,
+              "model_five_year_mean": 5.511603833791371,
+              "prior_five_year_persistence": 6.182,
+              "prior_expanding_five_year_trend": 6.2738961038961065
+            },
+            {
+              "year": 2006,
+              "observed_five_year_mean": 5.858,
+              "model_five_year_mean": 5.4741137807106295,
+              "prior_five_year_persistence": 6.032,
+              "prior_expanding_five_year_trend": 6.184584980237162
+            },
+            {
+              "year": 2007,
+              "observed_five_year_mean": 5.546,
+              "model_five_year_mean": 5.4465855975002615,
+              "prior_five_year_persistence": 5.858,
+              "prior_expanding_five_year_trend": 6.080282608695612
+            },
+            {
+              "year": 2008,
+              "observed_five_year_mean": 5.26,
+              "model_five_year_mean": 5.423364705030005,
+              "prior_five_year_persistence": 5.546,
+              "prior_expanding_five_year_trend": 5.941659999999956
+            },
+            {
+              "year": 2009,
+              "observed_five_year_mean": 5.116,
+              "model_five_year_mean": 5.40003430387302,
+              "prior_five_year_persistence": 5.26,
+              "prior_expanding_five_year_trend": 5.778719999999993
+            },
+            {
+              "year": 2010,
+              "observed_five_year_mean": 4.99,
+              "model_five_year_mean": 5.371929104989059,
+              "prior_five_year_persistence": 5.116,
+              "prior_expanding_five_year_trend": 5.61664387464387
+            },
+            {
+              "year": 2011,
+              "observed_five_year_mean": 4.7299999999999995,
+              "model_five_year_mean": 5.337576473195732,
+              "prior_five_year_persistence": 4.99,
+              "prior_expanding_five_year_trend": 5.457968253968261
+            },
+            {
+              "year": 2012,
+              "observed_five_year_mean": 4.59,
+              "model_five_year_mean": 5.296686609502976,
+              "prior_five_year_persistence": 4.7299999999999995,
+              "prior_expanding_five_year_trend": 5.283773399014763
+            },
+            {
+              "year": 2013,
+              "observed_five_year_mean": 4.694,
+              "model_five_year_mean": 5.250048658363785,
+              "prior_five_year_persistence": 4.59,
+              "prior_expanding_five_year_trend": 5.112464367816102
+            },
+            {
+              "year": 2014,
+              "observed_five_year_mean": 4.686,
+              "model_five_year_mean": 5.199328170790987,
+              "prior_five_year_persistence": 4.694,
+              "prior_expanding_five_year_trend": 4.975187096774135
+            },
+            {
+              "year": 2015,
+              "observed_five_year_mean": 4.636,
+              "model_five_year_mean": 5.145920833945427,
+              "prior_five_year_persistence": 4.686,
+              "prior_expanding_five_year_trend": 4.853225806451547
+            },
+            {
+              "year": 2016,
+              "observed_five_year_mean": 4.630000000000001,
+              "model_five_year_mean": 5.090734981765489,
+              "prior_five_year_persistence": 4.636,
+              "prior_expanding_five_year_trend": 4.739439393939364
+            },
+            {
+              "year": 2017,
+              "observed_five_year_mean": 4.880000000000001,
+              "model_five_year_mean": 5.035118049192238,
+              "prior_five_year_persistence": 4.630000000000001,
+              "prior_expanding_five_year_trend": 4.637946524064205
+            },
+            {
+              "year": 2018,
+              "observed_five_year_mean": 4.796,
+              "model_five_year_mean": 4.979973167660459,
+              "prior_five_year_persistence": 4.880000000000001,
+              "prior_expanding_five_year_trend": 4.576440336134397
+            },
+            {
+              "year": 2019,
+              "observed_five_year_mean": 4.6240000000000006,
+              "model_five_year_mean": 4.924588578647677,
+              "prior_five_year_persistence": 4.796,
+              "prior_expanding_five_year_trend": 4.51281904761899
+            },
+            {
+              "year": 2020,
+              "observed_five_year_mean": 4.5,
+              "model_five_year_mean": 4.869434215710777,
+              "prior_five_year_persistence": 4.6240000000000006,
+              "prior_expanding_five_year_trend": 4.4378108108108165
+            },
+            {
+              "year": 2021,
+              "observed_five_year_mean": 4.584,
+              "model_five_year_mean": 4.813917740335685,
+              "prior_five_year_persistence": 4.5,
+              "prior_expanding_five_year_trend": 4.357803698435248
+            },
+            {
+              "year": 2022,
+              "observed_five_year_mean": 4.6,
+              "model_five_year_mean": 4.757567388432717,
+              "prior_five_year_persistence": 4.584,
+              "prior_expanding_five_year_trend": 4.294701754386011
+            },
+            {
+              "year": 2023,
+              "observed_five_year_mean": 4.518,
+              "model_five_year_mean": 4.700743000310129,
+              "prior_five_year_persistence": 4.6,
+              "prior_expanding_five_year_trend": 4.239799999999946
+            },
+            {
+              "year": 2024,
+              "observed_five_year_mean": 4.516,
+              "model_five_year_mean": 4.644392410799637,
+              "prior_five_year_persistence": 4.518,
+              "prior_expanding_five_year_trend": 4.182626829268315
+            },
+            {
+              "year": 2025,
+              "observed_five_year_mean": 4.6659999999999995,
+              "model_five_year_mean": 4.589991416762506,
+              "prior_five_year_persistence": 4.516,
+              "prior_expanding_five_year_trend": 4.131031358884968
+            }
+          ],
+          "interpretation": "Five-year means reduce interannual weather noise and test the forced signal of the deterministic emulator. All baseline information is prior-only."
+        }
+      },
+      "evidence_role": "validation_informed_historical_diagnostics",
+      "used_for_tuning": true,
+      "independent_predictive_validation": false
+    },
+    "inspected_march_2026_evaluation": {
+      "status": "reported_after_prior_inspection_not_independent",
+      "year": 2026,
+      "month": 3,
+      "model_area_million_km2": 12.573070782187889,
+      "observed_area_million_km2": 12.43,
+      "area_error_million_km2": 0.14307078218788938,
+      "model_extent_million_km2": 14.621127902901778,
+      "observed_extent_million_km2": 14.13,
+      "extent_error_million_km2": 0.491127902901777,
+      "observation_source": "NSIDC-0803",
+      "used_for_tuning": true,
+      "independent_predictive_validation": false
+    },
+    "quantitative_temporal_skill_claim": {
+      "claimed": false,
+      "september_area_raw_annual_positive_vs_both_baselines": true,
+      "reason": "The historical record was inspected during development and does not constitute independent predictive validation, irrespective of baseline skill."
+    },
+    "prospective_untouched_temporal_evaluation": {
+      "start_year": 2027,
+      "status": "reserved_not_yet_available",
+      "used_for_tuning": false,
+      "independent_predictive_validation": true,
+      "reason": "Records through 2025 and March 2026 were already inspected; 2027 onward is the next defensible untouched window."
+    },
+    "all_current_sea_ice_release_gates_passed": true,
+    "records": [
+      {
+        "year": 1979,
+        "month": 3,
+        "model_year": 1979.2,
+        "model_area": 13.43984743993759,
+        "model_extent": 15.629095852478752,
+        "model_native_area": 13.43984743993759,
+        "model_raw_area": 13.43984743993759,
+        "model_warming_c": 0.30545376081711306,
+        "observed_area": 13.21,
+        "observed_extent": 16.34,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1980,
+        "month": 3,
+        "model_year": 1980.2,
+        "model_area": 13.417117171967881,
+        "model_extent": 15.602662997609027,
+        "model_native_area": 13.417117171967881,
+        "model_raw_area": 13.417117171967881,
+        "model_warming_c": 0.3355504612826881,
+        "observed_area": 12.99,
+        "observed_extent": 16.04,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1981,
+        "month": 3,
+        "model_year": 1981.2,
+        "model_area": 13.397317830239999,
+        "model_extent": 15.579638494461655,
+        "model_native_area": 13.397317830239999,
+        "model_raw_area": 13.397317830239999,
+        "model_warming_c": 0.362307963715701,
+        "observed_area": 12.71,
+        "observed_extent": 15.63,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1982,
+        "month": 3,
+        "model_year": 1982.2,
+        "model_area": 13.389618142490134,
+        "model_extent": 15.570684586434455,
+        "model_native_area": 13.389618142490134,
+        "model_raw_area": 13.389618142490134,
+        "model_warming_c": 0.35763593253397574,
+        "observed_area": 13.07,
+        "observed_extent": 16.04,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1983,
+        "month": 3,
+        "model_year": 1983.2,
+        "model_area": 13.410407606198506,
+        "model_extent": 15.594860494864356,
+        "model_native_area": 13.410407606198506,
+        "model_raw_area": 13.410407606198506,
+        "model_warming_c": 0.30239719723865166,
+        "observed_area": 12.93,
+        "observed_extent": 16.09,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1984,
+        "month": 3,
+        "model_year": 1984.2,
+        "model_area": 13.4269403008081,
+        "model_extent": 15.614086239048422,
+        "model_native_area": 13.4269403008081,
+        "model_raw_area": 13.4269403008081,
+        "model_warming_c": 0.3028068037841896,
+        "observed_area": 12.55,
+        "observed_extent": 15.58,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1985,
+        "month": 3,
+        "model_year": 1985.2,
+        "model_area": 13.413774955063541,
+        "model_extent": 15.598776359119183,
+        "model_native_area": 13.413774955063541,
+        "model_raw_area": 13.413774955063541,
+        "model_warming_c": 0.34197058228081895,
+        "observed_area": 12.75,
+        "observed_extent": 15.89,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1986,
+        "month": 3,
+        "model_year": 1986.2,
+        "model_area": 13.390784696703369,
+        "model_extent": 15.572041163411779,
+        "model_native_area": 13.390784696703369,
+        "model_raw_area": 13.390784696703369,
+        "model_warming_c": 0.37871507532541293,
+        "observed_area": 12.72,
+        "observed_extent": 15.91,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1987,
+        "month": 3,
+        "model_year": 1987.2,
+        "model_area": 13.366329664647061,
+        "model_extent": 15.543602593570004,
+        "model_native_area": 13.366329664647061,
+        "model_raw_area": 13.366329664647061,
+        "model_warming_c": 0.41705432313729457,
+        "observed_area": 12.83,
+        "observed_extent": 15.82,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1988,
+        "month": 3,
+        "model_year": 1988.2,
+        "model_area": 13.33741719013392,
+        "model_extent": 15.509980497968273,
+        "model_native_area": 13.33741719013392,
+        "model_raw_area": 13.33741719013392,
+        "model_warming_c": 0.46432782494878055,
+        "observed_area": 13.9,
+        "observed_extent": 15.96,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1989,
+        "month": 3,
+        "model_year": 1989.2,
+        "model_area": 13.30363402139711,
+        "model_extent": 15.470694309285873,
+        "model_native_area": 13.30363402139711,
+        "model_raw_area": 13.30363402139711,
+        "model_warming_c": 0.517671452526499,
+        "observed_area": 13.21,
+        "observed_extent": 15.42,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1990,
+        "month": 3,
+        "model_year": 1990.2,
+        "model_area": 13.27099497260588,
+        "model_extent": 15.432738608942431,
+        "model_native_area": 13.27099497260588,
+        "model_raw_area": 13.27099497260588,
+        "model_warming_c": 0.5612132983267747,
+        "observed_area": 13.51,
+        "observed_extent": 15.87,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1991,
+        "month": 3,
+        "model_year": 1991.2,
+        "model_area": 13.265035646694514,
+        "model_extent": 15.425808554393736,
+        "model_native_area": 13.265035646694514,
+        "model_raw_area": 13.265035646694514,
+        "model_warming_c": 0.534276769585975,
+        "observed_area": 13.42,
+        "observed_extent": 15.42,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1992,
+        "month": 3,
+        "model_year": 1992.2,
+        "model_area": 13.32742441982308,
+        "model_extent": 15.49835998175945,
+        "model_native_area": 13.32742441982308,
+        "model_raw_area": 13.32742441982308,
+        "model_warming_c": 0.37687067970457516,
+        "observed_area": 13.48,
+        "observed_extent": 15.48,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1993,
+        "month": 3,
+        "model_year": 1993.2,
+        "model_area": 13.389001159934464,
+        "model_extent": 15.569967102136738,
+        "model_native_area": 13.389001159934464,
+        "model_raw_area": 13.389001159934464,
+        "model_warming_c": 0.33623608798174986,
+        "observed_area": 13.77,
+        "observed_extent": 15.81,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1994,
+        "month": 3,
+        "model_year": 1994.2,
+        "model_area": 13.375710041255862,
+        "model_extent": 15.55451096182392,
+        "model_native_area": 13.375710041255862,
+        "model_raw_area": 13.375710041255862,
+        "model_warming_c": 0.4146366564043592,
+        "observed_area": 13.55,
+        "observed_extent": 15.55,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1995,
+        "month": 3,
+        "model_year": 1995.2,
+        "model_area": 13.32527791513671,
+        "model_extent": 15.495863827867748,
+        "model_native_area": 13.32527791513671,
+        "model_raw_area": 13.32527791513671,
+        "model_warming_c": 0.5043487031461432,
+        "observed_area": 13.34,
+        "observed_extent": 15.26,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1996,
+        "month": 3,
+        "model_year": 1996.2,
+        "model_area": 13.273182358760527,
+        "model_extent": 15.43528230358109,
+        "model_native_area": 13.273182358760527,
+        "model_raw_area": 13.273182358760527,
+        "model_warming_c": 0.578949773483457,
+        "observed_area": 12.9,
+        "observed_extent": 15.12,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1997,
+        "month": 3,
+        "model_year": 1997.2,
+        "model_area": 13.227298494626593,
+        "model_extent": 15.381924308720198,
+        "model_native_area": 13.227298494626593,
+        "model_raw_area": 13.227298494626593,
+        "model_warming_c": 0.6407652615821493,
+        "observed_area": 13.3,
+        "observed_extent": 15.47,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1998,
+        "month": 3,
+        "model_year": 1998.2,
+        "model_area": 13.184555974494451,
+        "model_extent": 15.332219358786267,
+        "model_native_area": 13.184555974494451,
+        "model_raw_area": 13.184555974494451,
+        "model_warming_c": 0.7031872838684371,
+        "observed_area": 13.57,
+        "observed_extent": 15.6,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1999,
+        "month": 3,
+        "model_year": 1999.2,
+        "model_area": 13.141511048189832,
+        "model_extent": 15.282162743025985,
+        "model_native_area": 13.141511048189832,
+        "model_raw_area": 13.141511048189832,
+        "model_warming_c": 0.7673037360403073,
+        "observed_area": 13.54,
+        "observed_extent": 15.4,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2000,
+        "month": 3,
+        "model_year": 2000.2000000000003,
+        "model_area": 13.101160656960353,
+        "model_extent": 15.23523958150717,
+        "model_native_area": 13.101160656960353,
+        "model_raw_area": 13.101160656960353,
+        "model_warming_c": 0.8240513905496875,
+        "observed_area": 13.17,
+        "observed_extent": 15.22,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2001,
+        "month": 3,
+        "model_year": 2001.2000000000003,
+        "model_area": 13.067163310293953,
+        "model_extent": 15.195704326947645,
+        "model_native_area": 13.067163310293953,
+        "model_raw_area": 13.067163310293953,
+        "model_warming_c": 0.8699096430452368,
+        "observed_area": 13.64,
+        "observed_extent": 15.52,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2002,
+        "month": 3,
+        "model_year": 2002.2000000000003,
+        "model_area": 13.038031775473524,
+        "model_extent": 15.161827487789088,
+        "model_native_area": 13.038031775473524,
+        "model_raw_area": 13.038031775473524,
+        "model_warming_c": 0.9117832882918673,
+        "observed_area": 13.42,
+        "observed_extent": 15.35,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2003,
+        "month": 3,
+        "model_year": 2003.2,
+        "model_area": 13.0151495521299,
+        "model_extent": 15.135217925176738,
+        "model_native_area": 13.0151495521299,
+        "model_raw_area": 13.0151495521299,
+        "model_warming_c": 0.9403906091542664,
+        "observed_area": 13.42,
+        "observed_extent": 15.48,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2004,
+        "month": 3,
+        "model_year": 2004.2,
+        "model_area": 12.999684341619828,
+        "model_extent": 15.11723355009206,
+        "model_native_area": 12.999684341619828,
+        "model_raw_area": 12.999684341619828,
+        "model_warming_c": 0.9597244274770419,
+        "observed_area": 12.99,
+        "observed_extent": 14.99,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2005,
+        "month": 3,
+        "model_year": 2005.2,
+        "model_area": 12.98971885969602,
+        "model_extent": 15.10564476733992,
+        "model_native_area": 12.98971885969602,
+        "model_raw_area": 12.98971885969602,
+        "model_warming_c": 0.9716182801742342,
+        "observed_area": 12.74,
+        "observed_extent": 14.69,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2006,
+        "month": 3,
+        "model_year": 2006.2,
+        "model_area": 12.982992801210305,
+        "model_extent": 15.09782308534149,
+        "model_native_area": 12.982992801210305,
+        "model_raw_area": 12.982992801210305,
+        "model_warming_c": 0.9815534963696724,
+        "observed_area": 12.52,
+        "observed_extent": 14.42,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2007,
+        "month": 3,
+        "model_year": 2007.1999999999998,
+        "model_area": 12.976030827929996,
+        "model_extent": 15.089727059831919,
+        "model_native_area": 12.976030827929996,
+        "model_raw_area": 12.976030827929996,
+        "model_warming_c": 0.9946218767956497,
+        "observed_area": 12.56,
+        "observed_extent": 14.54,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2008,
+        "month": 3,
+        "model_year": 2008.1999999999998,
+        "model_area": 12.966096279784527,
+        "model_extent": 15.078174249734147,
+        "model_native_area": 12.966096279784527,
+        "model_raw_area": 12.966096279784527,
+        "model_warming_c": 1.0141398850154504,
+        "observed_area": 13.53,
+        "observed_extent": 15.18,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2009,
+        "month": 3,
+        "model_year": 2009.1999999999998,
+        "model_area": 12.953524011055011,
+        "model_extent": 15.063554054532167,
+        "model_native_area": 12.953524011055011,
+        "model_raw_area": 12.953524011055011,
+        "model_warming_c": 1.035821850538988,
+        "observed_area": 13.43,
+        "observed_extent": 14.98,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2010,
+        "month": 3,
+        "model_year": 2010.2,
+        "model_area": 12.937250041267433,
+        "model_extent": 15.04462917946577,
+        "model_native_area": 12.937250041267433,
+        "model_raw_area": 12.937250041267433,
+        "model_warming_c": 1.0656913779587238,
+        "observed_area": 13.53,
+        "observed_extent": 15.14,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2011,
+        "month": 3,
+        "model_year": 2011.2,
+        "model_area": 12.918480521511649,
+        "model_extent": 15.022802248417698,
+        "model_native_area": 12.918480521511649,
+        "model_raw_area": 12.918480521511649,
+        "model_warming_c": 1.0953347945230303,
+        "observed_area": 12.83,
+        "observed_extent": 14.55,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2012,
+        "month": 3,
+        "model_year": 2012.2,
+        "model_area": 12.898221995096373,
+        "model_extent": 14.999243762907403,
+        "model_native_area": 12.898221995096373,
+        "model_raw_area": 12.898221995096373,
+        "model_warming_c": 1.1289817646881342,
+        "observed_area": 13.41,
+        "observed_extent": 15.2,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2013,
+        "month": 3,
+        "model_year": 2013.2,
+        "model_area": 12.875296406034135,
+        "model_extent": 14.97258377063223,
+        "model_native_area": 12.875296406034135,
+        "model_raw_area": 12.875296406034135,
+        "model_warming_c": 1.1664189353908878,
+        "observed_area": 13.45,
+        "observed_extent": 15.03,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2014,
+        "month": 3,
+        "model_year": 2014.2,
+        "model_area": 12.852493155673562,
+        "model_extent": 14.946066045098053,
+        "model_native_area": 12.852493155673562,
+        "model_raw_area": 12.852493155673562,
+        "model_warming_c": 1.200491676087932,
+        "observed_area": 12.95,
+        "observed_extent": 14.76,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2015,
+        "month": 3,
+        "model_year": 2015.2,
+        "model_area": 12.828899815977271,
+        "model_extent": 14.918629530714886,
+        "model_native_area": 12.828899815977271,
+        "model_raw_area": 12.828899815977271,
+        "model_warming_c": 1.2391907611839663,
+        "observed_area": 12.78,
+        "observed_extent": 14.37,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2016,
+        "month": 3,
+        "model_year": 2016.2,
+        "model_area": 12.804866107878619,
+        "model_extent": 14.890680915282829,
+        "model_native_area": 12.804866107878619,
+        "model_raw_area": 12.804866107878619,
+        "model_warming_c": 1.2754623878631741,
+        "observed_area": 12.61,
+        "observed_extent": 14.4,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2017,
+        "month": 3,
+        "model_year": 2017.2,
+        "model_area": 12.781962264078285,
+        "model_extent": 14.8640462104065,
+        "model_native_area": 12.781962264078285,
+        "model_raw_area": 12.781962264078285,
+        "model_warming_c": 1.3107909165378075,
+        "observed_area": 12.61,
+        "observed_extent": 14.29,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2018,
+        "month": 3,
+        "model_year": 2018.2,
+        "model_area": 12.75902184358772,
+        "model_extent": 14.837368970776696,
+        "model_native_area": 12.75902184358772,
+        "model_raw_area": 12.75902184358772,
+        "model_warming_c": 1.3470460756046054,
+        "observed_area": 12.69,
+        "observed_extent": 14.3,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2019,
+        "month": 3,
+        "model_year": 2019.2,
+        "model_area": 12.735671603337094,
+        "model_extent": 14.81021515488062,
+        "model_native_area": 12.735671603337094,
+        "model_raw_area": 12.735671603337094,
+        "model_warming_c": 1.384276085813255,
+        "observed_area": 12.89,
+        "observed_extent": 14.57,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "model_year": 2020.2,
+        "model_area": 12.711672664346889,
+        "model_extent": 14.782306972178997,
+        "model_native_area": 12.711672664346889,
+        "model_raw_area": 12.711672664346889,
+        "model_warming_c": 1.4229089524388763,
+        "observed_area": 13.03,
+        "observed_extent": 14.73,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2021,
+        "month": 3,
+        "model_year": 2021.2,
+        "model_area": 12.687023875294816,
+        "model_extent": 14.753643083807942,
+        "model_native_area": 12.687023875294816,
+        "model_raw_area": 12.687023875294816,
+        "model_warming_c": 1.4624293906913226,
+        "observed_area": 12.99,
+        "observed_extent": 14.66,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2022,
+        "month": 3,
+        "model_year": 2022.2,
+        "model_area": 12.661932915793521,
+        "model_extent": 14.72446499880148,
+        "model_native_area": 12.661932915793521,
+        "model_raw_area": 12.661932915793521,
+        "model_warming_c": 1.5027774869543558,
+        "observed_area": 12.8,
+        "observed_extent": 14.59,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2023,
+        "month": 3,
+        "model_year": 2023.2,
+        "model_area": 12.637104066548018,
+        "model_extent": 14.695591719807881,
+        "model_native_area": 12.637104066548018,
+        "model_raw_area": 12.637104066548018,
+        "model_warming_c": 1.5418826451416952,
+        "observed_area": 12.91,
+        "observed_extent": 14.43,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2024,
+        "month": 3,
+        "model_year": 2024.2,
+        "model_area": 12.613584129045359,
+        "model_extent": 14.668240564274594,
+        "model_native_area": 12.613584129045359,
+        "model_raw_area": 12.613584129045359,
+        "model_warming_c": 1.578183512269114,
+        "observed_area": 13.19,
+        "observed_extent": 14.87,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2025,
+        "month": 3,
+        "model_year": 2025.2,
+        "model_area": 12.592175173205217,
+        "model_extent": 14.643344253180112,
+        "model_native_area": 12.592175173205217,
+        "model_raw_area": 12.592175173205217,
+        "model_warming_c": 1.610463663838716,
+        "observed_area": 12.19,
+        "observed_extent": 14.12,
+        "observation_source": "NSIDC-0803"
+      },
+      {
+        "year": 2026,
+        "month": 3,
+        "model_year": 2026.2,
+        "model_area": 12.573070782187889,
+        "model_extent": 14.621127902901778,
+        "model_native_area": 12.573070782187889,
+        "model_raw_area": 12.573070782187889,
+        "model_warming_c": 1.6392312550142223,
+        "observed_area": 12.43,
+        "observed_extent": 14.13,
+        "observation_source": "NSIDC-0803"
+      },
+      {
+        "year": 1979,
+        "month": 9,
+        "model_year": 1979.7,
+        "model_area": 4.569461744100292,
+        "model_extent": 6.6052503820596575,
+        "model_native_area": 4.569461744100292,
+        "model_raw_area": 4.569461744100292,
+        "model_warming_c": 0.32568453985538365,
+        "observed_area": 4.58,
+        "observed_extent": 7.05,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1980,
+        "month": 9,
+        "model_year": 1980.7,
+        "model_area": 4.528234473935283,
+        "model_extent": 6.545655520069557,
+        "model_native_area": 4.528234473935283,
+        "model_raw_area": 4.528234473935283,
+        "model_warming_c": 0.3541204598630948,
+        "observed_area": 4.87,
+        "observed_extent": 7.67,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1981,
+        "month": 9,
+        "model_year": 1981.7,
+        "model_area": 4.494165632920046,
+        "model_extent": 6.496408313782565,
+        "model_native_area": 4.494165632920046,
+        "model_raw_area": 4.494165632920046,
+        "model_warming_c": 0.36982879922973966,
+        "observed_area": 4.44,
+        "observed_extent": 7.14,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1982,
+        "month": 9,
+        "model_year": 1982.7,
+        "model_area": 4.49541620928578,
+        "model_extent": 6.498216047489544,
+        "model_native_area": 4.49541620928578,
+        "model_raw_area": 4.49541620928578,
+        "model_warming_c": 0.3395333335693963,
+        "observed_area": 4.43,
+        "observed_extent": 7.3,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1983,
+        "month": 9,
+        "model_year": 1983.7,
+        "model_area": 4.552554093822666,
+        "model_extent": 6.580810027875664,
+        "model_native_area": 4.552554093822666,
+        "model_raw_area": 4.552554093822666,
+        "model_warming_c": 0.2963853183083649,
+        "observed_area": 4.7,
+        "observed_extent": 7.39,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1984,
+        "month": 9,
+        "model_year": 1984.7,
+        "model_area": 4.564055124334193,
+        "model_extent": 6.59743500263958,
+        "model_native_area": 4.564055124334193,
+        "model_raw_area": 4.564055124334193,
+        "model_warming_c": 0.32459233448427777,
+        "observed_area": 4.11,
+        "observed_extent": 6.81,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1985,
+        "month": 9,
+        "model_year": 1985.7,
+        "model_area": 4.523594677878531,
+        "model_extent": 6.538948600000446,
+        "model_native_area": 4.523594677878531,
+        "model_raw_area": 4.523594677878531,
+        "model_warming_c": 0.3661224212820221,
+        "observed_area": 4.23,
+        "observed_extent": 6.7,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1986,
+        "month": 9,
+        "model_year": 1986.7,
+        "model_area": 4.476567122088783,
+        "model_extent": 6.470969306542387,
+        "model_native_area": 4.476567122088783,
+        "model_raw_area": 4.476567122088783,
+        "model_warming_c": 0.4024999941378267,
+        "observed_area": 4.72,
+        "observed_extent": 7.41,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1987,
+        "month": 9,
+        "model_year": 1987.7,
+        "model_area": 4.427829310781613,
+        "model_extent": 6.400517803764608,
+        "model_native_area": 4.427829310781613,
+        "model_raw_area": 4.427829310781613,
+        "model_warming_c": 0.44544561774342833,
+        "observed_area": 5.64,
+        "observed_extent": 7.28,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1988,
+        "month": 9,
+        "model_year": 1988.7,
+        "model_area": 4.370355454768827,
+        "model_extent": 6.317438169740527,
+        "model_native_area": 4.370355454768827,
+        "model_raw_area": 4.370355454768827,
+        "model_warming_c": 0.49715765529308864,
+        "observed_area": 5.36,
+        "observed_extent": 7.37,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1989,
+        "month": 9,
+        "model_year": 1989.7,
+        "model_area": 4.306136472871018,
+        "model_extent": 6.224608318333268,
+        "model_native_area": 4.306136472871018,
+        "model_raw_area": 4.306136472871018,
+        "model_warming_c": 0.5490051058112159,
+        "observed_area": 4.86,
+        "observed_extent": 7.01,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1990,
+        "month": 9,
+        "model_year": 1990.7,
+        "model_area": 4.253364720339735,
+        "model_extent": 6.148325671034763,
+        "model_native_area": 4.253364720339735,
+        "model_raw_area": 4.253364720339735,
+        "model_warming_c": 0.5661739517102197,
+        "observed_area": 4.55,
+        "observed_extent": 6.14,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1991,
+        "month": 9,
+        "model_year": 1991.7,
+        "model_area": 4.27548368465113,
+        "model_extent": 6.18029908620937,
+        "model_native_area": 4.27548368465113,
+        "model_raw_area": 4.27548368465113,
+        "model_warming_c": 0.47582178343227094,
+        "observed_area": 4.51,
+        "observed_extent": 6.47,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1992,
+        "month": 9,
+        "model_year": 1992.7,
+        "model_area": 4.433820577648965,
+        "model_extent": 6.409178302523722,
+        "model_native_area": 4.433820577648965,
+        "model_raw_area": 4.433820577648965,
+        "model_warming_c": 0.33822755814811056,
+        "observed_area": 5.43,
+        "observed_extent": 7.47,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1993,
+        "month": 9,
+        "model_year": 1993.7,
+        "model_area": 4.508962845693478,
+        "model_extent": 6.517797987402511,
+        "model_native_area": 4.508962845693478,
+        "model_raw_area": 4.508962845693478,
+        "model_warming_c": 0.37088721588202567,
+        "observed_area": 4.58,
+        "observed_extent": 6.4,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1994,
+        "month": 9,
+        "model_year": 1994.7,
+        "model_area": 4.439013162375285,
+        "model_extent": 6.416684289917464,
+        "model_native_area": 4.439013162375285,
+        "model_raw_area": 4.439013162375285,
+        "model_warming_c": 0.4671845577505644,
+        "observed_area": 5.13,
+        "observed_extent": 7.14,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1995,
+        "month": 9,
+        "model_year": 1995.7,
+        "model_area": 4.3336473610271025,
+        "model_extent": 6.264375869673072,
+        "model_native_area": 4.3336473610271025,
+        "model_raw_area": 4.3336473610271025,
+        "model_warming_c": 0.5505733588874826,
+        "observed_area": 4.43,
+        "observed_extent": 6.08,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1996,
+        "month": 9,
+        "model_year": 1996.7,
+        "model_area": 4.2388301264938955,
+        "model_extent": 6.127315618444374,
+        "model_native_area": 4.2388301264938955,
+        "model_raw_area": 4.2388301264938955,
+        "model_warming_c": 0.6193087123099666,
+        "observed_area": 5.62,
+        "observed_extent": 7.58,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1997,
+        "month": 9,
+        "model_year": 1997.7,
+        "model_area": 4.159266474271319,
+        "model_extent": 6.012304732332948,
+        "model_native_area": 4.159266474271319,
+        "model_raw_area": 4.159266474271319,
+        "model_warming_c": 0.6804772010433686,
+        "observed_area": 4.89,
+        "observed_extent": 6.69,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1998,
+        "month": 9,
+        "model_year": 1998.7,
+        "model_area": 4.082516006872921,
+        "model_extent": 5.9013603624055575,
+        "model_native_area": 4.082516006872921,
+        "model_raw_area": 4.082516006872921,
+        "model_warming_c": 0.7451674891722386,
+        "observed_area": 4.3,
+        "observed_extent": 6.54,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 1999,
+        "month": 9,
+        "model_year": 1999.7,
+        "model_area": 4.006176016509845,
+        "model_extent": 5.791009345425675,
+        "model_native_area": 4.006176016509845,
+        "model_raw_area": 4.006176016509845,
+        "model_warming_c": 0.8075884275640178,
+        "observed_area": 4.29,
+        "observed_extent": 6.12,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2000,
+        "month": 9,
+        "model_year": 2000.7000000000003,
+        "model_area": 3.9385023755755513,
+        "model_extent": 5.693185713744425,
+        "model_native_area": 3.9385023755755513,
+        "model_raw_area": 3.9385023755755513,
+        "model_warming_c": 0.8596329512951013,
+        "observed_area": 4.35,
+        "observed_extent": 6.25,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2001,
+        "month": 9,
+        "model_year": 2001.7000000000003,
+        "model_area": 3.8834909532939443,
+        "model_extent": 5.613665578027701,
+        "model_native_area": 3.8834909532939443,
+        "model_raw_area": 3.8834909532939443,
+        "model_warming_c": 0.9031973806051498,
+        "observed_area": 4.59,
+        "observed_extent": 6.73,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2002,
+        "month": 9,
+        "model_year": 2002.7,
+        "model_area": 3.835919614165813,
+        "model_extent": 5.544900234635329,
+        "model_native_area": 3.835919614165813,
+        "model_raw_area": 3.835919614165813,
+        "model_warming_c": 0.9405404641711687,
+        "observed_area": 4.03,
+        "observed_extent": 5.83,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2003,
+        "month": 9,
+        "model_year": 2003.7,
+        "model_area": 3.801634075252253,
+        "model_extent": 5.495339787105529,
+        "model_native_area": 3.801634075252253,
+        "model_raw_area": 3.801634075252253,
+        "model_warming_c": 0.9636857909862471,
+        "observed_area": 4.05,
+        "observed_extent": 6.12,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2004,
+        "month": 9,
+        "model_year": 2004.7,
+        "model_area": 3.778783132604517,
+        "model_extent": 5.4623082822791105,
+        "model_native_area": 3.778783132604517,
+        "model_raw_area": 3.778783132604517,
+        "model_warming_c": 0.9795881502466747,
+        "observed_area": 4.39,
+        "observed_extent": 5.98,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2005,
+        "month": 9,
+        "model_year": 2005.7,
+        "model_area": 3.7645993170694085,
+        "model_extent": 5.441805286909186,
+        "model_native_area": 3.7645993170694085,
+        "model_raw_area": 3.7645993170694085,
+        "model_warming_c": 0.9897582525626469,
+        "observed_area": 4.07,
+        "observed_extent": 5.5,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2006,
+        "month": 9,
+        "model_year": 2006.6999999999998,
+        "model_area": 3.753814291980731,
+        "model_extent": 5.426215312623993,
+        "model_native_area": 3.753814291980731,
+        "model_raw_area": 3.753814291980731,
+        "model_warming_c": 1.000927899349923,
+        "observed_area": 4.01,
+        "observed_extent": 5.86,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2007,
+        "month": 9,
+        "model_year": 2007.6999999999998,
+        "model_area": 3.7407006801447973,
+        "model_extent": 5.407259318583488,
+        "model_native_area": 3.7407006801447973,
+        "model_raw_area": 3.7407006801447973,
+        "model_warming_c": 1.0171588471659567,
+        "observed_area": 2.82,
+        "observed_extent": 4.27,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2008,
+        "month": 9,
+        "model_year": 2008.6999999999998,
+        "model_area": 3.721313895342903,
+        "model_extent": 5.379235324754247,
+        "model_native_area": 3.721313895342903,
+        "model_raw_area": 3.721313895342903,
+        "model_warming_c": 1.0386762521162682,
+        "observed_area": 3.26,
+        "observed_extent": 4.69,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2009,
+        "month": 9,
+        "model_year": 2009.6999999999998,
+        "model_area": 3.6980841663315087,
+        "model_extent": 5.345656276494185,
+        "model_native_area": 3.6980841663315087,
+        "model_raw_area": 3.6980841663315087,
+        "model_warming_c": 1.0637990475606935,
+        "observed_area": 3.76,
+        "observed_extent": 5.26,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2010,
+        "month": 9,
+        "model_year": 2010.7,
+        "model_area": 3.66738450787807,
+        "model_extent": 5.301279292489382,
+        "model_native_area": 3.66738450787807,
+        "model_raw_area": 3.66738450787807,
+        "model_warming_c": 1.0954825924306868,
+        "observed_area": 3.34,
+        "observed_extent": 4.87,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2011,
+        "month": 9,
+        "model_year": 2011.7,
+        "model_area": 3.6349898510366287,
+        "model_extent": 5.254452153657354,
+        "model_native_area": 3.6349898510366287,
+        "model_raw_area": 3.6349898510366287,
+        "model_warming_c": 1.1264198167655108,
+        "observed_area": 3.21,
+        "observed_extent": 4.56,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2012,
+        "month": 9,
+        "model_year": 2012.7,
+        "model_area": 3.599264203813,
+        "model_extent": 5.202810000119714,
+        "model_native_area": 3.599264203813,
+        "model_raw_area": 3.599264203813,
+        "model_warming_c": 1.162959170259675,
+        "observed_area": 2.41,
+        "observed_extent": 3.57,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2013,
+        "month": 9,
+        "model_year": 2013.7,
+        "model_area": 3.5599950041373454,
+        "model_extent": 5.14604556905829,
+        "model_native_area": 3.5599950041373454,
+        "model_raw_area": 3.5599950041373454,
+        "model_warming_c": 1.199971662216209,
+        "observed_area": 3.78,
+        "observed_extent": 5.21,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2014,
+        "month": 9,
+        "model_year": 2014.7,
+        "model_area": 3.522643937573835,
+        "model_extent": 5.092053838630194,
+        "model_native_area": 3.522643937573835,
+        "model_raw_area": 3.522643937573835,
+        "model_warming_c": 1.235514690555222,
+        "observed_area": 3.74,
+        "observed_extent": 5.22,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2015,
+        "month": 9,
+        "model_year": 2015.7,
+        "model_area": 3.482650570135981,
+        "model_extent": 5.034242608261582,
+        "model_native_area": 3.482650570135981,
+        "model_raw_area": 3.482650570135981,
+        "model_warming_c": 1.2749838321181597,
+        "observed_area": 3.42,
+        "observed_extent": 4.62,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2016,
+        "month": 9,
+        "model_year": 2016.7,
+        "model_area": 3.444104096700417,
+        "model_extent": 4.978522892757663,
+        "model_native_area": 3.444104096700417,
+        "model_raw_area": 3.444104096700417,
+        "model_warming_c": 1.3105289808822944,
+        "observed_area": 2.91,
+        "observed_extent": 4.53,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2017,
+        "month": 9,
+        "model_year": 2017.7,
+        "model_area": 3.4068873588655797,
+        "model_extent": 4.9247253372534585,
+        "model_native_area": 3.4068873588655797,
+        "model_raw_area": 3.4068873588655797,
+        "model_warming_c": 1.3467987049603598,
+        "observed_area": 3.35,
+        "observed_extent": 4.82,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2018,
+        "month": 9,
+        "model_year": 2018.7,
+        "model_area": 3.369250965707851,
+        "model_extent": 4.870321161399398,
+        "model_native_area": 3.369250965707851,
+        "model_raw_area": 3.369250965707851,
+        "model_warming_c": 1.384028842138711,
+        "observed_area": 3.35,
+        "observed_extent": 4.79,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2019,
+        "month": 9,
+        "model_year": 2019.7,
+        "model_area": 3.3310707601254825,
+        "model_extent": 4.815130893566286,
+        "model_native_area": 3.3310707601254825,
+        "model_raw_area": 3.3310707601254825,
+        "model_warming_c": 1.4224230723405957,
+        "observed_area": 3.17,
+        "observed_extent": 4.36,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2020,
+        "month": 9,
+        "model_year": 2020.7,
+        "model_area": 3.2918737358883985,
+        "model_extent": 4.758470793577074,
+        "model_native_area": 3.2918737358883985,
+        "model_raw_area": 3.2918737358883985,
+        "model_warming_c": 1.4621251315374542,
+        "observed_area": 2.83,
+        "observed_extent": 4.0,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2021,
+        "month": 9,
+        "model_year": 2021.7,
+        "model_area": 3.2520747293635033,
+        "model_extent": 4.700940515882207,
+        "model_native_area": 3.2520747293635033,
+        "model_raw_area": 3.2520747293635033,
+        "model_warming_c": 1.502604811717283,
+        "observed_area": 3.47,
+        "observed_extent": 4.95,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2022,
+        "month": 9,
+        "model_year": 2022.7,
+        "model_area": 3.2119736444766724,
+        "model_extent": 4.642973577738621,
+        "model_native_area": 3.2119736444766724,
+        "model_raw_area": 3.2119736444766724,
+        "model_warming_c": 1.543194315064766,
+        "observed_area": 3.47,
+        "observed_extent": 4.9,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2023,
+        "month": 9,
+        "model_year": 2023.7,
+        "model_area": 3.1726975781456486,
+        "model_extent": 4.58619922078646,
+        "model_native_area": 3.1726975781456486,
+        "model_raw_area": 3.1726975781456486,
+        "model_warming_c": 1.5815492192657454,
+        "observed_area": 2.83,
+        "observed_extent": 4.38,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2024,
+        "month": 9,
+        "model_year": 2024.7,
+        "model_area": 3.1361562238612244,
+        "model_extent": 4.5333779460138235,
+        "model_native_area": 3.1361562238612244,
+        "model_raw_area": 3.1361562238612244,
+        "model_warming_c": 1.6164394958597406,
+        "observed_area": 2.91,
+        "observed_extent": 4.35,
+        "observation_source": "NSIDC-0051"
+      },
+      {
+        "year": 2025,
+        "month": 9,
+        "model_year": 2025.7,
+        "model_area": 3.1037027758829527,
+        "model_extent": 4.486465823391416,
+        "model_native_area": 3.1037027758829527,
+        "model_raw_area": 3.1037027758829527,
+        "model_warming_c": 1.6472554287930268,
+        "observed_area": 3.08,
+        "observed_extent": 4.75,
+        "observation_source": "NSIDC-0803"
+      }
+    ]
+  },
+  "ssp245_future_sea_ice": {
+    "september_area_2081_2100_million_km2": 1.790530247704573,
+    "september_extent_2081_2100_million_km2": 2.588248083706982,
+    "native_september_area_2081_2100_million_km2": 1.790530247704573,
+    "first_september_below_1_million_km2_native_area": null,
+    "september_2100_area_million_km2": 1.711372494393213,
+    "september_2100_extent_million_km2": 2.4738239327710567,
+    "native_september_2100_area_million_km2": 1.711372494393213,
+    "maximum_area_identity_error_million_km2": 0.0,
+    "evidence_role": "native_thermodynamic_area_projection_with_extent_only_operator",
+    "used_for_tuning": false,
+    "independent_predictive_validation": false,
+    "interpretation": "Native prognostic thermodynamic area is the primary future output. The fixed zero-intercept historical operator is used only for 15% extent. No post-2020 trend, scenario closure, or future-target adjustment is applied. Longitude reconstruction is display-only and has no regional forecast skill."
+  },
+  "ssp585_future_sea_ice": {
+    "september_area_2081_2100_million_km2": 0.9855195537198684,
+    "september_extent_2081_2100_million_km2": 1.42458866564318,
+    "native_september_area_2081_2100_million_km2": 0.9855195537198684,
+    "first_september_below_1_million_km2_native_area": 2090,
+    "september_2100_area_million_km2": 0.7786598714836188,
+    "september_2100_extent_million_km2": 1.1255687653479507,
+    "native_september_2100_area_million_km2": 0.7786598714836188,
+    "maximum_area_identity_error_million_km2": 0.0,
+    "evidence_role": "native_thermodynamic_area_projection_with_extent_only_operator",
+    "used_for_tuning": false,
+    "independent_predictive_validation": false,
+    "interpretation": "Native prognostic thermodynamic area is the primary future output. The fixed zero-intercept historical operator is used only for 15% extent. No post-2020 trend, scenario closure, or future-target adjustment is applied. Longitude reconstruction is display-only and has no regional forecast skill."
+  },
+  "arctic_open_water_observational_validation": {
+    "benchmark_file": "data/validation/open_water/NOAA_OISST_ARCTIC_BENCHMARKS.json",
+    "benchmark_sha256": "4aa2f417d006bfb5eb17c23074657eaef10e2fcc0eb74b3d980ed418b53b3521",
+    "evidence_role": "tuning_informed_broad_external_temperature_sanity_check_not_quantitative_validation",
+    "used_for_tuning": true,
+    "release_gate_role": "development_range_sanity_only",
+    "quantitative_validation_claimed": false,
+    "source_artifacts_reproduced": false,
+    "scope": {
+      "latitude_min_deg_n": 66.0,
+      "months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "interpretation": "Broad tuning-informed reduced-sector temperature sanity check only. It is not independent pointwise SST skill, a regional forecast test, or quantitative validation.",
+      "open_water_definition": "OISST sea-ice concentration is converted to open_water_fraction=clip(1-ice_concentration,0,1) and included in the weights.",
+      "sector_mask": "The processor imports climate_model._atlantic_basin_fraction and applies the same smooth fractional Atlantic mask used by the model; non-Atlantic is ocean_fraction minus that Atlantic fraction.",
+      "mask_equivalence_required": true
+    },
+    "checks": {
+      "atlantic_jja_mean_c": {
+        "value": 3.763205788341444,
+        "minimum": -1.8,
+        "maximum": 8.0,
+        "passed": true
+      },
+      "non_atlantic_jja_mean_c": {
+        "value": 3.0509067653357143,
+        "minimum": -1.8,
+        "maximum": 5.0,
+        "passed": true
+      },
+      "atlantic_september_mean_c": {
+        "value": 1.286031803354634,
+        "minimum": -1.8,
+        "maximum": 6.0,
+        "passed": true
+      },
+      "non_atlantic_september_mean_c": {
+        "value": 0.12397551899475262,
+        "minimum": -1.8,
+        "maximum": 3.0,
+        "passed": true
+      }
+    },
+    "bounds_passed": true,
+    "all_checks_passed": true,
+    "mandatory_warning": "Arctic open-water temperatures are reduced-sector diagnostics. The OISST ranges were inspected during v2.29.7 tuning and are only a broad development sanity check; do not interpret them as independent, local, coastal, or quantitative regional forecast validation."
+  },
+  "scientific_use": {
+    "model_class": "reduced_complexity_climate_and_amoc_emulator",
+    "intended_use": [
+      "scenario sensitivity experiments",
+      "process exploration",
+      "software and hypothesis testing"
+    ],
+    "not_intended_use": [
+      "precise regional climate forecasts",
+      "operational sea-ice navigation",
+      "deterministic AMOC collapse timing",
+      "outlet-glacier or local Greenland projections"
+    ],
+    "components": {
+      "sea_ice": {
+        "role": "native two-sector thermodynamic Northern Hemisphere area with an extent-only observation operator",
+        "calibration_period": "NOAA/NSIDC Sea Ice Index v4 March/September 1979-2020",
+        "validation_informed_development_period": "2021-2025; inspected during v2.29.5-v2.29.7 development and not independent",
+        "prospective_untouched_period": "2027 onward; March 2026 was already inspected",
+        "future_projection_role": "native thermodynamic area is primary; frozen zero-intercept seasonal scaling is used only for 15%-concentration extent",
+        "longitude_skill": "none; optional longitude occupancy is a deterministic area-preserving display reconstruction"
+      },
+      "arctic_open_water_temperature": {
+        "role": "reduced-sector diagnostic",
+        "validation": "tuning-informed broad NOAA OISST temperature sanity check using the model-derived Atlantic fraction mask; not independent validation",
+        "warning": "Do not interpret as a local, coastal, or point forecast."
+      },
+      "amoc": {
+        "role": "sensitivity emulator with full anomalous thermal-density coupling restored",
+        "warning": "Scenario weakening and hosing response are sensitivity results, not precise collapse probability or timing forecasts."
+      },
+      "greenland": {
+        "role": "aggregate surface-mass-balance and discharge emulator",
+        "warning": "Total contribution is scenario-sensitive; regional geometry and outlet-glacier evolution are not resolved."
+      }
+    },
+    "evidence_partition": {
+      "tuning_informed_development_regressions": "IPCC/literature ranges and sea-ice records through 2025 used during development; not independent validation",
+      "rolling_origin_historical_evaluation": "reported for context but all historical records have been inspected",
+      "prospective_untouched_temporal_evaluation": "reserved from 2027 onward",
+      "tuning_informed_external_sanity_check": "broad NOAA OISST open-water temperature ranges inspected during v2.29.7 tuning; not independent validation",
+      "structural_tests": "conservation, control stability, timestep, hosing, resolution, native sea-ice integrity and software regressions"
+    }
+  },
+  "provenance": {
+    "benchmark_file": "development_regression_benchmarks.json",
+    "benchmark_file_sha256": "ca8107e9ea77bc4a325e44efbeb2d8cfed67b8fdb6771e3367e2fbc7694b020f",
+    "benchmark_set_version": "2.29.7-development",
+    "processing_script": "validate_v2297.py",
+    "processing_script_sha256": "64726e51c5fb0df6a1cff04db240a549859f17286055b7622a626bde90defdeb",
+    "climate_model_sha256": "41bdf3530e1e74e771e8471d7d8ba7e43eedd19cf8510462acfdb9c2bc44217f",
+    "v2_29_8_validation_inheritance": "Numerical validation metrics are inherited from v2.29.7 because v2.29.8 changes only long-run orchestration, target selection, output diagnostics, and the version constant; the climate equations and physical defaults are unchanged."
+  },
+  "release_checks": {
+    "v2297_version": true,
+    "meinshausen2020_default": true,
+    "five_percent_unresolved_lead_threshold": true,
+    "development_benchmarks": true,
+    "native_sea_ice_calibration": true,
+    "validation_informed_sea_ice_development_evaluation": true,
+    "raw_rolling_origin_skill_positive_vs_persistence": true,
+    "inspected_march_2026_reported": true,
+    "sea_ice_dataset_hashes": true,
+    "no_current_independent_holdout_mislabel": true,
+    "continuous_monotone_identity_area_operator": true,
+    "reference_to_historical_sea_ice_consistency": true,
+    "emergency_thickness_cap_inactive": true,
+    "exact_zero_native_ice": true,
+    "future_area_mapping_is_identity": true,
+    "nondegenerate_sea_ice_extent": true,
+    "ssp245_late_century_native_sea_ice_area": true,
+    "ssp585_late_century_native_sea_ice_area": true,
+    "sea_ice_forcing_ordering": true,
+    "future_sea_ice_evidence_role": true,
+    "open_water_sanity_bounds_passed": true,
+    "open_water_evidence_scope_integrity": true,
+    "continuous_control_balance": true,
+    "uncorrected_control_drift_reported": true,
+    "ssp245_arctic_temperature": true,
+    "ssp585_arctic_temperature": true,
+    "energy_budget": true,
+    "control_stability": true,
+    "reference_cycle_closure": true,
+    "public_range_reference_cycle_convergence": true,
+    "disabled_arctic_skips_reference_spinup": true,
+    "unconditional_monte_carlo_safety": true,
+    "pre_projection_salt_integrity": true,
+    "timestep_local_arctic_convergence": true,
+    "resolution_local_arctic_convergence": true,
+    "hosing_recovery": true,
+    "perturbation_recovery": true,
+    "perturbation_salt_conservation": true
+  },
+  "all_release_checks_passed": true
+}

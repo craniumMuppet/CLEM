@@ -1,0 +1,38 @@
+Emergent Global Climate Model v2.29.13 - test results
+
+Result: PASS
+
+Automated regression inventory
+- Modern/current test modules: 27/27 passed
+- Modern/current individual tests: 222/222 passed
+- Legacy compatibility inventory: 54/54 passed effectively
+  - Initial isolated legacy run: 52 passed, 2 obsolete fixed-anchor assertions failed
+  - The two assertions were updated to the intentional v2.29.13 contract
+  - Targeted corrected rerun: 2/2 passed
+  - No production code changed after the 52 successful legacy cases
+- Effective total current tests: 276/276 passed
+- New v2.29.13 adversarial regressions: 5/5 passed
+
+Scientific validation
+- Scientific validation tasks: 21/21 passed
+- Release checks: 33/33 passed
+- Non-release-blocking development diagnostics still below target: native_sea_ice_calibration_diagnostics, validation_informed_2021_2025_diagnostics, robust_march_trend_diagnostic
+
+v2.29.13 fixes verified
+- Simultaneous stale-lock reclamation permits exactly one owner.
+- A valid-format but semantically incompatible backup falls through to compatible checkpoint metadata.
+- Reconstructed progress counts compatible failed checkpoints as attempted failures.
+- Built-in science-prior Monte Carlo keeps the configured AMOC control anchor at 17 Sv by default.
+- Explicit user-defined AMOC reference-strength ranges remain supported when built-in science priors are disabled.
+
+Uploaded v2.29.11 run diagnosis
+- Configured AMOC control anchor: 17.0 Sv.
+- Old built-in science prior sampled amoc_reference_sv over 5.0-19.5 Sv.
+- Uploaded first-year unweighted AMOC median: approximately 14.0 Sv.
+- Uploaded first-year weighted AMOC median: approximately 14.0 Sv.
+- Successful members: 483/1024; failed members: 541/1024.
+- The old output should be rerun under v2.29.13; it does not satisfy the newer ensemble-quality gates.
+
+Known scientific limitation
+- March native sea-ice temporal response remains scientifically inadequate and explicitly non-predictive.
+- This release does not alter or conceal that limitation.

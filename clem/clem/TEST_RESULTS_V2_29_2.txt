@@ -1,0 +1,546 @@
+Collected 177 test cases (complete inventory).
+[1/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_control_stability]
+.                                                                        [100%]
+1 passed in 11.67s
+[2/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_amoc_heat_redistribution_is_conservative]
+.                                                                        [100%]
+1 passed in 8.15s
+[3/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_salt_conservation_and_freshwater_routing]
+.                                                                        [100%]
+1 passed in 14.37s
+[4/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_directional_advection_and_fovs]
+.                                                                        [100%]
+1 passed in 8.85s
+[5/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_nonlinear_hosing_response]
+.                                                                        [100%]
+1 passed in 54.74s
+[6/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_physical_atlantic_localization]
+.                                                                        [100%]
+1 passed in 22.90s
+[7/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_post_1850_initialization_matches_continuous_run]
+.                                                                        [100%]
+1 passed in 30.32s
+[8/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_separated_freshwater_components_and_legacy_override]
+.                                                                        [100%]
+1 passed in 9.86s
+[9/177] tests/test_legacy_entrypoints.py::test_legacy_smoke_functions[smoke_test-test_nondivisible_timestep_and_summary_compatibility]
+.                                                                        [100%]
+1 passed in 8.51s
+[10/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_dynamics_fix_test-test_control_equilibrium]
+.                                                                        [100%]
+1 passed in 20.80s
+[11/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_dynamics_fix_test-test_hybrid_ssp_has_material_2100_weakening_and_bounded_long_horizon]
+.                                                                        [100%]
+1 passed in 37.26s
+[12/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_dynamics_fix_test-test_annual_arctic_compatibility_family_retains_legacy_hybrid_range]
+.                                                                        [100%]
+1 passed in 7.56s
+[13/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_dynamics_fix_test-test_ssp585_weakens_more_than_hybrid_mitigation]
+.                                                                        [100%]
+1 passed in 39.69s
+[14/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_persistent_collapse_test-test_no_boolean_collapse_command_controls_dynamics]
+.                                                                        [100%]
+1 passed in 1.03s
+[15/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_persistent_collapse_test-test_one_percent_ramp_collapses_continuously]
+.                                                                        [100%]
+1 passed in 71.06s (0:01:11)
+[16/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[amoc_persistent_collapse_test-test_control_branch_remains_active]
+.                                                                        [100%]
+1 passed in 18.39s
+[17/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[long_hold_salinity_exchange_test-test_validation]
+.                                                                        [100%]
+1 passed in 0.98s
+[18/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[long_hold_salinity_exchange_test-test_control_state_is_exactly_unchanged]
+.                                                                        [100%]
+1 passed in 13.63s
+[19/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[long_hold_salinity_exchange_test-test_long_capped_co2_hold_has_no_restart_overshoot]
+.                                                                        [100%]
+1 passed in 70.51s (0:01:10)
+[20/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[structural_fixes_v2_17_0_test-test_finite_greenland_reservoir]
+.                                                                        [100%]
+1 passed in 34.23s
+[21/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[structural_fixes_v2_17_0_test-test_absolute_density_margin_screening]
+.                                                                        [100%]
+1 passed in 15.53s
+[22/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[structural_fixes_v2_17_0_test-test_reversal_is_explicit_opt_in]
+.                                                                        [100%]
+1 passed in 51.28s
+[23/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[structural_fixes_v2_17_0_test-test_joint_amoc_calibration_targets]
+.                                                                        [100%]
+1 passed in 37.61s
+[24/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[structural_fixes_v2_17_0_test-test_long_term_ssp245_structural_branch]
+.                                                                        [100%]
+1 passed in 64.60s (0:01:04)
+[25/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[v2_17_1_validation_test-test_missing_validation_checks]
+.                                                                        [100%]
+1 passed in 1.08s
+[26/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[v2_17_1_validation_test-test_cross_resolution_initialization_and_control]
+.                                                                        [100%]
+1 passed in 48.09s
+[27/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[v2_17_1_validation_test-test_default_five_degree_migrated_compatibility]
+.                                                                        [100%]
+1 passed in 49.04s
+[28/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[v2_17_1_validation_test-test_optional_heun_coupling]
+.                                                                        [100%]
+1 passed in 19.44s
+[29/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[hybrid_ssp_transition_test-test_preserves_switch_level]
+.                                                                        [100%]
+1 passed in 8.20s
+[30/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[hybrid_ssp_transition_test-test_late_switch_does_not_reset_to_low_pathway]
+.                                                                        [100%]
+1 passed in 8.58s
+[31/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[hybrid_ssp_transition_test-test_identical_pathways_are_unchanged]
+.                                                                        [100%]
+1 passed in 8.31s
+[32/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[hybrid_ssp_transition_test-test_full_response_has_no_switch_cooling_or_amoc_rebound]
+.                                                                        [100%]
+1 passed in 44.56s
+[33/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[co2_target_sweep_test-test_linear_ramp_hold]
+.                                                                        [100%]
+1 passed in 14.06s
+[34/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[co2_target_sweep_test-test_target_sequence]
+.                                                                        [100%]
+1 passed in 1.33s
+[35/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[co2_target_sweep_test-test_gui_command]
+.                                                                        [100%]
+1 passed in 1.33s
+[36/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[co2_target_sweep_test-test_small_sweep]
+.                                                                        [100%]
+1 passed in 36.81s
+[37/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[full_regression_test-test_equilibrium_continuation_is_continuous_and_conservative]
+.                                                                        [100%]
+1 passed in 133.86s (0:02:13)
+[38/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[full_regression_test-test_long_ramp_hold_has_no_discrete_target_jump]
+.                                                                        [100%]
+1 passed in 208.81s (0:03:28)
+[39/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[full_regression_test-test_ssp585_transient_response]
+.                                                                        [100%]
+1 passed in 49.18s
+[40/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[review_fixes_v2_21_0_test-test_whole_domain_equilibrium_salt_closure]
+.                                                                        [100%]
+1 passed in 14.22s
+[41/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[review_fixes_v2_21_0_test-test_smooth_stability_and_transient_validation]
+.                                                                        [100%]
+1 passed in 11.02s
+[42/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[review_fixes_v2_21_0_test-test_collapse_threshold_semantics]
+.                                                                        [100%]
+1 passed in 8.15s
+[43/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[review_fixes_v2_21_0_test-test_calibration_outputs_are_not_labeled_validation]
+.                                                                        [100%]
+1 passed in 1.03s
+[44/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_functions[review_fixes_v2_21_0_test-test_reversible_regional_freshwater_and_regrowth]
+.                                                                        [100%]
+1 passed in 8.30s
+[45/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_scripts_without_test_functions[percent_ramp_hold_test.py]
+.                                                                        [100%]
+1 passed in 11.76s
+[46/177] tests/test_legacy_entrypoints.py::test_legacy_scientific_scripts_without_test_functions[sensitivity_convergence_test.py]
+.                                                                        [100%]
+1 passed in 21.29s
+[47/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_default_feedback_decomposition]
+.                                                                        [100%]
+1 passed in 516.74s (0:08:36)
+[48/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_total_atlantic_heat_transport_definition]
+.                                                                        [100%]
+1 passed in 23.68s
+[49/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_ohue_uses_explicit_ocean_heat_uptake]
+.                                                                        [100%]
+1 passed in 38.82s
+[50/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_grouped_likelihood_outputs]
+.                                                                        [100%]
+1 passed in 1.28s
+[51/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_physical_priors_do_not_duplicate_likelihood_intervals]
+.                                                                        [100%]
+1 passed in 1.33s
+[52/177] tests/test_legacy_entrypoints.py::test_legacy_calibration_functions[calibration_fix_test-test_parameter_specific_prior_marginals_and_correlations]
+.                                                                        [100%]
+1 passed in 2.59s
+[53/177] tests/test_legacy_entrypoints.py::test_legacy_gui_scripts[gui_smoke_test.py]
+.                                                                        [100%]
+1 passed in 1.13s
+[54/177] tests/test_legacy_entrypoints.py::test_legacy_gui_scripts[gui_layout_test.py]
+.                                                                        [100%]
+1 passed in 1.73s
+[55/177] tests/test_property_conservation.py::test_advective_and_mixing_tendencies_conserve_total_salt
+.                                                                        [100%]
+1 passed in 7.75s
+[56/177] tests/test_property_conservation.py::test_surface_freshwater_redistribution_has_zero_global_anomaly
+.                                                                        [100%]
+1 passed in 7.56s
+[57/177] tests/test_property_conservation.py::test_amoc_heat_redistribution_is_globally_conservative
+.                                                                        [100%]
+1 passed in 7.60s
+[58/177] tests/test_property_conservation.py::test_short_integrations_preserve_salt
+.                                                                        [100%]
+1 passed in 27.04s
+[59/177] tests/test_review_fixes.py::test_hybrid_switch_must_be_inside_requested_run
+.                                                                        [100%]
+1 passed in 0.72s
+[60/177] tests/test_review_fixes.py::test_ssp460_summary_reports_automatic_initialization
+.                                                                        [100%]
+1 passed in 15.08s
+[61/177] tests/test_review_fixes.py::test_meinshausen_forcing_is_zero_at_reference_and_exact_at_doubling
+.                                                                        [100%]
+1 passed in 7.70s
+[62/177] tests/test_review_fixes.py::test_meinshausen_high_co2_curvature_differs_from_logarithmic
+.                                                                        [100%]
+1 passed in 7.79s
+[63/177] tests/test_review_fixes.py::test_monte_carlo_rejects_experiment_controls
+.                                                                        [100%]
+1 passed in 0.71s
+[64/177] tests/test_review_fixes.py::test_monte_carlo_accepts_whitelisted_physical_parameters
+.                                                                        [100%]
+1 passed in 0.70s
+[65/177] tests/test_review_fixes.py::test_duration_classifier_rejects_sustained_recovery
+.                                                                        [100%]
+1 passed in 0.72s
+[66/177] tests/test_review_fixes.py::test_zero_recovery_threshold_allows_no_recovery_but_rejects_any_recovery
+.                                                                        [100%]
+1 passed in 0.73s
+[67/177] tests/test_review_fixes.py::test_duration_classifier_accepts_persistent_weak_state
+.                                                                        [100%]
+1 passed in 0.71s
+[68/177] tests/test_review_fixes.py::test_monotonicity_check_and_isotonic_projection
+.                                                                        [100%]
+1 passed in 0.71s
+[69/177] tests/test_review_fixes.py::test_threshold_estimates_include_bootstrap_interval
+.                                                                        [100%]
+1 passed in 0.70s
+[70/177] tests/test_review_fixes.py::test_structural_amoc_modes_are_explicit_and_operational
+.                                                                        [100%]
+1 passed in 7.85s
+[71/177] tests/test_v221_scientific_fixes.py::test_whole_domain_equilibrium_salt_closure
+.                                                                        [100%]
+1 passed in 14.73s
+[72/177] tests/test_v221_scientific_fixes.py::test_smooth_stability_and_transient_validation
+.                                                                        [100%]
+1 passed in 10.50s
+[73/177] tests/test_v221_scientific_fixes.py::test_collapse_threshold_semantics
+.                                                                        [100%]
+1 passed in 7.67s
+[74/177] tests/test_v221_scientific_fixes.py::test_calibration_outputs_are_not_labeled_validation
+.                                                                        [100%]
+1 passed in 0.49s
+[75/177] tests/test_v221_scientific_fixes.py::test_reversible_regional_freshwater_and_regrowth
+.                                                                        [100%]
+1 passed in 7.71s
+[76/177] tests/test_v222_remaining_fixes.py::test_unstable_roots_are_never_selected
+.                                                                        [100%]
+1 passed in 7.50s
+[77/177] tests/test_v222_remaining_fixes.py::test_adaptive_refinement_and_branch_metadata
+.                                                                        [100%]
+1 passed in 7.44s
+[78/177] tests/test_v222_remaining_fixes.py::test_equilibrium_bounds_are_configurable
+.                                                                        [100%]
+1 passed in 7.61s
+[79/177] tests/test_v222_remaining_fixes.py::test_jacobian_and_nonlinear_stability_are_multiscale
+.                                                                        [100%]
+1 passed in 8.67s
+[80/177] tests/test_v222_remaining_fixes.py::test_greenland_specific_driver_and_separate_mass_counters
+.                                                                        [100%]
+1 passed in 7.55s
+[81/177] tests/test_v222_remaining_fixes.py::test_held_out_benchmark_metadata_and_evaluation
+.                                                                        [100%]
+1 passed in 0.48s
+[82/177] tests/test_v222_remaining_fixes.py::test_summary_rejects_incomplete_frames_and_reports_gaps
+.                                                                        [100%]
+1 passed in 0.45s
+[83/177] tests/test_v223_final_fixes.py::test_branch_assignment_uses_global_secant_prediction
+.                                                                        [100%]
+1 passed in 0.45s
+[84/177] tests/test_v223_final_fixes.py::test_pseudo_arclength_predictor_can_turn_parameter_direction
+.                                                                        [100%]
+1 passed in 0.45s
+[85/177] tests/test_v223_final_fixes.py::test_root_search_reports_saturation_separately_from_seed_failures
+.                                                                        [100%]
+1 passed in 8.39s
+[86/177] tests/test_v223_final_fixes.py::test_unexpected_solver_exceptions_are_not_swallowed
+.                                                                        [100%]
+1 passed in 7.73s
+[87/177] tests/test_v223_final_fixes.py::test_complex_dominant_mode_tests_real_and_imaginary_components
+.                                                                        [100%]
+1 passed in 7.64s
+[88/177] tests/test_v223_final_fixes.py::test_real_continuation_emits_pseudo_arclength_branch_points
+.                                                                        [100%]
+1 passed in 10.26s
+[89/177] tests/test_v223_final_fixes.py::test_frozen_validation_has_multiple_provenance_complete_benchmarks
+.                                                                        [100%]
+1 passed in 0.45s
+[90/177] tests/test_v223_final_fixes.py::test_ocean_heat_content_diagnostic_is_finite
+.                                                                        [100%]
+1 passed in 7.98s
+[91/177] tests/test_v224_accuracy_fixes.py::test_v224_default_parameters
+.                                                                        [100%]
+1 passed in 0.48s
+[92/177] tests/test_v224_accuracy_fixes.py::test_historical_gmst_uses_1850_1900_reference
+.                                                                        [100%]
+1 passed in 0.51s
+[93/177] tests/test_v224_accuracy_fixes.py::test_arctic_air_diagnostic_is_distinct_from_surface_state
+.                                                                        [100%]
+1 passed in 17.31s
+[94/177] tests/test_v2252_seasonal_arctic.py::test_v2252_physical_defaults_do_not_use_freshwater_compensation
+.                                                                        [100%]
+1 passed in 0.46s
+[95/177] tests/test_v2252_seasonal_arctic.py::test_unforced_seasonal_arctic_control_is_stable
+.                                                                        [100%]
+1 passed in 32.51s
+[96/177] tests/test_v2252_seasonal_arctic.py::test_warm_and_cold_arctic_perturbations_recover
+.                                                                        [100%]
+1 passed in 34.45s
+[97/177] tests/test_v2252_seasonal_arctic.py::test_time_weighted_development_regression_ranges
+.                                                                        [100%]
+1 passed in 40.16s
+[98/177] tests/test_v2252_seasonal_arctic.py::test_transient_hosing_recovers_without_density_memory_feedback
+.                                                                        [100%]
+1 passed in 19.32s
+[99/177] tests/test_v2252_seasonal_arctic.py::test_arctic_heat_states_are_finite_and_distinct
+.                                                                        [100%]
+1 passed in 23.22s
+[100/177] tests/test_v226_thermodynamic_arctic.py::test_v226_defaults_are_physical_and_freshwater_is_not_inflated
+.                                                                        [100%]
+1 passed in 0.45s
+[101/177] tests/test_v226_thermodynamic_arctic.py::test_orbital_insolation_resolves_polar_night_and_midnight_sun
+.                                                                        [100%]
+1 passed in 0.45s
+[102/177] tests/test_v226_thermodynamic_arctic.py::test_generated_reference_cycle_has_thermodynamic_ice_and_freezing_interface
+.                                                                        [100%]
+1 passed in 7.58s
+[103/177] tests/test_v226_thermodynamic_arctic.py::test_internal_arctic_heat_exchange_is_conservative
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/test_v226_thermodynamic_arctic.py::test_internal_arctic_heat_exchange_is_conservative
+  /mnt/data/v2292_work/src/climate_model.py:2429: UserWarning: Deprecated Arctic compatibility fields have no effect in v2.29.2: arctic_open_water_heat_release_wm2_per_fraction, arctic_ice_anomaly_relaxation_years, arctic_winter_thin_ice_relaxation_years, arctic_interface_longwave_damping_wm2_k, arctic_atlantic_basal_ocean_heat_flux_wm2, arctic_non_atlantic_basal_ocean_heat_flux_wm2
+    config.validate()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 1 warning in 7.72s
+[104/177] tests/test_v226_thermodynamic_arctic.py::test_legacy_multiplier_controls_do_not_affect_enabled_seasonal_physics
+.                                                                        [100%]
+1 passed in 14.60s
+[105/177] tests/test_v226_thermodynamic_arctic.py::test_normal_interfaces_do_not_expose_legacy_multiplier_controls
+.                                                                        [100%]
+1 passed in 0.49s
+[106/177] tests/test_v226_thermodynamic_arctic.py::test_greenland_seasonal_forcing_is_summer_dominant_and_annually_normalized
+.                                                                        [100%]
+1 passed in 7.62s
+[107/177] tests/test_v226_thermodynamic_arctic.py::test_ssp245_generates_winter_autumn_amplification_and_bidirectional_ocean_exchange
+.                                                                        [100%]
+1 passed in 40.09s
+[108/177] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[2.5]
+.                                                                        [100%]
+1 passed in 7.95s
+[109/177] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[5.0]
+.                                                                        [100%]
+1 passed in 7.55s
+[110/177] tests/test_v2271_maintenance_arctic.py::test_arctic_baseline_and_reference_cycle_at_all_supported_resolutions[10.0]
+.                                                                        [100%]
+1 passed in 7.61s
+[111/177] tests/test_v2271_maintenance_arctic.py::test_reference_cycle_cache_keys_start_latitude_and_greenland_floor
+.                                                                        [100%]
+1 passed in 4.14s
+[112/177] tests/test_v2271_maintenance_arctic.py::test_reference_cycle_cache_is_bounded_lru
+.                                                                        [100%]
+1 passed in 8.75s
+[113/177] tests/test_v2271_maintenance_arctic.py::test_temperature_products_are_explicit_and_map_consistent
+.                                                                        [100%]
+1 passed in 7.96s
+[114/177] tests/test_v2271_maintenance_arctic.py::test_arctic_amplification_uses_like_for_like_near_surface_air
+.                                                                        [100%]
+1 passed in 0.47s
+[115/177] tests/test_v2271_maintenance_arctic.py::test_arctic_exchange_priors_and_tooltips_include_defaults
+.                                                                        [100%]
+1 passed in 0.73s
+[116/177] tests/test_v2271_maintenance_arctic.py::test_v2292_validation_records_match_current_sources
+.                                                                        [100%]
+1 passed in 0.46s
+[117/177] tests/test_v227_structural_arctic_greenland.py::test_v227_defaults_keep_freshwater_rates_and_use_structural_amoc_settings
+.                                                                        [100%]
+1 passed in 0.46s
+[118/177] tests/test_v227_structural_arctic_greenland.py::test_arctic_ocean_baseline_is_freezing_bounded_and_global_mean_is_preserved
+.                                                                        [100%]
+1 passed in 7.53s
+[119/177] tests/test_v227_structural_arctic_greenland.py::test_reference_ice_cycle_is_periodic_and_energy_budget_generated
+.                                                                        [100%]
+1 passed in 7.67s
+[120/177] tests/test_v227_structural_arctic_greenland.py::test_greenland_surface_mass_balance_is_zero_in_control_and_signed_under_anomalies
+.                                                                        [100%]
+1 passed in 7.64s
+[121/177] tests/test_v227_structural_arctic_greenland.py::test_greenland_dynamic_discharge_is_separate_from_surface_mass_balance
+.                                                                        [100%]
+1 passed in 7.66s
+[122/177] tests/test_v227_structural_arctic_greenland.py::test_greenland_combined_diagnostic_obeys_total_rate_and_reservoir_caps
+.                                                                        [100%]
+1 passed in 7.69s
+[123/177] tests/test_v227_structural_arctic_greenland.py::test_release_metadata_and_normal_interfaces_are_synchronized
+.                                                                        [100%]
+1 passed in 0.46s
+[124/177] tests/test_v227_structural_arctic_greenland.py::test_desktop_gui_and_monte_carlo_expose_structural_controls
+.                                                                        [100%]
+1 passed in 0.69s
+[125/177] tests/test_v2281_interface_maintenance.py::test_release_version_is_v2292
+.                                                                        [100%]
+1 passed in 0.70s
+[126/177] tests/test_v2281_interface_maintenance.py::test_desktop_defaults_match_model_config
+.                                                                        [100%]
+1 passed in 0.71s
+[127/177] tests/test_v2281_interface_maintenance.py::test_desktop_monte_carlo_ranges_contain_validated_defaults
+.                                                                        [100%]
+1 passed in 0.72s
+[128/177] tests/test_v2281_interface_maintenance.py::test_desktop_monte_carlo_command_constructs_valid_reference_model
+.                                                                        [100%]
+1 passed in 7.86s
+[129/177] tests/test_v2281_interface_maintenance.py::test_science_priors_contain_and_center_validated_amoc_defaults
+.                                                                        [100%]
+1 passed in 0.70s
+[130/177] tests/test_v2281_interface_maintenance.py::test_streamlit_uses_canonical_model_defaults_for_amoc_controls
+.                                                                        [100%]
+1 passed in 0.70s
+[131/177] tests/test_v2281_interface_maintenance.py::test_v229_arctic_coupling_defaults_match_cli_and_desktop
+.                                                                        [100%]
+1 passed in 0.71s
+[132/177] tests/test_v2281_remaining_maintenance.py::test_toa_includes_global_arctic_external_flux_anomaly
+.                                                                        [100%]
+1 passed in 7.81s
+[133/177] tests/test_v2281_remaining_maintenance.py::test_corrected_toa_closes_short_abrupt_2x_heat_budget
+.                                                                        [100%]
+1 passed in 10.20s
+[134/177] tests/test_v2281_remaining_maintenance.py::test_open_water_map_is_masked_where_open_water_is_absent
+.                                                                        [100%]
+1 passed in 8.00s
+[135/177] tests/test_v2281_remaining_maintenance.py::test_inactive_arctic_controls_are_not_active_gui_or_monte_carlo_inputs
+.                                                                        [100%]
+1 passed in 0.72s
+[136/177] tests/test_v2281_remaining_maintenance.py::test_filtered_sat_output_and_tooltip_use_actual_memory_timescale
+.                                                                        [100%]
+1 passed in 7.78s
+[137/177] tests/test_v2281_remaining_maintenance.py::test_common_validation_sampling_is_identical_for_all_supported_timesteps
+.                                                                        [100%]
+1 passed in 0.71s
+[138/177] tests/test_v2281_remaining_maintenance.py::test_validation_script_uses_common_subannual_sampling_for_headline_and_timesteps
+.                                                                        [100%]
+1 passed in 0.70s
+[139/177] tests/test_v228_fractional_arctic.py::test_v228_defaults_and_freshwater_are_preserved
+.                                                                        [100%]
+1 passed in 0.45s
+[140/177] tests/test_v228_fractional_arctic.py::test_fractional_reference_contains_simultaneous_ice_and_open_water_heat
+.                                                                        [100%]
+1 passed in 7.54s
+[141/177] tests/test_v228_fractional_arctic.py::test_local_ice_thickness_not_grid_equivalent_thickness_controls_conduction
+.                                                                        [100%]
+1 passed in 7.59s
+[142/177] tests/test_v228_fractional_arctic.py::test_atlantic_and_central_arctic_reference_cycles_are_distinct_and_periodic
+.                                                                        [100%]
+1 passed in 7.74s
+[143/177] tests/test_v228_fractional_arctic.py::test_unforced_two_reservoir_control_is_stable
+.                                                                        [100%]
+1 passed in 8.19s
+[144/177] tests/test_v228_fractional_arctic.py::test_reference_cycle_is_independent_of_transient_shortwave_scaling
+.                                                                        [100%]
+1 passed in 7.68s
+[145/177] tests/test_v228_fractional_arctic.py::test_phase_aware_maps_expose_open_water_and_local_ice_products
+.                                                                        [100%]
+1 passed in 7.74s
+[146/177] tests/test_v228_fractional_arctic.py::test_reference_cycle_bounds_and_closure_at_all_supported_resolutions
+.                                                                        [100%]
+1 passed in 21.84s
+[147/177] tests/test_v228_fractional_arctic.py::test_surface_reservoir_normalization_has_no_active_open_water_ceiling
+.                                                                        [100%]
+1 passed in 7.55s
+[148/177] tests/test_v228_fractional_arctic.py::test_stability_dependent_open_water_exchange_reaches_physical_limits
+.                                                                        [100%]
+1 passed in 7.52s
+[149/177] tests/test_v228_fractional_arctic.py::test_transient_shortwave_scaling_changes_only_the_anomaly
+.                                                                        [100%]
+1 passed in 7.65s
+[150/177] tests/test_v228_fractional_arctic.py::test_hidden_legacy_arctic_controls_have_zero_dynamical_effect
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/test_v228_fractional_arctic.py::test_hidden_legacy_arctic_controls_have_zero_dynamical_effect
+  /mnt/data/v2292_work/src/climate_model.py:2429: UserWarning: Deprecated Arctic compatibility fields have no effect in v2.29.2: arctic_open_water_heat_release_wm2_per_fraction, arctic_ice_air_exchange_wm2_k, arctic_ice_ocean_exchange_wm2_k, arctic_ice_anomaly_relaxation_years, arctic_winter_thin_ice_relaxation_years
+    config.validate()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 1 warning in 7.55s
+[151/177] tests/test_v228_fractional_arctic.py::test_normal_interfaces_expose_structural_not_empirical_arctic_controls
+.                                                                        [100%]
+1 passed in 0.49s
+[152/177] tests/test_v228_fractional_arctic.py::test_diagnostics_use_area_weighted_local_ice_and_effective_fluxes
+.                                                                        [100%]
+1 passed in 7.72s
+[153/177] tests/test_v228_fractional_arctic.py::test_cache_is_bounded_and_sensitive_to_sector_and_exchange_inputs
+.                                                                        [100%]
+1 passed in 9.73s
+[154/177] tests/test_v2291_arctic_phase_consistency.py::test_v2292_version_and_positive_coupling_validation
+.                                                                        [100%]
+1 passed in 0.47s
+[155/177] tests/test_v2291_arctic_phase_consistency.py::test_freeze_up_remaps_open_water_heat_conservatively
+.                                                                        [100%]
+1 passed in 7.56s
+[156/177] tests/test_v2291_arctic_phase_consistency.py::test_complete_ice_cover_has_no_dormant_open_water_heat
+.                                                                        [100%]
+1 passed in 7.54s
+[157/177] tests/test_v2291_arctic_phase_consistency.py::test_subgrid_opening_is_thermodynamically_closed
+.                                                                        [100%]
+1 passed in 7.54s
+[158/177] tests/test_v2291_arctic_phase_consistency.py::test_reference_ocean_targets_are_independent_parameters
+.                                                                        [100%]
+1 passed in 15.70s
+[159/177] tests/test_v2291_arctic_phase_consistency.py::test_arctic_open_water_temperature_is_timestep_convergent
+.                                                                        [100%]
+1 passed in 18.66s
+[160/177] tests/test_v2291_arctic_phase_consistency.py::test_lateral_excess_ice_heat_is_sourced_conservatively
+.                                                                        [100%]
+1 passed in 7.58s
+[161/177] tests/test_v2291_arctic_phase_consistency.py::test_public_default_parser_contains_reference_targets
+.                                                                        [100%]
+1 passed in 0.46s
+[162/177] tests/test_v2292_release_integrity.py::test_version_and_complete_runner_configuration
+.                                                                        [100%]
+1 passed in 0.70s
+[163/177] tests/test_v2292_release_integrity.py::test_reference_cycle_adapts_beyond_minimum_and_enforces_closure
+.                                                                        [100%]
+1 passed in 14.00s
+[164/177] tests/test_v2292_release_integrity.py::test_reference_cycle_fails_if_hard_maximum_is_too_short
+.                                                                        [100%]
+1 passed in 4.33s
+[165/177] tests/test_v2292_release_integrity.py::test_disabled_seasonal_arctic_skips_reference_spinup
+.                                                                        [100%]
+1 passed in 0.79s
+[166/177] tests/test_v2292_release_integrity.py::test_salt_projection_reports_roundoff_and_rejects_structural_leak
+.                                                                        [100%]
+1 passed in 7.97s
+[167/177] tests/test_v2292_release_integrity.py::test_monte_carlo_safety_filters_apply_in_none_mode
+.                                                                        [100%]
+1 passed in 8.01s
+[168/177] tests/test_v2292_release_integrity.py::test_phase_restoring_flux_is_signed_and_symmetric
+.                                                                        [100%]
+1 passed in 7.90s
+[169/177] tests/test_v2292_release_integrity.py::test_summary_uses_configured_full_arctic_latitude
+.                                                                        [100%]
+1 passed in 8.03s
+[170/177] tests/test_v2292_release_integrity.py::test_gui_rejects_invalid_stability_exchange_pair
+.                                                                        [100%]
+1 passed in 0.71s
+[171/177] tests/test_v2292_release_integrity.py::test_streamlit_arctic_defaults_are_canonical_and_cross_validated
+.                                                                        [100%]
+1 passed in 0.70s
+[172/177] tests/test_v2292_release_integrity.py::test_streamlit_direct_modelconfig_defaults_are_canonical
+.                                                                        [100%]
+1 passed in 0.72s
+[173/177] tests/test_v229_coupled_arctic_ocean.py::test_reference_cycle_contains_periodic_sector_ocean_states
+.                                                                        [100%]
+1 passed in 7.60s
+[174/177] tests/test_v229_coupled_arctic_ocean.py::test_basal_heat_flux_increases_with_ocean_temperature
+.                                                                        [100%]
+1 passed in 7.72s
+[175/177] tests/test_v229_coupled_arctic_ocean.py::test_open_water_exchange_is_two_way
+.                                                                        [100%]
+1 passed in 7.55s
+[176/177] tests/test_v229_coupled_arctic_ocean.py::test_transient_ocean_surface_exchange_is_equal_and_opposite
+.                                                                        [100%]
+1 passed in 7.61s
+[177/177] tests/test_v229_coupled_arctic_ocean.py::test_reference_area_mean_resolution_spread_is_reduced
+.                                                                        [100%]
+1 passed in 22.01s
+
+All 177 isolated test cases passed with normal teardown.

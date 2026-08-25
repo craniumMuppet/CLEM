@@ -1,0 +1,118 @@
+{
+  "model_version": "2.26.0",
+  "generated_utc": "2026-07-28T15:03:21.009773+00:00",
+  "evidence_role": "tuning-informed development regression; not independent held-out validation",
+  "development_metrics": {
+    "historical_gmst_2011_2020_c": 1.1869817566003518,
+    "historical_ocean_heat_content_change_1971_2018_zj": 363.05183853875985,
+    "historical_arctic_amplification_1979_2021_ratio": 3.489307714670933,
+    "ssp245_amoc_decline_2100_percent": 20.05410314391436
+  },
+  "development_evaluations": {
+    "historical_gmst_2011_2020_c": {
+      "value": 1.1869817566003518,
+      "range": [
+        0.95,
+        1.2
+      ],
+      "passed": true,
+      "used_for_tuning": true
+    },
+    "historical_ocean_heat_content_change_1971_2018_zj": {
+      "value": 363.05183853875985,
+      "range": [
+        300.0,
+        450.0
+      ],
+      "passed": true,
+      "used_for_tuning": true
+    },
+    "historical_arctic_amplification_1979_2021_ratio": {
+      "value": 3.489307714670933,
+      "range": [
+        2.5,
+        4.5
+      ],
+      "passed": true,
+      "used_for_tuning": true
+    },
+    "ssp245_amoc_decline_2100_percent": {
+      "value": 20.05410314391436,
+      "range": [
+        15.0,
+        50.0
+      ],
+      "passed": true,
+      "used_for_tuning": true
+    }
+  },
+  "all_development_ranges_passed": true,
+  "freshwater_defaults_sv_per_k": {
+    "hydrological": 0.006,
+    "greenland": 0.005,
+    "rejected_temporary_values_present_in_defaults": false
+  },
+  "amoc_structural_defaults": {
+    "temperature_density_coupling": 0.71,
+    "surface_heat_coupling_fraction": 0.075,
+    "duplicate_entrainment_feedback": 0.0
+  },
+  "additional_amoc_scenarios": {
+    "ssp585_decline_percent": 41.03576695114495,
+    "hybrid_minimum_sv": 9.898503739426891,
+    "hybrid_final_sv": 12.665091263204866
+  },
+  "seasonal_arctic": {
+    "seasonal_amplification": {
+      "DJF": 3.8503625010830027,
+      "MAM": 3.6873864308928974,
+      "JJA": 3.1967981547727966,
+      "SON": 3.408061829056117
+    },
+    "reference_ice_min_month": 9,
+    "reference_ice_max_month": 2,
+    "late_century_ice_min_month": 9,
+    "late_century_heat_release_max_month": 10,
+    "late_century_interface_temperature_range_c": [
+      -1.8,
+      -1.8
+    ],
+    "legacy_multiplier_max_absolute_difference": 0.0
+  },
+  "greenland": {
+    "model_version": "2.26.0",
+    "coefficients_sv_per_k": {
+      "hydrological": 0.006,
+      "greenland": 0.005
+    },
+    "2011_2020": {
+      "greenland_applied_mean_sv": 0.006308496109798942,
+      "greenland_annual_mean_state_sv": 0.006310958896655193
+    },
+    "2081_2100": {
+      "greenland_applied_mean_sv": 0.02667385755550149,
+      "greenland_annual_mean_state_sv": 0.026677902140004574,
+      "hydrological_mean_sv": 0.019413897670604956
+    },
+    "2011_2020_gt_per_year": 199.07690892911194,
+    "2081_2100_gt_per_year": 841.7456425337979,
+    "cumulative_net_loss_2100_gt": 56035.726022331604,
+    "cumulative_sle_2100_mm": 154.5813131650527
+  },
+  "v223_compatibility": {
+    "unchanged_tests_passed": 31,
+    "unchanged_tests_failed_intentionally": 2,
+    "optional_tests_skipped": 1,
+    "intentional_differences": [
+      "benchmark evidence role",
+      "hosing North Atlantic cooling amplitude"
+    ],
+    "hosing_comparison_file": "V2_23_HOSING_COMPARISON.json",
+    "source_preservation_counts": {
+      "original_files_missing_in_v226": 0,
+      "original_files_byte_identical": 103,
+      "original_files_modified": 21,
+      "files_added_since_v223": 15
+    }
+  }
+}

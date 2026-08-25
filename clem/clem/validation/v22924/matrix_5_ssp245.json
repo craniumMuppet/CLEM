@@ -1,0 +1,15 @@
+{
+  "model_version": "2.29.24",
+  "resolution_deg": 5.0,
+  "runtime_seconds": 82.19026923199999,
+  "scenario": "ssp245",
+  "september_2100": {
+    "arctic_geometry_area_million_km2": 1.5164472815961336,
+    "guard_contact_area_fraction": 0.0,
+    "maximum_local_thickness_m": 5.943388138882253,
+    "mean_local_thickness_m": 2.673072369783498,
+    "northern_hemisphere_area_million_km2": 1.5164472815961334,
+    "northern_hemisphere_extent_million_km2": 2.1920555520737066,
+    "volume_thousand_km3": 4.05357332866792
+  }
+}

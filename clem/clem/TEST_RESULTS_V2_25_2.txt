@@ -1,0 +1,89 @@
+Emergent-Sensitivity Global Climate Model v2.25.2
+Seasonal Arctic / AMOC correction release verification
+Date: 2026-07-28
+
+CORE PYTEST GROUPS
+------------------
+1. Existing unmarked scientific suite, excluding the new v2.25.2 file:
+   36 passed, 1 skipped, 14 deselected in 31.41 s.
+   The skip is the optional Hypothesis property suite because Hypothesis is not
+   installed in the execution environment.
+
+2. v2.25.2 seasonal-Arctic suite:
+   6 passed in 31.04 s.
+
+3. AMOC continuation-marked suite:
+   4 passed, 1 optional Hypothesis skip, 52 deselected in 27.81 s.
+
+The execution environment terminates a single quiet pytest process after a
+short period without output. The groups above were therefore run independently;
+together they cover the maintained pytest suite except the optional Hypothesis
+property tests and separately executed GUI/calibration/legacy entry points.
+
+SEASONAL-ARCTIC AND PHYSICAL CHECKS
+-----------------------------------
+PASS: default hydrological freshwater is 0.006 Sv/K.
+PASS: default Greenland freshwater is 0.005 Sv/K.
+PASS: no duplicate convection entrainment-density feedback by default.
+PASS: 500-year unforced control stability.
+PASS: warm/thin-ice perturbation recovery.
+PASS: cold/thick-ice perturbation recovery.
+PASS: finite and distinct Arctic air, ice, and heat-content diagnostics.
+PASS: exact time-weighted calendar-year validation.
+PASS: 0.1 Sv, 40-year hosing pulse recovery.
+PASS: timestep convergence at 0.10, 0.05, and 0.025 years.
+
+DEVELOPMENT REGRESSION METRICS AT DT=0.05 YEAR
+-----------------------------------------------
+Historical warming, 2011-2020 relative to 1850-1900: 1.1680877007 degC
+Ocean heat gain, 1971-2018:                           357.4645023157 ZJ
+Arctic/global trend ratio, 1979-2021:                 3.0351286992
+SSP2-4.5 AMOC weakening, late century:                20.5176634987 percent
+All four bundled development-regression ranges passed.
+These ranges were used during development and are not independent validation.
+
+DEEP STABILITY RESULTS
+----------------------
+500-year final GMST anomaly:                          -2.35e-15 degC
+500-year final Arctic-air anomaly:                    -6.27e-15 degC
+500-year final AMOC:                                  17.0 Sv
+500-year final salt error:                            0.0 ppm
+Warm perturbation final Arctic anomaly after 160 y:   +0.000103 degC
+Cold perturbation final Arctic anomaly after 160 y:   -0.000217 degC
+AMOC after 40 y of 0.1 Sv hosing:                     14.700654 Sv
+AMOC after 100 y recovery:                            17.033929 Sv
+
+LEGACY / MIGRATED SCIENTIFIC ENTRY POINTS
+------------------------------------------
+PASS: smoke_test.py
+PASS: amoc_dynamics_fix_test.py (migrated v2.25.2 response bounds)
+PASS: amoc_persistent_collapse_test.py
+PASS: long_hold_salinity_exchange_test.py
+PASS: structural_fixes_v2_17_0_test.py
+PASS: v2_17_1_validation_test.py (migrated compatibility semantics)
+PASS: hybrid_ssp_transition_test.py
+PASS: percent_ramp_hold_test.py
+PASS: co2_target_sweep_test.py
+PASS: sensitivity_convergence_test.py
+PASS: full_regression_test.py (explicit unresolved/pseudo-arclength semantics)
+PASS: review_fixes_v2_21_0_test.py
+PASS: calibration_fix_test.py
+
+INTERFACES AND PACKAGING
+------------------------
+PASS: Python bytecode compilation.
+PASS: deterministic and Monte Carlo GUI command builders.
+PASS: tooltip coverage: 133 desktop settings, 57 Monte Carlo parameters,
+      and 105 Streamlit controls.
+PASS: desktop GUI layout under a virtual display.
+PASS: CLI with seasonal Arctic enabled.
+PASS: CLI with seasonal Arctic disabled.
+PASS: validation summary generation with strict benchmark exit.
+
+ENVIRONMENT LIMITATION
+----------------------
+The dependency-lock environment check reports that the current execution image
+lacks the Streamlit runtime stack (including streamlit, pyarrow, altair, and
+related packages). Those exact dependencies remain declared in pyproject.toml
+and the lock files. The Streamlit server itself was therefore not launched in
+this environment; its control mapping and source compilation were verified.

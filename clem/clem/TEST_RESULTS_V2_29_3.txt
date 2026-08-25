@@ -1,0 +1,63 @@
+EMERGENT GLOBAL CLIMATE MODEL v2.29.3 - FINAL TEST RESULTS
+Generated: 2026-07-30
+
+RELEASE VERDICT: PASS
+
+ISOLATED REGRESSION INVENTORY
+- Current collected inventory: 187 tests
+- Passed: 187
+- Failed: 0
+- Timed out: 0
+- Sum of isolated test runtimes: 3531.84 seconds
+- Method: each pytest node ran in a separate subprocess with normal setup, execution, teardown, and an independent timeout.
+- Reason for isolation: the retained repository can hang during combined-process pytest shutdown after successful tests; isolation prevents that teardown defect from hiding results.
+
+VALIDATION PIPELINE
+- Named validation tasks: 19/19 passed
+- Release-blocking gates: 18/18 passed
+- Validation records regenerated from the final source tree:
+  - VALIDATION_SUMMARY_V2_29_3.json
+  - DEEP_VALIDATION_V2_29_3.json
+  - IMPLEMENTATION_AUDIT_V2_29_3.json
+
+KEY FINAL METRICS
+- Historical GMST, 2011-2020: 1.108106 C
+- Ocean heat-content change, 1971-2018: 383.716883 ZJ
+- Annual Arctic amplification, 1979-2021: 3.408498x
+- DJF / JJA Arctic amplification: 4.539620x / 1.635987x
+- SSP2-4.5 AMOC weakening by 2100: 20.848953%
+- SSP5-8.5 AMOC weakening by 2100: 39.600273%
+- SSP2-4.5 / SSP5-8.5 maximum resolved Arctic open-water temperature: 12.769176 C / 17.429418 C
+- Abrupt-2xCO2 energy residual: -0.03968027%
+- 500-year GMST drift: 0 C
+- 500-year AMOC drift: 0 Sv
+- 500-year salt residual: 0 ppm
+- 500-year cumulative salt projection correction: 0 PSU m3
+- Hosing recovery after 100 years: 81.489511%
+
+REGRESSION FIXES VERIFIED
+- Meinshausen et al. (2020) is the synchronized default forcing formula.
+- Existing output directories are preserved unless overwrite is explicitly authorized.
+- Source, working, home, root, and dangerous ancestor output targets are rejected.
+- Monte Carlo workers support timeout, heartbeat, atomic checkpoint, resume, stale-file cleanup, and process-tree termination.
+- Desktop close-during-launch cannot orphan a newly created process group.
+- Sub-5% Arctic leads export sensible heat conservatively to the coupled ocean.
+- Exact unforced seasonal-reference evolution has zero 500-year drift.
+- Deliberate physical perturbations are not suppressed by the reference-manifold guard.
+- Interpolated interface temperature and internal Arctic heat exchange pass strict consistency/conservation checks.
+
+PROVENANCE
+- Python: 3.13.5
+- Platform: Linux-6.12.13-x86_64-with-glibc2.41
+- climate_model.py SHA-256: 6401bfe43fbd0065d08b0afb8535ca2dc864027a52e19706a133bbd14888cc1b
+- validate_v2293.py SHA-256: e0fb93f19a815b4bab113b06ab38e69e962b521f773d6b8e1be2fd468929e8ac
+- held_out_amoc_benchmarks.json SHA-256: 67094e5d48b0688c4d0e72848362b0426e4a7187b92c6d2853150cb9a467b40a
+
+PACKAGE EXTRACTION VERIFICATION
+- Candidate archive compiled successfully after clean extraction.
+- Extracted-package focused checks: 15/15 passed.
+- Covered version/default synchronization, overwrite protection, resume, protected paths, worker timeout/heartbeat/checkpoint behavior, process-tree termination, GUI launch/close race handling, exact control equilibrium, perturbation preservation, current provenance, Streamlit parity, and desktop GUI smoke/layout.
+- Extracted-package Monte Carlo startup: 4/4 members succeeded with two spawned workers; 0 failed.
+- Candidate archive contained no pytest caches, bytecode, isolated-test logs, or validation-task scratch directories.
+
+All scientific metrics are tuning-informed development-regression checks, not independent real-world validation.

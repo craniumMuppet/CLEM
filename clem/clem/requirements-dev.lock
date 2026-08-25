@@ -1,0 +1,8 @@
+# Fully resolved development dependency graph for EGCM v2.29.23.
+# Install requirements.lock first, then this file.
+-r requirements.lock
+
+iniconfig==2.3.0
+pluggy==1.6.0
+pygments==2.20.0
+pytest==9.1.1

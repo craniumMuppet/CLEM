@@ -1,0 +1,42 @@
+Emergent-Sensitivity Global Climate Model v2.18.1
+
+Purpose
+-------
+Simplify the percent-ramp-to-cap scenario so one comma-separated growth-rate
+list controls the complete deterministic experiment. Remove the redundant
+single-rate field from user interfaces while preserving the internal scalar
+rate required by each individual trajectory.
+
+Passed
+------
+- Python compilation for the complete package
+- percent_ramp_hold_test.py
+- gui_smoke_test.py
+- setting_metadata_test.py
+- monte_carlo_smoke_test.py
+- v2_17_1_validation_test.py
+- Deterministic CLI test with rates 5,2: primary standard run resolved to 2%
+  and comparison products contained sorted rates [2%, 5%]
+- Monte Carlo multi-rate guard: rejected a list containing 1%,2% instead of
+  silently selecting one rate
+- Existing v2.17.1 cross-resolution and validation checks
+
+Behavior verified
+-----------------
+- The desktop GUI and Streamlit interface expose only one rate-list control.
+- A one-value list runs one pathway.
+- A multi-value deterministic list runs every pathway and creates the shared
+  CO2/temperature/AMOC plot and CSV/JSON products.
+- The first sorted value is used for ordinary single-run outputs and
+  diagnostics, so no second user setting can conflict with the comparison.
+- Monte Carlo requires exactly one rate because separate rates represent
+  separate ensembles.
+- The old --co2-growth-rate-percent option remains hidden and accepted for
+  command compatibility, but the rate list controls percent_ramp_hold.
+
+Long regression note
+--------------------
+full_regression_test.py exceeded the execution window after its first two
+long-running components passed. The model equations were not changed in this
+release; targeted scenario, GUI, Monte Carlo, compilation, and v2.17.1
+validation tests passed.

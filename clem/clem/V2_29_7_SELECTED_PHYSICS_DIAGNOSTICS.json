@@ -1,0 +1,136 @@
+{
+  "annual_arctic_amplification": 3.125262370984235,
+  "arctic_transient": {
+    "arctic_reference_convergence_tolerance_wyr_m2": 1e-08,
+    "arctic_reference_periodic_closure_wyr_m2": 0.0,
+    "arctic_reference_spinup_convergence_wyr_m2": 0.0,
+    "arctic_reference_spinup_years_completed": 80.0,
+    "cumulative_absolute_salt_projection_correction_ppm": 6.919211416891297e-08,
+    "maximum_absolute_salt_conservation_error_ppm": 0.0,
+    "maximum_arctic_open_water_temperature_c": 6.321358456518838,
+    "maximum_arctic_open_water_temperature_c_at_10pct_open": 6.321358456518838,
+    "maximum_arctic_open_water_temperature_c_at_1pct_open": 6.321358456518838,
+    "maximum_arctic_open_water_temperature_c_at_5pct_open": 6.321358456518838,
+    "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+    "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10
+  },
+  "dev_september_area_rmse": 0.2379989502548841,
+  "march_area_mean": 13.125388462700311,
+  "march_area_rmse": 0.40365961348551377,
+  "march_area_trend": -0.18722208471407778,
+  "march_extent_trend": -0.21771913117123426,
+  "open_water": {
+    "all_checks_passed": true,
+    "benchmark_file": "data/validation/open_water/NOAA_OISST_ARCTIC_BENCHMARKS.json",
+    "benchmark_sha256": "4aa2f417d006bfb5eb17c23074657eaef10e2fcc0eb74b3d980ed418b53b3521",
+    "bounds_passed": true,
+    "checks": {
+      "atlantic_jja_mean_c": {
+        "maximum": 8.0,
+        "minimum": -1.8,
+        "passed": true,
+        "value": 3.7632188647903977
+      },
+      "atlantic_september_mean_c": {
+        "maximum": 6.0,
+        "minimum": -1.8,
+        "passed": true,
+        "value": 1.286045064447724
+      },
+      "non_atlantic_jja_mean_c": {
+        "maximum": 5.0,
+        "minimum": -1.8,
+        "passed": true,
+        "value": 3.0509116569383417
+      },
+      "non_atlantic_september_mean_c": {
+        "maximum": 3.0,
+        "minimum": -1.8,
+        "passed": true,
+        "value": 0.12398086772421238
+      }
+    },
+    "evidence_role": "tuning_informed_broad_external_temperature_sanity_check_not_quantitative_validation",
+    "mandatory_warning": "Arctic open-water temperatures are reduced-sector diagnostics. The OISST ranges were inspected during v2.29.7 tuning and are only a broad development sanity check; do not interpret them as independent, local, coastal, or quantitative regional forecast validation.",
+    "quantitative_validation_claimed": false,
+    "release_gate_role": "development_range_sanity_only",
+    "scope": {
+      "interpretation": "Broad tuning-informed reduced-sector temperature sanity check only. It is not independent pointwise SST skill, a regional forecast test, or quantitative validation.",
+      "latitude_min_deg_n": 66.0,
+      "mask_equivalence_required": true,
+      "months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "open_water_definition": "OISST sea-ice concentration is converted to open_water_fraction=clip(1-ice_concentration,0,1) and included in the weights.",
+      "sector_mask": "The processor imports climate_model._atlantic_basin_fraction and applies the same smooth fractional Atlantic mask used by the model; non-Atlantic is ocean_fraction minus that Atlantic fraction."
+    },
+    "source_artifacts_reproduced": false,
+    "used_for_tuning": true
+  },
+  "overrides": {
+    "arctic_basal_ocean_exchange_wm2_k": 4.0,
+    "arctic_lapse_rate_feedback_wm2_k": 1.2,
+    "arctic_lateral_ocean_heat_transport_wm2_per_ice_fraction": 27.5,
+    "arctic_module_start_latitude_deg": 52.0,
+    "arctic_open_water_ocean_exchange_wm2_k": 30.0,
+    "arctic_open_water_stable_exchange_wm2_k": 0.5,
+    "arctic_reference_air_seasonal_amplitude_c": 12.0,
+    "arctic_transient_shortwave_scale": 1.0
+  },
+  "rolling_skill": {
+    "march_area": {
+      "persistence": 0.09723748357645423,
+      "trend": 0.170746963839139
+    },
+    "march_extent": {
+      "persistence": 0.05926758072050575,
+      "trend": -0.08717443583287499
+    },
+    "september_area": {
+      "persistence": 0.10107582231192003,
+      "trend": 0.07433344378976636
+    },
+    "september_extent": {
+      "persistence": 0.11622419197538347,
+      "trend": -0.031263867761928354
+    }
+  },
+  "sea_ice_gates": {
+    "calibration": {
+      "march_area_mapping_is_identity": true,
+      "march_extent_rmse_le_0p55": true,
+      "march_native_area_rmse_le_0p50": true,
+      "march_native_area_trend_error_le_0p15": true,
+      "seasonal_native_area_amplitude_error_le_0p60": true,
+      "september_area_mapping_is_identity": true,
+      "september_extent_rmse_le_1p15": true,
+      "september_native_area_rmse_le_0p80": true,
+      "september_native_area_trend_error_le_0p20": true,
+      "september_native_area_trend_fraction_ge_0p60": true,
+      "september_native_area_trend_is_negative": true
+    },
+    "calibration_passed": true,
+    "development": {
+      "march_area_mapping_is_identity": true,
+      "march_extent_rmse_le_0p50": true,
+      "march_native_area_rmse_le_0p50": true,
+      "september_area_mapping_is_identity": true,
+      "september_extent_rmse_le_0p60": true,
+      "september_native_area_rmse_le_0p60": true
+    },
+    "development_passed": true
+  },
+  "seasonal_arctic_amplification": {
+    "DJF": 4.018048335926757,
+    "JJA": 1.9957981069053612,
+    "MAM": 3.255827189398263,
+    "SON": 3.0824178517865586
+  },
+  "september_area_mean": 4.006334687223374,
+  "september_area_rmse": 0.5377255169725018,
+  "september_area_trend": -0.33356192735357953,
+  "september_extent_trend": -0.48217058627035503
+}

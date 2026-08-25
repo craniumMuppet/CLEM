@@ -1,0 +1,193 @@
+{
+  "acceptance_limit_percent": 5.0,
+  "accepted": true,
+  "comparison": {
+    "mean_difference_s": -0.05232697619976534,
+    "mean_relative_change_percent": -1.0512080656012057,
+    "median_difference_s": 0.016213287999562453,
+    "median_relative_change_percent": 0.332086404990628
+  },
+  "fixed": {
+    "maximum_s": 5.270052936997672,
+    "mean_s": 4.925467421699795,
+    "median_s": 4.898463134999474,
+    "minimum_s": 4.682626921003248,
+    "n": 10,
+    "pass_medians_s": [
+      4.934822518996953,
+      4.842782122999779
+    ],
+    "steady_state_runs_s": [
+      4.934822518996953,
+      4.799705581001035,
+      4.875331084000209,
+      5.270052936997672,
+      5.232343210998806,
+      4.682626921003248,
+      4.707276525001362,
+      4.988138130000152,
+      4.92159518599874,
+      4.842782122999779
+    ]
+  },
+  "generated_at_utc": "2026-08-07T15:12:57.317388+00:00",
+  "method": {
+    "configuration": {
+      "dt_years": 0.05,
+      "duration_years": 20.0,
+      "record_every_years": 1.0,
+      "resolution_deg": 10.0,
+      "scenario": "ssp245"
+    },
+    "description": "Alternating sequential 20-year SSP2-4.5 runs at 10 degree resolution with identical configuration; first run of each pass excluded from aggregate steady-state statistics.",
+    "passes": [
+      "original_pass1",
+      "fixed_pass1",
+      "fixed_pass2",
+      "original_pass2"
+    ],
+    "steady_state_samples_per_build": 10
+  },
+  "original": {
+    "maximum_s": 5.455777317998582,
+    "mean_s": 4.977794397899561,
+    "median_s": 4.882249846999912,
+    "minimum_s": 4.735415240000293,
+    "n": 10,
+    "pass_medians_s": [
+      4.87989770400236,
+      4.8846019899974635
+    ],
+    "steady_state_runs_s": [
+      4.76804547500069,
+      4.7439936800001306,
+      4.87989770400236,
+      5.3835626669970225,
+      5.455777317998582,
+      4.735415240000293,
+      5.010269139998854,
+      5.05621410400272,
+      4.860166660997493,
+      4.8846019899974635
+    ]
+  },
+  "raw_pass_records": {
+    "fixed_pass1": {
+      "all_run_times_s": [
+        17.483044086999143,
+        4.934822518996953,
+        4.799705581001035,
+        4.875331084000209,
+        5.270052936997672,
+        5.232343210998806
+      ],
+      "configuration": {
+        "dt_years": 0.05,
+        "duration_years": 20.0,
+        "record_every_years": 1.0,
+        "resolution_deg": 10.0,
+        "scenario": "ssp245"
+      },
+      "final_gmst_values_c": [
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502
+      ],
+      "label": "fixed_pass1",
+      "root": "/mnt/data/egcm_actual_fix/release_candidate_v2/emergent_global_climate_model_v2_29_23_sea_ice_fix",
+      "steady_state_mean_s": 5.022451066398935,
+      "steady_state_median_s": 4.934822518996953
+    },
+    "fixed_pass2": {
+      "all_run_times_s": [
+        17.76385515199945,
+        4.682626921003248,
+        4.707276525001362,
+        4.988138130000152,
+        4.92159518599874,
+        4.842782122999779
+      ],
+      "configuration": {
+        "dt_years": 0.05,
+        "duration_years": 20.0,
+        "record_every_years": 1.0,
+        "resolution_deg": 10.0,
+        "scenario": "ssp245"
+      },
+      "final_gmst_values_c": [
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502,
+        0.14190657609131502
+      ],
+      "label": "fixed_pass2",
+      "root": "/mnt/data/egcm_actual_fix/release_candidate_v2/emergent_global_climate_model_v2_29_23_sea_ice_fix",
+      "steady_state_mean_s": 4.828483777000656,
+      "steady_state_median_s": 4.842782122999779
+    },
+    "original_pass1": {
+      "all_run_times_s": [
+        17.753003735000675,
+        4.76804547500069,
+        4.7439936800001306,
+        4.87989770400236,
+        5.3835626669970225,
+        5.455777317998582
+      ],
+      "configuration": {
+        "dt_years": 0.05,
+        "duration_years": 20.0,
+        "record_every_years": 1.0,
+        "resolution_deg": 10.0,
+        "scenario": "ssp245"
+      },
+      "final_gmst_values_c": [
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544
+      ],
+      "label": "original_pass1",
+      "root": "/mnt/data/egcm_actual_fix/original_full/emergent_global_climate_model_v2_29_23_engineering_only",
+      "steady_state_mean_s": 5.046255368799757,
+      "steady_state_median_s": 4.87989770400236
+    },
+    "original_pass2": {
+      "all_run_times_s": [
+        17.40513852100048,
+        4.735415240000293,
+        5.010269139998854,
+        5.05621410400272,
+        4.860166660997493,
+        4.8846019899974635
+      ],
+      "configuration": {
+        "dt_years": 0.05,
+        "duration_years": 20.0,
+        "record_every_years": 1.0,
+        "resolution_deg": 10.0,
+        "scenario": "ssp245"
+      },
+      "final_gmst_values_c": [
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544,
+        0.1418031833141544
+      ],
+      "label": "original_pass2",
+      "root": "/mnt/data/egcm_actual_fix/original_full/emergent_global_climate_model_v2_29_23_engineering_only",
+      "steady_state_mean_s": 4.909333426999365,
+      "steady_state_median_s": 4.8846019899974635
+    }
+  },
+  "schema_version": "1.0"
+}

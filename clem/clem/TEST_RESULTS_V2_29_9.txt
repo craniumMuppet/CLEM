@@ -1,0 +1,67 @@
+Emergent-Sensitivity Global Climate Model v2.29.9
+Scientific review-fix release
+Test date: 2026-08-01 UTC
+
+Scope
+-----
+v2.29.9 addresses the independent-review findings concerning historical Arctic
+claim language, March trend gates, cross-domain calibration, lateral-restoring
+structural uncertainty, OISST evidence classification, public parameter ranges,
+and future-output classification. All v2.29.8 resumable-run, explicit CO2-target,
+and AMOC percentage-decline features are retained.
+
+Release validation
+------------------
+PASS  21/21 full v2.29.9 validation tasks completed.
+PASS  32/32 release checks in VALIDATION_SUMMARY_V2_29_9.json.
+PASS  Default SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 pathways.
+PASS  Historical/global metrics, Arctic reference cycle, energy audit, control,
+      perturbation recovery, timestep convergence, resolution convergence,
+      hosing recovery, long SSP2-4.5, and hybrid-pathway checks.
+PASS  Canonical AMOC initialization density-ratio spread: 0.0 (limit 0.20).
+PASS  Hybrid-pathway 2100 AMOC: 10.9943 Sv (restored 10-14 Sv range).
+PASS  Hosing recovery: 84.6070% (minimum 80%).
+PASS  March 1979-2020 trend robust gate: model -0.12124 versus observed
+      -0.03817 million km2/decade; absolute error 0.08307; magnitude ratio 3.176.
+
+Focused and retained regression tests
+-------------------------------------
+PASS  127 tests across the following retained files:
+       9  tests/test_v2299_scientific_review_fixes.py
+       8  tests/test_v2298_resumable_sweeps.py
+       9  tests/test_v2297_review_fixes.py
+      14  tests/test_v2296_native_arctic_integrity.py
+       6  tests/test_v2295_physical_integrity.py
+      13  tests/test_v2294_accuracy_integrity.py
+      10  tests/test_v2293_operational_safety.py
+      11  tests/test_v2292_release_integrity.py
+       8  tests/test_v2291_arctic_phase_consistency.py
+       7  tests/test_v2281_interface_maintenance.py
+      15  tests/test_v228_fractional_arctic.py
+       9  tests/test_v2271_maintenance_arctic.py
+       8  tests/test_v227_structural_arctic_greenland.py
+
+Additional checks
+-----------------
+PASS  Python compilation of the complete release source tree.
+PASS  git diff whitespace/error check.
+PASS  Model version imports as 2.29.9.
+PASS  v2.29.8 save/load, saved-seed, per-target checkpoint, explicit-target,
+      and AMOC percentage-output tests remain active and passing.
+PASS  Source-provenance hashes were regenerated after the final documentation
+      changes and match the frozen source tree.
+
+Non-release-blocking development evidence
+-----------------------------------------
+The 2021-2025 validation-informed development group does not pass every retained
+benchmark because September extent RMSE is 0.6228 million km2 versus the retained
+0.60 benchmark. This is deliberately reported as a development miss. Historical
+records through March 2026 were inspected during tuning and are not treated as
+independent predictive validation or release-blocking evidence.
+
+Environment note
+----------------
+The dependency-lock environment verification script could not fully execute in
+this container because optional Streamlit packages are not installed. This is an
+environment-completeness limitation, not a reported mismatch in the packaged lock
+files. Compilation, runtime imports used by validation, and all listed tests passed.

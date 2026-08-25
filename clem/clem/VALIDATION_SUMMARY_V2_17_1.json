@@ -1,0 +1,32 @@
+{
+  "model_version": "2.17.1",
+  "default_backward_compatible": true,
+  "default_structural_settings": {
+    "resolution_deg": 5.0,
+    "amoc_coupling_scheme": "euler",
+    "amoc_allow_reversal": false,
+    "freshwater_compensation_mode": "external"
+  },
+  "resolution_initial_density_ratios": {
+    "2.5": 1.0386452115280143,
+    "5.0": 0.9988656953174145,
+    "10.0": 1.1849604643811054
+  },
+  "cross_resolution_abrupt_2x_100yr": {
+    "gmst_range_c": [2.662124976727799, 2.6677546471984055],
+    "amoc_range_sv": [15.316472657238887, 15.769916929116187]
+  },
+  "five_degree_ssp245_2100_compatibility": {
+    "global_surface_warming_c": 3.3724956772,
+    "amoc_sv": 15.2985105342,
+    "greenland_freshwater_sv": 0.0099278275
+  },
+  "ecs_convergence_example_fast_grid": {
+    "requested_years": 400,
+    "extended_years": 800,
+    "equilibrium_ecs_c": 3.31872659193054,
+    "final_tail_toa_imbalance_wm2": 0.03447850221944867,
+    "converged": true
+  },
+  "posterior_compatibility_note": "Existing v2.17.0 5-degree Euler posterior results remain numerically compatible. Recompute for Heun or other structural families."
+}

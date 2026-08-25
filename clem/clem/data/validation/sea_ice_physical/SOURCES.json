@@ -1,0 +1,30 @@
+{
+  "generated_utc": "2026-08-09T07:49:23Z",
+  "rule": "source-separated physical evidence; each comparison uses its explicit observation operator",
+  "sources": {
+    "cryosat2_rdeft4_v1": {
+      "data_file": "cryosat2_rdeft4_monthly.csv",
+      "data_sha256": "ea822416b0b3484f46d8c8eea389761378cc81927534bdbe42d2ffac38246e5c",
+      "metadata_file": "cryosat2_rdeft4_v1_metadata.json",
+      "metadata_sha256": "cf3bd76f2eba6f1000c02d275a0b7c2fbc06bb491cd73c6a07a6c98fa50e2165",
+      "operator_file": "cryosat2_rdeft4_operator.npz",
+      "operator_sha256": "d14aa0ec444ecf60c33ca7be8d2fc38a6703535f7d7d6dbd9fa3db7c0a70cd11"
+    },
+    "icesat2_is2sitmogr4_v4": {
+      "data_file": "icesat2_is2sitmogr4_monthly.csv",
+      "data_sha256": "62ac3f07403fb91994ba7137249ad5a31822962a94942e0b355558b4df49e3b5",
+      "metadata_file": "icesat2_is2sitmogr4_v4_metadata.json",
+      "metadata_sha256": "dfe16ea5865903ef14ea241b2ee9325d81b78a7634379222708ede4bcfcb1925",
+      "operator_file": "icesat2_is2sitmogr4_operator.npz",
+      "operator_sha256": "7503913a78ea2e3511a5bc9ded158f2e001553ac80da4f3ba93479175853df31"
+    },
+    "piomas_v2_1": {
+      "data_file": "piomas_volume_monthly.csv",
+      "data_sha256": "bb9a267a0383318f83c08e3519fefd9b97a532b9e0bf111101ad9ee13ec461c4",
+      "metadata_file": "piomas_v2_1_metadata.json",
+      "metadata_sha256": "cb8d9d62bed5a07904f1fac36ae85092083b71303166bfd8fce31826cfa70f37",
+      "operator_file": "piomas_common_domain_operator.npz",
+      "operator_sha256": "b79bbe062d24040a5bcbfd7e06f4553dc056c13a2988451896c62eae97a52fe2"
+    }
+  }
+}

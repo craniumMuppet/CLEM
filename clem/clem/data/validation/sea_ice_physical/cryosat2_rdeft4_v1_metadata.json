@@ -1,0 +1,40 @@
+{
+  "concentration_variables_used": [
+    "ice_con"
+  ],
+  "dataset_id": "RDEFT4",
+  "doi": "10.5067/96JO0KIFDAS8",
+  "generated_utc": "2026-08-09T07:49:10Z",
+  "maximum_latitude_deg": null,
+  "mean_definition": "concentration-and-cell-area weighted thickness over the exact valid satellite retrieval footprint",
+  "minimum_concentration_fraction": 0.7,
+  "model_comparison_rule": "EGCM local ice thickness is sampled at identical cell centers and averaged with the identical per-record observation weights",
+  "months_used": [
+    3
+  ],
+  "operator_file": "cryosat2_rdeft4_operator.npz",
+  "operator_file_sha256": "d14aa0ec444ecf60c33ca7be8d2fc38a6703535f7d7d6dbd9fa3db7c0a70cd11",
+  "processed_file_sha256": "ea822416b0b3484f46d8c8eea389761378cc81927534bdbe42d2ffac38246e5c",
+  "role": "independent_satellite_thickness_validation",
+  "source_files_sha256": {
+    "RDEFT4_20110331.nc": "80cfe3abb3d0d3339f51e90982a8657eb562efdf6429f9566937d6bc955dded7",
+    "RDEFT4_20120331.nc": "9f1dfefb27b4baa83a07041391167de979ec1c645fb7266196fd28addf9dfa4b",
+    "RDEFT4_20130331.nc": "47c19126ecbd885c7c7407fbda0997a0503ee2b1a5f8017ca5566e332dba4eee",
+    "RDEFT4_20140331.nc": "f0489b9d4c83eb1121f4c94e3633234526ca2ace978c06117a7fcc0fa750df5b",
+    "RDEFT4_20150331.nc": "91d17ac0271b9e09ff3254956b51c6e28173526e2a56b6e718fa1944b349a3ff",
+    "RDEFT4_20170331.nc": "4f51ba7054e950150b3e6242a401b4573e0d32b7c65e8ad308062fd31ce354d1",
+    "RDEFT4_20180329.nc": "92a4dc97346505b438604a91242d627878956f1e3efcf9cdec4241a410c7ab9d",
+    "RDEFT4_20190331.nc": "89281fda5c82097e6b02e5d0f96d8555792050fc7d037ce6eaaaf6bc244f1944",
+    "RDEFT4_20200330.nc": "47e4d04bdcd1203fe37de9c8ab28a56b4fb1083a7f0c25b321ca44edcfcd15ef",
+    "RDEFT4_20210331.nc": "58c7c99b9d34772a1bd73186cf9687323ff480e5c01287a97446f20157746753",
+    "RDEFT4_20220331.nc": "4124cf7cd019f165a1bdfe5e810d20fc2411b12ef7ed57526d73c621d40e5992",
+    "RDEFT4_20230331.nc": "f1da8b5b527f938db6b405831185277f92dd16668bc7ce432c34ef79b738eed8",
+    "RDEFT4_20240331.nc": "4139289b5e01cc278d5dd865945f7f5488c10e454d521a1e65d5682f05ca8dad",
+    "RDEFT4_20250331.nc": "f05ef6ad7579acbf32b76f55630e4235b695519e59047b21daf114ec8e2588da"
+  },
+  "source_id": "cryosat2_rdeft4_v1",
+  "thickness_variables_used": [
+    "sea_ice_thickness"
+  ],
+  "version": "1"
+}

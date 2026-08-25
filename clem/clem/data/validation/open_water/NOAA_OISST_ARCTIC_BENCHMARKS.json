@@ -1,0 +1,77 @@
+{
+  "schema_version": "3.1",
+  "dataset": "NOAA OISST v2.1 monthly 1991-2020 climatology",
+  "retrieval_date": "2026-07-31",
+  "evidence_role": "tuning_informed_broad_external_temperature_sanity_check_not_quantitative_validation",
+  "used_for_tuning": true,
+  "release_gate_role": "descriptive_non_blocking_sanity_bounds",
+  "sources": [
+    {
+      "title": "NOAA OISST v2.1 monthly 1991-2020 SST climatology",
+      "url": "https://psl.noaa.gov/thredds/catalog/Datasets/noaa.oisst.v2/catalog.html?dataset=Datasets%2Fnoaa.oisst.v2%2Fsst.ltm.1991-2020.nc",
+      "http_download_url": "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/sst.ltm.1991-2020.nc",
+      "reported_size_bytes": 3441836,
+      "reported_modified_utc": "2022-06-10T15:24:58.219Z"
+    },
+    {
+      "title": "NOAA OISST v2.1 monthly 1991-2020 sea-ice climatology",
+      "url": "https://psl.noaa.gov/thredds/catalog/Datasets/noaa.oisst.v2/catalog.html?dataset=Datasets%2Fnoaa.oisst.v2%2Ficec.ltm.1991-2020.nc",
+      "http_download_url": "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/icec.ltm.1991-2020.nc",
+      "reported_size_bytes": 2026353,
+      "reported_modified_utc": "2022-06-10T15:25:26.288Z"
+    }
+  ],
+  "scope": {
+    "latitude_min_deg_n": 66.0,
+    "months": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "interpretation": "Broad tuning-informed reduced-sector temperature sanity check only. It is not independent pointwise SST skill, a regional forecast test, or quantitative validation.",
+    "open_water_definition": "OISST sea-ice concentration is converted to open_water_fraction=clip(1-ice_concentration,0,1) and included in the weights.",
+    "sector_mask": "The processor imports climate_model._atlantic_basin_fraction and applies the same smooth fractional Atlantic mask used by the model; non-Atlantic is ocean_fraction minus that Atlantic fraction.",
+    "mask_equivalence_required": true
+  },
+  "benchmarks": {
+    "atlantic_jja_mean_c": {
+      "minimum": -1.8,
+      "maximum": 8.0
+    },
+    "non_atlantic_jja_mean_c": {
+      "minimum": -1.8,
+      "maximum": 5.0
+    },
+    "atlantic_september_mean_c": {
+      "minimum": -1.8,
+      "maximum": 6.0
+    },
+    "non_atlantic_september_mean_c": {
+      "minimum": -1.8,
+      "maximum": 3.0
+    }
+  },
+  "mandatory_output_warning": "Arctic open-water temperatures are reduced-sector diagnostics. The OISST ranges were inspected during tuning and are descriptive sanity bounds only; source files, release-time hashes, and processed observational summaries are not packaged, so this is not an independent or reproduced quantitative observational validation or a local, coastal, or regional forecast test.",
+  "source_files": {
+    "sst_climatology": {
+      "url": "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/sst.ltm.1991-2020.nc",
+      "expected_local_name": "sst.ltm.1991-2020.nc",
+      "sha256": null
+    },
+    "ice_concentration_climatology": {
+      "url": "https://downloads.psl.noaa.gov/Datasets/noaa.oisst.v2/icec.ltm.1991-2020.nc",
+      "expected_local_name": "icec.ltm.1991-2020.nc",
+      "sha256": null
+    }
+  },
+  "reproduction": {
+    "processor": "tools/process_noaa_oisst_arctic_benchmarks.py",
+    "processor_sha256": "3672174c737c67fb42db492cd080f54b99e91a964d0b08df8860b0176f6dae90",
+    "model_mask_source": "climate_model.py:_atlantic_basin_fraction",
+    "command": "python tools/process_noaa_oisst_arctic_benchmarks.py --sst sst.ltm.1991-2020.nc --ice icec.ltm.1991-2020.nc --output oisst_arctic_processed.json",
+    "processed_output_in_release": false,
+    "source_hashes_in_release": false,
+    "status": "The deterministic processor and exact model mask are included. NOAA source files are not redistributed; therefore the release does not claim a reproduced numerical OISST validation. Downloaded source hashes and processed output must be generated locally before a reproducibility claim is made."
+  }
+}

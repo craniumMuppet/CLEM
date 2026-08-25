@@ -1,0 +1,1464 @@
+{
+  "model_version": "2.29.4",
+  "classification": "tuning-informed development regression checks; not independent validation",
+  "default_freshwater_coefficients_sv_per_k": {
+    "hydrological": 0.006,
+    "greenland": 0.005
+  },
+  "default_structural_parameters": {
+    "greenland_dynamic_discharge_fraction": 0.4,
+    "greenland_pdd_melt_factor_gt_per_degree_day": 0.7,
+    "greenland_max_freshwater_sv": 0.025,
+    "amoc_temperature_density_coupling": 1.0,
+    "amoc_convection_density_scale_factor": 4.0,
+    "amoc_reference_density_driver": 0.00075,
+    "ocean_heat_exchange_wm2_k": 1.45,
+    "arctic_winter_transport_enhancement": 12.0,
+    "arctic_open_water_stable_exchange_wm2_k": 0.5,
+    "arctic_open_water_unstable_exchange_wm2_k": 5.0,
+    "arctic_open_water_exchange_transition_c": 0.5,
+    "arctic_transient_shortwave_scale": 0.5,
+    "arctic_basal_ocean_exchange_wm2_k": 1.5,
+    "arctic_open_water_ocean_exchange_wm2_k": 1.5,
+    "arctic_lateral_ocean_heat_transport_wm2_per_ice_fraction": 10.0,
+    "arctic_atlantic_reference_ocean_temperature_c": 0.2,
+    "arctic_non_atlantic_reference_ocean_temperature_c": -0.8,
+    "arctic_reference_ocean_heat_capacity_wyr_m2_k": 6.0,
+    "arctic_reference_ocean_restoring_wm2_k": 12.0,
+    "arctic_air_low_pass_years": 0.15
+  },
+  "development_metrics": {
+    "historical_gmst_2011_2020_c": 1.1081067305872385,
+    "historical_ocean_heat_content_change_1971_2018_zj": 383.71682337322864,
+    "historical_arctic_amplification_1979_2021_ratio": 3.4085168046511836,
+    "ssp245_amoc_decline_2100_percent": 20.848662371160753
+  },
+  "benchmark_results": {
+    "historical_gmst_2011_2020_c": {
+      "value": 1.1081067305872385,
+      "minimum": 0.95,
+      "maximum": 1.2,
+      "units": "degC relative to 1850-1900",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI SPM, statement A.1.2"
+    },
+    "historical_ocean_heat_content_change_1971_2018_zj": {
+      "value": 383.71682337322864,
+      "minimum": 350.0,
+      "maximum": 500.0,
+      "units": "ZJ",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 7, Section 7.2.2 and Table 7.1"
+    },
+    "historical_arctic_amplification_1979_2021_ratio": {
+      "value": 3.4085168046511836,
+      "minimum": 3.0,
+      "maximum": 4.5,
+      "units": "Arctic trend divided by global trend",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "Rantanen et al. 2022, Communications Earth & Environment, doi:10.1038/s43247-022-00498-3"
+    },
+    "ssp245_amoc_decline_2100_percent": {
+      "value": 20.848662371160753,
+      "minimum": 15.0,
+      "maximum": 50.0,
+      "units": "percent",
+      "passed": true,
+      "evidence_role": "tuning_informed_development_regression",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 4, AMOC projections across SSP scenarios"
+    }
+  },
+  "all_development_checks_passed": true,
+  "seasonal_arctic_amplification_1979_2021": {
+    "DJF": 4.539628016340727,
+    "MAM": 3.357039102908989,
+    "JJA": 1.6359679891799768,
+    "SON": 3.698655786867164,
+    "annual": 3.4085168046511836
+  },
+  "ssp245_arctic_transient": {
+    "maximum_arctic_open_water_temperature_c": 12.769080696479275,
+    "maximum_arctic_open_water_temperature_c_at_1pct_open": 12.769080696479275,
+    "maximum_arctic_open_water_temperature_c_at_5pct_open": 12.769080696479275,
+    "maximum_arctic_open_water_temperature_c_at_10pct_open": 12.769080696479275,
+    "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+    "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+    "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+    "cumulative_absolute_salt_projection_correction_ppm": 2.545714877192086e-07,
+    "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+    "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+    "arctic_reference_spinup_years_completed": 80.0,
+    "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+  },
+  "ssp585_amoc_decline_2100_percent": 39.95863552367624,
+  "ssp585_arctic_transient": {
+    "maximum_arctic_open_water_temperature_c": 17.42935698598589,
+    "maximum_arctic_open_water_temperature_c_at_1pct_open": 17.42935698598589,
+    "maximum_arctic_open_water_temperature_c_at_5pct_open": 17.42935698598589,
+    "maximum_arctic_open_water_temperature_c_at_10pct_open": 17.42935698598589,
+    "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+    "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+    "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+    "cumulative_absolute_salt_projection_correction_ppm": 2.5856000557856953e-07,
+    "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+    "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+    "arctic_reference_spinup_years_completed": 80.0,
+    "arctic_reference_convergence_tolerance_wyr_m2": 1e-08,
+    "future_sea_ice": {
+      "september_area_2081_2100_million_km2": 0.3739305790729231,
+      "september_extent_2081_2100_million_km2": 0.5455285136127688,
+      "first_september_below_1_million_km2_area": 2061,
+      "september_2100_area_million_km2": 0.275455344772691,
+      "september_2100_extent_million_km2": 0.3965643784971045,
+      "interpretation": "Calibrated hemispheric observation-operator result with an AR6-consistent post-2020 tuning closure; not independent predictive validation, and the longitude reconstruction has no regional forecast skill.",
+      "evidence_role": "tuning_informed_statistical_projection_closure",
+      "used_for_tuning": true,
+      "independent_predictive_validation": false
+    }
+  },
+  "greenland_ssp245": {
+    "mean_total_loss_2011_2020_gt_per_year": 214.6046655525871,
+    "mean_dynamic_discharge_2011_2020_gt_per_year": 80.04464984051921,
+    "mean_surface_mass_balance_loss_2011_2020_gt_per_year": 162.77995757138967,
+    "cumulative_net_ice_loss_2100_gt": 31022.88940554383,
+    "cumulative_sea_level_2100_mm": 85.69858951807686
+  },
+  "supplementary_pathways_not_used_for_v2294_integrity_fix_tuning": {
+    "ssp126": {
+      "scenario": "ssp126",
+      "warming_2081_2100_c": 2.105745778752319,
+      "amoc_decline_2100_percent": 10.692950069844986,
+      "final_arctic_sea_ice_fraction": 0.7301767198764171,
+      "maximum_arctic_open_water_temperature_c": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 10.861078029059952,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 10.861078029059952,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.554385568190697e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    },
+    "ssp460": {
+      "scenario": "ssp460",
+      "warming_2081_2100_c": 3.519950324855433,
+      "amoc_decline_2100_percent": 26.21621911038997,
+      "final_arctic_sea_ice_fraction": 0.5634104781785383,
+      "maximum_arctic_open_water_temperature_c": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_1pct_open": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_5pct_open": 13.807330861064186,
+      "maximum_arctic_open_water_temperature_c_at_10pct_open": 13.807330861064186,
+      "maximum_dormant_arctic_open_water_heat_wyr_m2": 0.0,
+      "maximum_absolute_salt_conservation_error_ppm": 3.3306690738754696e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 3.4682763994442594e-10,
+      "cumulative_absolute_salt_projection_correction_ppm": 2.569992811988196e-07,
+      "arctic_reference_periodic_closure_wyr_m2": 3.6273206660553114e-12,
+      "arctic_reference_spinup_convergence_wyr_m2": 5.119460411151522e-12,
+      "arctic_reference_spinup_years_completed": 80.0,
+      "arctic_reference_convergence_tolerance_wyr_m2": 1e-08
+    }
+  },
+  "energy_audit": {
+    "years": 20.0,
+    "actual_resolved_heat_gain_zj": 623.6694632544849,
+    "resolved_system_toa_integrated_zj": 623.9167515264763,
+    "bulk_radiative_toa_integrated_zj": 620.5258522749986,
+    "explicit_arctic_toa_integrated_zj": 3.3908992514778493,
+    "residual_zj": -0.24728827199146508,
+    "relative_residual_percent": -0.03963481848923738
+  },
+  "arctic_reference_cycle": {
+    "global_baseline_mean_c": 13.999999999999998,
+    "arctic_ocean_baseline_mean_c_north_of_full_latitude": -1.8,
+    "arctic_ocean_baseline_min_c_north_of_full_latitude": -1.8000000000000003,
+    "arctic_ocean_baseline_max_c_north_of_full_latitude": -1.7999999999999998,
+    "freezing_temperature_c": -1.8,
+    "periodic_closure_wyr_m2": 3.6273206660553114e-12,
+    "spinup_convergence_wyr_m2": 5.119460411151522e-12,
+    "periodic_closure_temperature_c": 0.0,
+    "spinup_convergence_temperature_c": 0.0,
+    "spinup_years_completed": 80,
+    "monthly_ocean_area_weighted_ice_fraction": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9562063190578053,
+      0.8515037198405636,
+      0.8380021209825951,
+      0.8949419973241389,
+      0.9674076591261168,
+      0.9967223681997827
+    ],
+    "monthly_ocean_area_weighted_interface_temperature_c": [
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.6472651861497327,
+      -1.089982352835433,
+      -1.3365350826579936,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003
+    ],
+    "minimum_ice_month": 9,
+    "sectors": {
+      "atlantic": {
+        "monthly_ice_fraction": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.8231113011801496,
+          0.6496862367366684,
+          0.6165105802392795,
+          0.7007416027572737,
+          0.8733296772878979,
+          0.9841520634890965
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.102466638495389,
+          0.5179334253725741,
+          -0.26850989318158075,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.7999999999999998,
+          1.5613938605557267,
+          4.564629058505361,
+          1.8563754492925604,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "monthly_shallow_ocean_temperature_c": [
+          0.023321445345147466,
+          0.015512950735309321,
+          0.009043070111899384,
+          0.003682681861939116,
+          -0.0007588181318147365,
+          -0.0044387250057972075,
+          -0.0009593828309141889,
+          0.025755722314225456,
+          0.059808930897382734,
+          0.057848486146574465,
+          0.044120463406536845,
+          0.0327458162164977
+        ],
+        "maximum_open_water_temperature_c": 4.564629058505361,
+        "shallow_ocean_seasonal_range_c": 0.06424765590317993,
+        "minimum_ice_fraction": 0.6165105802392795,
+        "minimum_ice_month": 9
+      },
+      "non_atlantic": {
+        "monthly_ice_fraction": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.9909100492446679,
+          0.9041264219695596,
+          0.8957547160173257,
+          0.9455785891567938,
+          0.9919379304337871,
+          1.0
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.789318150306289,
+          -1.5092367788833194,
+          -1.6150162654956015,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8000000000000003,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.674060094584375,
+          -0.23815668701258277,
+          -0.9953071717201866,
+          -1.8,
+          -1.8,
+          -1.8000000000000003
+        ],
+        "monthly_shallow_ocean_temperature_c": [
+          -0.9045451993138092,
+          -0.9056709296209269,
+          -0.9066036754400801,
+          -0.9073764686367733,
+          -0.9080167881095859,
+          -0.9085473106881882,
+          -0.9085151719949576,
+          -0.9039071658755942,
+          -0.8985764986103063,
+          -0.8995675258713138,
+          -0.9015466591136923,
+          -0.9031865123394943
+        ],
+        "maximum_open_water_temperature_c": -0.23815668701258277,
+        "shallow_ocean_seasonal_range_c": 0.009970812077881863,
+        "minimum_ice_fraction": 0.8957547160173257,
+        "minimum_ice_month": 9
+      }
+    }
+  },
+  "sea_ice_calibration_and_holdout": {
+    "dataset_metadata": {
+      "dataset": "NOAA/NSIDC Sea Ice Index, Version 4",
+      "source": "National Snow and Ice Data Center",
+      "product_id": "G02135",
+      "retrieval_date": "2026-07-30",
+      "calibration_period": [
+        1979,
+        2020
+      ],
+      "independent_temporal_holdout_period": [
+        2021,
+        2025
+      ],
+      "months": [
+        3,
+        9
+      ],
+      "quantities": [
+        "Northern Hemisphere sea-ice area",
+        "Northern Hemisphere sea-ice extent"
+      ],
+      "units": "million square kilometres",
+      "evidence_partition": {
+        "1979-2020": "calibration and development evaluation; not independent validation",
+        "2021-2025": "frozen temporal holdout; not used to fit operator constants"
+      }
+    },
+    "calibration": {
+      "period": [
+        1979,
+        2020
+      ],
+      "evidence_role": "calibration_and_development_evaluation",
+      "used_for_tuning": true,
+      "records": 84,
+      "months": {
+        "3": {
+          "area": {
+            "rmse_million_km2": 0.37543020502244195,
+            "bias_million_km2": -0.06246406134442808,
+            "correlation": 0.18801621198408913,
+            "model_trend_million_km2_per_decade": -0.03870863033247741,
+            "observed_trend_million_km2_per_decade": -0.0381735677821891
+          },
+          "extent": {
+            "rmse_million_km2": 0.37998302085762375,
+            "bias_million_km2": 0.26347137308380325,
+            "correlation": 0.8705911140940639,
+            "model_trend_million_km2_per_decade": -0.41451074465303284,
+            "observed_trend_million_km2_per_decade": -0.4059395510898619
+          }
+        },
+        "9": {
+          "area": {
+            "rmse_million_km2": 0.5679932315896636,
+            "bias_million_km2": -0.2849242000734539,
+            "correlation": 0.78395627091718,
+            "model_trend_million_km2_per_decade": -0.42671791533675946,
+            "observed_trend_million_km2_per_decade": -0.49230208248925794
+          },
+          "extent": {
+            "rmse_million_km2": 0.6021131035121471,
+            "bias_million_km2": -0.2831478823690035,
+            "correlation": 0.8846764432404637,
+            "model_trend_million_km2_per_decade": -0.7578914238720597,
+            "observed_trend_million_km2_per_decade": -0.8342597844583015
+          }
+        }
+      }
+    },
+    "independent_holdout": {
+      "period": [
+        2021,
+        2025
+      ],
+      "evidence_role": "independent_temporal_holdout",
+      "used_for_tuning": false,
+      "records": 10,
+      "months": {
+        "3": {
+          "area": {
+            "rmse_million_km2": 0.35120616962047096,
+            "bias_million_km2": 0.12274838439244107,
+            "correlation": 0.476532782842395,
+            "model_trend_million_km2_per_decade": -0.13884048714413977,
+            "observed_trend_million_km2_per_decade": -1.2099999999999285
+          },
+          "extent": {
+            "rmse_million_km2": 0.2348738395590299,
+            "bias_million_km2": -0.03692212405851336,
+            "correlation": 0.428821617492251,
+            "model_trend_million_km2_per_decade": -0.4037918650542454,
+            "observed_trend_million_km2_per_decade": -0.7999999999999508
+          }
+        },
+        "9": {
+          "area": {
+            "rmse_million_km2": 0.41994517748547694,
+            "bias_million_km2": -0.35879674741423156,
+            "correlation": 0.7279902234011646,
+            "model_trend_million_km2_per_decade": -0.5963280476549592,
+            "observed_trend_million_km2_per_decade": -1.33999999999978
+          },
+          "extent": {
+            "rmse_million_km2": 0.7621750099814049,
+            "bias_million_km2": -0.732226443548442,
+            "correlation": 0.5728196554849431,
+            "model_trend_million_km2_per_decade": -0.7843652221451648,
+            "observed_trend_million_km2_per_decade": -0.9499999999998301
+          }
+        }
+      }
+    },
+    "independent_holdout_gates": {
+      "march_area_rmse_le_0p50": true,
+      "march_extent_rmse_le_0p50": true,
+      "september_area_rmse_le_0p60": true,
+      "september_extent_rmse_le_0p90": true,
+      "september_area_positive_correlation": true,
+      "september_extent_positive_correlation": true
+    },
+    "independent_holdout_passed": true,
+    "records": [
+      {
+        "year": 1979,
+        "month": 3,
+        "model_year": 1979.199999999995,
+        "model_area": 13.128986435767832,
+        "model_extent": 16.215565974818546,
+        "observed_area": 13.21,
+        "observed_extent": 16.34
+      },
+      {
+        "year": 1980,
+        "month": 3,
+        "model_year": 1980.2,
+        "model_area": 13.124832205346395,
+        "model_extent": 16.170382848077857,
+        "observed_area": 12.99,
+        "observed_extent": 16.04
+      },
+      {
+        "year": 1981,
+        "month": 3,
+        "model_year": 1981.2,
+        "model_area": 13.12132569069311,
+        "model_extent": 16.130726211476418,
+        "observed_area": 12.71,
+        "observed_extent": 15.63
+      },
+      {
+        "year": 1982,
+        "month": 3,
+        "model_year": 1982.2,
+        "model_area": 13.122632410138241,
+        "model_extent": 16.140899313776146,
+        "observed_area": 13.07,
+        "observed_extent": 16.04
+      },
+      {
+        "year": 1983,
+        "month": 3,
+        "model_year": 1983.2,
+        "model_area": 13.13167687136409,
+        "model_extent": 16.230553367861347,
+        "observed_area": 12.93,
+        "observed_extent": 16.09
+      },
+      {
+        "year": 1984,
+        "month": 3,
+        "model_year": 1984.2,
+        "model_area": 13.13237505410661,
+        "model_extent": 16.22959283984329,
+        "observed_area": 12.55,
+        "observed_extent": 15.58
+      },
+      {
+        "year": 1985,
+        "month": 3,
+        "model_year": 1985.2,
+        "model_area": 13.126742551573118,
+        "model_extent": 16.167136661102404,
+        "observed_area": 12.75,
+        "observed_extent": 15.89
+      },
+      {
+        "year": 1986,
+        "month": 3,
+        "model_year": 1986.2,
+        "model_area": 13.121209124884821,
+        "model_extent": 16.10997148774796,
+        "observed_area": 12.72,
+        "observed_extent": 15.91
+      },
+      {
+        "year": 1987,
+        "month": 3,
+        "model_year": 1987.2,
+        "model_area": 13.115500257675066,
+        "model_extent": 16.051232910816854,
+        "observed_area": 12.83,
+        "observed_extent": 15.82
+      },
+      {
+        "year": 1988,
+        "month": 3,
+        "model_year": 1988.2,
+        "model_area": 13.108576682932615,
+        "model_extent": 15.979221324780813,
+        "observed_area": 13.9,
+        "observed_extent": 15.96
+      },
+      {
+        "year": 1989,
+        "month": 3,
+        "model_year": 1989.2,
+        "model_area": 13.100863898372252,
+        "model_extent": 15.898678692285321,
+        "observed_area": 13.21,
+        "observed_extent": 15.42
+      },
+      {
+        "year": 1990,
+        "month": 3,
+        "model_year": 1990.2,
+        "model_area": 13.094762024557532,
+        "model_extent": 15.834389306503434,
+        "observed_area": 13.51,
+        "observed_extent": 15.87
+      },
+      {
+        "year": 1991,
+        "month": 3,
+        "model_year": 1991.2,
+        "model_area": 13.099426531394103,
+        "model_extent": 15.880108302640627,
+        "observed_area": 13.42,
+        "observed_extent": 15.42
+      },
+      {
+        "year": 1992,
+        "month": 3,
+        "model_year": 1992.2,
+        "model_area": 13.124058030704646,
+        "model_extent": 16.12961934323441,
+        "observed_area": 13.48,
+        "observed_extent": 15.48
+      },
+      {
+        "year": 1993,
+        "month": 3,
+        "model_year": 1993.2,
+        "model_area": 13.131369904850791,
+        "model_extent": 16.191309524067034,
+        "observed_area": 13.77,
+        "observed_extent": 15.81
+      },
+      {
+        "year": 1994,
+        "month": 3,
+        "model_year": 1994.2,
+        "model_area": 13.11964287179318,
+        "model_extent": 16.06404281038022,
+        "observed_area": 13.55,
+        "observed_extent": 15.55
+      },
+      {
+        "year": 1995,
+        "month": 3,
+        "model_year": 1995.2,
+        "model_area": 13.105442120248421,
+        "model_extent": 15.923172932943437,
+        "observed_area": 13.34,
+        "observed_extent": 15.26
+      },
+      {
+        "year": 1996,
+        "month": 3,
+        "model_year": 1996.2,
+        "model_area": 13.093628635163926,
+        "model_extent": 15.809356728317894,
+        "observed_area": 12.9,
+        "observed_extent": 15.12
+      },
+      {
+        "year": 1997,
+        "month": 3,
+        "model_year": 1997.2,
+        "model_area": 13.084185467940296,
+        "model_extent": 15.717260944962824,
+        "observed_area": 13.3,
+        "observed_extent": 15.47
+      },
+      {
+        "year": 1998,
+        "month": 3,
+        "model_year": 1998.2,
+        "model_area": 13.075096989492438,
+        "model_extent": 15.625305332642204,
+        "observed_area": 13.57,
+        "observed_extent": 15.6
+      },
+      {
+        "year": 1999,
+        "month": 3,
+        "model_year": 1999.2,
+        "model_area": 13.06605115469425,
+        "model_extent": 15.531735927860009,
+        "observed_area": 13.54,
+        "observed_extent": 15.4
+      },
+      {
+        "year": 2000,
+        "month": 3,
+        "model_year": 2000.2,
+        "model_area": 13.058321551148584,
+        "model_extent": 15.450303765115942,
+        "observed_area": 13.17,
+        "observed_extent": 15.22
+      },
+      {
+        "year": 2001,
+        "month": 3,
+        "model_year": 2001.2,
+        "model_area": 13.052398293495731,
+        "model_extent": 15.385822135006359,
+        "observed_area": 13.64,
+        "observed_extent": 15.52
+      },
+      {
+        "year": 2002,
+        "month": 3,
+        "model_year": 2002.2,
+        "model_area": 13.04718398323435,
+        "model_extent": 15.327412497445009,
+        "observed_area": 13.42,
+        "observed_extent": 15.35
+      },
+      {
+        "year": 2003,
+        "month": 3,
+        "model_year": 2003.2,
+        "model_area": 13.043969057622725,
+        "model_extent": 15.288918920828458,
+        "observed_area": 13.42,
+        "observed_extent": 15.48
+      },
+      {
+        "year": 2004,
+        "month": 3,
+        "model_year": 2004.2,
+        "model_area": 13.04214843747273,
+        "model_extent": 15.263942692521475,
+        "observed_area": 12.99,
+        "observed_extent": 14.99
+      },
+      {
+        "year": 2005,
+        "month": 3,
+        "model_year": 2005.2,
+        "model_area": 13.04138025970604,
+        "model_extent": 15.249594372222427,
+        "observed_area": 12.74,
+        "observed_extent": 14.69
+      },
+      {
+        "year": 2006,
+        "month": 3,
+        "model_year": 2006.2,
+        "model_area": 13.040801323788898,
+        "model_extent": 15.237615717299812,
+        "observed_area": 12.52,
+        "observed_extent": 14.42
+      },
+      {
+        "year": 2007,
+        "month": 3,
+        "model_year": 2007.2,
+        "model_area": 13.039602578026976,
+        "model_extent": 15.220489983646566,
+        "observed_area": 12.56,
+        "observed_extent": 14.54
+      },
+      {
+        "year": 2008,
+        "month": 3,
+        "model_year": 2008.2,
+        "model_area": 13.037266751627964,
+        "model_extent": 15.19346893372764,
+        "observed_area": 13.53,
+        "observed_extent": 15.18
+      },
+      {
+        "year": 2009,
+        "month": 3,
+        "model_year": 2009.2,
+        "model_area": 13.034446377268983,
+        "model_extent": 15.163201195765332,
+        "observed_area": 13.43,
+        "observed_extent": 14.98
+      },
+      {
+        "year": 2010,
+        "month": 3,
+        "model_year": 2010.2000000000003,
+        "model_area": 13.030300994552833,
+        "model_extent": 15.120816167801491,
+        "observed_area": 13.53,
+        "observed_extent": 15.14
+      },
+      {
+        "year": 2011,
+        "month": 3,
+        "model_year": 2011.2000000000003,
+        "model_area": 13.026097443518532,
+        "model_extent": 15.079063507262237,
+        "observed_area": 12.83,
+        "observed_extent": 14.55
+      },
+      {
+        "year": 2012,
+        "month": 3,
+        "model_year": 2012.2000000000003,
+        "model_area": 13.021282485389351,
+        "model_extent": 15.031630785306174,
+        "observed_area": 13.41,
+        "observed_extent": 15.2
+      },
+      {
+        "year": 2013,
+        "month": 3,
+        "model_year": 2013.2,
+        "model_area": 13.01588842020452,
+        "model_extent": 14.978962575613071,
+        "observed_area": 13.45,
+        "observed_extent": 15.03
+      },
+      {
+        "year": 2014,
+        "month": 3,
+        "model_year": 2014.2,
+        "model_area": 13.010999385934198,
+        "model_extent": 14.931634192553675,
+        "observed_area": 12.95,
+        "observed_extent": 14.76
+      },
+      {
+        "year": 2015,
+        "month": 3,
+        "model_year": 2015.2,
+        "model_area": 13.00547022064153,
+        "model_extent": 14.877797355305558,
+        "observed_area": 12.78,
+        "observed_extent": 14.37
+      },
+      {
+        "year": 2016,
+        "month": 3,
+        "model_year": 2016.2,
+        "model_area": 13.000313213911406,
+        "model_extent": 14.82789603426831,
+        "observed_area": 12.61,
+        "observed_extent": 14.4
+      },
+      {
+        "year": 2017,
+        "month": 3,
+        "model_year": 2017.1999999999998,
+        "model_area": 12.995341947730534,
+        "model_extent": 14.779634133464974,
+        "observed_area": 12.61,
+        "observed_extent": 14.29
+      },
+      {
+        "year": 2018,
+        "month": 3,
+        "model_year": 2018.1999999999998,
+        "model_area": 12.99025929777798,
+        "model_extent": 14.730247710123054,
+        "observed_area": 12.69,
+        "observed_extent": 14.3
+      },
+      {
+        "year": 2019,
+        "month": 3,
+        "model_year": 2019.1999999999998,
+        "model_area": 12.985040981518335,
+        "model_extent": 14.679700759395416,
+        "observed_area": 12.89,
+        "observed_extent": 14.57
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "model_year": 2020.1999999999998,
+        "model_area": 12.979611505268085,
+        "model_extent": 14.627381448707713,
+        "observed_area": 13.03,
+        "observed_extent": 14.73
+      },
+      {
+        "year": 2021,
+        "month": 3,
+        "model_year": 2021.1999999999996,
+        "model_area": 12.967512163535861,
+        "model_extent": 14.58082766986885,
+        "observed_area": 12.99,
+        "observed_extent": 14.66
+      },
+      {
+        "year": 2022,
+        "month": 3,
+        "model_year": 2022.1999999999996,
+        "model_area": 12.952304324461425,
+        "model_extent": 14.536443073434246,
+        "observed_area": 12.8,
+        "observed_extent": 14.59
+      },
+      {
+        "year": 2023,
+        "month": 3,
+        "model_year": 2023.1999999999996,
+        "model_area": 12.937629777163197,
+        "model_extent": 14.493736342460801,
+        "observed_area": 12.91,
+        "observed_extent": 14.43
+      },
+      {
+        "year": 2024,
+        "month": 3,
+        "model_year": 2024.1999999999996,
+        "model_area": 12.924103149214464,
+        "model_extent": 14.45445803976943,
+        "observed_area": 13.19,
+        "observed_extent": 14.87
+      },
+      {
+        "year": 2025,
+        "month": 3,
+        "model_year": 2025.1999999999994,
+        "model_area": 12.912192507587259,
+        "model_extent": 14.419924254174106,
+        "observed_area": 12.19,
+        "observed_extent": 14.12
+      },
+      {
+        "year": 1979,
+        "month": 9,
+        "model_year": 1979.699999999995,
+        "model_area": 4.602899503838947,
+        "model_extent": 7.024254061304552,
+        "observed_area": 4.58,
+        "observed_extent": 7.05
+      },
+      {
+        "year": 1980,
+        "month": 9,
+        "model_year": 1980.7,
+        "model_area": 4.550714293448854,
+        "model_extent": 6.932966717935567,
+        "observed_area": 4.87,
+        "observed_extent": 7.67
+      },
+      {
+        "year": 1981,
+        "month": 9,
+        "model_year": 1981.7,
+        "model_area": 4.516684377669729,
+        "model_extent": 6.8821340005681195,
+        "observed_area": 4.44,
+        "observed_extent": 7.14
+      },
+      {
+        "year": 1982,
+        "month": 9,
+        "model_year": 1982.7,
+        "model_area": 4.550003162303342,
+        "model_extent": 6.975415771367209,
+        "observed_area": 4.43,
+        "observed_extent": 7.3
+      },
+      {
+        "year": 1983,
+        "month": 9,
+        "model_year": 1983.7,
+        "model_area": 4.62151747717558,
+        "model_extent": 7.118265117532009,
+        "observed_area": 4.7,
+        "observed_extent": 7.39
+      },
+      {
+        "year": 1984,
+        "month": 9,
+        "model_year": 1984.7,
+        "model_area": 4.593548272815917,
+        "model_extent": 7.033565346208482,
+        "observed_area": 4.11,
+        "observed_extent": 6.81
+      },
+      {
+        "year": 1985,
+        "month": 9,
+        "model_year": 1985.7,
+        "model_area": 4.530181189706217,
+        "model_extent": 6.901487599279658,
+        "observed_area": 4.23,
+        "observed_extent": 6.7
+      },
+      {
+        "year": 1986,
+        "month": 9,
+        "model_year": 1986.7,
+        "model_area": 4.467346051063808,
+        "model_extent": 6.785482852931815,
+        "observed_area": 4.72,
+        "observed_extent": 7.41
+      },
+      {
+        "year": 1987,
+        "month": 9,
+        "model_year": 1987.7,
+        "model_area": 4.395064224918803,
+        "model_extent": 6.651868992540504,
+        "observed_area": 5.64,
+        "observed_extent": 7.28
+      },
+      {
+        "year": 1988,
+        "month": 9,
+        "model_year": 1988.7,
+        "model_area": 4.310124687731584,
+        "model_extent": 6.494937218765269,
+        "observed_area": 5.36,
+        "observed_extent": 7.37
+      },
+      {
+        "year": 1989,
+        "month": 9,
+        "model_year": 1989.7,
+        "model_area": 4.223815534913227,
+        "model_extent": 6.340779424282439,
+        "observed_area": 4.86,
+        "observed_extent": 7.01
+      },
+      {
+        "year": 1990,
+        "month": 9,
+        "model_year": 1990.7,
+        "model_area": 4.182279112956379,
+        "model_extent": 6.2875912876553235,
+        "observed_area": 4.55,
+        "observed_extent": 6.14
+      },
+      {
+        "year": 1991,
+        "month": 9,
+        "model_year": 1991.7,
+        "model_area": 4.290925680855725,
+        "model_extent": 6.548177364062272,
+        "observed_area": 4.51,
+        "observed_extent": 6.47
+      },
+      {
+        "year": 1992,
+        "month": 9,
+        "model_year": 1992.7,
+        "model_area": 4.511587742331747,
+        "model_extent": 6.983095150398079,
+        "observed_area": 5.43,
+        "observed_extent": 7.47
+      },
+      {
+        "year": 1993,
+        "month": 9,
+        "model_year": 1993.7,
+        "model_area": 4.5077386494713,
+        "model_extent": 6.896433505499127,
+        "observed_area": 4.58,
+        "observed_extent": 6.4
+      },
+      {
+        "year": 1994,
+        "month": 9,
+        "model_year": 1994.7,
+        "model_area": 4.3754427589347,
+        "model_extent": 6.601515441995112,
+        "observed_area": 5.13,
+        "observed_extent": 7.14
+      },
+      {
+        "year": 1995,
+        "month": 9,
+        "model_year": 1995.7,
+        "model_area": 4.2395029988946185,
+        "model_extent": 6.348377688751215,
+        "observed_area": 4.43,
+        "observed_extent": 6.08
+      },
+      {
+        "year": 1996,
+        "month": 9,
+        "model_year": 1996.7,
+        "model_area": 4.122600136251582,
+        "model_extent": 6.145785312303277,
+        "observed_area": 5.62,
+        "observed_extent": 7.58
+      },
+      {
+        "year": 1997,
+        "month": 9,
+        "model_year": 1997.7,
+        "model_area": 4.021278266101722,
+        "model_extent": 5.972327138402067,
+        "observed_area": 4.89,
+        "observed_extent": 6.69
+      },
+      {
+        "year": 1998,
+        "month": 9,
+        "model_year": 1998.7,
+        "model_area": 3.9216379109263855,
+        "model_extent": 5.796698269067737,
+        "observed_area": 4.3,
+        "observed_extent": 6.54
+      },
+      {
+        "year": 1999,
+        "month": 9,
+        "model_year": 1999.7,
+        "model_area": 3.8272078320350915,
+        "model_extent": 5.632457236073528,
+        "observed_area": 4.29,
+        "observed_extent": 6.12
+      },
+      {
+        "year": 2000,
+        "month": 9,
+        "model_year": 2000.7,
+        "model_area": 3.7485720030691017,
+        "model_extent": 5.499466254210393,
+        "observed_area": 4.35,
+        "observed_extent": 6.25
+      },
+      {
+        "year": 2001,
+        "month": 9,
+        "model_year": 2001.7,
+        "model_area": 3.68451357475494,
+        "model_extent": 5.391605456920628,
+        "observed_area": 4.59,
+        "observed_extent": 6.73
+      },
+      {
+        "year": 2002,
+        "month": 9,
+        "model_year": 2002.7,
+        "model_area": 3.630517965866299,
+        "model_extent": 5.301372283510494,
+        "observed_area": 4.03,
+        "observed_extent": 5.83
+      },
+      {
+        "year": 2003,
+        "month": 9,
+        "model_year": 2003.7,
+        "model_area": 3.5956640136947406,
+        "model_extent": 5.246935379422182,
+        "observed_area": 4.05,
+        "observed_extent": 6.12
+      },
+      {
+        "year": 2004,
+        "month": 9,
+        "model_year": 2004.7,
+        "model_area": 3.572580119619745,
+        "model_extent": 5.211051866728579,
+        "observed_area": 4.39,
+        "observed_extent": 5.98
+      },
+      {
+        "year": 2005,
+        "month": 9,
+        "model_year": 2005.7,
+        "model_area": 3.5584808479702015,
+        "model_extent": 5.1893597806737315,
+        "observed_area": 4.07,
+        "observed_extent": 5.5
+      },
+      {
+        "year": 2006,
+        "month": 9,
+        "model_year": 2006.7,
+        "model_area": 3.5449152643305033,
+        "model_extent": 5.165588532567184,
+        "observed_area": 4.01,
+        "observed_extent": 5.86
+      },
+      {
+        "year": 2007,
+        "month": 9,
+        "model_year": 2007.7,
+        "model_area": 3.525848693792959,
+        "model_extent": 5.12979973078491,
+        "observed_area": 2.82,
+        "observed_extent": 4.27
+      },
+      {
+        "year": 2008,
+        "month": 9,
+        "model_year": 2008.7,
+        "model_area": 3.499670015280797,
+        "model_extent": 5.081284471513745,
+        "observed_area": 3.26,
+        "observed_extent": 4.69
+      },
+      {
+        "year": 2009,
+        "month": 9,
+        "model_year": 2009.7,
+        "model_area": 3.4687537288066608,
+        "model_extent": 5.024556885065257,
+        "observed_area": 3.76,
+        "observed_extent": 5.26
+      },
+      {
+        "year": 2010,
+        "month": 9,
+        "model_year": 2010.7000000000003,
+        "model_area": 3.429550165101751,
+        "model_extent": 4.9531781466438805,
+        "observed_area": 3.34,
+        "observed_extent": 4.87
+      },
+      {
+        "year": 2011,
+        "month": 9,
+        "model_year": 2011.7000000000003,
+        "model_area": 3.3905082930022608,
+        "model_extent": 4.884156175214091,
+        "observed_area": 3.21,
+        "observed_extent": 4.56
+      },
+      {
+        "year": 2012,
+        "month": 9,
+        "model_year": 2012.7,
+        "model_area": 3.3459125101412055,
+        "model_extent": 4.804031576564712,
+        "observed_area": 2.41,
+        "observed_extent": 3.57
+      },
+      {
+        "year": 2013,
+        "month": 9,
+        "model_year": 2013.7,
+        "model_area": 3.300461147619813,
+        "model_extent": 4.724012797136052,
+        "observed_area": 3.78,
+        "observed_extent": 5.21
+      },
+      {
+        "year": 2014,
+        "month": 9,
+        "model_year": 2014.7,
+        "model_area": 3.257495972888869,
+        "model_extent": 4.648761358066436,
+        "observed_area": 3.74,
+        "observed_extent": 5.22
+      },
+      {
+        "year": 2015,
+        "month": 9,
+        "model_year": 2015.7,
+        "model_area": 3.2112461538168593,
+        "model_extent": 4.566808715584132,
+        "observed_area": 3.42,
+        "observed_extent": 4.62
+      },
+      {
+        "year": 2016,
+        "month": 9,
+        "model_year": 2016.6999999999998,
+        "model_area": 3.169280519086421,
+        "model_extent": 4.494310500130813,
+        "observed_area": 2.91,
+        "observed_extent": 4.53
+      },
+      {
+        "year": 2017,
+        "month": 9,
+        "model_year": 2017.6999999999998,
+        "model_area": 3.12777795956542,
+        "model_extent": 4.421868146453604,
+        "observed_area": 3.35,
+        "observed_extent": 4.82
+      },
+      {
+        "year": 2018,
+        "month": 9,
+        "model_year": 2018.6999999999998,
+        "model_area": 3.086165764592314,
+        "model_extent": 4.348904017249241,
+        "observed_area": 3.35,
+        "observed_extent": 4.79
+      },
+      {
+        "year": 2019,
+        "month": 9,
+        "model_year": 2019.6999999999998,
+        "model_area": 3.0439205288987985,
+        "model_extent": 4.2749321250898955,
+        "observed_area": 3.17,
+        "observed_extent": 4.36
+      },
+      {
+        "year": 2020,
+        "month": 9,
+        "model_year": 2020.6999999999996,
+        "model_area": 2.9892484906700156,
+        "model_extent": 4.19218924404853,
+        "observed_area": 2.83,
+        "observed_extent": 4.0
+      },
+      {
+        "year": 2021,
+        "month": 9,
+        "model_year": 2021.6999999999996,
+        "model_area": 2.9188473730579267,
+        "model_extent": 4.099305421344015,
+        "observed_area": 3.47,
+        "observed_extent": 4.95
+      },
+      {
+        "year": 2022,
+        "month": 9,
+        "model_year": 2022.6999999999996,
+        "model_area": 2.8500861988702293,
+        "model_extent": 4.008432463879234,
+        "observed_area": 3.47,
+        "observed_extent": 4.9
+      },
+      {
+        "year": 2023,
+        "month": 9,
+        "model_year": 2023.6999999999996,
+        "model_area": 2.7864574661075827,
+        "model_extent": 3.924645395394716,
+        "observed_area": 2.83,
+        "observed_extent": 4.38
+      },
+      {
+        "year": 2024,
+        "month": 9,
+        "model_year": 2024.6999999999994,
+        "model_area": 2.729797552455164,
+        "model_extent": 3.8502909188576604,
+        "observed_area": 2.91,
+        "observed_extent": 4.35
+      },
+      {
+        "year": 2025,
+        "month": 9,
+        "model_year": 2025.6999999999994,
+        "model_area": 2.6808276724379403,
+        "model_extent": 3.786193582782165,
+        "observed_area": 3.08,
+        "observed_extent": 4.75
+      }
+    ]
+  },
+  "ssp245_future_sea_ice": {
+    "september_area_2081_2100_million_km2": 1.050279367956001,
+    "september_extent_2081_2100_million_km2": 1.5449113995213533,
+    "first_september_below_1_million_km2_area": 2097,
+    "september_2100_area_million_km2": 0.9785626005897121,
+    "september_2100_extent_million_km2": 1.4429866517298786,
+    "interpretation": "Calibrated hemispheric observation-operator result with an AR6-consistent post-2020 tuning closure; not independent predictive validation, and the longitude reconstruction has no regional forecast skill.",
+    "evidence_role": "tuning_informed_statistical_projection_closure",
+    "used_for_tuning": true,
+    "independent_predictive_validation": false
+  },
+  "ssp585_future_sea_ice": {
+    "september_area_2081_2100_million_km2": 0.3739305790729231,
+    "september_extent_2081_2100_million_km2": 0.5455285136127688,
+    "first_september_below_1_million_km2_area": 2061,
+    "september_2100_area_million_km2": 0.275455344772691,
+    "september_2100_extent_million_km2": 0.3965643784971045,
+    "interpretation": "Calibrated hemispheric observation-operator result with an AR6-consistent post-2020 tuning closure; not independent predictive validation, and the longitude reconstruction has no regional forecast skill.",
+    "evidence_role": "tuning_informed_statistical_projection_closure",
+    "used_for_tuning": true,
+    "independent_predictive_validation": false
+  },
+  "arctic_open_water_observational_validation": {
+    "benchmark_file": "data/validation/open_water/NOAA_OISST_ARCTIC_BENCHMARKS.json",
+    "benchmark_sha256": "3ae3b3658c98562573408a6c6ee164531f7a7b50e82b4f908800426d1fbb98cc",
+    "evidence_role": "external_observational_plausibility_validation",
+    "used_for_tuning": false,
+    "scope": {
+      "latitude_min_deg_n": 66.0,
+      "months": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "interpretation": "Broad sector-mean plausibility envelopes, not pointwise SST skill or a substitute for gridded OISST validation."
+    },
+    "checks": {
+      "atlantic_jja_mean_c": {
+        "value": 4.467116183694453,
+        "minimum": -1.8,
+        "maximum": 8.0,
+        "passed": true
+      },
+      "non_atlantic_jja_mean_c": {
+        "value": 1.8079759057770863,
+        "minimum": -1.8,
+        "maximum": 5.0,
+        "passed": true
+      },
+      "atlantic_september_mean_c": {
+        "value": 4.69129509487829,
+        "minimum": -1.8,
+        "maximum": 6.0,
+        "passed": true
+      },
+      "non_atlantic_september_mean_c": {
+        "value": 2.317223993106625,
+        "minimum": -1.8,
+        "maximum": 3.0,
+        "passed": true
+      }
+    },
+    "all_checks_passed": true,
+    "mandatory_warning": "Arctic open-water temperatures are reduced-sector diagnostics. Do not interpret them as local or coastal forecasts."
+  },
+  "scientific_use": {
+    "model_class": "reduced_complexity_climate_and_amoc_emulator",
+    "intended_use": [
+      "scenario sensitivity experiments",
+      "process exploration",
+      "software and hypothesis testing"
+    ],
+    "not_intended_use": [
+      "precise regional climate forecasts",
+      "operational sea-ice navigation",
+      "deterministic AMOC collapse timing",
+      "outlet-glacier or local Greenland projections"
+    ],
+    "components": {
+      "sea_ice": {
+        "role": "calibrated statistical observation operator over a two-sector thermodynamic core",
+        "calibration_period": "NSIDC v4 March/September 1979-2020",
+        "independent_holdout_period": "NSIDC v4 March/September 2021-2025",
+        "future_projection_role": "AR6-consistent tuning-informed statistical projection closure; not independent predictive validation",
+        "longitude_skill": "none; longitude occupancy is deterministic display reconstruction"
+      },
+      "arctic_open_water_temperature": {
+        "role": "reduced-sector diagnostic",
+        "validation": "broad NOAA OISST/Arctic Report Card observational plausibility envelope",
+        "warning": "Do not interpret as a local, coastal, or point forecast."
+      },
+      "amoc": {
+        "role": "calibrated sensitivity emulator",
+        "warning": "Scenario weakening and hosing response are sensitivity results, not precise collapse probability or timing forecasts."
+      },
+      "greenland": {
+        "role": "aggregate surface-mass-balance and discharge emulator",
+        "warning": "Total contribution is scenario-sensitive; regional geometry and outlet-glacier evolution are not resolved."
+      }
+    },
+    "evidence_partition": {
+      "tuning_informed_development_regressions": "IPCC/literature ranges used during v2.24-v2.28 tuning; not independent validation",
+      "independent_temporal_holdout": "NSIDC 2021-2025 sea-ice area and extent",
+      "external_plausibility_validation": "NOAA OISST/Arctic Report Card open-water temperature envelopes",
+      "structural_tests": "conservation, control stability, timestep, hosing, resolution and software regressions"
+    }
+  },
+  "provenance": {
+    "benchmark_file": "development_regression_benchmarks.json",
+    "benchmark_file_sha256": "9aadf6a91227fd850b13582c8723bb409815095bc444a788773e8ca823c4637d",
+    "benchmark_set_version": "2.29.4-development",
+    "processing_script": "validate_v2294.py",
+    "processing_script_sha256": "afeb1773913e48678e8b02d1c96a3ee8168cfe10c6dc7863bf6a6f0c9844adcb",
+    "climate_model_sha256": "25159a4f4204ccfec13792084af54d7099dd1b38cf6b78dfd147513f965bfb1b"
+  },
+  "release_checks": {
+    "v2294_version": true,
+    "meinshausen2020_default": true,
+    "five_percent_unresolved_lead_threshold": true,
+    "development_benchmarks": true,
+    "independent_sea_ice_holdout": true,
+    "nondegenerate_sea_ice_extent": true,
+    "ssp245_late_century_sea_ice_area": true,
+    "ssp585_late_century_sea_ice_area": true,
+    "sea_ice_forcing_ordering": true,
+    "future_sea_ice_evidence_role": true,
+    "open_water_observational_plausibility": true,
+    "continuous_control_balance": true,
+    "ssp245_arctic_temperature": true,
+    "ssp585_arctic_temperature": true,
+    "energy_budget": true,
+    "control_stability": true,
+    "reference_cycle_closure": true,
+    "public_range_reference_cycle_convergence": true,
+    "disabled_arctic_skips_reference_spinup": true,
+    "unconditional_monte_carlo_safety": true,
+    "pre_projection_salt_integrity": true,
+    "timestep_local_arctic_convergence": true,
+    "resolution_local_arctic_convergence": true,
+    "hosing_recovery": true,
+    "perturbation_recovery": true,
+    "perturbation_salt_conservation": true
+  },
+  "all_release_checks_passed": true
+}

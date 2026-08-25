@@ -1,0 +1,14 @@
+{
+  "10": {
+    "march_skill_vs_expanding_linear_trend": 0.17651990741009216,
+    "march_skill_vs_persistence": 0.10352217213112336,
+    "september_skill_vs_expanding_linear_trend": -0.20463207066606381,
+    "september_skill_vs_persistence": -0.16983041709269964
+  },
+  "5": {
+    "march_skill_vs_expanding_linear_trend": 0.22387320703300384,
+    "march_skill_vs_persistence": 0.15507312469253842,
+    "september_skill_vs_expanding_linear_trend": -0.16371684711481094,
+    "september_skill_vs_persistence": -0.13009722867946194
+  }
+}

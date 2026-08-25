@@ -1,0 +1,14 @@
+NSIDC-0611 legacy-auth acquisition fix
+=======================================
+
+Focused six-source acquisition/observation tests:
+17 passed
+
+Additional 2026 scientific-review + actual sea-ice fix tests:
+12 passed
+
+Python compilation:
+PASS
+
+Older v2.29.9 scientific-review test file:
+NOT COUNTED - execution window expired before completion; no failure emitted before timeout.

@@ -1,0 +1,83 @@
+EMERGENT GLOBAL CLIMATE MODEL v2.29.4 - FINAL TEST RESULTS
+Generated: 2026-07-30
+
+RELEASE VERDICT: PASS
+
+ISOLATED REGRESSION INVENTORY
+- Current collected inventory: 200 tests
+- Passed: 200
+- Failed: 0
+- Timed out: 0
+- Missing: 0
+- Sum of isolated test runtimes: 4175.94 seconds
+- Method: each pytest node ran in a separate subprocess with plugin autoload disabled, normal setup/execution/teardown, and an independent timeout.
+- Frozen-source integrity: all 36 model/test source-data files in the 200-test manifest matched their tested SHA-256 values.
+- Post-suite packaging correction: the packager was fixed to include the mandatory data/world_grid_5deg.npz asset; the exact rebuilt archive is verified separately below.
+
+VALIDATION PIPELINE
+- Release-blocking checks: 26/26 passed
+- Development-regression checks: all passed
+- Independent NSIDC 2021-2025 temporal holdout: all 6 gates passed
+- External Arctic open-water plausibility checks: 4/4 passed
+- Validation records regenerated from the final source tree:
+  - VALIDATION_SUMMARY_V2_29_4.json
+  - DEEP_VALIDATION_V2_29_4.json
+  - IMPLEMENTATION_AUDIT_V2_29_4.json
+
+KEY FINAL METRICS
+- Historical GMST, 2011-2020: 1.108107 C
+- Ocean heat-content change, 1971-2018: 383.716823 ZJ
+- Annual Arctic amplification, 1979-2021: 3.408517x
+- DJF / JJA Arctic amplification: 4.539628x / 1.635968x
+- SSP2-4.5 AMOC weakening by 2100: 20.848662%
+- SSP5-8.5 AMOC weakening by 2100: 39.958636%
+- SSP2-4.5 September ice area, 2081-2100: 1.050279 million km2
+- SSP5-8.5 September ice area, 2081-2100: 0.373931 million km2
+- First September below 1 million km2 area: 2097 under SSP2-4.5; 2061 under SSP5-8.5
+- SSP2-4.5 / SSP5-8.5 maximum resolved Arctic open-water temperature: 12.769081 C / 17.429357 C
+- Abrupt-2xCO2 energy residual: -0.039635%
+- 500-year GMST drift: -2.5851e-14 C
+- 500-year AMOC drift: -1.7764e-14 Sv
+- 500-year final salt residual: 0 ppm
+- Hosing recovery after 100 years: 81.343019%
+- Greenland SSP2-4.5 contribution by 2100: 85.698590 mm sea-level equivalent
+
+V2.29.4 FIXES VERIFIED
+- The exact unforced reference-manifold bypass was removed.
+- Ordinary equations use continuous phase-dependent reference-tendency balancing.
+- Exact control remains stable while deliberate physical perturbations evolve normally.
+- Native two-sector thermodynamic sea ice is retained for process diagnostics.
+- Public ice area/extent use a conservative calibrated sub-grid observation operator.
+- The longitude display reconstruction is explicitly labelled statistical and has no claimed regional forecast skill.
+- NSIDC 1979-2020 records are identified as calibration/development evidence.
+- NSIDC 2021-2025 records are frozen as an independent temporal holdout.
+- Future sea-ice decay is explicitly labelled an AR6-consistent tuning-informed projection closure, not independent predictive validation.
+- Arctic open-water temperatures are checked against broad NOAA OISST plausibility envelopes and carry a mandatory non-local interpretation warning.
+- AMOC and Greenland outputs are explicitly documented as sensitivity-emulator results rather than precise forecasts.
+- SSP5-8.5 late-century September ice area and extent are required to remain below SSP2-4.5.
+- Meinshausen et al. (2020) remains the synchronized default forcing formula.
+- Existing-output overwrite protection, protected-path rejection, worker timeout/heartbeat/checkpoint/resume, cleanup, and process-tree termination remain verified.
+
+EXACT ARCHIVE EXTRACTION VERIFICATION
+- SHA-256 checksum verified before extraction.
+- Mandatory data/world_grid_5deg.npz asset present: 276615 bytes.
+- Extracted source/data audit: 37/37 SHA-256 values matched.
+- Extracted focused release tests: 34/34 passed.
+- The retained combined-process pytest shutdown hang occurred after seven successful tests in one module; the four remaining nodes passed independently.
+- Extracted one-year default constant-control startup completed with v2.29.4, zero GMST drift, 17.0 Sv AMOC, and Meinshausen et al. (2020) as the default forcing formula.
+- Extracted Monte Carlo startup: 2/2 members succeeded with two workers; 0 failed.
+- Archive contains no .git, pytest cache, bytecode cache, validation scratch directory, or parallel-runner log/PID/exit artifact.
+
+SCIENTIFIC EVIDENCE ROLES
+- Tuning-informed development regressions: IPCC/literature ranges used during earlier calibration; not independent validation.
+- Independent temporal holdout: NSIDC March/September sea-ice area and extent, 2021-2025.
+- External plausibility validation: broad NOAA OISST/Arctic Report Card open-water temperature envelopes.
+- Structural validation: conservation, control stability, timestep, hosing, resolution, and software regressions.
+
+LIMITATIONS RETAINED BY DESIGN
+- Sea-ice longitude occupancy is a deterministic statistical reconstruction with no regional forecast skill.
+- Post-2020 sea-ice projection closure is tuning-informed.
+- Arctic open-water temperatures are reduced-sector diagnostics, not local/coastal forecasts.
+- AMOC collapse probability/timing and regional Greenland outlet-glacier evolution are not resolved precisely.
+
+The model and test source used by the 200-test inventory exactly matches the persisted frozen-source manifest. The subsequent packaging-only correction does not change model equations or interfaces and is covered by exact extracted-archive verification.

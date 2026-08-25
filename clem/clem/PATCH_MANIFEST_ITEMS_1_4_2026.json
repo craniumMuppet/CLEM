@@ -1,0 +1,20 @@
+{
+  "files": {
+    "ARCTIC_VALIDATION_STACK_STATUS_2026.json": "e4acba7dbcfa1c9d41568b0879c21ccc67de8e7a78ab3839cea2a810fda6fdc0",
+    "CHANGELOG.md": "624c5306c60ad935151a2996a34195b4368a0914a77e00c1a0d6dd1b1b296dce",
+    "ITEMS_1_4_OBSERVATION_OPERATOR_FIXES_2026.md": "06faefa3c886e13b43516807954dc997814d7c2f810e1ba43bc67fe2e4e48ff0",
+    "SIX_SOURCE_ARCTIC_VALIDATION_2026.md": "8cd50d23d42af1125c45ab6f0f907f34560b3a892cf5f55b01343c194c3eaa2f",
+    "TEST_RESULTS_ITEMS_1_4_2026.txt": "fb957f9b59eaebc14cb8047d5aad6b21c36a2110c3a35a813c45853d56c80a10",
+    "VALIDATION_RERUN_ITEMS_1_4_2026.json": "50cb2b5b30e1cfc979e859d5ff73a7d204385e898b2e069e2d521d18f55f0f95",
+    "arctic_observation_operator.py": "1f07bab842583ec0676bcecda86a2b4cd4a464e14ae4eb23daf947e6af9b716a",
+    "arctic_validation_stack.py": "574d11333fedee585fab5c4f59e5cfe38109093e5fc344e2a9edb4aa958c1726",
+    "data/validation/ARCTIC_VALIDATION_STACK.md": "3a594d550171aa3ea742cca16ec222d8dec2df9522618f0eb93b2c269cd7eceb",
+    "data/validation/sea_ice_fixed_mask/README.md": "a9422a38f000cce1167ce1d9ff5a54db1dcce1566bc7a3a1adac0217d5cc9dac",
+    "scientific_evidence.py": "7a6805c5e56f325be6c361dc9ee0088847868525d8ca64ca92481eb22fe8d90d",
+    "sea_ice_validation.py": "a94956444e29ededa9b7508098bd8055cc5c635c1ebc66e741f47f2758138c45",
+    "tests/test_six_source_arctic_validation_stack.py": "f3432b727f4b631b42688615e2343d3a213a8ec6cd71dadb85834d9fc1f43a37",
+    "tools/acquire_arctic_validation_stack.py": "ce0a5c420fb3a83782a81f30a9617faa0e879904577ed4004ceac709c07dcc84",
+    "tools/export_arctic_validation_bundle.py": "5abb09142b3247093f4ff127c60bf1b962206f4b88868e8f78f38bf822142a3f"
+  },
+  "patch": "items_1_4_arctic_observation_operator_fixes_2026"
+}

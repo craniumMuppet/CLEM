@@ -1,0 +1,10 @@
+{
+  "dataset": "HadCRUT5 analysis global annual summary series",
+  "file": "HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv",
+  "role": "temperature_driven_regression_baseline_for_retrospective_nested_hindcasts",
+  "sha256": "45f634f176442a0ebd163844b2a40fb09d98f6217f575b008ddf37ea4c858c88",
+  "source_page": "https://www.metoffice.gov.uk/hadobs/hadcrut5/data/HadCRUT.5.1.0.0/download.html",
+  "source_provider": "Met Office Hadley Centre",
+  "used_for_model_calibration": false,
+  "version": "5.1.0.0"
+}

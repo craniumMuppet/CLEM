@@ -1,0 +1,75 @@
+Emergent Global Climate Model v2.29.15 - Test Results
+Review completion date: 2026-08-02
+
+OVERALL RESULT
+- Scientific validation tasks: 22/22 PASS
+- Release checks: 39/39 PASS
+- Modern pytest inventory: 229/229 PASS across 29 modules
+- Focused v2.29.10-v2.29.15 integrity regressions: 41/41 PASS
+- Legacy compatibility entry points: 54/54 PASS
+- Python source compilation: 135/135 PASS
+- Implementation-audit source hashes: 38/38 PASS
+
+P1 REVIEW REPRODUCTION 1 - SAVED WINTER DIAGNOSTICS
+Exact independent-review setup: SSP2-4.5, 1850-2101, dt 0.05 year, 10-degree resolution, fully active Arctic bands at or north of 66 degrees.
+- Atlantic saved local-thickness maximum error: 0.0 m
+- Non-Atlantic saved local-thickness maximum error: 0.0 m
+- Atlantic saved open-water-temperature maximum error: 0.0 C
+- Non-Atlantic saved open-water-temperature maximum error: 0.0 C
+- Atlantic saved concentration maximum error: 2.5268676040468563e-13
+- Non-Atlantic saved concentration maximum error: 1.3911094498553211e-13
+- Atlantic concentration x local-thickness volume-identity error: 5.970779426434092e-13 m
+- Non-Atlantic concentration x local-thickness volume-identity error: 3.3018032752352156e-13 m
+Result: PASS. Saved local fields now reconstruct the same lead-closure-adjusted state used by integration.
+
+P1 REVIEW REPRODUCTION 2 - NEAR-ZERO ICE VOLUME
+Cold-season reference concentration 0.99:
+- Equivalent thickness 1e-9 m, default closure 0.65 -> concentration 5.00002252254488e-10
+- Equivalent thickness 1e-9 m, upper-prior closure 0.90 -> concentration 5.000031025946043e-10
+- Equivalent thickness 0 m -> concentration 0.0
+- Maximum mapping volume-identity error: 1.3552527156068805e-20 m
+- Maximum available-volume concentration-cap excess: 0.0
+- Configured minimum local ice thickness: 0.03 m
+- Cold actual-air closure weight: 0.65
+- Warm actual-air closure weight: 0.0
+Result: PASS. Closure vanishes continuously with volume, respects available-volume support, and is suppressed by the actual transient near-melt state.
+
+MARCH RESPONSE RETENTION
+Canonical SSP2-4.5 historical diagnostic:
+- March native-area trend: -0.0559975628601871 million km2/decade
+- Observed fitted March-area trend: -0.03817356778218968 million km2/decade
+- Trend magnitude ratio: 1.4669198116271809
+- March area correlation: 0.14321578652606792
+- March area RMSE: 0.3820688192040629 million km2
+- March 15% extent trend: -0.065119137799608 million km2/decade
+Result: v2.29.14's fitted March-area trend improvement is retained. The correlation, RMSE, and extent-trend limitations remain explicitly non-release-blocking development diagnostics and are not claimed as independent predictive skill.
+
+COUPLED OUTPUT CHECKS
+- SSP2-4.5 AMOC decline in 2100: 27.471691450988477%
+- SSP5-8.5 AMOC decline in 2100: 37.067537277846554%
+- 500-year corrected control GMST drift: -1.1409082316832488e-14 C
+- 500-year corrected control AMOC drift: 3.197442310920451e-14 Sv
+- 650-year SSP2-4.5 AMOC in 2100: 10.818715413232022 Sv
+- 650-year SSP2-4.5 minimum AMOC: 10.581318733857545 Sv
+- 650-year SSP2-4.5 final AMOC: 16.28067127518326 Sv
+
+TEST EXECUTION DETAILS
+- All 29 modern pytest modules were executed in isolated module processes with slow, continuation, calibration, and GUI markers excluded, matching the modern inventory definition. One stale test path initially opened retained v2.29.14 validation records while expecting 2.29.15; the assertion was corrected to the active v2.29.15 records and validator, and the corrected case passed. Aggregate final result: 229/229 PASS.
+- Focused integrity set: test_v22910_integrity_recovery.py, test_v22911_target_baseline_safety.py, test_v22912_monte_carlo_integrity.py, test_v22913_integrity_amoc_baseline.py, test_v22914_recovery_validation_seaice.py, and test_v22915_winter_seaice_integrity.py. Result: 41/41 PASS.
+- All 54 retained legacy smoke, scientific, calibration, script, and GUI entry points completed in fresh subprocesses. Result: 54/54 PASS.
+- The installed-environment dependency verifier was not used as a release gate in this minimal sandbox because eleven optional GUI/runtime packages from the complete lock were not installed. The versioned lock files and dependency-integrity record are packaged and covered by the implementation audit and package manifest.
+
+DEVELOPMENT DIAGNOSTICS
+- Non-release-blocking development checks: 7/10 PASS.
+- Expected failed development diagnostics: native sea-ice calibration diagnostics, robust March trend diagnostic, and the validation-informed 2021-2025 diagnostics.
+- These failures preserve the stated limitation that winter temporal skill remains inadequate for quantitative prediction; they are not hidden or converted into release gates.
+
+PACKAGE VERIFICATION
+- ZIP compressed-data integrity: PASS
+- Archive checksum matched the supplied sibling SHA-256 file: PASS
+- Archive members: 348 files under one versioned top-level directory
+- Package manifest: 347/347 non-manifest packaged files verified by size and SHA-256
+- Implementation audit after fresh extraction: 38/38 source hashes verified
+- Fresh extracted-source compilation: 135/135 Python files passed
+- Packaging hygiene: PASS; no PID, runner log, exit marker, bytecode, cache, temporary, backup, or validation-task work artifacts were packaged
+- The archive SHA-256 is intentionally supplied in the sibling .sha256 file rather than embedded recursively inside this record.

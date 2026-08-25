@@ -1,0 +1,20 @@
+{
+  "model_version": "2.18.1",
+  "change": "single rate-list control for percent_ramp_hold",
+  "deterministic_rate_behavior": {
+    "one_value": "one pathway plus standard comparison products",
+    "multiple_values": "all pathways included in comparison outputs",
+    "primary_standard_output": "first sorted rate"
+  },
+  "monte_carlo_rate_behavior": "exactly one rate required",
+  "backward_compatibility": "hidden --co2-growth-rate-percent parser option retained",
+  "tests": {
+    "compileall": "passed",
+    "percent_ramp_hold_test": "passed",
+    "gui_smoke_test": "passed",
+    "setting_metadata_test": "passed",
+    "monte_carlo_smoke_test": "passed",
+    "v2_17_1_validation_test": "passed",
+    "full_regression_test": "timed out after first two components passed"
+  }
+}

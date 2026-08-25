@@ -1,0 +1,228 @@
+{
+  "model_version": "2.28.0",
+  "classification": "tuning-informed development regression checks; not independent validation",
+  "default_freshwater_coefficients_sv_per_k": {
+    "hydrological": 0.006,
+    "greenland_public_coefficient": 0.005
+  },
+  "structural_defaults": {
+    "greenland_dynamic_discharge_fraction": 0.4,
+    "greenland_pdd_melt_factor_gt_per_degree_day": 0.7,
+    "greenland_max_freshwater_sv": 0.025,
+    "amoc_temperature_density_coupling": 1.0,
+    "amoc_convection_density_scale_factor": 4.0,
+    "amoc_reference_density_driver": 0.00075,
+    "ocean_heat_exchange_wm2_k": 1.45,
+    "arctic_winter_transport_enhancement": 12.0,
+    "arctic_open_water_stable_exchange_wm2_k": 0.5,
+    "arctic_open_water_unstable_exchange_wm2_k": 5.0,
+    "arctic_open_water_exchange_transition_c": 0.5,
+    "arctic_transient_shortwave_scale": 0.5,
+    "arctic_air_low_pass_years": 0.15
+  },
+  "development_metrics": {
+    "historical_gmst_2011_2020_c": 1.1044586711166808,
+    "historical_ocean_heat_content_change_1971_2018_zj": 380.30402398369495,
+    "historical_arctic_amplification_1979_2021_ratio": 3.535848598015348,
+    "ssp245_amoc_decline_2100_percent": 19.021365684438173
+  },
+  "benchmark_results": {
+    "historical_gmst_2011_2020_c": {
+      "value": 1.1044586711166808,
+      "minimum": 0.95,
+      "maximum": 1.2,
+      "units": "degC relative to 1850-1900",
+      "passed": true,
+      "evidence_role": "development_regression_check",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI SPM, statement A.1.2"
+    },
+    "historical_ocean_heat_content_change_1971_2018_zj": {
+      "value": 380.30402398369495,
+      "minimum": 350.0,
+      "maximum": 500.0,
+      "units": "ZJ",
+      "passed": true,
+      "evidence_role": "development_regression_check",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 7, Section 7.2.2 and Table 7.1"
+    },
+    "historical_arctic_amplification_1979_2021_ratio": {
+      "value": 3.535848598015348,
+      "minimum": 3.0,
+      "maximum": 4.5,
+      "units": "Arctic trend divided by global trend",
+      "passed": true,
+      "evidence_role": "development_regression_check",
+      "used_for_tuning": true,
+      "source_reference": "Rantanen et al. 2022, Communications Earth & Environment, doi:10.1038/s43247-022-00498-3"
+    },
+    "ssp245_amoc_decline_2100_percent": {
+      "value": 19.021365684438173,
+      "minimum": 15.0,
+      "maximum": 50.0,
+      "units": "percent",
+      "passed": true,
+      "evidence_role": "development_regression_check",
+      "used_for_tuning": true,
+      "source_reference": "IPCC AR6 WGI Chapter 4, AMOC projections across SSP scenarios"
+    }
+  },
+  "all_development_checks_passed": true,
+  "seasonal_arctic_amplification_1979_2021": {
+    "DJF": 4.806145441044877,
+    "MAM": 3.585181196244391,
+    "JJA": 1.7184822184412825,
+    "SON": 3.784811414172421,
+    "annual": 3.535848598015348
+  },
+  "ssp585_amoc_decline_2100_percent": 39.71862244080969,
+  "greenland_ssp245": {
+    "mean_total_loss_2011_2020_gt_per_year": 214.89003553766653,
+    "mean_dynamic_discharge_2011_2020_gt_per_year": 80.18240247215343,
+    "mean_surface_mass_balance_loss_2011_2020_gt_per_year": 164.50595108793945,
+    "cumulative_net_ice_loss_2100_gt": 31048.847954286477,
+    "cumulative_sea_level_2100_mm": 85.77029821626095
+  },
+  "arctic_reference_cycle": {
+    "global_baseline_mean_c": 13.999999999999998,
+    "arctic_ocean_baseline_mean_c_north_of_full_latitude": -1.8,
+    "arctic_ocean_baseline_min_c_north_of_full_latitude": -1.8000000000000003,
+    "arctic_ocean_baseline_max_c_north_of_full_latitude": -1.7999999999999998,
+    "freezing_temperature_c": -1.8,
+    "periodic_closure_wyr_m2": 5.4498627832799684e-11,
+    "spinup_convergence_wyr_m2": 7.746692176624492e-11,
+    "spinup_years_completed": 70,
+    "monthly_ocean_area_weighted_ice_fraction": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.951120989388126,
+      0.8365097534515687,
+      0.8210050525395332,
+      0.8788561346566656,
+      0.9600179655910157,
+      0.9946593946959653
+    ],
+    "monthly_ocean_area_weighted_interface_temperature_c": [
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.7999999999999998,
+      -1.5993156071806076,
+      -1.0283291519486781,
+      -1.2082317230676076,
+      -1.8000000000000003,
+      -1.8000000000000003,
+      -1.8000000000000003
+    ],
+    "minimum_ice_month": 9,
+    "sectors": {
+      "atlantic": {
+        "monthly_ice_fraction": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.8070963210964438,
+          0.6055425897561486,
+          0.565746249438495,
+          0.6514170155888599,
+          0.8457391160899312,
+          0.9741772172876395
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.7999999999999998,
+          -0.9008808539884551,
+          0.4567823008859322,
+          0.010814579734752203,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.7999999999999998,
+          2.282556246750824,
+          3.856933069833366,
+          2.0987233843287036,
+          -1.8,
+          -1.8,
+          -1.8
+        ],
+        "minimum_ice_fraction": 0.565746249438495,
+        "minimum_ice_month": 9
+      },
+      "non_atlantic": {
+        "monthly_ice_fraction": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.9886745605762027,
+          0.8967330605198978,
+          0.887562259352359,
+          0.9381595251811873,
+          0.9898154923684361,
+          1.0
+        ],
+        "monthly_interface_temperature_c": [
+          -1.8000000000000003,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.7814282933984251,
+          -1.4155630843560318,
+          -1.5260907583068801,
+          -1.8,
+          -1.8,
+          -1.8000000000000003
+        ],
+        "monthly_open_water_temperature_c": [
+          -1.8000000000000003,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.8,
+          -1.6011653278580567,
+          0.34677055602652324,
+          -0.6265560102469495,
+          -1.8,
+          -1.8,
+          -1.8000000000000003
+        ],
+        "minimum_ice_fraction": 0.887562259352359,
+        "minimum_ice_month": 9
+      }
+    }
+  },
+  "provenance": {
+    "benchmark_file": "held_out_amoc_benchmarks.json",
+    "benchmark_file_sha256": "67094e5d48b0688c4d0e72848362b0426e4a7187b92c6d2853150cb9a467b40a",
+    "benchmark_set_version": "2.2.0",
+    "processing_script": "validate_v228.py",
+    "processing_script_sha256": "81c06cfc5c4c99e00b1413e32f64ece1ba5711ee97683fd048db00d9ffee72c5",
+    "climate_model_sha256": "3befe0f6614d1288ee5798ae3e9070756c7c00824b1bc5b78c60a8f06bfd20a2"
+  }
+}

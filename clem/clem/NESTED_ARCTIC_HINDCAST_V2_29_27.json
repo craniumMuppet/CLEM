@@ -1,0 +1,101 @@
+{
+  "all_folds_have_minimum_baselines": false,
+  "all_folds_scored": true,
+  "all_scored_folds_beat_all_available_baselines": false,
+  "calibration_objective": "mean squared normalized training error across G02202 March area RMSE / 1.0, G02202 September area RMSE / 1.0, and PIOMAS volume nRMSE / 0.25",
+  "candidate_bank": [
+    "canonical_v2_29_26",
+    "exp060",
+    "exp060_loss46",
+    "exp060_loss475",
+    "exp060_loss485",
+    "new022_loss485",
+    "new022_loss495"
+  ],
+  "candidate_bank_independent_of_future_method_development": false,
+  "candidate_bank_note": "Candidate trajectories were generated during method development using the available historical evidence. Fold selection used observations no later than each cutoff, but this is not untouched prospective validation.",
+  "folds": [
+    {
+      "baseline_availability_note": "Only one annual training observation is available through 1979; fitted trend, temperature-regression, and autoregressive baselines are undefined.",
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": null,
+        "expanding_linear_trend": null,
+        "persistence": 0.42961,
+        "temperature_driven_regression": null
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 1979,
+      "forecast_end": 1990,
+      "forecast_start": 1980,
+      "minimum_baselines_complete": false,
+      "model_rmse_million_km2": 1.0146,
+      "selected_candidate": "new022_loss495"
+    },
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 0.658077,
+        "expanding_linear_trend": 0.507254,
+        "persistence": 0.470949,
+        "temperature_driven_regression": 0.758249
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 1989,
+      "forecast_end": 2000,
+      "forecast_start": 1990,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.805254,
+      "selected_candidate": "new022_loss495"
+    },
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 1.187458,
+        "expanding_linear_trend": 0.659442,
+        "persistence": 0.669367,
+        "temperature_driven_regression": 0.800189
+      },
+      "beats_all_available_baselines": true,
+      "calibrate_through": 1999,
+      "forecast_end": 2010,
+      "forecast_start": 2000,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.641954,
+      "selected_candidate": "new022_loss495"
+    },
+    {
+      "baseline_rmse_million_km2": {
+        "autoregressive_model": 1.251283,
+        "expanding_linear_trend": 0.450517,
+        "persistence": 0.671907,
+        "temperature_driven_regression": 0.573455
+      },
+      "beats_all_available_baselines": false,
+      "calibrate_through": 2009,
+      "forecast_end": 2020,
+      "forecast_start": 2010,
+      "minimum_baselines_complete": true,
+      "model_rmse_million_km2": 0.589499,
+      "selected_candidate": "new022_loss495"
+    }
+  ],
+  "independent_prospective_validation": false,
+  "minimum_baselines": [
+    "persistence",
+    "expanding_linear_trend",
+    "temperature_driven_regression",
+    "autoregressive_model"
+  ],
+  "model_version": "2.29.27",
+  "prospective_untouched_period": "2027 onward",
+  "prospective_untouched_validation_complete": false,
+  "protocol": "retrospective_fold_specific_candidate_recalibration_and_forecast_scoring",
+  "retrospective_development_validation": true,
+  "schema_version": 1,
+  "scientific_predictive_skill_claim_allowed": false,
+  "selected_candidate_parameters": {
+    "arctic_ice_concentration_exponent": 0.6,
+    "arctic_ice_nonsolar_heat_loss_wm2": 49.5,
+    "arctic_new_ice_local_thickness_m": 0.22
+  },
+  "status": "run_but_predictive_skill_gate_failed",
+  "temperature_baseline_evidence": "data/validation/temperature/HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv"
+}

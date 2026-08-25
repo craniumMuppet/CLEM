@@ -1,0 +1,47 @@
+Emergent-Sensitivity Global Climate Model v2.23.0
+Final verification summary
+Date: 2026-07-25
+Python: 3.13.5
+Platform: Linux
+
+PASS - Python compilation
+  python -m compileall -q .
+
+PASS - Default collected pytest suite
+  33 passed, 1 skipped, 14 deselected
+  Skipped: optional Hypothesis conservation suite because Hypothesis was not installed in the execution environment.
+
+PASS - Continuation marker suite
+  4 passed, 1 optional Hypothesis suite skipped, 43 deselected
+
+PASS - Fast smoke suite
+  9/9 passed
+
+PASS - AMOC dynamics regression
+  3/3 passed
+
+PASS - Persistent-collapse regression
+  3/3 passed
+
+PASS - Long-hold salinity-exchange regression
+  passed
+
+PASS - Dependency graph consistency
+  42 exact runtime packages resolved
+  0 missing dependency nodes
+  0 version-specifier violations
+  graph SHA-256: e65977301e6ca5ff195379f3a24da3577efb2623880324bb52c00ac427e32659
+
+PASS - Frozen held-out validation execution and provenance checks
+  4/4 benchmark definitions evaluated with source, location, version, retrieval date,
+  processing-script and SHA-256 metadata.
+
+SCIENTIFIC VALIDATION RESULT - model not retuned
+  0/4 external held-out ranges passed:
+  - historical GMST 2011-2020: 1.3061 degC (range 0.95-1.20)
+  - ocean heat-content change 1971-2018: 328.51 ZJ (range 350-500)
+  - Arctic amplification 1979-2021: 1.3559 (range 3.0-4.5)
+  - SSP2-4.5 AMOC weakening: 8.7202% (range 20-50%)
+
+NOT COMPLETED - legacy structural_fixes_v2_17_0_test.py
+  The standalone script did not complete within the 300-second execution limit and emitted no failure before termination.

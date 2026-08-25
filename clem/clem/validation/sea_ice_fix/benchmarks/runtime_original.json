@@ -1,0 +1,25 @@
+{
+  "all_run_times_s": [
+    18.25416365899946,
+    4.959262525999293,
+    4.745773786999052,
+    5.766400541999246
+  ],
+  "configuration": {
+    "dt_years": 0.05,
+    "duration_years": 20.0,
+    "record_every_years": 1.0,
+    "resolution_deg": 10.0,
+    "scenario": "ssp245"
+  },
+  "final_gmst_values_c": [
+    0.1418031833141544,
+    0.1418031833141544,
+    0.1418031833141544,
+    0.1418031833141544
+  ],
+  "label": "original",
+  "root": "/mnt/data/egcm_actual_fix/original_full/emergent_global_climate_model_v2_29_23_engineering_only",
+  "steady_state_mean_s": 5.157145618332531,
+  "steady_state_median_s": 4.959262525999293
+}

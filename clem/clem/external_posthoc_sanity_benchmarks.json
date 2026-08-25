@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "benchmark_set_version": "2.29.14-posthoc-sanity",
+  "description": "External ranges added after calibration and used only as descriptive post-hoc sanity envelopes. They are not tuning targets, probability intervals, independent validation, or release gates.",
+  "benchmarks": {
+    "greenland_ssp245_sea_level_2014_2100_mm": {
+      "minimum": 22.0,
+      "maximum": 163.0,
+      "units": "mm sea-level equivalent, 2014 to 2100",
+      "evidence_role": "external_posthoc_sanity_envelope",
+      "used_for_tuning": false,
+      "description": "Published physically based Greenland SSP2-4.5 ensemble range for the 2014-to-2100 sea-level contribution, used only as a broad post-hoc sanity envelope.",
+      "source_title": "Extending the range and reach of physically-based Greenland ice sheet sea-level projections",
+      "source_reference": "The Cryosphere 19, 6887-6927 (2025)",
+      "source_url": "https://tc.copernicus.org/articles/19/6887/2025/",
+      "source_location": "Abstract: SSP2-4.5 Greenland contribution 22-163 mm in 2100 relative to 2014",
+      "retrieval_date": "2026-08-01",
+      "dataset_version": "Published 2025 multi-model ice-sheet projection ensemble",
+      "processing_script": "validate_v22912.py",
+      "notes": "This range was added after the v2.29.9 calibration. It is not independent validation of the emulator, a probability interval, or a release-blocking target."
+    }
+  }
+}

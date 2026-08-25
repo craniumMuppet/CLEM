@@ -1,0 +1,27 @@
+Core and interfaces
+- climate_model.py
+- climate_model_gui.py
+- app.py
+- monte_carlo.py
+- co2_target_sweep.py
+- setting_metadata.py
+- pyproject.toml
+
+Validation and tests
+- held_out_amoc_validation.py
+- amoc_ensemble_validation.py
+- tests/test_v224_accuracy_fixes.py
+- tests/test_v2252_seasonal_arctic.py
+- amoc_dynamics_fix_test.py
+- v2_17_1_validation_test.py
+- full_regression_test.py
+- deep_validation_v2_25_2.py
+
+Release records
+- README.md
+- CHANGELOG.md
+- V2_25_2_SEASONAL_ARCTIC_AND_AMOC_FIXES.md
+- VALIDATION_SUMMARY_V2_25_2.json
+- DEEP_VALIDATION_V2_25_2.json
+- TEST_RESULTS_V2_25_2.txt
+- V2_25_2_CHANGED_FILES.txt

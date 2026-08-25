@@ -1,0 +1,74 @@
+{
+  "original_future_baseline": {
+    "ssp245_10deg": {
+      "all_state_arrays_finite": false,
+      "final_global_surface_warming_c": 3.1718456523652456,
+      "final_toa_imbalance_wm2": 1.4452298565721375,
+      "first_september_below_1_million_km2": null,
+      "ice_fractions_within_bounds": true,
+      "late_century_september_trend_million_km2_per_decade": -0.04449867487100945,
+      "local_thickness_nonnegative": true,
+      "march_area_2081_2100_mean_million_km2": 11.520505606229154,
+      "march_area_2100_million_km2": 11.448254920287976,
+      "march_mean_local_thickness_2100_m": 2.2602712468609307,
+      "march_volume_2100_thousand_km3": 25.876161423061088,
+      "maximum_single_year_september_area_gain_million_km2": 0.5212178199898396,
+      "maximum_single_year_september_area_loss_million_km2": 0.2330501933103779,
+      "minimum_march_area_million_km2": 11.448254920287976,
+      "minimum_september_area_million_km2": 2.1977989767018062,
+      "minimum_september_volume_thousand_km3": 6.028885348117427,
+      "profile": "original",
+      "resolution_deg": 10.0,
+      "runtime_s": 93.66362343400033,
+      "scenario": "ssp245",
+      "seasonal_amplitude_2081_2100_mean_million_km2": 9.281001117018437,
+      "seasonal_amplitude_2100_million_km2": 9.25045594358617,
+      "september_area_2081_2100_mean_million_km2": 2.239504489210716,
+      "september_area_2100_million_km2": 2.1977989767018062,
+      "september_mean_local_thickness_2100_m": 2.743146853751319,
+      "september_volume_2100_thousand_km3": 6.028885348117427
+    },
+    "ssp585_10deg": {
+      "all_state_arrays_finite": false,
+      "final_global_surface_warming_c": 5.510950732475154,
+      "final_toa_imbalance_wm2": 3.2334655693645327,
+      "first_september_below_1_million_km2": null,
+      "ice_fractions_within_bounds": true,
+      "late_century_september_trend_million_km2_per_decade": 0.027306839525186675,
+      "local_thickness_nonnegative": true,
+      "march_area_2081_2100_mean_million_km2": 10.501230118223827,
+      "march_area_2100_million_km2": 10.28361125507704,
+      "march_mean_local_thickness_2100_m": 2.4997945652053715,
+      "march_volume_2100_thousand_km3": 25.70691552612637,
+      "maximum_single_year_september_area_gain_million_km2": 0.5212178199898396,
+      "maximum_single_year_september_area_loss_million_km2": 0.2330501933103779,
+      "minimum_march_area_million_km2": 10.28361125507704,
+      "minimum_september_area_million_km2": 2.185956865356364,
+      "minimum_september_volume_thousand_km3": 6.079827119608055,
+      "profile": "original",
+      "resolution_deg": 10.0,
+      "runtime_s": 93.82653828500042,
+      "scenario": "ssp585",
+      "seasonal_amplitude_2081_2100_mean_million_km2": 8.29234099635445,
+      "seasonal_amplitude_2100_million_km2": 8.051734739549453,
+      "september_area_2081_2100_mean_million_km2": 2.2088891218693782,
+      "september_area_2100_million_km2": 2.231876515527589,
+      "september_mean_local_thickness_2100_m": 2.74921954592012,
+      "september_volume_2100_thousand_km3": 6.135918540568537
+    }
+  },
+  "original_historical_skill": {
+    "10": {
+      "march_skill_vs_expanding_linear_trend": 0.17651990741009216,
+      "march_skill_vs_persistence": 0.10352217213112336,
+      "september_skill_vs_expanding_linear_trend": -0.20463207066606381,
+      "september_skill_vs_persistence": -0.16983041709269964
+    },
+    "5": {
+      "march_skill_vs_expanding_linear_trend": 0.22387320703300384,
+      "march_skill_vs_persistence": 0.15507312469253842,
+      "september_skill_vs_expanding_linear_trend": -0.16371684711481094,
+      "september_skill_vs_persistence": -0.13009722867946194
+    }
+  }
+}

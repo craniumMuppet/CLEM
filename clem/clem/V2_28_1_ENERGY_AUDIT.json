@@ -1,0 +1,12 @@
+{
+  "model_version": "2.28.1",
+  "years": 20.0,
+  "actual_resolved_heat_gain_zj": 618.620554504582,
+  "corrected_resolved_system_toa_integrated_zj": 617.9158834633478,
+  "bulk_radiative_toa_integrated_zj": 621.5796965962785,
+  "explicit_arctic_toa_integrated_zj": -3.6638131329307333,
+  "corrected_residual_zj": 0.7046710412341781,
+  "corrected_relative_residual_percent": 0.11403996241115824,
+  "bulk_only_residual_zj": -2.959142091696549,
+  "bulk_only_relative_residual_percent": -0.4760680099270581
+}

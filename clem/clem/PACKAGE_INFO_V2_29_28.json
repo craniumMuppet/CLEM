@@ -1,0 +1,38 @@
+{
+  "arctic_scientific_status": {
+    "calibration_passed": true,
+    "development_evaluation_passed": true,
+    "nsidc_0611_available": false,
+    "osi_saf_development_diagnostic_independent": false,
+    "osi_saf_march_development_rmse_le_1p00": true,
+    "osi_saf_september_development_rmse_le_1p00": false,
+    "physical_volume_thickness_gate_passed": true,
+    "prospective_untouched_validation_complete": false,
+    "retrospective_fold_local_hindcasts_run": true,
+    "retrospective_predictive_skill_gate_passed": false,
+    "scientific_predictive_validation_complete": false
+  },
+  "model_version": "2.29.28",
+  "package_name": "emergent_global_climate_model_v2_29_28",
+  "release_classification": "engineering_release_with_observational_recalibration; scientific_predictive_validation_incomplete",
+  "scientific_status_sources": [
+    "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json",
+    "RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json"
+  ],
+  "test_evidence": {
+    "errors": 0,
+    "failed": 0,
+    "file": "TEST_RESULTS_V2_29_28.json",
+    "nodeid_count": 140,
+    "passed": 140,
+    "pytest_version": "9.0.2",
+    "python_version": "3.13.5"
+  },
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "6081e58d02e7276717a707337636f4583564e4872b67fdf9668b0454d75b08b8",
+    "file": "TESTED_CODE_FINGERPRINT_V2_29_28.json",
+    "file_count": 602,
+    "profile": "tested-code-and-scientific-inputs",
+    "verified_immediately_before_packaging": true
+  }
+}

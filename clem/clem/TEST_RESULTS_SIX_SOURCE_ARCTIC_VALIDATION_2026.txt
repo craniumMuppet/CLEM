@@ -1,0 +1,19 @@
+Six-source Arctic validation integration - final focused regression record
+Date: 2026-08-08
+
+Command:
+python -m pytest -q tests/test_six_source_arctic_validation_stack.py tests/test_2026_sea_ice_scientific_review_fixes.py tests/test_v22925_review_cleanup.py
+
+Result:
+16 passed in 3.95s
+
+Additional checks:
+- python -m compileall completed successfully for the new/modified validation modules.
+- tools/acquire_arctic_validation_stack.py --process-existing completed without crashes.
+- PIOMAS v2.1 source CSV was acquired and processed to model-ready monthly volume.
+- ARCTIC_VALIDATION_STACK_STATUS_2026.json reports 1/6 sources available.
+- Missing G02202, CryoSat-2, ICESat-2, OSI SAF, and NSIDC-0611 inputs remain fail-closed.
+- Partial processed-evidence bundle export was verified and contains no raw NetCDF/HDF5 files.
+
+No claim is made here that the full 1979-present physical simulation/recalibration has been rerun.
+That requires the remaining five external observational products first.

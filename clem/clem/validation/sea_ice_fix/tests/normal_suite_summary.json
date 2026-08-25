@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "a": {
+      "tests": 88,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 788.194
+    },
+    "b": {
+      "tests": 74,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 204.672
+    },
+    "c": {
+      "tests": 73,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 175.305
+    },
+    "d": {
+      "tests": 85,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 244.537
+    }
+  },
+  "total": {
+    "tests": 320,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "time": 1412.708
+  }
+}

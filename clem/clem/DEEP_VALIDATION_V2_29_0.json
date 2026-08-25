@@ -1,0 +1,215 @@
+{
+  "model_version": "2.29.0",
+  "provenance": {
+    "processing_script": "validate_v229.py",
+    "processing_script_sha256": "a421ed459708565a35bd3f747b3064b5059e4e9dff6ed6be17cc8f04247312df",
+    "climate_model_sha256": "abce66121563f92674372c08f6faa89d6ac102867b6b575874e66762fd4cd689"
+  },
+  "control": {
+    "years": 500.0,
+    "initial_gmst_c": 0.0,
+    "final_gmst_c": 1.0030862943247311e-05,
+    "gmst_drift_c": 1.0030862943247311e-05,
+    "initial_amoc_sv": 17.0,
+    "final_amoc_sv": 16.99999697680761,
+    "amoc_drift_sv": -3.023192391538032e-06,
+    "final_toa_imbalance_wm2": -1.2198421997056608e-05,
+    "final_salt_conservation_error_ppm": 2.4424906541753444e-09,
+    "final_total_resolved_heat_content_anomaly_zj": 0.01353770928314053
+  },
+  "arctic_perturbations": [
+    {
+      "sign": -1.0,
+      "years": 160.0,
+      "final_arctic_air_c": 0.00011173897028966736,
+      "final_amoc_sv": 16.99973747739468,
+      "final_salt_conservation_error_ppm": -1.887379141862766e-09
+    },
+    {
+      "sign": 1.0,
+      "years": 160.0,
+      "final_arctic_air_c": 0.00030776924272200667,
+      "final_amoc_sv": 17.00020273333456,
+      "final_salt_conservation_error_ppm": -6.661338147750939e-10
+    }
+  ],
+  "hosing_recovery": {
+    "initial_amoc_sv": 17.0,
+    "amoc_after_40yr_hosing_sv": 14.669449802752187,
+    "amoc_after_100yr_recovery_sv": 16.757067540701126,
+    "recovery_percent_of_initial_loss": 89.57617563501712
+  },
+  "cross_resolution": [
+    {
+      "resolution_deg": 2.5,
+      "initial_density_driver_ratio": 0.6944768000463472,
+      "control_gmst_c": 4.7067559650887997e-07,
+      "control_amoc_sv": 16.999991257603934,
+      "control_toa_imbalance_wm2": -7.091313096262295e-07,
+      "abrupt_2x_100yr_gmst_c": 2.5186495680443612,
+      "abrupt_2x_100yr_amoc_sv": 14.34937836263336,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.71571495078018,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6126970309499857,
+          "maximum_area_mean_open_water_temperature_c": 4.667640913102396,
+          "shallow_ocean_seasonal_range_c": 0.0680113409136742
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.8856529836413302,
+          "maximum_area_mean_open_water_temperature_c": 0.2733177914258764,
+          "shallow_ocean_seasonal_range_c": 0.00924812139892206
+        }
+      }
+    },
+    {
+      "resolution_deg": 5.0,
+      "initial_density_driver_ratio": 0.7493348337403365,
+      "control_gmst_c": 7.646928489960033e-06,
+      "control_amoc_sv": 16.999996357586788,
+      "control_toa_imbalance_wm2": -9.541810503096957e-06,
+      "abrupt_2x_100yr_gmst_c": 2.5202056737428613,
+      "abrupt_2x_100yr_amoc_sv": 14.379009753894481,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.7209832318392759,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6143842330919795,
+          "maximum_area_mean_open_water_temperature_c": 4.638559913486652,
+          "shallow_ocean_seasonal_range_c": 0.06708184026604654
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.8894608550064791,
+          "maximum_area_mean_open_water_temperature_c": 0.2130729852165747,
+          "shallow_ocean_seasonal_range_c": 0.00834997475041499
+        }
+      }
+    },
+    {
+      "resolution_deg": 10.0,
+      "initial_density_driver_ratio": 0.8740292447094423,
+      "control_gmst_c": 2.001918015090255e-06,
+      "control_amoc_sv": 16.99998068845667,
+      "control_toa_imbalance_wm2": -2.7054928912428595e-06,
+      "abrupt_2x_100yr_gmst_c": 2.51455266249667,
+      "abrupt_2x_100yr_amoc_sv": 14.618683411121962,
+      "abrupt_2x_100yr_toa_imbalance_wm2": 0.7171012350256488,
+      "arctic_reference": {
+        "atlantic": {
+          "minimum_area_mean_ice_fraction": 0.6842925004333436,
+          "maximum_area_mean_open_water_temperature_c": 3.6170580353990682,
+          "shallow_ocean_seasonal_range_c": 0.041672952192158746
+        },
+        "non_atlantic": {
+          "minimum_area_mean_ice_fraction": 0.911079604934087,
+          "maximum_area_mean_open_water_temperature_c": -0.14175713163662335,
+          "shallow_ocean_seasonal_range_c": 0.004054723492703305
+        }
+      }
+    }
+  ],
+  "arctic_resolution_spreads": {
+    "atlantic": {
+      "minimum_area_mean_ice_fraction_spread": 0.07159546948335782,
+      "values_by_resolution": {
+        "2.5": {
+          "minimum_area_mean_ice_fraction": 0.6126970309499857,
+          "maximum_area_mean_open_water_temperature_c": 4.667640913102396,
+          "shallow_ocean_seasonal_range_c": 0.0680113409136742
+        },
+        "5.0": {
+          "minimum_area_mean_ice_fraction": 0.6143842330919795,
+          "maximum_area_mean_open_water_temperature_c": 4.638559913486652,
+          "shallow_ocean_seasonal_range_c": 0.06708184026604654
+        },
+        "10.0": {
+          "minimum_area_mean_ice_fraction": 0.6842925004333436,
+          "maximum_area_mean_open_water_temperature_c": 3.6170580353990682,
+          "shallow_ocean_seasonal_range_c": 0.041672952192158746
+        }
+      }
+    },
+    "non_atlantic": {
+      "minimum_area_mean_ice_fraction_spread": 0.025426621292756857,
+      "values_by_resolution": {
+        "2.5": {
+          "minimum_area_mean_ice_fraction": 0.8856529836413302,
+          "maximum_area_mean_open_water_temperature_c": 0.2733177914258764,
+          "shallow_ocean_seasonal_range_c": 0.00924812139892206
+        },
+        "5.0": {
+          "minimum_area_mean_ice_fraction": 0.8894608550064791,
+          "maximum_area_mean_open_water_temperature_c": 0.2130729852165747,
+          "shallow_ocean_seasonal_range_c": 0.00834997475041499
+        },
+        "10.0": {
+          "minimum_area_mean_ice_fraction": 0.911079604934087,
+          "maximum_area_mean_open_water_temperature_c": -0.14175713163662335,
+          "shallow_ocean_seasonal_range_c": 0.004054723492703305
+        }
+      }
+    }
+  },
+  "energy_audit": {
+    "years": 20.0,
+    "actual_resolved_heat_gain_zj": 618.5775090175792,
+    "resolved_system_toa_integrated_zj": 618.6482835648809,
+    "bulk_radiative_toa_integrated_zj": 620.8179503564986,
+    "explicit_arctic_toa_integrated_zj": -2.169666791617724,
+    "residual_zj": -0.070774547301653,
+    "relative_residual_percent": -0.011440191330334549
+  },
+  "supplementary_pathways": {
+    "ssp126": {
+      "scenario": "ssp126",
+      "warming_2081_2100_c": 2.089546360630016,
+      "amoc_decline_2100_percent": 9.231826169604041,
+      "final_arctic_sea_ice_fraction": 0.6680271550091388
+    },
+    "ssp460": {
+      "scenario": "ssp460",
+      "warming_2081_2100_c": 3.497697199125848,
+      "amoc_decline_2100_percent": 23.95123031412888,
+      "final_arctic_sea_ice_fraction": 0.45405873958553233
+    }
+  },
+  "timestep_metrics": [
+    {
+      "dt_years": 0.1,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1039111030006727,
+      "historical_ocean_heat_content_change_1971_2018_zj": 380.13847905129296,
+      "historical_arctic_amplification_1979_2021_ratio": 3.6173059786022916,
+      "ssp245_amoc_decline_2100_percent": 18.55721643133197
+    },
+    {
+      "dt_years": 0.05,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1034993958783608,
+      "historical_ocean_heat_content_change_1971_2018_zj": 380.19760666154593,
+      "historical_arctic_amplification_1979_2021_ratio": 3.613938706183626,
+      "ssp245_amoc_decline_2100_percent": 18.619192720012368
+    },
+    {
+      "dt_years": 0.025,
+      "sample_cadence_years": 0.1,
+      "historical_gmst_2011_2020_c": 1.1030494998987481,
+      "historical_ocean_heat_content_change_1971_2018_zj": 380.1358922171005,
+      "historical_arctic_amplification_1979_2021_ratio": 3.610509761297861,
+      "ssp245_amoc_decline_2100_percent": 18.567445359692314
+    }
+  ],
+  "timestep_differences_from_0p05": {
+    "0.1": {
+      "historical_gmst_2011_2020_c": 0.00041170712231197726,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.05912761025297186,
+      "historical_arctic_amplification_1979_2021_ratio": 0.0033672724186657454,
+      "ssp245_amoc_decline_2100_percent": -0.061976288680398284
+    },
+    "0.025": {
+      "historical_gmst_2011_2020_c": -0.0004498959796126467,
+      "historical_ocean_heat_content_change_1971_2018_zj": -0.061714444445442496,
+      "historical_arctic_amplification_1979_2021_ratio": -0.0034289448857647287,
+      "ssp245_amoc_decline_2100_percent": -0.05174736032005356
+    }
+  }
+}

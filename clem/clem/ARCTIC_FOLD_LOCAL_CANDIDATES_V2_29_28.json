@@ -1,0 +1,60 @@
+{
+  "candidate_grid_predeclared_before_scoring": true,
+  "candidates": {
+    "prior_early_bounded": {
+      "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": 1.0,
+      "arctic_forced_ocean_heat_convergence_onset_warming_c": 0.5,
+      "arctic_forced_ocean_heat_convergence_saturation_scale_c": 0.3,
+      "arctic_forced_ocean_heat_convergence_wm2_per_k": 4.0,
+      "arctic_ice_area_formation_support_floor": 0.5,
+      "arctic_ice_area_formation_volume_sensitivity": 6.0,
+      "arctic_ice_area_thick_pack_resistance_exponent": 0.0,
+      "arctic_ice_area_thinning_melt_amplification": 4.0
+    },
+    "prior_high_response": {
+      "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": 1.0,
+      "arctic_forced_ocean_heat_convergence_onset_warming_c": 0.5,
+      "arctic_forced_ocean_heat_convergence_saturation_scale_c": 0.5,
+      "arctic_forced_ocean_heat_convergence_wm2_per_k": 6.0,
+      "arctic_ice_area_formation_support_floor": 0.5,
+      "arctic_ice_area_formation_volume_sensitivity": 8.0,
+      "arctic_ice_area_thick_pack_resistance_exponent": 0.0,
+      "arctic_ice_area_thinning_melt_amplification": 6.0
+    },
+    "prior_low_response": {
+      "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": 1.0,
+      "arctic_forced_ocean_heat_convergence_onset_warming_c": 1.5,
+      "arctic_forced_ocean_heat_convergence_saturation_scale_c": 0.75,
+      "arctic_forced_ocean_heat_convergence_wm2_per_k": 2.0,
+      "arctic_ice_area_formation_support_floor": 0.5,
+      "arctic_ice_area_formation_volume_sensitivity": 2.0,
+      "arctic_ice_area_thick_pack_resistance_exponent": 0.0,
+      "arctic_ice_area_thinning_melt_amplification": 2.0
+    },
+    "prior_mode": {
+      "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": 1.0,
+      "arctic_forced_ocean_heat_convergence_onset_warming_c": 1.0,
+      "arctic_forced_ocean_heat_convergence_saturation_scale_c": 0.5,
+      "arctic_forced_ocean_heat_convergence_wm2_per_k": 4.0,
+      "arctic_ice_area_formation_support_floor": 0.5,
+      "arctic_ice_area_formation_volume_sensitivity": 4.0,
+      "arctic_ice_area_thick_pack_resistance_exponent": 0.0,
+      "arctic_ice_area_thinning_melt_amplification": 4.0
+    },
+    "prior_strong_bounded": {
+      "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": 1.0,
+      "arctic_forced_ocean_heat_convergence_onset_warming_c": 0.25,
+      "arctic_forced_ocean_heat_convergence_saturation_scale_c": 0.25,
+      "arctic_forced_ocean_heat_convergence_wm2_per_k": 8.0,
+      "arctic_ice_area_formation_support_floor": 0.6,
+      "arctic_ice_area_formation_volume_sensitivity": 12.0,
+      "arctic_ice_area_thick_pack_resistance_exponent": 0.0,
+      "arctic_ice_area_thinning_melt_amplification": 8.0
+    }
+  },
+  "grid_kind": "predeclared_prior_derived_method_development_grid",
+  "model_version": "2.29.28",
+  "note": "Fixed prior-derived candidate definitions used for retrospective fold-local method-development scoring. This bank is not independent prospective validation.",
+  "post_cutoff_observations_used_for_candidate_selection": false,
+  "schema_version": 1
+}

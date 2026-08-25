@@ -1,0 +1,37 @@
+Emergent-Sensitivity Global Climate Model v2.28.1
+Complete maintenance release test record
+
+Frozen-source physics validation
+- 13/13 validation tasks passed.
+- Headline and timestep metrics use the same 0.1-year subannual sampling grid.
+- 500-year control, warm/cold Arctic recovery, hosing recovery, and all three resolutions passed.
+
+Complete isolated release suite
+- 90/90 default isolated test cases passed.
+- Zero failures and zero timeouts.
+
+Monte Carlo reproduction of reported user failure
+- Actual desktop command construction parsed through the Monte Carlo CLI: passed.
+- ProcessClimateModel construction with the generated base configuration: passed.
+- Two-member one-year end-to-end Monte Carlo output generation: 2/2 members successful.
+- The former AMOC initial density ratio 0.5794 failure is not reproduced.
+
+Additional maintenance regressions
+- Corrected TOA equals bulk radiative TOA plus global Arctic external-flux anomaly.
+- 20-year abrupt-2xCO2 resolved heat-budget residual: approximately 0.114%.
+- Old bulk-only TOA residual: approximately -0.476%.
+- Open-water maps mask cells with no open-water area.
+- Inactive pre-v2.28 Arctic controls are absent from active desktop and Monte Carlo surfaces.
+- Arctic SAT memory is documented as 0.15 years; the old one-year column name is compatibility-only.
+- Validation source hashes match the packaged model and validator.
+
+Corrected public defaults
+- AMOC density exponent: 1.50
+- Convection density normalization: 4.00
+- Convection recovery: 160 years
+- Reference density driver: 7.5e-4
+- Minimum initial density ratio: 0.68
+
+Freshwater defaults remain unchanged
+- Hydrological freshwater: 0.006 Sv/K
+- Greenland freshwater: 0.005 Sv/K

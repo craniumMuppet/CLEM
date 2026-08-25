@@ -1,0 +1,21 @@
+EGCM v2.29.26 recovery/finalization verification
+
+Compile gate:
+- python -m compileall -q -f .
+- Result: PASS
+
+Recalibration/release suite:
+- 49 passed in 16.58s
+- Covers 2026 Arctic observational recalibration, repaired-data processing, six-source validation framework, sea-ice scientific-review behavior, actual sea-ice fix regressions, selected reviewed defaults, and v2.29.26 release-finalization checks.
+
+Additional release-integrity identity/default suite:
+- 11 passed in 0.99s
+- Covers synchronized current-version metadata/documentation/default assertions across inherited release-integrity tests.
+
+Reference-cycle integrity:
+- 1 passed in 15.94s
+- tests/test_v2295_physical_integrity.py::test_version_native_cycle_and_amoc_physics_defaults
+
+Total unique selected pytest checks: 61 passed, 0 failed, 0 errors.
+
+Verification scope is deliberately bounded: the repository-wide non-slow command contains unmarked long-running tests and exceeded the execution cap, so this evidence does not claim completion of the entire non-slow inventory.

@@ -1,0 +1,29 @@
+{
+  "model_version": "2.19.0",
+  "feature": "paired Monte Carlo CO2 target sweep",
+  "default_start_ppm": 278.3,
+  "default_step_ppm": 50.0,
+  "default_maximum_ppm": 1200.0,
+  "default_ramp_years": 100.0,
+  "default_hold_years": 200.0,
+  "default_collapse_window_years": 30.0,
+  "default_collapse_threshold_sv": 6.0,
+  "paired_parameter_design": true,
+  "collapse_classifications": [
+    "ever_below_threshold",
+    "persistent_final_window_collapse",
+    "reversed",
+    "active"
+  ],
+  "plot_modes": [
+    "mean",
+    "all"
+  ],
+  "new_feature_tests_passed": true,
+  "existing_fast_regressions_passed": true,
+  "long_hold_salinity_regression_passed": true,
+  "monte_carlo_smoke_passed": true,
+  "desktop_gui_smoke_passed": true,
+  "python_compilation_passed": true,
+  "default_physics_changed": false
+}

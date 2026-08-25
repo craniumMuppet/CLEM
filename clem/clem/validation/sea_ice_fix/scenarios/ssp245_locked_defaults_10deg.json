@@ -1,0 +1,32 @@
+{
+  "defaults": {
+    "arctic_basal_ocean_exchange_wm2_k": 10.0,
+    "arctic_forced_ocean_heat_convergence_onset_warming_c": 1.0,
+    "arctic_forced_ocean_heat_convergence_wm2_per_k": 4.0,
+    "arctic_ice_area_formation_volume_sensitivity": 4.0,
+    "arctic_max_equivalent_thickness_m": 4.5,
+    "arctic_reference_air_temperature_at_full_latitude_c": -9.5
+  },
+  "final_global_surface_warming_c": 3.1629880886478094,
+  "ice_fractions_within_bounds": true,
+  "local_thickness_bound_respected": true,
+  "march_area_2100_million_km2": 10.067559067375639,
+  "maximum_local_ice_thickness_m": 4.5,
+  "maximum_single_year_september_gain_million_km2": 0.5262084465834249,
+  "maximum_single_year_september_loss_million_km2": 0.23796040126038953,
+  "mode": "future",
+  "not_applicable_nonfinite_diagnostic_columns": [
+    "hybrid_ssp_after_weight"
+  ],
+  "prognostic_state_arrays_finite": true,
+  "resolution_deg": 10.0,
+  "runtime_s": 165.0836867479993,
+  "scenario": "ssp245",
+  "seasonal_amplitude_2100_million_km2": 8.89263372155605,
+  "september_area_2081_2100_mean_million_km2": 1.2244111818288332,
+  "september_area_2100_million_km2": 1.1749253458195883,
+  "september_maximum_local_thickness_2100_m": 4.5,
+  "september_mean_local_thickness_2100_m": 4.111536653380438,
+  "september_volume_2100_thousand_km3": 4.830748624322923,
+  "unexpected_nonfinite_numeric_columns": []
+}

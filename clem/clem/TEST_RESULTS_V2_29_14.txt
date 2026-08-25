@@ -1,0 +1,39 @@
+Emergent Global Climate Model v2.29.14 - Test Results
+Date: 2026-08-02
+
+OVERALL RESULT
+- Pytest inventory: 282/282 passed.
+- Modern module tests: 228/228 passed across 28 modules.
+- Retained legacy compatibility entry points: 54/54 passed.
+- Scientific validation tasks: 21/21 passed.
+- Release checks: 34/34 passed.
+- Source compilation: passed before packaging and will be repeated from the archive extraction.
+
+IMPLEMENTED REVIEW FIXES
+1. CO2 target failures now receive canonical nested terminal checkpoints, so checkpoint-only recovery preserves attempted, successful, failed, validated, and pending counts.
+2. Validation JSON uses canonical sorted-key serialization. Reassembly from the same task records produced byte-identical validation-summary, deep-validation, and implementation-audit hashes.
+3. Validation runner PID/log files and task directories are excluded from release archives.
+4. A cold-season, volume-conserving lead-closure operator improves March sea-ice area response without adding ice mass or materially suppressing September melt.
+5. The Arctic lapse-rate/inversion closure default is explicitly retuned from 1.00 to 1.10 W/m2/K to retain the predeclared annual Arctic-amplification development envelope after the winter compactness change.
+6. The v2.29.13 fixed 17 Sv built-in science-prior AMOC control anchor remains unchanged.
+
+FINAL SSP2-4.5 SEA-ICE DIAGNOSTICS, 1979-2020
+- March area mean: model 13.213973, observed 13.129762 million km2.
+- March area trend: model -0.056009, observed -0.038174 million km2/decade.
+- March trend-magnitude ratio: 1.4672x observed, reduced from approximately 3.17x in v2.29.13.
+- March correlation: 0.1433; still scientifically inadequate for quantitative temporal claims.
+- March RMSE: 0.382063 million km2.
+- September area trend: model -0.360997, observed -0.492302 million km2/decade.
+- September correlation: 0.7973.
+- Historical Arctic amplification development metric: 3.006992x.
+
+SCIENTIFIC CLASSIFICATION
+- All release-blocking checks passed.
+- Native historical March temporal diagnostics, the validation-informed 2021-2025 diagnostics, and robust March temporal skill remain explicitly non-release-blocking failures.
+- March timing and year-to-year behavior remain non-predictive because the reduced-complexity emulator does not contain observed weather/internal-variability forcing.
+- Future sea ice, AMOC, and Greenland results remain reduced-complexity sensitivity outputs rather than precise forecasts.
+
+DETERMINISTIC RECORD HASHES
+- VALIDATION_SUMMARY_V2_29_14.json: 249cd02a6cd6d513c859d51ddac8cc9db4c70194fa95f930175717368e07a271
+- DEEP_VALIDATION_V2_29_14.json: 495b9038be34379333a57aea57e29ea13bb17b63ad2fa2f9fb71778ac93ee1a7
+- IMPLEMENTATION_AUDIT_V2_29_14.json: 04bba7b5c753cef8e97e6a4c6f0e76b898db528a2dd8bf2f3b0291a5737712cd

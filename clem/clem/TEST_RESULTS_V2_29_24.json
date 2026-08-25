@@ -1,0 +1,23 @@
+{
+  "collected_total": 375,
+  "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q -m \"not slow\"",
+  "deselected_slow": 52,
+  "duration_seconds": 1065.01,
+  "errors": 0,
+  "exit_code": 0,
+  "failed": 0,
+  "generated_at_utc": "2026-08-08T12:45:20.088419+00:00",
+  "model_version": "2.29.24",
+  "passed": 323,
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "python": "3.13.5",
+  "raw_log": "TEST_RESULTS_V2_29_24.txt",
+  "selected": 323,
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "0683747337c1f43eb572201fffba18c8c0f0596f8c4b59889423dda19c51161a",
+    "algorithm": "sha256",
+    "coverage": "Python source/tests/tools, dependency/config metadata, and packaged runtime data/benchmarks; documentation and generated evidence excluded so post-test evidence writing does not change the tested-code identity.",
+    "file_count": 190
+  },
+  "warnings": 2
+}

@@ -1,0 +1,38 @@
+Emergent-Sensitivity Global Climate Model v2.16.0 validation
+
+PASS: test_control_stability
+PASS: test_amoc_heat_redistribution_is_conservative
+PASS: test_salt_conservation_and_freshwater_routing
+PASS: test_directional_advection_and_fovs
+PASS: test_nonlinear_hosing_response
+PASS: test_physical_atlantic_localization
+PASS: test_post_1850_initialization_matches_continuous_run
+PASS: test_separated_freshwater_components_and_legacy_override
+PASS: test_nondivisible_timestep_and_summary_compatibility
+All climate-model v2.16.0 fast smoke tests passed.
+PASS: test_control_equilibrium
+PASS: test_hybrid_ssp_has_material_but_noncollapsed_weakening
+PASS: test_ssp585_weakens_more_than_hybrid_mitigation
+All v2.16.0 AMOC-dynamics regression tests passed.
+PASS: test_no_boolean_collapse_command_controls_dynamics
+PASS: test_one_percent_ramp_collapses_continuously
+PASS: test_control_branch_remains_active
+All v2.16.0 continuous-collapse tests passed.
+PASS: test_equilibrium_continuation_is_continuous_and_conservative
+PASS: test_long_ramp_hold_has_no_discrete_target_jump
+PASS: test_ssp585_transient_response
+All climate-model v2.16.0 full regression tests passed.
+Tooltip coverage passed: 87 desktop settings, 55 Monte Carlo parameters, 75 Streamlit controls.
+PASS: deterministic GUI command
+PASS: constrained Monte Carlo GUI command
+PASS: default system-clock seed GUI command
+PASS: custom selected-scenario GUI command
+All GUI command-builder smoke tests passed.
+GUI layout test not run in headless validation environment (no display).
+PASS: test_default_feedback_decomposition
+PASS: test_total_atlantic_heat_transport_definition
+PASS: test_ohue_uses_explicit_ocean_heat_uptake
+PASS: test_grouped_likelihood_outputs
+PASS: test_physical_priors_do_not_duplicate_likelihood_intervals
+PASS: test_parameter_specific_prior_marginals_and_correlations
+All v2.16.0 calibration-fix tests passed.

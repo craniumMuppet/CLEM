@@ -1,0 +1,29 @@
+{
+  "v2.23.0": {
+    "0.1": {
+      "amoc_sv": 11.915223534617237,
+      "north_atlantic_warming_c": -0.7853515168434546
+    },
+    "0.5": {
+      "amoc_sv": 5.986166137090468e-10,
+      "north_atlantic_warming_c": -2.6958066922493655
+    },
+    "north_atlantic_cooling_contrast_c": 1.910455175405911
+  },
+  "v2.26.0": {
+    "0.1": {
+      "amoc_sv": 13.529630100537826,
+      "north_atlantic_warming_c": -0.2307758915742902
+    },
+    "0.5": {
+      "amoc_sv": 3.521248364559913e-10,
+      "north_atlantic_warming_c": -1.0484113881102093
+    },
+    "north_atlantic_cooling_contrast_c": 0.817635496535919
+  },
+  "interpretation": {
+    "v223_original_threshold_c": 1.0,
+    "v226_passes_original_threshold": false,
+    "cause": "Versioned AMOC heat-response calibration; freshwater defaults remain 0.006/0.005 Sv/K."
+  }
+}

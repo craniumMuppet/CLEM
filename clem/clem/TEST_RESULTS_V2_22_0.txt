@@ -1,0 +1,30 @@
+Emergent-Sensitivity Global Climate Model v2.22.0
+Validation date: 2026-07-25
+
+Fast consolidated pytest suite
+- 25 passed
+- 1 skipped: optional Hypothesis property suite unavailable in the execution environment
+- 14 deselected by default markers (slow, GUI, calibration)
+- Runtime: approximately 21 seconds
+
+Fast smoke suite
+- 9 passed
+
+Selected legacy scientific regressions
+- review_fixes_v2_21_0_test.py: passed
+- amoc_dynamics_fix_test.py: passed
+- amoc_persistent_collapse_test.py: passed
+- long_hold_salinity_exchange_test.py: passed
+- The subsequent long v2_17_1 validation run did not complete before the combined execution timeout; no failure was emitted before timeout.
+
+Equilibrium continuation check
+- Fixed-preindustrial continuation from 0.00 to 0.30 Sv with 0.05 Sv base spacing and one adaptive-refinement round completed in approximately 19 seconds.
+- Stable branch B000 was retained through 0.25 Sv.
+- 0.275 and 0.30 Sv were explicitly unresolved; no unstable root was substituted.
+
+Held-out validation quick check
+- Configuration: 10-degree grid, 0.25-year timestep.
+- SSP2-4.5 AMOC weakening, 1995-2014 to 2081-2100: 11.9313%.
+- Bundled independent range: 20-50%.
+- Result: failed held-out benchmark.
+- No model parameter was retuned against this held-out result.

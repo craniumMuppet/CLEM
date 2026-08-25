@@ -1,0 +1,33 @@
+{
+  "canonical_non_slow_tests": {
+    "collected_total": 375,
+    "deselected_slow": 52,
+    "errors": 0,
+    "failed": 0,
+    "passed": 323,
+    "selected": 323
+  },
+  "evidence": {
+    "review": "V2_29_24_REVIEW_FIXES.md",
+    "test_json": "TEST_RESULTS_V2_29_24.json",
+    "test_log": "TEST_RESULTS_V2_29_24.txt",
+    "validation_directory": "validation/v22924/",
+    "validation_summary": "VALIDATION_SUMMARY_V2_29_24.json"
+  },
+  "generated_at_utc": "2026-08-08T12:47:02.018230+00:00",
+  "model_version": "2.29.24",
+  "package_name": "emergent_global_climate_model_v2_29_24",
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "0683747337c1f43eb572201fffba18c8c0f0596f8c4b59889423dda19c51161a",
+    "algorithm": "sha256",
+    "coverage": "Python source/tests/tools, dependency/config metadata, and packaged runtime data/benchmarks; documentation and generated evidence excluded so post-test evidence writing does not change the tested-code identity.",
+    "file_count": 190
+  },
+  "validation_acceptance": {
+    "positive_march_skill_both_baselines_both_resolutions": true,
+    "positive_september_skill_both_baselines_both_resolutions": true,
+    "ssp245_local_safeguard_contact_below_0_1_percent_both_resolutions": true,
+    "strict_future_scenario_ordering_both_resolutions": true,
+    "unforced_stability_roundoff_scale": true
+  }
+}

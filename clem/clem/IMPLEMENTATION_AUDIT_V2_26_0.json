@@ -1,0 +1,49 @@
+{
+  "model_version": "2.26.0",
+  "generated_utc": "2026-07-28T15:03:21.009773+00:00",
+  "requested_features": {
+    "explicit_seasonal_insolation": {
+      "implemented": true,
+      "evidence": "daily_mean_insolation; polar night and midnight sun test"
+    },
+    "near_freezing_arctic_interface_enthalpy": {
+      "implemented": true,
+      "evidence": "interface = -1.8 C while ice exists; sensible warming only after melt"
+    },
+    "thermodynamic_sea_ice_seasonality": {
+      "implemented": true,
+      "evidence": "orbital-insolation/albedo enthalpy integration; no prescribed month or amplitude"
+    },
+    "autumn_winter_amplification_phasing": {
+      "implemented": true,
+      "evidence": {
+        "DJF": 3.8503625010830027,
+        "MAM": 3.6873864308928974,
+        "JJA": 3.1967981547727966,
+        "SON": 3.408061829056117
+      }
+    },
+    "explicit_seasonal_greenland_forcing": {
+      "implemented": true,
+      "evidence": {
+        "peak_month": 6,
+        "annual_weight_mean": 1.0007056150491742,
+        "annual_flux_sv": 0.026681502769817508,
+        "peak_flux_sv": 0.04072084362747025
+      }
+    },
+    "clear_v223_versioning": {
+      "implemented": true,
+      "evidence": "V2_23_COMPATIBILITY_V2_26_0.md and source-preservation JSON"
+    },
+    "legacy_multiplier_controls_removed_from_normal_interfaces": {
+      "implemented": true,
+      "evidence": "absent from GUI/Streamlit/metadata/help; hidden compatibility parser fields; zero enabled-seasonal effect"
+    }
+  },
+  "freshwater_inflation_guard": {
+    "hydrological_default": 0.006,
+    "greenland_default": 0.005,
+    "temporary_0p023_0p017_active": false
+  }
+}

@@ -1,0 +1,22 @@
+Emergent-Sensitivity Global Climate Model v2.17.0
+
+PASS: fast climate-model smoke tests
+PASS: calibration-fix tests
+PASS: AMOC dynamics regression tests
+PASS: continuous-collapse tests
+PASS: hybrid SSP transition tests
+PASS: six-Sv reference tests
+PASS: three-state AMOC completion-count tests
+PASS: Monte Carlo smoke tests
+PASS: setting metadata coverage
+PASS: process-tree termination test
+PASS: full regression tests
+PASS: structural v2.17.0 tests
+PASS: GUI command-builder smoke tests
+NOT RUN: Tk visual layout test (headless environment; no display)
+
+Central response diagnostics:
+SSP5-8.5 AMOC weakening, 1995-2014 to 2081-2100: 20.94045%
+0.1 Sv hosing AMOC weakening after approximately 40 years: 12.26395%
+SSP2-4.5 minimum AMOC through 2500: 14.4235 Sv
+SSP2-4.5 final AMOC: 16.1921 Sv

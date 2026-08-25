@@ -1,0 +1,77 @@
+Emergent-Sensitivity Global Climate Model v2.29.10
+Integrity and recovery release
+Test date: 2026-08-01 UTC
+
+Scope
+-----
+v2.29.10 addresses the remaining independent-review findings concerning native-grid
+AMOC initialization, long-run checkpoint safety and compatibility, failed-run retry,
+explicit CO2 targets below the default start, mean-only sweep output, recovery-rate
+overshoot, evidence separation, and audit coverage. The v2.29.8 save/load, per-target
+checkpoint, explicit-target, and AMOC percentage-decline features remain active.
+
+Release validation
+------------------
+PASS  21/21 full v2.29.10 validation tasks completed.
+PASS  32/32 release checks in VALIDATION_SUMMARY_V2_29_10.json.
+PASS  Default SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 pathways.
+PASS  Historical/global metrics, native Arctic reference cycle, energy audit,
+      control and perturbation recovery, timestep convergence, native-grid
+      resolution convergence, hosing recovery, long SSP2-4.5, and hybrid checks.
+PASS  Native-grid AMOC initialization density-ratio spread: 0.04855246
+      (maximum 0.20); no canonical 5-degree climatology substitution.
+PASS  Hybrid-pathway 2100 AMOC: 10.8162 Sv (required 10-14 Sv).
+PASS  Long SSP2-4.5 2100 AMOC: 10.9890 Sv (required at least 10 Sv).
+PASS  Hosing recovery: 83.1464% (minimum 80%).
+PASS  Millennium-hold recovery-rate limit with the 80-year convection-recovery
+      timescale.
+
+Full retained regression suite
+------------------------------
+PASS  254/254 independently isolated pytest nodes completed with zero failures.
+PASS  Conservation, legacy entry points, calibration, GUI, Arctic thermodynamics,
+      AMOC dynamics, long-hold behavior, package integrity, evidence roles,
+      operational safety, v2.29.8 resume features, v2.29.9 review fixes, and all
+      v2.29.10 integrity-recovery tests.
+PASS  Failed ordinary Monte Carlo checkpoints and failed nested target diagnostics
+      are retried by default.
+PASS  Safe JSON plus NPY checkpoints reject pickle payloads and source/environment
+      fingerprint mismatches.
+PASS  Specific targets such as 200,300,600,1200 are accepted with the normal
+      278.3 ppm field default by lowering and recording the effective common start.
+PASS  The mean-timeseries output schema contains means only; percentile and AMOC
+      percentage-interval products remain separate.
+
+Additional checks
+-----------------
+PASS  Python compilation of the complete frozen release source tree.
+PASS  Model version imports as 2.29.10.
+PASS  Implementation-audit source hashes were regenerated after the final source
+      and documentation changes and match the frozen tree.
+PASS  Runtime provenance fingerprints include source, required data, dependency
+      locks, Python, platform, and numerical-package versions.
+PASS  Clean extracted archive: 294/294 manifest entries verified and complete
+      source compilation passed.
+PASS  Clean extracted archive: 48/48 focused integrity, resume, evidence,
+      operational-safety, AMOC-reference, and conservation tests passed.
+
+Scientific limitation retained deliberately
+--------------------------------------------
+The March 1979-2020 native-area temporal response is not scientifically adequate
+under the predeclared diagnostic: the model trend is about 3.17 times the observed
+trend and the correlation is about 0.19. This result is explicit, non-release-
+blocking, and prevents temporal-skill or predictive-validation claims. Historical
+sea-ice observations through March 2026 were inspected during development; no
+retrospective independent temporal validation is claimed. The earliest reserved
+prospective temporal evaluation begins in 2027.
+
+The development benchmark group therefore does not pass every descriptive target.
+AMOC, Greenland, future sea-ice area/extent, and ice-free timing remain reduced-
+complexity sensitivity outputs rather than quantitative forecasts.
+
+Execution records
+-----------------
+Full validator log: v22910_validation_final.log (external build record)
+Full regression result set: 254 nodes, 254 passed, 0 failed
+Deterministic archive ZIP integrity, full manifest verification, extracted-tree
+compilation, and 48 focused extracted-package tests all passed.

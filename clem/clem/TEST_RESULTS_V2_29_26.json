@@ -1,0 +1,52 @@
+{
+  "compileall_passed": true,
+  "errors": 0,
+  "failed": 0,
+  "generated_at_utc": "2026-08-18T15:14:32.497565+00:00",
+  "groups": [
+    {
+      "duration_seconds": 16.58,
+      "failed": 0,
+      "log_source": "recovery execution log",
+      "name": "recalibration_and_release",
+      "passed": 49
+    },
+    {
+      "duration_seconds": 0.99,
+      "failed": 0,
+      "log_source": "recovery execution log",
+      "name": "additional_release_integrity",
+      "passed": 11
+    },
+    {
+      "duration_seconds": 15.94,
+      "failed": 0,
+      "log_source": "recovery execution log",
+      "name": "reference_cycle_integrity",
+      "passed": 1
+    }
+  ],
+  "model_version": "2.29.26",
+  "passed": 61,
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "python": "3.13.5",
+  "scientific_claim_status": {
+    "calibration_passed": true,
+    "development_evaluation_passed": true,
+    "nested_fold_specific_hindcasts_run": false,
+    "nsidc_0611_available": false,
+    "osi_saf_september_independent_gate_passed": false,
+    "physical_volume_thickness_gate_passed": true,
+    "scientific_predictive_validation_complete": false
+  },
+  "scope": "61 unique bounded release/recalibration checks; complete repository-wide non-slow inventory not claimed",
+  "tested_code_fingerprint": {
+    "aggregate_sha256": "a48b76fb3e147c1bdaa5028629b99d42c4678031a3fa44ab657f808feeee2cc4",
+    "algorithm": "sha256",
+    "coverage": "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, and release-facing Markdown inspected by regressions; generated evidence and transient caches excluded",
+    "file_count": 327,
+    "profile": "tested-code",
+    "schema_version": "2.0"
+  },
+  "tested_code_fingerprint_file": "TESTED_CODE_FINGERPRINT_V2_29_26.json"
+}

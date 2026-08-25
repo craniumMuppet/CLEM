@@ -1,0 +1,37 @@
+{
+  "defaults": {
+    "arctic_basal_ocean_exchange_wm2_k": 10.0,
+    "arctic_forced_ocean_heat_convergence_onset_warming_c": 1.0,
+    "arctic_forced_ocean_heat_convergence_wm2_per_k": 4.0,
+    "arctic_ice_area_formation_volume_sensitivity": 4.0,
+    "arctic_max_equivalent_thickness_m": 4.5,
+    "arctic_reference_air_temperature_at_full_latitude_c": -9.5
+  },
+  "duration_years": 200.0,
+  "final_toa_imbalance_wm2": -3.735119336815321e-16,
+  "gmst_absolute_drift_c": 1.6388558343217584e-15,
+  "gmst_final_c": -1.6388558343217584e-15,
+  "gmst_initial_c": 0.0,
+  "ice_fractions_within_bounds": true,
+  "march_drift_million_km2": -2.1428370189369161e-10,
+  "march_first_window_mean_million_km2": 13.989262577539396,
+  "march_last_window_mean_million_km2": 13.989262577325112,
+  "maximum_absolute_toa_imbalance_last_20_years_wm2": 2.17134603288683e-15,
+  "maximum_local_ice_thickness_m": 2.700451889775806,
+  "mode": "unforced_constant",
+  "not_applicable_nonfinite_diagnostic_columns": [
+    "hybrid_ssp_after_weight",
+    "rcmip_anthropogenic_effective_forcing_wm2",
+    "rcmip_co2_effective_forcing_wm2",
+    "rcmip_total_effective_forcing_wm2"
+  ],
+  "prognostic_state_arrays_finite": true,
+  "resolution_deg": 5.0,
+  "runtime_s": 86.36757004799802,
+  "seasonal_amplitude_first_window_million_km2": 8.393418201945291,
+  "seasonal_amplitude_last_window_million_km2": 8.393418201388918,
+  "september_drift_million_km2": 3.4209168831011993e-10,
+  "september_first_window_mean_million_km2": 5.595844375594104,
+  "september_last_window_mean_million_km2": 5.5958443759361955,
+  "unexpected_nonfinite_numeric_columns": []
+}

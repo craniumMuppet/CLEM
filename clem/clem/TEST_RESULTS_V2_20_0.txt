@@ -1,0 +1,61 @@
+Emergent-Sensitivity Global Climate Model v2.20.0
+Review-fix, structural-uncertainty and reproducibility test results
+
+CORRECTNESS AND API FIXES
+- hybrid SSP switch year rejected when outside the requested simulation interval: PASS
+- SSP4-6.0 automatic 1850 initialization reported correctly: PASS
+- legacy probability/mean-based output identifiers removed from active outputs: PASS
+- Monte Carlo experiment controls rejected by the physical-parameter whitelist: PASS
+
+AMOC OUTCOME DIAGNOSTICS
+- piecewise-linear collapsed, active and reversed state durations: PASS
+- sustained recovery disqualifies persistent collapse: PASS
+- fully weak final windows classify as persistent collapse: PASS
+- zero-year recovery threshold edge case: PASS
+- Monte Carlo completion-count integration: PASS
+- paired CO2 target-sweep integration: PASS
+
+CO2 TARGET THRESHOLDS
+- conditional ensemble fraction naming in CSV, JSON and plots: PASS
+- monotonicity violation detection: PASS
+- isotonic non-decreasing projection: PASS
+- pointwise weighted-member bootstrap intervals: PASS
+- threshold bootstrap intervals and crossing coverage: PASS
+- non-monotonic warning output: PASS
+
+NEW PHYSICS OPTIONS
+- logarithmic forcing remains the default: PASS
+- Meinshausen 2020 forcing is zero at the reference concentration: PASS
+- configured doubled-CO2 forcing is reproduced exactly: PASS
+- high-CO2 curvature differs from the logarithmic formulation: PASS
+- fixed and warming-sensitive Southern Ocean structures: PASS
+- none, diagnostic and interactive Indo-Pacific compensation structures: PASS
+- six structural-family combinations complete successfully: PASS
+- CLI, desktop GUI and Streamlit configuration mappings compile and validate: PASS
+
+CONSERVATION AND COMPATIBILITY
+- 750 randomized salt/freshwater/heat algebraic conservation checks: PASS
+- 24 short randomized integration conservation checks: PASS
+- v2.19.0 versus v2.20.0 default trajectory comparison: 102 common numeric columns, maximum absolute difference 0: PASS
+- timestep and grid convergence regressions: PASS
+- long-hold salinity exchange and AMOC calibration regressions: PASS
+
+AUTOMATED TESTS
+- Python compilation: PASS
+- targeted pytest suite: 12 passed
+- Hypothesis conservation module: included and enabled in locked CI; skipped locally because Hypothesis was not installed in this runtime
+- maintained non-graphical regression scripts: PASS when run in isolated groups
+- desktop GUI command-builder smoke: PASS
+- graphical layout regression under Xvfb: PASS
+- setting metadata coverage: 124 desktop settings, 57 Monte Carlo parameters, 98 Streamlit controls: PASS
+
+REPRODUCIBILITY
+- runtime dependencies pinned in requirements.lock
+- test dependencies pinned in requirements-dev.lock
+- GitHub Actions matrix for Python 3.12 and 3.13
+- CI runs compilation, pytest/Hypothesis, maintained regressions and Xvfb GUI layout
+
+DEFAULT BEHAVIOUR
+The v2.20.0 defaults retain the v2.19.0 logarithmic CO2 forcing, fixed
+Southern Ocean transport structure and no Indo-Pacific compensation. The new
+forcing and AMOC structures are explicit opt-in alternatives.

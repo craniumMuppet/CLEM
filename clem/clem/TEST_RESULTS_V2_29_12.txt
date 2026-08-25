@@ -1,0 +1,55 @@
+Emergent Global Climate Model v2.29.12
+Monte Carlo and long-run integrity release verification
+Date: 2026-08-02
+
+RESULT: PASS
+
+Source and package-preparation checks
+- Python source compilation: PASS.
+- Current pytest inventory collected: 271 tests.
+- Non-legacy test inventory: 217/217 PASS.
+  - Tests were executed by isolated module to prevent one long scientific test
+    from hiding the status of the remaining inventory.
+  - The active v2.29.12 validation-record/source-hash test was rerun after the
+    final records were generated; all 9 tests in that module passed.
+- Legacy compatibility inventory: 54/54 PASS.
+  - 53 unchanged entry points passed in the isolated run.
+  - One obsolete regression assertion required a quasi-random sample to contain
+    at least one rejected density draw. It was updated to test the actual v2.29.12
+    contract: exact screen/worker agreement for all draws plus deterministic
+    rejection of invalid hydrography. The corrected entry point passed on rerun.
+- Focused v2.29.8-v2.29.12 integrity regressions: 33/33 PASS.
+  - v2.29.12 Monte Carlo/run-lock/checkpoint regressions: 9/9 PASS.
+  - v2.29.11 target/baseline regressions: 8/8 PASS.
+  - v2.29.10 integrity/recovery regressions: 8/8 PASS.
+  - v2.29.8 resumable-sweep regressions: 8/8 PASS.
+
+Scientific validation
+- Parallel scientific validation tasks: 21/21 PASS.
+- Release checks: 32/32 PASS.
+- Validation records generated from the final audited production sources:
+  - VALIDATION_SUMMARY_V2_29_12.json
+  - DEEP_VALIDATION_V2_29_12.json
+  - IMPLEMENTATION_AUDIT_V2_29_12.json
+- Implementation-audit source files: 32.
+
+Independent-review fixes verified
+1. Exact sampled-configuration AMOC density screening matches worker initialization.
+2. Minimum survivor, maximum failure-fraction, and posterior effective-sample-size
+   quality gates prevent invalid uncertainty products.
+3. Exclusive output-directory ownership locks and transactional state updates
+   prevent simultaneous-writer lost updates.
+4. Corrupt or incompatible state backups fall through to compatible checkpoint
+   metadata recovery.
+5. Attempted, successful, failed, validated, and pending work are reported
+   separately; completed-with-failures/quality-warning states are explicit.
+6. Checkpoints reject unsupported ZIP compression, encryption, and NPY trailing
+   or truncated payload bytes.
+7. The March sea-ice temporal limitation remains explicit and non-predictive.
+
+Scientific limitation retained by design
+- all_release_checks_passed: true
+- all_development_checks_passed: false
+- march_temporal_response_scientifically_adequate: false
+- The release does not claim quantitative historical March sea-ice timing or
+  trend skill. This integrity release did not retune the Arctic physics.

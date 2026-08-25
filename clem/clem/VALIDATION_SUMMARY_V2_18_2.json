@@ -1,0 +1,31 @@
+{
+  "model_version": "2.18.2",
+  "feature": "conservative external-ocean salinity-anomaly exchange",
+  "default_exchange_sv": {
+    "southern_ocean_external": 5.0,
+    "south_atlantic_upper_external": 2.0
+  },
+  "long_hold_stress_test": {
+    "scenario": "percent_ramp_hold",
+    "growth_rate_percent_per_year": 1.0,
+    "co2_start_ppm": 278.3,
+    "co2_cap_ppm": 1200.0,
+    "hold_years": 1000.0,
+    "dt_years": 0.05,
+    "minimum_amoc_sv": 0.23366979913664102,
+    "maximum_amoc_after_first_6_sv_crossing": 5.8478698810675,
+    "final_amoc_sv": 1.6293201597258777,
+    "minimum_southern_salinity_psu": 32.9660497491589,
+    "maximum_absolute_salt_error_ppm": 3.774758283725532e-09,
+    "artificial_restart_removed": true
+  },
+  "calibration_checks": {
+    "ssp585_amoc_decline_2100_percent": 21.086449014440547,
+    "hosing_0p1_amoc_decline_40yr_percent": 12.310362238396655
+  },
+  "legacy_compatibility": {
+    "exchange_disabled_reproduces_v2_18_1": true,
+    "default_exchange_changes_long_term_amoc_structure": true,
+    "older_posterior_probabilities_transferable": false
+  }
+}
