@@ -194,7 +194,7 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "arctic_winter_transport_enhancement": _physical(
         "Additive cold-season Arctic energy-convergence coefficient multiplied by a joint darkness-and-cold-state index.",
-        "The index is zero in warm shoulder seasons even when nights are dark, and strongest in the cold polar night. Default 10 W/m2/K; built-in prior support 0-25 W/m2/K.",
+        "The index is zero in warm shoulder seasons even when nights are dark, and strongest in the cold polar night. Default 19 W/m2/K; built-in prior support 0-25 W/m2/K.",
         "Seasonal atmospheric energy-transport closure calibrated jointly against March and September sea-ice climatology and trends.",
         "Low",
     ),
@@ -1151,11 +1151,11 @@ SETTING_INFO.update({
         "Positive ice anomalies receive heat and negative ice anomalies export heat; the equal-and-opposite non-Arctic tendency preserves whole-domain energy while avoiding a one-sided recovery closure.", "Medium"),
     "arctic_forced_ocean_heat_convergence_wm2_per_k": _physical(
         "Warming-driven conservative ocean heat convergence into the Arctic surface/ocean system.",
-        "Default 7.5 W/m2/K; zero disables the forced convergence term.",
+        "Default 8.0 W/m2/K; zero disables the forced convergence term.",
         "The response saturates with warming and is weighted by native ice cover; equal-and-opposite heat is removed from lower latitudes. Strength remains a phenomenological structural uncertainty.", "Medium"),
     "arctic_forced_ocean_heat_convergence": _physical(
         "Warming-driven conservative ocean heat convergence into the Arctic surface/ocean system.",
-        "Default 7.5 W/m2/K; zero disables the forced convergence term.",
+        "Default 8.0 W/m2/K; zero disables the forced convergence term.",
         "The response saturates with warming and is weighted by native ice cover; equal-and-opposite heat is removed from lower latitudes. Strength remains a phenomenological structural uncertainty.", "Medium"),
     "arctic_forced_ocean_heat_convergence_ice_fraction_exponent": _physical(
         "Optional exponent that attenuates warming-driven Arctic ocean heat convergence as native ice fraction decreases.",
@@ -1163,11 +1163,11 @@ SETTING_INFO.update({
         "Used with the bounded heat-convergence response so anomalous under-ice heat import declines as ice-covered receiving area disappears.", "Low"),
     "arctic_forced_ocean_heat_convergence_onset_warming_c": _physical(
         "Global-warming threshold above which forced conservative Arctic ocean heat convergence activates.",
-        "Default 0.45 C; non-negative.",
+        "Default 0.40 C; non-negative.",
         "Keeps the unforced/reference regime separate from the transient warming-driven convergence response.", "Medium"),
     "arctic_forced_ocean_heat_convergence_saturation_scale_c": _physical(
         "Saturation warming scale for enhanced Arctic Ocean heat convergence.",
-        "Positive; default 0.32 C; built-in prior support 0.15-1.5 C.",
+        "Positive; default 0.45 C; built-in prior support 0.15-1.5 C.",
         "Makes the transient response approximately linear near onset but finite at larger warming.", "Low"
     ),
     "arctic_phase_restoring_deficit_saturation_fraction": _physical(
@@ -1283,11 +1283,11 @@ SETTING_INFO.update({
         "Default 0.15 years.", "Exponential diagnostic filter; conserved instantaneous air energy is unchanged.", "Low"),
     "arctic_full_cover_equivalent_thickness_m": _physical(
         "Equivalent grid-cell ice thickness corresponding to full compact pack coverage in the conservative compactness curve.",
-        "Default 4.0 m; built-in prior support 3.0-4.5 m.",
+        "Default 3.70 m; built-in prior support 3.0-4.5 m.",
         "Concentration changes without changing latent heat or equivalent ice volume.", "Low"),
     "arctic_full_cover_equivalent_thickness": _physical(
         "Equivalent grid-cell ice thickness corresponding to full compact pack coverage in the conservative compactness curve.",
-        "Default 4.0 m; built-in prior support 3.0-4.5 m.",
+        "Default 3.70 m; built-in prior support 3.0-4.5 m.",
         "Concentration changes without changing latent heat or equivalent ice volume.", "Low"),
     "arctic_max_equivalent_thickness_m": _op(
         "Emergency fail-fast threshold for pathological grid-equivalent latent-energy ice states. It never clips or transfers latent energy.",
@@ -1299,7 +1299,7 @@ SETTING_INFO.update({
         "Numerical safety control; crossing the threshold aborts rather than changing the model state."),
     "arctic_ice_concentration_exponent": _physical(
         "Curvature exponent of the compact-pack concentration curve above the thin-new-ice branch.",
-        "Default 0.56; built-in prior support 0.25–2.5.",
+        "Default 1.00; built-in prior support 0.25–2.5.",
         "The mapping is monotonic, has the configured thin-ice local-thickness limit, and reaches full concentration only at the declared full-cover equivalent thickness throughout the prior support.", "Low"),
     "arctic_ice_area_formation_temperature_scale_c": _physical(
         "Temperature scale for thermodynamic new-ice formation over open water.",
@@ -1328,7 +1328,7 @@ SETTING_INFO.update({
         "Changes area-volume partitioning without adding heat or removing latent energy.", "Low"),
     "arctic_ice_area_thinning_melt_amplification": _physical(
         "Additional lateral-melt sensitivity to reference-relative seasonal pack thinning.",
-        "Non-negative; default 4.0.",
+        "Non-negative; default 2.0.",
         "Allows transient area retreat to emerge from reduced pack support rather than stronger atmospheric forcing.", "Low"),
     "arctic_ice_area_thick_pack_resistance_exponent": _physical(
         "Deprecated empirical resistance exponent that suppresses anomaly-only area retreat after surviving floes thicken above the periodic-control pack.",
@@ -1352,7 +1352,7 @@ SETTING_INFO.update({
         "Optional non-anomalous mechanical opening; disabled in the calibrated production defaults.", "Low"),
     "arctic_ice_area_thin_pack_divergence_fraction_per_year": _physical(
         "Reference-relative deformation and lead-opening rate for a seasonally weakened pack.",
-        "Non-negative; default 0.80 per year.",
+        "Non-negative; default 0.30 per year.",
         "Responds to transient volume-support loss with cold-season weighting and remains inactive in the periodic control.", "Low"),
     "arctic_greenland_marine_influence": _physical(
         "Weight of Arctic marine temperature anomalies in the aggregate Greenland temperature driver.",

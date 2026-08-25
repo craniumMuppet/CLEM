@@ -15,7 +15,7 @@
   "operator_file": "cryosat2_rdeft4_operator.npz",
   "operator_file_sha256": "d14aa0ec444ecf60c33ca7be8d2fc38a6703535f7d7d6dbd9fa3db7c0a70cd11",
   "processed_file_sha256": "ea822416b0b3484f46d8c8eea389761378cc81927534bdbe42d2ffac38246e5c",
-  "role": "independent_satellite_thickness_validation",
+  "role": "development_informed_satellite_thickness_constraint",
   "source_files_sha256": {
     "RDEFT4_20110331.nc": "80cfe3abb3d0d3339f51e90982a8657eb562efdf6429f9566937d6bc955dded7",
     "RDEFT4_20120331.nc": "9f1dfefb27b4baa83a07041391167de979ec1c645fb7266196fd28addf9dfa4b",

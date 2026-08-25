@@ -297,7 +297,7 @@ class ModelConfig:
     # requires both polar darkness and a cold reference air column, preventing
     # the nominal winter term from acting strongly during the dark-but-warm
     # September shoulder season.
-    arctic_winter_transport_enhancement: float = 10.0
+    arctic_winter_transport_enhancement: float = 19.0
     arctic_winter_transport_temperature_scale_c: float = 15.0
     arctic_open_water_heat_release_wm2_per_fraction: float = 24.0
     arctic_ice_air_exchange_wm2_k: float = 0.08
@@ -313,7 +313,7 @@ class ModelConfig:
     # re-diagnosed from volume at each time step.
     arctic_full_cover_equivalent_thickness_m: float = 3.70
     arctic_new_ice_local_thickness_m: float = 0.22
-    arctic_ice_concentration_exponent: float = 0.56
+    arctic_ice_concentration_exponent: float = 1.00
     # Independent prognostic ice-area controls. Ice volume remains the latent-
     # energy reservoir; concentration evolves separately through new-ice
     # spreading, vertical growth, lateral melt, and weak mechanical compaction.
@@ -332,7 +332,7 @@ class ModelConfig:
     # the pack mechanically and exposes more perimeter to lateral melt. These
     # anomaly-only terms are zero on the periodic control orbit, so they alter
     # forced trend sensitivity without fitting the unforced climatology.
-    arctic_ice_area_thinning_melt_amplification: float = 4.0
+    arctic_ice_area_thinning_melt_amplification: float = 2.0
     # Deprecated empirical thick-pack resistance.  A nonzero value suppresses
     # anomaly-only area retreat when surviving floes exceed control thickness.
     # The scientifically conservative default is disabled: thickness/volume
@@ -342,7 +342,12 @@ class ModelConfig:
     arctic_ice_area_ridging_threshold: float = 0.80
     arctic_ice_area_ridging_fraction_per_year: float = 0.25
     arctic_ice_area_divergence_fraction_per_year: float = 0.0
-    arctic_ice_area_thin_pack_divergence_fraction_per_year: float = 0.80
+    arctic_ice_area_thin_pack_divergence_fraction_per_year: float = 0.30
+    # Grid-cell mean thickness over the ice-covered fraction cannot represent
+    # arbitrarily narrow, kilometre-deep remnants.  Unresolved deformation and
+    # floe dispersion spread conserved volume over enough area to keep this
+    # area-mean thickness within the reference solver's 12 m physical envelope.
+    arctic_ice_mechanical_max_local_thickness_m: float = 12.0
     # Optional legacy lead-closure control retained only for compatibility. The
     # v2.29.20 production defaults leave it disabled; prognostic area recovery
     # no longer depends on this fitted closure branch.
@@ -356,8 +361,8 @@ class ModelConfig:
     # the declared full-cover equivalent thickness: any excess grid-equivalent
     # volume is represented by additional area rather than an artificial 7-8 m
     # local-thickness remnant in a shrinking pack.
-    arctic_ice_export_onset_equivalent_thickness_m: float = 0.82
-    arctic_ice_export_timescale_years: float = 0.14
+    arctic_ice_export_onset_equivalent_thickness_m: float = 0.90
+    arctic_ice_export_timescale_years: float = 0.24
     # Mechanical export has a prescribed seasonal control component. This
     # fraction allows anomalies in pack thickness to alter export; zero keeps
     # the calibrated reference export fixed while one applies the full local
@@ -402,9 +407,9 @@ class ModelConfig:
     # ice-fraction weighting confines anomalous convergence to the under-ice
     # pathway as ice cover retreats. Equal-and-opposite heat is removed from
     # lower latitudes, preserving the conservative coupling.
-    arctic_forced_ocean_heat_convergence_wm2_per_k: float = 7.50
-    arctic_forced_ocean_heat_convergence_onset_warming_c: float = 0.45
-    arctic_forced_ocean_heat_convergence_saturation_scale_c: float = 0.32
+    arctic_forced_ocean_heat_convergence_wm2_per_k: float = 8.00
+    arctic_forced_ocean_heat_convergence_onset_warming_c: float = 0.40
+    arctic_forced_ocean_heat_convergence_saturation_scale_c: float = 0.45
     arctic_forced_ocean_heat_convergence_ice_fraction_exponent: float = 1.0
     arctic_phase_restoring_deficit_saturation_fraction: float = 0.14
     # Independent safety bound on deficit-side phase restoring. Keeping this
@@ -431,7 +436,7 @@ class ModelConfig:
     arctic_ice_thermal_conductivity_wm_k: float = 2.1
     arctic_snow_thermal_resistance_m2k_w: float = 0.12
     arctic_basal_ocean_heat_flux_wm2: float = 1.5
-    arctic_ice_nonsolar_heat_loss_wm2: float = 47.8
+    arctic_ice_nonsolar_heat_loss_wm2: float = 51.0
     arctic_ice_surface_exchange_wm2_k: float = 5.0
     arctic_open_water_nonsolar_heat_loss_wm2: float = 70.0
     # v2.28 uses stability-dependent open-water/air exchange.  The old single
@@ -880,6 +885,15 @@ class ModelConfig:
         ]:
             if value < 0.0:
                 raise ValueError(f"{name} cannot be negative")
+        if not (
+            self.arctic_new_ice_local_thickness_m
+            < self.arctic_ice_mechanical_max_local_thickness_m
+            < self.arctic_max_local_ice_thickness_m
+        ):
+            raise ValueError(
+                "arctic_ice_mechanical_max_local_thickness_m must exceed the "
+                "new-ice thickness and remain below the emergency safeguard"
+            )
         if not 0.0 <= self.arctic_winter_lead_closure_fraction <= 1.0:
             raise ValueError(
                 "arctic_winter_lead_closure_fraction must be in [0, 1]"
@@ -4178,8 +4192,17 @@ class ProcessClimateModel:
                 equivalent / ARCTIC_REFERENCE_SOLVER_MAX_LOCAL_THICKNESS_M, 0.0, 1.0
             )
             requested = np.maximum(requested, reference_minimum)
-        # Production local-thickness safety is deliberately non-corrective: it
-        # never increases concentration or projected area.
+        # Unresolved deformation/floe dispersion is a physical, volume-
+        # conserving area process distinct from the emergency safeguard.  It
+        # prevents a finite-volume grid cell from becoming an arbitrarily
+        # narrow, kilometre-deep remnant before the explicit area step runs.
+        if not getattr(self, "_arctic_reference_cycle_initializing", False):
+            mechanical_minimum = np.clip(
+                equivalent / cfg.arctic_ice_mechanical_max_local_thickness_m,
+                0.0,
+                1.0,
+            )
+            requested = np.maximum(requested, mechanical_minimum)
         recovered = np.clip(
             equivalent / cfg.arctic_new_ice_local_thickness_m, 0.0, 1.0
         )
@@ -4210,6 +4233,7 @@ class ProcessClimateModel:
         dt_years: float,
         reference_previous_equivalent_thickness_m: np.ndarray | None = None,
         reference_previous_concentration: np.ndarray | None = None,
+        area_process_scale: np.ndarray | float = 1.0,
         return_process_ledger: bool = False,
     ) -> np.ndarray | tuple[np.ndarray, dict[str, np.ndarray]]:
         """Advance independent sea-ice concentration without creating volume.
@@ -4223,6 +4247,11 @@ class ProcessClimateModel:
         """
         cfg = self.config
         dt = max(float(dt_years), 0.0)
+        process_scale = np.clip(
+            np.broadcast_to(np.asarray(area_process_scale, dtype=float), np.shape(previous_concentration)),
+            0.0,
+            1.0,
+        )
         previous_volume = np.maximum(
             np.asarray(previous_equivalent_thickness_m, dtype=float), 0.0
         )
@@ -4333,6 +4362,7 @@ class ProcessClimateModel:
             * spreading_efficiency
             / cfg.arctic_new_ice_local_thickness_m,
         )
+        area_gain *= process_scale
         concentration += area_gain
         formation_area_change = area_gain.copy()
 
@@ -4364,6 +4394,7 @@ class ProcessClimateModel:
             * lateral_share
             / cfg.arctic_ice_area_melt_thickness_m,
         )
+        area_loss *= process_scale
         concentration -= area_loss
         melt_area_change = -area_loss.copy()
 
@@ -4396,8 +4427,8 @@ class ProcessClimateModel:
             * concentration
             * np.clip(1.0 - 0.5 * concentration, 0.0, 1.0)
         )
-        ridging_area_change = -dt * ridging
-        divergence_area_change = -dt * divergence
+        ridging_area_change = -dt * process_scale * ridging
+        divergence_area_change = -dt * process_scale * divergence
         concentration += ridging_area_change + divergence_area_change
 
         # Smooth compact-pack relaxation only removes unsupported excess area;
@@ -4415,7 +4446,12 @@ class ProcessClimateModel:
         # redistribution acts on an established pack.
         established_pack = (previous_volume > 1.0e-12).astype(float)
         compaction_area_change = -(
-            compaction_alpha * dark * coldness * excess_area * established_pack
+            process_scale
+            * compaction_alpha
+            * dark
+            * coldness
+            * excess_area
+            * established_pack
         )
         concentration += compaction_area_change
         concentration_before_support = concentration.copy()
@@ -4439,6 +4475,16 @@ class ProcessClimateModel:
                 next_volume / ARCTIC_REFERENCE_SOLVER_MAX_LOCAL_THICKNESS_M, 0.0, 1.0
             )
             concentration = np.maximum(concentration, reference_minimum)
+        concentration_after_upper_support = concentration.copy()
+        mechanical_minimum = np.clip(
+            next_volume / cfg.arctic_ice_mechanical_max_local_thickness_m,
+            0.0,
+            1.0,
+        )
+        concentration = np.maximum(concentration, mechanical_minimum)
+        mechanical_spreading_area_change = (
+            concentration - concentration_after_upper_support
+        )
         recovery = np.clip(
             next_volume / cfg.arctic_new_ice_local_thickness_m, 0.0, 1.0
         )
@@ -4458,7 +4504,11 @@ class ProcessClimateModel:
         self._assert_arctic_local_thickness_safe(
             final_local, context="ice-concentration advance"
         )
-        support_area_change = final_concentration - concentration_before_support
+        support_area_change = (
+            final_concentration
+            - concentration_before_support
+            - mechanical_spreading_area_change
+        )
         if return_process_ledger:
             process_ledger = {
                 "initial_concentration": initial_concentration.copy(),
@@ -4469,6 +4519,9 @@ class ProcessClimateModel:
                 "thick_pack_resistance": thick_pack_resistance.copy(),
                 "supported_volume_deficit": supported_volume_deficit.copy(),
                 "compaction_area_change": compaction_area_change.copy(),
+                "mechanical_spreading_area_change": (
+                    mechanical_spreading_area_change.copy()
+                ),
                 "support_area_change": support_area_change.copy(),
                 "final_concentration": final_concentration.copy(),
                 "next_equivalent_thickness_m": next_volume.copy(),
@@ -6234,6 +6287,7 @@ class ProcessClimateModel:
                 reference_previous_concentration=(
                     reference_now[f"{prefix}_ice_fraction"]
                 ),
+                area_process_scale=blend,
                 return_process_ledger=self._arctic_process_ledger_enabled,
             )
             reference_area_result = self._advance_arctic_ice_concentration(
@@ -6256,6 +6310,7 @@ class ProcessClimateModel:
                 reference_previous_concentration=(
                     reference_now[f"{prefix}_ice_fraction"]
                 ),
+                area_process_scale=blend,
                 return_process_ledger=self._arctic_process_ledger_enabled,
             )
             if self._arctic_process_ledger_enabled:
@@ -6334,6 +6389,7 @@ class ProcessClimateModel:
                     "ridging_area_change",
                     "divergence_area_change",
                     "compaction_area_change",
+                    "mechanical_spreading_area_change",
                     "support_area_change",
                 )
                 area_anomalies = {
@@ -12698,6 +12754,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Reference-relative thin-pack divergence and winter deformation rate per year.",
     )
     parser.add_argument(
+        "--arctic-ice-mechanical-max-local-thickness",
+        type=float,
+        default=ModelConfig().arctic_ice_mechanical_max_local_thickness_m,
+        help="Maximum grid-cell mean local thickness before volume-conserving mechanical spreading (m).",
+    )
+    parser.add_argument(
         "--arctic-greenland-marine-influence",
         type=float,
         default=ModelConfig().arctic_greenland_marine_influence,
@@ -13305,6 +13367,9 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         ),
         arctic_ice_area_thin_pack_divergence_fraction_per_year=(
             args.arctic_ice_area_thin_pack_divergence_rate
+        ),
+        arctic_ice_mechanical_max_local_thickness_m=(
+            args.arctic_ice_mechanical_max_local_thickness
         ),
         arctic_greenland_marine_influence=args.arctic_greenland_marine_influence,
         arctic_basal_ocean_exchange_wm2_k=args.arctic_basal_ocean_exchange,

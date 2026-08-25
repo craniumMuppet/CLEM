@@ -57,8 +57,9 @@ NSIDC_DIR = ROOT / "data" / "validation" / "nsidc"
 FIXED_MASK_DIR = ROOT / "data" / "validation" / "sea_ice_fixed_mask"
 PHYSICAL_DIR = ROOT / "data" / "validation" / "sea_ice_physical"
 PROSPECTIVE_UNTOUCHED_START_YEAR = 2027
-MIN_FIXED_MASK_TREND_MAGNITUDE_RATIO = 2.0 / 3.0
-MAX_FIXED_MASK_TREND_MAGNITUDE_RATIO = 1.5
+MIN_FIXED_MASK_TREND_MAGNITUDE_RATIO = 0.80
+MAX_FIXED_MASK_TREND_MAGNITUDE_RATIO = 1.25
+RECENT_PERIOD_AREA_RMSE_LIMIT_MILLION_KM2 = 0.50
 
 
 @dataclass(frozen=True)
@@ -216,8 +217,9 @@ def physical_observation_metadata() -> dict[str, Any]:
         "sources": statuses,
         "reason": (
             "PIOMAS supplies the long volume constraint; CryoSat-2 and ICESat-2 "
-            "supply independent satellite thickness checks. The products are "
-            "never merged before scoring."
+            "supply source-separated, development-informed satellite thickness "
+            "constraints. These products were visible during recalibration and "
+            "are never merged before scoring."
         ),
     }
 
@@ -1084,6 +1086,14 @@ def _finite_le(value: Any, threshold: float) -> bool:
     return bool(np.isfinite(number) and number <= threshold)
 
 
+def _finite_ge(value: Any, threshold: float) -> bool:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return False
+    return bool(np.isfinite(number) and number >= threshold)
+
+
 def _fixed_mask_trend_magnitude_ratio(metric: dict[str, Any]) -> float:
     try:
         model = float(metric.get("model_trend_million_km2_per_decade"))
@@ -1105,6 +1115,25 @@ def _trend_direction_matches(metric: dict[str, Any]) -> bool:
 def _trend_ratio_in_declared_range(metric: dict[str, Any]) -> bool:
     ratio = _fixed_mask_trend_magnitude_ratio(metric)
     return bool(np.isfinite(ratio) and MIN_FIXED_MASK_TREND_MAGNITUDE_RATIO <= ratio <= MAX_FIXED_MASK_TREND_MAGNITUDE_RATIO)
+
+
+def _ols_trend_intervals_overlap(metric: dict[str, Any]) -> bool:
+    """Require overlap of model and observed OLS 95% trend intervals."""
+
+    model = metric.get("model_trend_diagnostics", {})
+    observed = metric.get("observed_trend_diagnostics", {})
+    try:
+        model_low = float(model["ols_95pct_ci_low_million_km2_per_decade"])
+        model_high = float(model["ols_95pct_ci_high_million_km2_per_decade"])
+        observed_low = float(observed["ols_95pct_ci_low_million_km2_per_decade"])
+        observed_high = float(observed["ols_95pct_ci_high_million_km2_per_decade"])
+    except (KeyError, TypeError, ValueError):
+        return False
+    values = (model_low, model_high, observed_low, observed_high)
+    return bool(
+        all(np.isfinite(value) for value in values)
+        and max(model_low, observed_low) <= min(model_high, observed_high)
+    )
 
 
 def calibration_passes(
@@ -1130,6 +1159,8 @@ def calibration_passes(
         "september_fixed_mask_area_trend_direction_matches": _trend_direction_matches(september["area"]),
         "march_fixed_mask_area_trend_magnitude_ratio_in_range": _trend_ratio_in_declared_range(march["area"]),
         "september_fixed_mask_area_trend_magnitude_ratio_in_range": _trend_ratio_in_declared_range(september["area"]),
+        "march_fixed_mask_area_ols_95pct_trend_intervals_overlap": _ols_trend_intervals_overlap(march["area"]),
+        "september_fixed_mask_area_ols_95pct_trend_intervals_overlap": _ols_trend_intervals_overlap(september["area"]),
         "coarse_zonal_extent_excluded_from_scientific_release_gate": True,
         "homogeneous_fixed_mask_area_dataset_available": homogeneous_area,
         "piomas_and_both_satellite_thickness_sources_available": physical_complete,
@@ -1157,11 +1188,13 @@ def development_evaluation_passes(
         "september_homogeneous_fixed_mask_area_available": bool(
             september["area"].get("available")
         ),
-        "march_fixed_mask_area_rmse_le_1p00": _finite_le(
-            march["area"].get("rmse_million_km2"), 1.00
+        "march_fixed_mask_area_rmse_le_0p50": _finite_le(
+            march["area"].get("rmse_million_km2"),
+            RECENT_PERIOD_AREA_RMSE_LIMIT_MILLION_KM2,
         ),
-        "september_fixed_mask_area_rmse_le_1p00": _finite_le(
-            september["area"].get("rmse_million_km2"), 1.00
+        "september_fixed_mask_area_rmse_le_0p50": _finite_le(
+            september["area"].get("rmse_million_km2"),
+            RECENT_PERIOD_AREA_RMSE_LIMIT_MILLION_KM2,
         ),
         "march_exact_fixed_mask_operator_applied": bool(
             march.get("fixed_mask_model_operator_applied_for_all_scored_records", False)
@@ -1262,7 +1295,7 @@ def evaluate_physical_constraints(records: pd.DataFrame) -> dict[str, Any]:
         "cryosat2_mean_thickness": PHYSICAL_METRIC_THRESHOLDS["cryosat2_mean_thickness_normalized_rmse"],
         "icesat2_mean_thickness": PHYSICAL_METRIC_THRESHOLDS["icesat2_mean_thickness_normalized_rmse"],
     }
-    gates = {
+    normalized_rmse_gates = {
         f"{name}_normalized_rmse_le_{threshold:.2f}": bool(
             metric.get("available", False)
             and _finite_le(metric.get("normalized_rmse_fraction"), threshold)
@@ -1270,21 +1303,59 @@ def evaluate_physical_constraints(records: pd.DataFrame) -> dict[str, Any]:
         for name, metric in metrics.items()
         for threshold in (thresholds[name],)
     }
+    relative_bias_limits = {
+        "piomas_volume": 0.10,
+        "cryosat2_mean_thickness": 0.10,
+        "icesat2_mean_thickness": 0.20,
+    }
+    bias_gates = {
+        f"{name}_absolute_relative_mean_bias_le_{limit:.2f}": bool(
+            metric.get("available", False)
+            and np.isfinite(float(metric.get("bias", float("nan"))))
+            and np.isfinite(float(metric.get("observed_mean", float("nan"))))
+            and abs(float(metric["observed_mean"])) > 1.0e-12
+            and abs(float(metric["bias"]) / float(metric["observed_mean"])) <= limit
+        )
+        for name, metric in metrics.items()
+        for limit in (relative_bias_limits[name],)
+    }
+    gates = {**normalized_rmse_gates, **bias_gates}
+    temporal_correlation_gates = {
+        "piomas_volume_correlation_ge_0.80": _finite_ge(
+            metrics["piomas_volume"].get("correlation"), 0.80
+        ),
+        "cryosat2_mean_thickness_correlation_ge_0.30": _finite_ge(
+            metrics["cryosat2_mean_thickness"].get("correlation"), 0.30
+        ),
+        "icesat2_mean_thickness_correlation_ge_0.30": _finite_ge(
+            metrics["icesat2_mean_thickness"].get("correlation"), 0.30
+        ),
+    }
     complete = bool(metadata.get("complete", False)) and all(
         metric.get("available", False) for metric in metrics.values()
     )
     passed = bool(complete and all(gates.values()))
+    temporal_response_passed = bool(
+        complete and all(temporal_correlation_gates.values())
+    )
     return {
         "available": bool(metadata.get("available", False)),
         "complete": complete,
         "metadata": metadata,
         "metrics": metrics,
         "quality_gates": gates,
+        "temporal_correlation_gates": temporal_correlation_gates,
+        "mean_state_constraints_passed": passed,
+        "temporal_response_validation_passed": temporal_response_passed,
         "passed": passed,
-        "scientific_volume_thickness_validation_complete": passed,
+        "scientific_volume_thickness_validation_complete": bool(
+            passed and temporal_response_passed
+        ),
         "gate_note": (
-            "PIOMAS volume and both independent satellite thickness products "
-            "must be present and pass their predeclared normalized-RMSE gates."
+            "PIOMAS volume and both satellite thickness products must pass "
+            "predeclared normalized-RMSE and relative-mean-bias gates. Temporal "
+            "correlations are reported separately and must all pass before full "
+            "volume/thickness validation can be called complete."
         ),
     }
 
@@ -1568,4 +1639,3 @@ def evaluate_result(result: Any) -> dict[str, Any]:
         "extent_metrics_are_release_blocking": False,
         "records": records.to_dict(orient="records"),
     }
-

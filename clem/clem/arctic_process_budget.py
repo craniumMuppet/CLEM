@@ -30,6 +30,7 @@ AREA_CHANGE_FIELDS = (
     "ridging_area_change",
     "divergence_area_change",
     "compaction_area_change",
+    "mechanical_spreading_area_change",
     "support_area_change",
     "final_concentration_support_change",
 )

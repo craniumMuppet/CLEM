@@ -24,6 +24,7 @@ import pandas as pd
 
 from climate_model import EARTH_AREA_M2, MODEL_VERSION, ModelConfig, ProcessClimateModel
 from arctic_process_budget import evaluate_arctic_process_ledger
+from arctic_validation_stack import SOURCES as ARCTIC_VALIDATION_SOURCES
 from sea_ice_validation import evaluate_result
 from validation_segmentation import _combine_results
 
@@ -327,6 +328,7 @@ def _integrated_arctic_state_metrics(
     elapsed_years: float,
 ) -> dict[str, float]:
     reference = model._arctic_reference_state(elapsed_years)
+    full_arctic = model.arctic_module_blend >= 0.99
     concentrations: list[float] = []
     equivalents: list[float] = []
     identity_errors: list[float] = []
@@ -345,12 +347,19 @@ def _integrated_arctic_state_metrics(
                 ),
             )
         )
-        concentrations.append(float(np.mean(concentration)))
-        equivalents.append(float(np.mean(equivalent)))
+        sector_fraction = (
+            model.grid.atlantic_ocean_fraction
+            if prefix == "atlantic"
+            else model.non_atlantic_ocean_fraction
+        )
+        weights = model.grid.band_area_weights * sector_fraction * full_arctic
+        concentrations.append(weighted_latitude_mean(concentration, weights))
+        equivalents.append(weighted_latitude_mean(equivalent, weights))
         identity_errors.append(
             float(np.max(np.abs(concentration * local - equivalent)))
         )
     return {
+        "averaging_domain": "ocean-area-weighted full Arctic module (blend >= 0.99)",
         "mean_concentration": float(np.mean(concentrations)),
         "mean_equivalent_thickness_m": float(np.mean(equivalents)),
         "maximum_volume_identity_error_m": float(max(identity_errors)),
@@ -1120,28 +1129,43 @@ def compact_sea_ice_summary(evaluation: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def main() -> None:
+def run_validation(
+    *,
+    expected_version: str = EXPECTED_VERSION,
+    artifact_tag: str = "V2_29_23",
+    validator_filename: str = "validate_v22923.py",
+    combiner_filename: str = "combine_v22923_validation.py",
+) -> None:
+    """Run the version-matched validator for a named release artifact set.
+
+    Later maintenance releases reuse this implementation through a tiny,
+    version-pinned entry point.  Keeping the scientific calculation here
+    avoids copy/paste drift while the explicit filenames below keep source
+    provenance bound to the entry point and combiner that were actually used.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--resolution", type=float, required=True)
     parser.add_argument("--output-dir", type=Path, default=Path("."))
     parser.add_argument("--segment-years", type=float, default=20.0)
     args = parser.parse_args()
 
-    if MODEL_VERSION != EXPECTED_VERSION:
+    if MODEL_VERSION != expected_version:
         raise SystemExit(
-            f"Expected model version {EXPECTED_VERSION}, found {MODEL_VERSION}."
+            f"Expected model version {expected_version}, found {MODEL_VERSION}."
         )
     args.output_dir.mkdir(parents=True, exist_ok=True)
     label = f"{args.resolution:g}DEG"
     generated_at = datetime.now(timezone.utc).isoformat()
     package_root = Path(__file__).resolve().parent
-    source_files = (
+    core_source_files = (
+        validator_filename,
         "validate_v22923.py",
         "climate_model.py",
         "arctic_process_budget.py",
+        "arctic_validation_stack.py",
         "sea_ice_validation.py",
         "sea_ice_observation.py",
-        "combine_v22923_validation.py",
+        combiner_filename,
         "validation_segmentation.py",
         "scientific_evidence.py",
         "validation_provenance.py",
@@ -1155,7 +1179,15 @@ def main() -> None:
         "data/validation/nsidc/METADATA.json",
         "data/validation/nsidc/N_03_extent_v4.0.csv",
         "data/validation/nsidc/N_09_extent_v4.0.csv",
+        "tools/acquire_arctic_validation_stack.py",
     )
+    observational_source_files = tuple(
+        relative
+        for specification in ARCTIC_VALIDATION_SOURCES.values()
+        for relative in specification.required_paths
+        if (package_root / relative).is_file()
+    )
+    source_files = tuple(dict.fromkeys((*core_source_files, *observational_source_files)))
     source_hashes = {
         relative: sha256_file(package_root / relative)
         for relative in source_files
@@ -1246,16 +1278,22 @@ def main() -> None:
         "coupled": coupled,
     }
 
-    sea_ice_path = args.output_dir / f"SEA_ICE_VALIDATION_V2_29_23_{label}.json"
+    validation_passed = bool(
+        sea_ice_payload["summary"]["all_engineering_gates_passed"]
+        and sea_ice_payload["summary"]["calibration_passed"]
+        and sea_ice_payload["summary"]["recent_period_evaluation_passed"]
+        and sea_ice_evaluation["physical_volume_thickness_validation"]["passed"]
+        and coupled["passed"]
+        and structural["passed"]
+    )
+    sea_ice_payload["validation_passed"] = validation_passed
+    coupled_payload["validation_passed"] = validation_passed
+
+    sea_ice_path = args.output_dir / f"SEA_ICE_VALIDATION_{artifact_tag}_{label}.json"
     coupled_path = (
-        args.output_dir / f"ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_23_{label}.json"
+        args.output_dir / f"ARCTIC_GREENLAND_AMOC_VALIDATION_{artifact_tag}_{label}.json"
     )
-    timeseries_path = args.output_dir / f"COUPLED_TIMESERIES_V2_29_23_{label}.csv"
-    write_json(sea_ice_path, sea_ice_payload)
-    write_json(coupled_path, coupled_payload)
-    primary.dataframe.loc[:, SELECTED_TIMESERIES_COLUMNS].to_csv(
-        timeseries_path, index=False
-    )
+    timeseries_path = args.output_dir / f"COUPLED_TIMESERIES_{artifact_tag}_{label}.csv"
     print(
         "RESULT "
         + json.dumps(
@@ -1275,12 +1313,40 @@ def main() -> None:
         ),
         flush=True,
     )
-    if not (
-        sea_ice_payload["summary"]["all_engineering_gates_passed"]
-        and coupled["passed"]
-        and structural["passed"]
-    ):
-        raise SystemExit("One or more v2.29.23 engineering gates failed.")
+    if not validation_passed:
+        # Canonical release artifacts are published only after every required
+        # per-resolution gate passes.  Failed diagnostics use an unmistakable
+        # noncanonical name and cannot be consumed by the release combiner.
+        write_json(
+            args.output_dir / f"FAILED_SEA_ICE_VALIDATION_{artifact_tag}_{label}.json",
+            sea_ice_payload,
+        )
+        write_json(
+            args.output_dir
+            / f"FAILED_ARCTIC_GREENLAND_AMOC_VALIDATION_{artifact_tag}_{label}.json",
+            coupled_payload,
+        )
+        raise SystemExit(
+            f"One or more {expected_version} engineering gates failed."
+        )
+
+    # Write through temporary files so interruption cannot leave a partial
+    # canonical artifact that a later finalizer might mistake for completion.
+    sea_tmp = sea_ice_path.with_suffix(sea_ice_path.suffix + ".tmp")
+    coupled_tmp = coupled_path.with_suffix(coupled_path.suffix + ".tmp")
+    timeseries_tmp = timeseries_path.with_suffix(timeseries_path.suffix + ".tmp")
+    write_json(sea_tmp, sea_ice_payload)
+    write_json(coupled_tmp, coupled_payload)
+    primary.dataframe.loc[:, SELECTED_TIMESERIES_COLUMNS].to_csv(
+        timeseries_tmp, index=False
+    )
+    sea_tmp.replace(sea_ice_path)
+    coupled_tmp.replace(coupled_path)
+    timeseries_tmp.replace(timeseries_path)
+
+
+def main() -> None:
+    run_validation()
 
 
 if __name__ == "__main__":

@@ -24,17 +24,36 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     )
 
 
-def resolution_payload(output_dir: Path, label: str) -> dict[str, Any]:
-    sea_path = output_dir / f"SEA_ICE_VALIDATION_V2_29_23_{label}DEG.json"
+def resolution_payload(
+    output_dir: Path,
+    label: str,
+    *,
+    model_version: str = MODEL_VERSION,
+    artifact_tag: str = "V2_29_23",
+) -> dict[str, Any]:
+    sea_path = output_dir / f"SEA_ICE_VALIDATION_{artifact_tag}_{label}DEG.json"
     coupled_path = (
-        output_dir / f"ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_23_{label}DEG.json"
+        output_dir / f"ARCTIC_GREENLAND_AMOC_VALIDATION_{artifact_tag}_{label}DEG.json"
     )
     sea = load_json(sea_path)
     coupled = load_json(coupled_path)
-    if sea["model_version"] != MODEL_VERSION or coupled["model_version"] != MODEL_VERSION:
+    if sea.get("model_version") != model_version or coupled.get("model_version") != model_version:
         raise SystemExit(f"Version mismatch in {label}-degree validation files")
-    if sea["source_hashes"] != coupled["source_hashes"]:
+    if (
+        sea.get("validation_type") != "version_matched_production_default"
+        or coupled.get("validation_type") != "version_matched_production_default"
+    ):
+        raise SystemExit(f"Validation-type mismatch in {label}-degree validation files")
+    if sea.get("source_hashes") != coupled.get("source_hashes"):
         raise SystemExit(f"Source-hash mismatch in {label}-degree validation files")
+    if not bool(sea.get("validation_passed", False)):
+        raise SystemExit(f"Sea-ice validation failed at {label} degrees")
+    if not bool(coupled.get("validation_passed", False)):
+        raise SystemExit(f"Coupled validation failed at {label} degrees")
+    if not bool(coupled.get("coupled", {}).get("passed", False)):
+        raise SystemExit(f"Coupled science gates failed at {label} degrees")
+    if not bool(coupled.get("structural_area_volume_experiments", {}).get("passed", False)):
+        raise SystemExit(f"Structural area/volume gates failed at {label} degrees")
     return {"sea_ice": sea, "coupled": coupled}
 
 
@@ -43,19 +62,27 @@ def gate_subset(gates: dict[str, bool], prefixes: tuple[str, ...]) -> bool:
     return bool(selected) and bool(all(selected))
 
 
-def main() -> None:
+def combine_validation(
+    *,
+    model_version: str = MODEL_VERSION,
+    artifact_tag: str = "V2_29_23",
+) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=Path("release_validation"))
     parser.add_argument(
         "--test-results",
         type=Path,
         default=None,
-        help="Optional engineering-test JSON. Defaults to OUTPUT_DIR/TEST_RESULTS_V2_29_23.json, then the current directory.",
+        help=f"Optional engineering-test JSON. Defaults to OUTPUT_DIR/TEST_RESULTS_{artifact_tag}.json, then the current directory.",
     )
     args = parser.parse_args()
 
-    five = resolution_payload(args.output_dir, "5")
-    ten = resolution_payload(args.output_dir, "10")
+    five = resolution_payload(
+        args.output_dir, "5", model_version=model_version, artifact_tag=artifact_tag
+    )
+    ten = resolution_payload(
+        args.output_dir, "10", model_version=model_version, artifact_tag=artifact_tag
+    )
     payloads = {"5": five, "10": ten}
 
     source_hashes = five["sea_ice"]["source_hashes"]
@@ -222,13 +249,18 @@ def main() -> None:
 
     test_results_path = args.test_results
     if test_results_path is None:
-        output_candidate = args.output_dir / "TEST_RESULTS_V2_29_23.json"
-        cwd_candidate = Path("TEST_RESULTS_V2_29_23.json")
+        output_candidate = args.output_dir / f"TEST_RESULTS_{artifact_tag}.json"
+        cwd_candidate = Path(f"TEST_RESULTS_{artifact_tag}.json")
         test_results_path = output_candidate if output_candidate.exists() else cwd_candidate
     if test_results_path.exists():
         test_results = load_json(test_results_path)
         engineering_integrity_passed = bool(
-            test_results.get("engineering_integrity_passed", False)
+            test_results.get(
+                "engineering_integrity_passed",
+                int(test_results.get("passed", 0)) > 0
+                and int(test_results.get("failed", 0)) == 0
+                and int(test_results.get("errors", 0)) == 0,
+            )
         )
     else:
         test_results = {
@@ -302,7 +334,7 @@ def main() -> None:
 
     summary = {
         "schema_version": "3.0",
-        "model_version": MODEL_VERSION,
+        "model_version": model_version,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "validation_type": "version_matched_production_default",
         "source_hashes": source_hashes,
@@ -358,9 +390,6 @@ def main() -> None:
             "Prospective untouched temporal evaluation begins in 2027."
         ),
     }
-    output_path = args.output_dir / "VALIDATION_SUMMARY_V2_29_23.json"
-    write_json(output_path, summary)
-    print(json.dumps(summary["release_status"], indent=2, sort_keys=True))
     engineering_release_passed = bool(
         observation_files_verified
         and engineering_integrity_passed
@@ -372,8 +401,28 @@ def main() -> None:
         and greenland_engineering_checks_passed
         and amoc_validation_passed
     )
+    summary["coupled_validation_complete"] = engineering_release_passed
+    summary["version_matched_arctic_greenland_amoc_validation_complete"] = bool(
+        engineering_release_passed
+        and all(
+            item["coupled"]["validation_passed"]
+            and item["coupled"]["coupled"]["passed"]
+            for item in payloads.values()
+        )
+    )
+    output_path = args.output_dir / f"VALIDATION_SUMMARY_{artifact_tag}.json"
+    print(json.dumps(summary["release_status"], indent=2, sort_keys=True))
     if not engineering_release_passed:
-        raise SystemExit("v2.29.23 engineering-release criteria are not all satisfied")
+        failed_path = args.output_dir / f"FAILED_VALIDATION_SUMMARY_{artifact_tag}.json"
+        write_json(failed_path, summary)
+        raise SystemExit(
+            f"{model_version} engineering-release criteria are not all satisfied"
+        )
+    write_json(output_path, summary)
+
+
+def main() -> None:
+    combine_validation()
 
 
 if __name__ == "__main__":

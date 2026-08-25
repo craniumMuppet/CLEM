@@ -6,14 +6,14 @@ This patch extends the earlier scientific-review fix into a six-product Arctic e
 
 1. NOAA/NSIDC G02202 v6 — primary fixed-mask concentration-derived area.
 2. PIOMAS v2.1 — common-domain monthly volume constraint from gridded `heff`.
-3. CryoSat-2 RDEFT4 v1 — independent satellite thickness validation.
-4. ICESat-2 IS2SITMOGR4 v4 — independent satellite thickness validation.
+3. CryoSat-2 RDEFT4 v1 — development-informed satellite thickness constraint.
+4. ICESat-2 IS2SITMOGR4 v4 — development-informed satellite thickness constraint.
 5. EUMETSAT OSI SAF OSI-450-a1 v3.1 — cross-dataset development area diagnostic; not independent validation.
 6. NSIDC-0611 v4 — multiyear-ice structural diagnostic.
 
 ## Scientific separation
 
-The stack is intentionally not one blended objective. G02202 is the primary area calibration target. PIOMAS constrains volume. CryoSat-2 and ICESat-2 are scored separately as satellite thickness checks. OSI SAF is not part of the primary G02202/PIOMAS/thickness calibration objective, but it was inspected during method development and is therefore not independent validation. Sea-ice age is a structural diagnostic rather than a thickness observation.
+The stack is intentionally not one blended objective. G02202 is the primary area calibration target. PIOMAS constrains volume. CryoSat-2 and ICESat-2 are scored separately as satellite thickness constraints. Both satellite products and OSI SAF were inspected during method development; none is labelled independent validation. Sea-ice age is a structural diagnostic rather than a thickness observation.
 
 Every spatial product now carries an explicit observation operator. EGCM is sampled on the same retained observation-cell centers and integrated or averaged with the same observation-cell areas/record weights used to construct the target. A processed CSV without the required operator is not accepted as scientific evidence.
 
@@ -32,4 +32,4 @@ The source archive used to build this patch does not contain the raw files neede
 
 ## Validation status
 
-The observation-operator and scientific-review regression suites pass after the correction. `ARCTIC_VALIDATION_STACK_STATUS_2026.json` records the current fail-closed data state. Full scientific validation remains incomplete: NSIDC-0611 is still absent, retrospective fold-local development evaluation does not establish independent predictive skill, and the reserved untouched prospective period begins in 2027.
+All five present products pass file and observation-operator integrity checks. Mean-state PIOMAS/CryoSat-2/ICESat-2 gates pass, but full temporal volume/thickness validation remains incomplete because the CryoSat-2 correlation gate fails. NSIDC-0611 is still absent, retrospective fold-local development evaluation does not establish independent predictive skill, and the reserved untouched prospective period begins in 2027.

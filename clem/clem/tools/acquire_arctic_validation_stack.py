@@ -1022,7 +1022,7 @@ def _satellite_weighted_thickness(
         "dataset_id": dataset_id,
         "version": version,
         "doi": doi,
-        "role": "independent_satellite_thickness_validation",
+        "role": "development_informed_satellite_thickness_constraint",
         "months_used": [3],
         "thickness_variables_used": sorted(thickness_variable_names),
         "concentration_variables_used": sorted(concentration_variable_names),
@@ -1466,7 +1466,8 @@ def refresh_piomas_osi(overwrite: bool = False) -> None:
 def acquire_earthdata() -> dict[str, str]:
     """Acquire Earthdata-backed products without making NSIDC-0611 a hard blocker.
 
-    CryoSat-2 and ICESat-2 are required core independent thickness checks.
+    CryoSat-2 and ICESat-2 are required source-separated thickness constraints.
+    They are development-informed and are not labelled independent validation.
     NSIDC-0611 is a structural multiyear-ice diagnostic hosted on a legacy
     archive that may require separate EDL application authorization.  The
     scientific calibration can proceed without that diagnostic, so a missing or

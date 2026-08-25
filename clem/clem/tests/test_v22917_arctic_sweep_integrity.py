@@ -37,7 +37,7 @@ def test_version_and_revised_arctic_defaults() -> None:
     cfg = ModelConfig()
     assert tuple(int(value) for value in MODEL_VERSION.split(".")) >= (2, 29, 17)
     assert cfg.arctic_new_ice_local_thickness_m == pytest.approx(0.22)
-    assert cfg.arctic_ice_concentration_exponent == pytest.approx(0.56)
+    assert cfg.arctic_ice_concentration_exponent == pytest.approx(1.0)
     assert cfg.arctic_winter_lead_closure_fraction == pytest.approx(0.0)
     assert cfg.arctic_transient_substeps_per_year == 80
 

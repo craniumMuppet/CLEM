@@ -35,7 +35,7 @@ def small_model(**overrides: object) -> ProcessClimateModel:
 def test_version_and_constrained_production_defaults() -> None:
     config = ModelConfig()
     assert MODEL_VERSION == "2.29.28"
-    assert config.arctic_winter_transport_enhancement == pytest.approx(10.0)
+    assert config.arctic_winter_transport_enhancement == pytest.approx(19.0)
     assert config.arctic_winter_transport_enhancement <= 25.0
     assert config.arctic_greenland_marine_influence == pytest.approx(0.10)
     assert config.arctic_greenland_marine_influence <= 0.25
@@ -187,14 +187,26 @@ def test_greenland_driver_ignores_raw_arctic_air_spike() -> None:
 
 
 
-def test_local_thickness_emergency_safeguard_fails_fast_without_remapping_volume() -> None:
+def test_mechanical_spreading_precedes_separate_local_thickness_emergency_safeguard() -> None:
     model = small_model()
     shape = model.grid.lat.shape
     equivalent = np.full(shape, 1.0)
     energy = -model.arctic_latent_energy_per_m_wyr_m2 * equivalent
-    with pytest.raises(FloatingPointError, match="local ice thickness"):
+    spread_concentration, spread_equivalent, spread_local = (
         model._arctic_state_from_energy_and_concentration(
             energy, np.full(shape, 1.0e-8)
+        )
+    )
+    np.testing.assert_allclose(spread_local, 12.0, rtol=0.0, atol=1e-12)
+    np.testing.assert_allclose(
+        spread_concentration * spread_local,
+        spread_equivalent,
+        rtol=0.0,
+        atol=1e-12,
+    )
+    with pytest.raises(FloatingPointError, match="local ice thickness"):
+        model._assert_arctic_local_thickness_safe(
+            np.full(shape, 501.0), context="emergency-regression"
         )
     # A physically admissible concentration preserves the latent-energy volume.
     concentration, recovered_equivalent, local = model._arctic_state_from_energy_and_concentration(

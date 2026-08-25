@@ -37,7 +37,7 @@ def test_v228_defaults_and_freshwater_are_preserved() -> None:
     assert cfg.hydrological_freshwater_sv_per_k == 0.006
     assert cfg.greenland_freshwater_sv_per_k == 0.005
     assert cfg.ocean_heat_exchange_wm2_k == 1.45
-    assert cfg.arctic_winter_transport_enhancement == 10.0
+    assert cfg.arctic_winter_transport_enhancement == 19.0
     assert cfg.arctic_open_water_stable_exchange_wm2_k == 0.5
     assert cfg.arctic_open_water_unstable_exchange_wm2_k == 10.0
     assert cfg.arctic_open_water_exchange_transition_c == 0.5

@@ -90,7 +90,7 @@ def test_cli_round_trip_preserves_new_heat_geometry_control() -> None:
     args = build_parser().parse_args([])
     cfg = config_from_args(args)
     assert cfg.arctic_forced_ocean_heat_convergence_ice_fraction_exponent == 1.0
-    assert cfg.arctic_forced_ocean_heat_convergence_saturation_scale_c == pytest.approx(0.32)
+    assert cfg.arctic_forced_ocean_heat_convergence_saturation_scale_c == pytest.approx(0.45)
 
 
 def test_scientific_validation_fails_closed_until_required_data_exist() -> None:

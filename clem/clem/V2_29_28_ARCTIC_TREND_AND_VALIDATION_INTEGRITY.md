@@ -1,14 +1,18 @@
 # v2.29.28 — Arctic trend and validation integrity
 
-v2.29.28 fixes the scientific issues identified in review of v2.29.27:
+The post-review v2.29.28 source correction addresses the scientific and coupled-integrity issues identified in review:
 
 1. Restores the inherited preindustrial March/September sea-ice climatology bounds.
-2. Adds explicit fixed-mask historical trend-direction and trend-magnitude gates; passing RMSE alone is no longer sufficient.
+2. Requires 0.80–1.25 historical trend ratios and overlapping model/observed OLS 95% trend intervals; passing RMSE alone is insufficient.
 3. Replaces unbounded warming-driven Arctic Ocean heat convergence with a conservative saturating response and equal-and-opposite lower-latitude energy tendency.
 4. Adds a bounded winter formation-support floor so severe pack depletion cannot numerically suppress thermodynamic refreezing to zero.
 5. Relabels OSI SAF as development evidence, not independent validation.
 6. Removes the invalid 1979 retrospective fold and replaces the globally outcome-selected candidate bank with a fixed prior-derived bank scored separately inside each valid cutoff.
 7. Keeps retrospective evidence and 2027+ prospective evidence explicitly separate; predictive skill remains fail-closed.
 8. Keeps processed observational hashes fail-closed and release fingerprints bound to scientific evidence inputs.
+9. Recalibrates active atmospheric transport, area/volume partition, mechanical export, and bounded ocean-heat convergence. The exact 10° run reaches historical trend ratios 0.968/0.961 and recent RMSE 0.370/0.358 M km2.
+10. Adds current-version 5°/10° validators and a cross-resolution combiner. Canonical artifacts are published only after all required gates pass, and the finalizer rechecks per-run pass flags and current source hashes.
+11. Separates passing physical mean-state gates from temporal response. CryoSat-2 temporal correlation still fails, so full volume/thickness validation remains incomplete.
+12. Scales area processes consistently through the 55–66 N module transition and adds an explicit volume-conserving 12 m deformation/spreading constraint before the 500 m emergency abort. Both resolutions are stable through 2100.
 
-The production candidate is an exact 1850-start integration, not a continuation-only screening result.
+The calibration candidate is an exact 1850-start integration, not a continuation-only screening result. Fresh current-source 5°/10° coupled results now pass, including cross-resolution differences of 0.196/0.072 M km2 for late March/September area and 0.252 Sv for 2100 AMOC. The final-source regression evidence is 143/143 passing and is bound by the regenerated tested-code fingerprint; this does not change the explicitly incomplete scientific-predictive status.

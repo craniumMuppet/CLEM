@@ -53,9 +53,10 @@ SCIENTIFIC_USE_METADATA: dict[str, Any] = {
                 "does not represent longitude-resolved process forecast skill"
             ),
             "scientific_validation_status": (
-                "incomplete: G02202 fixed-mask RMSE and historical-trend gates plus the "
-                "PIOMAS/CryoSat-2/ICESat-2 physical gates pass; OSI SAF is development-only "
-                "and its September cross-dataset mismatch remains; NSIDC-0611 is pending, "
+                "incomplete: G02202 fixed-mask RMSE, trend-ratio, and trend-interval gates "
+                "plus PIOMAS/CryoSat-2/ICESat-2 mean-state gates pass; the CryoSat-2 "
+                "temporal-correlation gate fails, and the satellite products and OSI SAF "
+                "are development-only rather than independent validation; NSIDC-0611 is pending, "
                 "retrospective fold-local prior-grid evaluation does not beat every required "
                 "simple baseline, and untouched prospective validation is reserved for 2027 onward"
             ),
@@ -82,7 +83,7 @@ SCIENTIFIC_USE_METADATA: dict[str, Any] = {
         "historical_extent_diagnostics": "NSIDC extent comparisons are coarse-zonal diagnostics, descriptive only and non-release-blocking, and are excluded from scientific release gates",
         "raw_nsidc_area": "provenance-only inhomogeneous record; excluded from calibration and skill claims",
         "retrospective_fold_local_evaluation": "valid 1989/1999/2009 cutoffs use predeclared prior-grid, pre-cutoff-only fold selection; retrospective method-development evidence only, not untouched prospective validation, and the required baseline skill gate fails",
-        "arctic_observational_recalibration_2026": "G02202 RMSE and historical-trend gates plus PIOMAS/CryoSat-2/ICESat-2 physical gates pass; OSI SAF is a bundled development-only cross-dataset diagnostic",
+        "arctic_observational_recalibration_2026": "G02202 level/trend gates and PIOMAS/CryoSat-2/ICESat-2 mean-state gates pass; CryoSat-2 temporal correlation fails, and all satellite/OSI evidence is development-informed",
         "prospective_untouched_temporal_evaluation": "reserved from 2027 onward",
         "tuning_informed_external_sanity_check": "broad NOAA OISST open-water temperature ranges inspected during development; not independent validation",
         "structural_tests": "conservation, control stability, timestep, hosing, resolution, native sea-ice integrity and software regressions",

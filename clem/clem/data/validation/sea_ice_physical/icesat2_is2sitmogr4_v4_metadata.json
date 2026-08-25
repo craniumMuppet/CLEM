@@ -15,7 +15,7 @@
   "operator_file": "icesat2_is2sitmogr4_operator.npz",
   "operator_file_sha256": "7503913a78ea2e3511a5bc9ded158f2e001553ac80da4f3ba93479175853df31",
   "processed_file_sha256": "62ac3f07403fb91994ba7137249ad5a31822962a94942e0b355558b4df49e3b5",
-  "role": "independent_satellite_thickness_validation",
+  "role": "development_informed_satellite_thickness_constraint",
   "source_files_sha256": {
     "IS2SITMOGR4_01_201903_007_004.nc": "aa615ba7f1b357ca3c4085f310734c5633a44a538942ddc46af3bbc52e10ed0b",
     "IS2SITMOGR4_01_202003_007_004.nc": "116346acb29f48a7a9d1ea73e2e6496bd6cbd74befa9176823599b45bb163b98",

@@ -1,5 +1,5 @@
 {
-  "aggregate_sha256": "6081e58d02e7276717a707337636f4583564e4872b67fdf9668b0454d75b08b8",
+  "aggregate_sha256": "3bd600836ec042b2318853a8eaba3c9b5c8ce94e75a18325903c0e388f12819d",
   "algorithm": "sha256",
   "coverage": "all source/GUI/tests/tools, dependency/configuration inputs, packaged runtime data, scientific evaluation JSON/manifests, validation evidence, and release-facing documents; the fingerprint itself, package-info/manifest outputs, and transient caches are excluded; test evidence is included",
   "excluded_current_generated_files": [
@@ -7,7 +7,7 @@
     "PACKAGE_MANIFEST_V2_29_28.json",
     "TESTED_CODE_FINGERPRINT_V2_29_28.json"
   ],
-  "file_count": 602,
+  "file_count": 613,
   "files": {
     ".github/workflows/ci.yml": {
       "sha256": "0f0fa9d59e46588bf5d6c9de31ee8da2c2d6eee2bf5e5ca3f8c1dab8b2d136b5",
@@ -49,13 +49,21 @@
       "sha256": "6910aae37f2361cd9e42e3ac6383415d45efdd3194d1ca0f86cb9f851b8b20d7",
       "size_bytes": 51998
     },
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_10DEG.json": {
+      "sha256": "8408a2b774800633a17e761f9b3f2f480656b74c225659205fb898f3481acc26",
+      "size_bytes": 56546
+    },
+    "ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_5DEG.json": {
+      "sha256": "deee1388a8342653b2fada3ebb6d0ef24218dba84f422a8dbce1a29e5f7b8e92",
+      "size_bytes": 56693
+    },
     "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json": {
-      "sha256": "80c1ea92b143189f2a695a4f19c167482b929bb5bfbc213b306d994eabd97e08",
-      "size_bytes": 420020
+      "sha256": "fb52191186c967a80ce5bbaf1c665a9d2c3b96a393a5a7d554e7b5f61d365bd8",
+      "size_bytes": 428771
     },
     "ARCTIC_OBSERVATIONAL_RECALIBRATION_2026.md": {
-      "sha256": "57727dda1916d97ca4a00fdb1451f0e1707c79bdb36f2ad9438edf88a2bad59c",
-      "size_bytes": 3023
+      "sha256": "80f7e6065c166f1f56686540dc2cfa92571eaf1c3fb2ee82665c4b31654d3f30",
+      "size_bytes": 4016
     },
     "ARCTIC_RECALIBRATION_CANDIDATE_SEARCH_2026.json": {
       "sha256": "fd10b7b2d57ab8098e8e627f006d526dc582f97d6e22e6c837e2352c665687ee",
@@ -86,8 +94,8 @@
       "size_bytes": 202
     },
     "CHANGELOG.md": {
-      "sha256": "c96290b3fcaf9ef57b7099c5644277354225e48007ea975a5044575ab9cafa1c",
-      "size_bytes": 64300
+      "sha256": "01572c89d66947535c720551026d7e9583c220e61e00dd38e5bf5e1325c5d443",
+      "size_bytes": 65474
     },
     "CO2_TARGET_SWEEP_V2_19_0.md": {
       "sha256": "ef5e62fdf44ebac612c3b41bdfdacf8dbf1680b1730c00e2d543b536d8bfed63",
@@ -108,6 +116,14 @@
     "COUPLED_TIMESERIES_V2_29_23_5DEG.csv": {
       "sha256": "f30467839bac154284381462044dbba27281f9fbd93c0fb55f537df67a57bed5",
       "size_bytes": 3115030
+    },
+    "COUPLED_TIMESERIES_V2_29_28_10DEG.csv": {
+      "sha256": "ef6e14e11c896b020c75dfeb98fbb574e8f09fe6fe2a56e75864afe1042c1567",
+      "size_bytes": 3177740
+    },
+    "COUPLED_TIMESERIES_V2_29_28_5DEG.csv": {
+      "sha256": "17c70ba82677f18a49f8f0d75197a3e4f60010bf39933ca1698b48e88b653e2a",
+      "size_bytes": 3180968
     },
     "CRASH_LOGGING_LAUNCHER_FIX_2026.txt": {
       "sha256": "e236baab9bb0399b8cc33317d94dc12e70a3b9c462b21874508ba39b060e834e",
@@ -414,8 +430,8 @@
       "size_bytes": 1459
     },
     "README.md": {
-      "sha256": "db67285986ab8f8d0866f9fcdbe51620100fd9808a71e35751c3579b331f9d4a",
-      "size_bytes": 3118
+      "sha256": "ab9755da85fa2e89eb91f234cb88096e6f849e131b0bde6080f3bfebe47d67a3",
+      "size_bytes": 4155
     },
     "RELEASE_FINGERPRINT_SCIENTIFIC_REVIEW_FIXED_2026.json": {
       "sha256": "db1f86ed0d8b85369da23ac618cc6fe3bb0c75f7310f2b27a9382217773513e6",
@@ -466,8 +482,8 @@
       "size_bytes": 1915
     },
     "SCIENTIFIC_CONSTRAINTS.md": {
-      "sha256": "000c45e46e53e6c6e800ea04345bfcc5adfbae7f386f9529fd522cb0cc0e5b0d",
-      "size_bytes": 19049
+      "sha256": "719ff3b888ee41dfd59eea1ca89f3bc2957e476883a1e21a9a31dab6e58b8ba7",
+      "size_bytes": 19752
     },
     "SCIENTIFIC_REVIEW_FIXES_2026.md": {
       "sha256": "d528a0e42a04beb1bfe1f52953d90dc5b0447cb5108a44b9d54870f08e17c4c0",
@@ -497,13 +513,21 @@
       "sha256": "9196f80d738af25c3e7474798b5f20f73a9ff20b54ee19f7b33348bade752cc8",
       "size_bytes": 174057
     },
+    "SEA_ICE_VALIDATION_V2_29_28_10DEG.json": {
+      "sha256": "7bdae937c03dbbce099010b9c2608bddc502147dabdad322b1c1cf9f40023849",
+      "size_bytes": 466444
+    },
+    "SEA_ICE_VALIDATION_V2_29_28_5DEG.json": {
+      "sha256": "342a21c145968e211f15c898055df22ffbb4b265f7ab5ed4895e51e5cb6f3563",
+      "size_bytes": 466620
+    },
     "SETTING_REFERENCE_GUIDE.md": {
       "sha256": "7b06f55b0b2cea6240469e39c5bae5710962b465736856c79be2f62a61bb7702",
       "size_bytes": 9545
     },
     "SIX_SOURCE_ARCTIC_VALIDATION_2026.md": {
-      "sha256": "1814fb0b50d24da01ef81443ae04805081ed0463be531a70c89b279e940352ed",
-      "size_bytes": 3658
+      "sha256": "4beb80285c50181594e3988f4e9fde2b44652f392359bb732f4a102ae24d7519",
+      "size_bytes": 3639
     },
     "SIX_SOURCE_ARCTIC_VALIDATION_FINGERPRINT_2026.json": {
       "sha256": "1dafba7b79094f34109afb305d3d1c68e695ad4b51149412dafc54a2802e3ba6",
@@ -570,8 +594,8 @@
       "size_bytes": 376
     },
     "TEST_RESULTS_SCIENTIFIC_REVIEW_FIXED_2026.txt": {
-      "sha256": "7eefb3473e15d20c41b29de1b852a9044cc3bc4df551a0f6dffbdcc3257e5f74",
-      "size_bytes": 2287
+      "sha256": "326150fe5326c6522928d0affded4577334528755c850618b52de365cce0708c",
+      "size_bytes": 2966
     },
     "TEST_RESULTS_SEA_ICE_FIX.json": {
       "sha256": "e966395d3b28c136501eaf23123f0c519a965508a8f3d1953e2a893a673bc0b8",
@@ -754,12 +778,12 @@
       "size_bytes": 588
     },
     "TEST_RESULTS_V2_29_28.json": {
-      "sha256": "b35a82085aa48bddc790394c849be66cbcc86ec67cb0bdfb72394cf975a687bc",
-      "size_bytes": 17996
+      "sha256": "9c484ab550c59000bdce99ac3c433c34dc931c17cf32ec0c0bfb8c2d351fb152",
+      "size_bytes": 18680
     },
     "TEST_RESULTS_V2_29_28.txt": {
-      "sha256": "19adad55a870597a05b875b786e2d5a43fc19db4ce185e5360ea37dfad704c62",
-      "size_bytes": 424
+      "sha256": "fb2c184b966540361d00d6a332664ee5c8a4105deb47c771f8490ca47aa79672",
+      "size_bytes": 490
     },
     "TEST_RESULTS_V2_29_3.txt": {
       "sha256": "cf7d5250496ec2e3cd27e3e54c796e871e2044edda347b75586bba9699773337",
@@ -942,8 +966,8 @@
       "size_bytes": 1287
     },
     "V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
-      "sha256": "188078df10426693ab48764e2c360f555cfc9be98ae5093f88870530bb1f06e6",
-      "size_bytes": 1228
+      "sha256": "3913ff9d9c15869565a6bbb27f5dc508054edc07e868e9488176307291d20e5b",
+      "size_bytes": 2502
     },
     "V2_29_2_RELEASE_INTEGRITY.md": {
       "sha256": "9241b505a6d73346c70bec912ccc57de0109dc874030471de6faeb06b3707c54",
@@ -1125,6 +1149,10 @@
       "sha256": "c3971c78f043361361a4e2cd735576296d01ddcf0a84c8cf6e0572f865d02e60",
       "size_bytes": 6068
     },
+    "VALIDATION_SUMMARY_V2_29_28.json": {
+      "sha256": "e667c7c1be03655177d6874957936414f8ab667a02ab5ec07036b11ee4e99952",
+      "size_bytes": 109115
+    },
     "VALIDATION_SUMMARY_V2_29_3.json": {
       "sha256": "5be36591b70444f6708dec370dbc9c859826a623aa839ef4f8b76229c8729268",
       "size_bytes": 13827
@@ -1198,12 +1226,12 @@
       "size_bytes": 10429
     },
     "arctic_process_budget.py": {
-      "sha256": "c245887ccf9b32bc34a445cedbe10ef1e9e90cb34a5d4b6dc23ca0d8fae5ea03",
-      "size_bytes": 13086
+      "sha256": "20371ecd40bf0e4a1cded7d7ffdc337c1a894f9f12e58177b3a2d74e5b237cbf",
+      "size_bytes": 13126
     },
     "arctic_validation_stack.py": {
-      "sha256": "3e705ac2a2a109cdb3f5041ac1bd62dd5cf3247189b4b6fd7a27173eb791e9e2",
-      "size_bytes": 17331
+      "sha256": "dc0cfc9cbf392d0008f57aabf8f94c48f99e7bac2c4be95f9e3d95d70b4629d1",
+      "size_bytes": 17372
     },
     "calibration_fix_test.py": {
       "sha256": "61b5e4b8083f96c9b38ce81927fcbb9a11e6c9f2faa3f7751896f4d2e125d03b",
@@ -1214,8 +1242,8 @@
       "size_bytes": 597
     },
     "climate_model.py": {
-      "sha256": "3a96362e83751fa18211760808967cd8d42b2ebf7e3b399b696226f413149663",
-      "size_bytes": 634180
+      "sha256": "849cee0a16b8b8f8f60bc777edfad8838a59b41cf7c3ffaefd4d8678353f0102",
+      "size_bytes": 637022
     },
     "climate_model_gui.py": {
       "sha256": "cd3bd5ac7ecec7231d80a1ac8d3dcf5196730f83dda45202c1becdbd1b6e5ff4",
@@ -1246,16 +1274,20 @@
       "size_bytes": 15568
     },
     "combine_v22923_validation.py": {
-      "sha256": "25b9cfb5653f98e8fc4185eb702774f69d7ce0dd8c81e11b240e3d2d8b49c8fa",
-      "size_bytes": 15568
+      "sha256": "923bf926e28bb7aaa2a0a07033d6aa4724d6e055440c2c85b4542ac07cdccd77",
+      "size_bytes": 17570
+    },
+    "combine_v22928_validation.py": {
+      "sha256": "d700e8b4ffd318c91c681c31d412d277aa4aac14996cf54e74ba11100a73e70b",
+      "size_bytes": 294
     },
     "data/ssp_pathways_rcmip_v5_1_0.csv": {
       "sha256": "9c2924ee980e7f48513c9f9af92439f089ea9e4535d59b6ce1d25dcec0fadfad",
       "size_bytes": 169200
     },
     "data/validation/ARCTIC_VALIDATION_STACK.md": {
-      "sha256": "3a594d550171aa3ea742cca16ec222d8dec2df9522618f0eb93b2c269cd7eceb",
-      "size_bytes": 3097
+      "sha256": "1b5274541874602ea2c2c58edbad404e37a2309e662f61c0d72c2f8f64371935",
+      "size_bytes": 3125
     },
     "data/validation/nsidc/METADATA.json": {
       "sha256": "fcc3289ba3340bb5d8736c324e9ef14857b68d1d74767ea15c71b447c3717808",
@@ -1342,8 +1374,8 @@
       "size_bytes": 1331370
     },
     "data/validation/sea_ice_physical/cryosat2_rdeft4_v1_metadata.json": {
-      "sha256": "cf3bd76f2eba6f1000c02d275a0b7c2fbc06bb491cd73c6a07a6c98fa50e2165",
-      "size_bytes": 2339
+      "sha256": "0cfbf7ee9d964c56f83cf62a3b915bafd58de7d27acd0369519b2466d52a809c",
+      "size_bytes": 2347
     },
     "data/validation/sea_ice_physical/icesat2_is2sitmogr4_monthly.csv": {
       "sha256": "62ac3f07403fb91994ba7137249ad5a31822962a94942e0b355558b4df49e3b5",
@@ -1354,8 +1386,8 @@
       "size_bytes": 2038050
     },
     "data/validation/sea_ice_physical/icesat2_is2sitmogr4_v4_metadata.json": {
-      "sha256": "dfe16ea5865903ef14ea241b2ee9325d81b78a7634379222708ede4bcfcb1925",
-      "size_bytes": 1787
+      "sha256": "8047cccfc63023a0e10d054f983e6470108ba34c5793cd9c2bd48346af07ebf9",
+      "size_bytes": 1795
     },
     "data/validation/sea_ice_physical/piomas_common_domain_operator.npz": {
       "sha256": "0e8645d97cec32010aa3374df5b570fb14c0a405eb2bc7ea257800a90e133238",
@@ -1458,8 +1490,8 @@
       "size_bytes": 3842
     },
     "monte_carlo.py": {
-      "sha256": "981235f3e8e42166d32b57a07b7907104616279a31b5aeafeebd7b731e0e972d",
-      "size_bytes": 166239
+      "sha256": "ff5ab4aec87811ac052f91a42fe7b1af4bc12a5d7743a257660217e942eddb20",
+      "size_bytes": 166594
     },
     "monte_carlo_smoke_test.py": {
       "sha256": "94b0588cade1261bf692733f2a226a1aea09c1628ed6827e23c7c63a8445892c",
@@ -1474,7 +1506,7 @@
       "size_bytes": 2577
     },
     "pyproject.toml": {
-      "sha256": "54c602745e3f1e574cc6001eaf3089979123186cb5e0cdc22b265f270c716afd",
+      "sha256": "09e9f1ecacf2be82a277746bac5bf75c35a39fe56fc8c809b866e7e136f73149",
       "size_bytes": 748
     },
     "recover_run_state.py": {
@@ -1578,8 +1610,8 @@
       "size_bytes": 16902
     },
     "scientific_evidence.py": {
-      "sha256": "7f2c0160a81413222e157bd1201e2eb31c85a97966991886029665d0621cc609",
-      "size_bytes": 6299
+      "sha256": "8dd9830007c0a4af74de813fe4d8b0c2aaeca3e00756cd35a1f3219f5ae3c7eb",
+      "size_bytes": 6410
     },
     "sea_ice_nested_hindcast.py": {
       "sha256": "bf79c4124f8cfe7a7cc7f8663e5f5d0997fe971d188080e339bf6fc5254e7e60",
@@ -1590,16 +1622,16 @@
       "size_bytes": 9790
     },
     "sea_ice_validation.py": {
-      "sha256": "d35f5d99c820c6b271e98ee00b993d4602851d363534bab69fdb800e0f131c61",
-      "size_bytes": 68093
+      "sha256": "b680ba802b1626cf179105247202aa9464bc83728eb0f656d8d381de3ff0a839",
+      "size_bytes": 71354
     },
     "sensitivity_convergence_test.py": {
       "sha256": "0c549eeae05e3c2babf725812ec89074358c27cfec6b4cce0aef8c216540fbe0",
       "size_bytes": 1241
     },
     "setting_metadata.py": {
-      "sha256": "729ac329071a584d8d4e50326b2a0a0cfbbeefeafb1f5cf6a1dc9bf5862cd036",
-      "size_bytes": 95866
+      "sha256": "997fea7ccbdb7403a7224a4878eab77eee5dc147e7c6f9094b5eda9dd62f2e97",
+      "size_bytes": 95868
     },
     "setting_metadata_test.py": {
       "sha256": "4cc9c9206d55b419529e35d736136f368f8f91063fc10787df1c6bb7a868aacd",
@@ -1618,11 +1650,11 @@
       "size_bytes": 3144
     },
     "tests/test_2026_arctic_observational_recalibration.py": {
-      "sha256": "0f99e3c78754ea60cd8e6db67e2b1624ed1bdfd1e9e8a5341c387d262773df74",
-      "size_bytes": 3184
+      "sha256": "4e730ae9bb3dbfd98a141d4b341984ccbb88e65212f52d996c6ce198aedc6b74",
+      "size_bytes": 4297
     },
     "tests/test_2026_sea_ice_scientific_review_fixes.py": {
-      "sha256": "7490cb38f6d4cf7094343300a8b4c3c698ecc3f74d96c4b9a37a490a89c5b7af",
+      "sha256": "ef3962348479de406ce1b763498592bfecfdc3127a13901591a2bb677aa7d246",
       "size_bytes": 6299
     },
     "tests/test_arctic_core5_nonblocking_acquisition.py": {
@@ -1642,7 +1674,7 @@
       "size_bytes": 7176
     },
     "tests/test_sea_ice_actual_fix.py": {
-      "sha256": "65f2a4e8ff1593218b9287c910a55ee193e213d394340d29a79370f9a18ef2d5",
+      "sha256": "d09bacc33665b64b28ffe59e7bf463f543209c566c077e69d32d54f9fd26549f",
       "size_bytes": 7135
     },
     "tests/test_six_source_arctic_validation_stack.py": {
@@ -1666,7 +1698,7 @@
       "size_bytes": 2043
     },
     "tests/test_v2252_seasonal_arctic.py": {
-      "sha256": "d776626b4e1793c0396c74641f4248f9a4a8a780e80cdd2aa461b15cb79e1ec0",
+      "sha256": "3836bcaff9a02bfbeb977dba4d9c063cfd89a7676f0d980c8a3aa729913d249f",
       "size_bytes": 4780
     },
     "tests/test_v226_thermodynamic_arctic.py": {
@@ -1678,7 +1710,7 @@
       "size_bytes": 9785
     },
     "tests/test_v227_structural_arctic_greenland.py": {
-      "sha256": "9de59b41588073080fb9755150047de2f379ecc0b9063752c74036767e68df73",
+      "sha256": "1e6d33a10fc089a6c24bd70209286abde05bf3b5e1be1c03c546fbe71110f51f",
       "size_bytes": 10143
     },
     "tests/test_v2281_interface_maintenance.py": {
@@ -1690,7 +1722,7 @@
       "size_bytes": 5971
     },
     "tests/test_v228_fractional_arctic.py": {
-      "sha256": "b517b8f75ab0c0af65829948d2648d2b5572c32152c0f9cee8e74283e5a1a7ac",
+      "sha256": "28452afefcacbb7c885285d99ab507bc18cae9fed98efd68fceeb01c711a031d",
       "size_bytes": 14271
     },
     "tests/test_v22910_integrity_recovery.py": {
@@ -1722,24 +1754,24 @@
       "size_bytes": 7697
     },
     "tests/test_v22917_arctic_sweep_integrity.py": {
-      "sha256": "7268b71da74cf8f2698a7e4c6573eb0a271038bbcdfe49825d4b4497f5000ee4",
-      "size_bytes": 8142
+      "sha256": "67ae33ff889ebb50b12cf1f32ad33081c739ca8752581db45dc9c421dbe93d02",
+      "size_bytes": 8141
     },
     "tests/test_v22917_gui_startup.py": {
       "sha256": "2db33977339125c51ab78551864686a3426d114dd99c6c0650240e3d17e2313a",
       "size_bytes": 1005
     },
     "tests/test_v22918_release_corrections.py": {
-      "sha256": "dd08ca474c5545ab24a8bf646c8d93e94762bfceca932ff0a6027315a00e0526",
-      "size_bytes": 8559
+      "sha256": "6ad532e1ea4ae7341ad9b9cef919812d1255b1fd074c044bfdfbbf2a699042a5",
+      "size_bytes": 8558
     },
     "tests/test_v2291_arctic_phase_consistency.py": {
       "sha256": "330d52eb4859134b646eb1eda3bb26bb482b843bdba019faea3b9a18b3e5299d",
       "size_bytes": 7734
     },
     "tests/test_v22920_prognostic_sea_ice.py": {
-      "sha256": "36dde7c08f4b80ffeab6d9ef05fe4a5e9521300e54ca07a8b6904b6045473f8f",
-      "size_bytes": 8029
+      "sha256": "75bcf420ace9855975d7a750b7b4a74bc47cf6e984431d63232094c995c0c6e0",
+      "size_bytes": 8448
     },
     "tests/test_v22920_review_corrections.py": {
       "sha256": "8fdec3e5c4dbe2519843b780d1cd711c74fe8486994a54eea6e9948889980c7a",
@@ -1750,16 +1782,20 @@
       "size_bytes": 462
     },
     "tests/test_v22923_engineering_corrections.py": {
-      "sha256": "5cfc60b5e08422f710434bf280b0ba75a68995925003c7ced8aac5a5123fc443",
-      "size_bytes": 9911
+      "sha256": "e2429e6a9687f080d0999c64fdc24985e514e510eb145a0df77ad5fb7932587b",
+      "size_bytes": 9918
     },
     "tests/test_v22925_review_cleanup.py": {
       "sha256": "1d800cd65e2b0a4f30934f75ec077d370e983bb80811b8dbbaab25febaf628cc",
       "size_bytes": 1430
     },
+    "tests/test_v22928_coupled_fail_closed.py": {
+      "sha256": "ad473f3894fb7a07a577b757ac81928a3622c9d2e0ad55bfd087e85ef932fd3b",
+      "size_bytes": 3771
+    },
     "tests/test_v22928_release_finalization.py": {
-      "sha256": "84d7bf49ee560d85eb01f0cede0fc5937878a0b1825c09117aa1582ead8657b0",
-      "size_bytes": 3822
+      "sha256": "7e2b4f4b211c0e89a94d6103d136202501aaac906121e3c08be1e1c3fae63e9d",
+      "size_bytes": 4572
     },
     "tests/test_v2292_release_integrity.py": {
       "sha256": "bba0f692c9a4666aa9293bb1e8d75376e88ddf5948c7bdb8d33bb91dba2bb702",
@@ -1774,7 +1810,7 @@
       "size_bytes": 11339
     },
     "tests/test_v2295_physical_integrity.py": {
-      "sha256": "7852533ba8bac33899155d11ae6f6ec317de31330309cc8ccbb29250fcc918ef",
+      "sha256": "840f43af78e95b80cc2540c8dd8dbe7e8a59ca24999ae33edbad370f5c52e438",
       "size_bytes": 7212
     },
     "tests/test_v2296_native_arctic_integrity.py": {
@@ -1782,16 +1818,16 @@
       "size_bytes": 9031
     },
     "tests/test_v2297_review_fixes.py": {
-      "sha256": "e1cce664896ab91e6da5adc9f6268c746d74edc1c53bf65f013e706ec06fc8a0",
-      "size_bytes": 10439
+      "sha256": "3fb5980d0f1775d7f0654f1bf5117b48363ee6b0aab3dc6bea4d389996fdad5f",
+      "size_bytes": 10438
     },
     "tests/test_v2298_resumable_sweeps.py": {
       "sha256": "f8d3310917a5b3a67a0a15259e175e4a9c2b9ca7f493a48eefc015bd3cbb3c41",
       "size_bytes": 16945
     },
     "tests/test_v2299_scientific_review_fixes.py": {
-      "sha256": "bf7296e0c2be1dfe6d437cb437847b35b875747c311e9e5bb808b3cc6973c085",
-      "size_bytes": 5960
+      "sha256": "38268ef464cc2467f01fc6002788ccbe11bf33fa1ee660fda4f5e017d07e820b",
+      "size_bytes": 5959
     },
     "tests/test_v229_coupled_arctic_ocean.py": {
       "sha256": "088af0f641dfa1a9874037e0d89d4abb9669fc24a4c297d99c952d90a4885542",
@@ -1802,8 +1838,8 @@
       "size_bytes": 6051
     },
     "tools/acquire_arctic_validation_stack.py": {
-      "sha256": "2d8a8ea795c757c48b8648c7582ce7a64b84f2f962f96470e9805c7d175bf241",
-      "size_bytes": 65996
+      "sha256": "70004c86f46ef544cd4806f817825e450727e99821b192393e0cdc0b6e839313",
+      "size_bytes": 66089
     },
     "tools/acquire_oisst_provenance.py": {
       "sha256": "ae574134310149b8442a5903b7610cbf7d34904077fbfc19ebb563454c69db8d",
@@ -1838,8 +1874,8 @@
       "size_bytes": 11670
     },
     "tools/finalize_v22923_status.py": {
-      "sha256": "2d099150e06b18cac8e5c7ef1257697baa9799f8af72118c71727fd0eb74cd71",
-      "size_bytes": 14145
+      "sha256": "02a774d9f3a1d8d9f1e1456481c26609db2c12c2bc2dcb80503103f74e9581f8",
+      "size_bytes": 14355
     },
     "tools/finalize_v22926_release.py": {
       "sha256": "b92a9cf6da3e2b7f541e66b6b3ede3cbbf0a722934854c4c68e5dfdb7348bfe9",
@@ -1850,8 +1886,8 @@
       "size_bytes": 8252
     },
     "tools/finalize_v22928_release.py": {
-      "sha256": "195029e7480265e2f38b924c2e14f4cd9e38c8df5995c76b539935607defc3d6",
-      "size_bytes": 8441
+      "sha256": "5cc504d0ce43964af92ca46963ba51044a4d9b524e1a1f0a1338265fd6dec807",
+      "size_bytes": 13263
     },
     "tools/package_v227.py": {
       "sha256": "2a9739c8dc5f1cb3af9096e8fc50ece3a2ccee29ae95c9b0989e5ff2d3426edf",
@@ -1982,8 +2018,8 @@
       "size_bytes": 6761
     },
     "tools/run_checkpointed_arctic_candidate.py": {
-      "sha256": "618ae6ff8cf8c59859c6e6ffaa385f7092f6e6e8849d160a39a8ff877d5c05d5",
-      "size_bytes": 11182
+      "sha256": "6a3cd8a892ba131d3f450fe521a1bf1391d0fc49e50b067b586d9d31dc59806e",
+      "size_bytes": 12042
     },
     "tools/run_isolated_v2293_tests.py": {
       "sha256": "4b85a2721567a58ed5ef78acda0a53f29e0218610a130934dd34f70247ba6a37",
@@ -2154,12 +2190,20 @@
       "size_bytes": 214
     },
     "validate_v22922.py": {
-      "sha256": "6d37662076f6faad8eed08a9a02973e8f0e2b40c4fa8c81fa3377fb24595475c",
-      "size_bytes": 49083
+      "sha256": "9be5cc8986c4caa5091e462c7626773695360b148f2a7fd327dc9a2309599ba6",
+      "size_bytes": 49506
     },
     "validate_v22923.py": {
-      "sha256": "36938fc2c7ce5788de1f98033b4e2e440d27fcd9b687cd7f52ec2d8024df2fe6",
-      "size_bytes": 51475
+      "sha256": "02ac006e135f98ec7b5cf44d8bafd67ba9e2fa9f4868182834427bd0ec4682e8",
+      "size_bytes": 54513
+    },
+    "validate_v22928.py": {
+      "sha256": "1ea8107d771445b9c0ee5ef4298e469f42af4b836acb30c35d33a48065b682a1",
+      "size_bytes": 404
+    },
+    "validate_v22928_coupled.py": {
+      "sha256": "15e07b7e17d20e74be5b258c41c41cfce1a9f881d4fb0a0a24628a1f91e8202f",
+      "size_bytes": 4673
     },
     "validate_v2293.py": {
       "sha256": "e0fb93f19a815b4bab113b06ab38e69e962b521f773d6b8e1be2fd468929e8ac",

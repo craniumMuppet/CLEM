@@ -4,13 +4,16 @@
     "development_evaluation_passed": true,
     "nsidc_0611_available": false,
     "osi_saf_development_diagnostic_independent": false,
-    "osi_saf_march_development_rmse_le_1p00": true,
-    "osi_saf_september_development_rmse_le_1p00": false,
-    "physical_volume_thickness_gate_passed": true,
+    "osi_saf_march_development_rmse_le_1p00": false,
+    "osi_saf_september_development_rmse_le_1p00": true,
+    "physical_volume_thickness_gate_passed": false,
+    "physical_volume_thickness_mean_state_constraints_passed": true,
+    "physical_volume_thickness_temporal_response_passed": false,
     "prospective_untouched_validation_complete": false,
     "retrospective_fold_local_hindcasts_run": true,
     "retrospective_predictive_skill_gate_passed": false,
-    "scientific_predictive_validation_complete": false
+    "scientific_predictive_validation_complete": false,
+    "version_matched_arctic_greenland_amoc_validation_complete": true
   },
   "model_version": "2.29.28",
   "package_name": "emergent_global_climate_model_v2_29_28",
@@ -23,15 +26,15 @@
     "errors": 0,
     "failed": 0,
     "file": "TEST_RESULTS_V2_29_28.json",
-    "nodeid_count": 140,
-    "passed": 140,
-    "pytest_version": "9.0.2",
-    "python_version": "3.13.5"
+    "nodeid_count": 143,
+    "passed": 143,
+    "pytest_version": "9.1.1",
+    "python_version": "3.13.13"
   },
   "tested_code_fingerprint": {
-    "aggregate_sha256": "6081e58d02e7276717a707337636f4583564e4872b67fdf9668b0454d75b08b8",
+    "aggregate_sha256": "3bd600836ec042b2318853a8eaba3c9b5c8ce94e75a18325903c0e388f12819d",
     "file": "TESTED_CODE_FINGERPRINT_V2_29_28.json",
-    "file_count": 602,
+    "file_count": 613,
     "profile": "tested-code-and-scientific-inputs",
     "verified_immediately_before_packaging": true
   }

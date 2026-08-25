@@ -6,8 +6,8 @@ EGCM uses six observational/reanalysis products with deliberately separate roles
 |---|---|---|---|
 | NOAA/NSIDC G02202 v6 | Primary homogeneous March/September sea-ice area | Yes | Permanent G02202 ocean/pole-hole support |
 | PIOMAS v2.1 | Long-record sea-ice volume constraint | Yes | PIOMAS common-domain ocean grid |
-| CryoSat-2 RDEFT4 v1 | Independent satellite thickness check | No | Record-specific satellite retrieval weights |
-| ICESat-2 IS2SITMOGR4 v4 | Independent satellite thickness check | No | Record-specific satellite retrieval weights |
+| CryoSat-2 RDEFT4 v1 | Development-informed satellite thickness constraint | No | Record-specific satellite retrieval weights |
+| ICESat-2 IS2SITMOGR4 v4 | Development-informed satellite thickness constraint | No | Record-specific satellite retrieval weights |
 | EUMETSAT OSI SAF OSI-450-a1 v3.1 | Untuned area/concentration cross-check | No | Independent OSI SAF fixed support |
 | NSIDC-0611 v4 | Multiyear-ice structural diagnostic | No | Categorical diagnostic; no thickness equivalence |
 

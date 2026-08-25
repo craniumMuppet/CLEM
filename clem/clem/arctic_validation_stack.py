@@ -76,7 +76,7 @@ SOURCES: dict[str, SourceSpec] = {
         source_id="cryosat2_rdeft4_v1",
         product="CryoSat-2 Level-4 Sea Ice Elevation, Freeboard, and Thickness",
         version="1",
-        role="independent_satellite_thickness_validation",
+        role="development_informed_satellite_thickness_constraint",
         provider="NASA NSIDC DAAC",
         required_paths=(
             "data/validation/sea_ice_physical/cryosat2_rdeft4_monthly.csv",
@@ -84,13 +84,13 @@ SOURCES: dict[str, SourceSpec] = {
             "data/validation/sea_ice_physical/cryosat2_rdeft4_v1_metadata.json",
         ),
         calibrated_to=False,
-        independent_check=True,
+        independent_check=False,
     ),
     "icesat2_is2sitmogr4_v4": SourceSpec(
         source_id="icesat2_is2sitmogr4_v4",
         product="ICESat-2 L4 Monthly Gridded Sea Ice Thickness",
         version="4",
-        role="independent_satellite_thickness_validation",
+        role="development_informed_satellite_thickness_constraint",
         provider="NASA NSIDC DAAC",
         required_paths=(
             "data/validation/sea_ice_physical/icesat2_is2sitmogr4_monthly.csv",
@@ -98,7 +98,7 @@ SOURCES: dict[str, SourceSpec] = {
             "data/validation/sea_ice_physical/icesat2_is2sitmogr4_v4_metadata.json",
         ),
         calibrated_to=False,
-        independent_check=True,
+        independent_check=False,
     ),
     "osi_saf_osi450a1_v3_1": SourceSpec(
         source_id="osi_saf_osi450a1_v3_1",
@@ -131,9 +131,9 @@ SOURCES: dict[str, SourceSpec] = {
 }
 
 PHYSICAL_METRIC_THRESHOLDS: dict[str, float] = {
-    "piomas_volume_normalized_rmse": 0.25,
-    "cryosat2_mean_thickness_normalized_rmse": 0.30,
-    "icesat2_mean_thickness_normalized_rmse": 0.30,
+    "piomas_volume_normalized_rmse": 0.20,
+    "cryosat2_mean_thickness_normalized_rmse": 0.15,
+    "icesat2_mean_thickness_normalized_rmse": 0.20,
 }
 
 OPERATOR_PATHS: dict[str, Path] = {
@@ -316,7 +316,7 @@ def validation_stack_status() -> dict[str, Any]:
         "scientific_design": {
             "primary_area_calibration": "nsidc_g02202_v6",
             "long_volume_constraint": "piomas_v2_1_common_domain",
-            "independent_satellite_thickness": [
+            "development_informed_satellite_thickness_constraints": [
                 "cryosat2_rdeft4_v1",
                 "icesat2_is2sitmogr4_v4",
             ],

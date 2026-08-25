@@ -21,7 +21,7 @@ def test_v2252_physical_defaults_do_not_use_freshwater_compensation() -> None:
     assert config.amoc_convection_entrainment_feedback == 0.0
     assert config.arctic_ocean_air_exchange_wm2_k == 0.20
     assert config.arctic_moisture_transport_wm2_per_k == 0.22
-    assert config.arctic_winter_transport_enhancement == 10.0
+    assert config.arctic_winter_transport_enhancement == 19.0
     assert config.arctic_open_water_stable_exchange_wm2_k == 0.5
     assert config.arctic_open_water_unstable_exchange_wm2_k == 10.0
     assert config.arctic_open_water_exchange_transition_c == 0.5

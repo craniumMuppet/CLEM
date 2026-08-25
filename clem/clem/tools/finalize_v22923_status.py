@@ -8,7 +8,7 @@ import hashlib
 import json
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 from xml.etree import ElementTree
 
@@ -39,7 +39,13 @@ def sha256(path: Path) -> str:
 
 def canonical_relative_path(name: str) -> Path:
     path = Path(name)
-    if path.is_absolute() or ".." in path.parts:
+    if (
+        path.is_absolute()
+        or PurePosixPath(name).is_absolute()
+        or PureWindowsPath(name).is_absolute()
+        or ".." in PurePosixPath(name).parts
+        or ".." in PureWindowsPath(name).parts
+    ):
         raise SystemExit(f"Fingerprint path must be package-relative: {name}")
     return path
 

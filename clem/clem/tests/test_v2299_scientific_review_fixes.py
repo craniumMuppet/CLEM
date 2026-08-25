@@ -23,7 +23,7 @@ def test_version_and_reviewed_defaults() -> None:
     cfg = ModelConfig()
     assert MODEL_VERSION == "2.29.28"
     assert cfg.arctic_full_cover_equivalent_thickness_m == 3.7
-    assert cfg.arctic_ice_concentration_exponent == 0.56
+    assert cfg.arctic_ice_concentration_exponent == 1.0
     assert cfg.arctic_lateral_ocean_heat_transport_wm2_per_ice_fraction == 25.0
     assert cfg.arctic_transient_shortwave_scale == 1.0
     assert cfg.arctic_lapse_rate_feedback_wm2_k == 1.1

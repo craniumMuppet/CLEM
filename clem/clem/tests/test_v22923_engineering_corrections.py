@@ -208,7 +208,7 @@ def test_current_entrypoints_and_gui_metadata_are_complete() -> None:
     packager = (ROOT / "tools" / "package_v22923.py").read_text(encoding="utf-8")
     assert "TEST_EVENTS_V2_29_23.ndjson" in runner
     assert "TEST_RESULTS_V2_29_23.junit.xml" in runner
-    assert 'output_candidate = args.output_dir / "TEST_RESULTS_V2_29_23.json"' in combiner
+    assert 'output_candidate = args.output_dir / f"TEST_RESULTS_{artifact_tag}.json"' in combiner
     assert "skip-relocation-check" in packager
 
 

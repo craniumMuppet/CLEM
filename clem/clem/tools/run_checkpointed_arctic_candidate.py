@@ -81,16 +81,21 @@ def _load_checkpoint(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _candidate_config(overrides: dict[str, Any]) -> ModelConfig:
+def _candidate_config(
+    overrides: dict[str, Any],
+    *,
+    resolution_deg: float = 10.0,
+    duration_years: float = 177.0,
+) -> ModelConfig:
     unknown = sorted(set(overrides) - set(ModelConfig.__dataclass_fields__))
     if unknown:
         raise ValueError(f"Unknown ModelConfig override(s): {unknown}")
     return replace(
         ModelConfig(),
         start_year=1850.0,
-        duration_years=177.0,
+        duration_years=float(duration_years),
         scenario="ssp245",
-        resolution_deg=10.0,
+        resolution_deg=float(resolution_deg),
         dt_years=0.05,
         record_every_years=0.1,
         auto_initialize_from_1850=False,
@@ -156,7 +161,11 @@ def cmd_init(args: argparse.Namespace) -> int:
     overrides = json.loads(args.overrides)
     if not isinstance(overrides, dict):
         raise ValueError("--overrides must decode to a JSON object")
-    config = _candidate_config(overrides)
+    config = _candidate_config(
+        overrides,
+        resolution_deg=args.resolution,
+        duration_years=args.duration_years,
+    )
     model = ProcessClimateModel(config)
     payload: dict[str, Any] = {
         "format": "egcm_checkpointed_arctic_candidate_v1",
@@ -233,7 +242,7 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
         )
     result = SparseArcticResult(payload)
     evaluation = evaluate_result(result)
-    output = {
+    output = evaluation if args.evaluation_only else {
         "candidate_id": payload["candidate_id"],
         "overrides": payload["overrides"],
         "trajectory_through_calendar_year": calendar_year,
@@ -263,6 +272,8 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--checkpoint", required=True, type=Path)
     init.add_argument("--candidate-id", required=True)
     init.add_argument("--overrides", default="{}")
+    init.add_argument("--resolution", type=float, default=10.0)
+    init.add_argument("--duration-years", type=float, default=177.0)
     init.set_defaults(func=cmd_init)
 
     advance = sub.add_parser("advance")
@@ -274,6 +285,11 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--checkpoint", required=True, type=Path)
     evaluate.add_argument("--output", required=True, type=Path)
     evaluate.add_argument("--require-through-year", type=float, default=2026.0)
+    evaluate.add_argument(
+        "--evaluation-only",
+        action="store_true",
+        help="Write the canonical sea_ice_validation evaluation payload without candidate-runner wrapping.",
+    )
     evaluate.set_defaults(func=cmd_evaluate)
     return parser
 

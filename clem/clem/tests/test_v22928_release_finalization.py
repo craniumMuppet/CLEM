@@ -14,15 +14,22 @@ def test_v22928_identity_and_selected_defaults() -> None:
     assert MODEL_VERSION=="2.29.28"
     from tools.v22928_release_integrity import PACKAGE_NAME
     assert PACKAGE_NAME == "emergent_global_climate_model_v2_29_28"
-    assert ROOT.name == PACKAGE_NAME
+    # The checkout may have any directory name.  The release finalizer enforces
+    # PACKAGE_NAME against the staged ZIP root before it will emit metadata.
     assert 'version = "2.29.28"' in (ROOT/"pyproject.toml").read_text()
-    assert cfg.arctic_ice_concentration_exponent==pytest.approx(0.56)
-    assert cfg.arctic_ice_nonsolar_heat_loss_wm2==pytest.approx(47.8)
+    assert cfg.arctic_winter_transport_enhancement==pytest.approx(19.0)
+    assert cfg.arctic_ice_mechanical_max_local_thickness_m==pytest.approx(12.0)
+    assert cfg.arctic_ice_concentration_exponent==pytest.approx(1.0)
+    assert cfg.arctic_ice_nonsolar_heat_loss_wm2==pytest.approx(51.0)
+    assert cfg.arctic_ice_area_thinning_melt_amplification==pytest.approx(2.0)
+    assert cfg.arctic_ice_area_thin_pack_divergence_fraction_per_year==pytest.approx(0.30)
+    assert cfg.arctic_ice_export_onset_equivalent_thickness_m==pytest.approx(0.90)
+    assert cfg.arctic_ice_export_timescale_years==pytest.approx(0.24)
     assert cfg.arctic_ice_area_formation_volume_sensitivity==pytest.approx(11.5)
     assert cfg.arctic_ice_area_formation_support_floor==pytest.approx(0.59)
-    assert cfg.arctic_forced_ocean_heat_convergence_wm2_per_k==pytest.approx(7.5)
-    assert cfg.arctic_forced_ocean_heat_convergence_onset_warming_c==pytest.approx(0.45)
-    assert cfg.arctic_forced_ocean_heat_convergence_saturation_scale_c==pytest.approx(0.32)
+    assert cfg.arctic_forced_ocean_heat_convergence_wm2_per_k==pytest.approx(8.0)
+    assert cfg.arctic_forced_ocean_heat_convergence_onset_warming_c==pytest.approx(0.40)
+    assert cfg.arctic_forced_ocean_heat_convergence_saturation_scale_c==pytest.approx(0.45)
 
 def test_v22928_documents_are_synchronized() -> None:
     assert (ROOT/"README.md").read_text().startswith("# Emergent-Sensitivity Global Climate Model v2.29.28")
@@ -33,8 +40,9 @@ def test_v22928_current_evidence_is_fail_closed_and_osi_is_development_only() ->
     p=json.loads((ROOT/"ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())
     assert p["calibration_passed"] is True
     assert p["physical_volume_thickness_validation"]["passed"] is True
+    assert p["physical_volume_thickness_validation"]["scientific_volume_thickness_validation_complete"] is False
     assert p["osi_saf_development_crosscheck"]["independent_crosscheck"] is False
-    assert p["osi_saf_development_crosscheck"]["months"]["9"]["rmse_million_km2"] > 1.0
+    assert p["osi_saf_development_crosscheck"]["months"]["3"]["rmse_million_km2"] > 1.0
     assert p["scientific_validation_complete"] is False
 
 def test_v22928_retrospective_fold_local_manifest_is_semantically_honest() -> None:
@@ -55,7 +63,8 @@ def test_v22928_scientific_wording_matches_fail_closed_status() -> None:
     status=SCIENTIFIC_USE_METADATA["components"]["sea_ice"]["scientific_validation_status"]
     lower=status.lower()
     assert "development-only" in lower
-    assert "september" in lower
+    assert "cryosat-2" in lower
+    assert "temporal-correlation" in lower
     assert "nsidc-0611" in lower
     assert "fold-local" in lower
     assert "2027" in lower

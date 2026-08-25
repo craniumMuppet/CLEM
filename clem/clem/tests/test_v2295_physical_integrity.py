@@ -54,8 +54,8 @@ def test_version_native_cycle_and_amoc_physics_defaults() -> None:
     # This is the preindustrial periodic reference cycle, not the warmed
     # 1979-2020 climatology. It must retain more summer ice than the historical
     # state while preserving a large seasonal retreat.
-    assert 13.5 <= march <= 14.5
-    assert 6.0 <= september <= 6.8
+    assert 15.5 <= march <= 16.5
+    assert 8.0 <= september <= 9.0
     assert 7.0 <= march - september <= 8.5
 
 

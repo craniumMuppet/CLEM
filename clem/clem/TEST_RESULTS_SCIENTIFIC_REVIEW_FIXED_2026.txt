@@ -1,51 +1,54 @@
-EGCM v2.29.25 scientific-review patch test record
-Date: 2026-08-08
+EGCM v2.29.28 post-review correction verification
+Generated: 2026-08-25T14:21:18Z
 
-Scientific state
-----------------
-Arctic scientific validation remains FAIL-CLOSED / INCOMPLETE.
-No predictive sea-ice skill claim is enabled. Missing homogeneous fixed-mask
-area and independent volume/thickness observations are not fabricated.
-
-Verified changes
-----------------
-- Raw discontinuous NSIDC area is provenance-only and excluded from calibration/skill.
-- Historical fitted area-to-extent multiplier is not used by production outputs or release gates.
-- Coarse native 15% extent is diagnostic-only and excluded from scientific pass/fail gates.
-- Fixed-mask area validation schema and independent volume/thickness validation are implemented.
-- Empirical thick-pack resistance exponent defaults to 0.0.
-- Forced ocean-heat ice-fraction attenuation exponent defaults to 0.0.
-- Existing conservative ice-export sink is retained rather than duplicated.
-- Strict per-fold nested hindcast infrastructure is present; folds have not been scientifically executed because corrected observations are absent.
-
-Tests completed
----------------
-1. New 2026 review-fix suite: 6 passed.
-2. Final focused regression after operator/UI cleanup: 11 passed in 2.46 s.
-3. Targeted compatibility checks: 6 passed in 2.24 s.
-4. Additional mapping/integrity checks: 3 passed in 30.49 s.
-5. Targeted physical-behavior checks: 14 passed in 31.70 s.
-6. Broader sea-ice regression group: 12 tests had reported passing before the
-   long-running group exceeded the execution window. This is intentionally NOT
-   reported as a complete-suite pass.
-
-Compilation
------------
-Current core modules compile successfully with Python py_compile.
-
-Core smoke test
----------------
-10 degree, 0.1 y run completed.
-Native NH area:       15.471593 M km2
-Thresholded NH area:  15.471593 M km2
-Coarse-zonal extent:  28.535715 M km2
-NH volume:             0.0269368 M km3
-Mean thickness:        1.74105 m
-Scientific validation complete: False
-
-Interpretation
+Decision state
 --------------
-The large coarse-zonal extent is not hidden or tuned away. It is evidence that
-the reduced two-sector geometry cannot serve as a satellite-equivalent extent
-operator, so extent is retained only as a structural diagnostic until a more
-spatially adequate formulation is introduced.
+Version-matched 5 degree / 10 degree coupled engineering validation: PASS.
+Arctic scientific validation: FAIL-CLOSED / INCOMPLETE.
+No predictive sea-ice skill, satellite-equivalent extent, independent
+satellite-validation, or prospective-validation claim is enabled.
+
+Physics evidence
+----------------
+- Active Arctic physics changed; this is not a status-only correction.
+- The 10 degree 1979-2020 March/September fixed-mask RMSE is 0.504/0.529
+  million km2 and the trends are -0.395/-0.813 million km2 per decade versus
+  -0.409/-0.846 observed. Ratios are 0.968/0.961 and both 95% OLS intervals overlap.
+- The 10 degree 2021-2025 March/September RMSE is 0.370/0.358 million km2.
+- PIOMAS nRMSE is 0.1883 with mean volume 7.67% low and correlation 0.934.
+- ICESat-2 bias/correlation is +0.283 m/+0.692. CryoSat-2 bias is -0.150 m,
+  but correlation is -0.123, so full temporal thickness validation remains failed.
+- Area tendencies are consistently tapered through the Arctic-module transition.
+  A volume-conserving 12 m unresolved-deformation/spreading process prevents
+  finite-volume, near-zero-area future remnants before the separate 500 m emergency abort.
+
+Coupled validation integrity
+----------------------------
+- validate_v22928.py and combine_v22928_validation.py are present and executable.
+- validate_v22928_coupled.py runs exact current-source 1850-2100 production and
+  no-Greenland-freshwater trajectories at both 5 and 10 degrees.
+- Failed per-resolution or combined runs retain only noncanonical FAILED_* diagnostics.
+- Canonical artifacts are promoted atomically only after both resolutions and
+  the combiner pass. The finalizer rechecks explicit pass flags and source hashes.
+- Cross-resolution late March/September area differences are 0.196/0.072 million km2;
+  late GMST difference is 0.013 C; Arctic-amplification difference is 0.308;
+  2100 AMOC difference is 0.252 Sv. Every predeclared cross-resolution gate passes.
+
+Regression and smoke evidence
+-----------------------------
+- Declared bounded release/Arctic regimen: 143 passed, 0 failed, 0 errors.
+- This restores the original 140-test evidence and adds three explicit
+  fail-closed coupled-integrity tests. Exact commands and 143 unique node IDs
+  are recorded in TEST_RESULTS_V2_29_28.json.
+- Four known long-running nodes remain explicitly listed as not executed; no
+  full-repository-suite claim is made.
+- python -m compileall -q -f .: PASS.
+- CLI help startup and core imports: PASS.
+
+Remaining blockers
+------------------
+- All three valid retrospective folds still fail to beat every simple baseline.
+- Native coarse-zonal extent remains diagnostic-only and physically unsuitable
+  as a satellite-equivalent product.
+- CryoSat-2 temporal correlation fails the declared gate.
+- NSIDC-0611 and genuinely untouched 2027+ prospective evidence remain unavailable.

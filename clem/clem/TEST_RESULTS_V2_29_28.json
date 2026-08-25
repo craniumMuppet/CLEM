@@ -1,19 +1,16 @@
 {
   "commands": [
-    "pytest -q tests/test_2026_arctic_observational_recalibration.py tests/test_v22928_release_finalization.py tests/test_six_source_arctic_validation_stack.py tests/test_sea_ice_actual_fix.py tests/test_v2297_review_fixes.py tests/test_2026_arctic_data_processing_repairs.py tests/test_2026_sea_ice_scientific_review_fixes.py",
-    "pytest -q tests/test_v22917_arctic_sweep_integrity.py tests/test_v22918_release_corrections.py -k 'not reference_cache_identity_includes_longwave_damping'",
-    "pytest -q tests/test_v22920_prognostic_sea_ice.py tests/test_v22920_review_corrections.py",
-    "pytest -q tests/test_v22922_engineering_corrections.py tests/test_v22923_engineering_corrections.py tests/test_v22925_review_cleanup.py",
-    "pytest -q tests/test_v2295_physical_integrity.py::test_version_native_cycle_and_amoc_physics_defaults",
-    "pytest -q tests/test_v2299_scientific_review_fixes.py -k 'not zero_lateral_restoring_is_valid_and_negative_is_rejected and not native_amoc_reference_converges_without_canonical_substitution'",
-    "pytest -q tests/test_v229_coupled_arctic_ocean.py::test_reference_cycle_contains_periodic_sector_ocean_states",
-    "pytest -q tests/test_v229_coupled_arctic_ocean.py::test_basal_heat_flux_increases_with_ocean_temperature",
-    "pytest -q tests/test_v229_coupled_arctic_ocean.py::test_open_water_exchange_is_two_way",
-    "pytest -q tests/test_v229_coupled_arctic_ocean.py::test_transient_ocean_surface_exchange_is_equal_and_opposite"
+    "python -m pytest -q tests/test_2026_arctic_observational_recalibration.py tests/test_v22928_release_finalization.py tests/test_v22928_coupled_fail_closed.py tests/test_six_source_arctic_validation_stack.py tests/test_sea_ice_actual_fix.py tests/test_v2297_review_fixes.py tests/test_2026_arctic_data_processing_repairs.py tests/test_2026_sea_ice_scientific_review_fixes.py --tb=short",
+    "python -m pytest -q tests/test_v22917_arctic_sweep_integrity.py tests/test_v22918_release_corrections.py -k 'not reference_cache_identity_includes_longwave_damping' --tb=short",
+    "python -m pytest -q tests/test_v22920_prognostic_sea_ice.py tests/test_v22920_review_corrections.py --tb=short",
+    "python -m pytest -q tests/test_v22922_engineering_corrections.py tests/test_v22923_engineering_corrections.py tests/test_v22925_review_cleanup.py --tb=short",
+    "python -m pytest -q tests/test_v2295_physical_integrity.py::test_version_native_cycle_and_amoc_physics_defaults --tb=short",
+    "python -m pytest -q tests/test_v2299_scientific_review_fixes.py -k 'not zero_lateral_restoring_is_valid_and_negative_is_rejected and not native_amoc_reference_converges_without_canonical_substitution' --tb=short",
+    "python -m pytest -q tests/test_v229_coupled_arctic_ocean.py::test_reference_cycle_contains_periodic_sector_ocean_states tests/test_v229_coupled_arctic_ocean.py::test_basal_heat_flux_increases_with_ocean_temperature tests/test_v229_coupled_arctic_ocean.py::test_open_water_exchange_is_two_way tests/test_v229_coupled_arctic_ocean.py::test_transient_ocean_surface_exchange_is_equal_and_opposite --tb=short"
   ],
   "compile_command": "python -m compileall -q -f .",
   "compile_passed": true,
-  "declared_pytest_requirement": "pytest==9.0.2",
+  "declared_pytest_requirement": "pytest==9.1.1",
   "deselected_known_long_tests": [
     "tests/test_v22918_release_corrections.py::test_reference_cache_identity_includes_longwave_damping",
     "tests/test_v2299_scientific_review_fixes.py::test_zero_lateral_restoring_is_valid_and_negative_is_rejected",
@@ -22,6 +19,7 @@
   ],
   "errors": 0,
   "failed": 0,
+  "generated_at_utc": "2026-08-25T14:21:18Z",
   "model_version": "2.29.28",
   "nodeids": [
     "tests/test_2026_arctic_observational_recalibration.py::test_recalibrated_arctic_defaults_are_locked_and_inside_declared_priors",
@@ -33,6 +31,9 @@
     "tests/test_v22928_release_finalization.py::test_v22928_retrospective_fold_local_manifest_is_semantically_honest",
     "tests/test_v22928_release_finalization.py::test_v22928_scientific_wording_matches_fail_closed_status",
     "tests/test_v22928_release_finalization.py::test_v22928_present_observational_sources_pass_hash_integrity",
+    "tests/test_v22928_coupled_fail_closed.py::test_resolution_loader_rejects_failed_coupled_run",
+    "tests/test_v22928_coupled_fail_closed.py::test_finalizer_rejects_two_failed_coupled_files_even_if_summary_claims_complete",
+    "tests/test_v22928_coupled_fail_closed.py::test_current_coupled_entry_points_exist",
     "tests/test_six_source_arctic_validation_stack.py::test_registry_has_exact_six_products_and_explicit_spatial_operators",
     "tests/test_six_source_arctic_validation_stack.py::test_malformed_piomas_common_domain_evidence_is_rejected_fail_closed",
     "tests/test_six_source_arctic_validation_stack.py::test_physical_gate_stays_closed_without_source_specific_operators",
@@ -165,9 +166,13 @@
     "tests/test_v229_coupled_arctic_ocean.py::test_open_water_exchange_is_two_way",
     "tests/test_v229_coupled_arctic_ocean.py::test_transient_ocean_surface_exchange_is_equal_and_opposite"
   ],
-  "passed": 140,
-  "pytest_version": "9.0.2",
-  "python_version": "3.13.5",
+  "passed": 143,
+  "pytest_version": "9.1.1",
+  "python_version": "3.13.13",
   "schema_version": 1,
-  "scope": "bounded v2.29.28 release/recalibration plus broader Arctic physical/coupled regression suite; no claim of the full repository long-run inventory"
+  "smoke_commands": [
+    "python climate_model.py --help",
+    "python -c 'import climate_model, sea_ice_validation, arctic_validation_stack'"
+  ],
+  "scope": "bounded v2.29.28 release/recalibration, fail-closed validation integrity, and broader Arctic physical/coupled regression suite; no claim of the full repository long-run inventory"
 }

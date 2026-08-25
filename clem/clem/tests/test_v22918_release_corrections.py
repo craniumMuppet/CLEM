@@ -30,9 +30,9 @@ def test_version_and_recalibrated_compactness_default() -> None:
     config = ModelConfig()
     assert MODEL_VERSION == "2.29.28"
     assert config.arctic_new_ice_local_thickness_m == pytest.approx(0.22)
-    assert config.arctic_ice_concentration_exponent == pytest.approx(0.56)
+    assert config.arctic_ice_concentration_exponent == pytest.approx(1.0)
     assert config.arctic_full_cover_equivalent_thickness_m == pytest.approx(3.7)
-    assert config.arctic_winter_transport_enhancement == pytest.approx(10.0)
+    assert config.arctic_winter_transport_enhancement == pytest.approx(19.0)
     assert config.arctic_winter_transport_temperature_scale_c == pytest.approx(15.0)
     assert config.arctic_ice_surface_exchange_wm2_k == pytest.approx(5.0)
     assert config.arctic_transient_shortwave_scale == pytest.approx(1.00)

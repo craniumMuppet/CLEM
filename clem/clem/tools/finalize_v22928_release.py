@@ -34,6 +34,15 @@ from arctic_validation_stack import validation_stack_status  # noqa: E402
 
 RECALIBRATION_JSON = "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json"
 RETROSPECTIVE_JSON = "RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json"
+COUPLED_SUMMARY_JSON = "VALIDATION_SUMMARY_V2_29_28.json"
+COUPLED_RESOLUTION_JSONS = tuple(
+    name
+    for resolution in (5, 10)
+    for name in (
+        f"SEA_ICE_VALIDATION_V2_29_28_{resolution}DEG.json",
+        f"ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_28_{resolution}DEG.json",
+    )
+)
 
 
 def verify_identity() -> None:
@@ -49,9 +58,89 @@ def verify_identity() -> None:
     for path, needle in required_text:
         if needle not in path.read_text(encoding="utf-8"):
             raise SystemExit(f"Release identity mismatch in {path.name}: missing {needle!r}")
-    for name in (TEST_JSON, FINGERPRINT_JSON, RECALIBRATION_JSON, RETROSPECTIVE_JSON):
+    for name in (
+        TEST_JSON,
+        FINGERPRINT_JSON,
+        RECALIBRATION_JSON,
+        RETROSPECTIVE_JSON,
+        COUPLED_SUMMARY_JSON,
+        *COUPLED_RESOLUTION_JSONS,
+    ):
         if not (ROOT / name).is_file():
             raise SystemExit(f"Missing required release evidence: {name}")
+
+
+def verify_coupled_evidence() -> dict[str, Any]:
+    """Reject incomplete, failed, stale, or cross-resolution-free evidence."""
+
+    summary = load_json(ROOT / COUPLED_SUMMARY_JSON)
+    if summary.get("model_version") != MODEL_VERSION:
+        raise SystemExit("Coupled summary model_version mismatch")
+    if summary.get("validation_type") != "version_matched_production_default":
+        raise SystemExit("Coupled summary validation_type mismatch")
+    required_true = {
+        "coupled_validation_complete": summary.get("coupled_validation_complete"),
+        "version_matched_arctic_greenland_amoc_validation_complete": summary.get(
+            "version_matched_arctic_greenland_amoc_validation_complete"
+        ),
+        "cross_resolution_validation_passed": summary.get(
+            "cross_resolution_validation_passed"
+        ),
+        "historical_calibration_passed": summary.get("historical_calibration_passed"),
+        "recent_period_evaluation_passed": summary.get(
+            "recent_period_evaluation_passed"
+        ),
+        "structural_area_volume_validation_passed": summary.get(
+            "structural_area_volume_validation_passed"
+        ),
+        "amoc_validation_passed": summary.get("amoc_validation_passed"),
+    }
+    failed = [name for name, value in required_true.items() if value is not True]
+    if failed:
+        raise SystemExit("Coupled summary contains failed/incomplete gates: " + ", ".join(failed))
+    if summary.get("resolutions_deg") != [5.0, 10.0]:
+        raise SystemExit("Coupled summary must contain exact 5-degree and 10-degree runs")
+    cross = summary.get("cross_resolution", {})
+    if cross.get("passed") is not True or not cross.get("gates"):
+        raise SystemExit("Coupled summary lacks passing cross-resolution comparisons")
+    if not all(value is True for value in cross["gates"].values()):
+        raise SystemExit("One or more cross-resolution gates failed")
+
+    expected_hashes = summary.get("source_hashes")
+    if not isinstance(expected_hashes, dict) or not expected_hashes:
+        raise SystemExit("Coupled summary lacks source hashes")
+    for relative, expected in expected_hashes.items():
+        source = ROOT / relative
+        if not source.is_file() or sha256_file(source) != expected:
+            raise SystemExit(f"Coupled source hash is stale or missing: {relative}")
+
+    for name in COUPLED_RESOLUTION_JSONS:
+        payload = load_json(ROOT / name)
+        if payload.get("model_version") != MODEL_VERSION:
+            raise SystemExit(f"Coupled evidence model_version mismatch: {name}")
+        if payload.get("validation_type") != "version_matched_production_default":
+            raise SystemExit(f"Coupled evidence validation_type mismatch: {name}")
+        if payload.get("source_hashes") != expected_hashes:
+            raise SystemExit(f"Coupled evidence source hashes mismatch: {name}")
+        if payload.get("validation_passed") is not True:
+            raise SystemExit(f"Coupled evidence is not a passing canonical run: {name}")
+        if name.startswith("ARCTIC_GREENLAND"):
+            if payload.get("coupled", {}).get("passed") is not True:
+                raise SystemExit(f"Coupled gates failed: {name}")
+            if payload.get("structural_area_volume_experiments", {}).get("passed") is not True:
+                raise SystemExit(f"Structural area/volume gates failed: {name}")
+        else:
+            sea_summary = payload.get("summary", {})
+            if not all(
+                sea_summary.get(key) is True
+                for key in (
+                    "calibration_passed",
+                    "recent_period_evaluation_passed",
+                    "all_engineering_gates_passed",
+                )
+            ):
+                raise SystemExit(f"Sea-ice gates failed: {name}")
+    return summary
 
 
 def verify_test_evidence() -> dict[str, Any]:
@@ -85,12 +174,21 @@ def derived_arctic_status() -> dict[str, Any]:
     physical = recal.get("physical_volume_thickness_validation", {})
     osi = recal.get("osi_saf_development_crosscheck", {})
     prospective_complete = bool(recal.get("prospective_untouched_validation_complete", False))
+    coupled = verify_coupled_evidence()
     return {
         "calibration_passed": bool(recal.get("calibration_passed", False)),
         "development_evaluation_passed": bool(
             recal.get("validation_informed_development_evaluation_passed", False)
         ),
-        "physical_volume_thickness_gate_passed": bool(physical.get("passed", False)),
+        "physical_volume_thickness_mean_state_constraints_passed": bool(
+            physical.get("mean_state_constraints_passed", False)
+        ),
+        "physical_volume_thickness_temporal_response_passed": bool(
+            physical.get("temporal_response_validation_passed", False)
+        ),
+        "physical_volume_thickness_gate_passed": bool(
+            physical.get("scientific_volume_thickness_validation_complete", False)
+        ),
         "osi_saf_development_diagnostic_independent": bool(osi.get("independent_crosscheck", False)),
         "osi_saf_march_development_rmse_le_1p00": bool(
             osi.get("months", {}).get("3", {}).get("rmse_le_1p00_million_km2", False)
@@ -104,6 +202,9 @@ def derived_arctic_status() -> dict[str, Any]:
             retrospective.get("scientific_predictive_skill_claim_allowed", False)
         ),
         "prospective_untouched_validation_complete": prospective_complete,
+        "version_matched_arctic_greenland_amoc_validation_complete": bool(
+            coupled["version_matched_arctic_greenland_amoc_validation_complete"]
+        ),
         "scientific_predictive_validation_complete": bool(
             recal.get("scientific_validation_complete", False)
         ),
@@ -192,6 +293,7 @@ def build_deterministic_zip() -> Path:
 
 def main() -> None:
     verify_identity()
+    verify_coupled_evidence()
     tests = verify_test_evidence()
     fingerprint = verify_tested_fingerprint()
     info = write_package_info(tests, fingerprint)

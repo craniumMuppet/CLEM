@@ -327,6 +327,7 @@ def _integrated_arctic_state_metrics(
     elapsed_years: float,
 ) -> dict[str, float]:
     reference = model._arctic_reference_state(elapsed_years)
+    full_arctic = model.arctic_module_blend >= 0.99
     concentrations: list[float] = []
     equivalents: list[float] = []
     identity_errors: list[float] = []
@@ -345,12 +346,19 @@ def _integrated_arctic_state_metrics(
                 ),
             )
         )
-        concentrations.append(float(np.mean(concentration)))
-        equivalents.append(float(np.mean(equivalent)))
+        sector_fraction = (
+            model.grid.atlantic_ocean_fraction
+            if prefix == "atlantic"
+            else model.non_atlantic_ocean_fraction
+        )
+        weights = model.grid.band_area_weights * sector_fraction * full_arctic
+        concentrations.append(weighted_latitude_mean(concentration, weights))
+        equivalents.append(weighted_latitude_mean(equivalent, weights))
         identity_errors.append(
             float(np.max(np.abs(concentration * local - equivalent)))
         )
     return {
+        "averaging_domain": "ocean-area-weighted full Arctic module (blend >= 0.99)",
         "mean_concentration": float(np.mean(concentrations)),
         "mean_equivalent_thickness_m": float(np.mean(equivalents)),
         "maximum_volume_identity_error_m": float(max(identity_errors)),

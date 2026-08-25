@@ -46,7 +46,7 @@ def test_v227_defaults_keep_freshwater_rates_and_use_structural_amoc_settings() 
     assert config.amoc_convection_density_scale_factor == 4.0
     assert config.amoc_reference_density_driver == 7.5e-4
     assert config.ocean_heat_exchange_wm2_k == 1.45
-    assert config.arctic_winter_transport_enhancement == 10.0
+    assert config.arctic_winter_transport_enhancement == 19.0
     assert config.arctic_open_water_stable_exchange_wm2_k == 0.5
     assert config.arctic_open_water_unstable_exchange_wm2_k == 10.0
     assert config.arctic_open_water_exchange_transition_c == 0.5
