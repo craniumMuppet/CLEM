@@ -1,0 +1,23 @@
+{
+  "changes": [
+    "Public CLI defaults delegate to ModelConfig for repaired water-vapor and convection parameters.",
+    "AMOC salt-loop comments match the validated Deep->SAU->Tropical->North->Deep topology.",
+    "Public model name changed from Emergent-Sensitivity Global Climate Model to Coupled Low-complexity Earth Model (CLEM).",
+    "No dynamics/config AST change outside build_parser() and the MODEL_NAME metadata constant."
+  ],
+  "core_ast_equal": true,
+  "release_core_ast_sha256": "ad7687f6833c102337ebdbe13369837d15d2c1b672042d30d5f86fbc1ac7e574",
+  "release_source_sha256": "aa3e9d43cf77c400f105ea0c9c98585310081d85bc838b2bdfcaacbde442fd67",
+  "revision": "repair-r13-release-consistency-plus-clem-name",
+  "validated_core_ast_sha256": "ad7687f6833c102337ebdbe13369837d15d2c1b672042d30d5f86fbc1ac7e574",
+  "validated_source_sha256": "f08e901aac796c7fd757a52345709b0d9e3d20ec34c92f6afc0d53d8f7a824b9",
+  "model_version": "2.29.28",
+  "repair_revision": "R13",
+  "repair_label_is_model_version": false,
+  "excluded_top_level_symbols": [
+    "MODEL_NAME",
+    "build_parser"
+  ],
+  "model_name": "Coupled Low-complexity Earth Model",
+  "model_short_name": "CLEM"
+}

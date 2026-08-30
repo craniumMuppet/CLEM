@@ -1,0 +1,83 @@
+{
+  "model_version": "2.29.28",
+  "repair_revision": "R13",
+  "revision": "repair-r13-release-consistency-plus-clem-name",
+  "repair_label_is_model_version": false,
+  "core_ast_sha256": "ad7687f6833c102337ebdbe13369837d15d2c1b672042d30d5f86fbc1ac7e574",
+  "release_climate_model_sha256": "aa3e9d43cf77c400f105ea0c9c98585310081d85bc838b2bdfcaacbde442fd67",
+  "validated_predecessor_climate_model_sha256": "f08e901aac796c7fd757a52345709b0d9e3d20ec34c92f6afc0d53d8f7a824b9",
+  "files": {
+    "climate_model.py": {
+      "sha256": "aa3e9d43cf77c400f105ea0c9c98585310081d85bc838b2bdfcaacbde442fd67",
+      "size_bytes": 659223
+    },
+    "scientific_evidence.py": {
+      "sha256": "8dd9830007c0a4af74de813fe4d8b0c2aaeca3e00756cd35a1f3219f5ae3c7eb",
+      "size_bytes": 6410
+    },
+    "climate_model_gui.py": {
+      "sha256": "e44e2f2b138e088fc654e162030cba971c082fd2bf8523867c359300286cc481",
+      "size_bytes": 133306
+    },
+    "app.py": {
+      "sha256": "edc2873738786ca91909026d97c2f4f229a0b4ddff0ccd8fbe7001474c6d38c4",
+      "size_bytes": 69995
+    },
+    "verify_physics_local.py": {
+      "sha256": "c9f86a021c44983247da8ae3e883f1facc5c53eae1a21fda600c14bafdb46576",
+      "size_bytes": 87296
+    },
+    "check_release_identity.py": {
+      "sha256": "229e6edfe0f5eb2c2e4148e55427cf74bbacacddb0ee1034cec585d82d3516b0",
+      "size_bytes": 3171
+    },
+    "RELEASE_METADATA.json": {
+      "sha256": "a479a4ed0a2332808ee899a8b140a00215667fd7db94fb2f3ff4e38d095e9f73",
+      "size_bytes": 1110
+    },
+    "README.md": {
+      "sha256": "21f2cb56e926ccf1b3fd06c8b3db3bc9e31e0c5f8deea63159329079e8be8d71",
+      "size_bytes": 3384
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "8fb11bc5cf379b68d756f5831dbf4b46d9b84abc8fad59d898765c5fdf362d3b",
+      "size_bytes": 1270
+    },
+    "RUN_PHYSICS_VERIFICATION.cmd": {
+      "sha256": "7c14e38a167f8c67caa3c8211038d56e5f4b2d17634d512dbae92c7c0bac4453",
+      "size_bytes": 692
+    },
+    "RUN_OUT_OF_SAMPLE_VALIDATION.cmd": {
+      "sha256": "04395a3d7eae2040d5183ffb849734b66283b1a6a6a37555aadc96e40d01928c",
+      "size_bytes": 602
+    },
+    "RUN_RELEASE_CONSISTENCY.cmd": {
+      "sha256": "c5616b6ca813592f941b783e2379a93a37ed74584241584ca32c2d5c6856cda0",
+      "size_bytes": 437
+    },
+    "REPAIR_R11_VERIFIED_BASELINE_RESULTS.json": {
+      "sha256": "08aa6d460b947968aab02f76ef36444c5c2f0ba146f4de22d603b36c8aa44974",
+      "size_bytes": 718540
+    },
+    "REPAIR_R11_VERIFIED_BASELINE_MANIFEST.json": {
+      "sha256": "217ad8b8cf7cd28286f6fe1cee1c7198e18dbf10a13d5e27e2cd1756d22e2b58",
+      "size_bytes": 673721
+    },
+    "REPAIR_R13_DYNAMICS_EQUIVALENCE.json": {
+      "sha256": "d64b41ea899fb6d8454347e067f63c892e3cb5fd24150782bbec21bc85957583",
+      "size_bytes": 1180
+    },
+    "PHYSICS_REPAIR_R13.md": {
+      "sha256": "7c872fbd494446fa970c72a043f0f16df15fffc3474eff11df19188ee9d1d461",
+      "size_bytes": 500
+    },
+    "REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "166291ec85509dfd454162684f93329fcede0af57a0627d236f9f279e978bbc2",
+      "size_bytes": 2380
+    }
+  },
+  "core_ast_exclusions": [
+    "MODEL_NAME",
+    "build_parser"
+  ]
+}

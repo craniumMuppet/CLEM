@@ -1,0 +1,33 @@
+[project]
+name = "coupled-low-complexity-earth-model"
+version = "2.29.28"
+description = "Coupled Low-complexity Earth Model"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy==2.3.5",
+  "pandas==2.2.3",
+  "matplotlib==3.10.8",
+  "streamlit==1.60.0",
+  "scipy==1.17.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest==9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+  "error::RuntimeWarning",
+]
+
+markers = [
+  "slow: long-running regression or continuation test",
+  "gui: graphical-interface test",
+  "calibration: calibration experiment regression",
+  "continuation: AMOC equilibrium-continuation test",
+  "conservation: physical conservation test",
+]

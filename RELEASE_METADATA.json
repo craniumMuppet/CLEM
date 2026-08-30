@@ -1,0 +1,20 @@
+{
+  "model_name": "Coupled Low-complexity Earth Model",
+  "model_version": "2.29.28",
+  "repair_revision": "R13",
+  "release_display_name": "Coupled Low-complexity Earth Model v2.29.28 \u2014 Physics Repair R13",
+  "recommended_git_tag": "v2.29.28-physics-r13",
+  "source_asset": "CLEM-v2.29.28-source.zip",
+  "validation_asset": "CLEM-v2.29.28-physics-repair-r13-validation-results.zip",
+  "climate_model_sha256": "aa3e9d43cf77c400f105ea0c9c98585310081d85bc838b2bdfcaacbde442fd67",
+  "validated_predecessor_climate_model_sha256": "f08e901aac796c7fd757a52345709b0d9e3d20ec34c92f6afc0d53d8f7a824b9",
+  "version_sources": {
+    "climate_model.py": "2.29.28",
+    "pyproject.toml": "2.29.28"
+  },
+  "repair_label_is_model_version": false,
+  "repair_iteration_note": "R11/R12/R13 are repair-workflow labels, not CLEM model versions.",
+  "model_short_name": "CLEM",
+  "core_ast_sha256_excluding_build_parser_and_model_name": "ad7687f6833c102337ebdbe13369837d15d2c1b672042d30d5f86fbc1ac7e574",
+  "name_change_note": "Branding-only rename to Coupled Low-complexity Earth Model (CLEM); numerical physics unchanged."
+}

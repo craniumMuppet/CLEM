@@ -1,0 +1,14 @@
+{
+  "changes": [
+    "Public CLI defaults now delegate to ModelConfig for repaired water-vapor and convection parameters.",
+    "AMOC salt-loop comments corrected to match the validated Deep->SAU->Tropical->North->Deep topology.",
+    "No executable core-model AST change outside build_parser()."
+  ],
+  "core_ast_equal": true,
+  "excluded_top_level_symbol": "build_parser",
+  "release_core_ast_sha256": "e84dbff3f68b3e0e6a69a3d2aa140e10a7c59097bfaab9e801e00d04662e7b89",
+  "release_source_sha256": "7cf8458b1622f4afc28eeb0cd9b133bb50b5500094521e029d8b66f08b6df248",
+  "revision": "v2.13-release-consistency",
+  "validated_core_ast_sha256": "e84dbff3f68b3e0e6a69a3d2aa140e10a7c59097bfaab9e801e00d04662e7b89",
+  "validated_source_sha256": "f08e901aac796c7fd757a52345709b0d9e3d20ec34c92f6afc0d53d8f7a824b9"
+}

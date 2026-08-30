@@ -1,0 +1,41 @@
+{
+  "core_ast_sha256": "e84dbff3f68b3e0e6a69a3d2aa140e10a7c59097bfaab9e801e00d04662e7b89",
+  "files": {
+    "RUN_PHYSICS_VERIFICATION.cmd": {
+      "sha256": "2e31d6d0e031d42cc6a83f4a2b2e50aa170597e9cf666a054c890d3a71f2dd16",
+      "size_bytes": 662
+    },
+    "RUN_V2_12_OUT_OF_SAMPLE_VALIDATION.cmd": {
+      "sha256": "43beff6d75b49f6e1b7961b986d2d30ecc1c58d2f8b83e4fb354d3606597f4f1",
+      "size_bytes": 511
+    },
+    "RUN_V2_13_RELEASE_CONSISTENCY.cmd": {
+      "sha256": "5a365914713134b6db2f5495eb511c2ec9b59f2198b9b51b53e6b28424806401",
+      "size_bytes": 383
+    },
+    "V2_11_VERIFIED_BASELINE_MANIFEST.json": {
+      "sha256": "217ad8b8cf7cd28286f6fe1cee1c7198e18dbf10a13d5e27e2cd1756d22e2b58",
+      "size_bytes": 673721
+    },
+    "V2_11_VERIFIED_BASELINE_RESULTS.json": {
+      "sha256": "08aa6d460b947968aab02f76ef36444c5c2f0ba146f4de22d603b36c8aa44974",
+      "size_bytes": 718540
+    },
+    "V2_13_DYNAMICS_EQUIVALENCE.json": {
+      "sha256": "84534689b3ba4d1249e68de3bd215a27e251c3954b72261c83099e47f0a97e8e",
+      "size_bytes": 807
+    },
+    "climate_model.py": {
+      "sha256": "7cf8458b1622f4afc28eeb0cd9b133bb50b5500094521e029d8b66f08b6df248",
+      "size_bytes": 659215
+    },
+    "verify_physics_local.py": {
+      "sha256": "91fa64d41a96b834a95f8ed33acaf56b18c1d73bff3acb39b68e8d5ceb33feaf",
+      "size_bytes": 86565
+    }
+  },
+  "physics_core_validated_as": "v2.11 + v2.12 held-out validation",
+  "release_climate_model_sha256": "7cf8458b1622f4afc28eeb0cd9b133bb50b5500094521e029d8b66f08b6df248",
+  "revision": "v2.13-release-consistency",
+  "validated_predecessor_climate_model_sha256": "f08e901aac796c7fd757a52345709b0d9e3d20ec34c92f6afc0d53d8f7a824b9"
+}
