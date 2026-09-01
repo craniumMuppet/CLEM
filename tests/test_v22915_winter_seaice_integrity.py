@@ -23,7 +23,7 @@ def _minimal_arctic_model(config: ModelConfig | None = None) -> ProcessClimateMo
 
 
 def test_v22915_version() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
 
 
 def test_winter_lead_closure_tapers_smoothly_at_vanishing_volume() -> None:

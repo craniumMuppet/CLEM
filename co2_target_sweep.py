@@ -248,10 +248,11 @@ def _count_target_checkpoints(
 def _state_from_checkpoint(payload: dict[str, Any]) -> ModelState:
     """Reconstruct a ModelState from a validated safe-checkpoint payload.
 
-    v2.29.20 adds independent Arctic concentration anomalies. Current
-    fingerprints prevent old runs from being resumed accidentally, but direct
-    checkpoint migration remains deterministic: a pre-v2.29.20 state starts
-    the new concentration anomaly at zero relative to its periodic reference.
+    v2.29.20 adds independent Arctic concentration anomalies and R17 adds
+    mass-neutral Arctic ice-support anomalies. Current fingerprints prevent old
+    runs from being resumed accidentally, but direct checkpoint migration
+    remains deterministic: older states start each new anomaly at zero relative
+    to the periodic reference.
     """
 
     if not isinstance(payload, dict):
@@ -262,6 +263,12 @@ def _state_from_checkpoint(payload: dict[str, Any]) -> ModelState:
             "arctic_atlantic_seasonal_ice_fraction"
         ),
         "arctic_non_atlantic_ice_concentration_anomaly": (
+            "arctic_non_atlantic_seasonal_ice_fraction"
+        ),
+        "arctic_atlantic_ice_support_anomaly": (
+            "arctic_atlantic_seasonal_ice_fraction"
+        ),
+        "arctic_non_atlantic_ice_support_anomaly": (
             "arctic_non_atlantic_seasonal_ice_fraction"
         ),
     }

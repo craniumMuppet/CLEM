@@ -1,0 +1,26 @@
+{
+  "r16_requested_experiments": 34,
+  "r16_completed_numerical_experiments": 31,
+  "r16_failed_preintegration_teos10_experiments": 3,
+  "r16_numerical_child_chunks": 840,
+  "r16_max_chunk_years": 5.0,
+  "r16_climate_model_sha256": "ddcd2272bf2d10ed9d9eacb9fabdc5e65db7fdfc3e3e23a09e85d5bfffc2ba40",
+  "teos10_setup_error_ratio": 2.6930,
+  "teos10_linear_guard_min": 0.68,
+  "teos10_linear_guard_max": 1.25,
+  "default_amoc_control_sv": 17.0,
+  "default_hosing_0p1_final_sv": 13.7767,
+  "default_hosing_0p2_final_sv": 9.51019,
+  "default_hosing_0p3_final_sv": 4.12617,
+  "ssp245_10deg_final_sv": 8.24632,
+  "ssp245_5deg_final_sv": 8.83083,
+  "south_atlantic_upper_ssp245_final_sv": 17.5051,
+  "greenland_default_added_ocean_freshwater_m3": 3.79821e13,
+  "maximum_reported_salt_error_ppm": 2.220446049250313e-10,
+  "extent_status": "diagnostic_non_release_blocking_spatial_resolution_limit_remains",
+  "r16_1_required_reruns": [
+    "r16_control_teos10_20y",
+    "r16_teos10_hosing_0p2_100y",
+    "r16_teos10_ssp245_1850_2100_10deg"
+  ]
+}

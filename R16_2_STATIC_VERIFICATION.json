@@ -1,0 +1,11 @@
+{
+  "candidate": "R16.2",
+  "climate_model_byte_identical_to_r16_1": true,
+  "climate_model_sha256": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+  "expected_r16_1_climate_model_sha256": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+  "focused_tests": "7 passed",
+  "numerical_integrations_run_here": false,
+  "provenance_check": "passed",
+  "python_ast_errors": [],
+  "python_file_count": 222
+}

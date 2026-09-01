@@ -40,7 +40,11 @@ import pandas as pd
 from scipy.optimize import least_squares
 
 from scientific_evidence import add_scientific_use_metadata
-from sea_ice_observation import reconstruct_concentration_and_occupancy
+from sea_ice_observation import (
+    MINIMUM_EXTENT_CONCENTRATION,
+    PACK_ICE_CONCENTRATION_THRESHOLD,
+    reconstruct_concentration_and_occupancy,
+)
 
 from amoc_continuation import (
     assign_branch_ids as _assign_amoc_branch_ids,
@@ -68,6 +72,9 @@ ForcingMode = Literal["co2_only", "total_effective"]
 CO2ForcingFormula = Literal["logarithmic", "meinshausen2020"]
 FreshwaterCompensationMode = Literal["external", "atlantic"]
 AmocCouplingScheme = Literal["euler", "heun"]
+AmocDensityGeometry = Literal["interhemispheric_high_latitude", "legacy_southern_surface", "south_atlantic_upper"]
+AmocDensityEOS = Literal["linear", "teos10", "teos10_surface_watermass", "teos10_matched"]
+ArcticIceSupportReferenceMode = Literal["fixed_pack_80", "thermodynamic_pack"]
 AmocSouthernOceanStructure = Literal["fixed", "warming_sensitive"]
 AmocIndoPacificCompensationMode = Literal["none", "diagnostic", "interactive"]
 GreenlandTemperatureDriver = Literal["global", "regional", "greenland"]
@@ -78,7 +85,7 @@ SSP_DATA_MAX_YEAR = 2500.0
 SSP_DATA_FILENAME = "ssp_pathways_rcmip_v5_1_0.csv"
 
 MODEL_NAME = "Coupled Low-complexity Earth Model"
-MODEL_VERSION = "2.29.28"
+MODEL_VERSION = "2.29.29"
 ARCTIC_REFERENCE_SOLVER_MAX_LOCAL_THICKNESS_M = 12.0
 SECONDS_PER_YEAR = 365.2425 * 24.0 * 3600.0
 EARTH_AREA_M2 = 5.100656e14
@@ -343,6 +350,15 @@ class ModelConfig:
     arctic_ice_area_ridging_fraction_per_year: float = 0.25
     arctic_ice_area_divergence_fraction_per_year: float = 0.0
     arctic_ice_area_thin_pack_divergence_fraction_per_year: float = 0.30
+    # R18 sea-ice support reference. R17 imposed 80% mean concentration
+    # on every partially occupied control cell, which made winter support too
+    # diffuse and almost removed the observed winter extent trend. The R18
+    # thermodynamic reference keeps the same 80% pack/MIZ boundary near melt
+    # but continuously compacts toward the physical 100% limit as the local
+    # reference air column becomes colder than seawater freezing. This changes
+    # only unresolved support geometry; ice area/latent volume remain governed
+    # by the existing prognostic concentration/energy states.
+    arctic_ice_support_reference_mode: ArcticIceSupportReferenceMode = "thermodynamic_pack"
     # Grid-cell mean thickness over the ice-covered fraction cannot represent
     # arbitrarily narrow, kilometre-deep remnants.  Unresolved deformation and
     # floe dispersion spread conserved volume over enough area to keep this
@@ -418,6 +434,11 @@ class ModelConfig:
     # ice-fraction weighting confines anomalous convergence to the under-ice
     # pathway as ice cover retreats. Equal-and-opposite heat is removed from
     # lower latitudes, preserving the conservative coupling.
+    # R15 mechanism switches are true ablation controls. Defaults preserve the
+    # validated R13/R14 branch; the local R15 runner tests each mechanism off.
+    arctic_forced_ocean_heat_convergence_enabled: bool = True
+    arctic_phase_restoring_enabled: bool = True
+    arctic_extra_lapse_rate_feedback_enabled: bool = True
     arctic_forced_ocean_heat_convergence_wm2_per_k: float = 8.00
     arctic_forced_ocean_heat_convergence_onset_warming_c: float = 0.40
     arctic_forced_ocean_heat_convergence_saturation_scale_c: float = 0.45
@@ -505,9 +526,9 @@ class ModelConfig:
     # Salt-conserving Atlantic overturning loop. Positive AMOC follows the
     # deep return limb -> South Atlantic upper limb -> Tropical Atlantic ->
     # Northern sinking -> deep return limb. The Southern Ocean surface box is
-    # prognostic and supplies the southern density reference, but it is not an
-    # advective limb of the 34.5 S overturning salt transport. The dedicated
-    # South Atlantic upper-limb tracer therefore matches the FovS diagnostic.
+    # prognostic but is not the hydraulic source water or an advective limb of
+    # the 34.5 S overturning salt transport. The dedicated South Atlantic
+    # upper-limb tracer supplies both FovS and the R15 hydraulic source state.
     amoc_reference_sv: float = 17.0
     amoc_adjustment_years: float = 8.0
     thermal_expansion_per_k: float = 2.0e-4
@@ -540,6 +561,22 @@ class ModelConfig:
     # north-south thermal contrast is still retained in the baseline driver.
     amoc_interhemispheric_temperature_coupling: float = 0.00
     haline_contraction_per_psu: float = 7.6e-4
+    # R16: retain the numerically validated interhemispheric high-latitude
+    # hydraulic closure as the production default. South-Atlantic-upper water
+    # remains an explicit structural sensitivity because the R15.1 local run
+    # made the default AMOC strengthen under SSP2-4.5 and respond too weakly
+    # to freshwater hosing.
+    amoc_density_geometry: AmocDensityGeometry = "interhemispheric_high_latitude"
+    # Linear alpha/beta remains the validated default. R17 separates two
+    # nonlinear structural branches: ``teos10_matched`` changes the equation of
+    # state while preserving the linear branch's thermal pathway; the R16
+    # direct surface-water-mass experiment remains available as
+    # ``teos10_surface_watermass`` (and legacy alias ``teos10``).
+    amoc_density_eos: AmocDensityEOS = "linear"
+    # Dimensional screening reference for the coherent source-water geometry.
+    # It is not an AMOC-strength tuning parameter; the runtime transport is
+    # normalized by each grid's exact control-state density driver.
+    amoc_south_atlantic_upper_reference_density_driver: float = 1.94e-3
     amoc_density_transport_exponent: float = 1.50
     # Smooth upper saturation for the transient hydraulic target. The reduced
     # density-power law otherwise permits a post-collapse salt-advection
@@ -553,6 +590,7 @@ class ModelConfig:
     # the old algebraic near-cancellation in which a weaker AMOC deepened the
     # pycnocline and almost immediately restored itself.
     amoc_pycnocline_feedback_strength: float = 0.35
+    # Deprecated compatibility-only field. The prognostic pycnocline equation does not use it.
     amoc_pycnocline_relaxation_years: float = 150.0
     amoc_eddy_depth_exponent: float = 2.00
     # Legacy logistic-transition controls are retained only so old config files
@@ -723,6 +761,15 @@ class ModelConfig:
     greenland_initial_ice_mass_gt: float = 2.85e6
     greenland_depletion_exponent: float = 1.0
     greenland_max_freshwater_sv: float = 0.10
+    # Land-ice melt is a real ocean mass addition. R15 retains a zero-net
+    # localization anomaly for the North Atlantic plume and separately applies
+    # the global salinity dilution implied by added freshwater volume.
+    greenland_uncompensated_freshwater_enabled: bool = True
+    # Reduced multi-century surface-elevation feedback: fractional ice loss
+    # lowers the representative surface and warms it by a lapse-rate response.
+    greenland_elevation_feedback_enabled: bool = True
+    greenland_elevation_max_lowering_m: float = 1500.0
+    greenland_elevation_lapse_rate_k_per_km: float = 6.5
     # SSP experiments that begin after 1850 are initialized by integrating the
     # selected historical pathway from 1850 to start_year. Disable only when a
     # caller supplies or deliberately constructs its own restart state.
@@ -730,6 +777,10 @@ class ModelConfig:
     freshwater_hosing_sv: float = 0.0
     freshwater_start_fraction: float = 0.25
     freshwater_ramp_years: float = 40.0
+    # Artificial hosing can be either a compensated redistribution experiment
+    # or an uncompensated mass-addition experiment. Historical/default hosing
+    # remains compensated for backwards compatibility.
+    freshwater_hosing_compensated: bool = True
     freshwater_compensation_mode: FreshwaterCompensationMode = "external"
     freshwater_compensation_tropical_fraction: float = 0.70
     amoc_fingerprint_shutdown_c: float = 3.2
@@ -1019,6 +1070,10 @@ class ModelConfig:
             )
         if self.arctic_ice_area_compaction_years <= 0.0:
             raise ValueError("arctic_ice_area_compaction_years must be positive")
+        if self.arctic_ice_support_reference_mode not in {"fixed_pack_80", "thermodynamic_pack"}:
+            raise ValueError(
+                "arctic_ice_support_reference_mode must be fixed_pack_80 or thermodynamic_pack"
+            )
         if not 0.0 <= self.arctic_ice_area_ridging_threshold <= 1.0:
             raise ValueError(
                 "arctic_ice_area_ridging_threshold must be in [0, 1]"
@@ -1313,6 +1368,10 @@ class ModelConfig:
             raise ValueError("greenland_depletion_exponent cannot be negative")
         if self.greenland_max_freshwater_sv <= 0.0:
             raise ValueError("greenland_max_freshwater_sv must be positive")
+        if self.greenland_elevation_max_lowering_m < 0.0:
+            raise ValueError("greenland_elevation_max_lowering_m cannot be negative")
+        if self.greenland_elevation_lapse_rate_k_per_km < 0.0:
+            raise ValueError("greenland_elevation_lapse_rate_k_per_km cannot be negative")
         if self.reference_density_kg_m3 <= 0.0:
             raise ValueError("reference_density_kg_m3 must be positive")
         if not 0.0 <= self.amoc_temperature_density_coupling <= 1.0:
@@ -1323,6 +1382,17 @@ class ModelConfig:
             raise ValueError(
                 "amoc_convection_temperature_density_coupling must be in [0, 1]"
             )
+        if self.amoc_density_geometry not in {"interhemispheric_high_latitude", "legacy_southern_surface", "south_atlantic_upper"}:
+            raise ValueError("amoc_density_geometry must be interhemispheric_high_latitude, legacy_southern_surface, or south_atlantic_upper")
+        if self.amoc_density_eos not in {
+            "linear", "teos10", "teos10_surface_watermass", "teos10_matched"
+        }:
+            raise ValueError(
+                "amoc_density_eos must be linear, teos10, "
+                "teos10_surface_watermass, or teos10_matched"
+            )
+        if self.amoc_south_atlantic_upper_reference_density_driver <= 0.0:
+            raise ValueError("amoc_south_atlantic_upper_reference_density_driver must be positive")
         if self.amoc_density_transport_exponent <= 0.0:
             raise ValueError("amoc_density_transport_exponent must be positive")
         if self.amoc_hydraulic_depth_exponent < 0.0:
@@ -1635,6 +1705,10 @@ class ModelState:
     arctic_non_atlantic_ice_energy_anomaly_wyr_m2: np.ndarray
     arctic_atlantic_ice_concentration_anomaly: np.ndarray
     arctic_non_atlantic_ice_concentration_anomaly: np.ndarray
+    # R17: subgrid support is a separate prognostic geometry state. It changes
+    # the area occupied by >=15% ice without changing conserved ice area/volume.
+    arctic_atlantic_ice_support_anomaly: np.ndarray
+    arctic_non_atlantic_ice_support_anomaly: np.ndarray
     arctic_atlantic_open_water_heat_anomaly_wyr_m2: np.ndarray
     arctic_non_atlantic_open_water_heat_anomaly_wyr_m2: np.ndarray
     arctic_atlantic_seasonal_ice_fraction: np.ndarray
@@ -1656,6 +1730,9 @@ class ModelState:
     greenland_cumulative_melt_gt: float = 0.0
     greenland_cumulative_accumulation_gt: float = 0.0
     greenland_cumulative_net_ice_loss_gt: float = 0.0
+    # Cumulative uncompensated freshwater volume added to the represented
+    # ocean. Positive values dilute global salinity while conserving salt mass.
+    ocean_added_freshwater_m3: float = 0.0
 
     def copy(self) -> "ModelState":
         return ModelState(
@@ -1677,6 +1754,8 @@ class ModelState:
             arctic_non_atlantic_ice_energy_anomaly_wyr_m2=self.arctic_non_atlantic_ice_energy_anomaly_wyr_m2.copy(),
             arctic_atlantic_ice_concentration_anomaly=self.arctic_atlantic_ice_concentration_anomaly.copy(),
             arctic_non_atlantic_ice_concentration_anomaly=self.arctic_non_atlantic_ice_concentration_anomaly.copy(),
+            arctic_atlantic_ice_support_anomaly=self.arctic_atlantic_ice_support_anomaly.copy(),
+            arctic_non_atlantic_ice_support_anomaly=self.arctic_non_atlantic_ice_support_anomaly.copy(),
             arctic_atlantic_open_water_heat_anomaly_wyr_m2=self.arctic_atlantic_open_water_heat_anomaly_wyr_m2.copy(),
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=self.arctic_non_atlantic_open_water_heat_anomaly_wyr_m2.copy(),
             arctic_atlantic_seasonal_ice_fraction=self.arctic_atlantic_seasonal_ice_fraction.copy(),
@@ -1700,6 +1779,7 @@ class ModelState:
             greenland_cumulative_net_ice_loss_gt=float(
                 self.greenland_cumulative_net_ice_loss_gt
             ),
+            ocean_added_freshwater_m3=float(self.ocean_added_freshwater_m3),
         )
 
 
@@ -1783,6 +1863,8 @@ class SimulationResult:
     sea_ice_history: np.ndarray
     atlantic_sea_ice_history: np.ndarray
     non_atlantic_sea_ice_history: np.ndarray
+    atlantic_sea_ice_support_history: np.ndarray
+    non_atlantic_sea_ice_support_history: np.ndarray
     snow_history: np.ndarray
     cloud_history: np.ndarray
     amoc_history_sv: np.ndarray
@@ -2012,6 +2094,8 @@ class SimulationResult:
         return reconstruct_concentration_and_occupancy(
             atlantic_fraction=self.atlantic_sea_ice_history[index],
             non_atlantic_fraction=self.non_atlantic_sea_ice_history[index],
+            atlantic_support_fraction=self.atlantic_sea_ice_support_history[index],
+            non_atlantic_support_fraction=self.non_atlantic_sea_ice_support_history[index],
             lat=self.grid.lat,
             lon=self.grid.lon,
             lat2d=self.grid.lat2d,
@@ -2978,6 +3062,37 @@ def _baseline_amoc_reference_temperatures(
     return float(north), float(southern)
 
 
+@lru_cache(maxsize=32)
+def _baseline_amoc_south_atlantic_upper_temperature(
+    resolution_deg: float,
+    arctic_module_start_latitude_deg: float,
+    arctic_module_full_latitude_deg: float,
+    arctic_interface_freezing_temperature_c: float,
+) -> float:
+    """Return the native-grid Atlantic upper-limb source temperature."""
+    config = replace(
+        ModelConfig(),
+        resolution_deg=float(resolution_deg),
+        arctic_module_start_latitude_deg=float(arctic_module_start_latitude_deg),
+        arctic_module_full_latitude_deg=float(arctic_module_full_latitude_deg),
+        arctic_interface_freezing_temperature_c=float(
+            arctic_interface_freezing_temperature_c
+        ),
+    )
+    grid = build_grid(config.resolution_deg)
+    _, _, baseline_ocean_map_c = build_baseline_temperature_components(grid, config)
+    region_fraction = latitude_interval_area_fraction(grid.lat_edges, -40.0, -30.0)
+    weights = (
+        grid.map_area_weights
+        * grid.atlantic_ocean_fraction_map
+        * np.asarray(region_fraction, dtype=float)[:, None]
+    )
+    denominator = float(np.sum(weights))
+    if denominator <= 1.0e-15:
+        raise ValueError("AMOC South Atlantic upper-limb region has zero ocean area")
+    return float(np.sum(baseline_ocean_map_c * weights) / denominator)
+
+
 def initial_amoc_density_diagnostics(
     config: ModelConfig,
     *,
@@ -2997,22 +3112,58 @@ def initial_amoc_density_diagnostics(
     else:
         north = float(baseline_north_temperature_c)
         southern = float(baseline_southern_temperature_c)
-    thermal = float(config.thermal_expansion_per_k) * (southern - north)
-    haline = float(config.haline_contraction_per_psu) * (
-        float(config.initial_north_salinity_psu)
-        - float(config.initial_southern_salinity_psu)
+    source_temperature = _baseline_amoc_south_atlantic_upper_temperature(
+        config.resolution_deg,
+        config.arctic_module_start_latitude_deg,
+        config.arctic_module_full_latitude_deg,
+        config.arctic_interface_freezing_temperature_c,
     )
-    driver = float(thermal + haline)
-    ratio = float(driver / float(config.amoc_reference_density_driver))
     south_upper_salinity = float(
         config.initial_deep_salinity_psu
         - config.initial_fovs_sv
         * config.fovs_reference_salinity_psu
         / config.amoc_reference_sv
     )
+    if config.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}:
+        active_source_temperature = southern
+        active_source_salinity = float(config.initial_southern_salinity_psu)
+        reference_driver = float(config.amoc_reference_density_driver)
+    else:
+        active_source_temperature = source_temperature
+        active_source_salinity = south_upper_salinity
+        reference_driver = float(
+            config.amoc_south_atlantic_upper_reference_density_driver
+        )
+
+    if config.amoc_density_eos in {"teos10", "teos10_surface_watermass", "teos10_matched"}:
+        from amoc_density_r16 import teos10_density_driver
+        driver = teos10_density_driver(
+            north_temperature_c=north,
+            north_salinity_psu=float(config.initial_north_salinity_psu),
+            source_temperature_c=active_source_temperature,
+            source_salinity_psu=active_source_salinity,
+            source_longitude_deg=-20.0,
+            source_latitude_deg=(-52.5 if config.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"} else -35.0),
+            reference_density_kg_m3=float(config.reference_density_kg_m3),
+        )
+        thermal = float("nan")
+        haline = float("nan")
+    else:
+        thermal = float(config.thermal_expansion_per_k) * (
+            active_source_temperature - north
+        )
+        haline = float(config.haline_contraction_per_psu) * (
+            float(config.initial_north_salinity_psu) - active_source_salinity
+        )
+        driver = float(thermal + haline)
+
+    ratio = float(driver / reference_driver)
     return {
         "baseline_north_temperature_c": north,
         "baseline_southern_temperature_c": southern,
+        "baseline_south_atlantic_upper_temperature_c": source_temperature,
+        "active_source_temperature_c": active_source_temperature,
+        "active_source_salinity_psu": active_source_salinity,
         "thermal_density_driver": thermal,
         "haline_density_driver": haline,
         "density_driver": driver,
@@ -3039,14 +3190,26 @@ def validate_initial_amoc_density_margin(
             "AMOC baseline northern density advantage is non-positive. "
             "Revise northern/southern temperatures or salinities."
         )
-    if config.amoc_enforce_initial_density_constraint and not (
-        config.amoc_minimum_initial_density_ratio
-        <= diagnostics["density_ratio"]
-        <= config.amoc_maximum_initial_density_ratio
+    # The absolute ratio envelope was calibrated for the inexpensive linear
+    # alpha/beta EOS.  TEOS-10 has a different dimensional control density
+    # contrast, while the hydraulic closure below normalizes each EOS by its
+    # own initialized baseline_density_driver.  Applying the linear envelope
+    # to TEOS-10 therefore rejects a valid structural-sensitivity branch before
+    # integration (R16 user-run evidence: control ratio ~2.693).  Retain the
+    # physically essential positive-density check above, but apply the absolute
+    # calibrated ratio envelope only to the linear EOS.
+    if (
+        config.amoc_enforce_initial_density_constraint
+        and config.amoc_density_eos == "linear"
+        and not (
+            config.amoc_minimum_initial_density_ratio
+            <= diagnostics["density_ratio"]
+            <= config.amoc_maximum_initial_density_ratio
+        )
     ):
         raise ValueError(
             "AMOC absolute initial density margin is outside the accepted "
-            f"range: ratio={diagnostics['density_ratio']:.4f}, "
+            f"linear-EOS range: ratio={diagnostics['density_ratio']:.4f}, "
             f"allowed=[{config.amoc_minimum_initial_density_ratio:.4f}, "
             f"{config.amoc_maximum_initial_density_ratio:.4f}]."
         )
@@ -3423,6 +3586,10 @@ class ProcessClimateModel:
         self.amoc_tropical_region_bounds_deg = (10.0, 30.0)
         self.amoc_north_region_bounds_deg = (45.0, 65.0)
         self.amoc_southern_region_bounds_deg = (-60.0, -45.0)
+        # Representative northward upper-limb source at the nominal FovS
+        # section. The box spans 40-30 S to remain stable on 10/5/2.5 degree
+        # grids while staying distinct from the Antarctic surface box.
+        self.amoc_south_atlantic_upper_region_bounds_deg = (-40.0, -30.0)
         self.amoc_tropical_region_fraction = latitude_interval_area_fraction(
             self.grid.lat_edges, *self.amoc_tropical_region_bounds_deg
         )
@@ -3431,6 +3598,9 @@ class ProcessClimateModel:
         )
         self.amoc_southern_region_fraction = latitude_interval_area_fraction(
             self.grid.lat_edges, *self.amoc_southern_region_bounds_deg
+        )
+        self.amoc_south_atlantic_upper_region_fraction = latitude_interval_area_fraction(
+            self.grid.lat_edges, *self.amoc_south_atlantic_upper_region_bounds_deg
         )
 
         def native_amoc_ocean_mean(region_fraction: np.ndarray) -> float:
@@ -3458,6 +3628,9 @@ class ProcessClimateModel:
         )
         raw_amoc_southern_c = native_amoc_ocean_mean(
             self.amoc_southern_region_fraction
+        )
+        self.baseline_amoc_south_atlantic_upper_c = native_amoc_ocean_mean(
+            self.amoc_south_atlantic_upper_region_fraction
         )
         self.raw_baseline_amoc_north_c = float(raw_amoc_north_c)
         self.raw_baseline_amoc_southern_c = float(raw_amoc_southern_c)
@@ -3505,6 +3678,7 @@ class ProcessClimateModel:
             config.fovs_reference_salinity_psu
         )
         self.initial_amoc_salinity_psu = initial_salinity.copy()
+        self.amoc_total_box_volume_m3 = float(np.sum(self.amoc_box_volumes_m3))
         self.initial_total_salt_psu_m3 = float(
             np.sum(self.amoc_box_volumes_m3 * initial_salinity)
         )
@@ -3559,6 +3733,8 @@ class ProcessClimateModel:
             arctic_non_atlantic_ice_energy_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_ice_concentration_anomaly=zeros.copy(),
             arctic_non_atlantic_ice_concentration_anomaly=zeros.copy(),
+            arctic_atlantic_ice_support_anomaly=zeros.copy(),
+            arctic_non_atlantic_ice_support_anomaly=zeros.copy(),
             arctic_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_seasonal_ice_fraction=arctic_reference_0["atlantic_ice_fraction"].copy(),
@@ -3578,6 +3754,7 @@ class ProcessClimateModel:
             greenland_cumulative_melt_gt=0.0,
             greenland_cumulative_accumulation_gt=0.0,
             greenland_cumulative_net_ice_loss_gt=0.0,
+            ocean_added_freshwater_m3=0.0,
         )
         if (
             config.auto_initialize_from_1850
@@ -4665,6 +4842,106 @@ class ProcessClimateModel:
             }
             return final_concentration, process_ledger
         return final_concentration
+
+    def _arctic_reference_ice_support_fraction(
+        self,
+        concentration: np.ndarray,
+        air_temperature_c: np.ndarray | None = None,
+    ) -> np.ndarray:
+        """Return conservative control-orbit support for unresolved sea ice.
+
+        ``fixed_pack_80`` reproduces R17 exactly: every partially occupied
+        control cell is represented at the fixed 80% pack/MIZ boundary.
+
+        ``thermodynamic_pack`` retains that 80% boundary as the warm/marginal
+        limit but lets the representative pack concentration approach the
+        physical 100% ceiling in cold conditions. The interpolation uses the
+        same freezing temperature and formation-temperature scale as the
+        prognostic concentration physics, so no observed area/extent ratio is
+        introduced. Support is geometric only and cannot change native ice
+        area or latent volume.
+        """
+        c = np.clip(np.asarray(concentration, dtype=float), 0.0, 1.0)
+        pack_concentration = np.full_like(c, PACK_ICE_CONCENTRATION_THRESHOLD)
+        if self.config.arctic_ice_support_reference_mode == "thermodynamic_pack":
+            if air_temperature_c is None:
+                raise ValueError(
+                    "thermodynamic_pack sea-ice support requires reference air temperature"
+                )
+            air = np.broadcast_to(np.asarray(air_temperature_c, dtype=float), c.shape)
+            freezing = float(self.config.arctic_interface_freezing_temperature_c)
+            scale = max(float(self.config.arctic_ice_area_formation_temperature_scale_c), 1.0e-12)
+            coldness = 0.5 * (1.0 + np.tanh((freezing - air) / scale))
+            pack_concentration = (
+                PACK_ICE_CONCENTRATION_THRESHOLD
+                + (1.0 - PACK_ICE_CONCENTRATION_THRESHOLD) * coldness
+            )
+        support = np.divide(
+            c,
+            np.maximum(pack_concentration, MINIMUM_EXTENT_CONCENTRATION),
+            out=np.zeros_like(c),
+            where=c > 0.0,
+        )
+        return np.clip(np.maximum(c, support), 0.0, 1.0)
+
+    @staticmethod
+    def _coerce_arctic_ice_support_fraction(
+        support: np.ndarray,
+        concentration: np.ndarray,
+    ) -> np.ndarray:
+        """Enforce exact concentration/support consistency for 15% extent."""
+        c = np.clip(np.asarray(concentration, dtype=float), 0.0, 1.0)
+        s = np.clip(np.asarray(support, dtype=float), 0.0, 1.0)
+        lower = c  # occupied concentration cannot exceed one
+        upper = np.divide(
+            c,
+            MINIMUM_EXTENT_CONCENTRATION,
+            out=np.zeros_like(c),
+            where=c > 0.0,
+        )
+        upper = np.clip(upper, 0.0, 1.0)
+        return np.where(c > 0.0, np.clip(s, lower, upper), 0.0)
+
+    def _advance_arctic_ice_support(
+        self,
+        previous_support: np.ndarray,
+        next_concentration: np.ndarray,
+        area_process: dict[str, np.ndarray],
+    ) -> np.ndarray:
+        """Advance unresolved ice-support geometry without changing ice mass.
+
+        Formation and lateral melt alter the marginal footprint; divergence
+        spreads the remaining floes over more ocean; compaction contracts the
+        footprint; ridging changes floe area/thickness inside the footprint and
+        therefore does not directly move its outer support. Mechanical support
+        spreading follows the existing concentration process. The representative
+        MIZ concentration is the midpoint of the standard 15-80% concentration
+        definition, not a fitted satellite area/extent coefficient.
+        """
+        support = np.clip(np.asarray(previous_support, dtype=float), 0.0, 1.0).copy()
+        edge_concentration = 0.5 * (
+            MINIMUM_EXTENT_CONCENTRATION + PACK_ICE_CONCENTRATION_THRESHOLD
+        )
+        thermodynamic_area = (
+            np.asarray(area_process["formation_area_change"], dtype=float)
+            + np.asarray(area_process["melt_area_change"], dtype=float)
+        )
+        support += thermodynamic_area / edge_concentration
+        # Divergence lowers native mean SIC while dispersing floes over a larger
+        # footprint. Compaction does the opposite. Ridging is internal overlap.
+        support += np.maximum(
+            -np.asarray(area_process["divergence_area_change"], dtype=float), 0.0
+        )
+        support += np.minimum(
+            np.asarray(area_process["compaction_area_change"], dtype=float), 0.0
+        )
+        support += np.maximum(
+            np.asarray(area_process["mechanical_spreading_area_change"], dtype=float), 0.0
+        ) / PACK_ICE_CONCENTRATION_THRESHOLD
+        support += np.maximum(
+            np.asarray(area_process["support_area_change"], dtype=float), 0.0
+        ) / PACK_ICE_CONCENTRATION_THRESHOLD
+        return self._coerce_arctic_ice_support_fraction(support, next_concentration)
 
     @staticmethod
     def _remap_arctic_open_water_heat_for_area_change(
@@ -5897,6 +6174,8 @@ class ProcessClimateModel:
         # pack is strongly depleted.
         deficit = np.maximum(-anomaly, 0.0)
         cfg = self.config
+        if not cfg.arctic_phase_restoring_enabled:
+            return np.zeros_like(anomaly, dtype=float)
         deficit_saturation = cfg.arctic_phase_restoring_deficit_saturation_fraction
         deficit_effective = -deficit_saturation * np.tanh(
             deficit / deficit_saturation
@@ -6112,6 +6391,8 @@ class ProcessClimateModel:
                 "non_atlantic_ice_energy": state.arctic_non_atlantic_ice_energy_anomaly_wyr_m2,
                 "atlantic_ice_concentration": state.arctic_atlantic_ice_concentration_anomaly,
                 "non_atlantic_ice_concentration": state.arctic_non_atlantic_ice_concentration_anomaly,
+                "atlantic_ice_support": state.arctic_atlantic_ice_support_anomaly,
+                "non_atlantic_ice_support": state.arctic_non_atlantic_ice_support_anomaly,
                 "atlantic_open_water_heat": state.arctic_atlantic_open_water_heat_anomaly_wyr_m2,
                 "non_atlantic_open_water_heat": state.arctic_non_atlantic_open_water_heat_anomaly_wyr_m2,
                 "atlantic_seasonal_ice": regular_atlantic_ice,
@@ -6138,6 +6419,8 @@ class ProcessClimateModel:
         non_ice_anom = state.arctic_non_atlantic_ice_energy_anomaly_wyr_m2.copy()
         atl_concentration_anom = state.arctic_atlantic_ice_concentration_anomaly.copy()
         non_concentration_anom = state.arctic_non_atlantic_ice_concentration_anomaly.copy()
+        atl_support_anom = state.arctic_atlantic_ice_support_anomaly.copy()
+        non_support_anom = state.arctic_non_atlantic_ice_support_anomaly.copy()
         atl_open_anom = state.arctic_atlantic_open_water_heat_anomaly_wyr_m2.copy()
         non_open_anom = state.arctic_non_atlantic_open_water_heat_anomaly_wyr_m2.copy()
 
@@ -6158,6 +6441,7 @@ class ProcessClimateModel:
             low_pass: np.ndarray,
             ice_anomaly: np.ndarray,
             concentration_anomaly: np.ndarray,
+            support_anomaly: np.ndarray,
             open_anomaly: np.ndarray,
             reference_now: dict[str, np.ndarray],
             reference_next: dict[str, np.ndarray],
@@ -6179,6 +6463,18 @@ class ProcessClimateModel:
                     reference_now[f"{prefix}_ice_fraction"]
                     + concentration_anomaly,
                 )
+            )
+            reference_support_now = self._arctic_reference_ice_support_fraction(
+                reference_now[f"{prefix}_ice_fraction"],
+                reference_now[f"{prefix}_air_temperature_c"],
+            )
+            reference_support_next = self._arctic_reference_ice_support_fraction(
+                reference_next[f"{prefix}_ice_fraction"],
+                reference_next[f"{prefix}_air_temperature_c"],
+            )
+            total_support = self._coerce_arctic_ice_support_fraction(
+                reference_support_now + support_anomaly,
+                total_concentration,
             )
             absolute_air = reference_now[f"{prefix}_air_temperature_c"] + air_anomaly
             lead_closure_weight_now = self._arctic_winter_lead_closure_weight(
@@ -6285,7 +6581,10 @@ class ProcessClimateModel:
             )
             forced_ocean_heat_convergence_wm2 = (
                 blend
-                * cfg.arctic_forced_ocean_heat_convergence_wm2_per_k
+                * (
+                    cfg.arctic_forced_ocean_heat_convergence_wm2_per_k
+                    if cfg.arctic_forced_ocean_heat_convergence_enabled else 0.0
+                )
                 * forced_heat_effective_warming_c
                 * forced_heat_geometry
             )
@@ -6441,7 +6740,7 @@ class ProcessClimateModel:
                     reference_now[f"{prefix}_ice_fraction"]
                 ),
                 area_process_scale=blend,
-                return_process_ledger=self._arctic_process_ledger_enabled,
+                return_process_ledger=True,
             )
             reference_area_result = self._advance_arctic_ice_concentration(
                 reference_now[f"{prefix}_ice_fraction"],
@@ -6464,16 +6763,10 @@ class ProcessClimateModel:
                     reference_now[f"{prefix}_ice_fraction"]
                 ),
                 area_process_scale=blend,
-                return_process_ledger=self._arctic_process_ledger_enabled,
+                return_process_ledger=True,
             )
-            if self._arctic_process_ledger_enabled:
-                actual_area_candidate, actual_area_process = actual_area_result
-                reference_area_candidate, reference_area_process = reference_area_result
-            else:
-                actual_area_candidate = actual_area_result
-                reference_area_candidate = reference_area_result
-                actual_area_process = None
-                reference_area_process = None
+            actual_area_candidate, actual_area_process = actual_area_result
+            reference_area_candidate, reference_area_process = reference_area_result
             combined_concentration_before_final_support = (
                 actual_area_candidate
                 + reference_next[f"{prefix}_ice_fraction"]
@@ -6487,6 +6780,22 @@ class ProcessClimateModel:
             )
             final_concentration_support_change = (
                 next_concentration - combined_concentration_before_final_support
+            )
+            actual_support_candidate = self._advance_arctic_ice_support(
+                total_support,
+                actual_area_candidate,
+                actual_area_process,
+            )
+            reference_support_candidate = self._advance_arctic_ice_support(
+                reference_support_now,
+                reference_area_candidate,
+                reference_area_process,
+            )
+            next_support = self._coerce_arctic_ice_support_fraction(
+                actual_support_candidate
+                + reference_support_next
+                - reference_support_candidate,
+                next_concentration,
             )
 
             actual_open_remapped, actual_area_transfer = (
@@ -6532,10 +6841,11 @@ class ProcessClimateModel:
             cleanup_concentration_support_change = (
                 next_concentration - next_concentration_before_cleanup_support
             )
+            next_support = self._coerce_arctic_ice_support_fraction(
+                next_support, next_concentration
+            )
             ledger_entry: dict[str, Any] | None = None
             if self._arctic_process_ledger_enabled:
-                assert actual_area_process is not None
-                assert reference_area_process is not None
                 area_process_names = (
                     "formation_area_change",
                     "melt_area_change",
@@ -6586,6 +6896,8 @@ class ProcessClimateModel:
                         + cleanup_concentration_support_change
                     ).copy(),
                     "final_concentration": next_concentration.copy(),
+                    "initial_ice_support_fraction": total_support.copy(),
+                    "final_ice_support_fraction": next_support.copy(),
                     "mechanical_ridging_energy_change_wyr_m2": np.zeros_like(next_ice_total),
                     "mechanical_divergence_energy_change_wyr_m2": np.zeros_like(next_ice_total),
                     "sector_ocean_fraction": sector_ocean_fraction.copy(),
@@ -6635,6 +6947,7 @@ class ProcessClimateModel:
             concentration_anomaly_new = (
                 next_concentration - reference_next[f"{prefix}_ice_fraction"]
             )
+            support_anomaly_new = next_support - reference_support_next
             open_anomaly_new = (
                 next_open_total
                 - reference_next[f"{prefix}_open_water_heat_wyr_m2"]
@@ -6647,6 +6960,7 @@ class ProcessClimateModel:
                 low_new,
                 ice_anomaly_new,
                 concentration_anomaly_new,
+                support_anomaly_new,
                 open_anomaly_new,
                 transport,
                 phase_restoring_flux_wm2 + forced_ocean_heat_convergence_wm2,
@@ -6674,6 +6988,7 @@ class ProcessClimateModel:
                 low_pass=atl_low,
                 ice_anomaly=atl_ice_anom,
                 concentration_anomaly=atl_concentration_anom,
+                support_anomaly=atl_support_anom,
                 open_anomaly=atl_open_anom,
                 reference_now=reference_now,
                 reference_next=reference_next,
@@ -6688,6 +7003,7 @@ class ProcessClimateModel:
                 low_pass=non_low,
                 ice_anomaly=non_ice_anom,
                 concentration_anomaly=non_concentration_anom,
+                support_anomaly=non_support_anom,
                 open_anomaly=non_open_anom,
                 reference_now=reference_now,
                 reference_next=reference_next,
@@ -6697,7 +7013,7 @@ class ProcessClimateModel:
             )
             (
                 atlantic_ocean, atl_air, atl_low, atl_ice_anom,
-                atl_concentration_anom, atl_open_anom,
+                atl_concentration_anom, atl_support_anom, atl_open_anom,
                 atl_transport, atl_phase_transport, atl_export_transport,
                 atl_ledger_entry,
             ) = atl
@@ -6710,7 +7026,7 @@ class ProcessClimateModel:
             )
             (
                 non_atlantic_ocean, non_air, non_low, non_ice_anom,
-                non_concentration_anom, non_open_anom,
+                non_concentration_anom, non_support_anom, non_open_anom,
                 non_transport, non_phase_transport, non_export_transport,
                 non_ledger_entry,
             ) = non
@@ -6861,6 +7177,8 @@ class ProcessClimateModel:
             "non_atlantic_ice_energy": non_ice_anom,
             "atlantic_ice_concentration": atl_concentration_anom,
             "non_atlantic_ice_concentration": non_concentration_anom,
+            "atlantic_ice_support": atl_support_anom,
+            "non_atlantic_ice_support": non_support_anom,
             "atlantic_open_water_heat": atl_open_anom,
             "non_atlantic_open_water_heat": non_open_anom,
             "atlantic_seasonal_ice": atl_seasonal,
@@ -7366,8 +7684,12 @@ class ProcessClimateModel:
         cfg = self.config
         arctic_shape = np.clip((self.grid.lat - 55.0) / 25.0, 0.0, 1.0) ** 2
         antarctic_shape = np.clip((-self.grid.lat - 60.0) / 20.0, 0.0, 1.0) ** 2
+        arctic_lapse_strength = (
+            cfg.arctic_lapse_rate_feedback_wm2_k
+            if cfg.arctic_extra_lapse_rate_feedback_enabled else 0.0
+        )
         return (
-            cfg.arctic_lapse_rate_feedback_wm2_k * arctic_shape
+            arctic_lapse_strength * arctic_shape
             + cfg.antarctic_lapse_rate_feedback_wm2_k * antarctic_shape
         ) * anomaly_c
 
@@ -7517,6 +7839,10 @@ class ProcessClimateModel:
             state.atlantic_ocean_anomaly_c,
             self.amoc_southern_region_fraction,
         )
+        south_atlantic_upper_anomaly = self._atlantic_region_mean(
+            state.atlantic_ocean_anomaly_c,
+            self.amoc_south_atlantic_upper_region_fraction,
+        )
         north_deep_anomaly = self._atlantic_region_mean(
             state.atlantic_deep_ocean_anomaly_c,
             self.amoc_north_region_fraction,
@@ -7529,6 +7855,10 @@ class ProcessClimateModel:
             "tropical": float(self.baseline_amoc_tropical_c + tropical_anomaly),
             "north": float(self.baseline_amoc_north_c + north_anomaly),
             "southern": float(self.baseline_amoc_southern_c + southern_anomaly),
+            "south_atlantic_upper": float(
+                self.baseline_amoc_south_atlantic_upper_c
+                + south_atlantic_upper_anomaly
+            ),
             "deep": float(self.baseline_amoc_deep_c + southern_deep_anomaly),
             "north_surface_anomaly": float(north_anomaly),
             "north_deep_anomaly": float(north_deep_anomaly),
@@ -7542,28 +7872,56 @@ class ProcessClimateModel:
         southern_salinity_psu: float,
         north_surface_anomaly_c: float = 0.0,
         north_deep_anomaly_c: float = 0.0,
+        south_atlantic_upper_temperature_c: float | None = None,
+        south_atlantic_upper_salinity_psu: float | None = None,
     ) -> float:
         cfg = self.config
-        # Keep the realistic Atlantic north-south thermal contrast in the control
-        # buoyancy budget, but drive forced thermal weakening with the local
-        # northern sinking-region surface-to-deep stratification anomaly. Adding
-        # a second north-south surface anomaly here double-counts northern SST:
-        # it partly cancels warming-driven weakening when the Southern Ocean
-        # warms faster, and over-stabilizes the AMOC during hosing cold events.
-        # The perturbation term is zero in the control state, so the exact control
-        # density driver remains unchanged and is still the normalization.
-        baseline_delta_t = self.baseline_amoc_southern_c - self.baseline_amoc_north_c
-        northern_stratification_anomaly = (
-            float(north_surface_anomaly_c) - float(north_deep_anomaly_c)
-        )
-        effective_delta_t = (
-            baseline_delta_t
-            - cfg.amoc_temperature_density_coupling
-            * northern_stratification_anomaly
-        )
-        thermal = cfg.thermal_expansion_per_k * effective_delta_t
+        if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}:
+            # Exact R13/R14 geometry retained for structural attribution.
+            baseline_delta_t = self.baseline_amoc_southern_c - self.baseline_amoc_north_c
+            northern_stratification_anomaly = (
+                float(north_surface_anomaly_c) - float(north_deep_anomaly_c)
+            )
+            effective_delta_t = (
+                baseline_delta_t
+                - cfg.amoc_temperature_density_coupling
+                * northern_stratification_anomaly
+            )
+            source_temperature_c = float(southern_temperature_c)
+            source_salinity_psu = float(southern_salinity_psu)
+            thermal_delta_t = effective_delta_t
+        else:
+            if south_atlantic_upper_temperature_c is None or south_atlantic_upper_salinity_psu is None:
+                raise ValueError("South Atlantic upper-limb density geometry requires source temperature and salinity")
+            source_temperature_c = float(south_atlantic_upper_temperature_c)
+            source_salinity_psu = float(south_atlantic_upper_salinity_psu)
+            # Both thermal and haline terms now compare the same source and
+            # sinking water masses. This removes the old Southern-surface/FovS
+            # inconsistency and its fragile cancellation.
+            thermal_delta_t = source_temperature_c - float(north_temperature_c)
+
+        if cfg.amoc_density_eos in {"teos10", "teos10_surface_watermass", "teos10_matched"}:
+            from amoc_density_r16 import teos10_density_driver
+            teos_source_temperature = source_temperature_c
+            if cfg.amoc_density_eos == "teos10_matched":
+                # Change only the nonlinear EOS. The effective north-to-source
+                # temperature difference follows the exact linear hydraulic
+                # pathway, while absolute warming can still alter TEOS-10
+                # expansion coefficients naturally.
+                teos_source_temperature = float(north_temperature_c) + thermal_delta_t
+            return teos10_density_driver(
+                north_temperature_c=float(north_temperature_c),
+                north_salinity_psu=float(north_salinity_psu),
+                source_temperature_c=teos_source_temperature,
+                source_salinity_psu=source_salinity_psu,
+                source_longitude_deg=-20.0,
+                source_latitude_deg=(-52.5 if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"} else -35.0),
+                reference_density_kg_m3=cfg.reference_density_kg_m3,
+            )
+
+        thermal = cfg.thermal_expansion_per_k * thermal_delta_t
         haline = cfg.haline_contraction_per_psu * (
-            north_salinity_psu - southern_salinity_psu
+            float(north_salinity_psu) - source_salinity_psu
         )
         return float(thermal + haline)
 
@@ -7581,22 +7939,24 @@ class ProcessClimateModel:
         )
 
     def _project_salinity_to_conserved_total(
-        self, salinity_psu: np.ndarray
+        self, salinity_psu: np.ndarray, ocean_volume_scale: float = 1.0
     ) -> np.ndarray:
-        """Project only floating-point salt roundoff onto the external box.
+        """Project floating-point salt roundoff with variable ocean volume.
 
-        The pre-projection residual is retained as an independent diagnostic.
-        A residual larger than the configured roundoff ceiling raises instead
-        of being silently concealed by exact projection.
+        For uncompensated land-ice melt the represented ocean volume expands.
+        Salinity therefore falls while physical salt mass remains constant. The
+        fixed-volume salinity inventory target is ``initial_salt / scale``.
         """
         salinity = np.asarray(salinity_psu, dtype=float).copy()
-        residual = self.initial_total_salt_psu_m3 - float(
-            np.sum(self.amoc_box_volumes_m3 * salinity)
-        )
-        residual_ppm = 1.0e6 * residual / self.initial_total_salt_psu_m3
+        scale = float(ocean_volume_scale)
+        if not np.isfinite(scale) or scale <= 0.0:
+            raise FloatingPointError("ocean_volume_scale must be finite and positive")
+        target_inventory = self.initial_total_salt_psu_m3 / scale
+        inventory = float(np.sum(self.amoc_box_volumes_m3 * salinity))
+        residual = target_inventory - inventory
+        residual_ppm = 1.0e6 * residual * scale / self.initial_total_salt_psu_m3
         self._maximum_pre_projection_salt_error_ppm = max(
-            self._maximum_pre_projection_salt_error_ppm,
-            abs(float(residual_ppm)),
+            self._maximum_pre_projection_salt_error_ppm, abs(float(residual_ppm))
         )
         if abs(residual_ppm) > self.config.salt_projection_max_residual_ppm:
             raise FloatingPointError(
@@ -7605,10 +7965,9 @@ class ProcessClimateModel:
                 f"error={residual_ppm:.6g} ppm, allowed="
                 f"{self.config.salt_projection_max_residual_ppm:.6g} ppm."
             )
-
         correction_total = 0.0
         for _ in range(2):
-            correction = self.initial_total_salt_psu_m3 - float(
+            correction = target_inventory - float(
                 np.sum(self.amoc_box_volumes_m3 * salinity)
             )
             salinity[-1] += correction / self.amoc_box_volumes_m3[-1]
@@ -7887,6 +8246,8 @@ class ProcessClimateModel:
             return {
                 "reference_temperature_c": 0.0,
                 "surface_temperature_c": 0.0,
+                "surface_elevation_lowering_m": 0.0,
+                "elevation_feedback_warming_c": 0.0,
                 "positive_degree_day_rate": 0.0,
                 "melt_anomaly_gt_per_year": 0.0,
                 "snowfall_anomaly_gt_per_year": 0.0,
@@ -7899,7 +8260,20 @@ class ProcessClimateModel:
             elapsed_years
         )
         anomaly = float(greenland_temperature_anomaly_c)
-        surface_temperature = reference_temperature + anomaly
+        ice_loss_fraction = float(np.clip(
+            1.0 - state.greenland_remaining_ice_gt / cfg.greenland_initial_ice_mass_gt,
+            0.0, 1.0,
+        ))
+        elevation_lowering_m = (
+            cfg.greenland_elevation_max_lowering_m * ice_loss_fraction
+            if cfg.greenland_elevation_feedback_enabled else 0.0
+        )
+        elevation_warming_c = (
+            cfg.greenland_elevation_lapse_rate_k_per_km
+            * elevation_lowering_m / 1000.0
+        )
+        effective_anomaly = anomaly + elevation_warming_c
+        surface_temperature = reference_temperature + effective_anomaly
         current_positive_temperature = max(surface_temperature, 0.0)
         reference_positive_temperature = max(reference_temperature, 0.0)
         pdd_rate = DAYS_PER_YEAR * current_positive_temperature
@@ -7944,7 +8318,7 @@ class ProcessClimateModel:
         )
         precipitation_multiplier = max(
             0.20,
-            1.0 + cfg.greenland_precipitation_fraction_per_k * anomaly,
+            1.0 + cfg.greenland_precipitation_fraction_per_k * effective_anomaly,
         )
         snowfall_anomaly = cfg.greenland_baseline_precipitation_gt_per_year * (
             precipitation_multiplier * current_snow_fraction
@@ -7954,7 +8328,7 @@ class ProcessClimateModel:
             np.clip(
                 cfg.greenland_meltwater_retention_fraction
                 - cfg.greenland_retention_loss_fraction_per_k
-                * max(anomaly, 0.0),
+                * max(effective_anomaly, 0.0),
                 0.0,
                 1.0,
             )
@@ -7981,6 +8355,8 @@ class ProcessClimateModel:
         return {
             "reference_temperature_c": float(reference_temperature),
             "surface_temperature_c": float(surface_temperature),
+            "surface_elevation_lowering_m": float(elevation_lowering_m),
+            "elevation_feedback_warming_c": float(elevation_warming_c),
             "positive_degree_day_rate": float(pdd_rate),
             "melt_anomaly_gt_per_year": float(melt_anomaly),
             "snowfall_anomaly_gt_per_year": float(snowfall_anomaly),
@@ -8051,7 +8427,20 @@ class ProcessClimateModel:
             )
         )
         anomaly = float(greenland_temperature_anomaly_c)
-        surface = reference + anomaly
+        ice_loss_fraction = float(np.clip(
+            1.0 - state.greenland_remaining_ice_gt / cfg.greenland_initial_ice_mass_gt,
+            0.0, 1.0,
+        ))
+        elevation_lowering_m = (
+            cfg.greenland_elevation_max_lowering_m * ice_loss_fraction
+            if cfg.greenland_elevation_feedback_enabled else 0.0
+        )
+        elevation_warming_c = (
+            cfg.greenland_elevation_lapse_rate_k_per_km
+            * elevation_lowering_m / 1000.0
+        )
+        effective_anomaly = anomaly + elevation_warming_c
+        surface = reference + effective_anomaly
         melt_anomaly = (
             cfg.greenland_pdd_melt_factor_gt_per_degree_day
             * DAYS_PER_YEAR
@@ -8080,7 +8469,7 @@ class ProcessClimateModel:
         )
         precipitation_multiplier = max(
             0.20,
-            1.0 + cfg.greenland_precipitation_fraction_per_k * anomaly,
+            1.0 + cfg.greenland_precipitation_fraction_per_k * effective_anomaly,
         )
         snowfall_anomaly = cfg.greenland_baseline_precipitation_gt_per_year * (
             precipitation_multiplier * current_snow - reference_snow
@@ -8089,7 +8478,7 @@ class ProcessClimateModel:
             np.clip(
                 cfg.greenland_meltwater_retention_fraction
                 - cfg.greenland_retention_loss_fraction_per_k
-                * max(anomaly, 0.0),
+                * max(effective_anomaly, 0.0),
                 0.0,
                 1.0,
             )
@@ -8273,6 +8662,11 @@ class ProcessClimateModel:
             if cfg.arctic_sea_ice_export_salinity_coupling_enabled:
                 flux[0] += sea_ice_export_sv
                 flux[5] -= sea_ice_export_sv
+        # Spatial freshwater anomalies are represented as zero-net virtual
+        # flux patterns. For real Greenland melt (and explicitly uncompensated
+        # hosing), R15 separately adds ocean volume and globally dilutes salinity.
+        # The external term is therefore a localization anomaly, not removal of
+        # the physical freshwater mass.
         total_anomaly = hosing_sv + hydrological_sv + greenland_sv
         if cfg.freshwater_compensation_mode == "external":
             flux[5] -= total_anomaly
@@ -8325,6 +8719,8 @@ class ProcessClimateModel:
             state.southern_salinity_psu,
             north_surface_anomaly_c=temperatures["north_surface_anomaly"],
             north_deep_anomaly_c=temperatures["north_deep_anomaly"],
+            south_atlantic_upper_temperature_c=temperatures["south_atlantic_upper"],
+            south_atlantic_upper_salinity_psu=state.south_atlantic_upper_salinity_psu,
         )
         # Normalize by the exact dimensional control driver. The previous free
         # density normalizer moved the bifurcation independently of the actual
@@ -8500,7 +8896,13 @@ class ProcessClimateModel:
             - state.amoc_sv
         )
         salinity = self._salinity_array(state)
-        total_salt = float(np.sum(self.amoc_box_volumes_m3 * salinity))
+        fixed_volume_salinity_inventory = float(
+            np.sum(self.amoc_box_volumes_m3 * salinity)
+        )
+        ocean_volume_scale = float(
+            1.0 + state.ocean_added_freshwater_m3 / self.amoc_total_box_volume_m3
+        )
+        total_salt = fixed_volume_salinity_inventory * ocean_volume_scale
         salt_error_ppm = 1.0e6 * (total_salt / self.initial_total_salt_psu_m3 - 1.0)
         # Two-layer reduction of the section-integrated overturning
         # freshwater transport at nominally 34.5 S:
@@ -8544,18 +8946,44 @@ class ProcessClimateModel:
                 )
             )
         )
+        density_source_salinity = (
+            state.southern_salinity_psu
+            if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}
+            else state.south_atlantic_upper_salinity_psu
+        )
+        density_source_temperature = (
+            temperatures["southern"]
+            if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}
+            else temperatures["south_atlantic_upper"]
+        )
+        linear_haline_term = cfg.haline_contraction_per_psu * (
+            state.north_salinity_psu - density_source_salinity
+        )
         return {
             "tropical_atlantic_temperature_c": temperatures["tropical"],
             "north_atlantic_temperature_c": temperatures["north"],
             "southern_ocean_temperature_c": temperatures["southern"],
+            "south_atlantic_upper_temperature_c": temperatures["south_atlantic_upper"],
             "atlantic_deep_temperature_c": temperatures["deep"],
-            # Exact thermal contribution used by the hydraulic density driver.
-            # Deriving it from the already-computed total driver prevents the
-            # diagnostic from drifting out of sync with the dynamics.
+            "amoc_density_source_temperature_c": density_source_temperature,
+            "amoc_density_source_salinity_psu": density_source_salinity,
+            "amoc_density_geometry_is_south_atlantic_upper": float(
+                cfg.amoc_density_geometry == "south_atlantic_upper"
+            ),
+            "amoc_density_geometry_is_interhemispheric_high_latitude": float(
+                cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}
+            ),
+            "amoc_density_eos_is_teos10": float(cfg.amoc_density_eos != "linear"),
+            "amoc_density_eos_is_teos10_matched": float(cfg.amoc_density_eos == "teos10_matched"),
+            "amoc_density_eos_is_teos10_surface_watermass": float(
+                cfg.amoc_density_eos in {"teos10", "teos10_surface_watermass"}
+            ),
+            # Linear partition is exact for the default linear branch and NaN
+            # for TEOS-10, where thermal/haline contributions are nonlinear.
             "amoc_temperature_density_term": (
-                driver
-                - cfg.haline_contraction_per_psu
-                * (state.north_salinity_psu - state.southern_salinity_psu)
+                driver - linear_haline_term
+                if cfg.amoc_density_eos == "linear"
+                else float("nan")
             ),
             "amoc_northern_stratification_anomaly_c": (
                 northern_stratification_anomaly
@@ -8563,14 +8991,20 @@ class ProcessClimateModel:
             "amoc_convection_density_driver_ratio": convection_density_ratio,
             "amoc_convection_effective_density_ratio": effective_convection_density_ratio,
             "amoc_convection_density_anomaly": convection_density_anomaly,
-            "amoc_salinity_density_term": cfg.haline_contraction_per_psu
-            * (state.north_salinity_psu - state.southern_salinity_psu),
+            "amoc_salinity_density_term": (
+                linear_haline_term
+                if cfg.amoc_density_eos == "linear"
+                else float("nan")
+            ),
             "amoc_density_driver": driver,
             "amoc_density_driver_ratio": density_ratio,
             "amoc_initial_density_driver": self.baseline_density_driver,
             "amoc_initial_density_driver_ratio": self.baseline_density_driver_ratio,
             "amoc_baseline_north_temperature_c": self.baseline_amoc_north_c,
             "amoc_baseline_southern_temperature_c": self.baseline_amoc_southern_c,
+            "amoc_baseline_south_atlantic_upper_temperature_c": (
+                self.baseline_amoc_south_atlantic_upper_c
+            ),
             "amoc_raw_baseline_north_temperature_c": self.raw_baseline_amoc_north_c,
             "amoc_raw_baseline_southern_temperature_c": self.raw_baseline_amoc_southern_c,
             "amoc_control_north_minus_south_temperature_c": (
@@ -8645,6 +9079,10 @@ class ProcessClimateModel:
             ),
             "fovs_sv": fovs_sv,
             "total_salt_psu_m3": total_salt,
+            "fixed_volume_salinity_inventory_psu_m3": fixed_volume_salinity_inventory,
+            "ocean_added_freshwater_m3": float(state.ocean_added_freshwater_m3),
+            "ocean_volume_scale": ocean_volume_scale,
+            "global_mean_ocean_dilution_fraction": float(1.0 - 1.0 / ocean_volume_scale),
             "salt_conservation_error_ppm": salt_error_ppm,
             "pre_projection_salt_conservation_error_ppm": float(
                 self._maximum_pre_projection_salt_error_ppm
@@ -8818,6 +9256,8 @@ class ProcessClimateModel:
             arctic_non_atlantic_ice_energy_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_ice_concentration_anomaly=zeros.copy(),
             arctic_non_atlantic_ice_concentration_anomaly=zeros.copy(),
+            arctic_atlantic_ice_support_anomaly=zeros.copy(),
+            arctic_non_atlantic_ice_support_anomaly=zeros.copy(),
             arctic_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_seasonal_ice_fraction=atlantic_seasonal.copy(),
@@ -8837,6 +9277,7 @@ class ProcessClimateModel:
             greenland_cumulative_melt_gt=0.0,
             greenland_cumulative_accumulation_gt=0.0,
             greenland_cumulative_net_ice_loss_gt=0.0,
+            ocean_added_freshwater_m3=0.0,
         )
 
 
@@ -8978,11 +9419,12 @@ class ProcessClimateModel:
 
         if self.config.seasonal_arctic_enabled:
             reference = self._arctic_reference_state(elapsed_years)
-            for prefix, energy_field, concentration_field, seasonal_field, public_field in (
+            for prefix, energy_field, concentration_field, support_field, seasonal_field, public_field in (
                 (
                     "atlantic",
                     "arctic_atlantic_ice_energy_anomaly_wyr_m2",
                     "arctic_atlantic_ice_concentration_anomaly",
+                    "arctic_atlantic_ice_support_anomaly",
                     "arctic_atlantic_seasonal_ice_fraction",
                     "atlantic_sea_ice_fraction",
                 ),
@@ -8990,6 +9432,7 @@ class ProcessClimateModel:
                     "non_atlantic",
                     "arctic_non_atlantic_ice_energy_anomaly_wyr_m2",
                     "arctic_non_atlantic_ice_concentration_anomaly",
+                    "arctic_non_atlantic_ice_support_anomaly",
                     "arctic_non_atlantic_seasonal_ice_fraction",
                     "non_atlantic_sea_ice_fraction",
                 ),
@@ -9009,6 +9452,14 @@ class ProcessClimateModel:
                     seasonal - reference[f"{prefix}_ice_fraction"],
                 )
                 setattr(corrected, seasonal_field, seasonal)
+                reference_support = self._arctic_reference_ice_support_fraction(
+                    reference[f"{prefix}_ice_fraction"],
+                    reference[f"{prefix}_air_temperature_c"],
+                )
+                support = self._coerce_arctic_ice_support_fraction(
+                    reference_support + getattr(corrected, support_field), seasonal
+                )
+                setattr(corrected, support_field, support - reference_support)
                 setattr(
                     corrected,
                     public_field,
@@ -9196,6 +9647,8 @@ class ProcessClimateModel:
             arctic_non_atlantic_ice_energy_anomaly_wyr_m2=arctic["non_atlantic_ice_energy"],
             arctic_atlantic_ice_concentration_anomaly=arctic["atlantic_ice_concentration"],
             arctic_non_atlantic_ice_concentration_anomaly=arctic["non_atlantic_ice_concentration"],
+            arctic_atlantic_ice_support_anomaly=arctic["atlantic_ice_support"],
+            arctic_non_atlantic_ice_support_anomaly=arctic["non_atlantic_ice_support"],
             arctic_atlantic_open_water_heat_anomaly_wyr_m2=arctic["atlantic_open_water_heat"],
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=arctic["non_atlantic_open_water_heat"],
             arctic_atlantic_seasonal_ice_fraction=arctic["atlantic_seasonal_ice"],
@@ -9219,6 +9672,7 @@ class ProcessClimateModel:
             greenland_cumulative_net_ice_loss_gt=(
                 state.greenland_cumulative_net_ice_loss_gt
             ),
+            ocean_added_freshwater_m3=state.ocean_added_freshwater_m3,
         )
         gmst = self._global_surface_mean(provisional_state)
         hosing = self.prescribed_freshwater_hosing_sv(elapsed_years)
@@ -9426,7 +9880,29 @@ class ProcessClimateModel:
             provisional_state.greenland_freshwater_sv = greenland_new
             amoc = rates_1["diagnostics"]
 
-        salinity_new = self._project_salinity_to_conserved_total(salinity_new)
+        # Convert realized Greenland net ice loss into actual ocean volume.
+        # 1 Gt water = 1e9 m3. The zero-net virtual-flux pattern supplies the
+        # local North Atlantic plume; the scale change supplies the global mass.
+        old_added_volume = float(state.ocean_added_freshwater_m3)
+        volume_change_m3 = 0.0
+        if cfg.greenland_uncompensated_freshwater_enabled:
+            realized_greenland_delta_gt = (
+                provisional_state.greenland_cumulative_net_ice_loss_gt
+                - state.greenland_cumulative_net_ice_loss_gt
+            )
+            volume_change_m3 += float(realized_greenland_delta_gt) * 1.0e9
+        if not cfg.freshwater_hosing_compensated:
+            volume_change_m3 += float(hosing) * 1.0e6 * SECONDS_PER_YEAR * float(dt)
+        new_added_volume = old_added_volume + volume_change_m3
+        if new_added_volume <= -0.95 * self.amoc_total_box_volume_m3:
+            raise FloatingPointError(
+                "Uncompensated freshwater removal exhausted represented ocean volume"
+            )
+        old_scale = 1.0 + old_added_volume / self.amoc_total_box_volume_m3
+        new_scale = 1.0 + new_added_volume / self.amoc_total_box_volume_m3
+        salinity_new = np.asarray(salinity_new, dtype=float) * (old_scale / new_scale)
+        provisional_state.ocean_added_freshwater_m3 = float(new_added_volume)
+        salinity_new = self._project_salinity_to_conserved_total(salinity_new, new_scale)
         provisional_state.north_salinity_psu = float(salinity_new[0])
         provisional_state.tropical_salinity_psu = float(salinity_new[1])
         provisional_state.south_atlantic_upper_salinity_psu = float(salinity_new[2])
@@ -9462,6 +9938,8 @@ class ProcessClimateModel:
             self.state.arctic_non_atlantic_ice_energy_anomaly_wyr_m2,
             self.state.arctic_atlantic_ice_concentration_anomaly,
             self.state.arctic_non_atlantic_ice_concentration_anomaly,
+            self.state.arctic_atlantic_ice_support_anomaly,
+            self.state.arctic_non_atlantic_ice_support_anomaly,
             self.state.arctic_atlantic_open_water_heat_anomaly_wyr_m2,
             self.state.arctic_non_atlantic_open_water_heat_anomaly_wyr_m2,
             self.state.arctic_atlantic_seasonal_ice_fraction,
@@ -9482,6 +9960,8 @@ class ProcessClimateModel:
         ]
         if any(not math.isfinite(value) for value in scalar_state):
             raise FloatingPointError("AMOC state became non-finite. Reduce dt_years.")
+        if not math.isfinite(self.state.ocean_added_freshwater_m3):
+            raise FloatingPointError("Ocean freshwater-volume state became non-finite.")
         if any(not 0.0 < value < 50.0 for value in scalar_state[:6]):
             raise FloatingPointError("An AMOC-box salinity left the physical 0-50 PSU range.")
         if not (
@@ -9533,6 +10013,62 @@ class ProcessClimateModel:
             + self.non_atlantic_ocean_fraction * radiative["non_atlantic_ocean"][component]
         )
         return weighted_mean(zonal, self.grid.band_area_weights)
+
+    def _effective_sea_ice_support_fractions(
+        self, state: ModelState, elapsed_years: float
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Return the current native-band support used by the 15% extent operator.
+
+        This is the single source of truth for both checkpointed ``record()``
+        output and full ``SimulationResult`` histories.  When the seasonal
+        Arctic module is disabled there is no separate support dynamics, so the
+        resolved native concentration itself is the occupied support.
+        """
+        if not self.config.seasonal_arctic_enabled:
+            return (
+                np.clip(state.atlantic_sea_ice_fraction, 0.0, 1.0).copy(),
+                np.clip(state.non_atlantic_sea_ice_fraction, 0.0, 1.0).copy(),
+            )
+        reference = self._arctic_reference_state(elapsed_years)
+        atl_seasonal_concentration = np.clip(
+            reference["atlantic_ice_fraction"]
+            + state.arctic_atlantic_ice_concentration_anomaly, 0.0, 1.0
+        )
+        non_seasonal_concentration = np.clip(
+            reference["non_atlantic_ice_fraction"]
+            + state.arctic_non_atlantic_ice_concentration_anomaly, 0.0, 1.0
+        )
+        atl_reference_support = self._arctic_reference_ice_support_fraction(
+            reference["atlantic_ice_fraction"],
+            reference["atlantic_air_temperature_c"],
+        )
+        non_reference_support = self._arctic_reference_ice_support_fraction(
+            reference["non_atlantic_ice_fraction"],
+            reference["non_atlantic_air_temperature_c"],
+        )
+        atl_seasonal_support = self._coerce_arctic_ice_support_fraction(
+            atl_reference_support + state.arctic_atlantic_ice_support_anomaly,
+            atl_seasonal_concentration,
+        )
+        non_seasonal_support = self._coerce_arctic_ice_support_fraction(
+            non_reference_support + state.arctic_non_atlantic_ice_support_anomaly,
+            non_seasonal_concentration,
+        )
+        atl_effective_support = np.clip(
+            state.atlantic_sea_ice_fraction
+            + self.arctic_module_blend
+            * (atl_seasonal_support - atl_seasonal_concentration),
+            state.atlantic_sea_ice_fraction,
+            1.0,
+        )
+        non_effective_support = np.clip(
+            state.non_atlantic_sea_ice_fraction
+            + self.arctic_module_blend
+            * (non_seasonal_support - non_seasonal_concentration),
+            state.non_atlantic_sea_ice_fraction,
+            1.0,
+        )
+        return atl_effective_support, non_effective_support
 
     def record(self, elapsed_years: float) -> dict[str, float]:
         state = self.state
@@ -9724,6 +10260,13 @@ class ProcessClimateModel:
             greenland, state, max(self.config.dt_years, 1.0e-12)
         )
         total_freshwater = hosing + hydrological + greenland_applied_flux
+        uncompensated_mass_addition_sv = (
+            (0.0 if self.config.freshwater_hosing_compensated else hosing)
+            + (
+                greenland_applied_flux
+                if self.config.greenland_uncompensated_freshwater_enabled else 0.0
+            )
+        )
         surface_flux = self._surface_freshwater_fluxes_sv(
             hosing, hydrological, greenland_applied_flux,
             self._last_atlantic_ice_storage_freshwater_sv,
@@ -9731,6 +10274,9 @@ class ProcessClimateModel:
         )
         sea_ice_area = weighted_mean(
             self.grid.ocean_fraction * ice_aggregate, self.grid.band_area_weights
+        )
+        atlantic_ice_support, non_atlantic_ice_support = (
+            self._effective_sea_ice_support_fractions(state, elapsed_years)
         )
         _, _, sea_ice_observation = reconstruct_concentration_and_occupancy(
             atlantic_fraction=state.atlantic_sea_ice_fraction,
@@ -9744,6 +10290,8 @@ class ProcessClimateModel:
             map_area_weights=self.grid.map_area_weights,
             warming_c=gmst,
             calendar_year=self.config.start_year + elapsed_years,
+            atlantic_support_fraction=atlantic_ice_support,
+            non_atlantic_support_fraction=non_atlantic_ice_support,
         )
         raw_northern_ice_area = float(
             sea_ice_observation["native_northern_ice_area_million_km2"]
@@ -9819,6 +10367,9 @@ class ProcessClimateModel:
                 else 1.0
             ),
             "greenland_applied_freshwater_sv": greenland_applied_flux,
+            "uncompensated_ocean_mass_addition_sv": float(
+                uncompensated_mass_addition_sv
+            ),
             "greenland_annual_mean_freshwater_sv": greenland_annual_applied_flux,
             "greenland_dynamic_discharge_sv": state.greenland_freshwater_sv,
             "greenland_surface_mass_balance_freshwater_sv": greenland_smb[
@@ -9832,6 +10383,12 @@ class ProcessClimateModel:
             ],
             "greenland_absolute_surface_temperature_c": greenland_smb[
                 "surface_temperature_c"
+            ],
+            "greenland_surface_elevation_lowering_m": greenland_smb[
+                "surface_elevation_lowering_m"
+            ],
+            "greenland_elevation_feedback_warming_c": greenland_smb[
+                "elevation_feedback_warming_c"
             ],
             "greenland_positive_degree_day_rate": greenland_smb[
                 "positive_degree_day_rate"
@@ -9889,6 +10446,23 @@ class ProcessClimateModel:
             "sea_ice_area_mapping_is_identity": 1.0,
             "sea_ice_extent_operator_calibrated": 0.0,
             "sea_ice_observation_operator_calibrated": 0.0,
+            "sea_ice_extent_is_separate_prognostic_state": float(
+                sea_ice_observation["extent_is_separate_prognostic_state"]
+            ),
+            "sea_ice_pack_threshold_concentration": float(
+                sea_ice_observation["pack_ice_concentration_threshold"]
+            ),
+            "northern_hemisphere_mean_pack_concentration": float(
+                sea_ice_observation["northern_hemisphere_mean_pack_concentration"]
+            ),
+            "atlantic_sea_ice_support_fraction": weighted_mean(
+                self.grid.atlantic_ocean_fraction * atlantic_ice_support,
+                self.grid.band_area_weights,
+            ),
+            "non_atlantic_sea_ice_support_fraction": weighted_mean(
+                self.non_atlantic_ocean_fraction * non_atlantic_ice_support,
+                self.grid.band_area_weights,
+            ),
             "atlantic_sea_ice_area_fraction": weighted_mean(self.grid.atlantic_ocean_fraction * state.atlantic_sea_ice_fraction, self.grid.band_area_weights),
             "non_atlantic_sea_ice_area_fraction": weighted_mean(self.non_atlantic_ocean_fraction * state.non_atlantic_sea_ice_fraction, self.grid.band_area_weights),
             "arctic_atlantic_seasonal_sea_ice_fraction": weighted_mean(
@@ -10012,6 +10586,8 @@ class ProcessClimateModel:
         ice_history: list[np.ndarray] = []
         atlantic_ice_history: list[np.ndarray] = []
         non_atlantic_ice_history: list[np.ndarray] = []
+        atlantic_ice_support_history: list[np.ndarray] = []
+        non_atlantic_ice_support_history: list[np.ndarray] = []
         snow_history: list[np.ndarray] = []
         cloud_history: list[np.ndarray] = []
         amoc_history: list[float] = []
@@ -10107,6 +10683,11 @@ class ProcessClimateModel:
             deep_history.append(self._aggregate_deep_temperature(self.state).copy())
             atlantic_ice_history.append(self.state.atlantic_sea_ice_fraction.copy())
             non_atlantic_ice_history.append(self.state.non_atlantic_sea_ice_fraction.copy())
+            atl_effective_support, non_effective_support = (
+                self._effective_sea_ice_support_fractions(self.state, elapsed)
+            )
+            atlantic_ice_support_history.append(atl_effective_support.copy())
+            non_atlantic_ice_support_history.append(non_effective_support.copy())
             ice_history.append(self._aggregate_sea_ice(self.state).copy())
             snow_history.append(self.state.snow_fraction.copy())
             cloud_history.append(self._aggregate_low_cloud(self.state).copy())
@@ -10195,6 +10776,8 @@ class ProcessClimateModel:
             sea_ice_history=np.asarray(ice_history),
             atlantic_sea_ice_history=np.asarray(atlantic_ice_history),
             non_atlantic_sea_ice_history=np.asarray(non_atlantic_ice_history),
+            atlantic_sea_ice_support_history=np.asarray(atlantic_ice_support_history),
+            non_atlantic_sea_ice_support_history=np.asarray(non_atlantic_ice_support_history),
             snow_history=np.asarray(snow_history),
             cloud_history=np.asarray(cloud_history),
             amoc_history_sv=np.asarray(amoc_history),
@@ -13090,6 +13673,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Reference-relative thin-pack divergence and winter deformation rate per year.",
     )
     parser.add_argument(
+        "--arctic-ice-support-reference-mode",
+        choices=["fixed_pack_80", "thermodynamic_pack"],
+        default=ModelConfig().arctic_ice_support_reference_mode,
+        help=(
+            "Reference compactness for the prognostic sea-ice support state. "
+            "thermodynamic_pack compacts toward 100%% in cold conditions; "
+            "fixed_pack_80 reproduces the R17 80%% partial-pack reference."
+        ),
+    )
+    parser.add_argument(
         "--arctic-ice-mechanical-max-local-thickness",
         type=float,
         default=ModelConfig().arctic_ice_mechanical_max_local_thickness_m,
@@ -13210,6 +13803,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ocean-exchange", type=float, default=1.45)
     parser.add_argument("--meridional-diffusion", type=float, default=0.52)
     parser.add_argument("--freshwater-hosing", type=float, default=0.0)
+    parser.add_argument("--uncompensated-hosing", action="store_true", help="Treat artificial hosing as a real ocean-mass freshwater addition instead of a compensated redistribution experiment.")
+    parser.add_argument("--legacy-compensated-greenland", action="store_true", help="Structural attribution only: reproduce the old compensated Greenland freshwater treatment.")
+    parser.add_argument("--disable-greenland-elevation-feedback", action="store_true", help="Disable Greenland thinning/elevation melt feedback for mechanism attribution.")
+    parser.add_argument("--disable-arctic-forced-ocean-heat-convergence", action="store_true", help="Disable the empirical Arctic forced-ocean heat-convergence term.")
+    parser.add_argument("--disable-arctic-phase-restoring", action="store_true", help="Disable Arctic seasonal/phase restoring.")
+    parser.add_argument("--disable-arctic-extra-lapse-rate-feedback", action="store_true", help="Disable the extra unresolved Arctic lapse-rate feedback term.")
     parser.add_argument(
         "--warming-freshwater",
         type=float,
@@ -13293,20 +13892,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--amoc-interhemispheric-temperature-coupling",
         type=float,
         default=ModelConfig().amoc_interhemispheric_temperature_coupling,
-        help=(
-            "Legacy compatibility coefficient for the old forced Atlantic north-south "
-            "surface anomaly pathway. The v2.4 default is 0 because the hydraulic "
-            "perturbation response uses local northern surface-to-deep stratification."
-        ),
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-stratification-saturation-c",
         type=float,
         default=ModelConfig().amoc_stratification_saturation_c,
-        help=(
-            "Smooth saturation scale for unresolved northern surface-to-deep "
-            "thermal stratification in the hydraulic AMOC response."
-        ),
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-convection-temperature-coupling",
@@ -13345,6 +13937,22 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--amoc-density-exponent", type=float, default=1.50)
+    parser.add_argument(
+        "--amoc-density-geometry",
+        choices=["interhemispheric_high_latitude", "south_atlantic_upper", "legacy_southern_surface"],
+        default=ModelConfig().amoc_density_geometry,
+        help="AMOC hydraulic density geometry; interhemispheric_high_latitude is the validated default, south_atlantic_upper is structural sensitivity, and legacy_southern_surface is an exact compatibility alias.",
+    )
+    parser.add_argument(
+        "--amoc-density-eos",
+        choices=["linear", "teos10", "teos10_surface_watermass", "teos10_matched"],
+        default=ModelConfig().amoc_density_eos,
+        help=(
+            "Reduced AMOC box EOS. 'teos10_matched' preserves the linear thermal "
+            "pathway while changing EOS; 'teos10'/'teos10_surface_watermass' keep "
+            "the R16 direct water-mass sensitivity. TEOS branches require gsw."
+        ),
+    )
     parser.add_argument("--amoc-depth-exponent", type=float, default=1.00)
     parser.add_argument(
         "--amoc-pycnocline-feedback-strength",
@@ -13352,29 +13960,25 @@ def build_parser() -> argparse.ArgumentParser:
         default=ModelConfig().amoc_pycnocline_feedback_strength,
         help="Fraction of the raw pycnocline-depth multiplier applied to AMOC transport.",
     )
+    # Deprecated compatibility-only option retained so old command lines and
+    # serialized configurations continue to parse. It has no dynamical effect.
     parser.add_argument(
         "--amoc-pycnocline-relaxation-years",
         type=float,
         default=150.0,
-        help="Relaxation time of pycnocline depth toward its control value.",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-convection-critical-density-ratio",
         type=float,
         default=ModelConfig().amoc_convection_critical_density_ratio,
-        help=(
-            "Legacy compatibility parameter. The repaired dynamics do not use a tuned "
-            "critical ratio to place the AMOC bifurcation."
-        ),
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-convection-transition-width",
         type=float,
         default=ModelConfig().amoc_convection_transition_width,
-        help=(
-            "Legacy compatibility width retained for old configurations; the repaired "
-            "convection response is continuous in the local density anomaly."
-        ),
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-convection-density-scale-factor",
@@ -13392,10 +13996,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--amoc-convection-transport-exponent",
         type=float,
         default=ModelConfig().amoc_convection_transport_exponent,
-        help=(
-            "Deprecated compatibility exponent. The repaired default is zero: "
-            "convection does not directly multiply hydraulic AMOC transport."
-        ),
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--amoc-convective-mixing-reference",
@@ -13743,6 +14344,7 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         arctic_ice_area_thin_pack_divergence_fraction_per_year=(
             args.arctic_ice_area_thin_pack_divergence_rate
         ),
+        arctic_ice_support_reference_mode=args.arctic_ice_support_reference_mode,
         arctic_ice_mechanical_max_local_thickness_m=(
             args.arctic_ice_mechanical_max_local_thickness
         ),
@@ -13831,6 +14433,12 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         ocean_heat_exchange_wm2_k=args.ocean_exchange,
         meridional_diffusion_wm2_k=args.meridional_diffusion,
         freshwater_hosing_sv=args.freshwater_hosing,
+        freshwater_hosing_compensated=not args.uncompensated_hosing,
+        greenland_uncompensated_freshwater_enabled=not args.legacy_compensated_greenland,
+        greenland_elevation_feedback_enabled=not args.disable_greenland_elevation_feedback,
+        arctic_forced_ocean_heat_convergence_enabled=not args.disable_arctic_forced_ocean_heat_convergence,
+        arctic_phase_restoring_enabled=not args.disable_arctic_phase_restoring,
+        arctic_extra_lapse_rate_feedback_enabled=not args.disable_arctic_extra_lapse_rate_feedback,
         warming_freshwater_sv_per_k=args.warming_freshwater,
         hydrological_freshwater_sv_per_k=args.hydrological_freshwater,
         hydrological_freshwater_north_fraction=(
@@ -13899,6 +14507,8 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         ),
         amoc_adjustment_years=args.amoc_adjustment_years,
         amoc_density_transport_exponent=args.amoc_density_exponent,
+        amoc_density_geometry=args.amoc_density_geometry,
+        amoc_density_eos=args.amoc_density_eos,
         amoc_hydraulic_depth_exponent=args.amoc_depth_exponent,
         amoc_pycnocline_feedback_strength=(
             args.amoc_pycnocline_feedback_strength

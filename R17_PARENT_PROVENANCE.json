@@ -1,0 +1,49 @@
+{
+  "added_climate_model_ast_symbols": [
+    "ProcessClimateModel._advance_arctic_ice_support",
+    "ProcessClimateModel._arctic_reference_ice_support_fraction",
+    "ProcessClimateModel._coerce_arctic_ice_support_fraction",
+    "ProcessClimateModel._effective_sea_ice_support_fractions"
+  ],
+  "amoc_restart_or_recovery_trigger_added": false,
+  "changed_climate_model_ast_symbols": [
+    "ModelConfig",
+    "ModelConfig.validate",
+    "ModelState",
+    "ModelState.copy",
+    "ProcessClimateModel",
+    "ProcessClimateModel.__init__",
+    "ProcessClimateModel._advance_seasonal_arctic",
+    "ProcessClimateModel._amoc_diagnostics",
+    "ProcessClimateModel._apply_reference_step_residual",
+    "ProcessClimateModel._check_state",
+    "ProcessClimateModel._density_driver_from_values",
+    "ProcessClimateModel._reference_manifold_state",
+    "ProcessClimateModel._step_uncorrected",
+    "ProcessClimateModel.record",
+    "ProcessClimateModel.run",
+    "SimulationResult",
+    "SimulationResult._sea_ice_observation_at_index",
+    "build_parser",
+    "initial_amoc_density_diagnostics"
+  ],
+  "default_amoc_density_eos": "linear",
+  "default_amoc_physics_retuned": false,
+  "default_amoc_reference_sv_changed": false,
+  "matched_teos_is_opt_in": true,
+  "notes": [
+    "R17 adds a mass-neutral prognostic sea-ice support state used only for spatial occupancy/extent diagnostics.",
+    "R17 adds teos10_matched while retaining linear as default and preserving the R16.2 direct surface-watermass TEOS branch.",
+    "R17 changes recovery validation design only; it adds no restart threshold or recovery forcing to default equations."
+  ],
+  "r16_2_direct_teos_branch_preserved_for_attribution": true,
+  "r16_2_parent_climate_model_sha256": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+  "r16_2_parent_sea_ice_observation_sha256": "7d346f90b87d4940a379c1afd50cefaa8184bd3ea6a91fb10fef4e8406774a65",
+  "r16_2_parent_source_zip_sha256": "80176acff4e2f7b5a50c7365ffeda16c807791a60de7a8016ae6914ed31d9bb6",
+  "r17_climate_model_sha256": "7e80b668de0f30d278ec2b79de6438c4d0a89b546eca3585d6efb37132e2e450",
+  "r17_co2_target_sweep_sha256": "c103195f411ba10f227acd5d1a9c322a97e7616623b8c8f70d2b716f71619e10",
+  "r17_sea_ice_observation_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+  "removed_climate_model_ast_symbols": [],
+  "schema": "clem-r17-parent-provenance-v1",
+  "sea_ice_support_changes_native_ice_mass_or_energy": false
+}

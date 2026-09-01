@@ -1,0 +1,131 @@
+{
+  "candidate": "CLEM v2.29.28 R18.1 maintenance diagnosis",
+  "climate_model_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+  "diagnostic_scope": "fixed_preindustrial_reduced_amoc_subsystem_zero_artificial_hosing",
+  "interpretation": "The production equations have a stable weak boundary branch, an unstable intermediate separator near 12.32 Sv, and the stable 17 Sv control branch. Allowing reversal converts the weak-side attractor into a stable reversed circulation while retaining the same intermediate separator and strong branch. R18's ~9.87 Sv -0.40 Sv de-hosing state was below the zero-hosing separator, so relapse after the salinifying perturbation ended is structurally consistent. No restart trigger or coefficient retuning is justified by R18.",
+  "physics_changed": false,
+  "production_no_reversal": {
+    "roots": [
+      {
+        "amoc_sv": 1.3291024345167823e-19,
+        "convection_efficiency": 1.0000000000000289,
+        "deep_salinity_psu": 33.407564575645765,
+        "density_driver_ratio": -2.8963133640553,
+        "equilibrium_residual_norm": 2.6768776911550298e-14,
+        "external_salinity_psu": 35.18256457564576,
+        "linear_stability": "stable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 2.2551405187698492e-17,
+        "maximum_real_eigenvalue_per_year": -4.9657886869579866e-05,
+        "north_salinity_psu": 33.407564575645765,
+        "pycnocline_depth_m": 1034.3362128858328,
+        "south_atlantic_upper_salinity_psu": 35.941388105057534,
+        "southern_salinity_psu": 33.48256457564576,
+        "tropical_salinity_psu": 35.60756457564576,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      },
+      {
+        "amoc_sv": 12.31976361187811,
+        "convection_efficiency": 0.9999999999988332,
+        "deep_salinity_psu": 35.04955627872672,
+        "density_driver_ratio": 0.7805942432384673,
+        "equilibrium_residual_norm": 4.718437986511826e-13,
+        "external_salinity_psu": 34.72484851350896,
+        "linear_stability": "unstable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 8.994793638795266e-17,
+        "maximum_real_eigenvalue_per_year": 3.070505713102874e-05,
+        "north_salinity_psu": 35.04955627872671,
+        "pycnocline_depth_m": 801.5776102368543,
+        "south_atlantic_upper_salinity_psu": 35.48367204292075,
+        "southern_salinity_psu": 33.02484851350896,
+        "tropical_salinity_psu": 35.68466887301501,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      },
+      {
+        "amoc_sv": 17.0,
+        "convection_efficiency": 1.0,
+        "deep_salinity_psu": 35.15,
+        "density_driver_ratio": 1.0,
+        "equilibrium_residual_norm": 1.9183769950973238e-14,
+        "external_salinity_psu": 34.70000000000001,
+        "linear_stability": "stable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 1.862160282223302e-17,
+        "maximum_real_eigenvalue_per_year": -1.8905182272707784e-05,
+        "north_salinity_psu": 35.15,
+        "pycnocline_depth_m": 700.0,
+        "south_atlantic_upper_salinity_psu": 35.45882352941177,
+        "southern_salinity_psu": 33.0,
+        "tropical_salinity_psu": 35.65,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      }
+    ],
+    "summary": {
+      "bistability_supported": true,
+      "distinct_converged_roots": 3,
+      "stable_roots": 2,
+      "unstable_basin_boundary_amoc_sv": 12.31976361187811,
+      "unstable_roots": 1
+    }
+  },
+  "reversal_enabled_sensitivity": {
+    "roots": [
+      {
+        "amoc_sv": -5.738865444193415,
+        "convection_efficiency": 0.14495811811198853,
+        "deep_salinity_psu": 35.42421209337482,
+        "density_driver_ratio": -0.4258709207453332,
+        "equilibrium_residual_norm": 2.7799538870570048e-14,
+        "external_salinity_psu": 34.685579537854785,
+        "linear_stability": "stable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 2.168404344971009e-17,
+        "maximum_real_eigenvalue_per_year": -5.7134512076373735e-05,
+        "north_salinity_psu": 34.321332196271264,
+        "pycnocline_depth_m": 1129.3502672103896,
+        "south_atlantic_upper_salinity_psu": 35.44440306726655,
+        "southern_salinity_psu": 32.98557953785478,
+        "tropical_salinity_psu": 35.23230167368425,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      },
+      {
+        "amoc_sv": 12.319763611879887,
+        "convection_efficiency": 0.9999999999993915,
+        "deep_salinity_psu": 35.049556278726754,
+        "density_driver_ratio": 0.7805942432385546,
+        "equilibrium_residual_norm": 2.549873875417785e-13,
+        "external_salinity_psu": 34.72484851350895,
+        "linear_stability": "unstable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 7.112366251504909e-17,
+        "maximum_real_eigenvalue_per_year": 3.070505710794974e-05,
+        "north_salinity_psu": 35.049556278726754,
+        "pycnocline_depth_m": 801.5776102368175,
+        "south_atlantic_upper_salinity_psu": 35.48367204292073,
+        "southern_salinity_psu": 33.02484851350895,
+        "tropical_salinity_psu": 35.68466887301499,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      },
+      {
+        "amoc_sv": 17.0,
+        "convection_efficiency": 1.0,
+        "deep_salinity_psu": 35.15,
+        "density_driver_ratio": 1.0,
+        "equilibrium_residual_norm": 1.9183769950973238e-14,
+        "external_salinity_psu": 34.70000000000001,
+        "linear_stability": "stable",
+        "maximum_absolute_full_salinity_tendency_psu_per_year": 1.862160282223302e-17,
+        "maximum_real_eigenvalue_per_year": -1.8905182272707784e-05,
+        "north_salinity_psu": 35.15,
+        "pycnocline_depth_m": 700.0,
+        "south_atlantic_upper_salinity_psu": 35.45882352941177,
+        "southern_salinity_psu": 33.0,
+        "tropical_salinity_psu": 35.65,
+        "whole_domain_salt_closure_error_ppm": 0.0
+      }
+    ],
+    "summary": {
+      "bistability_supported": true,
+      "distinct_converged_roots": 3,
+      "stable_roots": 2,
+      "unstable_basin_boundary_amoc_sv": 12.319763611879887,
+      "unstable_roots": 1
+    }
+  }
+}

@@ -33,7 +33,7 @@ def _ocean_arctic_weights(model: ProcessClimateModel) -> np.ndarray:
 
 def test_v228_defaults_and_freshwater_are_preserved() -> None:
     cfg = ModelConfig()
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     assert cfg.hydrological_freshwater_sv_per_k == 0.006
     assert cfg.greenland_freshwater_sv_per_k == 0.005
     assert cfg.ocean_heat_exchange_wm2_k == 1.45

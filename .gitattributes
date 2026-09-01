@@ -1,2 +1,12 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Frozen validation products are byte-bound to published SHA-256 provenance.
+# Preserve their recorded CRLF bytes across checkout/archive operations.
+data/validation/sea_ice_fixed_mask/N_03_fixed_mask.csv -text
+data/validation/sea_ice_fixed_mask/N_09_fixed_mask.csv -text
+data/validation/sea_ice_physical/piomas_volume_monthly.csv -text
+data/validation/sea_ice_physical/cryosat2_rdeft4_monthly.csv -text
+data/validation/sea_ice_physical/icesat2_is2sitmogr4_monthly.csv -text
+data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_03_fixed_mask_crosscheck.csv -text
+data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_09_fixed_mask_crosscheck.csv -text

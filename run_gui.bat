@@ -5,13 +5,13 @@ cd /d "%~dp0"
 rem Prefer the Windows Python launcher so the selected interpreter is explicit.
 where pyw.exe >nul 2>nul
 if %errorlevel%==0 (
-    start "EGCM GUI" pyw.exe -3 "%~dp0launch_gui.pyw"
+    start "CLEM GUI" pyw.exe -3 "%~dp0launch_gui.pyw"
     exit /b 0
 )
 
 where pythonw.exe >nul 2>nul
 if %errorlevel%==0 (
-    start "EGCM GUI" pythonw.exe "%~dp0launch_gui.pyw"
+    start "CLEM GUI" pythonw.exe "%~dp0launch_gui.pyw"
     exit /b 0
 )
 

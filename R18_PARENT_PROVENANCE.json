@@ -1,0 +1,22 @@
+{
+  "amoc_restart_or_recovery_trigger_added": false,
+  "candidate": "CLEM v2.29.28 Physics Candidate R18",
+  "changes": [
+    "thermodynamic sea-ice support reference using existing freezing/formation scale",
+    "fixed-mask extent uses fractional prognostic support occupancy",
+    "validation metadata updated to describe separate coarse support geometry without release promotion",
+    "recovery experiment map extended to -0.25/-0.30/-0.35/-0.40 Sv with zero-hosing persistence hold"
+  ],
+  "default_amoc_physics_retuned": false,
+  "r17_parent_arctic_observation_operator_sha256": "1f07bab842583ec0676bcecda86a2b4cd4a464e14ae4eb23daf947e6af9b716a",
+  "r17_parent_climate_model_sha256": "7e80b668de0f30d278ec2b79de6438c4d0a89b546eca3585d6efb37132e2e450",
+  "r17_parent_sea_ice_observation_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+  "r17_parent_sea_ice_validation_sha256": "3b09c45fef054ebadb29beacb5a8ce9b3c6480e1ed4c6c20f10dbb6716d1cf63",
+  "r17_parent_source_zip_sha256": "3e43ede91d563beed2a89c91afceeab40580ffb0d0e8ab4a2a71e0470b042ef4",
+  "r17_teos_evidence_reused_without_rerun": true,
+  "r18_arctic_observation_operator_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+  "r18_climate_model_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+  "r18_sea_ice_observation_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+  "r18_sea_ice_validation_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a",
+  "schema_version": 1
+}

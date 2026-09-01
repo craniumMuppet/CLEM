@@ -1,0 +1,62 @@
+{
+  "added": [
+    "R17_RESULTS_REVIEW.md",
+    "R18_IMPLEMENTATION_AND_LOCAL_VALIDATION.md",
+    "R18_PARENT_PROVENANCE.json",
+    "R18_STATIC_VERIFICATION.json",
+    "provenance/r17-parent/arctic_observation_operator.py",
+    "provenance/r17-parent/climate_model.py",
+    "provenance/r17-parent/run_r17_local_validation.bat",
+    "provenance/r17-parent/run_r17_local_validation_debug.bat",
+    "provenance/r17-parent/run_r17_recovery_validation.bat",
+    "provenance/r17-parent/run_r17_sea_ice_validation.bat",
+    "provenance/r17-parent/run_r17_teos_validation.bat",
+    "provenance/r17-parent/sea_ice_observation.py",
+    "provenance/r17-parent/sea_ice_validation.py",
+    "provenance/r17-parent/tests/test_r17_spatial_teos_recovery.py",
+    "provenance/r17-parent/verify_r17_local.py",
+    "run_r18_local_validation.bat",
+    "run_r18_local_validation_debug.bat",
+    "run_r18_recovery_validation.bat",
+    "run_r18_sea_ice_validation.bat",
+    "tests/test_r18_source_fixes.py",
+    "verify_r18_local.py"
+  ],
+  "added_count": 21,
+  "candidate_compared_file_count": 773,
+  "comparison_exclusions": [
+    "R18_R17_CHANGES.json",
+    "R18_SOURCE_MANIFEST.json",
+    "SOURCE_FINGERPRINT.json",
+    "SOURCE_TREE_SHA256.txt"
+  ],
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "arctic_observation_operator.py",
+    "climate_model.py",
+    "sea_ice_validation.py",
+    "tests/test_r17_spatial_teos_recovery.py"
+  ],
+  "modified_count": 6,
+  "parent_compared_file_count": 758,
+  "parent_source_zip_sha256": "3e43ede91d563beed2a89c91afceeab40580ffb0d0e8ab4a2a71e0470b042ef4",
+  "removal_explanations": {
+    "run_r17_local_validation.bat": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/.",
+    "run_r17_local_validation_debug.bat": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/.",
+    "run_r17_recovery_validation.bat": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/.",
+    "run_r17_sea_ice_validation.bat": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/.",
+    "run_r17_teos_validation.bat": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/.",
+    "verify_r17_local.py": "Superseded as an active root entry point by R18; exact R17 file is preserved under provenance/r17-parent/."
+  },
+  "removed": [
+    "run_r17_local_validation.bat",
+    "run_r17_local_validation_debug.bat",
+    "run_r17_recovery_validation.bat",
+    "run_r17_sea_ice_validation.bat",
+    "run_r17_teos_validation.bat",
+    "verify_r17_local.py"
+  ],
+  "removed_count": 6,
+  "schema": "clem-r18-r17-tree-diff-v1"
+}

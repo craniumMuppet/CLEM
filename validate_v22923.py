@@ -1074,6 +1074,15 @@ def compact_sea_ice_summary(evaluation: dict[str, Any]) -> dict[str, Any]:
         "scientific_temporal_skill_gate_passed": bool(
             evaluation["scientific_temporal_skill_gate_passed"]
         ),
+        "retrospective_temporal_skill_is_release_blocking": bool(
+            evaluation.get("historical_scores_are_release_blocking", False)
+        ),
+        "extent_metrics_are_release_blocking": bool(
+            evaluation.get("extent_metrics_are_release_blocking", False)
+        ),
+        "independent_predictive_scientific_validation_status": evaluation.get(
+            "independent_predictive_scientific_validation_status", "not_available"
+        ),
         "failed_calibration_gates": [
             name for name, passed in evaluation["calibration_gates"].items() if not passed
         ],

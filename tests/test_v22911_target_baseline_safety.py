@@ -53,7 +53,7 @@ def _state_template(output: Path, fingerprint: str = "fingerprint") -> dict[str,
 
 
 def test_version_and_descending_target_semantics() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     targets = sweep.resolve_targets(
         "specific", 278.3, 50.0, 1200.0, "200,300,600,1200"
     )

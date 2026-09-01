@@ -54,7 +54,7 @@ def test_subgrid_extent_is_conservative_and_not_sector_binary() -> None:
     extent = float(np.sum(np.where(north, occupancy, 0.0) * cell_ocean_area))
     np.testing.assert_allclose(area, metrics["northern_hemisphere_sea_ice_area_million_km2"], rtol=0, atol=1e-10)
     np.testing.assert_allclose(extent, metrics["northern_hemisphere_sea_ice_extent_million_km2"], rtol=0, atol=1e-10)
-    assert set(np.unique(occupancy)).issubset({0.0, 1.0})
+    assert np.any((occupancy > 0.0) & (occupancy < 1.0))
     assert 0.0 < extent < float(np.sum(np.where(north, cell_ocean_area, 0.0)))
     assert area <= extent
 

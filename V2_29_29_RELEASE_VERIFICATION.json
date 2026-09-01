@@ -1,0 +1,64 @@
+{
+  "bounded_test_evidence": {
+    "coupled_trust_boundary": {
+      "failed": 0,
+      "file": "verification/v2.29.29/coupled_trust_boundary_tests.txt",
+      "passed": 5,
+      "sha256": "3f2ea59ea3ff3b1f8ed8689f38597c7b6868acf5bbab9f1e2bf4e322510ff5ce"
+    },
+    "current_release": {
+      "failed": 0,
+      "file": "verification/v2.29.29/current_release_tests.txt",
+      "passed": 15,
+      "sha256": "e7d347b8e2a4e147143f15a9210d4090e660a8a86ad7856ae61acd4fd74afccc"
+    },
+    "release_hardening": {
+      "failed": 0,
+      "file": "verification/v2.29.29/release_hardening_tests.txt",
+      "passed": 9,
+      "sha256": "9ed2a46d563ea03d91b55c7941aadab44d33cde161e55b0dd1553f86baa4db87"
+    },
+    "six_source_arctic": {
+      "failed": 0,
+      "file": "verification/v2.29.29/six_source_arctic_tests.txt",
+      "passed": 17,
+      "sha256": "445b1a1c0145e404b032a69dc73e087704e94cd06d766b60e87343a7e45301b7"
+    },
+    "target_baseline_safety": {
+      "failed": 0,
+      "file": "verification/v2.29.29/target_baseline_safety_tests.txt",
+      "passed": 8,
+      "sha256": "dcafb3610416a41a7ab8e182311599a6f262ee856635be9f3673701b1f80233a"
+    }
+  },
+  "bounded_test_total_failed": 0,
+  "bounded_test_total_passed": 54,
+  "canonical_engineering_runner_executed": false,
+  "canonical_engineering_runner_reason": "environment has pytest 9.0.2 and no network/cache access to install the pinned pytest 9.1.1; the canonical runner intentionally fails closed on a version mismatch",
+  "canonical_engineering_runner_required_pytest": "9.1.1",
+  "climate_integration_executed_for_version_bump": false,
+  "climate_integration_required_for_version_bump": false,
+  "date": "2026-09-01",
+  "dynamics_equivalence": "V2_29_29_DYNAMICS_EQUIVALENCE.json",
+  "historical_numerical_evidence_policy": "No new long climate integration was run. Existing v2.29.28 numerical bundles are preserved under their true generation identity and linked through the dynamics-equivalence record.",
+  "model_version": "2.29.29",
+  "pytest_version_in_this_environment": "9.0.2",
+  "python_compileall": "passed",
+  "release_identity_check": "passed",
+  "release_identity_output": {
+    "file": "verification/v2.29.29/release_identity.txt",
+    "sha256": "17148155224e3c7462fb1f7b33dfd8cf42cd30c50e38ddbe42c377896fbbe22f"
+  },
+  "release_tree_fingerprint": {
+    "aggregate_sha256": "f2c47f3e3f7e125471fd2b614cce9ebc65ecde520b2f55d3d10afab78008bc1f",
+    "file": "V2_29_29_RELEASE_TREE_FINGERPRINT.json",
+    "file_count": 481,
+    "sha256": "91bcc5dd767c6dea3574e3b2f0ffd54db16dcdf01f412d4dd74102d91517047d"
+  },
+  "schema_version": 2,
+  "static_zero_year_output": {
+    "file": "verification/v2.29.29/static_zero_year.txt",
+    "sha256": "e93ee4f5b5f574b9ed3c79a1154a5cc8d3f8e67773076099899c65f977735237"
+  },
+  "zero_year_static_physics_check": "passed"
+}

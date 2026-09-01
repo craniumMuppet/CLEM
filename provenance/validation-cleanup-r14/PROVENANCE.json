@@ -1,0 +1,96 @@
+{
+  "artifact": "CLEM v2.29.28 validation-cleanup R14 candidate",
+  "base_climate_model_sha256": "aa3e9d43cf77c400f105ea0c9c98585310081d85bc838b2bdfcaacbde442fd67",
+  "base_source_archive": {
+    "file_count": 694,
+    "name": "CLEM-v2.29.28-source.zip",
+    "sha256": "cd28bd1c35c5031bc5fc50288462ffadf0c256880fa2093210b293dc20682a30"
+  },
+  "base_to_candidate": {
+    "added": [
+      "provenance/validation-cleanup-r14/CHANGELOG.md",
+      "provenance/validation-cleanup-r14/CRYOSAT2_DIAGNOSTIC.md",
+      "provenance/validation-cleanup-r14/CURRENT_R13_SOURCE_AUDIT.md",
+      "provenance/validation-cleanup-r14/PROVENANCE.json",
+      "tests/test_v22928_validation_semantics_and_interface_parity.py"
+    ],
+    "modified": [
+      ".gitattributes",
+      "SOURCE_TREE_SHA256.txt",
+      "app.py",
+      "climate_model.py",
+      "climate_model_gui.py",
+      "combine_v22923_validation.py",
+      "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_03_fixed_mask_crosscheck.csv",
+      "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_09_fixed_mask_crosscheck.csv",
+      "data/validation/sea_ice_fixed_mask/N_03_fixed_mask.csv",
+      "data/validation/sea_ice_fixed_mask/N_09_fixed_mask.csv",
+      "data/validation/sea_ice_physical/cryosat2_rdeft4_monthly.csv",
+      "data/validation/sea_ice_physical/icesat2_is2sitmogr4_monthly.csv",
+      "data/validation/sea_ice_physical/piomas_volume_monthly.csv",
+      "monte_carlo.py",
+      "sea_ice_validation.py",
+      "setting_metadata.py",
+      "validate_v22923.py"
+    ],
+    "removed": []
+  },
+  "candidate_climate_model_sha256": "08d020a197dbf069d3e0b9f4576393021cfdb8a637e77affe113f01ec48a0176",
+  "changes": {
+    "candidate_manifest": [
+      "SOURCE_TREE_SHA256.txt regenerated for this candidate; historical R13 provenance files left unchanged"
+    ],
+    "cryosat_semantics": [
+      "exact interannual correlation explicitly retrospective development diagnostic and non-release-blocking"
+    ],
+    "dead_parameter_cleanup": [
+      "amoc_pycnocline_relaxation_years removed from active GUI/Streamlit/Monte Carlo; hidden compatibility parser retained"
+    ],
+    "frozen_data_byte_integrity": [
+      "seven processed observational CSVs restored to provenance-bound CRLF bytes; exact paths marked -text in .gitattributes"
+    ],
+    "interface_parity": [
+      "desktop GUI physical defaults source canonical ModelConfig"
+    ],
+    "validation_semantics": [
+      "coarse extent non-release-blocking",
+      "retrospective temporal skill non-release-blocking",
+      "independent prospective validation status not_available"
+    ]
+  },
+  "climate_model_ast_equivalent_excluding_build_parser": true,
+  "generated_utc": "2026-08-30T17:25:00Z",
+  "known_unresolved_items": [
+    "NSIDC-0611 v4 sea-ice-age product is still missing; acquisition requires user Earthdata credentials.",
+    "AMOC hydraulic density driver still mixes Southern Ocean surface salinity with South Atlantic upper-limb FovS/advection water mass definitions.",
+    "Current AMOC density closure still uses constant alpha/beta; TEOS-10 remains a diagnostic/sensitivity task.",
+    "Greenland land-ice freshwater is still included in compensated freshwater routing and requires a physics repair plus user-run numerical validation.",
+    "AMOC collapse/recovery/hysteresis sensitivity to reduced closure choices remains unquantified.",
+    "Arctic heat convergence/restoring/extra lapse-rate terms still require mechanism ablations.",
+    "Independent prospective predictive validation remains not available."
+  ],
+  "model_name": "Coupled Low-complexity Earth Model",
+  "model_version": "2.29.28",
+  "physics_integration_run_by_assistant": false,
+  "r13_validation_archive": {
+    "name": "CLEM-v2.29.28-physics-repair-r13-validation-results.zip",
+    "sha256": "3ebb04a5c6d609184f9576a77592c422e26d9956774ab0537111c2324708befb"
+  },
+  "reports": {
+    "changelog": "provenance/validation-cleanup-r14/CHANGELOG.md",
+    "cryosat2_diagnostic": "provenance/validation-cleanup-r14/CRYOSAT2_DIAGNOSTIC.md",
+    "current_source_audit": "provenance/validation-cleanup-r14/CURRENT_R13_SOURCE_AUDIT.md"
+  },
+  "schema_version": "1.0",
+  "tests": {
+    "deselected": 1,
+    "deselected_test": "test_packaging_runtime_smoke_passes_in_minimal_release_environment",
+    "duration_seconds": 20.88,
+    "errors": 0,
+    "failed": 0,
+    "passed": 56,
+    "scope": "bounded lightweight targeted suite"
+  },
+  "validated_climate_dynamics_changed": false,
+  "workflow_revision": "R14 validation-cleanup candidate"
+}

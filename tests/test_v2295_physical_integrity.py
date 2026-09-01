@@ -40,7 +40,7 @@ def _reference_native_area(model: ProcessClimateModel, month: int) -> float:
 
 
 def test_version_native_cycle_and_amoc_physics_defaults() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     config = ModelConfig()
     assert config.amoc_temperature_density_coupling == 1.0
     assert config.arctic_full_cover_equivalent_thickness_m == 3.7

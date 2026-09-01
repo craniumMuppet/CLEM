@@ -207,17 +207,21 @@ The source dataset is not relicensed under the CLEM MIT License.
 
 **Dataset:** EASE-Grid Sea Ice Age  
 **Product ID:** NSIDC-0611  
-**Version used by CLEM:** Version 4  
+**Version used by CLEM:** Version 4 (annual source files revision v4.1)  
 **Provider:** NASA National Snow and Ice Data Center Distributed Active Archive Center  
-**Use in CLEM:** Structural diagnostic of multiyear Arctic sea ice
+**Subset used by CLEM:** Northern Hemisphere, 1984-2024  
+**Use in CLEM:** Structural diagnostic of multiyear Arctic sea ice  
+**Licence metadata:** U.S. Government Works (as listed by the NASA Open Data Portal)
 
-The CLEM diagnostic is documented under:
+CLEM redistributes processed March and September multiyear-sea-ice fractions and provenance metadata, not the original NSIDC NetCDF archive:
 
 ```text
-data/validation/sea_ice_structural/nsidc_0611_v4/
+data/validation/sea_ice_structural/nsidc_0611_v4/multiyear_ice_annual.csv
+data/validation/sea_ice_structural/nsidc_0611_v4/METADATA.json
+data/validation/sea_ice_structural/nsidc_0611_v4/README.md
 ```
 
-The comparison is structural rather than a direct model-observation RMSE target.
+The diagnostic uses NSIDC sea-ice-age categories to estimate the fraction of valid sea-ice cells classified as multiyear ice. The comparison is structural rather than a direct model-observation RMSE target.
 
 ### Citation
 
@@ -225,7 +229,11 @@ Tschudi, M., Meier, W. N., Stewart, J. S., Fowler, C., & Maslanik, J. (2019). *E
 
 DOI: **10.5067/UTAV7490FEPB**
 
-The source dataset is not relicensed under the CLEM MIT License.
+NSIDC states that citation of this dataset is required when the data are used. The NASA Open Data Portal lists NSIDC-0611 as public and identifies its licence field as **U.S. Government Works**.
+
+The original NSIDC-0611 NetCDF files are not included in the CLEM release package. The processed CLEM-derived products retain dataset identification, temporal coverage, processing details, and SHA-256 provenance for all 41 annual source files in `METADATA.json`.
+
+NSIDC-0611 data and derived products are not relicensed under the CLEM MIT License.
 
 ---
 

@@ -1,0 +1,24 @@
+{
+  "candidate": "CLEM v2.29.28 R18.3 release finalization",
+  "canonical_release_evidence_reason": "Runtime pytest version differs from the recorded canonical release requirement; historical canonical evidence was preserved rather than rewritten.",
+  "canonical_release_evidence_regenerated": false,
+  "canonical_release_pytest_requirement": "9.1.1",
+  "date": "2026-09-01",
+  "governing_files_byte_identical_to_validated_r18_2": true,
+  "governing_files_sha256": {
+    "arctic_observation_operator.py": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+    "climate_model.py": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+    "sea_ice_observation.py": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+    "sea_ice_validation.py": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a"
+  },
+  "numerical_integrations_run": 0,
+  "numerical_rerun_required": false,
+  "physics_changed": false,
+  "pytest_version_used": "9.0.2",
+  "python_files_parsed": 244,
+  "python_parse_failures": [],
+  "release_identity_check_passed": true,
+  "targeted_tests_failed": 0,
+  "targeted_tests_passed": 55,
+  "zero_year_static_worker_passed": true
+}

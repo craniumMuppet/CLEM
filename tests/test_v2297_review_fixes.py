@@ -65,7 +65,7 @@ def test_amoc_recovery_and_hosing_gate_match_v22910_recalibration() -> None:
     assert '"long_ssp245_single_year_2100_floor_restored"' in source
 
 
-def test_selected_v22910_physics_defaults_are_frozen() -> None:
+def test_selected_current_physics_defaults_are_frozen() -> None:
     cfg = ModelConfig()
     expected = {
         "arctic_lapse_rate_feedback_wm2_k": 1.1,
@@ -86,7 +86,7 @@ def test_selected_v22910_physics_defaults_are_frozen() -> None:
         "arctic_transient_shortwave_scale": 1.0,
         "arctic_full_cover_equivalent_thickness_m": 3.7,
         "arctic_ice_concentration_exponent": 1.0,
-        "amoc_stratification_saturation_c": 0.6,
+        "amoc_stratification_saturation_c": 4.0,
         "arctic_greenland_marine_influence": 0.1,
     }
     for name, value in expected.items():

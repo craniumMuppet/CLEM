@@ -20,7 +20,7 @@ def _show_error(message: str) -> None:
         ctypes.windll.user32.MessageBoxW(
             None,
             message,
-            "EGCM GUI startup failed",
+            "CLEM GUI startup failed",
             0x00000010,
         )
         return
@@ -47,7 +47,7 @@ def main() -> int:
         except OSError:
             pass
         _show_error(
-            "The EGCM desktop GUI could not start.\n\n"
+            "The CLEM desktop GUI could not start.\n\n"
             f"The full traceback was written to:\n{ERROR_LOG}\n\n"
             f"Last error:\n{details.strip().splitlines()[-1] if details.strip() else 'Unknown error'}"
         )

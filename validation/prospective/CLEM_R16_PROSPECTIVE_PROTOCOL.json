@@ -1,0 +1,68 @@
+{
+  "protocol_id": "CLEM-v2.29.28-R16-prospective-v1",
+  "protocol_version": 1,
+  "frozen_on": "2026-08-31",
+  "model": "Coupled Low-complexity Earth Model v2.29.28",
+  "candidate": "Physics Candidate R16",
+  "source_identity": {
+    "fingerprint_file": "SOURCE_FINGERPRINT.json",
+    "rule": "Any source or protocol change after freeze invalidates the reserved holdout for that changed candidate."
+  },
+  "reserved_period": {
+    "start_year": 2027,
+    "end_year": 2036,
+    "required_complete_years": 10,
+    "evaluate_not_before_year": 2037
+  },
+  "variables": [
+    {
+      "name": "september_arctic_sea_ice_area",
+      "observation_source": "NSIDC Sea Ice Index",
+      "operator": "September monthly mean area on the published observational definition",
+      "metrics": [
+        "rmse",
+        "bias",
+        "pearson_r"
+      ],
+      "primary_skill_metric": "rmse"
+    },
+    {
+      "name": "march_arctic_sea_ice_thickness",
+      "observation_source": "operational satellite thickness product available under frozen acquisition rules",
+      "operator": "March-only footprint-matched area-weighted thickness",
+      "metrics": [
+        "rmse",
+        "bias"
+      ],
+      "primary_skill_metric": "rmse"
+    },
+    {
+      "name": "global_mean_surface_temperature_anomaly",
+      "observation_source": "HadCRUT5 or successor only if continuity metadata document equivalence",
+      "operator": "annual global anomaly using the protocol baseline",
+      "metrics": [
+        "rmse",
+        "bias"
+      ],
+      "primary_skill_metric": "rmse"
+    }
+  ],
+  "baseline_periods": {
+    "gmst": "1850-1900 where supported by the observational product",
+    "sea_ice": "product-native absolute units; no post-freeze anomaly recentering"
+  },
+  "statistical_baselines": [
+    "persistence",
+    "expanding_linear_trend",
+    "temperature_regression",
+    "ar1"
+  ],
+  "missing_data_policy": "A year is usable only when the preregistered observational operator can be evaluated without model-informed imputation. The evaluation remains not_available until 10 complete usable years exist.",
+  "dataset_integrity": "Every observational input must carry acquisition URL/product identifier, version, download date, raw SHA-256, transformation script SHA-256, and processed SHA-256.",
+  "decision_rule": {
+    "status_before_sufficient_evidence": "not_available",
+    "minimum_requirement": "For each primary variable, CLEM RMSE must not exceed the best preregistered simple baseline RMSE; report all metrics and confidence intervals regardless of outcome.",
+    "no_manual_boolean": true
+  },
+  "spatial_extent_policy": "R16 conservative 15-percent subgrid extent is diagnostic and excluded from the predictive release gate because longitude remains unresolved and extent is not a separate prognostic spatial state."
+}

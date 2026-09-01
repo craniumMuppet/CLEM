@@ -1,0 +1,38 @@
+{
+  "added": [
+    "CLEM_v2.29.28_R16_2_LOCAL_RUN_INSTRUCTIONS.txt",
+    "R16_2_PROVENANCE_HOTFIX.md",
+    "R16_2_STATIC_VERIFICATION.json",
+    "R16_TEOS_DELTA_PROVENANCE.json",
+    "provenance/r16-parent/climate_model.py",
+    "run_r16_2_teos_validation.bat",
+    "run_r16_2_teos_validation_debug.bat",
+    "tests/test_r16_2_provenance_hotfix.py"
+  ],
+  "base": "CLEM v2.29.28 R16.1 TEOS setup hotfix",
+  "base_source_zip_sha256": "c60a45b3a694eb0febd57c5de3487f7950add1dee1e7fa6520bebb40a41893d1",
+  "candidate": "CLEM v2.29.28 R16.2 provenance hotfix",
+  "climate_model_sha256_unchanged": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+  "counts": {
+    "added": 8,
+    "modified": 4,
+    "removed": 3
+  },
+  "excluded_canonical_metadata": [
+    "R16_2_SOURCE_DIFF.json",
+    "R16_2_SOURCE_MANIFEST.json",
+    "SOURCE_FINGERPRINT.json",
+    "SOURCE_TREE_SHA256.txt"
+  ],
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "tests/test_r16_1_teos_hotfix.py",
+    "verify_r16_local.py"
+  ],
+  "removed": [
+    "CLEM_v2.29.28_R16_1_LOCAL_RUN_INSTRUCTIONS.txt",
+    "run_r16_1_teos_validation.bat",
+    "run_r16_1_teos_validation_debug.bat"
+  ]
+}

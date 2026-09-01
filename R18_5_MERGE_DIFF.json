@@ -1,0 +1,22 @@
+{
+  "added": [
+    "R18_5_PACKAGE_AUDIT.md",
+    "R18_5_PUBLIC_RELEASE_MERGE.md",
+    "R18_5_RELEASE_STATUS.json",
+    "THIRD_PARTY_DATA.md"
+  ],
+  "candidate": "CLEM v2.29.28 R18.5 public-release merge",
+  "comparison_scope": "Intended source/public-release changes; this diff record and the self-describing source manifest are excluded as generated evidence.",
+  "governing_files_unchanged": true,
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "RELEASE_METADATA.json",
+    "docs/MODEL_LIMITATIONS.md",
+    "docs/VALIDATION.md"
+  ],
+  "parent": "CLEM v2.29.28 R18.4 NSIDC-0611 data integration",
+  "parent_source_zip_sha256": "9701b9d8d0fc74404ce220374daca682be55338422a1c4554215454f2af56033",
+  "removed": [],
+  "user_uploaded_repo_zip_sha256": "a65a390300ebf171bc6cfacde652de7e1dbf506777b52a04465efb724fd4f55e"
+}

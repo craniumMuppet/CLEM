@@ -112,11 +112,12 @@ def test_stack_status_is_truthful_with_repaired_core_five_evidence() -> None:
         "cryosat2_rdeft4_v1",
         "icesat2_is2sitmogr4_v4",
         "osi_saf_osi450a1_v3_1",
+        "nsidc_0611_v4",
     }
     assert status["sources"]["piomas_v2_1"]["available"] is True
     assert status["sources"]["osi_saf_osi450a1_v3_1"]["available"] is True
-    assert status["sources"]["nsidc_0611_v4"]["available"] is False
-    assert status["all_six_observational_products_available"] is False
+    assert status["sources"]["nsidc_0611_v4"]["available"] is True
+    assert status["all_six_observational_products_available"] is True
     assert status["core_five_calibration_validation_stack_complete"] is True
 
 
@@ -234,10 +235,10 @@ class _SyntheticResult:
 def test_evaluate_result_surfaces_six_channels_and_remains_incomplete() -> None:
     payload = evaluate_result(_SyntheticResult())
     assert payload["arctic_validation_stack"]["required_source_count"] == 6
-    assert payload["all_six_observational_products_available"] is False
+    assert payload["all_six_observational_products_available"] is True
     assert payload["physical_volume_thickness_validation"]["complete"] is False
     assert payload["osi_saf_development_crosscheck"]["available"] is True
-    assert payload["ice_age_structural_diagnostic"]["available"] is False
+    assert payload["ice_age_structural_diagnostic"]["available"] is True
     assert payload["observational_stack_complete"] is False
     assert payload["scientific_validation_complete"] is False
     assert "exact observation cell centers" in payload["area_operator"]["mapping"]

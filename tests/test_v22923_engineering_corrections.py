@@ -56,8 +56,8 @@ def production_ledger(
 
 
 def test_v22923_identity_and_primary_documentation_are_semantically_current() -> None:
-    assert MODEL_VERSION == "2.29.28"
-    assert "version = \"2.29.28\"" in (ROOT / "pyproject.toml").read_text(
+    assert MODEL_VERSION == "2.29.29"
+    assert "version = \"2.29.29\"" in (ROOT / "pyproject.toml").read_text(
         encoding="utf-8"
     )
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -65,11 +65,11 @@ def test_v22923_identity_and_primary_documentation_are_semantically_current() ->
     scientific_constraints = (ROOT / "SCIENTIFIC_CONSTRAINTS.md").read_text(
         encoding="utf-8"
     )
-    assert readme.startswith("# Coupled Low-complexity Earth Model v2.29.28")
-    assert changelog.startswith("# Changelog\n\n## 2.29.28")
+    assert readme.startswith("# Coupled Low-complexity Earth Model v2.29.29")
+    assert changelog.startswith("# Changelog\n\n## 2.29.29")
     assert "TEST_RESULTS_V2_29_22.json" not in readme
     assert scientific_constraints.startswith(
-        "# Scientific constraints used by v2.29.28\n"
+        "# Scientific constraints used by v2.29.29\n"
     )
 
 

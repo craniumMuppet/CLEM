@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from prospective_validation_r16 import evaluate as evaluate_r16_prospective
+
 MODEL_VERSION = "2.29.23"
 
 
@@ -269,7 +271,12 @@ def combine_validation(
         }
         engineering_integrity_passed = False
 
-    scientific_release_passed = bool(
+    # Current engineering/physics prerequisites intentionally exclude two
+    # historical diagnostics that the sea-ice validator already declares
+    # non-release-blocking: coarse two-sector spatial extent and retrospective
+    # temporal skill scores. Neither can substitute for untouched prospective
+    # predictive evidence.
+    current_validation_prerequisites_passed = bool(
         observation_files_verified
         and engineering_integrity_passed
         and historical_calibration_passed
@@ -278,15 +285,44 @@ def combine_validation(
         and structural_area_volume_passed
         and arctic_air_engineering_checks_passed
         and greenland_engineering_checks_passed
-        and positive_september_temporal_skill_passed
-        and extent_independently_validated
         and amoc_validation_passed
     )
-    independent_prospective_validation_available = False
-    scientific_release_passed = bool(
-        scientific_release_passed and independent_prospective_validation_available
+    prospective_evidence_path = Path(__file__).resolve().parent / "validation" / "prospective" / "R16_PROSPECTIVE_EVIDENCE.json"
+    prospective = evaluate_r16_prospective(
+        prospective_evidence_path if prospective_evidence_path.exists() else None
     )
-    release_classification = "engineering_only"
+    independent_predictive_scientific_validation_status = str(
+        prospective.get("independent_predictive_scientific_validation_status", "not_available")
+    )
+    independent_predictive_scientific_validation_complete = bool(
+        prospective.get("independent_predictive_scientific_validation_complete", False)
+    )
+    independent_predictive_scientific_validation_passed = bool(
+        prospective.get(
+            "independent_predictive_scientific_validation_passed",
+            independent_predictive_scientific_validation_complete
+            and independent_predictive_scientific_validation_status == "passed",
+        )
+    )
+    independent_prospective_validation_available = bool(
+        independent_predictive_scientific_validation_status != "not_available"
+    )
+    # Backwards-compatible alias. A scientific release requires both the current
+    # engineering/physics prerequisites and a *passed* frozen prospective test.
+    # A completed-but-failed prospective evaluation must never turn this true.
+    scientific_release_passed = bool(
+        current_validation_prerequisites_passed
+        and independent_predictive_scientific_validation_passed
+    )
+    release_classification = (
+        "scientifically_validated"
+        if scientific_release_passed
+        else (
+            "engineering_release_independent_predictive_validation_failed"
+            if independent_predictive_scientific_validation_status == "failed"
+            else "engineering_release_independent_predictive_validation_not_available"
+        )
+    )
 
     configuration_keys = (
         "arctic_winter_transport_enhancement",
@@ -360,7 +396,14 @@ def combine_validation(
         "amoc_validation_passed": amoc_validation_passed,
         "positive_september_temporal_skill_passed": positive_september_temporal_skill_passed,
         "extent_independently_validated": extent_independently_validated,
+        "retrospective_temporal_skill_is_release_blocking": False,
+        "extent_metrics_are_release_blocking": False,
+        "current_validation_prerequisites_passed": current_validation_prerequisites_passed,
         "independent_prospective_validation_available": independent_prospective_validation_available,
+        "independent_predictive_scientific_validation_status": independent_predictive_scientific_validation_status,
+        "independent_predictive_scientific_validation_complete": independent_predictive_scientific_validation_complete,
+        "independent_predictive_scientific_validation_passed": independent_predictive_scientific_validation_passed,
+        "prospective_validation_evidence": prospective,
         "scientific_release_passed": scientific_release_passed,
         "release_classification": release_classification,
         "release_status": {
@@ -377,30 +420,28 @@ def combine_validation(
             "amoc_validation_passed": amoc_validation_passed,
             "positive_september_temporal_skill_passed": positive_september_temporal_skill_passed,
             "extent_independently_validated": extent_independently_validated,
+            "retrospective_temporal_skill_is_release_blocking": False,
+            "extent_metrics_are_release_blocking": False,
+            "current_validation_prerequisites_passed": current_validation_prerequisites_passed,
             "independent_prospective_validation_available": independent_prospective_validation_available,
+            "independent_predictive_scientific_validation_status": independent_predictive_scientific_validation_status,
+            "independent_predictive_scientific_validation_complete": independent_predictive_scientific_validation_complete,
+            "independent_predictive_scientific_validation_passed": independent_predictive_scientific_validation_passed,
             "scientific_release_passed": scientific_release_passed,
             "release_classification": release_classification,
         },
         "test_results": test_results,
-        "recent_period_september_failure_is_release_blocking": True,
+        "recent_period_september_failure_is_release_blocking": False,
         "interpretation": (
             "Historical and 2021-2025 sea-ice records were inspected during model "
-            "development. Passing these gates demonstrates calibration and "
-            "development consistency, not independent predictive validation. "
-            "Prospective untouched temporal evaluation begins in 2027."
+            "development. Retrospective temporal scores and coarse two-sector extent "
+            "are diagnostics and are not release-blocking physical predictions. "
+            "Current engineering/physics prerequisites can pass while independent "
+            "predictive scientific validation remains not_available until sufficient "
+            "untouched prospective observations exist."
         ),
     }
-    engineering_release_passed = bool(
-        observation_files_verified
-        and engineering_integrity_passed
-        and historical_calibration_passed
-        and recent_period_evaluation_passed
-        and cross_resolution_passed
-        and structural_area_volume_passed
-        and arctic_air_engineering_checks_passed
-        and greenland_engineering_checks_passed
-        and amoc_validation_passed
-    )
+    engineering_release_passed = current_validation_prerequisites_passed
     summary["coupled_validation_complete"] = engineering_release_passed
     summary["version_matched_arctic_greenland_amoc_validation_complete"] = bool(
         engineering_release_passed

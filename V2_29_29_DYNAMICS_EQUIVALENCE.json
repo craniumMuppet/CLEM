@@ -1,0 +1,55 @@
+{
+  "all_non_climate_model_governing_modules_byte_identical": true,
+  "climate_integration_rerun_required_for_version_bump": false,
+  "climate_model_change_class": "MODEL_VERSION identity line only",
+  "climate_model_version_neutral_identical": true,
+  "date": "2026-09-01",
+  "equivalence_passed": true,
+  "governing_module_comparison": {
+    "amoc_continuation.py": {
+      "byte_identical": true,
+      "parent_sha256": "f57c1856750cee2c186131d2106d3ade02d544e5598004fd6e293c7dbf4a0f13",
+      "v2_29_29_sha256": "f57c1856750cee2c186131d2106d3ade02d544e5598004fd6e293c7dbf4a0f13"
+    },
+    "arctic_observation_operator.py": {
+      "byte_identical": true,
+      "parent_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+      "v2_29_29_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba"
+    },
+    "arctic_process_budget.py": {
+      "byte_identical": true,
+      "parent_sha256": "20371ecd40bf0e4a1cded7d7ffdc337c1a894f9f12e58177b3a2d74e5b237cbf",
+      "v2_29_29_sha256": "20371ecd40bf0e4a1cded7d7ffdc337c1a894f9f12e58177b3a2d74e5b237cbf"
+    },
+    "arctic_validation_stack.py": {
+      "byte_identical": true,
+      "parent_sha256": "dc0cfc9cbf392d0008f57aabf8f94c48f99e7bac2c4be95f9e3d95d70b4629d1",
+      "v2_29_29_sha256": "dc0cfc9cbf392d0008f57aabf8f94c48f99e7bac2c4be95f9e3d95d70b4629d1"
+    },
+    "climate_model.py": {
+      "byte_identical": false,
+      "normalized_version_neutral_parent_sha256": "ee3ab8654e9bb97031da6771a3e4c7085da69311ae4b0f5aefe4e9701043222c",
+      "normalized_version_neutral_v2_29_29_sha256": "ee3ab8654e9bb97031da6771a3e4c7085da69311ae4b0f5aefe4e9701043222c",
+      "parent_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+      "v2_29_29_sha256": "55fb982cbd58dc50593f3801126802d160374323d67c34ef06e01164c089c71e",
+      "version_neutral_identical": true
+    },
+    "sea_ice_observation.py": {
+      "byte_identical": true,
+      "parent_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+      "v2_29_29_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95"
+    },
+    "sea_ice_validation.py": {
+      "byte_identical": true,
+      "parent_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a",
+      "v2_29_29_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a"
+    }
+  },
+  "governing_physics_retuned": false,
+  "historical_evidence_policy": "Retain original v2.29.28 filenames and embedded version metadata. Do not rename or rewrite numerical result artifacts as v2.29.29.",
+  "parent_model_version": "2.29.28",
+  "parent_release": "R18.5.1 public-release attribution maintenance",
+  "purpose": "Permit honest inheritance of v2.29.28 numerical evidence across the v2.29.29 semantic public-release version bump without relabelling historical integrations.",
+  "release_model_version": "2.29.29",
+  "schema_version": 1
+}

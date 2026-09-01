@@ -31,20 +31,20 @@ def _control_model(**overrides: object) -> ProcessClimateModel:
 
 def test_v227_defaults_keep_freshwater_rates_and_use_structural_amoc_settings() -> None:
     config = ModelConfig()
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     assert config.hydrological_freshwater_sv_per_k == 0.006
     assert config.greenland_freshwater_sv_per_k == 0.005
     assert config.greenland_surface_mass_balance_enabled
     assert config.greenland_dynamic_discharge_fraction == 0.10
     assert config.greenland_pdd_melt_factor_gt_per_degree_day == 0.38
-    assert config.greenland_max_freshwater_sv == 0.025
+    assert config.greenland_max_freshwater_sv == 0.10
     assert config.amoc_temperature_density_coupling == 1.0
-    assert config.amoc_stratification_saturation_c == 0.6
-    assert config.amoc_convection_temperature_density_coupling == 0.3
+    assert config.amoc_stratification_saturation_c == 4.0
+    assert config.amoc_convection_temperature_density_coupling == 0.8
     assert config.amoc_density_transport_exponent == 1.5
     assert config.amoc_convection_recovery_years == 80.0
-    assert config.amoc_convection_density_scale_factor == 4.0
-    assert config.amoc_reference_density_driver == 7.5e-4
+    assert config.amoc_convection_density_scale_factor == 1.0
+    assert config.amoc_reference_density_driver == 4.34e-4
     assert config.ocean_heat_exchange_wm2_k == 1.45
     assert config.arctic_winter_transport_enhancement == 19.0
     assert config.arctic_open_water_stable_exchange_wm2_k == 0.5
@@ -184,8 +184,8 @@ def test_greenland_combined_diagnostic_obeys_total_rate_and_reservoir_caps() -> 
 
 def test_release_metadata_and_normal_interfaces_are_synchronized() -> None:
     root = Path(__file__).resolve().parents[1]
-    assert 'version = "2.29.28"' in (root / "pyproject.toml").read_text(encoding="utf-8")
-    assert '"model_version": "2.29.28"' in (root / "dependency_integrity.lock.json").read_text(encoding="utf-8")
+    assert 'version = "2.29.29"' in (root / "pyproject.toml").read_text(encoding="utf-8")
+    assert '"model_version": "2.29.29"' in (root / "dependency_integrity.lock.json").read_text(encoding="utf-8")
     for filename in ("app.py", "climate_model_gui.py"):
         text = (root / filename).read_text(encoding="utf-8")
         assert "2.26.0" not in text

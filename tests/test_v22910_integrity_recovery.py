@@ -35,7 +35,7 @@ def _safe_summary() -> dict[str, float]:
 
 
 def test_version_and_native_amoc_reference() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     ratios: list[float] = []
     north: list[float] = []
     for resolution in (2.5, 5.0, 10.0):

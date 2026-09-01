@@ -16,6 +16,7 @@
     "version_matched_arctic_greenland_amoc_validation_complete": true
   },
   "model_version": "2.29.28",
+  "nsidc_0611_available": true,
   "package_name": "emergent_global_climate_model_v2_29_28",
   "release_classification": "engineering_release_with_observational_recalibration; scientific_predictive_validation_incomplete",
   "scientific_status_sources": [

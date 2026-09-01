@@ -42,7 +42,7 @@ def test_v226_defaults_are_physical_and_freshwater_is_not_inflated() -> None:
     assert config.hydrological_freshwater_sv_per_k == 0.006
     assert config.greenland_freshwater_sv_per_k == 0.005
     assert config.amoc_temperature_density_coupling == 1.0
-    assert config.amoc_convection_density_scale_factor == 4.0
+    assert config.amoc_convection_density_scale_factor == 1.0
     assert config.hydrological_freshwater_sv_per_k < 0.023
     assert config.greenland_freshwater_sv_per_k < 0.017
     assert config.arctic_air_local_warming_multiplier == 1.0

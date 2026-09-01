@@ -1,4 +1,4 @@
-name: clem-v2.29.28-physics-r13-ci
+name: clem-v2.29.29-physics-r13-ci
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
       - name: Check CLI startup
         run: python climate_model.py --help
 
-      - name: Run Coupled Low-complexity Earth Model 2.29.28 / Repair R13 release-consistency checks
+      - name: Run Coupled Low-complexity Earth Model 2.29.29 / Repair R13 release-consistency checks
         run: python verify_physics_local.py --worker-mode static
 
       - name: Run GUI launcher regression tests

@@ -1,0 +1,17 @@
+{
+  "added": [
+    "test_r15_setup_record_hotfix.py",
+    "R15_1_HOTFIX_VERIFICATION.json",
+    "R15_1_R15_TO_R15_1_CHANGES.json"
+  ],
+  "base": "R15",
+  "candidate": "R15.1",
+  "modified": [
+    "climate_model.py",
+    "verify_r15_local.py",
+    "R15_IMPLEMENTATION_AND_LOCAL_VALIDATION.md",
+    "CLEM_v2.29.28_R15_LOCAL_RUN_INSTRUCTIONS.txt"
+  ],
+  "physics_equations_changed": false,
+  "removed": []
+}

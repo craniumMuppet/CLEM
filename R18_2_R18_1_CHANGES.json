@@ -1,0 +1,44 @@
+{
+  "added": [
+    "R18_2_OBSERVATION_OPERATOR_HOTFIX.md",
+    "R18_2_PARENT_PROVENANCE.json",
+    "provenance/r18.1-parent/R18_1_AMOC_BISTABILITY_DIAGNOSIS.json",
+    "provenance/r18.1-parent/R18_1_PARENT_PROVENANCE.json",
+    "provenance/r18.1-parent/R18_RESULTS_REVIEW.md",
+    "provenance/r18.1-parent/arctic_observation_operator.py",
+    "provenance/r18.1-parent/climate_model.py",
+    "provenance/r18.1-parent/run_r18_local_validation.bat",
+    "provenance/r18.1-parent/run_r18_local_validation_debug.bat",
+    "provenance/r18.1-parent/run_r18_recovery_validation.bat",
+    "provenance/r18.1-parent/run_r18_sea_ice_validation.bat",
+    "provenance/r18.1-parent/sea_ice_observation.py",
+    "provenance/r18.1-parent/sea_ice_validation.py",
+    "provenance/r18.1-parent/verify_r18_local.py",
+    "run_r18_2_seaice_operator_validation.bat",
+    "run_r18_2_seaice_operator_validation_debug.bat",
+    "tests/test_r18_2_seaice_operator.py",
+    "verify_r18_2_seaice_operator.py"
+  ],
+  "arctic_observation_operator_byte_identical": true,
+  "base": "CLEM v2.29.28 R18.1 maintenance",
+  "base_source_zip_sha256": "578f1b4677fa163af0a400fa2ec5e59a767fba9a84f660bf053d89212a588775",
+  "candidate": "CLEM v2.29.28 R18.2 sea-ice observation-operator hotfix",
+  "climate_model_byte_identical": true,
+  "governing_physics_changed": false,
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "tests/test_r18_1_finalizer_and_diagnosis.py",
+    "tests/test_r18_source_fixes.py"
+  ],
+  "note": "Canonical R18.2 manifest/fingerprint/tree files are generated after this change record and are therefore not self-hashed here.",
+  "removed": [
+    "run_r18_local_validation.bat",
+    "run_r18_local_validation_debug.bat",
+    "run_r18_recovery_validation.bat",
+    "run_r18_sea_ice_validation.bat",
+    "verify_r18_local.py"
+  ],
+  "sea_ice_observation_byte_identical": true,
+  "sea_ice_validation_byte_identical": true
+}

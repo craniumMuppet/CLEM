@@ -1,0 +1,16 @@
+{
+  "candidate": "CLEM v2.29.28 R18.2 sea-ice observation-operator hotfix",
+  "date": "2026-09-01",
+  "r18_1_parent_source_zip_sha256": "578f1b4677fa163af0a400fa2ec5e59a767fba9a84f660bf053d89212a588775",
+  "r18_1_climate_model_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+  "r18_1_sea_ice_observation_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+  "r18_1_arctic_observation_operator_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+  "r18_1_sea_ice_validation_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a",
+  "r18_1_verify_r18_local_sha256": "6ed83bae00886b55c72f0a86874dace23ff3789a51ede43d996f6105e9e20f9a",
+  "governing_physics_changed": false,
+  "sea_ice_physics_retuned": false,
+  "amoc_physics_retuned": false,
+  "observation_operator_hotfix_only": true,
+  "reason": "R18 fixed-mask reporting mixed NSIDC 15%-cell-threshold area with a support-conserving area integral and used monthly-boundary summary sampling. R18.2 reports both operator families explicitly and scores nearest the established month-centred targets from native 0.05-year records.",
+  "local_rerun_scope": "two historical sea-ice evaluation branches only"
+}

@@ -1,0 +1,26 @@
+{
+  "added": [
+    "CLEM_v2.29.28_R16_1_LOCAL_RUN_INSTRUCTIONS.txt",
+    "R16_1_TEOS_HOTFIX.md",
+    "R16_RESULTS_REVIEW.json",
+    "R16_RESULTS_REVIEW.md",
+    "run_r16_1_teos_validation.bat",
+    "run_r16_1_teos_validation_debug.bat",
+    "tests/test_r16_1_teos_hotfix.py"
+  ],
+  "added_count": 7,
+  "base": "CLEM v2.29.28 Physics Candidate R16",
+  "candidate": "CLEM v2.29.28 Physics Candidate R16.1 TEOS setup hotfix",
+  "modified": [
+    "README.md",
+    "amoc_density_r16.py",
+    "climate_model.py",
+    "run_r16_local_validation.bat",
+    "run_r16_local_validation_debug.bat",
+    "verify_r16_local.py"
+  ],
+  "modified_count": 6,
+  "removed": [],
+  "removed_count": 0,
+  "scope": "canonical identity files excluded from diff counts"
+}

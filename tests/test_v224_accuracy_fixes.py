@@ -15,7 +15,7 @@ def test_v224_default_parameters() -> None:
     assert config.hydrological_freshwater_sv_per_k == 0.006
     assert config.greenland_freshwater_sv_per_k == 0.005
     assert config.amoc_temperature_density_coupling == 1.0
-    assert config.amoc_surface_heat_coupling_fraction == 0.075
+    assert config.amoc_surface_heat_coupling_fraction == 0.5
 
 
 def test_historical_gmst_uses_1850_1900_reference() -> None:

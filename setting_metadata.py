@@ -651,25 +651,25 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "amoc_surface_heat_coupling": _physical(
         "Fraction of diagnosed AMOC heat-transport anomaly applied directly to the surface mixed layer.",
-        "No observational CI. Built-in prior support: 0.02–0.80; default 0.075.",
+        "No observational CI. Built-in prior support: 0.02–0.80; default 0.50.",
         "Unresolved partition between surface expression, gyres, atmosphere, and vertical redistribution.",
         "Low",
     ),
     "amoc_surface_heat_coupling_fraction": _physical(
         "Fraction of diagnosed AMOC heat-transport anomaly applied directly to the surface mixed layer.",
-        "No observational CI. Built-in prior support: 0.02–0.80; default 0.075.",
+        "No observational CI. Built-in prior support: 0.02–0.80; default 0.50.",
         "Unresolved partition between surface expression, gyres, atmosphere, and vertical redistribution.",
         "Low",
     ),
     "amoc_heat_response_damping": _physical(
         "Conservative regional damping that transfers heat between Atlantic and non-Atlantic reservoirs when an AMOC temperature contrast develops.",
-        "No direct observational CI. Built-in prior support: 0.20–5.0 W/m2/K; default 1.35.",
+        "No direct observational CI. Built-in prior support: 0.20–5.0 W/m2/K; default 2.60.",
         "Unresolved atmospheric compensation, gyre exchange, and regional radiative damping.",
         "Low",
     ),
     "amoc_heat_response_damping_wm2_k": _physical(
         "Conservative regional damping that transfers heat between Atlantic and non-Atlantic reservoirs when an AMOC temperature contrast develops.",
-        "No direct observational CI. Built-in prior support: 0.20–5.0 W/m2/K; default 1.35.",
+        "No direct observational CI. Built-in prior support: 0.20–5.0 W/m2/K; default 2.60.",
         "Unresolved atmospheric compensation, gyre exchange, and regional radiative damping.",
         "Low",
     ),
@@ -680,8 +680,8 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Medium",
     ),
     "atlantic_gyre_heat_transport_pw": _physical(
-        "Reference Atlantic heat transport attributed to wind-driven gyres rather than overturning.",
-        "No single observational CI for the model decomposition. Built-in prior support: 0.10–1.00 PW; default 0.52 PW. Total RAPID transport is about 1.2 PW.",
+        "Diagnostic-only reference gyre contribution used in RAPID total-MHT scoring; it does not enter climate tendencies.",
+        "Default 0.52 PW. Retained as a diagnostic nuisance parameter for heat-transport scoring, not as a climate-control knob.",
         "RAPID total heat transport plus a reduced overturning/gyre decomposition.",
         "Medium",
     ),
@@ -735,7 +735,7 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "amoc_reference_density_driver": _physical(
         "Fixed absolute density-driver scale used to screen control-state hydrography before per-member anomaly normalization.",
-        "Built-in prior support: 4.0e-4–1.5e-3; default 7.5e-4 in the model's nondimensional linear equation-of-state units.",
+        "Built-in prior support: 4.0e-4–1.5e-3; default 4.34e-4 in the model's nondimensional linear equation-of-state units.",
         "Canonical control-state north-south thermal and salinity density contrast.",
         "Medium",
     ),
@@ -763,15 +763,15 @@ SETTING_INFO: dict[str, SettingInfo] = {
 
     # Convection and pycnocline closure.
     "amoc_convection_critical_density_ratio": _physical(
-        "Local northern surface-to-deep density ratio at the midpoint of the continuous deep-convection response.",
-        "No observational CI. Built-in prior support: 0.84–0.97; default 0.91 after joint SSP5-8.5 and hosing calibration.",
-        "Reduced-model convection response centre; it does not trigger a discrete collapsed state.",
+        "Deprecated compatibility-only field; current transport equations do not read it.",
+        "Inactive in CLEM v2.29.29 dynamics; compatibility default 0.00; no active uncertainty range or Monte Carlo prior.",
+        "Legacy configuration compatibility only.",
         "Low",
     ),
     "amoc_convection_transition_width": _physical(
-        "Width of the smooth density interval over which deep-convection efficiency changes.",
-        "No observational CI. Built-in prior support: 0.015–0.12; default 0.035.",
-        "Represents spatial and temporal heterogeneity of deep-convection weakening.",
+        "Deprecated compatibility-only field; current transport equations do not read it.",
+        "Inactive in CLEM v2.29.29 dynamics; compatibility default 0.10; no active uncertainty range or Monte Carlo prior.",
+        "Legacy configuration compatibility only.",
         "Low",
     ),
     "amoc_convection_density_scale_factor": _physical(
@@ -787,9 +787,9 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Low",
     ),
     "amoc_convection_transport_exponent": _physical(
-        "Exponent linking prognostic deep-convection efficiency directly to overturning transport.",
-        "No observational CI. Built-in prior support: 0.5–1.5; default 1.0.",
-        "Required coupling between sinking efficiency and AMOC transport in this reduced model.",
+        "Deprecated compatibility-only field; current transport equations do not read it.",
+        "Inactive in CLEM v2.29.29 dynamics; compatibility default 0.00; no active uncertainty range or Monte Carlo prior.",
+        "Legacy configuration compatibility only.",
         "Low",
     ),
     "amoc_convective_mixing_reference_sv": _physical(
@@ -848,14 +848,14 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "amoc_pycnocline_feedback_strength": _physical(
         "Fraction of the pycnocline-depth anomaly allowed to feed back onto northern sinking transport.",
-        "No observational CI. Built-in prior support: 0–0.50; default 0.10.",
+        "No observational CI. Built-in prior support: 0–0.50; default 0.35.",
         "Reduced feedback coefficient chosen to avoid unrealistic algebraic self-restoration.",
         "Low",
     ),
     "amoc_pycnocline_relaxation_years": _physical(
-        "E-folding time for pycnocline depth to relax toward its transport-balance target.",
-        "No direct CI. Built-in prior support: 40–500 years; default 150.",
-        "Thermocline adjustment in reduced pycnocline models.",
+        "Deprecated compatibility-only field retained for old configurations; the current prognostic pycnocline equation does not use it.",
+        "Inactive in CLEM v2.29.29 dynamics; no active uncertainty range or Monte Carlo prior.",
+        "Legacy configuration compatibility only.",
         "Low",
     ),
     "amoc_ekman_inflow": _physical(

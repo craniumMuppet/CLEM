@@ -80,7 +80,7 @@ def _open_heat_for_temperature(
 
 
 def test_v2292_version_and_positive_coupling_validation() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     config = ModelConfig()
     config.validate()
     assert config.arctic_lateral_ocean_heat_transport_wm2_per_ice_fraction == pytest.approx(25.0)

@@ -1,0 +1,17 @@
+{
+  "candidate": "CLEM v2.29.28 Physics Candidate R15",
+  "date": "2026-08-31",
+  "numerical_integrations_run_by_assistant": false,
+  "verification": {
+    "targeted_lightweight_tests_passed": 52,
+    "targeted_lightweight_tests_failed": 0,
+    "pytest_tests_collected": 444,
+    "python_files_ast_parsed": 217,
+    "python_ast_failures": 0,
+    "r15_local_segment_specs": 28,
+    "r15_local_segment_spec_failures": 0,
+    "r15_static_worker_passed": true,
+    "mandatory_max_local_integration_chunk_years": 5
+  },
+  "numerical_acceptance": "pending_user_local_R15_validation_bundle"
+}

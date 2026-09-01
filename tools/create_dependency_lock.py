@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK_PATH = ROOT / "dependency_integrity.lock.json"
-MODEL_VERSION = "2.29.28"
+MODEL_VERSION = "2.29.29"
 
 
 def installed_content_sha256(distribution: metadata.Distribution) -> str:

@@ -1,0 +1,32 @@
+{
+  "added": [
+    "R18_2_RESULTS_REVIEW.md",
+    "R18_3_DYNAMICS_EQUIVALENCE.json",
+    "R18_3_FINAL_RELEASE_AUDIT.md",
+    "R18_3_RELEASE_STATUS.json",
+    "R18_3_STATIC_VERIFICATION.json"
+  ],
+  "base": "CLEM v2.29.28 R18.2 sea-ice observation-operator hotfix",
+  "base_source_zip_sha256": "bef91cd0ee1e3d439bca460f5df8a7c28adf949c336dd90fe7d1e57d7f08ee5a",
+  "candidate": "CLEM v2.29.28 R18.3 release finalization",
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "RELEASE_METADATA.json",
+    "check_release_identity.py",
+    "combine_v22923_validation.py",
+    "launch_gui.pyw",
+    "prospective_validation_r16.py",
+    "run_gui.bat",
+    "run_v22928_engineering_tests.py",
+    "tests/test_v22928_release_finalization.py",
+    "tests/test_v22928_validation_semantics_and_interface_parity.py",
+    "tools/finalize_v22928_release.py",
+    "tools/v22928_release_integrity.py"
+  ],
+  "note": "R18_3_R18_2_CHANGES.json and R18_3_SOURCE_MANIFEST.json are generated after this comparison and therefore are not self-listed.",
+  "numerical_rerun_required": false,
+  "physics_changed": false,
+  "removed": [],
+  "removed_count": 0
+}

@@ -1,0 +1,36 @@
+{
+  "candidate": "CLEM v2.29.28 R18.5 public-release merge",
+  "date": "2026-09-01",
+  "governing_files_sha256": {
+    "arctic_observation_operator.py": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+    "climate_model.py": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+    "sea_ice_observation.py": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+    "sea_ice_validation.py": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a"
+  },
+  "merge_basis": {
+    "user_post_r13_changes": [
+      "README.md",
+      "THIRD_PARTY_DATA.md"
+    ],
+    "user_readme_commit": "639cb720caeba4000031cf3c213f8a05ff06d0d5",
+    "user_repository_base_tag": "v2.29.28-r13",
+    "user_repository_base_tag_commit": "9937f9c361bb954a7896cc74db0922bb15cabf85",
+    "user_repository_head_commit": "0850f7768cc80eaf89784cd2ea0a554aeeeb7f5d",
+    "validated_parent": "CLEM v2.29.28 R18.4 NSIDC-0611 data integration"
+  },
+  "model_version": "2.29.28",
+  "numerical_rerun_required": false,
+  "observation_operator_changed": false,
+  "physics_changed": false,
+  "public_release_files_sha256": {
+    "LICENSE": "4129f7b3ce0d1d208a7b4c99ee24a47f13c98d802a0d9b09b59984665574054f",
+    "README.md": "4c6d40e566672200b6c4ce1984e53691915be477f6f3eba44976ea7d74627760",
+    "THIRD_PARTY_DATA.md": "c19519b04d67bc7186fff941d9b3d4201ce658007d33c4811b5566c282107f40"
+  },
+  "scientific_release": {
+    "arctic_observational_stack": "6/6 available",
+    "independent_predictive_scientific_validation_status": "not_available",
+    "nsidc_0611_v4_available": true,
+    "reason": "Frozen 2027-2036 prospective holdout observations do not yet exist."
+  }
+}

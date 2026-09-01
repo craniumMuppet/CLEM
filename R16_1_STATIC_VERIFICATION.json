@@ -1,0 +1,17 @@
+{
+  "candidate": "CLEM v2.29.28 Physics Candidate R16.1 TEOS setup hotfix",
+  "date": "2026-08-31",
+  "focused_tests": {
+    "command": "python -m pytest -q tests/test_r16_1_teos_hotfix.py tests/test_r16_source_fixes.py",
+    "failed": 0,
+    "passed": 15
+  },
+  "numerical_integrations_run_here": false,
+  "python_ast_files": 220,
+  "python_ast_parse_errors": 0,
+  "r16_completed_child_chunks": 840,
+  "r16_completed_non_teos_experiments_reused": 31,
+  "r16_failed_preintegration_teos_experiments": 3,
+  "r16_max_child_advance_years": 5.0,
+  "teos_delta_numerical_status": "pending_user_local_run"
+}

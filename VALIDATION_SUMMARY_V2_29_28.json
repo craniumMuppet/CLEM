@@ -5230,7 +5230,7 @@
       "profile": "tested-code-and-scientific-inputs",
       "schema_version": 2
     },
-    "runner_command": "python run_v22928_engineering_tests.py",
+    "runner_command": "C:\\Users\\viktor.dahlberg\\AppData\\Local\\Programs\\Python\\Python313\\python.exe run_v22928_engineering_tests.py",
     "runner_exit_code": 0,
     "schema_version": 4,
     "scope": "bounded release/recalibration and Arctic physical/coupled regression suite",

@@ -1,0 +1,18 @@
+{
+  "candidate": "CLEM v2.29.28 R18.2 sea-ice observation-operator hotfix",
+  "climate_model_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+  "date": "2026-09-01",
+  "governing_files_byte_identical_to_r18_1": true,
+  "local_rerun_scope": "two historical sea-ice evaluation branches only",
+  "physics_changed": false,
+  "python_files_parsed": 244,
+  "python_parse_failures": [],
+  "r18_2_experiment_count": 2,
+  "r18_2_max_chunk_years": 5.0,
+  "r18_2_static_worker_passed": true,
+  "slow_legacy_batches_counted": false,
+  "slow_legacy_note": "Two broader legacy prognostic-sea-ice batches exceeded the bounded execution window after partial passing output; they are intentionally not counted.",
+  "targeted_tests_failed": 0,
+  "targeted_tests_passed": 27,
+  "verify_r18_2_seaice_operator_sha256": "c445649a161b4e4759179a219843bdfa90a421027d21b4d7e4a06bd0f8b5107b"
+}

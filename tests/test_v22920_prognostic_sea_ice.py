@@ -34,7 +34,7 @@ def small_model(**overrides: object) -> ProcessClimateModel:
 
 def test_version_and_constrained_production_defaults() -> None:
     config = ModelConfig()
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     assert config.arctic_winter_transport_enhancement == pytest.approx(19.0)
     assert config.arctic_winter_transport_enhancement <= 25.0
     assert config.arctic_greenland_marine_influence == pytest.approx(0.10)

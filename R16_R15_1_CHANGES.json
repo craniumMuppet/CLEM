@@ -1,0 +1,51 @@
+{
+  "added": [
+    "CLEM_v2.29.28_R16_LOCAL_RUN_INSTRUCTIONS.txt",
+    "R15_1_RESULTS_REVIEW.md",
+    "R16_IMPLEMENTATION_AND_LOCAL_VALIDATION.md",
+    "R16_SEA_ICE_EXTENT_REPAIR.md",
+    "R16_STATIC_VERIFICATION.json",
+    "amoc_density_r16.py",
+    "parameter_activity_r16.py",
+    "prospective_validation_r16.py",
+    "requirements-r16-teos10.txt",
+    "run_r16_local_validation.bat",
+    "run_r16_local_validation_debug.bat",
+    "tests/test_r16_source_fixes.py",
+    "validation/prospective/CLEM_R16_PROSPECTIVE_PROTOCOL.json",
+    "verify_r16_local.py"
+  ],
+  "base": "CLEM v2.29.28 Physics Candidate R15.1",
+  "candidate": "CLEM v2.29.28 Physics Candidate R16",
+  "counts": {
+    "added": 14,
+    "modified": 11,
+    "removed": 11
+  },
+  "modified": [
+    "README.md",
+    "app.py",
+    "climate_model.py",
+    "climate_model_gui.py",
+    "combine_v22923_validation.py",
+    "sea_ice_observation.py",
+    "sea_ice_validation.py",
+    "setting_metadata.py",
+    "tests/test_2026_sea_ice_scientific_review_fixes.py",
+    "tests/test_v22928_validation_semantics_and_interface_parity.py",
+    "tests/test_v2294_accuracy_integrity.py"
+  ],
+  "removed": [
+    "CLEM_v2.29.28_R15_LOCAL_RUN_INSTRUCTIONS.txt",
+    "SOURCE_FINGERPRINT.json",
+    "SOURCE_TREE_SHA256.txt",
+    "amoc_density_r15.py",
+    "prospective_validation_r15.py",
+    "requirements-r15-teos10.txt",
+    "run_r15_local_validation.bat",
+    "run_r15_local_validation_debug.bat",
+    "tests/test_r15_source_fixes.py",
+    "validation/prospective/CLEM_R15_PROSPECTIVE_PROTOCOL.json",
+    "verify_r15_local.py"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "amoc_diagnosis_sha256": "5eb09ef40be45935675d19a44f1c7c057d791f45c3a0fdfbc0d78fe3e18926db",
+  "candidate": "CLEM v2.29.28 R18.1 maintenance",
+  "climate_model_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+  "corrected_finalizer_all_10_segments_complete": true,
+  "corrected_finalizer_replayed_on_completed_r18_chunks": true,
+  "date": "2026-09-01",
+  "default_no_reversal_bistability_supported": true,
+  "default_zero_hosing_unstable_separator_sv": 12.31976361187811,
+  "physics_changed": false,
+  "python_files_parsed": 238,
+  "python_parse_failures": [],
+  "r18_local_integrations_rerun": false,
+  "r18_local_rerun_required": false,
+  "r18_static_worker_passed": true,
+  "reversal_enabled_bistability_supported": true,
+  "reversal_enabled_weak_stable_amoc_sv": -5.738865444193415,
+  "targeted_tests_failed": 0,
+  "targeted_tests_passed": 76,
+  "verify_r18_local_sha256": "6ed83bae00886b55c72f0a86874dace23ff3789a51ede43d996f6105e9e20f9a"
+}

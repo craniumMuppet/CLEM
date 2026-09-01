@@ -1,0 +1,23 @@
+MODEL_NAME_is_CLEM_long_name: PASS
+MODEL_VERSION_is_2.29.29: PASS
+pyproject_version_is_2.29.29: PASS
+pyproject_name_matches_CLEM_long_name: PASS
+MODEL_VERSION_matches_pyproject: PASS
+README_title_is_2.29.29: PASS
+README_does_not_claim_CLEM_v2.13: PASS
+README_uses_long_model_name: PASS
+metadata_model_version: PASS
+metadata_model_name: PASS
+metadata_repair_revision: PASS
+repair_revision_not_model_version: PASS
+app_header_not_stale_v2.29.23: PASS
+streamlit_title_uses_MODEL_NAME_AND_VERSION: PASS
+desktop_title_uses_MODEL_NAME_AND_VERSION: PASS
+old_brand_absent_from_active_runtime_surfaces: PASS
+CI_uses_2.29.29_identity: PASS
+release_launcher_uses_long_name_and_2.29.29: PASS
+validation_launcher_uses_long_name_and_2.29.29: PASS
+desktop_bootstrap_uses_CLEM_window_title: PASS
+desktop_error_dialog_uses_CLEM_name: PASS
+release_package_name_uses_CLEM_identity: PASS
+RELEASE IDENTITY CHECK PASSED

@@ -1,0 +1,61 @@
+{
+  "added": [
+    "R17_IMPLEMENTATION_AND_LOCAL_VALIDATION.md",
+    "R17_PARENT_PROVENANCE.json",
+    "R17_RESULTS_BASELINE.md",
+    "R17_STATIC_VERIFICATION.json",
+    "provenance/r16.2-parent/climate_model.py",
+    "provenance/r16.2-parent/requirements-r16-teos10.txt",
+    "provenance/r16.2-parent/run_r16_2_teos_validation.bat",
+    "provenance/r16.2-parent/run_r16_2_teos_validation_debug.bat",
+    "provenance/r16.2-parent/run_r16_local_validation.bat",
+    "provenance/r16.2-parent/run_r16_local_validation_debug.bat",
+    "provenance/r16.2-parent/sea_ice_observation.py",
+    "provenance/r16.2-parent/tests/test_r16_2_provenance_hotfix.py",
+    "provenance/r16.2-parent/verify_r16_local.py",
+    "requirements-r17-teos10.txt",
+    "run_r17_local_validation.bat",
+    "run_r17_local_validation_debug.bat",
+    "run_r17_recovery_validation.bat",
+    "run_r17_sea_ice_validation.bat",
+    "run_r17_teos_validation.bat",
+    "tests/test_r17_spatial_teos_recovery.py",
+    "verify_r17_local.py"
+  ],
+  "added_count": 21,
+  "candidate_compared_file_count": 756,
+  "comparison_exclusions": [
+    "R17_R16_2_CHANGES.json",
+    "R17_SOURCE_MANIFEST.json",
+    "SOURCE_FINGERPRINT.json",
+    "SOURCE_TREE_SHA256.txt"
+  ],
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "climate_model.py",
+    "co2_target_sweep.py",
+    "sea_ice_observation.py"
+  ],
+  "modified_count": 5,
+  "parent_compared_file_count": 741,
+  "parent_source_zip_sha256": "80176acff4e2f7b5a50c7365ffeda16c807791a60de7a8016ae6914ed31d9bb6",
+  "removal_explanations": {
+    "requirements-r16-teos10.txt": "Archived unchanged under provenance/r16.2-parent and replaced by R17-named dependency file.",
+    "run_r16_2_teos_validation.bat": "Archived unchanged under provenance/r16.2-parent; superseded by R17 launchers.",
+    "run_r16_2_teos_validation_debug.bat": "Archived unchanged under provenance/r16.2-parent; superseded by R17 launchers.",
+    "run_r16_local_validation.bat": "Archived unchanged under provenance/r16.2-parent; superseded by R17 launchers.",
+    "run_r16_local_validation_debug.bat": "Archived unchanged under provenance/r16.2-parent; superseded by R17 launchers.",
+    "tests/test_r16_2_provenance_hotfix.py": "Archived unchanged under provenance/r16.2-parent/tests because its exact-R16.2 identity assertions are intentionally false for R17."
+  },
+  "removed": [
+    "requirements-r16-teos10.txt",
+    "run_r16_2_teos_validation.bat",
+    "run_r16_2_teos_validation_debug.bat",
+    "run_r16_local_validation.bat",
+    "run_r16_local_validation_debug.bat",
+    "tests/test_r16_2_provenance_hotfix.py"
+  ],
+  "removed_count": 6,
+  "schema": "clem-r17-r16.2-tree-diff-v1"
+}

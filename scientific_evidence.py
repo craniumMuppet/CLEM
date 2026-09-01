@@ -1,4 +1,4 @@
-"""Scientific evidence roles and mandatory interpretation metadata for v2.29.28."""
+"""Scientific evidence roles and mandatory interpretation metadata for v2.29.29."""
 from __future__ import annotations
 
 from typing import Any
@@ -56,7 +56,7 @@ SCIENTIFIC_USE_METADATA: dict[str, Any] = {
                 "incomplete: G02202 fixed-mask RMSE, trend-ratio, and trend-interval gates "
                 "plus PIOMAS/CryoSat-2/ICESat-2 mean-state gates pass; the CryoSat-2 "
                 "temporal-correlation gate fails, and the satellite products and OSI SAF "
-                "are development-only rather than independent validation; NSIDC-0611 is pending, "
+                "are development-only rather than independent validation; NSIDC-0611 is available as a structural multiyear-ice diagnostic, "
                 "retrospective fold-local prior-grid evaluation does not beat every required "
                 "simple baseline, and untouched prospective validation is reserved for 2027 onward"
             ),

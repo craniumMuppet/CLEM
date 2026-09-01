@@ -1,5 +1,131 @@
 # Changelog
 
+## 2.29.29 — 2026-09-01
+
+CLEM v2.29.29 is the public release of the physics-repair and validation work carried out after the v2.29.28-r13 baseline. The version bump itself does not retune the final governing equations; the numerical evidence produced during the repair line remains recorded under the v2.29.28 version that actually generated it.
+
+### Greenland freshwater and salt conservation
+
+- Changed Greenland land-ice loss from a zero-net compensated redistribution to an **uncompensated freshwater/mass addition to the represented ocean** by default. Ocean volume now increases with realized land-ice melt, salinity dilutes consistently, and physical salt mass is conserved.
+- Propagated represented ocean volume through checkpoints/restarts so the freshwater-mass correction survives resumable integrations.
+- Kept hydrological redistribution separate from land-ice mass addition, and made artificial freshwater hosing independently selectable as compensated or uncompensated for attribution experiments.
+- Added a switchable Greenland surface-elevation feedback: thinning lowers the ice surface, increases local temperature through the lapse rate, and feeds back on PDD melt. Validation showed the effect is active but modest over the tested interval.
+
+### AMOC physics and structural uncertainty
+
+- Audited the hydraulic density geometry. A proposed North Atlantic versus **South-Atlantic upper-limb** default was tested and rejected: it made SSP2-4.5 AMOC strengthen slightly and made 0.1-0.3 Sv hosing far too weak. The production default therefore remains the validated **interhemispheric high-latitude density contrast**; the South-Atlantic-upper construction is retained only as an explicit structural-sensitivity branch.
+- Added explicit structural AMOC controls for the density-transport exponent, pycnocline feedback strength, strong-state hydraulic saturation, and circulation reversal. The validation matrix now forces each branch into a regime where it actually changes the solution instead of merely checking dormant parameters.
+- Added a reduced **TEOS-10/GSW density sensitivity** and fixed its geometry-specific coordinate/setup handling. A matched-pathway TEOS branch was then added so the nonlinear EOS can be compared without simultaneously changing the validated thermal-density pathway. TEOS remained substantially less sensitive to freshwater forcing than the validated linear alpha/beta closure, so the linear EOS remains the production default.
+- Extended collapse/recovery experiments from simple collapse tests to a de-hosing map. Stronger recovery forcing can lift the reduced AMOC toward the intermediate branch, but removing the perturbation causes relapse when the state remains below the zero-hosing basin separator.
+- Added an equilibrium diagnosis of the unchanged production AMOC subsystem. The reduced model contains a stable weak state, an unstable intermediate separator near **12.32 Sv**, and the stable **17 Sv** strong state; enabling reversal changes the weak attractor to a reversed branch rather than creating the bistability. No Boolean restart threshold or forced recovery term was added.
+
+### Arctic mechanisms and parameter activity
+
+- Made forced Arctic-ocean heat convergence, phase/seasonal restoring, and the extra unresolved lapse-rate feedback independently switchable and added explicit ablation experiments for each mechanism.
+- The ablations confirmed that all three terms are dynamically active; the extra lapse-rate term had the largest isolated effect in the tested step-forcing experiment, while heat convergence was smaller and phase restoring acted as a damping contribution.
+- Added parameter-activity auditing so compatibility-only/dead controls remain loadable for old configurations but are hidden from active priors/user controls when they no longer affect the equations.
+- Classified `atlantic_gyre_heat_transport_pw` as diagnostic-only: it remains available for RAPID total-heat-transport scoring but does not drive climate tendencies.
+
+### Sea-ice spatial representation and observation operator
+
+- Replaced the earlier all-or-nothing coarse-cell extent treatment with an **unfitted conservative subgrid reconstruction** as an intermediate diagnostic. Validation showed that CLEM's two-sector concentration field is still too spatially diffuse for a credible satellite-style threshold-extent claim, so no empirical area-to-extent multiplier was fitted.
+- Added a **mass-neutral prognostic sea-ice support fraction** for the unresolved ice footprint. Native prognostic concentration and latent-energy ice volume remain authoritative; support evolves from the existing formation, melt, divergence, compaction and mechanical-spreading process ledger and cannot create ice mass.
+- Replaced the fixed 80% support compactness reference with a thermodynamic pack reference: the 80% pack/MIZ boundary remains the warm limit while cold pack approaches full support using the existing freezing and formation-temperature scales.
+- Corrected the fixed-mask operator so **area** integrates native concentration while structural **extent** integrates fractional support occupancy.
+- Corrected the NSIDC-style comparator to apply the **15% native-cell concentration threshold to both area and literal threshold extent**, and changed March/September sampling to the model record nearest the established mid-month target.
+- The corrected R18.2 comparison showed that the previously inferred large sea-ice-area bias was mainly an observation-operator mismatch. Across 5°/10° March/September runs, corrected area RMSE is about **0.45-0.56 million km²** with correlations about **0.84-0.90**.
+- Literal >=15% threshold extent on CLEM's coarse reconstructed cells remains resolution-limited and is **not** treated as satellite-resolution validation or a release gate. The fractional-support footprint remains the reduced-order structural extent diagnostic.
+
+### Observational validation
+
+- Integrated authentic **NSIDC-0611 EASE-Grid Sea Ice Age v4/v4.1** data for **1984-2024**: 41 annual NetCDF files, no missing years, processed with CLEM's existing definition into 82 March/September multiyear-ice records.
+- Recorded SHA-256 provenance for all 41 original NSIDC files and packaged the processed diagnostic plus metadata; the raw NetCDF files are not redistributed.
+- This completes the intended Arctic observational stack at **6/6 available sources**. The multiyear-ice comparison remains a structural diagnostic because observed age class and CLEM's thickness-based mature-ice fraction are related but not identical quantities.
+- Retained the CryoSat-2 temporal-thickness result as an incomplete retrospective diagnostic rather than retuning thickness physics to force agreement with the short record.
+
+### Validation and release logic
+
+- Replaced manually satisfiable prospective-validation flags with an **evidence-driven evaluator** and froze the **2027-2036** prospective protocol. Until those genuinely future observations exist, the correct status is `not_available`, not failed and not passed.
+- Fixed scientific-release logic so merely completing a future prospective evaluation cannot count as a pass if that evaluation fails.
+- Kept the low-resolution sea-ice extent diagnostic non-release-blocking and separated retrospective/development-informed evidence from genuinely independent predictive validation.
+- Fixed the R18 post-run finalizer error where the verifier called an undefined `ols()` helper after the numerical integrations had already completed.
+- Added bounded, restartable local validation workflows with a maximum of **5 model years per child process**, checkpoint/source fingerprints, stale-process protection and resumable experiment state.
+
+### Public release
+
+- Merged the public README/reference work onto the validated repair tree and added `THIRD_PARTY_DATA.md` with dataset-specific attribution, including NSIDC-0611 and its U.S. Government Works metadata.
+- Updated active runtime, package, GUI, CI, launcher, validator and release-tool identity to **CLEM v2.29.29**.
+- Historical v2.29.28 numerical files and embedded version labels are intentionally retained under their true generation version. `V2_29_29_DYNAMICS_EQUIVALENCE.json` documents that the final v2.29.29 governing dynamics differ from the validated parent only by the active version identity.
+- Independent prospective predictive validation is **not claimed** in this release; the preregistered future holdout cannot be evaluated yet.
+
+### Release hardening and asset correction
+
+- Corrected the public release layout to explicitly ship the clean v2.29.29 source and the large historical numerical-validation bundles as separate assets. The original Repair R11-R13 evidence bundle is 80,553,730 bytes and remains under its true v2.29.28 generation name; the R18.2 sea-ice operator evidence is likewise a separate historical asset.
+- Updated stale legacy regression assertions that still encoded superseded AMOC/Greenland defaults, without changing the validated production physics.
+- Updated R18/R18.2 source-provenance checks to use the documented version-neutral dynamics-equivalence rule for the `MODEL_VERSION`-only v2.29.29 identity change.
+- Clarified current-versus-historical fingerprint/version documentation and removed transient test/bytecode caches from the public source package.
+- Re-ran bounded post-merge release checks: 54 tests passed across current release semantics, fail-closed coupling, stale-default/provenance repairs, six-source Arctic handling and target/baseline safety; release identity and zero-year static physics checks also pass. The canonical `pytest==9.1.1` runner remains unclaimed in the assistant environment because only pytest 9.0.2 is available offline.
+
+## Internal repair history (v2.29.28 R15-R18.5.1)
+
+## R18.5 public-release merge - 2026-09-01
+
+- No governing physics or observation-operator change from R18.4.
+- Merged the user repository's post-R13 public README expansion and `THIRD_PARTY_DATA.md` attribution/citation document onto the validated R18.4 tree.
+- Updated public README sea-ice metrics and validation wording to the completed R18.2/R18.4 evidence state rather than reverting to older R13-era Arctic operator numbers.
+- Synchronized active release metadata, public validation summary, and model-limitations documentation.
+- Removed one generated `__pycache__` bytecode artifact from the packaged source tree.
+- No climate integration rerun is required.
+
+## R18.4 NSIDC-0611 observational integration - 2026-09-01
+
+- Integrated authentic NSIDC-0611 v4/v4.1 annual EASE-Grid Sea Ice Age inputs for 1984-2024.
+- Generated March/September multiyear-ice structural diagnostics and recorded SHA-256 provenance for all 41 annual source files.
+- Completed the intended Arctic observational stack at 6/6 products.
+- Kept the NSIDC-0611 diagnostic structural/non-release-blocking and preserved the frozen 2027-2036 prospective holdout as `not_available`.
+- No governing physics change and no climate integration rerun required.
+
+## R18.3 release finalization - 2026-09-01
+
+- No governing physics change; `climate_model.py`, `sea_ice_observation.py`, `arctic_observation_operator.py`, and `sea_ice_validation.py` remain byte-identical to the numerically evaluated R18.2 candidate.
+- Records the completed R18.2 sea-ice result review: corrected 15% cell-threshold area no longer shows the previously inferred large mean-state bias, so no additional sea-ice retune is justified.
+- Keeps native 15% cell-threshold extent explicitly resolution-limited/non-release-blocking and retains fractional-support extent as the reduced-order structural footprint diagnostic.
+- Fixes the active v2.29.28 package root/name to `CLEM-v2.29.28-source`.
+- Fixes prospective release logic so scientific release requires both current engineering/physics prerequisites and a **passed** frozen prospective evaluation; merely completing a failed future evaluation can never set the scientific release pass flag.
+- Updates the current v2.29.28 finalizer to consume the evidence-driven frozen prospective evaluator instead of the historical hard-coded prospective Boolean.
+- No user-local numerical rerun is required.
+
+## R18.2 observation-operator hotfix — 2026-09-01
+
+- Leaves `climate_model.py`, sea-ice physics, and AMOC physics byte-identical to R18.1.
+- Separates the NSIDC-compatible `concentration >= 0.15` native-cell area/extent comparator from the R18 fractional-support structural diagnostic.
+- Scores March and September at the nearest native 0.05-year model record to the established mid-month target rather than reconstructing months from coarse summary boundaries.
+- Restricts local rerun scope to two historical sea-ice evaluation branches (10° and 5°); no TEOS, AMOC recovery, or future branch is repeated.
+- Preserves the <=5-model-year resumable child-process protocol and exact R18.1 parent provenance.
+
+## R18 physics candidate — 2026-09-01
+
+- Keeps CLEM runtime version 2.29.28 and the validated linear/high-latitude AMOC default unchanged.
+- Replaces R17's fixed 80% control-orbit support compactness with an unfitted thermodynamic reference: 80% remains the warm MIZ/pack boundary while cold pack approaches 100%, using the existing freezing temperature and ice-formation temperature scale.
+- Keeps the support state geometric/mass-neutral: native prognostic concentration and latent ice volume remain authoritative.
+- Fixes the scientific fixed-mask operator so extent integrates fractional prognostic support occupancy while area integrates native concentration; legacy results without support retain the old threshold fallback.
+- Corrects validation metadata to describe the separate coarse support geometry without claiming satellite-resolution or independent predictive validation.
+- Retains R17 matched-TEOS results as structural sensitivity evidence and does not rerun or promote TEOS; linear remains the production EOS.
+- Extends the AMOC recovery map from one shared +0.8 Sv collapsed checkpoint to -0.25/-0.30/-0.35/-0.40 Sv de-hosing branches and a zero-hosing persistence hold after the -0.40 branch. No restart threshold is added.
+- Adds exact monthly packaged NSIDC fixed-mask area/extent diagnostics and 1979-2024 March/September metrics to the local R18 result bundle.
+- Numerical acceptance of the new R18 sea-ice/recovery changes remains pending the user-run R18 result bundle.
+
+## R17 physics candidate — 2026-08-31
+
+- Keeps CLEM runtime version 2.29.28 and the validated linear/high-latitude AMOC default unchanged.
+- Adds a mass-neutral prognostic Arctic sea-ice support fraction used for the 15% extent footprint while leaving prognostic ice concentration and latent-energy mass/volume equations authoritative.
+- Uses the fixed 15% extent and 80% pack/MIZ concentration definitions without fitting an area-to-extent multiplier.
+- Adds `teos10_matched`, which changes the nonlinear EOS while preserving the validated linear thermal-density pathway; the R16.2 direct surface-watermass TEOS formulation remains sensitivity-only.
+- Adds a resumable recovery/hysteresis matrix that collapses once and branches the exact checkpoint into -0.05, -0.10, and -0.20 Sv de-hosing experiments; no restart threshold or forced recovery term is added.
+- Migrates older safe checkpoints with zero support anomaly for the new mass-neutral state.
+- Adds staged R17 Windows launchers and exact R16.2 parent provenance.
+- Numerical acceptance of the new R17 physics remains pending the user-run R17 result bundle.
+
 ## 2.29.28 — 2026-08-21
 
 - Restores the inherited preindustrial Arctic March/September reference-cycle bounds.
@@ -758,3 +884,18 @@
 - Added NetCDF signature validation and resume/reuse of valid annual files.
 - Changed the Windows acquisition launcher to securely prompt for `EARTHDATA_TOKEN` without echoing the token.
 - Added focused regression coverage for the direct NSIDC DAAC path.
+
+## R16.2 - TEOS delta provenance hotfix (2026-08-31)
+
+- No `climate_model.py` change from R16.1.
+- Replaced the inherited Repair-R11/R13 CLI/name-only equivalence gate in the TEOS-only validation path with an exact R16-parent provenance proof.
+- Bundles the exact R16 parent `climate_model.py` snapshot and verifies AST identity everywhere except the intentionally changed `validate_initial_amoc_density_margin()` function.
+- Adds `run_r16_2_teos_validation.bat`; the 31 completed non-TEOS R16 experiments are not repeated.
+
+## R18.1 - finalizer hotfix and AMOC basin diagnosis (2026-09-01)
+
+- Fixed the R18 post-run fixed-mask finalizer to call the existing `linear_fit()` helper instead of undefined `ols()`.
+- Preserved `climate_model.py` byte-for-byte from R18; no governing AMOC, sea-ice, Greenland, forcing, or conservation physics changed.
+- Added a reproducible fixed-preindustrial zero-hosing AMOC fixed-point diagnosis.
+- The frozen R18 equations support a weak stable branch, an unstable intermediate basin boundary, and the strong stable control branch; the R18 -0.40 Sv recovery state remained below that boundary, explaining its relapse after de-hosing ended.
+- No restart switch or AMOC coefficient retuning was introduced.

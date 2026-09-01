@@ -36,13 +36,13 @@ def _slow_worker(payload: tuple[int, float]) -> dict[str, object]:
 
 
 def test_version_and_meinshausen_defaults_are_synchronized() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     assert ModelConfig().co2_forcing_formula == "meinshausen2020"
     assert MODEL_DEFAULT_CONFIG.co2_forcing_formula == "meinshausen2020"
     parsed = config_from_args(build_parser().parse_args([]))
     assert parsed.co2_forcing_formula == "meinshausen2020"
     pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
-    assert 'version = "2.29.28"' in pyproject.read_text(encoding="utf-8")
+    assert 'version = "2.29.29"' in pyproject.read_text(encoding="utf-8")
 
 
 def test_existing_output_is_preserved_without_explicit_overwrite(tmp_path: Path) -> None:

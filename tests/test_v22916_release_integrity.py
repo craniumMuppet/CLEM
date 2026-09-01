@@ -19,7 +19,7 @@ from validation_provenance import (
 
 
 def test_v22916_version() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
 
 
 def test_signed_amoc_percent_weakening_decreases() -> None:

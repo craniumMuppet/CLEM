@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$Python = 'python',
+    [string]$Python = 'C:\Users\viktor.dahlberg\AppData\Local\Python\pythoncore-3.14-64\python.exe',
     [string]$Output = "outputs_co2_target_sweep_v22917",
     [switch]$Resume
 )

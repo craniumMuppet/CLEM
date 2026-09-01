@@ -1,0 +1,66 @@
+{
+  "arctic_observational_stack": "6/6 available",
+  "bounded_post_merge_tests_passed": 54,
+  "canonical_v22929_engineering_runner_executed": false,
+  "canonical_v22929_engineering_runner_note": "environment has pytest 9.0.2 and no network/cache access to install the pinned pytest 9.1.1; the canonical runner intentionally fails closed on a version mismatch",
+  "changelog": "CHANGELOG.md",
+  "corrected_public_changelog": true,
+  "dynamics_equivalence": {
+    "file": "V2_29_29_DYNAMICS_EQUIVALENCE.json",
+    "passed": true,
+    "sha256": "d9452f9806f179d77114b4200fee4a91327e449809203ee0722125363dd6bfd1"
+  },
+  "final_identity_step_governing_dynamics_changed": false,
+  "historical_evidence_relabelled": false,
+  "historical_numerical_evidence_model_version": "2.29.28",
+  "historical_validation_assets": [
+    {
+      "name": "CLEM-v2.29.28-physics-repair-r13-validation-results.zip",
+      "role": "Repair R11-R13 base numerical evidence",
+      "sha256": "3ebb04a5c6d609184f9576a77592c422e26d9956774ab0537111c2324708befb",
+      "size_bytes": 80553730
+    },
+    {
+      "name": "CLEM_v2.29.28_R17_validation_results.zip",
+      "role": "accepted R17 structural AMOC/TEOS/recovery evidence",
+      "sha256": "c386edc134992a6e0ae45d8b7d0ecae1d726645729aa7ff2d03c86a09f1fd950",
+      "size_bytes": 44545789
+    },
+    {
+      "name": "CLEM_v2.29.28_R18_validation_results_finalized.zip",
+      "role": "finalized R18 structural/observation-operator evidence",
+      "sha256": "69f0d2d8095e084e6464c291ca978417d9891d759ca0649106c6cee434dce4c8",
+      "size_bytes": 29314682
+    },
+    {
+      "name": "CLEM_v2.29.28_R18_2_seaice_operator_results.zip",
+      "role": "R18.2 completed sea-ice operator comparison",
+      "sha256": "d6506dfbec839528ad3c4e633c1563cf18c1fc6caf6dd94fd44dfe5ec36e0f06",
+      "size_bytes": 25318048
+    }
+  ],
+  "model_name": "Coupled Low-complexity Earth Model",
+  "model_short_name": "CLEM",
+  "model_version": "2.29.29",
+  "numerical_rerun_required_for_version_bump": false,
+  "package_name": "CLEM-v2.29.29-source",
+  "previous_public_tag": "v2.29.28-r13",
+  "prospective_validation_status": "not_available",
+  "public_release_baseline": "v2.29.28-r13",
+  "recommended_git_tag": "v2.29.29",
+  "release_assets_document": "RELEASE_ASSETS_V2_29_29.md",
+  "release_date": "2026-09-01",
+  "release_metadata": "RELEASE_METADATA.json",
+  "release_notes": "RELEASE_NOTES_V2_29_29.md",
+  "release_scope": "accumulated repair release since v2.29.28-r13",
+  "release_status": "V2_29_29_RELEASE_STATUS.json",
+  "release_tree_fingerprint": {
+    "aggregate_sha256": "f2c47f3e3f7e125471fd2b614cce9ebc65ecde520b2f55d3d10afab78008bc1f",
+    "file": "V2_29_29_RELEASE_TREE_FINGERPRINT.json",
+    "file_count": 481,
+    "sha256": "91bcc5dd767c6dea3574e3b2f0ffd54db16dcdf01f412d4dd74102d91517047d"
+  },
+  "release_verification": "V2_29_29_RELEASE_VERIFICATION.json",
+  "schema_version": 1,
+  "targeted_release_tests_passed": 20
+}

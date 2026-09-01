@@ -1,0 +1,29 @@
+{
+  "candidate": "CLEM v2.29.28 R18.3 release finalization",
+  "governing_files": {
+    "arctic_observation_operator.py": {
+      "byte_identical": true,
+      "r18_2_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+      "r18_3_sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba"
+    },
+    "climate_model.py": {
+      "byte_identical": true,
+      "r18_2_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+      "r18_3_sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90"
+    },
+    "sea_ice_observation.py": {
+      "byte_identical": true,
+      "r18_2_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+      "r18_3_sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95"
+    },
+    "sea_ice_validation.py": {
+      "byte_identical": true,
+      "r18_2_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a",
+      "r18_3_sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a"
+    }
+  },
+  "numerical_rerun_required": false,
+  "parent": "CLEM v2.29.28 R18.2 sea-ice observation-operator hotfix",
+  "physics_changed": false,
+  "validated_r18_2_source_zip_sha256": "bef91cd0ee1e3d439bca460f5df8a7c28adf949c336dd90fe7d1e57d7f08ee5a"
+}

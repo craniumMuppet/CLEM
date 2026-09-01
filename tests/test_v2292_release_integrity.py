@@ -34,11 +34,11 @@ def _reference_stress_config(**changes) -> ModelConfig:
 
 
 def test_version_and_complete_runner_configuration() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     runner = (ROOT / "run_tests.py").read_text(encoding="utf-8")
     plugin = (ROOT / "isolated_pytest_exit.py").read_text(encoding="utf-8")
-    assert 'version = "2.29.28"' in pyproject
+    assert 'version = "2.29.29"' in pyproject
     assert "not slow" not in pyproject
     assert '"isolated_pytest_exit"' not in runner
     assert "os._exit" not in plugin

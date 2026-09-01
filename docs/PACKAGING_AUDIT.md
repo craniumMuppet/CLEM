@@ -1,55 +1,22 @@
-# Coupled Low-complexity Earth Model v2.29.28 packaging audit
+# Coupled Low-complexity Earth Model v2.29.29 packaging audit
 
 ## Scope
 
-This audit covers the branding-only rename of the current model from **Emergent-Sensitivity Global Climate Model** to **Coupled Low-complexity Earth Model (CLEM)**. Model/runtime version **2.29.28** and Physics Repair **R13** are unchanged.
+This audit covers the v2.29.29 public-release consolidation. Active model/runtime identity is v2.29.29. Historical numerical and provenance artifacts retain the version labels under which they were generated.
 
-## Source-tree preservation
+## Preservation rule
 
-The renamed tree was compared file-for-file against the immediately preceding audited `CLEM-v2.29.28-source.zip`:
+The release is built from the validated R18.5.1 public-release tree. No governing numerical result is renamed to imply a v2.29.29 rerun. The version bump is documented by `V2_29_29_DYNAMICS_EQUIVALENCE.json`.
 
-- predecessor files: **693**
-- renamed-tree files: **694**
-- missing predecessor files: **0**
-- added files: **1** (`docs/NAME_CHANGE.md`)
-- modified files: **31**, all attributable to branding, release identity, tests that assert branding, release-finalization tooling, or the name-only equivalence/fingerprint metadata
+## Public-release contents
 
-No model/data/test/tool path was deleted. Historical result artifacts were not rewritten merely to change their old display name.
+- current CLEM v2.29.29 runtime and GUI
+- v2.29.29 validators, CI, launchers, packaging, and identity checks
+- R18.2 sea-ice observation-operator evidence
+- R18.4 NSIDC-0611 processed observational data and provenance
+- public README, scientific references, `THIRD_PARTY_DATA.md`, and MIT code license
+- frozen 2027–2036 prospective-validation protocol
 
-## Numerical equivalence
+## Validation status
 
-The byte-level `climate_model.py` hash changes because `MODEL_NAME` and the CLI description changed. Numerical equivalence is checked with a normalized AST that excludes only:
-
-- `MODEL_NAME` (release metadata only)
-- `build_parser()` (public CLI surface already excluded by Repair R13)
-
-The normalized dynamics/configuration AST is identical before and after the rename:
-
-`ad7687f6833c102337ebdbe13369837d15d2c1b672042d30d5f86fbc1ac7e574`
-
-The bundled Repair R11 numerical baseline is still accepted by the Repair R13 equivalence guard.
-
-## Active identity surfaces
-
-The authoritative full name is **Coupled Low-complexity Earth Model**. The following current surfaces use that identity:
-
-- `climate_model.py` (`MODEL_NAME`)
-- desktop GUI title
-- Streamlit page/title
-- CLI help description
-- output metadata exported through `MODEL_NAME`
-- `pyproject.toml` project name/description
-- README and release metadata
-- Windows/Linux release and validation launchers
-- release-identity checker
-
-Historical `TEST_RESULTS_V2_*` and archived provenance may retain the previous name because those files document what was actually emitted at the time.
-
-## Regression checks
-
-- release identity check: **PASS**
-- zero-climate-year physics/release consistency: **PASS**
-- name/GUI/release targeted tests: **7 passed**
-- complete historical test collection: **427 tests collected**
-- normalized dynamics/configuration AST before/after rename: **identical**
-- known inherited Arctic observational-data availability failures remain external-data/provenance issues and are unrelated to this rename
+Engineering/physics/static verification and existing numerical/structural evidence are retained. Independent prospective predictive validation remains `not_available` because the preregistered future observations do not yet exist.

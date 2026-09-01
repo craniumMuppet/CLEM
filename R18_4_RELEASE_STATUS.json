@@ -1,0 +1,86 @@
+{
+  "candidate": "CLEM v2.29.28 R18.4 NSIDC-0611 data integration",
+  "cryosat2": {
+    "retrospective_temporal_correlation_10deg": -0.12273736332844482,
+    "role": "development-informed temporal diagnostic; mean-state gates pass; no post-hoc physics tuning"
+  },
+  "date": "2026-09-01",
+  "external_data": {
+    "all_six_observational_products_available": true,
+    "metadata_file": "data/validation/sea_ice_structural/nsidc_0611_v4/METADATA.json",
+    "metadata_sha256": "8371a8c11695cc7c79324323f8c9b47936e6b50069cda0bb9ef021f3a466f07d",
+    "nsidc_0611_v4_available": true,
+    "observed_summary": {
+      "3": {
+        "first": 0.444546795605056,
+        "last": 0.2214752007928596,
+        "linear_trend_fraction_per_decade": -0.063697949696156,
+        "records": 41
+      },
+      "9": {
+        "first": 0.8550339019204506,
+        "last": 0.7847751341871285,
+        "linear_trend_fraction_per_decade": -0.05289823715369498,
+        "records": 41
+      }
+    },
+    "processed_file": "data/validation/sea_ice_structural/nsidc_0611_v4/multiyear_ice_annual.csv",
+    "processed_file_sha256": "06ab7be731d77a02ef92f95fb5f9c88225fe7dd16a6424e497551d48ba95adca",
+    "source_file_count": 41,
+    "status": "authentic NSIDC-0611 v4/v4.1 annual NetCDF files for 1984-2024 processed; 41 source SHA-256 hashes recorded",
+    "year_coverage": [
+      1984,
+      2024
+    ]
+  },
+  "governing_files_sha256": {
+    "arctic_observation_operator.py": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+    "climate_model.py": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+    "sea_ice_observation.py": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+    "sea_ice_validation.py": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a"
+  },
+  "model_version": "2.29.28",
+  "numerical_rerun_required": false,
+  "physics_changed": false,
+  "r18_2_seaice_disposition": {
+    "5deg_march_area_bias_million_km2": 0.35464944050167424,
+    "5deg_march_area_correlation": 0.8723494046663108,
+    "5deg_september_area_bias_million_km2": -0.05542817847511806,
+    "5deg_september_area_correlation": 0.900201080443086,
+    "additional_sea_ice_physics_retune_justified": false,
+    "cell_threshold_area_mean_state_bias_small": true,
+    "fractional_support_extent_role": "reduced_order_structural_diagnostic_non_release_blocking",
+    "native_cell_threshold_extent_resolution_limited": true
+  },
+  "release_semantics_repairs": [
+    "scientific release now requires current prerequisites plus a passed prospective result",
+    "completed-but-failed prospective evidence cannot set the pass flag",
+    "current v2.29.28 finalizer consumes the evidence-driven prospective evaluator",
+    "active package root/name is CLEM-v2.29.28-source",
+    "active Windows GUI bootstrap/error branding uses CLEM"
+  ],
+  "scientific_release": {
+    "current_engineering_physics_prerequisites": "passed in existing version-matched evidence and R18/R18.2 follow-up evidence",
+    "independent_predictive_scientific_validation_complete": false,
+    "independent_predictive_scientific_validation_passed": false,
+    "independent_predictive_scientific_validation_status": "not_available",
+    "reason": "Frozen 2027-2036 prospective holdout is not yet available. Retrospective extent/temporal diagnostics are explicitly non-release-blocking.",
+    "scientific_release_passed": false
+  },
+  "validated_parent": {
+    "r18_2_seaice_results_zip_sha256": "d6506dfbec839528ad3c4e633c1563cf18c1fc6caf6dd94fd44dfe5ec36e0f06",
+    "r18_2_source_zip_sha256": "bef91cd0ee1e3d439bca460f5df8a7c28adf949c336dd90fe7d1e57d7f08ee5a"
+  },
+  "verification": {
+    "assistant_pytest_version": "9.0.2",
+    "canonical_release_pytest_requirement": "9.1.1",
+    "canonical_test_evidence_note": "Not regenerated because this runtime does not match the recorded canonical pytest requirement; existing historical evidence is not falsified.",
+    "canonical_test_evidence_regenerated": false,
+    "python_files_parsed": 244,
+    "python_parse_failures": 0,
+    "release_identity_check": "passed",
+    "targeted_tests_failed": 0,
+    "targeted_tests_passed": 55,
+    "zero_year_static_worker": "passed"
+  }
+}

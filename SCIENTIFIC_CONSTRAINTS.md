@@ -1,4 +1,4 @@
-# Scientific constraints used by v2.29.28
+# Scientific constraints used by v2.29.29
 
 The model supports three posterior-weighting modes:
 
@@ -63,7 +63,7 @@ The initial South Atlantic upper-limb salinity is derived from the sampled FovS,
 
 ## Current prognostic sea-ice area and constrained Arctic coupling
 
-The prognostic area formulation was introduced in v2.29.20 and is retained, with the v2.29.28 forced-response and validation-integrity corrections described below.
+The prognostic area formulation was introduced in v2.29.20 and is retained, with the v2.29.28 forced-response and validation-integrity corrections carried forward unchanged into v2.29.29 as described below.
 
 Sea-ice volume remains an explicit latent-energy reservoir, but ice-covered area is now a separate prognostic concentration state in Atlantic and non-Atlantic Arctic sectors. New ice spreads at a configurable thin local thickness, while vertical growth changes volume without automatically filling open water. Lateral melt, ridging/rafting, and divergence modify area separately. The implementation enforces `0 <= concentration <= 1`, non-negative volume, and `equivalent thickness = concentration * local thickness` at every substep. Complete loss and subsequent thin-ice recovery are tested directly.
 

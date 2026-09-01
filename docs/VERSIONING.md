@@ -2,31 +2,34 @@
 
 The full public model name is **Coupled Low-complexity Earth Model (CLEM)**.
 
-CLEM has one authoritative model version and a separate repair-workflow revision.
+## Current model version
 
-## Model version
-
-**2.29.28**
+**2.29.29**
 
 Authoritative sources:
 
-- `climate_model.py` — `MODEL_VERSION = "2.29.28"`
-- `pyproject.toml` — `version = "2.29.28"`
+- `climate_model.py` — `MODEL_VERSION = "2.29.29"`
+- `pyproject.toml` — `version = "2.29.29"`
+- public release tag — `v2.29.29`
 
-The extensive `v2.29.x` validators, tests, comments, engineering notes, and historical results belong to the real CLEM model-development lineage.
+All active runtime, GUI, CI, launcher, validator, packaging, and release-integrity surfaces use v2.29.29.
 
-## Physics-repair revision
+## Historical numerical evidence
 
-**R13**
+Some packaged result, validation, and provenance filenames intentionally retain **v2.29.28** or earlier version labels. Those files are historical evidence generated under those exact version identities and are not renamed because doing so would falsify numerical provenance.
 
-R13 is a provenance label for the repair/validation workflow that produced the current validated package. It is not a semantic model version and must not be displayed as `CLEM v2.13`.
+The v2.29.29 release is linked to the immediately preceding validated v2.29.28/R18.5.1 tree by `V2_29_29_DYNAMICS_EQUIVALENCE.json`. The v2.29.29 version bump does not retune governing physics, so the validated v2.29.28 numerical evidence is inherited explicitly rather than relabelled.
 
-Earlier repair artifacts originally used labels `v2.11`, `v2.12`, and `v2.13`. In current public documentation these are referred to as **Repair R11**, **Repair R12**, and **Repair R13**. Raw evidence retains original filenames/hashes where necessary for provenance.
+## Repair-workflow revisions
 
-## Recommended GitHub release name
+Repair labels such as **R13** and maintenance labels R15–R18.x are provenance/workflow labels, not semantic model versions. They must not be displayed as `CLEM v2.13`, `CLEM v18`, or similar.
 
-`Coupled Low-complexity Earth Model v2.29.28 — Physics Repair R13`
+## Recommended GitHub release
 
-Recommended tag if a distinct tag is needed without changing `MODEL_VERSION`:
+Release name: `Coupled Low-complexity Earth Model v2.29.29`
 
-`v2.29.28-physics-r13`
+Tag: `v2.29.29`
+
+## Current versus historical fingerprints
+
+`V2_29_29_RELEASE_TREE_FINGERPRINT.json` is the active v2.29.29 release-tree fingerprint. The generic historical `SOURCE_FINGERPRINT.json` is retained for repair-line/prospective-protocol provenance and must not be interpreted as the current package identity.

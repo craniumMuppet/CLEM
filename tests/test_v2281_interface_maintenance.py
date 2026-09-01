@@ -24,7 +24,7 @@ def _as_float(value: object) -> float:
 
 
 def test_release_version_is_v2292() -> None:
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
 
 
 def test_desktop_defaults_match_model_config() -> None:

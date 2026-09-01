@@ -167,21 +167,15 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("hosing", "freshwater_hosing_sv", "Explicit freshwater hosing", "0.000", "0.200", "Sv"),
     ("amoc_reference", "amoc_reference_sv", "Reference AMOC", "14.0", "19.0", "Sv"),
     ("amoc_temp", "amoc_temperature_density_coupling", "AMOC northern-stratification coupling", "0.40", "1.00", "fraction"),
-    ("amoc_interhemispheric", "amoc_interhemispheric_temperature_coupling", "AMOC interhemispheric temperature coupling", "0.00", "0.08", "fraction"),
     ("amoc_adjust", "amoc_adjustment_years", "AMOC adjustment time", "3.0", "20.0", "years"),
     ("amoc_heat", "amoc_heat_transport_pw_per_sv", "Overturning heat transport", "0.035", "0.050", "PW/Sv"),
     ("amoc_surface_heat", "amoc_surface_heat_coupling_fraction", "Surface AMOC heat coupling", "0.025", "0.20", "fraction"),
     ("amoc_heat_damping", "amoc_heat_response_damping_wm2_k", "AMOC temperature damping", "0.8", "2.5", "W/m2/K"),
-    ("atlantic_gyre_heat", "atlantic_gyre_heat_transport_pw", "Atlantic gyre heat transport", "0.35", "0.65", "PW"),
     ("amoc_density", "amoc_density_transport_exponent", "AMOC density exponent", "0.8", "2.5", ""),
     ("amoc_depth", "amoc_hydraulic_depth_exponent", "AMOC hydraulic depth exponent", "0.5", "1.2", ""),
     ("pyc_feedback", "amoc_pycnocline_feedback_strength", "Pycnocline AMOC feedback strength", "0.00", "0.30", "fraction"),
-    ("pyc_relax", "amoc_pycnocline_relaxation_years", "Pycnocline relaxation time", "100", "250", "years"),
-    ("conv_critical", "amoc_convection_critical_density_ratio", "Convection critical density ratio", "0.84", "0.97", "local density ratio"),
-    ("conv_width", "amoc_convection_transition_width", "Convection transition width", "0.015", "0.10", "ratio"),
     ("conv_scale", "amoc_convection_density_scale_factor", "Convection density scale factor", "1.2", "6.0", "factor"),
     ("conv_min", "amoc_convection_minimum_fraction", "Residual convection fraction", "0.00", "0.15", "fraction"),
-    ("conv_exp", "amoc_convection_transport_exponent", "Convection transport exponent", "0.70", "1.30", ""),
     ("conv_mix", "amoc_convective_mixing_reference_sv", "Convective salt exchange", "1.0", "10.0", "Sv"),
     ("conv_mix_exp", "amoc_convective_mixing_exponent", "Convective mixing exponent", "1.0", "4.0", ""),
     ("conv_feedback", "amoc_convection_entrainment_feedback", "Convective entrainment feedback", "0.00", "0.22", "ratio"),
@@ -274,7 +268,7 @@ DEFAULTS: dict[str, Any] = {
     "arctic_reference_ocean_restoring": f"{MODEL_DEFAULT_CONFIG.arctic_reference_ocean_restoring_wm2_k:.1f}",
     "arctic_air_memory_years": f"{MODEL_DEFAULT_CONFIG.arctic_air_low_pass_years:.2f}",
     "longwave_spectral_factor": "0.98",
-    "water_vapor_height": "1.00",
+    "water_vapor_height": f"{MODEL_DEFAULT_CONFIG.water_vapor_emission_height_km_per_lnq:g}",
     "low_cloud_loss": "0.0045",
     "high_cloud_coupling": "0.25",
     "ocean_exchange": "1.45",
@@ -288,7 +282,7 @@ DEFAULTS: dict[str, Any] = {
     "greenland_freshwater_adjustment_years": "45",
     "greenland_initial_ice_mass_gt": "2.85e6",
     "greenland_depletion_exponent": "1.0",
-    "greenland_max_freshwater_sv": "0.025",
+    "greenland_max_freshwater_sv": f"{MODEL_DEFAULT_CONFIG.greenland_max_freshwater_sv:g}",
     "greenland_surface_mass_balance_enabled": True,
     "greenland_dynamic_discharge_fraction": "0.10",
     "greenland_reference_annual_temperature_c": "-10.5",
@@ -301,21 +295,16 @@ DEFAULTS: dict[str, Any] = {
     "greenland_meltwater_retention_fraction": "0.35",
     "greenland_retention_loss_fraction_per_k": "0.04",
     "amoc_temperature_coupling": "1.0",
-    "amoc_interhemispheric_temperature_coupling": "0.02",
     "amoc_adjustment_years": "8.0",
     "amoc_heat_transport": "0.040",
-    "amoc_surface_heat_coupling": "0.075",
-    "amoc_heat_response_damping": "1.35",
+    "amoc_surface_heat_coupling": f"{MODEL_DEFAULT_CONFIG.amoc_surface_heat_coupling_fraction:g}",
+    "amoc_heat_response_damping": f"{MODEL_DEFAULT_CONFIG.amoc_heat_response_damping_wm2_k:g}",
     "atlantic_gyre_heat_transport": "0.52",
     "amoc_density_exponent": f"{MODEL_DEFAULT_CONFIG.amoc_density_transport_exponent:.2f}",
     "amoc_depth_exponent": "1.00",
-    "amoc_pycnocline_feedback_strength": "0.10",
-    "amoc_pycnocline_relaxation_years": "150",
-    "amoc_convection_critical_density_ratio": "0.91",
-    "amoc_convection_transition_width": "0.035",
+    "amoc_pycnocline_feedback_strength": f"{MODEL_DEFAULT_CONFIG.amoc_pycnocline_feedback_strength:g}",
     "amoc_convection_density_scale_factor": f"{MODEL_DEFAULT_CONFIG.amoc_convection_density_scale_factor:.2f}",
     "amoc_convection_minimum_fraction": "0.02",
-    "amoc_convection_transport_exponent": "1.0",
     "amoc_convective_mixing_reference_sv": "5.0",
     "amoc_convective_mixing_exponent": "2.0",
     "amoc_convection_entrainment_feedback": "0.00",
@@ -330,7 +319,7 @@ DEFAULTS: dict[str, Any] = {
     "amoc_north_gyre": "5.0",
     "amoc_southern_gyre": "10.0",
     "amoc_southern_external_exchange": "5.0",
-    "amoc_south_atlantic_external_exchange": "2.0",
+    "amoc_south_atlantic_external_exchange": f"{MODEL_DEFAULT_CONFIG.amoc_south_atlantic_external_exchange_sv:g}",
     "initial_fovs": "-0.15",
     "fovs_reference_salinity": "35.0",
     "freshwater_start_fraction": "0.25",
@@ -412,7 +401,6 @@ for _range_id, _config_field, _label, _minimum, _maximum, _help in MC_RANGE_SPEC
         "greenland_depletion",
         "greenland_max_flux",
         "amoc_temp",
-        "amoc_interhemispheric",
     }
     DEFAULTS[f"mc_{_range_id}_min"] = _minimum
     DEFAULTS[f"mc_{_range_id}_max"] = _maximum
@@ -515,7 +503,6 @@ CLI_MAP = {
     "greenland_meltwater_retention_fraction": "--greenland-meltwater-retention-fraction",
     "greenland_retention_loss_fraction_per_k": "--greenland-retention-loss-fraction-per-k",
     "amoc_temperature_coupling": "--amoc-temperature-coupling",
-    "amoc_interhemispheric_temperature_coupling": "--amoc-interhemispheric-temperature-coupling",
     "amoc_adjustment_years": "--amoc-adjustment-years",
     "amoc_heat_transport": "--amoc-heat-transport",
     "amoc_surface_heat_coupling": "--amoc-surface-heat-coupling",
@@ -524,12 +511,8 @@ CLI_MAP = {
     "amoc_density_exponent": "--amoc-density-exponent",
     "amoc_depth_exponent": "--amoc-depth-exponent",
     "amoc_pycnocline_feedback_strength": "--amoc-pycnocline-feedback-strength",
-    "amoc_pycnocline_relaxation_years": "--amoc-pycnocline-relaxation-years",
-    "amoc_convection_critical_density_ratio": "--amoc-convection-critical-density-ratio",
-    "amoc_convection_transition_width": "--amoc-convection-transition-width",
     "amoc_convection_density_scale_factor": "--amoc-convection-density-scale-factor",
     "amoc_convection_minimum_fraction": "--amoc-convection-minimum-fraction",
-    "amoc_convection_transport_exponent": "--amoc-convection-transport-exponent",
     "amoc_convective_mixing_reference_sv": "--amoc-convective-mixing-reference",
     "amoc_convective_mixing_exponent": "--amoc-convective-mixing-exponent",
     "amoc_convection_entrainment_feedback": "--amoc-convection-entrainment-feedback",
@@ -1942,10 +1925,6 @@ class ClimateModelGUI:
             "Temperature-density coupling",
         )
         self._field(
-            dynamics, 1, "amoc_interhemispheric_temperature_coupling",
-            "Interhemispheric temperature coupling",
-        )
-        self._field(
             dynamics, 2, "amoc_adjustment_years", "Adjustment time (years)"
         )
         self._field(
@@ -1997,24 +1976,12 @@ class ClimateModelGUI:
 
         convection = self._section(tab, "Deep convection response", 2)
         self._field(
-            convection, 0, "amoc_convection_critical_density_ratio",
-            "Critical density-driver ratio"
-        )
-        self._field(
-            convection, 1, "amoc_convection_transition_width",
-            "Transition width"
-        )
-        self._field(
             convection, 2, "amoc_convection_density_scale_factor",
             "Density normalization scale"
         )
         self._field(
             convection, 3, "amoc_convection_minimum_fraction",
             "Residual convection fraction"
-        )
-        self._field(
-            convection, 4, "amoc_convection_transport_exponent",
-            "Transport exponent"
         )
         self._field(
             convection, 5, "amoc_convective_mixing_reference_sv",
@@ -2047,10 +2014,6 @@ class ClimateModelGUI:
         self._field(
             pycnocline, 2, "amoc_pycnocline_feedback_strength",
             "AMOC depth-feedback strength"
-        )
-        self._field(
-            pycnocline, 3, "amoc_pycnocline_relaxation_years",
-            "Depth relaxation (years)"
         )
         self._field(pycnocline, 4, "amoc_ekman_inflow", "Ekman inflow (Sv)")
         self._field(pycnocline, 5, "amoc_upwelling", "Reference upwelling (Sv)")

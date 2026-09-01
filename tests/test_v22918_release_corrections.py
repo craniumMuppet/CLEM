@@ -28,7 +28,7 @@ def _mapping_model(**updates: object) -> ProcessClimateModel:
 
 def test_version_and_recalibrated_compactness_default() -> None:
     config = ModelConfig()
-    assert MODEL_VERSION == "2.29.28"
+    assert MODEL_VERSION == "2.29.29"
     assert config.arctic_new_ice_local_thickness_m == pytest.approx(0.22)
     assert config.arctic_ice_concentration_exponent == pytest.approx(1.0)
     assert config.arctic_full_cover_equivalent_thickness_m == pytest.approx(3.7)

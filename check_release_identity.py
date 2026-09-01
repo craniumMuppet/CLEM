@@ -8,7 +8,7 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-EXPECTED_MODEL_VERSION = "2.29.28"
+EXPECTED_MODEL_VERSION = "2.29.29"
 EXPECTED_REPAIR_REVISION = "R13"
 EXPECTED_MODEL_NAME = "Coupled Low-complexity Earth Model"
 
@@ -36,14 +36,17 @@ gui_text = read("climate_model_gui.py")
 ci_text = read(".github/workflows/ci.yml")
 release_cmd = read("RUN_RELEASE_CONSISTENCY.cmd")
 validation_cmd = read("RUN_OUT_OF_SAMPLE_VALIDATION.cmd")
+run_gui_bat = read("run_gui.bat")
+launch_gui_text = read("launch_gui.pyw")
+release_integrity_text = read("tools/v22929_release_integrity.py")
 
 checks = {
     "MODEL_NAME_is_CLEM_long_name": f'MODEL_NAME = "{EXPECTED_MODEL_NAME}"' in model_text,
-    "MODEL_VERSION_is_2.29.28": model_version == EXPECTED_MODEL_VERSION,
-    "pyproject_version_is_2.29.28": project_version == EXPECTED_MODEL_VERSION,
+    "MODEL_VERSION_is_2.29.29": model_version == EXPECTED_MODEL_VERSION,
+    "pyproject_version_is_2.29.29": project_version == EXPECTED_MODEL_VERSION,
     "pyproject_name_matches_CLEM_long_name": project_name == "coupled-low-complexity-earth-model",
     "MODEL_VERSION_matches_pyproject": model_version == project_version,
-    "README_title_is_2.29.28": readme.startswith(f"# {EXPECTED_MODEL_NAME} v{EXPECTED_MODEL_VERSION}\n"),
+    "README_title_is_2.29.29": readme.startswith(f"# {EXPECTED_MODEL_NAME} v{EXPECTED_MODEL_VERSION}\n"),
     "README_does_not_claim_CLEM_v2.13": "CLEM v2.13" not in readme,
     "README_uses_long_model_name": EXPECTED_MODEL_NAME in readme,
     "metadata_model_version": metadata.get("model_version") == EXPECTED_MODEL_VERSION,
@@ -54,9 +57,12 @@ checks = {
     "streamlit_title_uses_MODEL_NAME_AND_VERSION": 'st.title(f"{MODEL_NAME} v{MODEL_VERSION}")' in app_text,
     "desktop_title_uses_MODEL_NAME_AND_VERSION": 'APP_TITLE = f"{MODEL_NAME} {MODEL_VERSION}"' in gui_text,
     "old_brand_absent_from_active_runtime_surfaces": "Emergent-Sensitivity Global Climate Model" not in (model_text + app_text + gui_text + read("pyproject.toml")),
-    "CI_uses_2.29.28_identity": "clem-v2.29.28-physics-r13-ci" in ci_text and "clem-v2.13" not in ci_text,
-    "release_launcher_uses_long_name_and_2.29.28": f"{EXPECTED_MODEL_NAME} v2.29.28" in release_cmd and "CLEM v2.13" not in release_cmd,
-    "validation_launcher_uses_long_name_and_2.29.28": f"{EXPECTED_MODEL_NAME} v2.29.28" in validation_cmd and "CLEM v2.12" not in validation_cmd,
+    "CI_uses_2.29.29_identity": "clem-v2.29.29-physics-r13-ci" in ci_text and "clem-v2.13" not in ci_text,
+    "release_launcher_uses_long_name_and_2.29.29": f"{EXPECTED_MODEL_NAME} v2.29.29" in release_cmd and "CLEM v2.13" not in release_cmd,
+    "validation_launcher_uses_long_name_and_2.29.29": f"{EXPECTED_MODEL_NAME} v2.29.29" in validation_cmd and "CLEM v2.12" not in validation_cmd,
+    "desktop_bootstrap_uses_CLEM_window_title": 'start "CLEM GUI"' in run_gui_bat,
+    "desktop_error_dialog_uses_CLEM_name": "CLEM GUI startup failed" in launch_gui_text and "The CLEM desktop GUI could not start" in launch_gui_text,
+    "release_package_name_uses_CLEM_identity": 'PACKAGE_NAME = "CLEM-v2.29.29-source"' in release_integrity_text,
 }
 
 for name, ok in checks.items():

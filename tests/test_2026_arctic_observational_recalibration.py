@@ -1,4 +1,4 @@
-"""Regression checks for the v2.29.28 Arctic observational recalibration."""
+"""Regression checks for the v2.29.29 Arctic observational recalibration."""
 from __future__ import annotations
 import json
 from pathlib import Path
@@ -37,8 +37,8 @@ def test_recalibrated_arctic_defaults_are_locked_and_inside_declared_priors() ->
 def test_repaired_core_five_observation_stack_is_complete() -> None:
     status=validation_stack_status()
     assert status["core_five_calibration_validation_stack_complete"] is True
-    assert status["all_six_observational_products_available"] is False
-    assert status["missing_sources"] == ["nsidc_0611_v4"]
+    assert status["all_six_observational_products_available"] is True
+    assert status["missing_sources"] == []
 
 def test_packaged_recalibration_enforces_level_trend_and_physical_gates() -> None:
     payload=json.loads((ROOT/"ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())

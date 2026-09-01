@@ -1,0 +1,37 @@
+{
+  "added": [
+    "R18_1_AMOC_BISTABILITY_DIAGNOSIS.json",
+    "R18_1_FINALIZER_AND_AMOC_DIAGNOSIS.md",
+    "R18_1_PARENT_PROVENANCE.json",
+    "R18_RESULTS_REVIEW.md",
+    "provenance/r18-parent/R18_PARENT_PROVENANCE.json",
+    "provenance/r18-parent/R18_R17_CHANGES.json",
+    "provenance/r18-parent/R18_SOURCE_MANIFEST.json",
+    "provenance/r18-parent/R18_STATIC_VERIFICATION.json",
+    "provenance/r18-parent/SOURCE_FINGERPRINT.json",
+    "provenance/r18-parent/SOURCE_TREE_SHA256.txt",
+    "provenance/r18-parent/climate_model.py",
+    "provenance/r18-parent/run_r18_local_validation.bat",
+    "provenance/r18-parent/run_r18_local_validation_debug.bat",
+    "provenance/r18-parent/run_r18_recovery_validation.bat",
+    "provenance/r18-parent/run_r18_sea_ice_validation.bat",
+    "provenance/r18-parent/verify_r18_local.py",
+    "r18_1_amoc_bistability_diagnosis.py",
+    "tests/test_r18_1_finalizer_and_diagnosis.py"
+  ],
+  "arctic_observation_operator_byte_identical": true,
+  "base": "CLEM v2.29.28 Physics Candidate R18",
+  "base_source_zip_sha256": "5c902a486b4a1cd637da75b0857e4550febe2f3fd36a1566f56d09fc1ff2291d",
+  "candidate": "CLEM v2.29.28 R18.1 maintenance",
+  "climate_model_byte_identical": true,
+  "governing_physics_changed": false,
+  "modified": [
+    "CHANGELOG.md",
+    "README.md",
+    "verify_r18_local.py"
+  ],
+  "note": "Canonical R18.1 manifest/fingerprint/tree files are generated after this change record and are therefore not self-hashed here.",
+  "removed": [],
+  "sea_ice_observation_byte_identical": true,
+  "sea_ice_validation_byte_identical": true
+}

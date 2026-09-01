@@ -1,0 +1,23 @@
+{
+  "candidate": "CLEM v2.29.28 R16.2 TEOS delta provenance hotfix",
+  "changed_symbol_semantics": {
+    "validate_initial_amoc_density_margin": "R16.1 stops applying the linear-EOS absolute density-ratio calibration envelope to TEOS-10 while retaining the positive-density sanity check and the original linear-EOS guard."
+  },
+  "current_ast_sha256_excluding_changed_symbols": "00096845178022a3cb326d0209b90003200d56848328c8705b09cf7dd6b36653",
+  "default_linear_eos_physics_changed": false,
+  "excluded_changed_top_level_symbols": [
+    "validate_initial_amoc_density_margin"
+  ],
+  "note": "The old Repair-R11/R13 CLI/name-only equivalence gate is not applicable to this TEOS delta because R16.1 intentionally changes TEOS preflight logic.",
+  "parent_ast_sha256_excluding_changed_symbols": "00096845178022a3cb326d0209b90003200d56848328c8705b09cf7dd6b36653",
+  "parent_snapshot": "provenance/r16-parent/climate_model.py",
+  "purpose": "Prove the R16.1 climate-model change is isolated to the TEOS setup guard; this is not a claim of full dynamics equivalence.",
+  "r16_1_climate_model_sha256": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+  "r16_completed_child_chunks_reused": 840,
+  "r16_completed_non_teos_evidence_reused": true,
+  "r16_parent_climate_model_sha256": "ddcd2272bf2d10ed9d9eacb9fabdc5e65db7fdfc3e3e23a09e85d5bfffc2ba40",
+  "r16_parent_source_zip_sha256": "e4a890150dc95f8bbb8a4340676b5d1e795c064503299ac258ec154dce5c8ab7",
+  "schema_version": 1,
+  "teos_branch_changed": true,
+  "unchanged_ast_equal": true
+}

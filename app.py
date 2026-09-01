@@ -331,7 +331,6 @@ with st.sidebar:
     freshwater_start_fraction = st.slider('Hosing start position in run', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.freshwater_start_fraction), 0.05, help=setting_tooltip('freshwater_start_fraction'))
     freshwater_ramp_years = st.slider('Hosing ramp duration (years)', 0.0, 150.0, float(DEFAULT_MODEL_CONFIG.freshwater_ramp_years), 5.0, help=setting_tooltip('freshwater_ramp_years'))
     temperature_density_coupling = st.slider('Anomalous surface-temperature coupling to sinking density', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_temperature_density_coupling), 0.01, help=setting_tooltip('temperature_density_coupling', extra_note="v2.29.6 restores full anomalous thermal-density coupling; freshwater coefficients remain unchanged."))
-    interhemispheric_temperature_coupling = st.slider('Interhemispheric Atlantic temperature-density coupling', 0.0, 0.2, float(DEFAULT_MODEL_CONFIG.amoc_interhemispheric_temperature_coupling), 0.01, help=setting_tooltip('interhemispheric_temperature_coupling', extra_note='Explicit coefficient replacing the former hidden 0.02 multiplier.'))
     freshwater_compensation_label = st.selectbox('Freshwater compensation location', ['External global-ocean reservoir', 'Tropical and Southern Atlantic'], index=0, help=setting_tooltip('freshwater_compensation_label', extra_note='External compensation conserves global salt without directly salinifying the Atlantic source waters feeding the AMOC.'))
     freshwater_compensation_mode = (
         "external"
@@ -341,7 +340,7 @@ with st.sidebar:
     amoc_heat_transport = st.slider('Overturning heat transport (PW/Sv)', 0.0, 0.1, float(DEFAULT_MODEL_CONFIG.amoc_heat_transport_pw_per_sv), 0.005, help=setting_tooltip('amoc_heat_transport'))
     amoc_surface_heat_coupling = st.slider('Surface AMOC heat coupling fraction', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_surface_heat_coupling_fraction), 0.025, help=setting_tooltip('amoc_surface_heat_coupling', extra_note='Fraction of the diagnosed overturning heat-transport anomaly applied to the prognostic surface mixed layer.'))
     amoc_heat_response_damping = st.slider('AMOC regional temperature damping (W/m2/K)', 0.25, 4.0, float(DEFAULT_MODEL_CONFIG.amoc_heat_response_damping_wm2_k), 0.05, help=setting_tooltip('amoc_heat_response_damping'))
-    atlantic_gyre_heat_transport = st.slider('Atlantic gyre heat transport (PW)', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.atlantic_gyre_heat_transport_pw), 0.01, help=setting_tooltip('atlantic_gyre_heat_transport'))
+    atlantic_gyre_heat_transport = float(DEFAULT_MODEL_CONFIG.atlantic_gyre_heat_transport_pw)
     initial_fovs = st.slider('Initial FovS at 34.5 S (Sv)', -0.5, 0.2, float(DEFAULT_MODEL_CONFIG.initial_fovs_sv), 0.01, help=setting_tooltip('initial_fovs', extra_note='Negative values mean the overturning imports salinity into the Atlantic. The South Atlantic upper-limb salinity is derived from this target rather than from the Southern Ocean surface box.'))
 
     st.subheader("AMOC hysteresis")
@@ -486,12 +485,8 @@ with st.sidebar:
         density_exponent = st.slider('AMOC density-response exponent', 0.5, 3.0, float(DEFAULT_MODEL_CONFIG.amoc_density_transport_exponent), 0.05, help=setting_tooltip('density_exponent'))
         depth_exponent = st.slider('Hydraulic pycnocline-depth exponent', 0.0, 2.5, float(DEFAULT_MODEL_CONFIG.amoc_hydraulic_depth_exponent), 0.05, help=setting_tooltip('depth_exponent'))
         pycnocline_feedback_strength = st.slider('Pycnocline AMOC feedback strength', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_pycnocline_feedback_strength), 0.05, help=setting_tooltip('pycnocline_feedback_strength'))
-        pycnocline_relaxation_years = st.slider('Pycnocline relaxation time (years)', 50.0, 500.0, float(DEFAULT_MODEL_CONFIG.amoc_pycnocline_relaxation_years), 10.0, help=setting_tooltip('pycnocline_relaxation_years'))
-        convection_critical_density_ratio = st.slider('Deep-convection critical density ratio', 0.6, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_convection_critical_density_ratio), 0.01, help=setting_tooltip('convection_critical_density_ratio'))
-        convection_transition_width = st.slider('Deep-convection transition width', 0.005, 0.15, float(DEFAULT_MODEL_CONFIG.amoc_convection_transition_width), 0.005, help=setting_tooltip('convection_transition_width'))
         convection_density_scale_factor = st.slider('Convection density normalization scale', 1.0, 6.0, float(DEFAULT_MODEL_CONFIG.amoc_convection_density_scale_factor), 0.01, help=setting_tooltip('convection_density_scale_factor'))
         convection_minimum_fraction = st.slider('Residual deep-convection fraction', 0.0, 0.7, float(DEFAULT_MODEL_CONFIG.amoc_convection_minimum_fraction), 0.01, help=setting_tooltip('convection_minimum_fraction'))
-        convection_transport_exponent = st.slider('Convection transport exponent', 0.1, 1.5, float(DEFAULT_MODEL_CONFIG.amoc_convection_transport_exponent), 0.05, help=setting_tooltip('convection_transport_exponent'))
         convective_mixing_reference = st.slider('Convective salt exchange (Sv)', 0.0, 15.0, float(DEFAULT_MODEL_CONFIG.amoc_convective_mixing_reference_sv), 0.5, help=setting_tooltip('convective_mixing_reference'))
         convective_mixing_exponent = st.slider('Convective mixing exponent', 0.5, 5.0, float(DEFAULT_MODEL_CONFIG.amoc_convective_mixing_exponent), 0.1, help=setting_tooltip('convective_mixing_exponent'))
         convection_entrainment_feedback = st.slider('Convective entrainment feedback', 0.0, 0.35, float(DEFAULT_MODEL_CONFIG.amoc_convection_entrainment_feedback), 0.01, help=setting_tooltip('convection_entrainment_feedback'))
@@ -603,9 +598,6 @@ config = ModelConfig(
     freshwater_ramp_years=float(freshwater_ramp_years),
     freshwater_compensation_mode=freshwater_compensation_mode,
     amoc_temperature_density_coupling=float(temperature_density_coupling),
-    amoc_interhemispheric_temperature_coupling=float(
-        interhemispheric_temperature_coupling
-    ),
     amoc_heat_transport_pw_per_sv=float(amoc_heat_transport),
     amoc_surface_heat_coupling_fraction=float(amoc_surface_heat_coupling),
     amoc_heat_response_damping_wm2_k=float(amoc_heat_response_damping),
@@ -614,14 +606,8 @@ config = ModelConfig(
     amoc_density_transport_exponent=float(density_exponent),
     amoc_hydraulic_depth_exponent=float(depth_exponent),
     amoc_pycnocline_feedback_strength=float(pycnocline_feedback_strength),
-    amoc_pycnocline_relaxation_years=float(pycnocline_relaxation_years),
-    amoc_convection_critical_density_ratio=float(
-        convection_critical_density_ratio
-    ),
-    amoc_convection_transition_width=float(convection_transition_width),
     amoc_convection_density_scale_factor=float(convection_density_scale_factor),
     amoc_convection_minimum_fraction=float(convection_minimum_fraction),
-    amoc_convection_transport_exponent=float(convection_transport_exponent),
     amoc_convective_mixing_reference_sv=float(convective_mixing_reference),
     amoc_convective_mixing_exponent=float(convective_mixing_exponent),
     amoc_convection_entrainment_feedback=float(

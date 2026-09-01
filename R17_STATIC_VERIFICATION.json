@@ -1,0 +1,246 @@
+{
+  "candidate": "CLEM v2.29.28 Physics Candidate R17",
+  "climate_integrations_run_in_assistant_environment": 0,
+  "date": "2026-08-31",
+  "known_slow_batch_not_counted": "Older v2.29.20/v2.29.5 combined constructor-heavy batch exceeded the bounded local test window; it was terminated and is not counted as a pass.",
+  "lightweight_pytest": [
+    {
+      "command": "tests/test_r17_spatial_teos_recovery.py + tests/test_r16_source_fixes.py + tests/test_2026_sea_ice_scientific_review_fixes.py",
+      "result": "passed",
+      "tests": 28
+    },
+    {
+      "command": "tests/test_v22928_validation_semantics_and_interface_parity.py + tests/test_v22928_coupled_fail_closed.py + tests/test_v22917_gui_startup.py",
+      "result": "passed",
+      "tests": 14
+    },
+    {
+      "command": "tests/test_v22928_release_finalization.py + tests/test_six_source_arctic_validation_stack.py + tests/test_arctic_core5_nonblocking_acquisition.py",
+      "result": "passed",
+      "tests": 27
+    }
+  ],
+  "lightweight_tests_passed_total": 69,
+  "numerical_acceptance": "pending_user_local_r17_validation",
+  "static_worker": {
+    "ok": true,
+    "result": {
+      "cli_default_consistency": {
+        "parameters": {
+          "amoc_convection_critical_density_ratio": {
+            "cli": 0.0,
+            "match": true,
+            "model_config": 0.0
+          },
+          "amoc_convection_density_scale_factor": {
+            "cli": 1.0,
+            "match": true,
+            "model_config": 1.0
+          },
+          "amoc_convection_transition_width": {
+            "cli": 0.1,
+            "match": true,
+            "model_config": 0.1
+          },
+          "amoc_convection_transport_exponent": {
+            "cli": 0.0,
+            "match": true,
+            "model_config": 0.0
+          },
+          "amoc_heat_response_damping_wm2_k": {
+            "cli": 2.6,
+            "match": true,
+            "model_config": 2.6
+          },
+          "amoc_interhemispheric_temperature_coupling": {
+            "cli": 0.0,
+            "match": true,
+            "model_config": 0.0
+          },
+          "amoc_pycnocline_feedback_strength": {
+            "cli": 0.35,
+            "match": true,
+            "model_config": 0.35
+          },
+          "amoc_surface_heat_coupling_fraction": {
+            "cli": 0.5,
+            "match": true,
+            "model_config": 0.5
+          },
+          "amoc_temperature_density_coupling": {
+            "cli": 1.0,
+            "match": true,
+            "model_config": 1.0
+          },
+          "arctic_ice_export_freshwater_reference_sv": {
+            "cli": 0.075,
+            "match": true,
+            "model_config": 0.075
+          },
+          "greenland_max_freshwater_sv": {
+            "cli": 0.1,
+            "match": true,
+            "model_config": 0.1
+          },
+          "water_vapor_height": {
+            "cli": 0.98,
+            "match": true,
+            "model_config": 0.98
+          }
+        },
+        "pass_all_repaired_cli_defaults_match_model_config": true
+      },
+      "control": {
+        "active_source_salinity_psu": 33.0,
+        "active_source_temperature_c": -0.27663731577214,
+        "baseline_north_temperature_c": 5.72336268422786,
+        "baseline_south_atlantic_upper_temperature_c": 16.129029846528983,
+        "baseline_southern_temperature_c": -0.27663731577214,
+        "density_driver": 0.00043399999999999884,
+        "density_ratio": 0.9999999999999973,
+        "haline_density_driver": 0.001633999999999999,
+        "north_minus_south_temperature_c": 6.0,
+        "pass_control_density_ratio": true,
+        "pass_north_warmer_than_south": true,
+        "pass_positive_control_density_driver": true,
+        "pass_realistic_control_temperature_contrast": true,
+        "pass_thermal_opposes_northern_density": true,
+        "south_atlantic_upper_salinity_psu": 35.45882352941177,
+        "thermal_density_driver": -0.0012000000000000001
+      },
+      "humidity": {
+        "max_relative_error_vs_ice_magnus_below_freezing": 0.0,
+        "pass_ice_saturation_branch": true,
+        "pass_monotonic": true,
+        "q_sat": [
+          0.000755904665349303,
+          0.001903689253489726,
+          0.004484688923695108,
+          0.009029175886828214
+        ],
+        "temperature_k": [
+          253.15,
+          263.15,
+          273.15,
+          283.15
+        ]
+      },
+      "r17_support_state": {
+        "concentration": [
+          0.08,
+          0.4,
+          0.8,
+          0.95
+        ],
+        "pass_reference_pack_boundary_is_80pct": true,
+        "pass_support_at_least_native_area": true,
+        "pass_support_not_below_15pct_implied_concentration": true,
+        "reference_support": [
+          0.09999999999999999,
+          0.5,
+          1.0,
+          1.0
+        ]
+      },
+      "r17_validation_design": {
+        "experiment_count": 11,
+        "mandatory_max_chunk_years": 5.0,
+        "pass_max_chunk_is_five_years": true,
+        "pass_recovery_branches_share_one_seed": true,
+        "stage_counts": {
+          "recovery": 4,
+          "sea-ice": 4,
+          "teos": 3
+        }
+      },
+      "salt_loop_control": {
+        "baseline_surface_freshwater_sv": [
+          0.3142857142857142,
+          -0.21890756302520747,
+          -0.09537815126050676,
+          3.469446951953614e-18,
+          0.0,
+          0.0
+        ],
+        "initial_fovs_sv": -0.15000000000000163,
+        "north_control_freshwater_sv": 0.3142857142857142,
+        "pass_control_freshwater_conservative": true,
+        "pass_initial_fovs_preserved": true,
+        "pass_sau_control_flux_not_compensating_southern_surface": true,
+        "pass_southern_surface_control_flux_removed": true,
+        "south_atlantic_upper_control_freshwater_sv": -0.09537815126050676,
+        "southern_surface_control_freshwater_sv": 3.469446951953614e-18,
+        "sum_control_surface_freshwater_sv": -1.0408340855860843e-17,
+        "tropical_control_freshwater_sv": -0.21890756302520747
+      },
+      "sea_ice_freshwater_routing": {
+        "pass_export_does_not_touch_sau": true,
+        "pass_export_route_conservative": true,
+        "pass_positive_export_adds_freshwater_to_north": true,
+        "pass_positive_export_draws_from_external_arctic": true,
+        "pass_positive_storage_removes_north_freshwater": true,
+        "pass_storage_route_conservative": true,
+        "positive_0p05sv_export_delta_by_box": [
+          0.04999999999999999,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "positive_0p05sv_storage_delta_by_box": [
+          -0.04999999999999999,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.05
+        ]
+      },
+      "serialization": {
+        "pass_nested_nonfinite_to_null": true,
+        "pass_nonfinite_to_null": true,
+        "undefined_diagnostic_representation": null
+      },
+      "source_invariants": {
+        "amoc_heat_response_damping_wm2_k": 2.6,
+        "amoc_interhemispheric_temperature_coupling": 0.0,
+        "amoc_surface_heat_coupling_fraction": 0.5,
+        "amoc_temperature_density_coupling": 1.0,
+        "arctic_ice_export_freshwater_reference_sv": 0.075,
+        "arctic_sea_ice_export_salinity_coupling_enabled": true,
+        "arctic_sea_ice_salinity_coupling_enabled": true,
+        "arctic_sea_ice_storage_salinity_coupling_enabled": true,
+        "configured_convection_max": 1.5,
+        "convection_density_scale_factor": 1.0,
+        "convection_transport_exponent": 0.0,
+        "deep_ocean_heat_capacity_wyr_m2_k": 260.0,
+        "ecs_record_interval_years": 0.2,
+        "greenland_max_freshwater_sv": 0.1,
+        "legacy_convection_transition_center_density_ratio": 0.0,
+        "legacy_convection_transition_width": 0.1,
+        "pass_arctic_external_flux_includes_longwave": true,
+        "pass_convection_max_above_old_1p05": true,
+        "pass_convection_not_direct_transport_multiplier": true,
+        "pass_core_sensitivity_diagnostic_anti_alias": true,
+        "pass_duplicate_interhemispheric_thermal_path_disabled": true,
+        "pass_ecs_record_interval_anti_alias": true,
+        "pass_full_local_stratification_thermal_coupling": true,
+        "pass_ice_export_routed_arctic_to_north": true,
+        "pass_legacy_logistic_not_used_in_dynamics": true,
+        "pass_local_convection_density_anomaly_is_active": true,
+        "pass_local_stratification_enters_hydraulic_density": true,
+        "pass_logistic_no_longer_dominates_transport": true,
+        "pass_long_branch_compensation_strengthened": true,
+        "pass_no_old_pycnocline_restoring_expression": true,
+        "pass_no_stale_1p05_convection_limit": true,
+        "pass_observed_scale_ice_export_reference": true,
+        "pass_polar_inversion_separate_from_lapse_rate": true,
+        "pass_southern_surface_not_in_amoc_advective_loop": true,
+        "pass_water_vapor_height_ar6_combined_target": true,
+        "water_vapor_emission_height_km_per_lnq": 0.98
+      }
+    }
+  },
+  "verify_r17_local_sha256": "c90302f0f0074b8fe20e4178c71b482c37ce4736dc397d386e12fd372cedcb24"
+}

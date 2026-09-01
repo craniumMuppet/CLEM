@@ -17,7 +17,7 @@ def test_v2252_physical_defaults_do_not_use_freshwater_compensation() -> None:
     assert config.hydrological_freshwater_sv_per_k == 0.006
     assert config.greenland_freshwater_sv_per_k == 0.005
     assert config.amoc_temperature_density_coupling == 1.0
-    assert config.amoc_convection_density_scale_factor == 4.0
+    assert config.amoc_convection_density_scale_factor == 1.0
     assert config.amoc_convection_entrainment_feedback == 0.0
     assert config.arctic_ocean_air_exchange_wm2_k == 0.20
     assert config.arctic_moisture_transport_wm2_per_k == 0.22

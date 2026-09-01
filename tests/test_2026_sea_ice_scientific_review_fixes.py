@@ -56,12 +56,12 @@ def test_raw_area_multiplier_is_not_used_by_default() -> None:
     assert extent == 6.0
 
 
-def test_extent_is_native_binary_15pct_threshold_without_fit() -> None:
+def test_extent_is_conservative_fractional_15pct_threshold_without_fit() -> None:
     concentration, occupancy, metrics = _synthetic_observation(
         np.array([0.10, 0.80])
     )
-    assert set(np.unique(occupancy)).issubset({0.0, 1.0})
-    assert np.all(occupancy[0] == 0.0)
+    assert np.all((occupancy >= 0.0) & (occupancy <= 1.0))
+    assert np.any((occupancy > 0.0) & (occupancy < 1.0))
     assert np.all(occupancy[1] == 1.0)
     assert metrics["extent_threshold_concentration"] == MINIMUM_EXTENT_CONCENTRATION
     assert metrics["extent_observation_operator_calibrated"] == 0.0
@@ -69,6 +69,8 @@ def test_extent_is_native_binary_15pct_threshold_without_fit() -> None:
     assert metrics["extent_is_separate_prognostic_state"] == 0.0
     assert metrics["extent_derived_from_native_concentration"] == 1.0
     assert metrics["legacy_extent_multiplier_used"] == 0.0
+    assert metrics["extent_subgrid_fractional_occupancy"] == 1.0
+    assert metrics["extent_method"] == "conservative_unfitted_meridional_subgrid_15pct_threshold"
     assert metrics["northern_hemisphere_sea_ice_thresholded_area_million_km2"] <= metrics[
         "northern_hemisphere_sea_ice_extent_million_km2"
     ]

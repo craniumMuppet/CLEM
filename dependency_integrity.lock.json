@@ -5,7 +5,7 @@
     "python": "3.13.13"
   },
   "graph_sha256": "c6c4c9aefcb2baeb3dea474121995ce5ef6fffa4aba17cd4cd45637c69f7e101",
-  "model_version": "2.29.28",
+  "model_version": "2.29.29",
   "packages": {
     "altair": {
       "dependencies": [

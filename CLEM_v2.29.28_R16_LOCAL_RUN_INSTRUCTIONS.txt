@@ -1,0 +1,11 @@
+CLEM v2.29.28 Physics Candidate R16 local validation
+
+1. Extract the source ZIP to a normal writable folder.
+2. The full R16 suite includes TEOS-10 structural experiments and therefore the launcher requires gsw at startup. If needed:
+   python -m pip install -r requirements-r16-teos10.txt
+3. Run: run_r16_local_validation.bat
+4. Re-running the same command resumes matching checkpoints. Use --fresh only to restart from zero.
+5. Every integration child advances at most 5 model years.
+6. Upload CLEM_v2.29.28_R16_validation_results.zip after completion.
+
+Default ordinary CLEM runs use amoc_density_eos=linear and do not require gsw.

@@ -1,0 +1,37 @@
+CLEM v2.29.28 - R16.2 TEOS delta provenance hotfix
+
+Purpose
+-------
+Run only the three TEOS-10 experiments that were blocked before integration in R16.
+The 31 completed non-TEOS R16 experiments and their 840 completed <=5-year chunks
+remain valid evidence and are not repeated.
+
+What changed from R16.1
+-----------------------
+Only verifier/provenance tooling changed. climate_model.py is byte-identical to R16.1.
+The old Repair-R11/R13 CLI/name-only equivalence gate was inappropriate for the
+intentional R16.1 TEOS setup-guard change. R16.2 instead verifies:
+  * exact R16 parent climate_model.py snapshot/hash,
+  * exact R16 parent source ZIP hash,
+  * exact R16.1 current climate_model.py hash, and
+  * AST identity of every top-level symbol except validate_initial_amoc_density_margin.
+
+Run
+---
+Double-click:
+  run_r16_2_teos_validation.bat
+
+If the window closes on an error, use:
+  run_r16_2_teos_validation_debug.bat
+
+Dependency
+----------
+The delta suite consists entirely of TEOS-10 experiments, so gsw is required:
+  python -m pip install -r requirements-r16-teos10.txt
+
+Output
+------
+Upload this file back to ChatGPT:
+  CLEM_v2.29.28_R16_2_TEOS_validation_results.zip
+
+Do not rerun the full R16 suite unless specifically requested.
