@@ -192,6 +192,46 @@ The corresponding difference in AMOC decline is approximately:
 
 ---
 
+## Generated Scenario Gallery
+
+### All-SSP comparisons
+
+#### AMOC
+
+![AMOC comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_amoc_comparison.png)
+
+#### Global near-surface air temperature
+
+![Temperature comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_temperature_comparison.png)
+
+#### Northern Hemisphere sea ice
+
+![Sea-ice comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_sea_ice_comparison.png)
+
+#### FovS
+
+![FovS comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_fovs_comparison.png)
+
+### SSP2-4.5 final diagnostics
+
+#### Temperature anomaly
+
+![Final SSP2-4.5 temperature-anomaly map](outputs_ssps/ssp245/diagnostics/final_temperature_anomaly_map.png)
+
+#### Sea ice
+
+![Final SSP2-4.5 sea-ice map](outputs_ssps/ssp245/diagnostics/final_sea_ice_map.png)
+
+#### Snow
+
+![Final SSP2-4.5 snow map](outputs_ssps/ssp245/diagnostics/final_snow_map.png)
+
+### Percent-ramp comparison
+
+![Atmospheric CO2 percent-ramp comparison](outputs_percent_ramp_comparison/percent_ramp_comparison.png)
+
+---
+
 ## Freshwater Hosing Experiments
 
 CLEM supports direct North Atlantic freshwater-forcing experiments for examining AMOC sensitivity, nonlinear weakening, collapse, and recovery.
