@@ -39,8 +39,8 @@ import requests
 
 try:
     import xarray as xr
-except ImportError as exc:  # pragma: no cover
-    raise SystemExit("Install requirements-validation-data.txt before running this script") from exc
+except ImportError:  # pragma: no cover - exercised in the runtime-only CI environment
+    xr = None
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -175,6 +175,11 @@ def _open_dataset(path: Path):
         raise ValueError(
             f"Observation file is not NetCDF/NetCDF-4: {path.name} "
             f"(signature={signature!r})"
+        )
+    if xr is None:
+        raise RuntimeError(
+            "xarray is required to open observational NetCDF data. "
+            "Install requirements-validation-data.txt before running acquisition."
         )
 
     errors: list[str] = []

@@ -67,3 +67,12 @@ def test_export_rejects_missing_core_source_even_when_ice_age_is_optional(monkey
     monkeypatch.setattr(exporter, "SOURCES", {})
     with pytest.raises(SystemExit, match="piomas_v2_1"):
         export_bundle(tmp_path / "bundle.zip", allow_missing_ice_age=True)
+
+
+def test_xarray_is_only_required_when_observational_netcdf_is_opened(monkeypatch, tmp_path):
+    path = tmp_path / "observation.nc"
+    path.write_bytes(b"CDF\x01" + b"\x00" * 32)
+    monkeypatch.setattr(acquire, "xr", None)
+
+    with pytest.raises(RuntimeError, match="requirements-validation-data.txt"):
+        acquire._open_dataset(path)

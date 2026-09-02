@@ -5,7 +5,12 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import xarray as xr
+import pytest
+
+try:
+    import xarray as xr
+except ImportError:  # Optional observational-data dependency.
+    xr = None
 
 from arctic_validation_stack import source_status
 from tools.acquire_arctic_validation_stack import (
@@ -17,6 +22,7 @@ from tools.acquire_arctic_validation_stack import (
 )
 
 
+@pytest.mark.skipif(xr is None, reason="requires requirements-validation-data.txt")
 def test_osi_projected_kilometre_axes_become_625_km2_cells() -> None:
     ds = xr.Dataset(coords={
         "x": xr.DataArray(np.array([-25.0, 0.0, 25.0]), dims=("x",), attrs={"units": "km"}),
