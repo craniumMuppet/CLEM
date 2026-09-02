@@ -4,7 +4,7 @@
     "platform": "Windows-11-10.0.26200-SP0",
     "python": "3.13.13"
   },
-  "graph_sha256": "c6c4c9aefcb2baeb3dea474121995ce5ef6fffa4aba17cd4cd45637c69f7e101",
+  "graph_sha256": "9638ad9116741e8d1bd0842881901fbe1d7132caf95ad18220ba83550b623c25",
   "model_version": "2.29.29",
   "packages": {
     "altair": {
@@ -141,6 +141,21 @@
       "installed_content_sha256": "753d3a69db22d0079c39a0d7e20f0fc25edae979404bdca0c30ff1450f469b28",
       "metadata_source": "PyPI metadata snapshot",
       "version": "3.1.45"
+    },
+    "gsw": {
+      "dependencies": [
+        {
+          "marker": "",
+          "name": "numpy",
+          "specifier": ">=2"
+        }
+      ],
+      "hash_source": "tested installed distribution contents",
+      "hashed_bytes": 4790024,
+      "hashed_file_count": 65,
+      "installed_content_sha256": "630e31b96aaa4bd253b545efd9be675799d7692ac37b84dd55064ac8fddd8b91",
+      "metadata_source": "tested environment metadata",
+      "version": "3.6.23"
     },
     "idna": {
       "dependencies": [],

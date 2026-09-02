@@ -1,17 +1,16 @@
-"""R16 reduced AMOC equation-of-state helpers.
+"""Reduced AMOC equation-of-state helpers.
 
-The R16/R16.1 candidate keeps the inexpensive linear alpha/beta closure while
-exposing a TEOS-10 diagnostic branch for structural-sensitivity runs. TEOS-10
-is evaluated only for the representative North Atlantic sinking box and the
-active reduced source-water box selected by ``amoc_density_geometry``; it does
-not add grid-scale cost.
+TEOS-10 is evaluated only for the representative North Atlantic sinking box
+and the active reduced source-water box selected by ``amoc_density_geometry``;
+it does not add grid-scale cost. The fixed-alpha/beta equation remains
+available as an explicit structural sensitivity in :mod:`climate_model`.
 """
 
 from __future__ import annotations
 
 
 class TEOS10Unavailable(RuntimeError):
-    """Raised when the optional GSW dependency is unavailable."""
+    """Raised when the required GSW dependency is unavailable."""
 
 
 def teos10_density_driver(
@@ -35,8 +34,9 @@ def teos10_density_driver(
         import gsw  # type: ignore
     except ImportError as exc:
         raise TEOS10Unavailable(
-            "The R16 TEOS-10 branch requires the optional 'gsw' package. "
-            "Install gsw or use amoc_density_eos='linear'."
+            "The production TEOS-10 AMOC density equation requires the 'gsw' "
+            "package. Install the declared CLEM runtime dependencies or use "
+            "amoc_density_eos='linear' as an explicit structural sensitivity."
         ) from exc
 
     p_dbar = 0.0

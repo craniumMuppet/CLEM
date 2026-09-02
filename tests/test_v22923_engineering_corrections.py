@@ -66,7 +66,8 @@ def test_v22923_identity_and_primary_documentation_are_semantically_current() ->
         encoding="utf-8"
     )
     assert readme.startswith("# Coupled Low-complexity Earth Model v2.29.29")
-    assert changelog.startswith("# Changelog\n\n## 2.29.29")
+    assert changelog.startswith("# Changelog\n\n## Unreleased")
+    assert "\n## 2.29.29" in changelog
     assert "TEST_RESULTS_V2_29_22.json" not in readme
     assert scientific_constraints.startswith(
         "# Scientific constraints used by v2.29.29\n"

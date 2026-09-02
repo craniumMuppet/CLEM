@@ -195,6 +195,8 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
 
 DEFAULTS: dict[str, Any] = {
     "scenario": "ssp245",
+    "run_all_ssp": False,
+    "resume_all_ssp": False,
     "start_year": "1850",
     "years": "250",
     "dt": "0.05",
@@ -721,6 +723,12 @@ def build_cli_command(values: dict[str, Any]) -> list[str]:
 
     if str(values.get("one_percent_cap", "")).strip():
         command.extend(["--one-percent-cap", str(values["one_percent_cap"]).strip()])
+    if bool(values.get("run_all_ssp", False)) or bool(
+        values.get("resume_all_ssp", False)
+    ):
+        command.append("--run-all-ssp")
+    if bool(values.get("resume_all_ssp", False)):
+        command.append("--resume-all-ssp")
     if not bool(values.get("seasonal_arctic_enabled", True)):
         command.append("--disable-seasonal-arctic")
     if not bool(values.get("greenland_surface_mass_balance_enabled", True)):
@@ -832,6 +840,12 @@ def validate_values(values: dict[str, Any]) -> None:
     years = float(values["years"])
     dt = float(values["dt"])
     scenario = str(values["scenario"])
+    run_all_ssp = bool(values.get("run_all_ssp", False))
+    resume_all_ssp = bool(values.get("resume_all_ssp", False))
+    if resume_all_ssp and not run_all_ssp:
+        raise ValueError("Resume all SSP scenarios requires Run all SSP scenarios.")
+    if run_all_ssp and bool(values.get("monte_carlo_enabled", False)):
+        raise ValueError("All-SSP batch execution is available for deterministic runs only.")
     target_sweep = bool(values.get("monte_carlo_enabled", False)) and bool(
         values.get("mc_co2_target_sweep_enabled", False)
     )
@@ -960,7 +974,9 @@ def validate_values(values: dict[str, Any]) -> None:
         raise ValueError("Simulation years must be positive.")
     if not 0.001 <= dt <= 0.25:
         raise ValueError("Time step must be between 0.001 and 0.25 years.")
-    if (scenario in SSP_SCENARIOS or scenario == "hybrid_ssp") and not target_sweep:
+    if (
+        run_all_ssp or scenario in SSP_SCENARIOS or scenario == "hybrid_ssp"
+    ) and not target_sweep:
         end = start + years
         if start < 1750 or end > 2500:
             raise ValueError(
@@ -1435,13 +1451,30 @@ class ClimateModelGUI:
 
         general = self._section(tab, "Scenario and duration", 0)
         self._field(general, 0, "scenario", "Scenario", values=SCENARIOS)
-        self._field(general, 1, "forcing_mode", "Forcing mode", values=FORCING_MODES)
-        self._field(general, 2, "start_year", "Start year")
-        self._field(general, 3, "years", "Simulation length (years)")
-        self._field(general, 4, "dt", "Time step (years)", help_text="0.05 recommended")
         self._checkbox(
             general,
-            5,
+            1,
+            "run_all_ssp",
+            "Run all SSP scenarios sequentially",
+            help_text=(
+                "Runs SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 with the "
+                "same settings and creates a combined near-surface-air temperature plot."
+            ),
+        )
+        self._checkbox(
+            general,
+            2,
+            "resume_all_ssp",
+            "Resume an interrupted all-SSP batch",
+            help_text="Skips complete, settings-compatible scenario subfolders.",
+        )
+        self._field(general, 3, "forcing_mode", "Forcing mode", values=FORCING_MODES)
+        self._field(general, 4, "start_year", "Start year")
+        self._field(general, 5, "years", "Simulation length (years)")
+        self._field(general, 6, "dt", "Time step (years)", help_text="0.05 recommended")
+        self._checkbox(
+            general,
+            7,
             "auto_initialize_from_1850",
             "Initialize post-1850 SSP runs from a continuous 1850 integration",
         )
@@ -2126,14 +2159,16 @@ class ClimateModelGUI:
         if not self.widgets:
             return
         scenario = str(self.variables["scenario"].get())
-        is_ssp = scenario in SSP_SCENARIOS or scenario == "hybrid_ssp"
-        is_hybrid = scenario == "hybrid_ssp"
+        run_all_ssp = bool(self.variables["run_all_ssp"].get())
+        is_ssp = run_all_ssp or scenario in SSP_SCENARIOS or scenario == "hybrid_ssp"
+        is_hybrid = not run_all_ssp and scenario == "hybrid_ssp"
         is_one_percent = scenario == "one_percent"
         is_percent_ramp = scenario == "percent_ramp_hold"
         is_overshoot = scenario == "overshoot"
         is_linear = scenario == "linear"
         is_constant_or_step = scenario in {"constant", "step_2x"}
 
+        self._set_widget_state("scenario", "disabled" if run_all_ssp else "readonly")
         self._set_widget_state("forcing_mode", "readonly" if is_ssp else "disabled")
         for key in ("ssp_before", "ssp_after"):
             self._set_widget_state(key, "readonly" if is_hybrid else "disabled")
@@ -2158,6 +2193,13 @@ class ClimateModelGUI:
             self._set_widget_state("co2_start", "normal")
 
         monte_carlo = bool(self.variables["monte_carlo_enabled"].get())
+        self._set_widget_state(
+            "run_all_ssp", "disabled" if monte_carlo else "normal"
+        )
+        self._set_widget_state(
+            "resume_all_ssp",
+            "normal" if (run_all_ssp and not monte_carlo) else "disabled",
+        )
         target_sweep = monte_carlo and bool(self.variables["mc_co2_target_sweep_enabled"].get())
         self._set_widget_state("mc_co2_target_sweep_enabled", "normal" if monte_carlo else "disabled")
         sweep_mode = str(self.variables["mc_sweep_target_mode"].get())
@@ -2313,7 +2355,7 @@ class ClimateModelGUI:
         resume = loaded_resume or (
             bool(values.get("monte_carlo_enabled", False))
             and bool(values.get("mc_resume", False))
-        )
+        ) or bool(values.get("resume_all_ssp", False))
         overwrite = False
         if output_path.exists() and not resume:
             overwrite = messagebox.askyesno(

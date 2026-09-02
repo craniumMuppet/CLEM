@@ -1,5 +1,36 @@
 # Changelog
 
+## Unreleased
+
+### AMOC seawater-density physics
+
+- Promoted matched-pathway TEOS-10/GSW seawater density to the production AMOC
+  closure. This changes the equation of state on the established North Atlantic
+  stratification pathway; the fixed-alpha/beta and literal prognostic-water-mass
+  branches remain structural sensitivities.
+- Kept the preindustrial AMOC control at 17 Sv and retained the same thermal
+  pathway, water-mass geometry, initial salinities, and hydraulic coefficients;
+  no AMOC output offset or RAPID-period calibration term was added.
+- At the production 0.05-year integration step, the 2004–2020 mean increases
+  from the released ~14.17/~14.32 Sv at 10°/5° to ~15.74/~15.86 Sv, within
+  the 16.9 ± 1.2 Sv RAPID comparison interval. Salt conservation remains at
+  roundoff.
+- Declared `gsw` as a normal runtime dependency and added regression coverage
+  for exact control-state normalization and selected-EOS density-margin
+  screening.
+- Rejected literal prognostic-water-mass TEOS, South-Atlantic-upper geometry,
+  canonical-hydraulic, and idealized aerosol-pattern candidates because
+  independent SSP/hosing checks failed or the forcing pattern lacked an
+  independent spatial constraint. Documented the retained closure's weaker
+  SSP2-4.5 and hosing response as an open limitation.
+
+### All-SSP batch execution
+
+- Added sequential, resumable one-click/CLI execution of SSP1-2.6, SSP2-4.5,
+  SSP4-6.0, and SSP5-8.5 with shared settings and per-scenario output folders.
+- Added a combined global near-surface-air temperature anomaly CSV and
+  comparison figure.
+
 ## 2.29.29 — 2026-09-01
 
 CLEM v2.29.29 is the public release of the physics-repair and validation work carried out after the v2.29.28-r13 baseline. The version bump itself does not retune the final governing equations; the numerical evidence produced during the repair line remains recorded under the v2.29.28 version that actually generated it.

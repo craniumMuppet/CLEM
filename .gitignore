@@ -225,6 +225,7 @@ tmp/
 
 # Generated simulation output
 outputs/
+outputs_ssps/
 results/
 validation_outputs/
 coupled_outputs/

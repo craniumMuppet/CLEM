@@ -15,13 +15,16 @@ from sea_ice_observation import (
 )
 
 
-def test_r17_default_amoc_is_unchanged_linear_high_latitude():
+def test_production_amoc_uses_matched_teos10_high_latitude_geometry():
     cfg = cm.ModelConfig(resolution_deg=10.0, auto_initialize_from_1850=False)
-    assert cfg.amoc_density_eos == "linear"
+    assert cfg.amoc_density_eos == "teos10_matched"
     assert cfg.amoc_density_geometry == "interhemispheric_high_latitude"
     d = cm.initial_amoc_density_diagnostics(cfg)
-    assert d["density_driver"] == pytest.approx(4.34e-4, abs=2e-8)
-    assert d["density_ratio"] == pytest.approx(1.0, abs=2e-3)
+    assert d["density_driver"] == pytest.approx(1.1687567542e-3, abs=2e-10)
+    assert d["density_ratio"] == pytest.approx(1.0, abs=2e-6)
+    assert d["density_ratio_to_linear_reference"] == pytest.approx(
+        2.692987913, abs=2e-6
+    )
 
 
 def _bare_model(eos: str = "linear"):

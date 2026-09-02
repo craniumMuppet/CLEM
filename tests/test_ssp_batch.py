@@ -1,0 +1,108 @@
+"""All-SSP batch execution, comparison, and resume regressions."""
+
+from __future__ import annotations
+
+from dataclasses import asdict
+import json
+from pathlib import Path
+from types import SimpleNamespace
+
+import numpy as np
+import pandas as pd
+import pytest
+
+import climate_model as cm
+from climate_model_gui import DEFAULTS, build_cli_command, validate_values
+
+
+def _temperature_frame(offset: float = 0.0) -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "year": [2000.0, 2001.0, 2002.0],
+            "global_near_surface_air_warming_c": np.asarray([0.0, 0.2, 0.4])
+            + offset,
+        }
+    )
+
+
+def test_cli_and_desktop_expose_all_ssp_batch_flags() -> None:
+    args = cm.build_parser().parse_args(["--run-all-ssp", "--resume-all-ssp"])
+    assert args.run_all_ssp is True
+    assert args.resume_all_ssp is True
+
+    values = dict(DEFAULTS)
+    values.update({"run_all_ssp": True, "resume_all_ssp": True})
+    validate_values(values)
+    command = build_cli_command(values)
+    assert command.count("--run-all-ssp") == 1
+    assert command.count("--resume-all-ssp") == 1
+
+
+def test_all_ssp_batch_rejects_monte_carlo() -> None:
+    values = dict(DEFAULTS)
+    values.update({"run_all_ssp": True, "monte_carlo_enabled": True})
+    with pytest.raises(ValueError, match="deterministic"):
+        validate_values(values)
+
+
+def test_temperature_comparison_uses_global_near_surface_air(tmp_path: Path) -> None:
+    for index, scenario in enumerate(cm.SSP_BATCH_SCENARIOS):
+        scenario_output = tmp_path / scenario
+        scenario_output.mkdir()
+        frame = _temperature_frame(float(index))
+        frame["global_bulk_surface_warming_c"] = 100.0 + index
+        frame.to_csv(scenario_output / "timeseries.csv", index=False)
+
+    comparison = cm.save_ssp_temperature_comparison(tmp_path)
+    assert list(comparison.columns) == [
+        "year",
+        *(cm.SSP_COMPARISON_COLUMNS[item] for item in cm.SSP_BATCH_SCENARIOS),
+    ]
+    np.testing.assert_allclose(
+        comparison[cm.SSP_COMPARISON_COLUMNS["ssp585"]],
+        [3.0, 3.2, 3.4],
+    )
+    assert (tmp_path / "ssp_temperature_comparison.csv").is_file()
+    assert (tmp_path / "ssp_temperature_comparison.png").is_file()
+
+
+def test_all_ssp_batch_resumes_completed_scenarios(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls: list[str] = []
+
+    def fake_run_model(config: cm.ModelConfig, **_kwargs: object) -> SimpleNamespace:
+        calls.append(config.scenario)
+        offset = float(cm.SSP_BATCH_SCENARIOS.index(config.scenario))
+        return SimpleNamespace(config=config, dataframe=_temperature_frame(offset))
+
+    def fake_save_outputs(result: SimpleNamespace, output_dir: str | Path) -> None:
+        output = Path(output_dir)
+        output.mkdir(parents=True, exist_ok=True)
+        result.dataframe.to_csv(output / "timeseries.csv", index=False)
+        (output / "config.json").write_text(
+            json.dumps(asdict(result.config), indent=2), encoding="utf-8"
+        )
+        (output / "summary.json").write_text("{}\n", encoding="utf-8")
+        (output / "temperature_timeseries.png").write_bytes(b"complete")
+
+    monkeypatch.setattr(cm, "run_model", fake_run_model)
+    monkeypatch.setattr(cm, "save_outputs", fake_save_outputs)
+    config = cm.ModelConfig(
+        scenario="ssp245",
+        start_year=2000.0,
+        duration_years=2.0,
+        dt_years=0.1,
+        auto_initialize_from_1850=False,
+    )
+
+    first = cm.run_all_ssp_scenarios(config, tmp_path, diagnose=False)
+    assert calls == list(cm.SSP_BATCH_SCENARIOS)
+    assert first["status"] == "completed"
+
+    calls.clear()
+    second = cm.run_all_ssp_scenarios(
+        config, tmp_path, resume=True, diagnose=False
+    )
+    assert calls == []
+    assert second["completed_scenarios"] == list(cm.SSP_BATCH_SCENARIOS)

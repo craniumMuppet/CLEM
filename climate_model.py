@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 from collections import OrderedDict
+import hashlib
 import json
 import math
 import shutil
@@ -80,6 +81,19 @@ AmocIndoPacificCompensationMode = Literal["none", "diagnostic", "interactive"]
 GreenlandTemperatureDriver = Literal["global", "regional", "greenland"]
 
 SSP_SCENARIOS = {"ssp126", "ssp245", "ssp460", "ssp585"}
+SSP_BATCH_SCENARIOS = ("ssp126", "ssp245", "ssp460", "ssp585")
+SSP_SCENARIO_LABELS = {
+    "ssp126": "SSP1-2.6",
+    "ssp245": "SSP2-4.5",
+    "ssp460": "SSP4-6.0",
+    "ssp585": "SSP5-8.5",
+}
+SSP_COMPARISON_COLUMNS = {
+    "ssp126": "ssp1_2_6_temperature_anomaly_c",
+    "ssp245": "ssp2_4_5_temperature_anomaly_c",
+    "ssp460": "ssp4_6_0_temperature_anomaly_c",
+    "ssp585": "ssp5_8_5_temperature_anomaly_c",
+}
 SSP_DATA_MIN_YEAR = 1750.0
 SSP_DATA_MAX_YEAR = 2500.0
 SSP_DATA_FILENAME = "ssp_pathways_rcmip_v5_1_0.csv"
@@ -567,12 +581,12 @@ class ModelConfig:
     # made the default AMOC strengthen under SSP2-4.5 and respond too weakly
     # to freshwater hosing.
     amoc_density_geometry: AmocDensityGeometry = "interhemispheric_high_latitude"
-    # Linear alpha/beta remains the validated default. R17 separates two
-    # nonlinear structural branches: ``teos10_matched`` changes the equation of
-    # state while preserving the linear branch's thermal pathway; the R16
-    # direct surface-water-mass experiment remains available as
-    # ``teos10_surface_watermass`` (and legacy alias ``teos10``).
-    amoc_density_eos: AmocDensityEOS = "linear"
+    # Use nonlinear TEOS-10 density on the established reduced-order North
+    # Atlantic stratification pathway. This changes the equation of state while
+    # preserving the model's hydraulic thermal coordinate and exact 17 Sv
+    # control normalization. The direct prognostic-water-mass TEOS and fixed
+    # alpha/beta equations remain explicit structural sensitivities.
+    amoc_density_eos: AmocDensityEOS = "teos10_matched"
     # Dimensional screening reference for the coherent source-water geometry.
     # It is not an AMOC-strength tuning parameter; the runtime transport is
     # normalized by each grid's exact control-state density driver.
@@ -3124,7 +3138,11 @@ def initial_amoc_density_diagnostics(
         * config.fovs_reference_salinity_psu
         / config.amoc_reference_sv
     )
-    if config.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}:
+    high_latitude_geometry = config.amoc_density_geometry in {
+        "interhemispheric_high_latitude",
+        "legacy_southern_surface",
+    }
+    if high_latitude_geometry:
         active_source_temperature = southern
         active_source_salinity = float(config.initial_southern_salinity_psu)
         reference_driver = float(config.amoc_reference_density_driver)
@@ -3137,15 +3155,63 @@ def initial_amoc_density_diagnostics(
 
     if config.amoc_density_eos in {"teos10", "teos10_surface_watermass", "teos10_matched"}:
         from amoc_density_r16 import teos10_density_driver
+        source_latitude = -52.5 if high_latitude_geometry else -35.0
         driver = teos10_density_driver(
             north_temperature_c=north,
             north_salinity_psu=float(config.initial_north_salinity_psu),
             source_temperature_c=active_source_temperature,
             source_salinity_psu=active_source_salinity,
             source_longitude_deg=-20.0,
-            source_latitude_deg=(-52.5 if config.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"} else -35.0),
+            source_latitude_deg=source_latitude,
             reference_density_kg_m3=float(config.reference_density_kg_m3),
         )
+        # Compare nonlinear density margins against the same EOS evaluated at
+        # the canonical control hydrography.  Comparing this dimensional TEOS
+        # contrast with the old linear alpha/beta reference made the nominal
+        # control ratio about 2.7 and disabled the initial-density safety gate.
+        canonical = ModelConfig()
+        control_midpoint = 0.5 * (north + southern)
+        reference_north = float(
+            control_midpoint
+            + 0.5 * canonical.amoc_control_north_minus_south_temperature_c
+        )
+        reference_southern = float(
+            control_midpoint
+            - 0.5 * canonical.amoc_control_north_minus_south_temperature_c
+        )
+        reference_south_upper_temperature = (
+            _baseline_amoc_south_atlantic_upper_temperature(
+                config.resolution_deg,
+                canonical.arctic_module_start_latitude_deg,
+                canonical.arctic_module_full_latitude_deg,
+                canonical.arctic_interface_freezing_temperature_c,
+            )
+        )
+        reference_south_upper_salinity = float(
+            canonical.initial_deep_salinity_psu
+            - canonical.initial_fovs_sv
+            * canonical.fovs_reference_salinity_psu
+            / canonical.amoc_reference_sv
+        )
+        teos_reference_driver = teos10_density_driver(
+            north_temperature_c=reference_north,
+            north_salinity_psu=float(canonical.initial_north_salinity_psu),
+            source_temperature_c=(
+                reference_southern
+                if high_latitude_geometry
+                else reference_south_upper_temperature
+            ),
+            source_salinity_psu=(
+                float(canonical.initial_southern_salinity_psu)
+                if high_latitude_geometry
+                else reference_south_upper_salinity
+            ),
+            source_longitude_deg=-20.0,
+            source_latitude_deg=source_latitude,
+            reference_density_kg_m3=float(config.reference_density_kg_m3),
+        )
+        linear_reference_ratio = float(driver / reference_driver)
+        reference_driver = float(teos_reference_driver)
         thermal = float("nan")
         haline = float("nan")
     else:
@@ -3156,6 +3222,7 @@ def initial_amoc_density_diagnostics(
             float(config.initial_north_salinity_psu) - active_source_salinity
         )
         driver = float(thermal + haline)
+        linear_reference_ratio = float(driver / reference_driver)
 
     ratio = float(driver / reference_driver)
     return {
@@ -3168,6 +3235,8 @@ def initial_amoc_density_diagnostics(
         "haline_density_driver": haline,
         "density_driver": driver,
         "density_ratio": ratio,
+        "density_ratio_to_linear_reference": linear_reference_ratio,
+        "selected_eos_reference_density_driver": reference_driver,
         "south_atlantic_upper_salinity_psu": south_upper_salinity,
     }
 
@@ -3190,26 +3259,17 @@ def validate_initial_amoc_density_margin(
             "AMOC baseline northern density advantage is non-positive. "
             "Revise northern/southern temperatures or salinities."
         )
-    # The absolute ratio envelope was calibrated for the inexpensive linear
-    # alpha/beta EOS.  TEOS-10 has a different dimensional control density
-    # contrast, while the hydraulic closure below normalizes each EOS by its
-    # own initialized baseline_density_driver.  Applying the linear envelope
-    # to TEOS-10 therefore rejects a valid structural-sensitivity branch before
-    # integration (R16 user-run evidence: control ratio ~2.693).  Retain the
-    # physically essential positive-density check above, but apply the absolute
-    # calibrated ratio envelope only to the linear EOS.
-    if (
-        config.amoc_enforce_initial_density_constraint
-        and config.amoc_density_eos == "linear"
-        and not (
+    # Each EOS is normalized against its own canonical control hydrography, so
+    # the same dimensionless safety envelope can screen fragile initial states
+    # without comparing incompatible dimensional density formulations.
+    if config.amoc_enforce_initial_density_constraint and not (
             config.amoc_minimum_initial_density_ratio
             <= diagnostics["density_ratio"]
             <= config.amoc_maximum_initial_density_ratio
-        )
     ):
         raise ValueError(
             "AMOC absolute initial density margin is outside the accepted "
-            f"linear-EOS range: ratio={diagnostics['density_ratio']:.4f}, "
+            f"selected-EOS range: ratio={diagnostics['density_ratio']:.4f}, "
             f"allowed=[{config.amoc_minimum_initial_density_ratio:.4f}, "
             f"{config.amoc_maximum_initial_density_ratio:.4f}]."
         )
@@ -13336,6 +13396,239 @@ def save_outputs(result: SimulationResult, output_dir: str | Path) -> None:
         plt.close(feedback_figure)
 
 
+def save_ssp_temperature_comparison(output_dir: str | Path) -> pd.DataFrame:
+    """Write the all-SSP near-surface-air GMST comparison products.
+
+    Each source is the normal ``timeseries.csv`` written by ``save_outputs``.
+    An outer merge keeps the product usable if callers deliberately use a
+    sampling configuration that does not place every scenario on identical
+    floating-point year values.
+    """
+
+    output = Path(output_dir)
+    comparison: pd.DataFrame | None = None
+    for scenario in SSP_BATCH_SCENARIOS:
+        source = output / scenario / "timeseries.csv"
+        frame = pd.read_csv(
+            source,
+            usecols=["year", "global_near_surface_air_warming_c"],
+        ).rename(
+            columns={
+                "global_near_surface_air_warming_c": SSP_COMPARISON_COLUMNS[scenario]
+            }
+        )
+        comparison = (
+            frame
+            if comparison is None
+            else comparison.merge(frame, on="year", how="outer", validate="one_to_one")
+        )
+
+    if comparison is None:  # pragma: no cover - the scenario tuple is fixed and nonempty
+        raise RuntimeError("No SSP scenarios are configured for comparison")
+    comparison = comparison.sort_values("year").reset_index(drop=True)
+
+    csv_path = output / "ssp_temperature_comparison.csv"
+    csv_temporary = output / ".ssp_temperature_comparison.csv.tmp"
+    comparison.to_csv(csv_temporary, index=False)
+    csv_temporary.replace(csv_path)
+
+    fig, ax = plt.subplots(figsize=(10.5, 6.0), constrained_layout=True)
+    for scenario in SSP_BATCH_SCENARIOS:
+        ax.plot(
+            comparison["year"],
+            comparison[SSP_COMPARISON_COLUMNS[scenario]],
+            label=SSP_SCENARIO_LABELS[scenario],
+        )
+    ax.axhline(0.0, linewidth=0.8, color="black")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Global near-surface air temperature anomaly (°C)")
+    ax.set_title("SSP global temperature comparison")
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+    figure_path = output / "ssp_temperature_comparison.png"
+    figure_temporary = output / ".ssp_temperature_comparison.tmp.png"
+    fig.savefig(figure_temporary, dpi=170)
+    plt.close(fig)
+    figure_temporary.replace(figure_path)
+    return comparison
+
+
+def _write_ssp_batch_state(path: Path, state: dict[str, Any]) -> None:
+    """Atomically replace the small all-SSP progress record."""
+
+    temporary = path.with_name(f".{path.name}.tmp")
+    with temporary.open("w", encoding="utf-8", newline="\n") as handle:
+        json.dump(state, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+    temporary.replace(path)
+
+
+def _ssp_batch_fingerprint(
+    base_config: ModelConfig,
+    *,
+    diagnose: bool,
+    equilibrium_years: float,
+    run_hysteresis: bool,
+    hysteresis_max_hosing_sv: float,
+    hysteresis_step_sv: float,
+    hysteresis_years_per_step: float,
+    hysteresis_spinup_years: float,
+) -> tuple[str, dict[str, Any]]:
+    # The scenario selected in the ordinary single-run control is intentionally
+    # excluded: batch mode replaces it with each of the four supported SSPs.
+    shared_config = asdict(replace(base_config, scenario="ssp126"))
+    settings: dict[str, Any] = {
+        "shared_model_config": shared_config,
+        "diagnose": bool(diagnose),
+        "equilibrium_years": float(equilibrium_years),
+        "run_hysteresis": bool(run_hysteresis),
+        "hysteresis_max_hosing_sv": float(hysteresis_max_hosing_sv),
+        "hysteresis_step_sv": float(hysteresis_step_sv),
+        "hysteresis_years_per_step": float(hysteresis_years_per_step),
+        "hysteresis_spinup_years": float(hysteresis_spinup_years),
+        "scenarios": list(SSP_BATCH_SCENARIOS),
+        "temperature_field": "global_near_surface_air_warming_c",
+    }
+    encoded = json.dumps(settings, sort_keys=True, separators=(",", ":")).encode(
+        "utf-8"
+    )
+    return hashlib.sha256(encoded).hexdigest(), settings
+
+
+def _ssp_output_is_complete(output: Path, expected_config: ModelConfig) -> bool:
+    required = (
+        output / "timeseries.csv",
+        output / "config.json",
+        output / "summary.json",
+        output / "temperature_timeseries.png",
+    )
+    if not all(path.is_file() for path in required):
+        return False
+    try:
+        saved_config = json.loads((output / "config.json").read_text(encoding="utf-8"))
+        if saved_config != asdict(expected_config):
+            return False
+        header = pd.read_csv(output / "timeseries.csv", nrows=1)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    return {
+        "year",
+        "global_near_surface_air_warming_c",
+    }.issubset(header.columns)
+
+
+def run_all_ssp_scenarios(
+    base_config: ModelConfig,
+    output_dir: str | Path,
+    *,
+    resume: bool = False,
+    diagnose: bool = True,
+    equilibrium_years: float = 1200.0,
+    run_hysteresis: bool = False,
+    hysteresis_max_hosing_sv: float = 0.8,
+    hysteresis_step_sv: float = 0.05,
+    hysteresis_years_per_step: float = 80.0,
+    hysteresis_spinup_years: float = 200.0,
+) -> dict[str, Any]:
+    """Sequentially run, resume, and compare all supported SSP scenarios."""
+
+    output = Path(output_dir)
+    state_path = output / "ssp_batch_state.json"
+    fingerprint, settings = _ssp_batch_fingerprint(
+        base_config,
+        diagnose=diagnose,
+        equilibrium_years=equilibrium_years,
+        run_hysteresis=run_hysteresis,
+        hysteresis_max_hosing_sv=hysteresis_max_hosing_sv,
+        hysteresis_step_sv=hysteresis_step_sv,
+        hysteresis_years_per_step=hysteresis_years_per_step,
+        hysteresis_spinup_years=hysteresis_spinup_years,
+    )
+    completed: list[str] = []
+    if resume and state_path.exists():
+        try:
+            previous = json.loads(state_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Cannot read SSP batch progress: {state_path}") from exc
+        if previous.get("settings_fingerprint") != fingerprint:
+            raise ValueError(
+                "The saved SSP batch used different model settings. Resume with the "
+                "original settings, or choose a new/overwritten output folder."
+            )
+
+    state: dict[str, Any] = {
+        "format": "clem-ssp-batch-state",
+        "version": 1,
+        "model_version": MODEL_VERSION,
+        "status": "running",
+        "settings_fingerprint": fingerprint,
+        "settings": settings,
+        "completed_scenarios": completed,
+        "current_scenario": None,
+    }
+    _write_ssp_batch_state(state_path, state)
+
+    try:
+        for scenario in SSP_BATCH_SCENARIOS:
+            config = replace(base_config, scenario=scenario)
+            scenario_output = output / scenario
+            if resume and _ssp_output_is_complete(scenario_output, config):
+                completed.append(scenario)
+                state["completed_scenarios"] = list(completed)
+                _write_ssp_batch_state(state_path, state)
+                print(
+                    f"Skipping completed {SSP_SCENARIO_LABELS[scenario]}: "
+                    f"{scenario_output.resolve()}"
+                )
+                continue
+
+            state["current_scenario"] = scenario
+            _write_ssp_batch_state(state_path, state)
+            print(
+                f"Running {SSP_SCENARIO_LABELS[scenario]} "
+                f"({len(completed) + 1}/{len(SSP_BATCH_SCENARIOS)})...",
+                flush=True,
+            )
+            prepare_output_directory(
+                scenario_output,
+                overwrite=scenario_output.exists(),
+                prompt=False,
+            )
+            result = run_model(
+                config,
+                diagnose=diagnose,
+                equilibrium_years=equilibrium_years,
+                run_hysteresis=run_hysteresis,
+                hysteresis_max_hosing_sv=hysteresis_max_hosing_sv,
+                hysteresis_step_sv=hysteresis_step_sv,
+                hysteresis_years_per_step=hysteresis_years_per_step,
+                hysteresis_spinup_years=hysteresis_spinup_years,
+            )
+            save_outputs(result, scenario_output)
+            completed.append(scenario)
+            state["completed_scenarios"] = list(completed)
+            _write_ssp_batch_state(state_path, state)
+
+        comparison = save_ssp_temperature_comparison(output)
+        state.update(
+            {
+                "status": "completed",
+                "current_scenario": None,
+                "comparison_csv": "ssp_temperature_comparison.csv",
+                "comparison_figure": "ssp_temperature_comparison.png",
+                "comparison_rows": int(len(comparison)),
+            }
+        )
+        _write_ssp_batch_state(state_path, state)
+        return state
+    except BaseException as exc:
+        state["status"] = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
+        state["error"] = f"{type(exc).__name__}: {exc}"
+        _write_ssp_batch_state(state_path, state)
+        raise
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -13353,6 +13646,22 @@ def build_parser() -> argparse.ArgumentParser:
         ],
         default="overshoot",
         help="CO2/forcing pathway. SSP pathways use bundled RCMIP v5.1.0 data.",
+    )
+    parser.add_argument(
+        "--run-all-ssp",
+        action="store_true",
+        help=(
+            "Run SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 sequentially "
+            "with shared settings, then write a combined temperature CSV and plot."
+        ),
+    )
+    parser.add_argument(
+        "--resume-all-ssp",
+        action="store_true",
+        help=(
+            "Resume --run-all-ssp in an existing output folder, skipping scenario "
+            "subfolders that are complete and match the current settings."
+        ),
     )
     parser.add_argument("--start-year", type=float, default=1850.0)
     parser.add_argument("--years", type=float, default=350.0)
@@ -13948,9 +14257,11 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["linear", "teos10", "teos10_surface_watermass", "teos10_matched"],
         default=ModelConfig().amoc_density_eos,
         help=(
-            "Reduced AMOC box EOS. 'teos10_matched' preserves the linear thermal "
-            "pathway while changing EOS; 'teos10'/'teos10_surface_watermass' keep "
-            "the R16 direct water-mass sensitivity. TEOS branches require gsw."
+            "Reduced AMOC box EOS. The default 'teos10_matched' applies nonlinear "
+            "density to the established North Atlantic stratification pathway; "
+            "'linear' retains the fixed-alpha/beta sensitivity, while "
+            "'teos10'/'teos10_surface_watermass' use literal prognostic source "
+            "temperatures as a structural sensitivity. TEOS branches require gsw."
         ),
     )
     parser.add_argument("--amoc-depth-exponent", type=float, default=1.00)
@@ -14661,9 +14972,29 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
 def main() -> None:
     args = build_parser().parse_args()
     config = config_from_args(args)
+    run_ssp_batch = bool(args.run_all_ssp or args.resume_all_ssp)
     args.output = prepare_output_directory(
-        args.output, overwrite=bool(args.overwrite_output), prompt=True
+        args.output,
+        overwrite=bool(args.overwrite_output),
+        resume=bool(args.resume_all_ssp),
+        prompt=True,
     )
+    if run_ssp_batch:
+        summary = run_all_ssp_scenarios(
+            config,
+            args.output,
+            resume=bool(args.resume_all_ssp),
+            diagnose=not args.skip_diagnostics,
+            equilibrium_years=args.equilibrium_years,
+            run_hysteresis=args.run_amoc_hysteresis,
+            hysteresis_max_hosing_sv=args.hysteresis_max_hosing,
+            hysteresis_step_sv=args.hysteresis_step,
+            hysteresis_years_per_step=args.hysteresis_years_per_step,
+            hysteresis_spinup_years=args.hysteresis_spinup_years,
+        )
+        print(json.dumps(summary, indent=2))
+        print(f"\nSSP batch outputs written to: {args.output.resolve()}")
+        return
     if config.scenario == "one_percent" and config.one_percent_cap_ppm is None:
         final_one_percent_co2 = config.co2_start_ppm * 1.01**config.duration_years
         if final_one_percent_co2 > 100000.0:

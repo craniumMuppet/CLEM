@@ -262,27 +262,45 @@ R18.4 additionally integrates NSIDC-0611 sea-ice age as a structural diagnostic.
 
 ## Known Biases and Limitations
 
-### Low Historical AMOC Mean State
+### Historical AMOC Mean State
 
-The largest documented mean-state bias is the historical AMOC strength.
+The public v2.29.29 configuration has a documented low historical AMOC mean.
+The Unreleased physics repair replaces the fixed-alpha/beta seawater density
+approximation with [TEOS-10](https://www.teos-10.org/pubs/TEOS-10_Manual.pdf)
+on the same reduced-order North Atlantic stratification pathway. It does not
+change the 17 Sv preindustrial control, retune a hydraulic coefficient, or add
+an output correction.
 
-For approximately 2004-2020:
+For approximately 2004–2020:
 
-| Dataset / Configuration | AMOC |
+| Dataset / Configuration | 2004–2020 AMOC |
 |---|---:|
-| CLEM 10° | **~14.17 Sv** |
-| CLEM 5° | **~14.32 Sv** |
-| RAPID-era observational comparison | **16.9 ± 1.2 Sv** |
+| CLEM v2.29.29, fixed-alpha/beta, 10° | **~14.17 Sv** |
+| CLEM v2.29.29, fixed-alpha/beta, 5° | **~14.32 Sv** |
+| Unreleased matched-pathway TEOS-10, 10° | **~15.74 Sv** |
+| Unreleased matched-pathway TEOS-10, 5° | **~15.86 Sv** |
+| RAPID 26.5° N | **16.9 ± 1.2 Sv** |
 
-The modeled historical AMOC is therefore approximately:
+The nonlinear density closure reduces the released-model discrepancy from
+2.6–2.7 Sv to about 1.0–1.2 Sv, inside the published RAPID uncertainty interval.
+These are 10°/5° historical runs using the production 0.05-year integration
+step, not a claim of independent calibration. The RAPID comparison is from
+[Johns et al. (2023)](https://doi.org/10.1098/rsta.2022.0188).
 
-**2.6-2.7 Sv lower than the observational comparison**
-
-or roughly:
-
-**15-16% too weak**
-
-This bias is documented rather than removed using post-hoc tuning against the validation period.
+Mechanism isolation attributes almost all of the released model's excessive
+historical decline to the thermal-density pathway; removing anomalous
+freshwater changes shifts the mean by only about 0.025 Sv. At the control
+temperatures, the old constant thermal expansion coefficient is
+2.0e-4 K^-1, compared with TEOS-10 values of about 1.22e-4 K^-1 for the
+northern box and 0.43e-4 K^-1 for the cold Southern source. The old linear
+thermal (-0.001200) and haline (+0.001634) terms therefore left a fragile
+0.000434 residual, whereas the direct TEOS-10 density contrast is 0.001169.
+The repair changes only the equation used to translate the established thermal
+and salinity coordinates into density, retaining their geometry, initial
+hydrography, hydraulic coefficients, and 17 Sv control. A literal
+prognostic-water-mass TEOS alternative was also tested; although its historical
+mean reached ~16.34 Sv, its SSP2-4.5 weakening was only ~6.5%, below the model's
+independently declared 15–50% development range, so it was not promoted.
 
 ### Simplified Sea-Ice Geography
 
@@ -418,6 +436,19 @@ Example SSP2-4.5 experiment:
 ```bash
 python climate_model.py --scenario ssp245 --start-year 1850 --years 250
 ```
+
+Run all four supported SSP pathways sequentially with identical settings:
+
+```bash
+python climate_model.py --run-all-ssp --start-year 1850 --years 250 --output outputs_all_ssp
+```
+
+This writes normal outputs under `ssp126/`, `ssp245/`, `ssp460/`, and
+`ssp585/`, plus `ssp_temperature_comparison.png` and
+`ssp_temperature_comparison.csv` at the batch root. The comparison uses the
+global near-surface air temperature anomaly. Resume an interrupted batch with
+the same settings by adding `--resume-all-ssp`; complete compatible scenario
+subfolders are skipped.
 
 Available experiment types include:
 

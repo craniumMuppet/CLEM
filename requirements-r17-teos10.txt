@@ -1,2 +1,2 @@
-# Optional dependency required for the R16 TEOS-10 AMOC structural branch.
-gsw>=3.6.19
+# Compatibility helper; gsw is also part of the main runtime dependencies now.
+gsw>=3.6.23

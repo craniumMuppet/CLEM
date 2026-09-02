@@ -73,14 +73,14 @@ def test_r18_fixed_mask_operator_retains_legacy_threshold_fallback():
     assert abs(got["extent_million_km2"] - 2.0) < 1e-12
 
 
-def test_r18_default_amoc_and_teos_status_unchanged():
+def test_production_amoc_uses_matched_teos_without_changing_control():
     cfg = cm.ModelConfig()
     assert cfg.amoc_reference_sv == 17.0
     assert cfg.amoc_density_geometry == "interhemispheric_high_latitude"
-    assert cfg.amoc_density_eos == "linear"
+    assert cfg.amoc_density_eos == "teos10_matched"
     assert cfg.arctic_ice_support_reference_mode == "thermodynamic_pack"
-    matched = cm.ModelConfig(amoc_density_eos="teos10_matched")
-    assert matched.amoc_density_eos == "teos10_matched"
+    linear = cm.ModelConfig(amoc_density_eos="linear")
+    assert linear.amoc_density_eos == "linear"
 
 
 def test_r18_runner_matrix_has_no_teos_and_only_five_year_children():

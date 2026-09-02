@@ -51,6 +51,12 @@ SETTING_INFO: dict[str, SettingInfo] = {
     # Experiment and output controls.
     "preset": _op("Loads a complete, predefined combination of settings."),
     "scenario": _op("Selects the prescribed CO2 or SSP pathway used by the experiment."),
+    "run_all_ssp": _op(
+        "Runs all four supported SSP pathways sequentially with one shared set of model settings and creates combined temperature products."
+    ),
+    "resume_all_ssp": _op(
+        "Resumes an interrupted all-SSP batch and skips complete scenario outputs whose saved settings match."
+    ),
     "forcing_mode": _op("Chooses whether SSP experiments use total effective forcing or CO2 forcing alone."),
     "start_year": _op("Calendar year at which recorded output begins.", "User-defined; SSP data are limited to the pathway data period."),
     "years": _op("Length of the recorded transient simulation."),
@@ -690,6 +696,11 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "No observational CI. Built-in prior support: 0.8–2.5; default 1.50.",
         "Hydraulic scaling in conceptual and reduced-complexity overturning models.",
         "Low",
+    ),
+    "amoc_density_eos": _op(
+        "Selects the seawater equation used for the reduced AMOC density contrast.",
+        "Production default: teos10_matched, which changes the equation of state on the established North Atlantic stratification pathway. The linear fixed-alpha/beta and direct prognostic-water-mass options remain structural sensitivities.",
+        "TEOS-10/GSW nonlinear seawater thermodynamics and reduced-box structural-sensitivity experiments.",
     ),
     "amoc_density_transport_exponent": _physical(
         "Power-law sensitivity of hydraulic overturning transport to signed density contrast.",

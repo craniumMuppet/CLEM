@@ -14,6 +14,29 @@ CLEM v2.29.29 retains the numerically validated physics lineage established by R
 - Pycnocline volume imbalance converges to approximately **5.7e-7 Sv**
 - Salt conservation passes to reported precision
 
+## Unreleased AMOC EOS repair screening
+
+The headline values above describe the tagged v2.29.29 fixed-alpha/beta
+configuration. The Unreleased worktree evaluates TEOS-10 density on the
+established reduced-order North Atlantic stratification pathway without
+changing the 17 Sv control or any hydraulic coefficient. Historical runs use
+the production 0.05-year step; SSP and hosing mechanism screens use a
+0.25-year step:
+
+| Check | Result |
+|---|---:|
+| Historical 2004–2020 AMOC, 10° | 15.740 Sv |
+| Historical 2004–2020 AMOC, 5° | 15.860 Sv |
+| RAPID 2004–2020 comparison | 16.9 ± 1.2 Sv |
+| SSP2-4.5 decline, 1995–2014 to 2081–2100, 10° | 18.38% |
+| 0.1 Sv hosing decline around year 40, 10° | 6.58% |
+| Maximum salt-conservation error | 2.3e-10 ppm |
+
+The historical mean is now inside the RAPID uncertainty interval, but the SSP
+and hosing responses are weaker than the released linear-EOS configuration.
+This is a physics-screening result, not a replacement tagged validation bundle;
+the full release matrix must be refreshed before a new release.
+
 ## Public release assets
 
 CLEM v2.29.29 is distributed as a **multi-asset release** rather than one oversized source archive:

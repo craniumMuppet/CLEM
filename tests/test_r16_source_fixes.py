@@ -9,7 +9,11 @@ from sea_ice_observation import reconstruct_concentration_and_occupancy
 
 
 def test_r16_default_restores_validated_high_latitude_geometry_and_alias():
-    cfg = cm.ModelConfig(resolution_deg=10.0, auto_initialize_from_1850=False)
+    cfg = cm.ModelConfig(
+        resolution_deg=10.0,
+        auto_initialize_from_1850=False,
+        amoc_density_eos="linear",
+    )
     assert cfg.amoc_density_geometry == "interhemispheric_high_latitude"
     default = cm.initial_amoc_density_diagnostics(cfg)
     legacy = cm.initial_amoc_density_diagnostics(replace(cfg, amoc_density_geometry="legacy_southern_surface"))
@@ -22,7 +26,11 @@ def test_r16_default_restores_validated_high_latitude_geometry_and_alias():
 
 @pytest.mark.parametrize("resolution", [10.0, 5.0, 2.5])
 def test_high_latitude_density_control_is_resolution_consistent(resolution):
-    cfg = cm.ModelConfig(resolution_deg=resolution, auto_initialize_from_1850=False)
+    cfg = cm.ModelConfig(
+        resolution_deg=resolution,
+        auto_initialize_from_1850=False,
+        amoc_density_eos="linear",
+    )
     d = cm.initial_amoc_density_diagnostics(cfg)
     assert d["density_driver"] > 0.0
     assert d["density_ratio"] == pytest.approx(1.0, abs=2e-3)

@@ -66,6 +66,7 @@ def test_desktop_monte_carlo_command_constructs_valid_reference_model(tmp_path: 
     config = config_from_args(args)
     config.validate()
     model = ProcessClimateModel(config)
+    assert model.baseline_density_driver > 0.0
     assert model.baseline_density_driver_ratio >= config.amoc_minimum_initial_density_ratio
     assert model.baseline_density_driver_ratio <= config.amoc_maximum_initial_density_ratio
 
