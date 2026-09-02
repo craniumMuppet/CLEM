@@ -43,7 +43,11 @@
 
 ### All-SSP batch execution
 
-- Added sequential, resumable one-click/CLI execution of SSP1-2.6, SSP2-4.5,
+- Parallelized all-SSP execution across up to four independent worker
+  processes (one scenario per worker), with a GUI/CLI worker-count control.
+- Kept progress-state writes and comparison generation in the parent process;
+  resume compatibility is independent of worker count.
+- Added resumable one-click/CLI execution of SSP1-2.6, SSP2-4.5,
   SSP4-6.0, and SSP5-8.5 with shared settings and per-scenario output folders.
 - Added combined global near-surface-air temperature, AMOC, FovS, and Northern
   Hemisphere sea-ice area/extent CSVs and comparison figures, plus a long-form

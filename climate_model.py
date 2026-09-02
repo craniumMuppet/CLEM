@@ -22,8 +22,11 @@ from collections import OrderedDict
 import hashlib
 import json
 import math
+import multiprocessing
+import os
 import shutil
 import sys
+import time
 import warnings
 from dataclasses import asdict, dataclass, replace
 from functools import lru_cache
@@ -82,6 +85,7 @@ GreenlandTemperatureDriver = Literal["global", "regional", "greenland"]
 
 SSP_SCENARIOS = {"ssp126", "ssp245", "ssp460", "ssp585"}
 SSP_BATCH_SCENARIOS = ("ssp126", "ssp245", "ssp460", "ssp585")
+DEFAULT_SSP_BATCH_WORKERS = min(len(SSP_BATCH_SCENARIOS), os.cpu_count() or 1)
 SSP_SCENARIO_LABELS = {
     "ssp126": "SSP1-2.6",
     "ssp245": "SSP2-4.5",
@@ -13688,6 +13692,52 @@ def _ssp_output_is_complete(output: Path, expected_config: ModelConfig) -> bool:
     }.issubset(header.columns)
 
 
+def _run_ssp_scenario_worker(
+    job: tuple[
+        str,
+        ModelConfig,
+        Path,
+        bool,
+        float,
+        bool,
+        float,
+        float,
+        float,
+        float,
+    ],
+) -> str:
+    """Run and save one isolated SSP scenario in a worker process."""
+
+    (
+        scenario,
+        config,
+        scenario_output,
+        diagnose,
+        equilibrium_years,
+        run_hysteresis,
+        hysteresis_max_hosing_sv,
+        hysteresis_step_sv,
+        hysteresis_years_per_step,
+        hysteresis_spinup_years,
+    ) = job
+    print(
+        f"Worker PID {os.getpid()} started {SSP_SCENARIO_LABELS[scenario]}.",
+        flush=True,
+    )
+    result = run_model(
+        config,
+        diagnose=diagnose,
+        equilibrium_years=equilibrium_years,
+        run_hysteresis=run_hysteresis,
+        hysteresis_max_hosing_sv=hysteresis_max_hosing_sv,
+        hysteresis_step_sv=hysteresis_step_sv,
+        hysteresis_years_per_step=hysteresis_years_per_step,
+        hysteresis_spinup_years=hysteresis_spinup_years,
+    )
+    save_outputs(result, scenario_output)
+    return scenario
+
+
 def run_all_ssp_scenarios(
     base_config: ModelConfig,
     output_dir: str | Path,
@@ -13700,8 +13750,13 @@ def run_all_ssp_scenarios(
     hysteresis_step_sv: float = 0.05,
     hysteresis_years_per_step: float = 80.0,
     hysteresis_spinup_years: float = 200.0,
+    workers: int = DEFAULT_SSP_BATCH_WORKERS,
 ) -> dict[str, Any]:
-    """Sequentially run, resume, and compare all supported SSP scenarios."""
+    """Run, resume, and compare all supported SSP scenarios across processes."""
+
+    if isinstance(workers, bool) or int(workers) != workers or workers < 1:
+        raise ValueError("SSP batch workers must be a positive integer.")
+    requested_workers = int(workers)
 
     output = Path(output_dir)
     state_path = output / "ssp_batch_state.json"
@@ -13736,10 +13791,27 @@ def run_all_ssp_scenarios(
         "settings": settings,
         "completed_scenarios": completed,
         "current_scenario": None,
+        "active_scenarios": [],
+        "parallel_workers": min(requested_workers, len(SSP_BATCH_SCENARIOS)),
     }
     _write_ssp_batch_state(state_path, state)
 
+    pool: Any = None
     try:
+        jobs: list[
+            tuple[
+                str,
+                ModelConfig,
+                Path,
+                bool,
+                float,
+                bool,
+                float,
+                float,
+                float,
+                float,
+            ]
+        ] = []
         for scenario in SSP_BATCH_SCENARIOS:
             config = replace(base_config, scenario=scenario)
             scenario_output = output / scenario
@@ -13753,32 +13825,81 @@ def run_all_ssp_scenarios(
                 )
                 continue
 
-            state["current_scenario"] = scenario
-            _write_ssp_batch_state(state_path, state)
-            print(
-                f"Running {SSP_SCENARIO_LABELS[scenario]} "
-                f"({len(completed) + 1}/{len(SSP_BATCH_SCENARIOS)})...",
-                flush=True,
-            )
             prepare_output_directory(
                 scenario_output,
                 overwrite=scenario_output.exists(),
                 prompt=False,
             )
-            result = run_model(
+            jobs.append((
+                scenario,
                 config,
-                diagnose=diagnose,
-                equilibrium_years=equilibrium_years,
-                run_hysteresis=run_hysteresis,
-                hysteresis_max_hosing_sv=hysteresis_max_hosing_sv,
-                hysteresis_step_sv=hysteresis_step_sv,
-                hysteresis_years_per_step=hysteresis_years_per_step,
-                hysteresis_spinup_years=hysteresis_spinup_years,
-            )
-            save_outputs(result, scenario_output)
+                scenario_output,
+                diagnose,
+                equilibrium_years,
+                run_hysteresis,
+                hysteresis_max_hosing_sv,
+                hysteresis_step_sv,
+                hysteresis_years_per_step,
+                hysteresis_spinup_years,
+            ))
+
+        active = [job[0] for job in jobs]
+        actual_workers = min(requested_workers, len(jobs)) if jobs else 0
+        state["active_scenarios"] = list(active)
+        state["current_scenario"] = active[0] if actual_workers == 1 and active else None
+        state["parallel_workers"] = actual_workers
+        _write_ssp_batch_state(state_path, state)
+
+        def mark_completed(scenario: str) -> None:
             completed.append(scenario)
+            completed.sort(key=SSP_BATCH_SCENARIOS.index)
             state["completed_scenarios"] = list(completed)
+            state["active_scenarios"] = [
+                item for item in state["active_scenarios"] if item != scenario
+            ]
+            remaining = state["active_scenarios"]
+            state["current_scenario"] = (
+                remaining[0] if actual_workers == 1 and remaining else None
+            )
             _write_ssp_batch_state(state_path, state)
+            print(
+                f"Completed {SSP_SCENARIO_LABELS[scenario]} "
+                f"({len(completed)}/{len(SSP_BATCH_SCENARIOS)}).",
+                flush=True,
+            )
+
+        if actual_workers == 1:
+            for job in jobs:
+                print(f"Running {SSP_SCENARIO_LABELS[job[0]]}...", flush=True)
+                mark_completed(_run_ssp_scenario_worker(job))
+        elif actual_workers > 1:
+            labels = ", ".join(SSP_SCENARIO_LABELS[item] for item in active)
+            print(
+                f"Running {len(jobs)} SSP scenarios on {actual_workers} "
+                f"worker processes: {labels}",
+                flush=True,
+            )
+            context = multiprocessing.get_context("spawn")
+            pool = context.Pool(processes=actual_workers)
+            results = {
+                job[0]: pool.apply_async(_run_ssp_scenario_worker, (job,))
+                for job in jobs
+            }
+            pool.close()
+            remaining = set(results)
+            while remaining:
+                progress = False
+                for scenario in SSP_BATCH_SCENARIOS:
+                    if scenario not in remaining or not results[scenario].ready():
+                        continue
+                    finished_scenario = results[scenario].get()
+                    mark_completed(finished_scenario)
+                    remaining.remove(scenario)
+                    progress = True
+                if remaining and not progress:
+                    time.sleep(0.2)
+            pool.join()
+            pool = None
 
         comparisons = save_ssp_comparisons(output)
         comparison = comparisons["temperature"]
@@ -13786,6 +13907,7 @@ def run_all_ssp_scenarios(
             {
                 "status": "completed",
                 "current_scenario": None,
+                "active_scenarios": [],
                 "comparison_csv": "ssp_temperature_comparison.csv",
                 "comparison_figure": "ssp_temperature_comparison.png",
                 "comparison_rows": int(len(comparison)),
@@ -13807,6 +13929,9 @@ def run_all_ssp_scenarios(
         _write_ssp_batch_state(state_path, state)
         return state
     except BaseException as exc:
+        if pool is not None:
+            pool.terminate()
+            pool.join()
         state["status"] = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
         state["error"] = f"{type(exc).__name__}: {exc}"
         _write_ssp_batch_state(state_path, state)
@@ -13835,9 +13960,17 @@ def build_parser() -> argparse.ArgumentParser:
         "--run-all-ssp",
         action="store_true",
         help=(
-            "Run SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 sequentially "
+            "Run SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 in parallel "
             "with shared settings, then write a combined temperature CSV and plot."
         ),
+    )
+    parser.add_argument(
+        "--ssp-workers",
+        type=int,
+        choices=range(1, len(SSP_BATCH_SCENARIOS) + 1),
+        default=DEFAULT_SSP_BATCH_WORKERS,
+        metavar="N",
+        help="Worker processes used by --run-all-ssp (1-4).",
     )
     parser.add_argument(
         "--resume-all-ssp",
@@ -15179,6 +15312,7 @@ def main() -> None:
             hysteresis_step_sv=args.hysteresis_step,
             hysteresis_years_per_step=args.hysteresis_years_per_step,
             hysteresis_spinup_years=args.hysteresis_spinup_years,
+            workers=args.ssp_workers,
         )
         print(json.dumps(summary, indent=2))
         print(f"\nSSP batch outputs written to: {args.output.resolve()}")

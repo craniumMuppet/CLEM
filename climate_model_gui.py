@@ -26,6 +26,7 @@ from run_state import describe_run_state, load_run_state
 from setting_metadata import setting_tooltip
 from climate_model import (
     ARCTIC_MINIMUM_EFFECTIVE_WARM_DAMPING_WM2_K,
+    DEFAULT_SSP_BATCH_WORKERS,
     MODEL_NAME,
     MODEL_VERSION,
     ModelConfig,
@@ -66,10 +67,10 @@ def terminate_process_tree(
 ) -> tuple[bool, str]:
     """Terminate a subprocess and every descendant process.
 
-    Monte Carlo runs create a parent Python process plus a pool of worker
-    processes. Calling ``Popen.terminate()`` only stops the parent on Windows,
-    leaving the worker pool alive. This helper starts every simulation in its
-    own process group and then terminates that whole group/tree.
+    Monte Carlo and all-SSP runs create a parent Python process plus a pool of
+    worker processes. Calling ``Popen.terminate()`` only stops the parent on
+    Windows, leaving the worker pool alive. This helper starts every simulation
+    in its own process group and then terminates that whole group/tree.
 
     Returns ``(success, details)``. A process that has already exited is
     treated as successfully stopped.
@@ -197,6 +198,7 @@ DEFAULTS: dict[str, Any] = {
     "scenario": "ssp245",
     "run_all_ssp": False,
     "resume_all_ssp": False,
+    "ssp_workers": str(DEFAULT_SSP_BATCH_WORKERS),
     "start_year": "1850",
     "years": "250",
     "dt": "0.05",
@@ -409,6 +411,7 @@ for _range_id, _config_field, _label, _minimum, _maximum, _help in MC_RANGE_SPEC
 
 CLI_MAP = {
     "scenario": "--scenario",
+    "ssp_workers": "--ssp-workers",
     "start_year": "--start-year",
     "years": "--years",
     "dt": "--dt",
@@ -846,6 +849,9 @@ def validate_values(values: dict[str, Any]) -> None:
         raise ValueError("Resume all SSP scenarios requires Run all SSP scenarios.")
     if run_all_ssp and bool(values.get("monte_carlo_enabled", False)):
         raise ValueError("All-SSP batch execution is available for deterministic runs only.")
+    ssp_workers = float(values["ssp_workers"])
+    if not ssp_workers.is_integer() or not 1 <= ssp_workers <= 4:
+        raise ValueError("Parallel SSP workers must be an integer from 1 to 4.")
     target_sweep = bool(values.get("monte_carlo_enabled", False)) and bool(
         values.get("mc_co2_target_sweep_enabled", False)
     )
@@ -1455,7 +1461,7 @@ class ClimateModelGUI:
             general,
             1,
             "run_all_ssp",
-            "Run all SSP scenarios sequentially",
+            "Run all SSP scenarios in parallel",
             help_text=(
                 "Runs SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 with the "
                 "same settings and creates combined temperature, AMOC, FovS, and sea-ice plots."
@@ -1468,13 +1474,14 @@ class ClimateModelGUI:
             "Resume an interrupted all-SSP batch",
             help_text="Skips complete, settings-compatible scenario subfolders.",
         )
-        self._field(general, 3, "forcing_mode", "Forcing mode", values=FORCING_MODES)
-        self._field(general, 4, "start_year", "Start year")
-        self._field(general, 5, "years", "Simulation length (years)")
-        self._field(general, 6, "dt", "Time step (years)", help_text="0.05 recommended")
+        self._field(general, 3, "ssp_workers", "Parallel SSP workers (1-4)")
+        self._field(general, 4, "forcing_mode", "Forcing mode", values=FORCING_MODES)
+        self._field(general, 5, "start_year", "Start year")
+        self._field(general, 6, "years", "Simulation length (years)")
+        self._field(general, 7, "dt", "Time step (years)", help_text="0.05 recommended")
         self._checkbox(
             general,
-            7,
+            8,
             "auto_initialize_from_1850",
             "Initialize post-1850 SSP runs from a continuous 1850 integration",
         )
@@ -2198,6 +2205,10 @@ class ClimateModelGUI:
         )
         self._set_widget_state(
             "resume_all_ssp",
+            "normal" if (run_all_ssp and not monte_carlo) else "disabled",
+        )
+        self._set_widget_state(
+            "ssp_workers",
             "normal" if (run_all_ssp and not monte_carlo) else "disabled",
         )
         target_sweep = monte_carlo and bool(self.variables["mc_co2_target_sweep_enabled"].get())

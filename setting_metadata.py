@@ -52,10 +52,15 @@ SETTING_INFO: dict[str, SettingInfo] = {
     "preset": _op("Loads a complete, predefined combination of settings."),
     "scenario": _op("Selects the prescribed CO2 or SSP pathway used by the experiment."),
     "run_all_ssp": _op(
-        "Runs all four supported SSP pathways sequentially with one shared set of model settings and creates combined temperature, AMOC, FovS, and sea-ice products."
+        "Runs all four supported SSP pathways in separate worker processes with one shared set of model settings and creates combined temperature, AMOC, FovS, and sea-ice products."
     ),
     "resume_all_ssp": _op(
         "Resumes an interrupted all-SSP batch and skips complete scenario outputs whose saved settings match."
+    ),
+    "ssp_workers": _op(
+        "Number of separate worker processes used by an all-SSP batch. Each worker runs one complete scenario at a time.",
+        "Integer from 1 to 4; defaults to the smaller of four or the detected logical CPU count.",
+        "Process-level parallel execution control.",
     ),
     "forcing_mode": _op("Chooses whether SSP experiments use total effective forcing or CO2 forcing alone."),
     "start_year": _op("Calendar year at which recorded output begins.", "User-defined; SSP data are limited to the pathway data period."),

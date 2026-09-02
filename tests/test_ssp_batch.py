@@ -34,22 +34,36 @@ def _temperature_frame(offset: float = 0.0) -> pd.DataFrame:
 
 
 def test_cli_and_desktop_expose_all_ssp_batch_flags() -> None:
-    args = cm.build_parser().parse_args(["--run-all-ssp", "--resume-all-ssp"])
+    args = cm.build_parser().parse_args(
+        ["--run-all-ssp", "--resume-all-ssp", "--ssp-workers", "2"]
+    )
     assert args.run_all_ssp is True
     assert args.resume_all_ssp is True
+    assert args.ssp_workers == 2
 
     values = dict(DEFAULTS)
-    values.update({"run_all_ssp": True, "resume_all_ssp": True})
+    values.update(
+        {"run_all_ssp": True, "resume_all_ssp": True, "ssp_workers": "2"}
+    )
     validate_values(values)
     command = build_cli_command(values)
     assert command.count("--run-all-ssp") == 1
     assert command.count("--resume-all-ssp") == 1
+    assert command[command.index("--ssp-workers") + 1] == "2"
 
 
 def test_all_ssp_batch_rejects_monte_carlo() -> None:
     values = dict(DEFAULTS)
     values.update({"run_all_ssp": True, "monte_carlo_enabled": True})
     with pytest.raises(ValueError, match="deterministic"):
+        validate_values(values)
+
+
+@pytest.mark.parametrize("workers", ["0", "1.5", "5"])
+def test_all_ssp_batch_rejects_invalid_worker_counts(workers: str) -> None:
+    values = dict(DEFAULTS)
+    values.update({"run_all_ssp": True, "ssp_workers": workers})
+    with pytest.raises(ValueError, match="integer from 1 to 4"):
         validate_values(values)
 
 
@@ -147,13 +161,104 @@ def test_all_ssp_batch_resumes_completed_scenarios(
         auto_initialize_from_1850=False,
     )
 
-    first = cm.run_all_ssp_scenarios(config, tmp_path, diagnose=False)
+    first = cm.run_all_ssp_scenarios(
+        config, tmp_path, diagnose=False, workers=1
+    )
     assert calls == list(cm.SSP_BATCH_SCENARIOS)
     assert first["status"] == "completed"
 
     calls.clear()
     second = cm.run_all_ssp_scenarios(
-        config, tmp_path, resume=True, diagnose=False
+        config, tmp_path, resume=True, diagnose=False, workers=1
     )
     assert calls == []
     assert second["completed_scenarios"] == list(cm.SSP_BATCH_SCENARIOS)
+
+
+def test_all_ssp_batch_submits_scenarios_before_collecting_results(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    events: list[tuple[str, object]] = []
+
+    def fake_run_model(config: cm.ModelConfig, **_kwargs: object) -> SimpleNamespace:
+        events.append(("run", config.scenario))
+        offset = float(cm.SSP_BATCH_SCENARIOS.index(config.scenario))
+        return SimpleNamespace(config=config, dataframe=_temperature_frame(offset))
+
+    def fake_save_outputs(result: SimpleNamespace, output_dir: str | Path) -> None:
+        output = Path(output_dir)
+        output.mkdir(parents=True, exist_ok=True)
+        result.dataframe.to_csv(output / "timeseries.csv", index=False)
+        (output / "config.json").write_text(
+            json.dumps(asdict(result.config), indent=2), encoding="utf-8"
+        )
+        (output / "summary.json").write_text("{}\n", encoding="utf-8")
+        for filename in (
+            "temperature_timeseries.png",
+            "amoc_timeseries.png",
+            "fovs_timeseries.png",
+            "sea_ice_timeseries.png",
+        ):
+            (output / filename).write_bytes(b"complete")
+
+    class ImmediateResult:
+        def __init__(self, function: object, args: tuple[object, ...]) -> None:
+            self.function = function
+            self.args = args
+            self.value: object | None = None
+
+        def ready(self) -> bool:
+            return True
+
+        def get(self) -> object:
+            if self.value is None:
+                self.value = self.function(*self.args)  # type: ignore[operator]
+            return self.value
+
+    class FakePool:
+        def __init__(self, processes: int) -> None:
+            events.append(("pool", processes))
+
+        def apply_async(
+            self, function: object, args: tuple[object, ...]
+        ) -> ImmediateResult:
+            scenario = args[0][0]
+            events.append(("submit", scenario))
+            return ImmediateResult(function, args)
+
+        def close(self) -> None:
+            events.append(("close", None))
+
+        def join(self) -> None:
+            events.append(("join", None))
+
+        def terminate(self) -> None:
+            events.append(("terminate", None))
+
+    class FakeContext:
+        @staticmethod
+        def Pool(processes: int) -> FakePool:
+            return FakePool(processes)
+
+    monkeypatch.setattr(cm, "run_model", fake_run_model)
+    monkeypatch.setattr(cm, "save_outputs", fake_save_outputs)
+    monkeypatch.setattr(cm.multiprocessing, "get_context", lambda _mode: FakeContext())
+    config = cm.ModelConfig(
+        scenario="ssp245",
+        start_year=2000.0,
+        duration_years=2.0,
+        dt_years=0.1,
+        auto_initialize_from_1850=False,
+    )
+
+    state = cm.run_all_ssp_scenarios(
+        config, tmp_path, diagnose=False, workers=4
+    )
+
+    assert events[0] == ("pool", 4)
+    assert events[1:5] == [
+        ("submit", scenario) for scenario in cm.SSP_BATCH_SCENARIOS
+    ]
+    assert state["parallel_workers"] == 4
+    assert state["completed_scenarios"] == list(cm.SSP_BATCH_SCENARIOS)
+    assert state["active_scenarios"] == []

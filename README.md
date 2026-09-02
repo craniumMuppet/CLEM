@@ -445,10 +445,11 @@ Example SSP2-4.5 experiment:
 python climate_model.py --scenario ssp245 --start-year 1850 --years 250
 ```
 
-Run all four supported SSP pathways sequentially with identical settings:
+Run all four supported SSP pathways in separate worker processes with identical
+settings:
 
 ```bash
-python climate_model.py --run-all-ssp --start-year 1850 --years 250 --output outputs_all_ssp
+python climate_model.py --run-all-ssp --ssp-workers 4 --start-year 1850 --years 250 --output outputs_all_ssp
 ```
 
 This writes the complete normal output set under `ssp126/`, `ssp245/`,
@@ -465,6 +466,9 @@ Hemisphere sea-ice area/extent:
 
 Resume an interrupted batch with the same settings by adding
 `--resume-all-ssp`; complete compatible scenario subfolders are skipped.
+Use `--ssp-workers 1` for the former sequential behavior or choose 2–4 workers
+to trade additional memory use for faster completion. The default is the
+smaller of four workers or the detected logical CPU count.
 
 Available experiment types include:
 
