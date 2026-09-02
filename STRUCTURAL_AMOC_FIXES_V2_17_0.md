@@ -6,7 +6,7 @@ The Greenland freshwater source now draws from a prognostic finite ice mass. The
 
 Default values:
 
-- initial ice mass: 2.85 million Gt;
+- initial ice mass: 2.61345 million Gt (converted from 2.85 million km³ at 917 kg/m³; the original 2.85-million-Gt label was a unit error corrected after v2.17.0);
 - depletion exponent: 1.0;
 - maximum freshwater flux: 0.05 Sv.
 

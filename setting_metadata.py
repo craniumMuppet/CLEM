@@ -505,8 +505,8 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "greenland_initial_ice_mass_gt": _physical(
         "Initial finite Greenland ice reservoir available to the meltwater parameterization.",
-        "Default 2.85 million Gt. This is a reservoir bound, not a claim that all ice is dynamically available on the simulated timescale.",
-        "Greenland ice-sheet mass expressed as freshwater-equivalent gigatonnes.",
+        "Default 2.61345 million Gt, obtained from 2.85 million km3 of ice at 917 kg/m3. This is a reservoir bound, not a claim that all ice is dynamically available on the simulated timescale.",
+        "Greenland ice-sheet volume converted to mass using glacier-ice density.",
         "Medium",
     ),
     "greenland_depletion_exponent": _physical(

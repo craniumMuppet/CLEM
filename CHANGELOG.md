@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Greenland reservoir units
+
+- Corrected the default Greenland reservoir from 2.85 million Gt to
+  2.61345 million Gt. The source value is 2.85 million km³ of ice; CLEM now
+  converts that volume explicitly using an ice density of 917 kg/m³ instead of
+  treating the volume's numerical value as a mass.
+- Made the desktop GUI and CLI inherit this canonical model default, preventing
+  interface-specific copies of the reservoir value from drifting again.
+
 ### Runtime dependency bootstrap
 
 - Updated the desktop, debug, and Streamlit launchers to create and maintain a

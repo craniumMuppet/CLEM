@@ -240,7 +240,7 @@
     "mc_greenland_adjust_enabled": true,
     "mc_greenland_adjust_min": "30",
     "mc_greenland_adjust_max": "150",
-    "greenland_initial_ice_mass_gt": "2.85e6",
+    "greenland_initial_ice_mass_gt": "2.61345e6",
     "greenland_depletion_exponent": "1.0",
     "greenland_max_freshwater_sv": "0.025",
     "amoc_reference_density_driver": "1.0e-3",

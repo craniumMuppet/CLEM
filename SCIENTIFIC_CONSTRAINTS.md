@@ -200,7 +200,7 @@ In v2.27, `greenland_freshwater_sv_per_k` controls only the slow dynamic-dischar
 
 ## v2.17.0 structural AMOC constraints
 
-Greenland freshwater discharge is limited by a prognostic finite reservoir. The default initial reservoir is 2.85 million Gt; discharge scales with the remaining fraction and is capped by a configurable maximum flux. This is still a reduced ice-sheet emulator, not a dynamic ice-sheet model.
+Greenland freshwater discharge is limited by a prognostic finite reservoir. The default initial reservoir is 2.61345 million Gt, explicitly converted from the [IPCC TAR WG1 Table 11.3](https://archive.ipcc.ch/ipccreports/tar/wg1/pdf/TAR-11.PDF) value of 2.85 million km³ ice volume using 917 kg/m³ glacier-ice density. Discharge scales with the remaining fraction and is capped by a configurable maximum flux. This is still a reduced ice-sheet emulator, not a dynamic ice-sheet model.
 
 The transient model checks the absolute initial basin density driver against a fixed reference. Members outside the configured 0.68–1.25 ratio are rejected by default. This prevents member-specific normalization from making arbitrarily weak absolute density margins appear equally robust.
 

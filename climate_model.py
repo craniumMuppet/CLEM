@@ -138,6 +138,14 @@ AIR_HEAT_CAPACITY = 1004.0
 LATENT_HEAT_VAPORIZATION = 2.5e6
 LATENT_HEAT_FUSION = 3.34e5
 SEA_ICE_DENSITY_KG_M3 = 917.0
+# The IPCC TAR WG1 Table 11.3 value of 2.85 million is Greenland ice *volume*
+# in km^3, not mass in Gt. Convert it explicitly using glacier-ice density:
+# 1 km^3 * 1e9 m^3/km^3 * 917 kg/m^3 / 1e12 kg/Gt = 0.917 Gt.
+GREENLAND_REFERENCE_ICE_VOLUME_KM3 = 2.85e6
+GREENLAND_ICE_DENSITY_KG_M3 = 917.0
+GREENLAND_REFERENCE_ICE_MASS_GT = (
+    GREENLAND_REFERENCE_ICE_VOLUME_KM3 * GREENLAND_ICE_DENSITY_KG_M3 / 1000.0
+)
 EPSILON_WATER_DRY = DRY_AIR_GAS_CONSTANT / WATER_VAPOR_GAS_CONSTANT
 AMOC_SIX_SV_REFERENCE = 6.0
 SV_TO_GT_PER_YEAR = 1.0e6 * SECONDS_PER_YEAR * 1000.0 / 1.0e12
@@ -776,7 +784,7 @@ class ModelConfig:
     # Finite Greenland ice reservoir. Freshwater discharge is reduced as the
     # remaining reservoir declines and is capped by both a maximum flux and
     # the mass physically available during the current timestep.
-    greenland_initial_ice_mass_gt: float = 2.85e6
+    greenland_initial_ice_mass_gt: float = GREENLAND_REFERENCE_ICE_MASS_GT
     greenland_depletion_exponent: float = 1.0
     greenland_max_freshwater_sv: float = 0.10
     # Land-ice melt is a real ocean mass addition. R15 retains a zero-net
@@ -14323,7 +14331,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--greenland-regrowth", type=float, default=0.001)
     parser.add_argument("--greenland-max-regrowth-sv", type=float, default=0.02)
-    parser.add_argument("--greenland-initial-ice-mass-gt", type=float, default=2.85e6)
+    parser.add_argument(
+        "--greenland-initial-ice-mass-gt",
+        type=float,
+        default=ModelConfig().greenland_initial_ice_mass_gt,
+    )
     parser.add_argument("--greenland-depletion-exponent", type=float, default=1.0)
     parser.add_argument("--greenland-max-freshwater-sv", type=float, default=ModelConfig().greenland_max_freshwater_sv)
     parser.add_argument(

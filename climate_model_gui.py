@@ -282,7 +282,7 @@ DEFAULTS: dict[str, Any] = {
     "greenland_freshwater": "0.005",
     "greenland_freshwater_threshold": "0.0",
     "greenland_freshwater_adjustment_years": "45",
-    "greenland_initial_ice_mass_gt": "2.85e6",
+    "greenland_initial_ice_mass_gt": f"{MODEL_DEFAULT_CONFIG.greenland_initial_ice_mass_gt:g}",
     "greenland_depletion_exponent": "1.0",
     "greenland_max_freshwater_sv": f"{MODEL_DEFAULT_CONFIG.greenland_max_freshwater_sv:g}",
     "greenland_surface_mass_balance_enabled": True,
