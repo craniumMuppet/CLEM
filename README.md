@@ -264,30 +264,31 @@ R18.4 additionally integrates NSIDC-0611 sea-ice age as a structural diagnostic.
 
 ### Historical AMOC Mean State
 
-The public v2.29.29 configuration has a documented low historical AMOC mean.
-The Unreleased physics repair replaces the fixed-alpha/beta seawater density
-approximation with [TEOS-10](https://www.teos-10.org/pubs/TEOS-10_Manual.pdf)
-on the same reduced-order North Atlantic stratification pathway. It does not
-change the 17 Sv preindustrial control, retune a hydraulic coefficient, or add
-an output correction.
+The former fixed-alpha/beta configuration had a documented low historical AMOC
+mean. The current v2.29.29 production configuration repairs that physical
+density pathway with
+[TEOS-10](https://www.teos-10.org/pubs/TEOS-10_Manual.pdf) on the same
+reduced-order North Atlantic stratification pathway. It does not raise the
+17 Sv preindustrial control anchor, retune a hydraulic coefficient, or add an
+output correction.
 
 For approximately 2004–2020:
 
 | Dataset / Configuration | 2004–2020 AMOC |
 |---|---:|
-| CLEM v2.29.29, fixed-alpha/beta, 10° | **~14.17 Sv** |
-| CLEM v2.29.29, fixed-alpha/beta, 5° | **~14.32 Sv** |
-| Unreleased matched-pathway TEOS-10, 10° | **~15.74 Sv** |
-| Unreleased matched-pathway TEOS-10, 5° | **~15.86 Sv** |
+| Pre-repair fixed-alpha/beta, 10° | **~14.17 Sv** |
+| Pre-repair fixed-alpha/beta, 5° | **~14.32 Sv** |
+| CLEM v2.29.29 production matched-pathway TEOS-10, 10° | **~15.74 Sv** |
+| CLEM v2.29.29 production matched-pathway TEOS-10, 5° | **~15.86 Sv** |
 | RAPID 26.5° N | **16.9 ± 1.2 Sv** |
 
-The nonlinear density closure reduces the released-model discrepancy from
-2.6–2.7 Sv to about 1.0–1.2 Sv, inside the published RAPID uncertainty interval.
+The nonlinear density closure reduces the pre-repair discrepancy from 2.6–2.7
+Sv to about 1.0–1.2 Sv, inside the published RAPID uncertainty interval.
 These are 10°/5° historical runs using the production 0.05-year integration
 step, not a claim of independent calibration. The RAPID comparison is from
 [Johns et al. (2023)](https://doi.org/10.1098/rsta.2022.0188).
 
-Mechanism isolation attributes almost all of the released model's excessive
+Mechanism isolation attributes almost all of the pre-repair model's excessive
 historical decline to the thermal-density pathway; removing anomalous
 freshwater changes shifts the mean by only about 0.025 Sv. At the control
 temperatures, the old constant thermal expansion coefficient is
