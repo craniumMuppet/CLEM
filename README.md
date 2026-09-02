@@ -378,7 +378,7 @@ Instead, CLEM provides a relatively transparent coupled framework in which impor
 
 ### Requirements
 
-Python 3.12+ is recommended.
+Python 3.12+ is required.
 
 ```bash
 python -m venv .venv
@@ -407,6 +407,13 @@ On Windows:
 ```bash
 run_gui.bat
 ```
+
+The launcher creates a project-local `.venv` when necessary and synchronizes
+all pinned runtime dependencies from `requirements.lock` before opening the
+GUI. This includes the production `gsw`/TEOS-10 dependency. Subsequent launches
+perform a fast version check and install only when the locked environment is
+missing or out of date. An internet connection is therefore required for the
+first launch or after a dependency-lock update.
 
 Or run directly:
 

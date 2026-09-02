@@ -4,7 +4,7 @@ import argparse, hashlib, json
 from pathlib import Path
 from typing import Any, Mapping
 SCHEMA_VERSION="2.0"; ALGORITHM="sha256"
-EXCLUDED_DIRS={".git",".pytest_cache","__pycache__","outputs","output","release_validation","validation_review_corrected","calibration_work","greenland_check"}
+EXCLUDED_DIRS={".git",".pytest_cache",".venv","venv","__pycache__","outputs","output","release_validation","validation_review_corrected","calibration_work","greenland_check"}
 EXCLUDED_SUFFIXES={".pyc",".pyo",".tmp",".bak",".tolbak",".stage0",".pid",".exit",".log"}
 EXECUTABLE_SUFFIXES={".py",".pyw",".sh",".bat",".ps1",".toml",".in",".lock",".yml",".yaml"}; RELEASE_SUFFIXES=EXECUTABLE_SUFFIXES|{".md"}
 ROOT_RUNTIME_INPUTS={".gitignore","calibration_targets.json","climate_model_settings_increased_sv_from_melt.json","dependency_integrity.lock.json","development_regression_benchmarks.json","external_posthoc_sanity_benchmarks.json","held_out_amoc_benchmarks.json"}

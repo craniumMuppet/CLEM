@@ -35,7 +35,7 @@ TEST_JUNIT = "TEST_RESULTS_V2_29_23.junit.xml"
 SUMMARY_NAME = "VALIDATION_SUMMARY_V2_29_23.json"
 
 EXCLUDED_DIRS = {
-    ".git", ".pytest_cache", "__pycache__", "outputs", "output",
+    ".git", ".pytest_cache", ".venv", "venv", "__pycache__", "outputs", "output",
     "calibration_work", "greenland_check", "release_validation",
     "validation_review_corrected",
 }
@@ -57,6 +57,7 @@ FORBIDDEN_NAMES = {
 }
 REQUIRED = {
     "climate_model.py", "climate_model_gui.py", "app.py", "setting_metadata.py",
+    "bootstrap_runtime.py",
     "arctic_process_budget.py", "release_tree_fingerprint.py",
     "validate_v22923.py", "combine_v22923_validation.py",
     "run_v22923_engineering_tests.py", "V2_29_23_ENGINEERING_CORRECTIONS.md",

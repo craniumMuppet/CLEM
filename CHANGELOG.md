@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Runtime dependency bootstrap
+
+- Updated the desktop, debug, and Streamlit launchers to create and maintain a
+  project-local `.venv` from `requirements.lock` before startup, so missing
+  production dependencies such as `gsw` are installed automatically.
+- Added an exact locked-version preflight check and a visible, actionable
+  failure path for offline or otherwise unsuccessful installations.
+
 ### AMOC seawater-density physics
 
 - Promoted matched-pathway TEOS-10/GSW seawater density to the production AMOC
