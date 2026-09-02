@@ -444,12 +444,20 @@ Run all four supported SSP pathways sequentially with identical settings:
 python climate_model.py --run-all-ssp --start-year 1850 --years 250 --output outputs_all_ssp
 ```
 
-This writes normal outputs under `ssp126/`, `ssp245/`, `ssp460/`, and
-`ssp585/`, plus `ssp_temperature_comparison.png` and
-`ssp_temperature_comparison.csv` at the batch root. The comparison uses the
-global near-surface air temperature anomaly. Resume an interrupted batch with
-the same settings by adding `--resume-all-ssp`; complete compatible scenario
-subfolders are skipped.
+This writes the complete normal output set under `ssp126/`, `ssp245/`,
+`ssp460/`, and `ssp585/`. At the batch root it also writes four-scenario CSVs
+and plots for global near-surface air temperature, AMOC, FovS, and Northern
+Hemisphere sea-ice area/extent:
+
+- `ssp_temperature_comparison.csv` and `.png`
+- `ssp_amoc_comparison.csv` and `.png`
+- `ssp_fovs_comparison.csv` and `.png`
+- `ssp_sea_ice_comparison.csv` and `.png`
+- `ssp_combined_timeseries.csv`, containing every normal time-series field for
+  every scenario in analysis-ready long form
+
+Resume an interrupted batch with the same settings by adding
+`--resume-all-ssp`; complete compatible scenario subfolders are skipped.
 
 Available experiment types include:
 

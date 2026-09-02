@@ -88,11 +88,15 @@ SSP_SCENARIO_LABELS = {
     "ssp460": "SSP4-6.0",
     "ssp585": "SSP5-8.5",
 }
+SSP_COMPARISON_PREFIXES = {
+    "ssp126": "ssp1_2_6",
+    "ssp245": "ssp2_4_5",
+    "ssp460": "ssp4_6_0",
+    "ssp585": "ssp5_8_5",
+}
 SSP_COMPARISON_COLUMNS = {
-    "ssp126": "ssp1_2_6_temperature_anomaly_c",
-    "ssp245": "ssp2_4_5_temperature_anomaly_c",
-    "ssp460": "ssp4_6_0_temperature_anomaly_c",
-    "ssp585": "ssp5_8_5_temperature_anomaly_c",
+    scenario: f"{prefix}_temperature_anomaly_c"
+    for scenario, prefix in SSP_COMPARISON_PREFIXES.items()
 }
 SSP_DATA_MIN_YEAR = 1750.0
 SSP_DATA_MAX_YEAR = 2500.0
@@ -13349,6 +13353,26 @@ def save_outputs(result: SimulationResult, output_dir: str | Path) -> None:
     plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(10.5, 5.8), constrained_layout=True)
+    ax.plot(
+        df["year"],
+        df["northern_hemisphere_sea_ice_area_million_km2"],
+        label="Northern Hemisphere sea-ice area",
+    )
+    ax.plot(
+        df["year"],
+        df["northern_hemisphere_sea_ice_extent_million_km2"],
+        label="Northern Hemisphere sea-ice extent",
+        linestyle="--",
+    )
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Sea ice (million km²)")
+    ax.set_title("Northern Hemisphere sea-ice area and extent")
+    ax.grid(True, alpha=0.25)
+    ax.legend(loc="best")
+    fig.savefig(output / "sea_ice_timeseries.png", dpi=170)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(10.5, 5.8), constrained_layout=True)
     ax.plot(df["year"], df["north_salinity_psu"], label="Northern sinking")
     ax.plot(df["year"], df["tropical_salinity_psu"], label="Tropical surface")
     ax.plot(
@@ -13396,25 +13420,22 @@ def save_outputs(result: SimulationResult, output_dir: str | Path) -> None:
         plt.close(feedback_figure)
 
 
-def save_ssp_temperature_comparison(output_dir: str | Path) -> pd.DataFrame:
-    """Write the all-SSP near-surface-air GMST comparison products.
-
-    Each source is the normal ``timeseries.csv`` written by ``save_outputs``.
-    An outer merge keeps the product usable if callers deliberately use a
-    sampling configuration that does not place every scenario on identical
-    floating-point year values.
-    """
-
+def _ssp_wide_comparison(
+    output_dir: str | Path,
+    source_column: str,
+    output_suffix: str,
+) -> pd.DataFrame:
+    """Return one time-series field with one named column per SSP."""
     output = Path(output_dir)
     comparison: pd.DataFrame | None = None
     for scenario in SSP_BATCH_SCENARIOS:
         source = output / scenario / "timeseries.csv"
         frame = pd.read_csv(
             source,
-            usecols=["year", "global_near_surface_air_warming_c"],
+            usecols=["year", source_column],
         ).rename(
             columns={
-                "global_near_surface_air_warming_c": SSP_COMPARISON_COLUMNS[scenario]
+                source_column: f"{SSP_COMPARISON_PREFIXES[scenario]}_{output_suffix}"
             }
         )
         comparison = (
@@ -13425,32 +13446,166 @@ def save_ssp_temperature_comparison(output_dir: str | Path) -> pd.DataFrame:
 
     if comparison is None:  # pragma: no cover - the scenario tuple is fixed and nonempty
         raise RuntimeError("No SSP scenarios are configured for comparison")
-    comparison = comparison.sort_values("year").reset_index(drop=True)
+    return comparison.sort_values("year").reset_index(drop=True)
 
-    csv_path = output / "ssp_temperature_comparison.csv"
-    csv_temporary = output / ".ssp_temperature_comparison.csv.tmp"
-    comparison.to_csv(csv_temporary, index=False)
-    csv_temporary.replace(csv_path)
+
+def _write_comparison_csv(frame: pd.DataFrame, path: Path) -> None:
+    temporary = path.with_name(f".{path.name}.tmp")
+    frame.to_csv(temporary, index=False)
+    temporary.replace(path)
+
+
+def _save_ssp_scalar_comparison(
+    output_dir: str | Path,
+    *,
+    source_column: str,
+    output_suffix: str,
+    stem: str,
+    ylabel: str,
+    title: str,
+    zero_line: bool = False,
+    reference_line: tuple[float, str] | None = None,
+) -> pd.DataFrame:
+    """Write a four-SSP CSV and line plot for one scalar time series."""
+    output = Path(output_dir)
+    comparison = _ssp_wide_comparison(output, source_column, output_suffix)
+    _write_comparison_csv(comparison, output / f"{stem}.csv")
 
     fig, ax = plt.subplots(figsize=(10.5, 6.0), constrained_layout=True)
     for scenario in SSP_BATCH_SCENARIOS:
+        column = f"{SSP_COMPARISON_PREFIXES[scenario]}_{output_suffix}"
         ax.plot(
             comparison["year"],
-            comparison[SSP_COMPARISON_COLUMNS[scenario]],
+            comparison[column],
             label=SSP_SCENARIO_LABELS[scenario],
         )
-    ax.axhline(0.0, linewidth=0.8, color="black")
+    if zero_line:
+        ax.axhline(0.0, linewidth=0.8, color="black", linestyle=":")
+    if reference_line is not None:
+        value, label = reference_line
+        ax.axhline(value, linewidth=1.0, color="black", linestyle="--", label=label)
     ax.set_xlabel("Year")
-    ax.set_ylabel("Global near-surface air temperature anomaly (°C)")
-    ax.set_title("SSP global temperature comparison")
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
     ax.grid(True, alpha=0.25)
     ax.legend()
-    figure_path = output / "ssp_temperature_comparison.png"
-    figure_temporary = output / ".ssp_temperature_comparison.tmp.png"
+    figure_path = output / f"{stem}.png"
+    figure_temporary = output / f".{stem}.tmp.png"
     fig.savefig(figure_temporary, dpi=170)
     plt.close(fig)
     figure_temporary.replace(figure_path)
     return comparison
+
+
+def save_ssp_temperature_comparison(output_dir: str | Path) -> pd.DataFrame:
+    """Write the all-SSP near-surface-air GMST comparison products."""
+    return _save_ssp_scalar_comparison(
+        output_dir,
+        source_column="global_near_surface_air_warming_c",
+        output_suffix="temperature_anomaly_c",
+        stem="ssp_temperature_comparison",
+        ylabel="Global near-surface air temperature anomaly (°C)",
+        title="SSP global temperature comparison",
+        zero_line=True,
+    )
+
+
+def save_ssp_amoc_comparison(output_dir: str | Path) -> pd.DataFrame:
+    """Write the all-SSP AMOC comparison products."""
+    return _save_ssp_scalar_comparison(
+        output_dir,
+        source_column="amoc_sv",
+        output_suffix="amoc_sv",
+        stem="ssp_amoc_comparison",
+        ylabel="AMOC transport (Sv)",
+        title="SSP Atlantic meridional overturning comparison",
+        zero_line=True,
+        reference_line=(AMOC_SIX_SV_REFERENCE, "6 Sv reference"),
+    )
+
+
+def save_ssp_fovs_comparison(output_dir: str | Path) -> pd.DataFrame:
+    """Write the all-SSP FovS comparison products."""
+    return _save_ssp_scalar_comparison(
+        output_dir,
+        source_column="fovs_sv",
+        output_suffix="fovs_sv",
+        stem="ssp_fovs_comparison",
+        ylabel="FovS freshwater transport (Sv)",
+        title="SSP South Atlantic overturning freshwater transport comparison",
+        zero_line=True,
+    )
+
+
+def save_ssp_sea_ice_comparison(output_dir: str | Path) -> pd.DataFrame:
+    """Write four-SSP Northern Hemisphere sea-ice area/extent products."""
+    output = Path(output_dir)
+    area = _ssp_wide_comparison(
+        output,
+        "northern_hemisphere_sea_ice_area_million_km2",
+        "sea_ice_area_million_km2",
+    )
+    extent = _ssp_wide_comparison(
+        output,
+        "northern_hemisphere_sea_ice_extent_million_km2",
+        "sea_ice_extent_million_km2",
+    )
+    comparison = area.merge(extent, on="year", how="outer", validate="one_to_one")
+    comparison = comparison.sort_values("year").reset_index(drop=True)
+    _write_comparison_csv(comparison, output / "ssp_sea_ice_comparison.csv")
+
+    fig, axes = plt.subplots(2, 1, figsize=(10.5, 9.0), sharex=True, constrained_layout=True)
+    for scenario in SSP_BATCH_SCENARIOS:
+        prefix = SSP_COMPARISON_PREFIXES[scenario]
+        label = SSP_SCENARIO_LABELS[scenario]
+        axes[0].plot(
+            comparison["year"],
+            comparison[f"{prefix}_sea_ice_area_million_km2"],
+            label=label,
+        )
+        axes[1].plot(
+            comparison["year"],
+            comparison[f"{prefix}_sea_ice_extent_million_km2"],
+            label=label,
+        )
+    axes[0].set_ylabel("Area (million km²)")
+    axes[0].set_title("Northern Hemisphere sea-ice area")
+    axes[1].set_xlabel("Year")
+    axes[1].set_ylabel("Extent (million km²)")
+    axes[1].set_title("Northern Hemisphere sea-ice extent")
+    for ax in axes:
+        ax.grid(True, alpha=0.25)
+        ax.legend(loc="best")
+    temporary = output / ".ssp_sea_ice_comparison.tmp.png"
+    fig.savefig(temporary, dpi=170)
+    plt.close(fig)
+    temporary.replace(output / "ssp_sea_ice_comparison.png")
+    return comparison
+
+
+def save_ssp_combined_timeseries(output_dir: str | Path) -> pd.DataFrame:
+    """Stack every normal SSP time-series field into one analysis-ready CSV."""
+    output = Path(output_dir)
+    frames: list[pd.DataFrame] = []
+    for scenario in SSP_BATCH_SCENARIOS:
+        frame = pd.read_csv(output / scenario / "timeseries.csv")
+        frame.insert(0, "ssp_scenario_label", SSP_SCENARIO_LABELS[scenario])
+        frame.insert(0, "ssp_scenario", scenario)
+        frames.append(frame)
+    combined = pd.concat(frames, ignore_index=True, sort=False)
+    _write_comparison_csv(combined, output / "ssp_combined_timeseries.csv")
+    return combined
+
+
+def save_ssp_comparisons(output_dir: str | Path) -> dict[str, pd.DataFrame]:
+    """Write all batch-root comparison plots and machine-readable tables."""
+    return {
+        "temperature": save_ssp_temperature_comparison(output_dir),
+        "amoc": save_ssp_amoc_comparison(output_dir),
+        "fovs": save_ssp_fovs_comparison(output_dir),
+        "sea_ice": save_ssp_sea_ice_comparison(output_dir),
+        "combined_timeseries": save_ssp_combined_timeseries(output_dir),
+    }
 
 
 def _write_ssp_batch_state(path: Path, state: dict[str, Any]) -> None:
@@ -13502,6 +13657,9 @@ def _ssp_output_is_complete(output: Path, expected_config: ModelConfig) -> bool:
         output / "config.json",
         output / "summary.json",
         output / "temperature_timeseries.png",
+        output / "amoc_timeseries.png",
+        output / "fovs_timeseries.png",
+        output / "sea_ice_timeseries.png",
     )
     if not all(path.is_file() for path in required):
         return False
@@ -13515,6 +13673,10 @@ def _ssp_output_is_complete(output: Path, expected_config: ModelConfig) -> bool:
     return {
         "year",
         "global_near_surface_air_warming_c",
+        "amoc_sv",
+        "fovs_sv",
+        "northern_hemisphere_sea_ice_area_million_km2",
+        "northern_hemisphere_sea_ice_extent_million_km2",
     }.issubset(header.columns)
 
 
@@ -13610,7 +13772,8 @@ def run_all_ssp_scenarios(
             state["completed_scenarios"] = list(completed)
             _write_ssp_batch_state(state_path, state)
 
-        comparison = save_ssp_temperature_comparison(output)
+        comparisons = save_ssp_comparisons(output)
+        comparison = comparisons["temperature"]
         state.update(
             {
                 "status": "completed",
@@ -13618,6 +13781,19 @@ def run_all_ssp_scenarios(
                 "comparison_csv": "ssp_temperature_comparison.csv",
                 "comparison_figure": "ssp_temperature_comparison.png",
                 "comparison_rows": int(len(comparison)),
+                "comparison_products": {
+                    "temperature": [
+                        "ssp_temperature_comparison.csv",
+                        "ssp_temperature_comparison.png",
+                    ],
+                    "amoc": ["ssp_amoc_comparison.csv", "ssp_amoc_comparison.png"],
+                    "fovs": ["ssp_fovs_comparison.csv", "ssp_fovs_comparison.png"],
+                    "sea_ice": [
+                        "ssp_sea_ice_comparison.csv",
+                        "ssp_sea_ice_comparison.png",
+                    ],
+                    "all_fields": ["ssp_combined_timeseries.csv"],
+                },
             }
         )
         _write_ssp_batch_state(state_path, state)

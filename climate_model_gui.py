@@ -1458,7 +1458,7 @@ class ClimateModelGUI:
             "Run all SSP scenarios sequentially",
             help_text=(
                 "Runs SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5 with the "
-                "same settings and creates a combined near-surface-air temperature plot."
+                "same settings and creates combined temperature, AMOC, FovS, and sea-ice plots."
             ),
         )
         self._checkbox(

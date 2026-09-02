@@ -28,8 +28,12 @@
 
 - Added sequential, resumable one-click/CLI execution of SSP1-2.6, SSP2-4.5,
   SSP4-6.0, and SSP5-8.5 with shared settings and per-scenario output folders.
-- Added a combined global near-surface-air temperature anomaly CSV and
-  comparison figure.
+- Added combined global near-surface-air temperature, AMOC, FovS, and Northern
+  Hemisphere sea-ice area/extent CSVs and comparison figures, plus a long-form
+  combined CSV containing every normal time-series field for all four SSPs.
+- Preserved the complete ordinary output set in each scenario subfolder and
+  added a Northern Hemisphere sea-ice area/extent time-series figure to normal
+  deterministic output.
 
 ## 2.29.29 — 2026-09-01
 

@@ -52,7 +52,7 @@ SETTING_INFO: dict[str, SettingInfo] = {
     "preset": _op("Loads a complete, predefined combination of settings."),
     "scenario": _op("Selects the prescribed CO2 or SSP pathway used by the experiment."),
     "run_all_ssp": _op(
-        "Runs all four supported SSP pathways sequentially with one shared set of model settings and creates combined temperature products."
+        "Runs all four supported SSP pathways sequentially with one shared set of model settings and creates combined temperature, AMOC, FovS, and sea-ice products."
     ),
     "resume_all_ssp": _op(
         "Resumes an interrupted all-SSP batch and skips complete scenario outputs whose saved settings match."

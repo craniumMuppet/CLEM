@@ -21,6 +21,14 @@ def _temperature_frame(offset: float = 0.0) -> pd.DataFrame:
             "year": [2000.0, 2001.0, 2002.0],
             "global_near_surface_air_warming_c": np.asarray([0.0, 0.2, 0.4])
             + offset,
+            "amoc_sv": np.asarray([17.0, 16.5, 16.0]) - offset,
+            "fovs_sv": np.asarray([-0.15, -0.14, -0.13]) + 0.01 * offset,
+            "northern_hemisphere_sea_ice_area_million_km2": (
+                np.asarray([10.0, 9.8, 9.6]) - offset
+            ),
+            "northern_hemisphere_sea_ice_extent_million_km2": (
+                np.asarray([12.0, 11.7, 11.4]) - offset
+            ),
         }
     )
 
@@ -66,6 +74,43 @@ def test_temperature_comparison_uses_global_near_surface_air(tmp_path: Path) -> 
     assert (tmp_path / "ssp_temperature_comparison.png").is_file()
 
 
+def test_all_ssp_comparisons_cover_amoc_fovs_sea_ice_and_every_field(
+    tmp_path: Path,
+) -> None:
+    for index, scenario in enumerate(cm.SSP_BATCH_SCENARIOS):
+        scenario_output = tmp_path / scenario
+        scenario_output.mkdir()
+        frame = _temperature_frame(float(index))
+        frame["additional_diagnostic"] = index + frame["year"]
+        frame.to_csv(scenario_output / "timeseries.csv", index=False)
+
+    products = cm.save_ssp_comparisons(tmp_path)
+
+    assert set(products) == {
+        "temperature",
+        "amoc",
+        "fovs",
+        "sea_ice",
+        "combined_timeseries",
+    }
+    for stem in (
+        "ssp_temperature_comparison",
+        "ssp_amoc_comparison",
+        "ssp_fovs_comparison",
+        "ssp_sea_ice_comparison",
+    ):
+        assert (tmp_path / f"{stem}.csv").is_file()
+        assert (tmp_path / f"{stem}.png").is_file()
+
+    combined = pd.read_csv(tmp_path / "ssp_combined_timeseries.csv")
+    assert len(combined) == 3 * len(cm.SSP_BATCH_SCENARIOS)
+    assert set(combined["ssp_scenario"]) == set(cm.SSP_BATCH_SCENARIOS)
+    assert "additional_diagnostic" in combined.columns
+    sea_ice = products["sea_ice"]
+    assert "ssp5_8_5_sea_ice_area_million_km2" in sea_ice.columns
+    assert "ssp5_8_5_sea_ice_extent_million_km2" in sea_ice.columns
+
+
 def test_all_ssp_batch_resumes_completed_scenarios(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -84,7 +129,13 @@ def test_all_ssp_batch_resumes_completed_scenarios(
             json.dumps(asdict(result.config), indent=2), encoding="utf-8"
         )
         (output / "summary.json").write_text("{}\n", encoding="utf-8")
-        (output / "temperature_timeseries.png").write_bytes(b"complete")
+        for filename in (
+            "temperature_timeseries.png",
+            "amoc_timeseries.png",
+            "fovs_timeseries.png",
+            "sea_ice_timeseries.png",
+        ):
+            (output / filename).write_bytes(b"complete")
 
     monkeypatch.setattr(cm, "run_model", fake_run_model)
     monkeypatch.setattr(cm, "save_outputs", fake_save_outputs)
