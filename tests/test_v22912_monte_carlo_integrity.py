@@ -67,7 +67,11 @@ def _state_template(output: Path, fingerprint: str = "fingerprint") -> dict[str,
 
 
 def test_joint_prior_screen_uses_sampled_density_normalization() -> None:
-    base = ModelConfig(auto_initialize_from_1850=False, duration_years=0.1)
+    base = ModelConfig(
+        auto_initialize_from_1850=False,
+        duration_years=0.1,
+        amoc_density_eos="linear",
+    )
     sampled = {"amoc_reference_density_driver": 0.00100544496}
     sampled_config = replace(base, **sampled)
 

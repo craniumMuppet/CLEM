@@ -1016,7 +1016,7 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "initial_southern_salinity_psu": _physical(
         "Initial Southern Ocean surface-box salinity.",
-        "Built-in prior support: 34.20–34.90 PSU and an additional absolute density-margin rejection filter.",
+        "Built-in prior support: 32.70–33.30 PSU and an additional absolute density-margin rejection filter.",
         "Hydrographic observations aggregated into a basin-scale box.",
         "High",
     ),
@@ -1270,7 +1270,7 @@ SETTING_INFO.update({
         "Default 0.50 C.", "Hyperbolic-tangent stability transition.", "Low"),
     "arctic_transient_shortwave_scale": _physical(
         "Fraction of the local sea-ice albedo anomaly that reaches the surface after cloud masking.",
-        "Bounded [0,1.2]; default 1.00 with built-in prior support 0.50-1.20.", "Transient-only shortwave anomaly scaling; control climatology is unchanged.", "Low"),
+        "Bounded [0,1]; default 1.00 with built-in prior support 0.50-1.00.", "Transient-only shortwave anomaly scaling; control climatology is unchanged.", "Low"),
     "arctic_interface_longwave_damping_wm2_k": _physical(
         "Temperature-dependent net longwave damping of Arctic ice and open-water surface anomalies.",
         "Default 2.2 W/m2/K; built-in prior support 1.5–4.5 W/m2/K.",

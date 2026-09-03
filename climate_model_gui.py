@@ -190,7 +190,7 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("north_gyre", "amoc_north_tropical_gyre_sv", "Northern gyre exchange", "2.0", "8.0", "Sv"),
     ("south_gyre", "amoc_tropical_southern_gyre_sv", "Southern gyre exchange", "5.0", "15.0", "Sv"),
     ("initial_fovs", "initial_fovs_sv", "Initial FovS at 34.5 S", "-0.33", "0.03", "Sv"),
-    ("southern_salinity", "initial_southern_salinity_psu", "Initial Southern Ocean salinity", "34.20", "34.90", "PSU"),
+    ("southern_salinity", "initial_southern_salinity_psu", "Initial Southern Ocean salinity", "32.70", "33.30", "PSU"),
     ("north_salinity", "initial_north_salinity_psu", "Initial northern/deep salinity", "34.85", "35.45", "PSU"),
 ]
 

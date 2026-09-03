@@ -527,7 +527,7 @@ PHYSICAL_CLIMATE_PRIORS: dict[str, PriorSpec] = {
     "arctic_open_water_stable_exchange_wm2_k": PriorSpec(0.1, 2.0, "loguniform", None, source="stable Arctic boundary-layer exchange", rationale="Weak exchange when air is warmer than open water."),
     "arctic_open_water_unstable_exchange_wm2_k": PriorSpec(2.0, 10.0, "lognormal", 5.0, source="unstable Arctic boundary-layer exchange", rationale="Stronger exchange when water is warmer than air."),
     "arctic_open_water_exchange_transition_c": PriorSpec(0.1, 1.5, "loguniform", None, source="boundary-layer stability transition", rationale="Positive smooth transition width."),
-    "arctic_transient_shortwave_scale": PriorSpec(0.50, 1.20, "truncated_normal", 1.00, source="cloud masking of sea-ice albedo anomalies", rationale="Bounded effective shortwave anomaly factor after introducing independent prognostic ice area."),
+    "arctic_transient_shortwave_scale": PriorSpec(0.50, 1.00, "truncated_normal", 1.00, source="cloud masking of sea-ice albedo anomalies", rationale="Bounded effective shortwave anomaly factor after introducing independent prognostic ice area."),
     "arctic_interface_longwave_damping_wm2_k": PriorSpec(1.5, 4.5, "truncated_normal", 2.2, source="net Arctic surface longwave response", rationale="Samples temperature-dependent net longwave cooling rather than holding it fixed."),
     "arctic_ice_surface_exchange_wm2_k": PriorSpec(3.0, 8.0, "truncated_normal", 5.0, source="Arctic ice-atmosphere sensible exchange", rationale="Samples the tuning-informed coupling between the prognostic air column and thermodynamic ice surface; the calibrated default is interior to the support."),
     "arctic_ice_nonsolar_heat_loss_wm2": PriorSpec(38.0, 51.0, "truncated_normal", 44.2, source="Arctic ice-surface control energy budget", rationale="Treats the fitted control-state turbulent and radiative loss as uncertain."),
@@ -610,7 +610,7 @@ PHYSICAL_AMOC_PRIORS: dict[str, PriorSpec] = {
     "amoc_north_tropical_gyre_sv": PriorSpec(1.0, 12.0, "lognormal", 5.0, source="subtropical gyre salt exchange", rationale="Effective diffusive exchange; posterior response constraints limit excessive damping of salt-advection feedback."),
     "amoc_tropical_southern_gyre_sv": PriorSpec(3.0, 22.0, "lognormal", 10.0, source="South Atlantic gyre salt exchange", rationale="Effective diffusive exchange; posterior response constraints limit excessive damping of salt-advection feedback."),
     "initial_fovs_sv": PriorSpec(-0.60, 0.30, "uniform", None, source="physically possible signed freshwater transport", rationale="Broad signed prior; observational estimate enters only as likelihood."),
-    "initial_southern_salinity_psu": PriorSpec(34.20, 34.90, "truncated_normal", 34.55, source="South Atlantic upper-ocean salinity", rationale="Hydrographic prior constrained jointly by the absolute AMOC density margin."),
+    "initial_southern_salinity_psu": PriorSpec(32.70, 33.30, "truncated_normal", 33.00, source="Southern Ocean high-latitude source-water salinity", rationale="Centered on the current interhemispheric control hydrography and constrained jointly by the absolute AMOC density margin."),
     "initial_north_salinity_psu": PriorSpec(34.85, 35.45, "truncated_normal", 35.15, source="North Atlantic source-water salinity", rationale="Hydrographic prior constrained jointly by the absolute AMOC density margin."),
 }
 
@@ -1274,7 +1274,11 @@ def _joint_prior_state_is_physical(sampled: dict[str, float], base_config: Model
     if abs(south_upper - deep_salinity) > 1.0:
         return False
     southern = float(config.initial_southern_salinity_psu)
-    if abs(deep_salinity - southern) > 2.0:
+    # The current interhemispheric control hydrography has a 2.15 PSU
+    # north/deep-to-Southern-Ocean contrast (35.15 versus 33.00 PSU).
+    # Keep a finite plausibility screen without rejecting the control state
+    # around which the built-in hydrographic prior is defined.
+    if abs(deep_salinity - southern) > 2.5:
         return False
     if diagnostics["density_driver"] <= 0.0:
         return False
