@@ -87,6 +87,30 @@ COMMON_START_MINIMUM_LOCAL_TEMPERATURE_LIMIT_C = 40.0
 COMMON_START_LOCAL_TO_GLOBAL_LIMIT_RATIO = 2.0
 COMMON_START_MAXIMUM_ANNUAL_GMST_DRIFT_C = 0.02
 COMMON_START_MAXIMUM_ANNUAL_AMOC_DRIFT_SV = 0.10
+DEFAULT_COMMON_START_REDRAW_ATTEMPTS = 3
+COMMON_START_REDRAW_SEED_STRIDE = 0x9E3779B9
+
+
+def _common_start_redraw_seed(seed: int, attempt: int) -> int:
+    """Return a deterministic independent seed for one replacement-draw round."""
+
+    attempt_number = int(attempt)
+    if attempt_number < 1:
+        raise ValueError("Common-start redraw attempts are numbered from one.")
+    return int(
+        (int(seed) + attempt_number * COMMON_START_REDRAW_SEED_STRIDE)
+        % (2**32)
+    )
+
+
+def _is_common_start_rejection(result: Any) -> bool:
+    """Return whether a worker failed solely because its baseline draw was invalid."""
+
+    return (
+        isinstance(result, dict)
+        and str(result.get("status", "")).lower() == "failed"
+        and result.get("failure_kind") == "common_start_baseline_rejected"
+    )
 
 
 def validate_common_start_baseline(
@@ -548,6 +572,7 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
     successful_target_simulations = 0
     failed_target_simulations = 0
     baseline_diagnostics: dict[str, Any] | None = None
+    baseline_rejection_reason: str | None = None
     try:
         base = ModelConfig(**base_config_dict)
         target_values = np.asarray(targets, dtype=float)
@@ -609,6 +634,7 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
                 baseline_record = {
                     "status": "ok",
                     "member": int(member_id),
+                    "sampled": sampled,
                     "baseline_definition": AMOC_BASELINE_DEFINITION,
                     "baseline_semantics": (
                         "One exact member-specific accepted pre-forcing state is reused "
@@ -652,9 +678,13 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
                         "Common-start baseline failed and its terminal failure "
                         f"checkpoint could not be saved: {checkpoint_exc}"
                     ) from baseline_exc
+                baseline_rejection_reason = (
+                    f"{type(baseline_exc).__name__}: {baseline_exc}"
+                )
                 print(
-                    f"Member {int(member_id) + 1} common-start baseline rejected: "
-                    f"{type(baseline_exc).__name__}: {baseline_exc}",
+                    f"Member {int(member_id) + 1} prior draw excluded by the "
+                    f"common-start safety gate: {baseline_rejection_reason}. "
+                    "No target simulations were run for this draw.",
                     flush=True,
                 )
                 raise RuntimeError(
@@ -1013,7 +1043,7 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
             failed_target_simulations = target_count
         elif attempted_target_simulations > successful_target_simulations + failed_target_simulations:
             failed_target_simulations += 1
-        return {
+        failure = {
             "member": int(member_id),
             "status": "failed",
             "sampled": sampled,
@@ -1023,6 +1053,12 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
             "successful_target_simulations": int(successful_target_simulations),
             "failed_target_simulations": int(failed_target_simulations),
         }
+        if baseline_rejection_reason is not None:
+            failure["failure_kind"] = "common_start_baseline_rejected"
+            failure["baseline_rejection_reason"] = baseline_rejection_reason
+            if baseline_diagnostics is not None:
+                failure["baseline_diagnostics"] = baseline_diagnostics
+        return failure
 
 def _weighted_stats(values: np.ndarray, weights: np.ndarray) -> dict[str, float]:
     q = weighted_quantile(
@@ -1458,6 +1494,13 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
     )
     bootstrap_samples = int(args.sweep_bootstrap_samples)
     confidence_level = float(args.sweep_confidence_level)
+    baseline_redraw_attempts = int(
+        getattr(
+            args,
+            "sweep_baseline_redraw_attempts",
+            DEFAULT_COMMON_START_REDRAW_ATTEMPTS,
+        )
+    )
     if start_ppm <= 0.0:
         raise ValueError("Sweep starting CO2 must be positive")
     if target_mode not in TARGET_MODES:
@@ -1482,6 +1525,8 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         raise ValueError("Initial-equilibration years must be a non-negative whole number")
     if bootstrap_samples < 0:
         raise ValueError("Bootstrap samples cannot be negative")
+    if not 0 <= baseline_redraw_attempts <= 100:
+        raise ValueError("Baseline redraw attempts must be between 0 and 100")
     if not 0.0 < confidence_level < 1.0:
         raise ValueError("Confidence level must be between zero and one")
     if not 2 <= args.monte_carlo_runs <= 100000:
@@ -1548,6 +1593,23 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         not args.mc_no_correlated_priors,
         science_modes=args.mc_use_science_priors,
     )
+    redraw_seeds = [
+        _common_start_redraw_seed(seed_used, attempt)
+        for attempt in range(1, baseline_redraw_attempts + 1)
+    ]
+    redraw_sample_batches = [
+        generate_samples(
+            base_config,
+            ranges,
+            args.monte_carlo_runs,
+            redraw_seed,
+            args.mc_sampling,
+            args.mc_design,
+            not args.mc_no_correlated_priors,
+            science_modes=args.mc_use_science_priors,
+        )
+        for redraw_seed in redraw_seeds
+    ]
     workers = _automatic_worker_count(args.mc_workers)
     calibration = constraints_enabled(constraint_mode)
     provenance = runtime_provenance()
@@ -1569,6 +1631,8 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
             "constraint_mode": constraint_mode,
             "correlated_priors": not args.mc_no_correlated_priors,
             "science_priors": args.mc_use_science_priors,
+            "baseline_redraw_attempts": baseline_redraw_attempts,
+            "baseline_redraw_seeds": redraw_seeds,
             "diagnose_each": bool(args.mc_diagnose_each),
             "calibration": calibration,
             "collapse_window_years": collapse_window_years,
@@ -1598,6 +1662,8 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         "design": args.mc_design,
         "constraint_mode": constraint_mode,
         "science_priors": bool(args.mc_use_science_priors),
+        "baseline_redraw_attempts": baseline_redraw_attempts,
+        "baseline_redraw_seeds": redraw_seeds,
         "command_arguments": list(getattr(args, "saved_command_arguments", [])),
     }
     created_unix_seconds = time.time()
@@ -1663,8 +1729,10 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
             "checkpoint_format": "safe_json_npy_zip_v2_bounded",
         },
     )
-    payloads = [
-        (
+    def build_member_payload(
+        member: int, sampled: dict[str, float]
+    ) -> tuple[Any, ...]:
+        return (
             member,
             asdict(base_config),
             sampled,
@@ -1686,6 +1754,9 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
             bool(args.mc_retry_failed_on_resume),
             checkpoint_metadata,
         )
+
+    payloads = [
+        build_member_payload(member, sampled)
         for member, sampled in enumerate(samples)
     ]
     print(
@@ -1710,6 +1781,13 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
             flush=True,
         )
     print("Targets (ppm): " + ", ".join(f"{value:g}" for value in targets), flush=True)
+    if baseline_redraw_attempts > 0:
+        print(
+            "Common-start exclusions are expected rejection-sampling events, "
+            f"not runtime errors; up to {baseline_redraw_attempts} deterministic "
+            "replacement round(s) will refill invalid prior draws.",
+            flush=True,
+        )
 
     progress_interval = max(1, len(payloads) // 50)
     checkpoint_validation_cache: dict[str, bool] = {}
@@ -1762,6 +1840,160 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         progress_callback=report_progress,
         checkpoint_metadata=checkpoint_metadata,
     )
+
+    # Invalid common-start climates are outside the support of a CO2-induced
+    # collapse experiment. Replace those draws deterministically instead of
+    # silently shrinking the requested ensemble or letting their target runs
+    # fail later. Each redraw round has its own supervisor checkpoints, while
+    # an accepted nested baseline remains resumable in the member target tree.
+    rejection_history: dict[int, list[dict[str, Any]]] = {
+        member: [] for member in range(int(args.monte_carlo_runs))
+    }
+
+    def record_baseline_rejection(result: dict[str, Any], attempt: int) -> None:
+        member = int(result["member"])
+        rejection_history[member].append(
+            {
+                "member": member,
+                "draw_attempt": int(attempt),
+                "error": str(result.get("error", "Common-start baseline rejected")),
+                "sampled": dict(result.get("sampled", {})),
+                "baseline_diagnostics": dict(
+                    result.get("baseline_diagnostics", {})
+                ),
+            }
+        )
+
+    for result in results:
+        result.setdefault("baseline_draw_attempt", 0)
+        if _is_common_start_rejection(result):
+            record_baseline_rejection(result, 0)
+        result["baseline_rejected_draws"] = list(
+            rejection_history[int(result["member"])]
+        )
+
+    for redraw_attempt, replacement_samples in enumerate(
+        redraw_sample_batches, start=1
+    ):
+        rejected_members = [
+            int(result["member"])
+            for result in results
+            if _is_common_start_rejection(result)
+        ]
+        if not rejected_members:
+            break
+        print(
+            f"Common-start screening excluded {len(rejected_members)} prior "
+            f"draw(s); trying deterministic replacement round "
+            f"{redraw_attempt}/{baseline_redraw_attempts}.",
+            flush=True,
+        )
+        for member in rejected_members:
+            baseline_path = (
+                target_checkpoint_root
+                / f"member_{member:08d}"
+                / "baseline.ckpt"
+            )
+            saved_baseline = load_compatible_checkpoint(
+                baseline_path, run_fingerprint
+            )
+            if result_is_failed(saved_baseline):
+                baseline_path.unlink(missing_ok=True)
+
+        replacement_tasks = [
+            (
+                member,
+                build_member_payload(member, replacement_samples[member]),
+            )
+            for member in rejected_members
+        ]
+        replacement_checkpoint_dir = (
+            member_checkpoint_root / f"baseline_redraw_{redraw_attempt:02d}"
+        )
+        replacement_results = run_supervised_tasks(
+            replacement_tasks,
+            _sweep_member_worker,
+            max_workers=workers,
+            timeout_seconds=float(args.mc_member_timeout_seconds),
+            heartbeat_seconds=float(args.mc_heartbeat_seconds),
+            checkpoint_dir=replacement_checkpoint_dir,
+            fingerprint=run_fingerprint,
+            resume=bool(args.mc_resume),
+            # A scientifically rejected draw must advance to the next
+            # deterministic candidate, not rerun the same candidate forever.
+            retry_failed_on_resume=False,
+            label=f"baseline redraw {redraw_attempt} members",
+            checkpoint_metadata=checkpoint_metadata,
+        )
+        accepted_this_round = 0
+        for replacement in replacement_results:
+            member = int(replacement["member"])
+            replacement["baseline_draw_attempt"] = int(redraw_attempt)
+            if _is_common_start_rejection(replacement):
+                record_baseline_rejection(replacement, redraw_attempt)
+            else:
+                accepted_this_round += 1
+            replacement["baseline_rejected_draws"] = list(
+                rejection_history[member]
+            )
+            results[member] = replacement
+            save_compatible_checkpoint(
+                replacement_checkpoint_dir / f"member_{member:08d}.ckpt",
+                run_fingerprint,
+                replacement,
+                checkpoint_metadata,
+            )
+        remaining_rejections = sum(
+            _is_common_start_rejection(result) for result in results
+        )
+        print(
+            f"Replacement round {redraw_attempt} accepted "
+            f"{accepted_this_round}/{len(rejected_members)} draw(s); "
+            f"{remaining_rejections} still require replacement.",
+            flush=True,
+        )
+
+    exhausted_rejections = sum(
+        _is_common_start_rejection(result) for result in results
+    )
+    if exhausted_rejections:
+        print(
+            f"{exhausted_rejections} member(s) exhausted all "
+            f"{baseline_redraw_attempts} common-start replacement round(s) "
+            "and remain failed.",
+            flush=True,
+        )
+
+    baseline_rejection_records = [
+        record
+        for member_history in rejection_history.values()
+        for record in member_history
+    ]
+    if baseline_rejection_records:
+        flattened_rejections: list[dict[str, Any]] = []
+        for record in baseline_rejection_records:
+            row: dict[str, Any] = {
+                "member": int(record["member"]),
+                "draw_attempt": int(record["draw_attempt"]),
+                "error": str(record["error"]),
+            }
+            row.update(
+                {
+                    f"sample_{name}": value
+                    for name, value in record["sampled"].items()
+                }
+            )
+            row.update(
+                {
+                    f"baseline_{name}": value
+                    for name, value in record["baseline_diagnostics"].items()
+                    if isinstance(value, (bool, int, float, str))
+                }
+            )
+            flattened_rejections.append(row)
+        pd.DataFrame(flattened_rejections).to_csv(
+            output / "co2_target_sweep_baseline_rejections.csv", index=False
+        )
 
     # Normalize older/synthetic worker records that predate target-level
     # accounting. This keeps resume and tests backward compatible while the
@@ -2383,6 +2615,12 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         ),
         "amoc_baseline_definition": AMOC_BASELINE_DEFINITION,
         "members_per_target_requested": int(args.monte_carlo_runs),
+        "baseline_redraw_attempts_allowed": baseline_redraw_attempts,
+        "baseline_redraw_seeds": redraw_seeds,
+        "baseline_rejected_draws": len(baseline_rejection_records),
+        "members_requiring_baseline_redraw": sum(
+            bool(history) for history in rejection_history.values()
+        ),
         "complete_paired_members": len(complete),
         "partial_paired_members": len(partial),
         "usable_members": len(eligible),
@@ -2493,6 +2731,16 @@ def build_parser():
         help=(
             "Constant-CO2 spinup used only when the common sweep start differs "
             "from the model reference concentration. Must be a non-negative whole year count."
+        ),
+    )
+    parser.add_argument(
+        "--sweep-baseline-redraw-attempts",
+        type=int,
+        default=DEFAULT_COMMON_START_REDRAW_ATTEMPTS,
+        help=(
+            "Maximum deterministic replacement draws for a member whose "
+            "common-start climate fails the mandatory physical baseline gate. "
+            "Rejected draws are written to an audit CSV."
         ),
     )
     parser.add_argument("--sweep-ramp-years", type=float, default=100.0, help="Linear ramp duration for every target.")

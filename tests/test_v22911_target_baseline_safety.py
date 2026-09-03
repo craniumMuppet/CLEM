@@ -101,6 +101,123 @@ def test_common_start_gate_accepts_stable_active_control() -> None:
     assert limits["maximum_local_temperature_anomaly_c"] == pytest.approx(40.0)
 
 
+def test_common_start_replacement_draws_are_deterministic_and_explicit() -> None:
+    seeds = [
+        sweep._common_start_redraw_seed(19930929, attempt)
+        for attempt in range(1, 4)
+    ]
+    assert seeds == [
+        sweep._common_start_redraw_seed(19930929, attempt)
+        for attempt in range(1, 4)
+    ]
+    assert len(set(seeds)) == 3
+    assert all(0 <= seed < 2**32 for seed in seeds)
+    with pytest.raises(ValueError, match="numbered from one"):
+        sweep._common_start_redraw_seed(19930929, 0)
+
+    rejected = {
+        "status": "failed",
+        "failure_kind": "common_start_baseline_rejected",
+    }
+    assert sweep._is_common_start_rejection(rejected)
+    assert not sweep._is_common_start_rejection(
+        {"status": "failed", "error": "unrelated worker failure"}
+    )
+    assert not sweep._is_common_start_rejection(
+        {**rejected, "status": "ok"}
+    )
+
+
+def test_common_start_redraw_parser_default_and_validation(tmp_path: Path) -> None:
+    parsed = sweep.build_parser().parse_args([])
+    assert (
+        parsed.sweep_baseline_redraw_attempts
+        == sweep.DEFAULT_COMMON_START_REDRAW_ATTEMPTS
+    )
+
+    invalid = sweep.build_parser().parse_args(
+        [
+            "--monte-carlo-runs",
+            "2",
+            "--mc-range",
+            "hydrological_freshwater_sv_per_k",
+            "0.004",
+            "0.006",
+            "--sweep-baseline-redraw-attempts",
+            "101",
+            "--output",
+            str(tmp_path),
+            "--overwrite-output",
+        ]
+    )
+    with pytest.raises(ValueError, match="between 0 and 100"):
+        sweep.run_sweep(invalid)
+
+
+def test_worker_tags_common_start_gate_failure_for_replacement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    class FakeState:
+        def __init__(self) -> None:
+            self.land_anomaly_c = np.zeros(1)
+            self.atlantic_ocean_anomaly_c = np.zeros(1)
+            self.non_atlantic_ocean_anomaly_c = np.zeros(1)
+            self.amoc_sv = 17.0
+
+        def copy(self) -> "FakeState":
+            return self
+
+    class FakeModel:
+        def __init__(self, config: ModelConfig) -> None:
+            self.config = config
+            self.state = FakeState()
+
+        def run(self) -> None:
+            raise AssertionError("native reference baseline must not spin up")
+
+    def reject_baseline(*_args: object, **_kwargs: object) -> dict[str, float]:
+        raise ValueError("synthetic baseline rejection")
+
+    monkeypatch.setattr(sweep, "ProcessClimateModel", FakeModel)
+    monkeypatch.setattr(sweep, "validate_common_start_baseline", reject_baseline)
+    base = ModelConfig(
+        scenario="linear_ramp_hold",
+        co2_start_ppm=278.3,
+        co2_end_ppm=300.0,
+        co2_ramp_years=1.0,
+        co2_hold_years=1.0,
+        duration_years=2.0,
+        auto_initialize_from_1850=False,
+    )
+    payload = (
+        0,
+        base.__dict__.copy(),
+        {},
+        278.3,
+        [300.0],
+        1.0,
+        1.0,
+        1.0,
+        0.95,
+        0.0,
+        0.0,
+        "none",
+        False,
+        False,
+        20.0,
+        str(tmp_path / "targets"),
+        "fingerprint",
+        False,
+        False,
+        None,
+    )
+    result = sweep._sweep_member_worker(payload)
+    assert result["status"] == "failed"
+    assert result["failure_kind"] == "common_start_baseline_rejected"
+    assert "synthetic baseline rejection" in result["baseline_rejection_reason"]
+    assert sweep._is_common_start_rejection(result)
+
+
 @pytest.mark.parametrize(
     ("updates", "message"),
     [

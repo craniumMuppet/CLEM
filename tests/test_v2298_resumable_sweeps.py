@@ -282,9 +282,30 @@ def test_synthetic_specific_sweep_writes_decline_intervals(
     targets = np.asarray([200.0, 300.0, 600.0, 1200.0])
     years = np.arange(1850.0, 1862.0)
 
+    supervised_calls = 0
+
     def fake_results(*_args: object, **_kwargs: object) -> list[dict[str, object]]:
+        nonlocal supervised_calls
+        tasks = _args[0]
+        members = [int(member) for member, _payload in tasks]
         results: list[dict[str, object]] = []
-        for member in range(2):
+        for member in members:
+            if supervised_calls == 0 and member == 0:
+                results.append(
+                    {
+                        "member": member,
+                        "status": "failed",
+                        "failure_kind": "common_start_baseline_rejected",
+                        "sampled": {
+                            "hydrological_freshwater_sv_per_k": 0.004
+                        },
+                        "error": "RuntimeError: synthetic invalid baseline",
+                        "attempted_target_simulations": len(targets),
+                        "successful_target_simulations": 0,
+                        "failed_target_simulations": len(targets),
+                    }
+                )
+                continue
             amoc_rows = []
             decline_rows = []
             warming_rows = []
@@ -346,6 +367,7 @@ def test_synthetic_specific_sweep_writes_decline_intervals(
                     "target_summaries": target_summaries,
                 }
             )
+        supervised_calls += 1
         return results
 
     monkeypatch.setattr(sweep, "run_supervised_tasks", fake_results)
@@ -356,6 +378,10 @@ def test_synthetic_specific_sweep_writes_decline_intervals(
     assert summary["start_ppm"] == pytest.approx(278.3)
     assert summary["common_start_ppm"] == pytest.approx(278.3)
     assert summary["amoc_baseline_definition"] == sweep.AMOC_BASELINE_DEFINITION
+    assert summary["baseline_rejected_draws"] == 1
+    assert summary["members_requiring_baseline_redraw"] == 1
+    assert supervised_calls == 2
+    assert (tmp_path / "co2_target_sweep_baseline_rejections.csv").exists()
 
     endpoint = pd.read_csv(tmp_path / "co2_target_sweep_summary.csv")
     for column in (
