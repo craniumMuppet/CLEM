@@ -78,6 +78,53 @@ def test_common_amoc_baseline_is_supplied_not_inferred_from_forced_records() -> 
     assert sweep.AMOC_BASELINE_DEFINITION == "common_member_pre_forcing_t0"
 
 
+def _healthy_common_start_diagnostics(**updates: float) -> dict[str, float]:
+    values = {
+        "common_start_ppm": 300.0,
+        "global_surface_warming_c": 0.25,
+        "annual_mean_toa_imbalance_wm2": 0.05,
+        "annual_mean_prescribed_forcing_wm2": 0.45,
+        "annual_gmst_drift_c": 0.001,
+        "annual_amoc_drift_sv": 0.01,
+        "initial_amoc_sv": 17.0,
+        "maximum_absolute_local_temperature_anomaly_c": 2.0,
+    }
+    values.update(updates)
+    return values
+
+
+def test_common_start_gate_accepts_stable_active_control() -> None:
+    limits = sweep.validate_common_start_baseline(
+        _healthy_common_start_diagnostics(), ModelConfig()
+    )
+    assert limits["maximum_equivalent_global_warming_c"] > 1.0
+    assert limits["maximum_local_temperature_anomaly_c"] == pytest.approx(40.0)
+
+
+@pytest.mark.parametrize(
+    ("updates", "message"),
+    [
+        ({"initial_amoc_sv": 3.69}, "already weak/collapsed"),
+        ({"annual_mean_toa_imbalance_wm2": 0.5}, "energy-balance gate"),
+        ({"global_surface_warming_c": -0.8}, "wrong sign"),
+        ({"global_surface_warming_c": 9.09}, "global warming"),
+        (
+            {"maximum_absolute_local_temperature_anomaly_c": 72.7},
+            "local temperature",
+        ),
+        ({"annual_gmst_drift_c": 0.2}, "annual GMST change"),
+        ({"annual_amoc_drift_sv": -1.0}, "annual AMOC change"),
+    ],
+)
+def test_common_start_gate_rejects_contaminated_baselines(
+    updates: dict[str, float], message: str
+) -> None:
+    with pytest.raises(ValueError, match=message):
+        sweep.validate_common_start_baseline(
+            _healthy_common_start_diagnostics(**updates), ModelConfig()
+        )
+
+
 def test_resume_fails_closed_without_primary_state(tmp_path: Path) -> None:
     (tmp_path / "stale.txt").write_text("stale", encoding="utf-8")
     with pytest.raises(ValueError, match="no long_run_state.json"):

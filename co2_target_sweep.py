@@ -79,6 +79,226 @@ SWEEP_VERSION = MODEL_VERSION
 TARGET_MODES = ("increments", "specific")
 AMOC_BASELINE_DEFINITION = "common_member_pre_forcing_t0"
 COMMON_START_REFERENCE_TOLERANCE_PPM = 1.0e-9
+COMMON_START_TOA_IMBALANCE_TOLERANCE_WM2 = 0.20
+COMMON_START_MAXIMUM_EQUIVALENT_ECS_C = 10.0
+COMMON_START_WARMING_SIGN_TOLERANCE_C = 0.25
+COMMON_START_WARMING_SLACK_C = 0.50
+COMMON_START_MINIMUM_LOCAL_TEMPERATURE_LIMIT_C = 40.0
+COMMON_START_LOCAL_TO_GLOBAL_LIMIT_RATIO = 2.0
+COMMON_START_MAXIMUM_ANNUAL_GMST_DRIFT_C = 0.02
+COMMON_START_MAXIMUM_ANNUAL_AMOC_DRIFT_SV = 0.10
+
+
+def validate_common_start_baseline(
+    diagnostics: dict[str, Any],
+    config: ModelConfig,
+) -> dict[str, float]:
+    """Reject a numerically completed but scientifically invalid sweep baseline.
+
+    A CO2-collapse sweep is conditional on an active, stable common-start
+    climate.  Merely reaching the requested spin-up duration is insufficient:
+    broad prior combinations can produce a runaway or already-collapsed state
+    without crossing the model's deliberately loose emergency bounds.
+    """
+
+    required = (
+        "common_start_ppm",
+        "global_surface_warming_c",
+        "annual_mean_toa_imbalance_wm2",
+        "annual_mean_prescribed_forcing_wm2",
+        "annual_gmst_drift_c",
+        "annual_amoc_drift_sv",
+        "initial_amoc_sv",
+        "maximum_absolute_local_temperature_anomaly_c",
+    )
+    values: dict[str, float] = {}
+    for name in required:
+        try:
+            value = float(diagnostics[name])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(
+                f"Common-start baseline diagnostic {name!r} is missing or invalid."
+            ) from exc
+        if not math.isfinite(value):
+            raise ValueError(
+                f"Common-start baseline diagnostic {name!r} is non-finite."
+            )
+        values[name] = value
+
+    amoc = values["initial_amoc_sv"]
+    if amoc <= float(config.amoc_collapse_threshold_sv):
+        raise ValueError(
+            "Common-start baseline AMOC is already weak/collapsed: "
+            f"{amoc:.6g} Sv <= {float(config.amoc_collapse_threshold_sv):.6g} Sv. "
+            "A CO2-induced collapse sweep requires an active pre-forcing AMOC."
+        )
+
+    imbalance = abs(values["annual_mean_toa_imbalance_wm2"])
+    if imbalance > COMMON_START_TOA_IMBALANCE_TOLERANCE_WM2:
+        raise ValueError(
+            "Common-start spin-up did not reach the energy-balance gate: "
+            f"annual-mean |TOA imbalance|={imbalance:.6g} W/m2 exceeds "
+            f"{COMMON_START_TOA_IMBALANCE_TOLERANCE_WM2:.6g} W/m2."
+        )
+
+    forcing = values["annual_mean_prescribed_forcing_wm2"]
+    warming = values["global_surface_warming_c"]
+    if (
+        forcing > 1.0e-8
+        and warming < -COMMON_START_WARMING_SIGN_TOLERANCE_C
+    ) or (
+        forcing < -1.0e-8
+        and warming > COMMON_START_WARMING_SIGN_TOLERANCE_C
+    ):
+        raise ValueError(
+            "Common-start warming has the wrong sign for the prescribed forcing: "
+            f"forcing={forcing:.6g} W/m2, warming={warming:.6g} C."
+        )
+
+    equivalent_warming_limit = (
+        COMMON_START_WARMING_SLACK_C
+        + COMMON_START_MAXIMUM_EQUIVALENT_ECS_C
+        * abs(forcing)
+        / float(config.co2_doubling_erf_wm2)
+    )
+    if abs(warming) > equivalent_warming_limit:
+        raise ValueError(
+            "Common-start global warming is outside the unconditional "
+            "numerical-plausibility envelope: "
+            f"|warming|={abs(warming):.6g} C exceeds "
+            f"{equivalent_warming_limit:.6g} C."
+        )
+
+    local_temperature_limit = max(
+        COMMON_START_MINIMUM_LOCAL_TEMPERATURE_LIMIT_C,
+        COMMON_START_LOCAL_TO_GLOBAL_LIMIT_RATIO * equivalent_warming_limit,
+    )
+    local_maximum = values["maximum_absolute_local_temperature_anomaly_c"]
+    if local_maximum > local_temperature_limit:
+        raise ValueError(
+            "Common-start local temperature is outside the broad physical "
+            "plausibility envelope: "
+            f"maximum |anomaly|={local_maximum:.6g} C exceeds "
+            f"{local_temperature_limit:.6g} C."
+        )
+
+    gmst_drift_limit = COMMON_START_MAXIMUM_ANNUAL_GMST_DRIFT_C * max(
+        1.0, equivalent_warming_limit
+    )
+    if abs(values["annual_gmst_drift_c"]) > gmst_drift_limit:
+        raise ValueError(
+            "Common-start spin-up is still drifting: "
+            f"annual GMST change={values['annual_gmst_drift_c']:.6g} C exceeds "
+            f"{gmst_drift_limit:.6g} C."
+        )
+
+    amoc_drift_limit = max(
+        COMMON_START_MAXIMUM_ANNUAL_AMOC_DRIFT_SV,
+        0.01 * abs(amoc),
+    )
+    if abs(values["annual_amoc_drift_sv"]) > amoc_drift_limit:
+        raise ValueError(
+            "Common-start spin-up is still drifting: "
+            f"annual AMOC change={values['annual_amoc_drift_sv']:.6g} Sv exceeds "
+            f"{amoc_drift_limit:.6g} Sv."
+        )
+
+    return {
+        "maximum_equivalent_global_warming_c": float(equivalent_warming_limit),
+        "maximum_local_temperature_anomaly_c": float(local_temperature_limit),
+        "maximum_absolute_annual_toa_imbalance_wm2": float(
+            COMMON_START_TOA_IMBALANCE_TOLERANCE_WM2
+        ),
+        "maximum_absolute_annual_gmst_drift_c": float(gmst_drift_limit),
+        "maximum_absolute_annual_amoc_drift_sv": float(amoc_drift_limit),
+    }
+
+
+def _common_start_baseline_diagnostics(
+    model: ProcessClimateModel,
+    state: ModelState,
+    elapsed_years: float,
+    common_start_ppm: float,
+) -> dict[str, Any]:
+    """Probe one further annual cycle without changing the accepted baseline."""
+
+    initial_arrays = (
+        np.asarray(state.land_anomaly_c, dtype=float),
+        np.asarray(state.atlantic_ocean_anomaly_c, dtype=float),
+        np.asarray(state.non_atlantic_ocean_anomaly_c, dtype=float),
+    )
+    if (
+        abs(float(common_start_ppm) - float(model.config.co2_reference_ppm))
+        <= COMMON_START_REFERENCE_TOLERANCE_PPM
+        and float(elapsed_years) == 0.0
+    ):
+        # The native reference manifold is constructed as the exact control
+        # state.  Avoid an unnecessary extra model year (and preserve the
+        # lightweight test/extension interface) when no spin-up was required.
+        diagnostics: dict[str, Any] = {
+            "common_start_ppm": float(common_start_ppm),
+            "probe_duration_years": 0.0,
+            "global_surface_warming_c": 0.0,
+            "annual_mean_toa_imbalance_wm2": 0.0,
+            "annual_mean_prescribed_forcing_wm2": 0.0,
+            "annual_gmst_drift_c": 0.0,
+            "annual_amoc_drift_sv": 0.0,
+            "initial_amoc_sv": float(state.amoc_sv),
+            "maximum_absolute_local_temperature_anomaly_c": max(
+                float(np.max(np.abs(array))) for array in initial_arrays
+            ),
+            "maximum_absolute_land_temperature_anomaly_c": float(
+                np.max(np.abs(initial_arrays[0]))
+            ),
+            "maximum_absolute_ocean_temperature_anomaly_c": max(
+                float(np.max(np.abs(array))) for array in initial_arrays[1:]
+            ),
+        }
+        return diagnostics
+
+    model.state = state.copy()
+    initial_record = model.record(float(elapsed_years))
+    initial_gmst = float(initial_record["global_surface_warming_c"])
+    initial_amoc = float(state.amoc_sv)
+    weighted_toa = 0.0
+    weighted_forcing = 0.0
+    offset = 0.0
+    while offset < 1.0 - 1.0e-12:
+        dt = min(float(model.config.dt_years), 1.0 - offset)
+        model.step(float(elapsed_years) + offset, dt_years=dt)
+        offset += dt
+        record = model.record(float(elapsed_years) + offset)
+        weighted_toa += dt * float(record["toa_imbalance_wm2"])
+        weighted_forcing += dt * float(record["total_prescribed_forcing_wm2"])
+
+    final_gmst = float(model._global_surface_mean(model.state))
+    arrays = (
+        *initial_arrays,
+        np.asarray(model.state.land_anomaly_c, dtype=float),
+        np.asarray(model.state.atlantic_ocean_anomaly_c, dtype=float),
+        np.asarray(model.state.non_atlantic_ocean_anomaly_c, dtype=float),
+    )
+    local_maximum = max(float(np.max(np.abs(array))) for array in arrays)
+    diagnostics: dict[str, Any] = {
+        "common_start_ppm": float(common_start_ppm),
+        "probe_duration_years": 1.0,
+        "global_surface_warming_c": initial_gmst,
+        "annual_mean_toa_imbalance_wm2": float(weighted_toa),
+        "annual_mean_prescribed_forcing_wm2": float(weighted_forcing),
+        "annual_gmst_drift_c": float(final_gmst - initial_gmst),
+        "annual_amoc_drift_sv": float(model.state.amoc_sv - initial_amoc),
+        "initial_amoc_sv": initial_amoc,
+        "maximum_absolute_local_temperature_anomaly_c": local_maximum,
+        "maximum_absolute_land_temperature_anomaly_c": max(
+            float(np.max(np.abs(arrays[0]))),
+            float(np.max(np.abs(arrays[3]))),
+        ),
+        "maximum_absolute_ocean_temperature_anomaly_c": max(
+            *(float(np.max(np.abs(array))) for array in arrays[1:3]),
+            *(float(np.max(np.abs(array))) for array in arrays[4:6]),
+        ),
+    }
+    return diagnostics
 
 
 
@@ -327,10 +547,27 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
     attempted_target_simulations = 0
     successful_target_simulations = 0
     failed_target_simulations = 0
+    baseline_diagnostics: dict[str, Any] | None = None
     try:
         base = ModelConfig(**base_config_dict)
         target_values = np.asarray(targets, dtype=float)
         member_checkpoint_dir.mkdir(parents=True, exist_ok=True)
+
+        baseline_duration = max(float(initial_equilibration_years), float(base.dt_years))
+        baseline_config = replace(
+            base,
+            **sampled,
+            scenario="constant",
+            co2_start_ppm=float(start_ppm),
+            co2_end_ppm=float(start_ppm),
+            co2_peak_ppm=float(start_ppm),
+            duration_years=baseline_duration,
+            forcing_mode="co2_only",
+            additional_forcing_wm2=0.0,
+            freshwater_hosing_sv=0.0,
+            auto_initialize_from_1850=False,
+            record_every_years=baseline_duration,
+        )
 
         baseline_path = member_checkpoint_dir / "baseline.ckpt"
         baseline_record = (
@@ -342,58 +579,87 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
             baseline_path.unlink(missing_ok=True)
             baseline_record = None
         if baseline_record is None:
-            baseline_duration = max(float(initial_equilibration_years), float(base.dt_years))
-            baseline_config = replace(
-                base,
-                **sampled,
-                scenario="constant",
-                co2_start_ppm=float(start_ppm),
-                co2_end_ppm=float(start_ppm),
-                co2_peak_ppm=float(start_ppm),
-                duration_years=baseline_duration,
-                forcing_mode="co2_only",
-                additional_forcing_wm2=0.0,
-                freshwater_hosing_sv=0.0,
-                auto_initialize_from_1850=False,
-                record_every_years=baseline_duration,
-            )
-            baseline_model = ProcessClimateModel(baseline_config)
-            if abs(float(start_ppm) - float(base.co2_reference_ppm)) > COMMON_START_REFERENCE_TOLERANCE_PPM:
-                if initial_equilibration_years <= 0.0:
-                    raise ValueError(
-                        "A non-reference sweep start requires a positive "
-                        "--sweep-initial-equilibration-years value."
+            try:
+                baseline_model = ProcessClimateModel(baseline_config)
+                if abs(float(start_ppm) - float(base.co2_reference_ppm)) > COMMON_START_REFERENCE_TOLERANCE_PPM:
+                    if initial_equilibration_years <= 0.0:
+                        raise ValueError(
+                            "A non-reference sweep start requires a positive "
+                            "--sweep-initial-equilibration-years value."
+                        )
+                    baseline_model.run()
+                    initialization = "constant_co2_spinup"
+                    equilibration_used = float(initial_equilibration_years)
+                else:
+                    initialization = "native_reference_control_state"
+                    equilibration_used = 0.0
+                shared_baseline_state = baseline_model.state.copy()
+                shared_initial_amoc = float(shared_baseline_state.amoc_sv)
+                baseline_diagnostics = _common_start_baseline_diagnostics(
+                    baseline_model,
+                    shared_baseline_state,
+                    equilibration_used,
+                    float(start_ppm),
+                )
+                baseline_diagnostics["acceptance_limits"] = (
+                    validate_common_start_baseline(
+                        baseline_diagnostics, baseline_config
                     )
-                baseline_model.run()
-                initialization = "constant_co2_spinup"
-                equilibration_used = float(initial_equilibration_years)
-            else:
-                initialization = "native_reference_control_state"
-                equilibration_used = 0.0
-            shared_baseline_state = baseline_model.state.copy()
-            shared_initial_amoc = float(shared_baseline_state.amoc_sv)
-            baseline_record = {
-                "status": "ok",
-                "member": int(member_id),
-                "baseline_definition": AMOC_BASELINE_DEFINITION,
-                "baseline_semantics": (
-                    "One exact member-specific pre-forcing state is reused for every "
-                    "target; percentage change is measured from its t=0 AMOC."
-                ),
-                "initialization": initialization,
-                "common_start_ppm": float(start_ppm),
-                "reference_co2_ppm": float(base.co2_reference_ppm),
-                "initial_equilibration_years_requested": float(initial_equilibration_years),
-                "initial_equilibration_years_used": equilibration_used,
-                "initial_amoc_sv": shared_initial_amoc,
-                "state": asdict(shared_baseline_state),
-            }
-            save_compatible_checkpoint(
-                baseline_path,
-                run_fingerprint,
-                baseline_record,
-                checkpoint_metadata,
-            )
+                )
+                baseline_record = {
+                    "status": "ok",
+                    "member": int(member_id),
+                    "baseline_definition": AMOC_BASELINE_DEFINITION,
+                    "baseline_semantics": (
+                        "One exact member-specific accepted pre-forcing state is reused "
+                        "for every target; percentage change is measured from its t=0 AMOC."
+                    ),
+                    "initialization": initialization,
+                    "common_start_ppm": float(start_ppm),
+                    "reference_co2_ppm": float(base.co2_reference_ppm),
+                    "initial_equilibration_years_requested": float(initial_equilibration_years),
+                    "initial_equilibration_years_used": equilibration_used,
+                    "initial_amoc_sv": shared_initial_amoc,
+                    "baseline_diagnostics": baseline_diagnostics,
+                    "state": asdict(shared_baseline_state),
+                }
+                save_compatible_checkpoint(
+                    baseline_path,
+                    run_fingerprint,
+                    baseline_record,
+                    checkpoint_metadata,
+                )
+            except Exception as baseline_exc:
+                failed_baseline = {
+                    "status": "failed",
+                    "member": int(member_id),
+                    "common_start_ppm": float(start_ppm),
+                    "baseline_definition": AMOC_BASELINE_DEFINITION,
+                    "error": f"{type(baseline_exc).__name__}: {baseline_exc}",
+                    "traceback": traceback.format_exc(limit=12),
+                }
+                if baseline_diagnostics is not None:
+                    failed_baseline["baseline_diagnostics"] = baseline_diagnostics
+                try:
+                    save_compatible_checkpoint(
+                        baseline_path,
+                        run_fingerprint,
+                        failed_baseline,
+                        checkpoint_metadata,
+                    )
+                except Exception as checkpoint_exc:
+                    raise RuntimeError(
+                        "Common-start baseline failed and its terminal failure "
+                        f"checkpoint could not be saved: {checkpoint_exc}"
+                    ) from baseline_exc
+                print(
+                    f"Member {int(member_id) + 1} common-start baseline rejected: "
+                    f"{type(baseline_exc).__name__}: {baseline_exc}",
+                    flush=True,
+                )
+                raise RuntimeError(
+                    f"Common-start baseline rejected: {baseline_exc}"
+                ) from baseline_exc
         if not isinstance(baseline_record, dict) or baseline_record.get("status") != "ok":
             raise RuntimeError(f"Saved baseline checkpoint {baseline_path} is not successful.")
         if baseline_record.get("baseline_definition") != AMOC_BASELINE_DEFINITION:
@@ -407,6 +673,24 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
             raise ValueError("Saved baseline common CO2 start is incompatible.")
         shared_baseline_state = _state_from_checkpoint(dict(baseline_record["state"]))
         shared_initial_amoc = float(baseline_record["initial_amoc_sv"])
+        baseline_diagnostics = baseline_record.get("baseline_diagnostics")
+        if isinstance(baseline_diagnostics, dict):
+            validate_common_start_baseline(baseline_diagnostics, baseline_config)
+        else:
+            # Compatibility path for a checkpoint created before the baseline
+            # acceptance gate.  Reconstruct and validate it before reuse.
+            baseline_validation_model = ProcessClimateModel(baseline_config)
+            baseline_diagnostics = _common_start_baseline_diagnostics(
+                baseline_validation_model,
+                shared_baseline_state,
+                float(baseline_record["initial_equilibration_years_used"]),
+                float(start_ppm),
+            )
+            baseline_diagnostics["acceptance_limits"] = (
+                validate_common_start_baseline(
+                    baseline_diagnostics, baseline_config
+                )
+            )
 
         diagnostic_summary: dict[str, Any] | None = None
         if diagnose_each or run_calibration_experiments:
@@ -703,6 +987,7 @@ def _sweep_member_worker(payload: tuple[Any, ...]) -> dict[str, Any]:
             "initial_amoc_baseline_sv": float(shared_initial_amoc),
             "amoc_baseline_definition": AMOC_BASELINE_DEFINITION,
             "baseline_initialization": baseline_record["initialization"],
+            "baseline_diagnostics": baseline_diagnostics,
             "initial_equilibration_years_used": float(
                 baseline_record["initial_equilibration_years_used"]
             ),
@@ -1418,8 +1703,10 @@ def _run_sweep_unlocked(args: Any) -> dict[str, Any]:
         )
     if abs(start_ppm - base_config.co2_reference_ppm) > COMMON_START_REFERENCE_TOLERANCE_PPM:
         print(
-            f"Each member is equilibrated for {initial_equilibration_years:g} years at "
-            f"the non-reference common start before any target ramp.",
+            f"Each member is spun up for {initial_equilibration_years:g} years at "
+            "the non-reference common start, then must pass the active-AMOC, "
+            "energy-balance, drift, and temperature-plausibility gates before "
+            "any target ramp.",
             flush=True,
         )
     print("Targets (ppm): " + ", ".join(f"{value:g}" for value in targets), flush=True)
