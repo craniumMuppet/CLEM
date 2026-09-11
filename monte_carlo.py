@@ -1045,7 +1045,19 @@ HELD_OUT_VALIDATION_DIAGNOSTICS: tuple[str, ...] = (
 )
 
 
-def science_default_ranges(mode: str) -> dict[str, tuple[float, float]]:
+def _density_reference_prior_is_active(config: ModelConfig) -> bool:
+    return (
+        config.amoc_density_eos == "linear"
+        and config.amoc_density_geometry in {
+            "interhemispheric_high_latitude", "legacy_southern_surface"
+        }
+        and config.amoc_enforce_initial_density_constraint
+    )
+
+
+def science_default_ranges(
+    mode: str, base_config: ModelConfig | None = None,
+) -> dict[str, tuple[float, float]]:
     """Return broad process-prior bounds with control anchors held fixed.
 
     Sampled process bounds are intentionally wider than observational
@@ -1059,12 +1071,19 @@ def science_default_ranges(mode: str) -> dict[str, tuple[float, float]]:
         ranges.update(AR6_AMOC_PRIOR_RANGES)
     for name in FIXED_SCIENCE_PRIOR_PARAMETERS:
         ranges.pop(name, None)
+    if not _density_reference_prior_is_active(base_config or ModelConfig()):
+        ranges.pop("amoc_reference_density_driver", None)
     return ranges
 
 
 def _resolve_parameter_name(name: str, base_config: ModelConfig) -> str:
     cleaned = name.strip().replace("-", "_")
     resolved = PARAMETER_ALIASES.get(cleaned, cleaned)
+    if resolved == "amoc_reference_density_driver" and not _density_reference_prior_is_active(base_config):
+        raise ValueError(
+            "amoc_reference_density_driver is inactive for the selected EOS, "
+            "geometry, or disabled initial-density constraint; it cannot be sampled."
+        )
     if resolved not in base_config.__dataclass_fields__:
         valid = sorted(
             alias
@@ -1131,7 +1150,7 @@ def parse_ranges(
             "arguments. Choose the built-in prior or your own min/max ranges."
         )
     if use_science_priors:
-        ranges = science_default_ranges(constraint_mode)
+        ranges = science_default_ranges(constraint_mode, base_config)
     if not ranges:
         raise ValueError(
             "Select at least one --mc-range PARAMETER MIN MAX, or explicitly "
@@ -1302,6 +1321,8 @@ def generate_samples(
 ) -> list[dict[str, float]]:
     if runs < 2:
         raise ValueError("Monte Carlo mode requires at least two runs.")
+    if "amoc_reference_density_driver" in ranges:
+        _resolve_parameter_name("amoc_reference_density_driver", base_config)
     names = list(ranges)
     unit = _unit_design(runs, len(names), seed, design)
     unit = _apply_gaussian_copula_correlations(unit, names, correlated_priors)

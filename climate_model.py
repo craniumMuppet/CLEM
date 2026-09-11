@@ -1828,6 +1828,8 @@ class SensitivityDiagnostics:
     feedbacks_wm2_k: dict[str, float]
     abrupt_2x: pd.DataFrame
     one_percent: pd.DataFrame
+    bulk_surface_equilibrium_response_c: float | None = None
+    bulk_surface_transient_response_c: float | None = None
 
     @property
     def gregory_feedback_wm2_k(self) -> float:
@@ -1838,6 +1840,10 @@ class SensitivityDiagnostics:
         return {
             "evidence_role": "calibrated_process_diagnostic",
             "independent_validation": False,
+            "temperature_field": "global_near_surface_air_warming_c",
+            "temperature_interpretation": "Model global near-surface air-temperature proxy",
+            "bulk_surface_equilibrium_response_c": self.bulk_surface_equilibrium_response_c,
+            "bulk_surface_transient_response_c": self.bulk_surface_transient_response_c,
             "interpretation": (
                 "These sensitivity and feedback metrics are process-diagnosed "
                 "from coefficients that are themselves calibration parameters."
@@ -3770,6 +3776,14 @@ class ProcessClimateModel:
         )
         self.baseline_density_driver = float(initial_density["density_driver"])
         self.baseline_density_driver_ratio = float(initial_density["density_ratio"])
+        # Local convection retains its linear anomaly closure. Its scale must
+        # use that same EOS, independently of the selected hydraulic EOS.
+        linear_density = initial_amoc_density_diagnostics(
+            replace(config, amoc_density_eos="linear"),
+            baseline_north_temperature_c=self.baseline_amoc_north_c,
+            baseline_southern_temperature_c=self.baseline_amoc_southern_c,
+        )
+        self.baseline_convection_density_driver = float(linear_density["density_driver"])
         self._freshwater_override_sv: float | None = None
         self._reference_residual_mode = False
         self._reference_tendency_residual_cache: dict[tuple[float, float], ModelState] = {}
@@ -8833,7 +8847,7 @@ class ProcessClimateModel:
             + cfg.haline_contraction_per_psu * northern_haline_anomaly
         )
         convection_density_scale = max(
-            abs(self.baseline_density_driver)
+            abs(self.baseline_convection_density_driver)
             * cfg.amoc_convection_density_scale_factor,
             1.0e-12,
         )
@@ -9075,6 +9089,7 @@ class ProcessClimateModel:
             "amoc_density_driver": driver,
             "amoc_density_driver_ratio": density_ratio,
             "amoc_initial_density_driver": self.baseline_density_driver,
+            "amoc_convection_reference_density_driver": self.baseline_convection_density_driver,
             "amoc_initial_density_driver_ratio": self.baseline_density_driver_ratio,
             "amoc_baseline_north_temperature_c": self.baseline_amoc_north_c,
             "amoc_baseline_southern_temperature_c": self.baseline_amoc_southern_c,
@@ -10945,7 +10960,7 @@ def diagnose_climate_sensitivity(
             abrupt["elapsed_years"]
             >= actual_equilibrium_years - tail_years
         ]
-        equilibrium_ecs = float(tail["global_surface_warming_c"].mean())
+        equilibrium_ecs = float(tail["global_near_surface_air_warming_c"].mean())
         equilibrium_imbalance = float(tail["toa_imbalance_wm2"].mean())
         equilibrium_converged = bool(
             abs(equilibrium_imbalance) <= equilibrium_toa_tolerance_wm2
@@ -10966,7 +10981,7 @@ def diagnose_climate_sensitivity(
     if len(gregory) < 3:
         raise ValueError("Not enough points for Gregory regression")
     slope, intercept = np.polyfit(
-        gregory["global_surface_warming_c"].to_numpy(),
+        gregory["global_near_surface_air_warming_c"].to_numpy(),
         gregory["toa_imbalance_wm2"].to_numpy(),
         1,
     )
@@ -10998,9 +11013,11 @@ def diagnose_climate_sensitivity(
         tcr_index = int(
             np.argmin(np.abs(one_percent["elapsed_years"].to_numpy() - doubling_time))
         )
-        tcr = float(one_percent.iloc[tcr_index]["global_surface_warming_c"])
+        tcr = float(one_percent.iloc[tcr_index]["global_near_surface_air_warming_c"])
+        bulk_tcr = float(one_percent.iloc[tcr_index]["global_surface_warming_c"])
     else:
-        tcr = float(tcr_window["global_surface_warming_c"].mean())
+        tcr = float(tcr_window["global_near_surface_air_warming_c"].mean())
+        bulk_tcr = float(tcr_window["global_surface_warming_c"].mean())
 
     denominator = equilibrium_ecs if abs(equilibrium_ecs) > 1.0e-8 else float("nan")
     feedbacks = {
@@ -11014,6 +11031,8 @@ def diagnose_climate_sensitivity(
     feedbacks["Net feedback"] = float(sum(feedbacks.values()))
 
     return SensitivityDiagnostics(
+        bulk_surface_equilibrium_response_c=float(tail["global_surface_warming_c"].mean()),
+        bulk_surface_transient_response_c=bulk_tcr,
         equilibrium_ecs_c=equilibrium_ecs,
         equilibrium_converged=equilibrium_converged,
         equilibrium_simulation_years=actual_equilibrium_years,
@@ -13011,7 +13030,7 @@ def make_cryosphere_map_figure(
 def make_gregory_figure(diagnostics: SensitivityDiagnostics) -> plt.Figure:
     data = diagnostics.abrupt_2x
     subset = data[(data["elapsed_years"] >= 1.0) & (data["elapsed_years"] <= 150.0)]
-    temperature = subset["global_surface_warming_c"].to_numpy()
+    temperature = subset["global_near_surface_air_warming_c"].to_numpy()
     imbalance = subset["toa_imbalance_wm2"].to_numpy()
     fitted = diagnostics.gregory_forcing_wm2 - diagnostics.gregory_restoring_coefficient_wm2_k * temperature
     fig, ax = plt.subplots(figsize=(7.8, 5.4), constrained_layout=True)
@@ -13019,7 +13038,7 @@ def make_gregory_figure(diagnostics: SensitivityDiagnostics) -> plt.Figure:
     order = np.argsort(temperature)
     ax.plot(temperature[order], fitted[order], linewidth=2.0, label="Gregory regression")
     ax.axhline(0.0, linewidth=0.8, color="black")
-    ax.set_xlabel("Global surface warming (°C)")
+    ax.set_xlabel("Global near-surface air warming (°C)")
     ax.set_ylabel("TOA energy imbalance (W/m²)")
     ax.set_title("Emergent effective climate sensitivity")
     ax.legend()

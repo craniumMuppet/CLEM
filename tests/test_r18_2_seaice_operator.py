@@ -1,26 +1,15 @@
 from __future__ import annotations
 
-import ast
 import hashlib
 import importlib.util
 from pathlib import Path
 
 import numpy as np
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-
-def version_neutral_ast_sha256(path: Path) -> str:
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    tree.body = [
-        node for node in tree.body
-        if not (
-            isinstance(node, ast.Assign)
-            and any(isinstance(t, ast.Name) and t.id == "MODEL_VERSION" for t in node.targets)
-        )
-    ]
-    return hashlib.sha256(ast.dump(tree, annotate_fields=True, include_attributes=False).encode("utf-8")).hexdigest()
 
 def _runner():
     path = ROOT / "verify_r18_2_seaice_operator.py"
@@ -35,12 +24,14 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_r18_2_governing_source_is_exact_r18_1() -> None:
+def test_r18_2_frozen_governing_source_is_exact_r18_1() -> None:
     parent = ROOT / "provenance" / "r18.1-parent"
     assert sha256(parent / "climate_model.py") == "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90"
-    assert version_neutral_ast_sha256(ROOT / "climate_model.py") == version_neutral_ast_sha256(parent / "climate_model.py")
-    for name in ("sea_ice_observation.py", "arctic_observation_operator.py", "sea_ice_validation.py"):
-        assert sha256(ROOT / name) == sha256(parent / name)
+    runner = _runner()
+    result = runner.validate_r18_2_provenance(
+        sha256(parent / "climate_model.py"), evaluated_source_dir=parent,
+    )
+    assert all(result["checks"].values())
 
 
 def test_r18_2_reports_cell_threshold_and_support_operators_separately() -> None:
@@ -102,10 +93,17 @@ def test_r18_2_has_no_gsw_dependency_or_teos_segment() -> None:
     assert all("teos" not in name.lower() for name in runner.SEGMENTS)
 
 
-def test_r18_2_provenance_gate_passes() -> None:
+def test_r18_2_provenance_gate_rejects_new_governing_physics() -> None:
     runner = _runner()
-    result = runner.validate_r18_2_provenance(runner.sha256(runner.SOURCE))
-    assert all(result["checks"].values())
+    with pytest.raises(SystemExit, match="current_climate_dynamics_equivalent"):
+        runner.validate_r18_2_provenance(runner.sha256(runner.SOURCE))
+
+
+def test_r18_2_frozen_provenance_rejects_wrong_supplied_hash() -> None:
+    runner = _runner()
+    parent = ROOT / "provenance" / "r18.1-parent"
+    with pytest.raises(SystemExit, match="evaluated_source_hash_matches"):
+        runner.validate_r18_2_provenance("0" * 64, evaluated_source_dir=parent)
 
 
 def test_r18_2_static_worker_has_no_recovery_stage_dependency() -> None:

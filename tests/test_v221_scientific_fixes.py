@@ -82,7 +82,12 @@ def test_smooth_stability_and_transient_validation() -> None:
         total_salt(model),
     )
     assert roots
-    control = roots[0]
+    # Roots are ordered by transport, so the first can be the weak branch.
+    # This test concerns stability of the configured strong control state.
+    control = min(
+        roots, key=lambda root: abs(float(root["vector"][5]) - model.config.amoc_reference_sv)
+    )
+    assert abs(float(control["vector"][5]) - model.config.amoc_reference_sv) < 1.0e-4
     assert control["linear_stable"]
     assert control["transient_stable"]
     assert control["stable"]

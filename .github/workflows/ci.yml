@@ -40,5 +40,8 @@ jobs:
       - name: Run GUI launcher regression tests
         run: python -m pytest -q tests/test_v22917_gui_startup.py
 
+      - name: Check current physics and historical provenance boundaries
+        run: python -m pytest -q tests/test_current_model_review_fixes.py tests/test_amoc_eos_physics_repair.py tests/test_monte_carlo_science_prior_consistency.py tests/test_r18_2_seaice_operator.py
+
       - name: Verify complete historical pytest suite still collects
         run: python -m pytest --collect-only -q

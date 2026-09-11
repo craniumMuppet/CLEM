@@ -42,7 +42,7 @@ DEFAULT_CHUNK_TIMEOUT_SECONDS = 300
 DEFAULT_SETUP_TIMEOUT_SECONDS = 300
 RECORD_INTERVAL_YEARS = 1.0
 EPS = 1.0e-9
-VERIFIER_REVISION = "2026-08-30-repair-r13-release-consistency"
+VERIFIER_REVISION = "2026-09-11-current-model-air-temperature-validation"
 
 # Every expensive model experiment is represented here. No segment is advanced
 # by more than MAX_CHUNK_YEARS in a child command.
@@ -532,6 +532,25 @@ def static_worker() -> dict[str, Any]:
     cfg = cm.ModelConfig(resolution_deg=10.0, auto_initialize_from_1850=False)
     d = cm.initial_amoc_density_diagnostics(cfg)
     contrast = d["baseline_north_temperature_c"] - d["baseline_southern_temperature_c"]
+    thermal_contribution = float(d["thermal_density_driver"])
+    if cfg.amoc_density_eos != "linear":
+        from amoc_density_r16 import teos10_density_driver
+        # Isolate the thermal effect at fixed salinities. TEOS diagnostics do
+        # not have additive alpha/beta terms; their NaN placeholders cannot
+        # be interpreted as a failed physical sign check.
+        isothermal_driver = teos10_density_driver(
+            north_temperature_c=d["active_source_temperature_c"],
+            north_salinity_psu=cfg.initial_north_salinity_psu,
+            source_temperature_c=d["active_source_temperature_c"],
+            source_salinity_psu=d["active_source_salinity_psu"],
+            source_latitude_deg=(
+                -52.5 if cfg.amoc_density_geometry in {
+                    "interhemispheric_high_latitude", "legacy_southern_surface"
+                } else -35.0
+            ),
+            reference_density_kg_m3=cfg.reference_density_kg_m3,
+        )
+        thermal_contribution = d["density_driver"] - isothermal_driver
 
     temperatures_k = np.array([253.15, 263.15, 273.15, 283.15])
     pressure_pa = 85000.0
@@ -595,7 +614,8 @@ def static_worker() -> dict[str, Any]:
             "north_minus_south_temperature_c": float(contrast),
             "pass_north_warmer_than_south": bool(contrast > 0.0),
             "pass_realistic_control_temperature_contrast": bool(5.0 <= contrast <= 8.0),
-            "pass_thermal_opposes_northern_density": bool(d["thermal_density_driver"] < 0.0),
+            "fixed_salinity_thermal_density_contribution": thermal_contribution,
+            "pass_thermal_opposes_northern_density": bool(thermal_contribution < 0.0),
             "pass_positive_control_density_driver": bool(d["density_driver"] > 0.0),
             "pass_control_density_ratio": bool(abs(d["density_ratio"] - 1.0) < 0.02),
         },
@@ -1101,7 +1121,7 @@ def finalize_results(static_result: dict[str, Any], segment_status: dict[str, An
         weakening = 100.0 * (initial_amoc - final_amoc) / max(abs(initial_amoc), 1.0e-9)
         feedback_tail = [r for r in thermal if float(r["elapsed_years"]) >= 100.0 - EPS]
         mean_warming = (
-            sum(float(r["global_surface_warming_c"]) for r in feedback_tail) / len(feedback_tail)
+            sum(float(r["global_near_surface_air_warming_c"]) for r in feedback_tail) / len(feedback_tail)
             if feedback_tail else float("nan")
         )
         def feedback_ratio(key: str) -> float:
@@ -1186,14 +1206,14 @@ def finalize_results(static_result: dict[str, Any], segment_status: dict[str, An
         tail_start = equilibrium_end - 100.0
         trend_start = equilibrium_end - 200.0
         tail = [r for r in ecs if float(r["elapsed_years"]) >= tail_start - EPS]
-        ecs_c = sum(float(r["global_surface_warming_c"]) for r in tail) / len(tail)
+        ecs_c = sum(float(r["global_near_surface_air_warming_c"]) for r in tail) / len(tail)
         # The 0.2-y record interval samples five phases per year, preventing the
         # seasonal Arctic external-flux alias that contaminated the v2.7-v2.9
         # once-per-year equilibrium TOA diagnostic.
         tail_toa = sum(float(r["toa_imbalance_wm2"]) for r in tail) / len(tail)
         trend_tail = [r for r in ecs if float(r["elapsed_years"]) >= trend_start - EPS]
         trend_years = [float(r["elapsed_years"]) for r in trend_tail]
-        trend_gmst = [float(r["global_surface_warming_c"]) for r in trend_tail]
+        trend_gmst = [float(r["global_near_surface_air_warming_c"]) for r in trend_tail]
         trend_amoc = [float(r["amoc_sv"]) for r in trend_tail]
         gmst_slope_y, _ = linear_fit(trend_years, trend_gmst)
         amoc_slope_y, _ = linear_fit(trend_years, trend_amoc)
@@ -1220,12 +1240,14 @@ def finalize_results(static_result: dict[str, Any], segment_status: dict[str, An
         wv_lr = wv + lapse + polar
         net = planck + wv_lr + albedo + cloud
         greg = [r for r in ecs if 1.0 - EPS <= float(r["elapsed_years"]) <= 150.0 + EPS]
-        gs = [float(r["global_surface_warming_c"]) for r in greg]
+        gs = [float(r["global_near_surface_air_warming_c"]) for r in greg]
         gn = [float(r["toa_imbalance_wm2"]) for r in greg]
         slope, intercept = linear_fit(gs, gn)
         greg_lambda = -slope
         greg_ecs = intercept / greg_lambda if greg_lambda > 0.0 else float("nan")
         results["tests"]["climate_sensitivity"] = {
+            "temperature_field": "global_near_surface_air_warming_c",
+            "bulk_surface_equilibrium_response_c": sum(float(r["global_surface_warming_c"]) for r in tail) / len(tail),
             "equilibrium_ecs_c": ecs_c,
             "equilibrium_tail_toa_imbalance_wm2": tail_toa,
             "equilibrium_tail_gmst_trend_c_per_century": gmst_trend_century,
@@ -1267,9 +1289,13 @@ def finalize_results(static_result: dict[str, Any], segment_status: dict[str, An
     tcr = frames["tcr_one_percent_80y"]
     if tcr:
         doubling_time = math.log(2.0) / math.log(1.01)
-        tcr_c = interpolate_record(tcr, "elapsed_years", "global_surface_warming_c", doubling_time)
+        tcr_window = [r for r in tcr if doubling_time - 10.0 <= float(r["elapsed_years"]) <= doubling_time + 10.0]
+        tcr_c = sum(float(r["global_near_surface_air_warming_c"]) for r in tcr_window) / len(tcr_window)
         co2_at_double = interpolate_record(tcr, "elapsed_years", "co2_ppm", doubling_time)
         entry = {
+            "temperature_field": "global_near_surface_air_warming_c",
+            "averaging_window_years": [doubling_time - 10.0, doubling_time + 10.0],
+            "bulk_surface_transient_response_c": sum(float(r["global_surface_warming_c"]) for r in tcr_window) / len(tcr_window),
             "doubling_time_years": doubling_time,
             "tcr_c": tcr_c,
             "co2_ppm_at_doubling_time": co2_at_double,
@@ -1670,8 +1696,7 @@ def parent_main(args: argparse.Namespace) -> None:
         control = static_result["control"]
         print(
             f"  control ΔT={control['north_minus_south_temperature_c']:.3f} K, "
-            f"thermal={control['thermal_density_driver']:+.6e}, "
-            f"haline={control['haline_density_driver']:+.6e}, "
+            f"fixed-salinity thermal={control['fixed_salinity_thermal_density_contribution']:+.6e}, "
             f"ratio={control['density_ratio']:.4f}",
             flush=True,
         )

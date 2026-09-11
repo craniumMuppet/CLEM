@@ -750,8 +750,8 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Low",
     ),
     "amoc_reference_density_driver": _physical(
-        "Fixed absolute density-driver scale used to screen control-state hydrography before per-member anomaly normalization.",
-        "Built-in prior support: 4.0e-4–1.5e-3; default 4.34e-4 in the model's nondimensional linear equation-of-state units.",
+        "Absolute screening reference for the linear high-latitude hydraulic EOS. Inactive with TEOS-10, which uses a canonical reference computed with the selected EOS.",
+        "Linear-EOS prior support: 4.0e-4–1.5e-3; default 4.34e-4. Excluded from sampling when its screening constraint is inactive.",
         "Canonical control-state north-south thermal and salinity density contrast.",
         "Medium",
     ),
@@ -791,8 +791,8 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Low",
     ),
     "amoc_convection_density_scale_factor": _physical(
-        "Normalization scale applied to the local northern surface-to-deep density anomaly.",
-        "No direct observational CI. Built-in prior support: 1.2–6.0; v2.28.1 default 4.00.",
+        "Multiplies the linear control-density scale for the local northern surface-to-deep density anomaly, independently of the hydraulic EOS.",
+        "No direct observational CI. Built-in prior support: 1.2–6.0; current deterministic default 1.00. The prior retains its older development range.",
         "Maps box-model density anomalies onto a nondimensional convection stability metric.",
         "Low",
     ),

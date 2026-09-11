@@ -14,6 +14,14 @@ Climate sensitivity is not prescribed directly. **ECS and TCR emerge from the mo
 
 ## Current release status
 
+**Current checkout (Unreleased):** governing physics have changed since the
+tagged v2.29.29 release. The checkout uses matched-pathway TEOS-10 hydraulic
+density, a corrected Greenland mass reservoir, and an EOS-independent linear
+reference for local convection. ECS/TCR and feedback diagnostics now use the
+model's global near-surface air-temperature proxy. The numerical tables below
+are tagged-release evidence, not validation of these newer changes. See
+`docs/CURRENT_MODEL_REVIEW_FIXES.md` for the corrections and verification scope.
+
 **v2.29.29** is the public-release consolidation of the validated R15–R18.5.1 repair, structural-validation, observation-integration, packaging, and attribution work. The version bump itself changes release identity only; it does not retune the governing climate, AMOC, Greenland, or sea-ice dynamics. Existing v2.29.28 numerical evidence is retained as inherited evidence and is linked to v2.29.29 by an explicit dynamics-equivalence record.
 
 R18.4 completed the sixth-source Arctic observational stack by processing authentic **NSIDC-0611 v4/v4.1 EASE-Grid Sea Ice Age** files for 1984–2024. The Arctic observational stack is now **6/6 available**. Independent predictive scientific validation remains **`not_available`** until the preregistered 2027–2036 prospective holdout observations exist.
@@ -124,6 +132,13 @@ CLEM calculates its climate sensitivity from explicit forcing experiments rather
 | Water-vapour + lapse-rate | **+1.384 W m^-2 K^-1** |
 | Surface-albedo feedback | **+0.302 W m^-2 K^-1** |
 | Cloud feedback | **+0.425 W m^-2 K^-1** |
+
+These inherited sensitivity values used the bulk-surface temperature field.
+Current ECS, TCR, Gregory regression, and feedback normalization use
+`global_near_surface_air_warming_c`; outputs identify that field explicitly and
+retain separate `bulk_surface_equilibrium_response_c` and
+`bulk_surface_transient_response_c` diagnostics. The two temperature definitions
+must not be treated as interchangeable in comparisons or calibration.
 
 The equilibrium 2xCO2 experiment reaches approximately **3.27 °C warming** while retaining an AMOC strength of approximately **11.1 Sv**.
 

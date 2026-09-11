@@ -1,5 +1,12 @@
 # Coupled Low-complexity Earth Model v2.29.29 validation summary
 
+**Scope:** the headline results below belong to the tagged release. Its ECS,
+TCR, and feedback values use the legacy bulk-surface temperature definition.
+The current checkout uses near-surface air temperature for those diagnostics
+and has an additional convection-normalization correction. The earlier TEOS
+screening table below predates that correction; it must not be presented as
+validation of the current equations. See `CURRENT_MODEL_REVIEW_FIXES.md`.
+
 CLEM v2.29.29 retains the numerically validated physics lineage established by Repair R11/R12/R13 and subsequently audited through the R15-R18 structural-validation work. R18.3-R18.5 are no-physics-change release/data/documentation maintenance revisions.
 
 ## Headline verified results

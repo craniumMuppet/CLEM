@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+### Current-model review corrections
+
+- Use global near-surface air temperature consistently for ECS, TCR, Gregory
+  regression/plots, and feedback normalization. Export the temperature-field
+  identity and separately named bulk-surface response diagnostics.
+- Keep the linear local-convection density normalization independent of the
+  hydraulic EOS, eliminating the unintended weakening of convection sensitivity
+  when selecting TEOS-10. The reference scale is derived from the same control
+  hydrography with the linear EOS, not a freely sampled normalization.
+- Exclude the inactive density-reference prior from TEOS-10 ensembles and
+  reject explicit sampling of it. Retain it for linear high-latitude density
+  screening when that constraint is enabled.
+- Audit the frozen R18.1 sources in historical provenance tests, retain rejection
+  of changed physics by the historical runner, and add current-model behavioral
+  regression coverage to CI. Historical numerical evidence is not relabelled.
+- Evaluate the static thermal-sign check using a fixed-salinity TEOS comparison,
+  and select the actual 17 Sv control branch in the equilibrium-stability test.
+
+These corrections change scientific diagnostics and TEOS-10 trajectories.
+Earlier historical/SSP/hosing screening values remain pre-correction evidence;
+the complete numerical release matrix must be regenerated before a new release.
+
 ### Greenland reservoir units
 
 - Corrected the default Greenland reservoir from 2.85 million Gt to

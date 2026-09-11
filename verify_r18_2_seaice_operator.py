@@ -119,8 +119,15 @@ def core_ast_sha256(path: Path) -> str:
     return ast_sha256_excluding_top_level(path, {"MODEL_NAME", "build_parser"})
 
 
-def validate_r18_2_provenance(source_hash: str) -> dict[str, Any]:
-    """Fail closed unless R18.2 physics remain equivalent to exact R18.1."""
+def validate_r18_2_provenance(
+    source_hash: str, *, evaluated_source_dir: Path | None = None,
+) -> dict[str, Any]:
+    """Verify historical sources; default execution still rejects changed physics.
+
+    An explicit directory supports auditing the frozen historical snapshot.
+    It does not switch the model imported by integration workers.
+    """
+    evaluated_dir = ROOT if evaluated_source_dir is None else Path(evaluated_source_dir)
     provenance_path = ROOT / "R18_2_PARENT_PROVENANCE.json"
     parent_dir = ROOT / "provenance" / "r18.1-parent"
     required_parent = {
@@ -134,14 +141,15 @@ def validate_r18_2_provenance(source_hash: str) -> dict[str, Any]:
         raise SystemExit("R18.2 parent provenance manifest is missing.")
     provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
     checks: dict[str, bool] = {
+        "evaluated_source_hash_matches": sha256(evaluated_dir / "climate_model.py") == source_hash,
         "parent_source_zip": provenance.get("r18_1_parent_source_zip_sha256") == R18_1_PARENT_SOURCE_ZIP_SHA256,
         "current_climate_dynamics_equivalent": (
-            ast_sha256_excluding_top_level(ROOT / "climate_model.py", {"MODEL_VERSION"})
+            ast_sha256_excluding_top_level(evaluated_dir / "climate_model.py", {"MODEL_VERSION"})
             == ast_sha256_excluding_top_level(parent_dir / "climate_model.py", {"MODEL_VERSION"})
         ),
-        "current_sea_ice_observation_unchanged": sha256(ROOT / "sea_ice_observation.py") == R18_1_SEA_ICE_OBSERVATION_SHA256,
-        "current_arctic_operator_unchanged": sha256(ROOT / "arctic_observation_operator.py") == R18_1_ARCTIC_OPERATOR_SHA256,
-        "current_sea_ice_validation_unchanged": sha256(ROOT / "sea_ice_validation.py") == R18_1_SEA_ICE_VALIDATION_SHA256,
+        "current_sea_ice_observation_unchanged": sha256(evaluated_dir / "sea_ice_observation.py") == R18_1_SEA_ICE_OBSERVATION_SHA256,
+        "current_arctic_operator_unchanged": sha256(evaluated_dir / "arctic_observation_operator.py") == R18_1_ARCTIC_OPERATOR_SHA256,
+        "current_sea_ice_validation_unchanged": sha256(evaluated_dir / "sea_ice_validation.py") == R18_1_SEA_ICE_VALIDATION_SHA256,
         "governing_physics_changed_false": provenance.get("governing_physics_changed") is False,
         "observation_operator_hotfix_only": provenance.get("observation_operator_hotfix_only") is True,
     }
@@ -151,7 +159,7 @@ def validate_r18_2_provenance(source_hash: str) -> dict[str, Any]:
     failed = [name for name, ok in checks.items() if not ok]
     if failed:
         raise SystemExit("R18.2 provenance check failed: " + ", ".join(failed))
-    return {"manifest": provenance_path.name, "checks": checks}
+    return {"manifest": provenance_path.name, "evaluated_source_dir": str(evaluated_dir.resolve()), "checks": checks}
 
 
 def json_safe(value: Any) -> Any:

@@ -1,5 +1,13 @@
 # Model limitations
 
+The AMOC numerical screening results below predate the current checkout's
+convection-normalization correction. They describe the earlier EOS repair,
+not the corrected model's validated historical or future response. Local
+convection still uses a reduced linear density-anomaly closure; TEOS-10 applies
+to the hydraulic density calculation. Its reference now uses the linear EOS
+independently, so selecting a hydraulic EOS cannot also rescale local convection.
+See `CURRENT_MODEL_REVIEW_FIXES.md` for verification scope.
+
 ## Historical AMOC mean state
 
 CLEM v2.29.29 underestimates the RAPID-era absolute AMOC strength in the

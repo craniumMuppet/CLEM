@@ -1,0 +1,80 @@
+{
+  "base_runner_sha256": "27457db94dc7500091c76744b6e244992bfc0a064623e0068337cbc24e95b3e5",
+  "climate_model_sha256": "bc83e8906ec37b07a47d25649456eee90a1b8e4d877f186233241c1b670db098",
+  "configuration_change": {
+    "duration_years": [
+      1050.0,
+      3000.0
+    ]
+  },
+  "created_unix": 1789134446.5001833,
+  "end_year": 3000.0,
+  "extension_runner_sha256": "4eadcbb7d240f6f6d1e05b79df5b61b8446f2208abd993fbc53c6467ea4572b2",
+  "extension_spec": {
+    "config": {
+      "dt_years": 0.05,
+      "freshwater_hosing_sv": 0.4,
+      "freshwater_ramp_years": 1.0,
+      "freshwater_start_fraction": 0.0,
+      "resolution_deg": 10.0,
+      "scenario": "constant",
+      "seasonal_arctic_enabled": false
+    },
+    "duration": 3000.0,
+    "stages": [
+      {
+        "end": 250.0,
+        "overrides": {
+          "freshwater_hosing_sv": 0.4
+        },
+        "start": 0.0
+      },
+      {
+        "end": 3000.0,
+        "overrides": {
+          "freshwater_hosing_sv": 0.0
+        },
+        "start": 250.0
+      }
+    ]
+  },
+  "extension_spec_sha256": "76663d77899bb64d33b1b2503cfb0df0f83c53bbfa1f838672f7a199a492a53a",
+  "initial_elapsed_years": 1049.999999999506,
+  "parent_checkpoint_sha256": "fd09ceaa09a4ca7c1b52b094970f129237a37eed85155efd63609de7558939b7",
+  "parent_spec": {
+    "config": {
+      "dt_years": 0.05,
+      "freshwater_hosing_sv": 0.4,
+      "freshwater_ramp_years": 1.0,
+      "freshwater_start_fraction": 0.0,
+      "resolution_deg": 10.0,
+      "scenario": "constant",
+      "seasonal_arctic_enabled": false
+    },
+    "duration": 1050.0,
+    "stages": [
+      {
+        "end": 250.0,
+        "overrides": {
+          "freshwater_hosing_sv": 0.4
+        },
+        "start": 0.0
+      },
+      {
+        "end": 1050.0,
+        "overrides": {
+          "freshwater_hosing_sv": 0.0
+        },
+        "start": 250.0
+      }
+    ]
+  },
+  "parent_spec_sha256": "24efacf24e9bc71b1f68298b540a40ad208d4dcb8ec2677700741f0e42d2260e",
+  "parent_timeseries_sha256": "ece909ccbd51276f22e99ce9ef0e243c2d69ac8bcfa8f731a65a814e0c837158",
+  "state_unchanged_at_handoff": true,
+  "thresholds": {
+    "evaluation_start_year": 600.0,
+    "final_abs_volume_imbalance_sv": 0.05,
+    "mean_abs_volume_imbalance_sv": 0.5
+  }
+}
