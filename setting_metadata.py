@@ -803,9 +803,9 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Low",
     ),
     "amoc_convection_transport_exponent": _physical(
-        "Deprecated compatibility-only field; current transport equations do not read it.",
-        "Inactive in CLEM v2.29.29 dynamics; compatibility default 0.00; no active uncertainty range or Monte Carlo prior.",
-        "Legacy configuration compatibility only.",
+        "Exponent coupling continuous northern deep-water-formation efficiency to AMOC transport.",
+        "Built-in structural prior support: 0.5–1.5; default 1.0 gives direct proportional coupling.",
+        "Reduced deep-water-formation closure without a critical-density switch.",
         "Low",
     ),
     "amoc_convective_mixing_reference_sv": _physical(

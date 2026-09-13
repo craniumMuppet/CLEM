@@ -1,0 +1,31 @@
+{
+  "comparison": "mean 2081-2100 AMOC relative to mean 1995-2014 AMOC",
+  "evidence_scope": "development consistency check; not independent validation",
+  "source_sha256": {
+    "climate_model.py": "8260ddb0866e3027a139ea9afd5edad2830ec57c3df0d8a96cff4cbcdf806ef5",
+    "amoc_density_r16.py": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122"
+  },
+  "resolutions": {
+    "10deg": {
+      "amoc_1995_2014_sv": 16.163080802159566,
+      "amoc_2081_2100_sv": 13.216519032148705,
+      "amoc_decline_percent": 18.230198846850833,
+      "final_amoc_sv": 13.079996535018038,
+      "minimum_amoc_sv": 13.079996535018038,
+      "final_fovs_sv": -0.1267585833726451,
+      "final_convection_efficiency": 0.7877958536971281,
+      "maximum_pre_projection_salt_error_ppm": 3.4420944899803346e-10
+    },
+    "5deg": {
+      "amoc_1995_2014_sv": 16.20630946361021,
+      "amoc_2081_2100_sv": 13.450483416264499,
+      "amoc_decline_percent": 17.004649044458077,
+      "final_amoc_sv": 13.325799449016879,
+      "minimum_amoc_sv": 13.325799449016879,
+      "final_fovs_sv": -0.1287889378307752,
+      "final_convection_efficiency": 0.7977485703564227,
+      "maximum_pre_projection_salt_error_ppm": 3.442094648062675e-10
+    }
+  },
+  "completed": true
+}

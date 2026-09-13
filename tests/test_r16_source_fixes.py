@@ -108,8 +108,9 @@ def test_diagnostic_only_gyre_transport_removed_from_active_gui_surfaces():
 
 def test_compatibility_only_controls_hidden_from_cli_help():
     help_text=cm.build_parser().format_help()
-    for opt in ('--amoc-pycnocline-relaxation-years','--amoc-convection-critical-density-ratio','--amoc-convection-transition-width','--amoc-convection-transport-exponent','--amoc-interhemispheric-temperature-coupling','--amoc-stratification-saturation-c'):
+    for opt in ('--amoc-pycnocline-relaxation-years','--amoc-convection-critical-density-ratio','--amoc-convection-transition-width','--amoc-interhemispheric-temperature-coupling','--amoc-stratification-saturation-c'):
         assert opt not in help_text
+    assert '--amoc-convection-transport-exponent' in help_text
 
 
 def test_prospective_r16_is_evidence_driven_and_not_available_without_data():

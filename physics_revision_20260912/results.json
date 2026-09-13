@@ -1,7 +1,7 @@
 {
   "evidence_scope": "development experiments; not independent observational validation",
   "source_sha256": {
-    "climate_model.py": "618480be97fe15f8e58abedab0cf68f383e5b902640421e69d428a2496ca99a4",
+    "climate_model.py": "8260ddb0866e3027a139ea9afd5edad2830ec57c3df0d8a96cff4cbcdf806ef5",
     "amoc_density_r16.py": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122"
   },
   "experiments": {
@@ -191,7 +191,7 @@
         "amoc_convection_transition_width": 0.1,
         "amoc_convection_density_scale_factor": 1.0,
         "amoc_convection_minimum_fraction": 0.02,
-        "amoc_convection_transport_exponent": 0.0,
+        "amoc_convection_transport_exponent": 1.0,
         "amoc_convection_adjustment_years": 20.0,
         "amoc_convection_recovery_years": 80.0,
         "amoc_convection_timescale_smoothing": 0.01,
@@ -313,7 +313,7 @@
         "amoc_equilibrium_arclength_hosing_scale_sv": 0.02,
         "amoc_equilibrium_arclength_max_steps": 60
       },
-      "elapsed_seconds": 21.975068400031887,
+      "elapsed_seconds": 21.995256999973208,
       "final_air_warming_c": -7.534296154063815e-17,
       "final_amoc_sv": 17.0,
       "minimum_amoc_sv": 17.0,
@@ -508,7 +508,7 @@
         "amoc_convection_transition_width": 0.1,
         "amoc_convection_density_scale_factor": 1.0,
         "amoc_convection_minimum_fraction": 0.02,
-        "amoc_convection_transport_exponent": 0.0,
+        "amoc_convection_transport_exponent": 1.0,
         "amoc_convection_adjustment_years": 20.0,
         "amoc_convection_recovery_years": 80.0,
         "amoc_convection_timescale_smoothing": 0.01,
@@ -630,13 +630,13 @@
         "amoc_equilibrium_arclength_hosing_scale_sv": 0.02,
         "amoc_equilibrium_arclength_max_steps": 60
       },
-      "elapsed_seconds": 23.497279900009744,
-      "final_air_warming_c": 1.7430965271393024,
-      "final_amoc_sv": 16.071780264314533,
-      "minimum_amoc_sv": 15.80753544442615,
-      "maximum_pre_projection_salt_error_ppm": 3.4420831917945395e-10,
+      "elapsed_seconds": 23.267912599956617,
+      "final_air_warming_c": 1.7400229969207366,
+      "final_amoc_sv": 13.852909312753988,
+      "minimum_amoc_sv": 13.852909312753988,
+      "maximum_pre_projection_salt_error_ppm": 3.442083278476931e-10,
       "maximum_radiative_component_residual_wm2": 2.220446049250313e-15,
-      "maximum_land_warming_c": 4.712126070918014,
+      "maximum_land_warming_c": 4.5874466893221815,
       "eos_bound_recorded_samples": 0
     },
     "abrupt2x_60y_5deg": {
@@ -825,7 +825,7 @@
         "amoc_convection_transition_width": 0.1,
         "amoc_convection_density_scale_factor": 1.0,
         "amoc_convection_minimum_fraction": 0.02,
-        "amoc_convection_transport_exponent": 0.0,
+        "amoc_convection_transport_exponent": 1.0,
         "amoc_convection_adjustment_years": 20.0,
         "amoc_convection_recovery_years": 80.0,
         "amoc_convection_timescale_smoothing": 0.01,
@@ -947,13 +947,13 @@
         "amoc_equilibrium_arclength_hosing_scale_sv": 0.02,
         "amoc_equilibrium_arclength_max_steps": 60
       },
-      "elapsed_seconds": 43.9639126000111,
-      "final_air_warming_c": 1.7393260949632041,
-      "final_amoc_sv": 16.183447308064824,
-      "minimum_amoc_sv": 15.92052635561465,
-      "maximum_pre_projection_salt_error_ppm": 3.4420832400159075e-10,
-      "maximum_radiative_component_residual_wm2": 2.220446049250313e-15,
-      "maximum_land_warming_c": 6.471935987432712,
+      "elapsed_seconds": 43.5676488999743,
+      "final_air_warming_c": 1.7373435131641133,
+      "final_amoc_sv": 14.038325103222062,
+      "minimum_amoc_sv": 14.038325103222062,
+      "maximum_pre_projection_salt_error_ppm": 3.442082972411444e-10,
+      "maximum_radiative_component_residual_wm2": 3.1086244689504383e-15,
+      "maximum_land_warming_c": 6.30489148632376,
       "eos_bound_recorded_samples": 0
     },
     "hosing_0p2_100y": {
@@ -1142,7 +1142,7 @@
         "amoc_convection_transition_width": 0.1,
         "amoc_convection_density_scale_factor": 1.0,
         "amoc_convection_minimum_fraction": 0.02,
-        "amoc_convection_transport_exponent": 0.0,
+        "amoc_convection_transport_exponent": 1.0,
         "amoc_convection_adjustment_years": 20.0,
         "amoc_convection_recovery_years": 80.0,
         "amoc_convection_timescale_smoothing": 0.01,
@@ -1264,13 +1264,13 @@
         "amoc_equilibrium_arclength_hosing_scale_sv": 0.02,
         "amoc_equilibrium_arclength_max_steps": 60
       },
-      "elapsed_seconds": 39.57411119999597,
-      "final_air_warming_c": -0.0022228021298991343,
-      "final_amoc_sv": 14.083042559110313,
-      "minimum_amoc_sv": 14.083042559110313,
-      "maximum_pre_projection_salt_error_ppm": 1.7210355205176555e-10,
-      "maximum_radiative_component_residual_wm2": 1.734723475976807e-17,
-      "maximum_land_warming_c": 0.13131543725907424,
+      "elapsed_seconds": 39.04835190001177,
+      "final_air_warming_c": -0.0024529949462082394,
+      "final_amoc_sv": 10.004291166566233,
+      "minimum_amoc_sv": 10.004291166566233,
+      "maximum_pre_projection_salt_error_ppm": 3.442071041035311e-10,
+      "maximum_radiative_component_residual_wm2": 3.469446951953614e-17,
+      "maximum_land_warming_c": 0.29370221104380784,
       "eos_bound_recorded_samples": 0
     },
     "abrupt2x_20y_dt0025": {
@@ -1459,7 +1459,7 @@
         "amoc_convection_transition_width": 0.1,
         "amoc_convection_density_scale_factor": 1.0,
         "amoc_convection_minimum_fraction": 0.02,
-        "amoc_convection_transport_exponent": 0.0,
+        "amoc_convection_transport_exponent": 1.0,
         "amoc_convection_adjustment_years": 20.0,
         "amoc_convection_recovery_years": 80.0,
         "amoc_convection_timescale_smoothing": 0.01,
@@ -1581,19 +1581,19 @@
         "amoc_equilibrium_arclength_hosing_scale_sv": 0.02,
         "amoc_equilibrium_arclength_max_steps": 60
       },
-      "elapsed_seconds": 35.43777900002897,
-      "final_air_warming_c": 1.634893767664802,
-      "final_amoc_sv": 15.815642453171536,
-      "minimum_amoc_sv": 15.815642453171536,
-      "maximum_pre_projection_salt_error_ppm": 3.4420742050037373e-10,
+      "elapsed_seconds": 34.915754100016784,
+      "final_air_warming_c": 1.6342699820739486,
+      "final_amoc_sv": 14.611562166187655,
+      "minimum_amoc_sv": 14.611562166187655,
+      "maximum_pre_projection_salt_error_ppm": 3.4420743018751266e-10,
       "maximum_radiative_component_residual_wm2": 2.220446049250313e-15,
-      "maximum_land_warming_c": 4.633644646187769,
+      "maximum_land_warming_c": 4.57735998220106,
       "eos_bound_recorded_samples": 0
     }
   },
   "dt_and_arctic_substep_refinement_endpoint_differences": {
-    "global_near_surface_air_warming_c": -5.584659913004941e-05,
-    "amoc_sv": -0.003837862832106964
+    "global_near_surface_air_warming_c": -3.582418570191592e-05,
+    "amoc_sv": -0.0056784667279288215
   },
   "completed": true
 }

@@ -51,26 +51,26 @@
       },
       "hosing_0p2sv_100y": {
         "initial_fovs_sv": -0.16000000000000633,
-        "final_fovs_sv": -0.16644673037167848,
-        "minimum_amoc_sv": 14.403080774270506,
-        "final_amoc_sv": 14.403080774270506,
-        "final_north_salinity_psu": 34.570604558510176,
-        "final_basin_salt_inventory_anomaly_psu_m3": -2.2171218392510424e+16
+        "final_fovs_sv": -0.13791866049382462,
+        "minimum_amoc_sv": 11.88293920080182,
+        "final_amoc_sv": 11.88293920080182,
+        "final_north_salinity_psu": 34.48914283580346,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.367740498727631e+16
       },
       "amoc_only_active_salinity": {
-        "year_10_amoc_sv": 16.644584999282657,
-        "year_50_amoc_sv": 16.9791921396276,
-        "year_100_amoc_sv": 16.983525040734946
+        "year_10_amoc_sv": 16.69783353346219,
+        "year_50_amoc_sv": 16.973614506850154,
+        "year_100_amoc_sv": 16.973208056949648
       },
       "amoc_only_frozen_salinity": {
-        "year_10_amoc_sv": 16.66937222542668,
-        "year_50_amoc_sv": 16.98754048407218,
-        "year_100_amoc_sv": 16.984950047093374
+        "year_10_amoc_sv": 16.727234443027704,
+        "year_50_amoc_sv": 16.994676376615125,
+        "year_100_amoc_sv": 16.980481112276678
       },
       "active_minus_frozen_amoc_sv": {
-        "year_10_amoc_sv": -0.024787226144024288,
-        "year_50_amoc_sv": -0.008348344444581102,
-        "year_100_amoc_sv": -0.0014250063584277939
+        "year_10_amoc_sv": -0.029400909565513444,
+        "year_50_amoc_sv": -0.02106186976497071,
+        "year_100_amoc_sv": -0.007273055327029709
       }
     },
     "freshwater_budget_alternative_salt_inventory_seed": {
@@ -122,26 +122,26 @@
       },
       "hosing_0p2sv_100y": {
         "initial_fovs_sv": -0.16000000000000633,
-        "final_fovs_sv": -0.16628795142426248,
-        "minimum_amoc_sv": 14.388503385303913,
-        "final_amoc_sv": 14.388503385303913,
-        "final_north_salinity_psu": 34.257485129581276,
-        "final_basin_salt_inventory_anomaly_psu_m3": -2.2180373099405944e+16
+        "final_fovs_sv": -0.14574341180416395,
+        "minimum_amoc_sv": 12.562995128922493,
+        "final_amoc_sv": 12.562995128922493,
+        "final_north_salinity_psu": 34.20052119991386,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.3277729150599136e+16
       },
       "amoc_only_active_salinity": {
-        "year_10_amoc_sv": 16.643854615774167,
-        "year_50_amoc_sv": 16.979047634555574,
-        "year_100_amoc_sv": 16.983425057971544
+        "year_10_amoc_sv": 16.67988871300105,
+        "year_50_amoc_sv": 16.98218562991889,
+        "year_100_amoc_sv": 16.97711930918785
       },
       "amoc_only_frozen_salinity": {
-        "year_10_amoc_sv": 16.668751178231645,
-        "year_50_amoc_sv": 16.98746454345263,
-        "year_100_amoc_sv": 16.984871981518367
+        "year_10_amoc_sv": 16.707864209506614,
+        "year_50_amoc_sv": 17.00159878214606,
+        "year_100_amoc_sv": 16.982977268527964
       },
       "active_minus_frozen_amoc_sv": {
-        "year_10_amoc_sv": -0.024896562457477955,
-        "year_50_amoc_sv": -0.008416908897057596,
-        "year_100_amoc_sv": -0.0014469235468226316
+        "year_10_amoc_sv": -0.02797549650556519,
+        "year_50_amoc_sv": -0.01941315222716966,
+        "year_100_amoc_sv": -0.0058579593401155705
       }
     },
     "legacy_prescribed_hydrography_positive": {
@@ -193,26 +193,26 @@
       },
       "hosing_0p2sv_100y": {
         "initial_fovs_sv": 0.2185714285714265,
-        "final_fovs_sv": 0.14429196631954896,
-        "minimum_amoc_sv": 13.257561300580694,
-        "final_amoc_sv": 13.257561300580694,
-        "final_north_salinity_psu": 34.802293430970764,
-        "final_basin_salt_inventory_anomaly_psu_m3": -1.7796547149352088e+16
+        "final_fovs_sv": 0.11167930640779337,
+        "minimum_amoc_sv": 10.169201286392788,
+        "final_amoc_sv": 10.169201286392788,
+        "final_north_salinity_psu": 34.713900014219256,
+        "final_basin_salt_inventory_anomaly_psu_m3": -1.5809319021098956e+16
       },
       "amoc_only_active_salinity": {
-        "year_10_amoc_sv": 16.63756176190624,
-        "year_50_amoc_sv": 16.928455762647115,
-        "year_100_amoc_sv": 16.954230209434012
+        "year_10_amoc_sv": 16.72263570826313,
+        "year_50_amoc_sv": 16.95374376047924,
+        "year_100_amoc_sv": 16.97485098636464
       },
       "amoc_only_frozen_salinity": {
-        "year_10_amoc_sv": 16.700504621326996,
-        "year_50_amoc_sv": 16.984647187752493,
-        "year_100_amoc_sv": 16.98251206321471
+        "year_10_amoc_sv": 16.78960763693011,
+        "year_50_amoc_sv": 16.980077470892937,
+        "year_100_amoc_sv": 16.977959198402537
       },
       "active_minus_frozen_amoc_sv": {
-        "year_10_amoc_sv": -0.06294285942075462,
-        "year_50_amoc_sv": -0.056191425105378556,
-        "year_100_amoc_sv": -0.028281853780697475
+        "year_10_amoc_sv": -0.06697192866698032,
+        "year_50_amoc_sv": -0.026333710413695144,
+        "year_100_amoc_sv": -0.003108212037897573
       }
     },
     "legacy_prescribed_hydrography_negative": {
@@ -264,26 +264,26 @@
       },
       "hosing_0p2sv_100y": {
         "initial_fovs_sv": -0.10005714285714434,
-        "final_fovs_sv": -0.11021855355574776,
-        "minimum_amoc_sv": 13.783654070651272,
-        "final_amoc_sv": 13.783654070651272,
-        "final_north_salinity_psu": 34.80487143500735,
-        "final_basin_salt_inventory_anomaly_psu_m3": -2.183229671650544e+16
+        "final_fovs_sv": -0.08542826740566677,
+        "minimum_amoc_sv": 10.674858611569352,
+        "final_amoc_sv": 10.674858611569352,
+        "final_north_salinity_psu": 34.71280978552317,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.3111363818412016e+16
       },
       "amoc_only_active_salinity": {
-        "year_10_amoc_sv": 16.664648189910277,
-        "year_50_amoc_sv": 16.95964266173055,
-        "year_100_amoc_sv": 16.9703242437185
+        "year_10_amoc_sv": 16.748921119241654,
+        "year_50_amoc_sv": 16.956286715659026,
+        "year_100_amoc_sv": 16.965184655794573
       },
       "amoc_only_frozen_salinity": {
-        "year_10_amoc_sv": 16.700504621326996,
-        "year_50_amoc_sv": 16.984647187752493,
-        "year_100_amoc_sv": 16.98251206321471
+        "year_10_amoc_sv": 16.78960763693011,
+        "year_50_amoc_sv": 16.980077470892937,
+        "year_100_amoc_sv": 16.977959198402537
       },
       "active_minus_frozen_amoc_sv": {
-        "year_10_amoc_sv": -0.03585643141671824,
-        "year_50_amoc_sv": -0.02500452602194514,
-        "year_100_amoc_sv": -0.012187819496208618
+        "year_10_amoc_sv": -0.04068651768845655,
+        "year_50_amoc_sv": -0.023790755233910943,
+        "year_100_amoc_sv": -0.012774542607964179
       }
     }
   },

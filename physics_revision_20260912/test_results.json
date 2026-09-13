@@ -1,5 +1,5 @@
 {
-  "scope": "109 distinct focused tests; historical release inventory not rerun",
+  "scope": "111 distinct focused tests; historical release inventory not rerun",
   "passed_test_files": [
     "tests/test_physics_review_repairs.py",
     "tests/test_amoc_eos_physics_repair.py",
@@ -55,6 +55,10 @@
     {
       "passed": 109,
       "description": "complete focused suite after separating transformed and literal-source TEOS-10 modes"
+    },
+    {
+      "passed": 111,
+      "description": "complete focused suite after restoring continuous convection transport coupling; one stale CLI-help assertion then passed after its expected active option was updated"
     }
   ],
   "compilation": "passed",

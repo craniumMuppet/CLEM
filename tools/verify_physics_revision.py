@@ -146,8 +146,62 @@ def recovery_probe():
     assert results["open_boundary"]["remaining_basin_deficit_fraction"] < results["legacy_closed_boundary"]["remaining_basin_deficit_fraction"]
 
 
+def ssp245_probe():
+    """Check the current SSP2-4.5 response against the predeclared broad gate."""
+    output = ROOT / "physics_revision_20260912"
+    output.mkdir(exist_ok=True)
+    source_hashes = snapshot_sources(output)
+    results = {
+        "comparison": "mean 2081-2100 AMOC relative to mean 1995-2014 AMOC",
+        "evidence_scope": "development consistency check; not independent validation",
+        "source_sha256": source_hashes,
+        "resolutions": {},
+    }
+    for resolution in (10.0, 5.0):
+        cfg = cm.ModelConfig(
+            start_year=1850.0,
+            duration_years=250.0,
+            resolution_deg=resolution,
+            scenario="ssp245",
+            dt_years=0.05,
+            record_every_years=1.0,
+            seasonal_arctic_enabled=True,
+            auto_initialize_from_1850=False,
+        )
+        print(f"Starting SSP2-4.5 at {resolution:g} degrees", flush=True)
+        frame = cm.ProcessClimateModel(cfg).run().dataframe
+        recent = frame.loc[frame.year.between(1995.0, 2014.0), "amoc_sv"]
+        late = frame.loc[frame.year.between(2081.0, 2100.0), "amoc_sv"]
+        decline = float(100.0 * (1.0 - late.mean() / recent.mean()))
+        record = {
+            "amoc_1995_2014_sv": float(recent.mean()),
+            "amoc_2081_2100_sv": float(late.mean()),
+            "amoc_decline_percent": decline,
+            "final_amoc_sv": float(frame.amoc_sv.iloc[-1]),
+            "minimum_amoc_sv": float(frame.amoc_sv.min()),
+            "final_fovs_sv": float(frame.fovs_sv.iloc[-1]),
+            "final_convection_efficiency": float(
+                frame.amoc_convection_efficiency.iloc[-1]
+            ),
+            "maximum_pre_projection_salt_error_ppm": float(
+                frame.pre_projection_salt_conservation_error_ppm.abs().max()
+            ),
+        }
+        assert 15.0 <= decline <= 50.0, record
+        assert record["minimum_amoc_sv"] > 3.0, record
+        assert record["maximum_pre_projection_salt_error_ppm"] < 1.0e-8, record
+        results["resolutions"][f"{resolution:g}deg"] = record
+        print(json.dumps(record), flush=True)
+    results["completed"] = True
+    (output / "ssp245_results.json").write_text(
+        json.dumps(results, indent=2), encoding="utf-8"
+    )
+
+
 if __name__ == "__main__":
     if "--recovery-only" in sys.argv:
         recovery_probe()
+    elif "--ssp245-only" in sys.argv:
+        ssp245_probe()
     else:
         main()

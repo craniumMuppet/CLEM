@@ -718,9 +718,9 @@ def static_worker() -> dict[str, Any]:
             "legacy_convection_transition_width": float(cfg.amoc_convection_transition_width),
             "convection_density_scale_factor": float(cfg.amoc_convection_density_scale_factor),
             "convection_transport_exponent": float(cfg.amoc_convection_transport_exponent),
-            "pass_convection_not_direct_transport_multiplier": bool(
-                abs(cfg.amoc_convection_transport_exponent) < 1.0e-12
-                and "hydraulic_target_without_convection * convection_multiplier" not in source_text
+            "pass_continuous_convection_multiplies_transport": bool(
+                abs(cfg.amoc_convection_transport_exponent - 1.0) < 1.0e-12
+                and "hydraulic_target_without_convection * convection_multiplier" in source_text
             ),
             "amoc_temperature_density_coupling": float(cfg.amoc_temperature_density_coupling),
             "amoc_interhemispheric_temperature_coupling": float(cfg.amoc_interhemispheric_temperature_coupling),
@@ -756,7 +756,10 @@ def static_worker() -> dict[str, Any]:
                 "cfg.amoc_temperature_density_coupling" in source_text
                 and "northern_stratification_anomaly" in source_text
             ),
-            "pass_logistic_no_longer_dominates_transport": bool(cfg.amoc_convection_transport_exponent <= 0.25),
+            "pass_no_critical_density_logistic_in_transport": bool(
+                "logistic_argument" not in source_text
+                and "control_logistic" not in source_text
+            ),
         },
     }
 

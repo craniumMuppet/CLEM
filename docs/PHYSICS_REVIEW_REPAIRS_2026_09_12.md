@@ -111,7 +111,7 @@ to accommodate the revised model.
 
 ## Development verification
 
-109 distinct focused tests pass, covering new physical invariants, existing
+111 distinct focused tests pass, covering new physical invariants, existing
 temperature/convection behavior, Greenland units, prior activity, CLI/desktop
 parity, Monte Carlo integrity, freshwater routing and conservation. This includes 18 coupled 15-year
 salt-conservation integrations across compensation modes, hosing and time steps.
@@ -124,14 +124,14 @@ Results and time series are in `physics_revision_20260912/`.
 | Coupled experiment | Final air warming (K) | Final AMOC (Sv) |
 |---|---:|---:|
 | Control, 5 years, 10 degrees | approximately 0 | 17.000 |
-| Abrupt 2xCO2, 60 years, 10 degrees | 1.743 | 16.072 |
-| Abrupt 2xCO2, 60 years, 5 degrees | 1.739 | 16.183 |
-| 0.2 Sv hosing, 100 years, 10 degrees | -0.0022 | 14.083 |
+| Abrupt 2xCO2, 60 years, 10 degrees | 1.740 | 13.853 |
+| Abrupt 2xCO2, 60 years, 5 degrees | 1.737 | 14.038 |
+| 0.2 Sv hosing, 100 years, 10 degrees | -0.0025 | 10.004 |
 
 Maximum pre-projection salt error is 3.45e-10 ppm. The recorded radiative
-component budget closes within 2.7e-15 W/m2. Halving the main step to 0.025 years
+component budget closes within 3.2e-15 W/m2. Halving the main step to 0.025 years
 and doubling Arctic substeps to 160/year changes the year-20 air warming by
--0.000056 K and AMOC by -0.00384 Sv. No EOS freezing-bound activations occur
+-0.000036 K and AMOC by -0.00568 Sv. No EOS freezing-bound activations occur
 in the recorded samples. These are consistency checks, not observational fits.
 
 The initial South Atlantic implementation made AMOC strengthen to 19.214 Sv
@@ -147,10 +147,35 @@ The corrected operator retains the prognostic South Atlantic upper salinity but
 represents the thermally transformed source with the northern deep-temperature
 anomaly. The hydraulic thermal contrast therefore follows the model's northern
 surface-to-deep stratification. It introduces no fitted weakening target or new
-coefficient. In doubled CO2, 10-degree AMOC reaches a minimum of 15.808 Sv and
-ends at 16.072 Sv; the 5-degree result reaches 15.921 and ends at 16.183 Sv.
-These establish the correct forced sign and numerical consistency, but do not
-constitute observational validation of the response magnitude.
+coefficient. Before the subsequent convection-coupling repair, doubled-CO2 AMOC reached a
+minimum of 15.808 Sv and ended at 16.072 Sv at 10 degrees; the 5-degree result
+reached 15.921 and ended at 16.183 Sv. With the complete current repair, the
+60-year endpoints are 13.853 and 14.038 Sv. These establish the correct forced
+sign and numerical consistency, but do not constitute observational validation
+of the response magnitude.
+
+### SSP2-4.5 convection-coupling regression
+
+Changing the hydraulic source to the South Atlantic upper limb also changed the
+normalization of the separate northern convection anomaly from about
+`5.1e-4` to `2.1e-3`. The prognostic convection efficiency was then excluded
+from transport by a hard-coded multiplier of one. In the 5-degree SSP2-4.5 run,
+AMOC consequently reached a shallow 16.08 Sv minimum and recovered to 16.16 Sv
+by 2100 even though convection efficiency had fallen to about 0.94.
+
+The repair preserves the high-latitude linear control buoyancy margin as the
+convection anomaly scale, independently of the selected South Atlantic
+hydraulic geometry. Continuous convection efficiency again multiplies the
+hydraulic target with the pre-existing unit exponent. The old critical-density
+logistic switch remains absent, and no SSP-specific target or coefficient is
+introduced.
+
+Using the repository's predeclared comparison of 2081-2100 with 1995-2014,
+SSP2-4.5 AMOC now declines 18.23% at 10 degrees and 17.00% at 5 degrees. The
+2100 transports are 13.08 and 13.33 Sv, respectively, versus the 17 Sv control.
+Both fall within the existing broad 15-50% development gate. CMIP6 and IPCC
+assess substantially uncertain magnitudes, so these runs establish removal of
+the suppressed-response regression rather than observational validation.
 
 The experiment source snapshots are saved with the time series.
 `source_equivalence.json` records exact equality between the current executable
@@ -166,8 +191,8 @@ deficit and transport; it is not a proof of branch identity or hysteresis.
 
 | Isolated pulse recovery at year 1000 | Open boundary | Legacy closed boundary |
 |---|---:|---:|
-| Fraction of year-100 basin salt deficit remaining | 0.1386 | 0.9596 |
-| AMOC (Sv) | 16.7644 | 16.6207 |
+| Fraction of year-100 basin salt deficit remaining | 0.1830 | 0.9754 |
+| AMOC (Sv) | 16.6737 | 15.5371 |
 
 Both use the revised density/radiation physics; only topology differs. The
 large difference in inventory decay directly tests ventilation, while the
@@ -247,10 +272,10 @@ trend, but the approximation remains explicit.
 
 The model contains a transient salinity feedback. Reducing AMOC from 17 to
 16 Sv at control changes the northern salt tendency by -0.0864 PSU per century.
-In an AMOC-only perturbation from 17 to 15 Sv, active salinity makes AMOC 0.0248
-Sv weaker than a frozen-salinity ablation at year 10, 0.00835 Sv weaker at year
-50, and 0.00143 Sv weaker at year 100 while both return to about 16.984 Sv. An
-isolated 0.2 Sv, 100-year hosing run ends at 14.403 Sv and FovS -0.1664 Sv.
+In an AMOC-only perturbation from 17 to 15 Sv, active salinity makes AMOC 0.0294
+Sv weaker than a frozen-salinity ablation at year 10, 0.0211 Sv weaker at year
+50, and 0.00727 Sv weaker at year 100 while both return to about 16.97 Sv. An
+isolated 0.2 Sv, 100-year hosing run ends at 11.883 Sv and FovS -0.1379 Sv.
 These experiments show a modest transient response, not a stable
 weak branch.
 

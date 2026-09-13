@@ -421,10 +421,9 @@ class ModelConfig:
     # power above one rapidly removes the coupling during spring breakup while
     # retaining the full winter feedback at polar night.
     arctic_ice_export_anomaly_darkness_exponent: float = 4.0
-    # The latent-energy export closure is not a calibrated mass-export model.
-    # Normalize only its salinity-equivalent freshwater anomaly to an observed-
-    # scale annual Fram Strait sea-ice export (~0.06-0.09 Sv; midpoint 0.075 Sv).
-    # Arctic energy transport itself is unchanged.
+    # Historical observed-scale Fram Strait reference retained for diagnostics.
+    # The prognostic freshwater flux follows the same exported ice mass as the
+    # latent-energy budget and is not rescaled independently.
     arctic_ice_export_freshwater_reference_sv: float = 0.075
     # Master switch retained for backward compatibility. Storage/brine and
     # mechanical-export freshwater pathways are independently switchable so
@@ -634,12 +633,10 @@ class ModelConfig:
     # local density anomaly reduces convection by e^-1 before configured bounds.
     amoc_convection_density_scale_factor: float = 1.00
     amoc_convection_minimum_fraction: float = 0.02
-    # Convection affects transport only weakly near neutral buoyancy; the main
-    # AMOC response is the prognostic hydraulic density gradient itself. This
-    # prevents the smoothed convection switch from becoming the bifurcation.
-    # Deprecated compatibility setting. Convection no longer multiplies the
-    # hydraulic AMOC target directly; it controls deep-water salt entrainment.
-    amoc_convection_transport_exponent: float = 0.00
+    # Continuous deep-water-formation efficiency multiplies the hydraulic
+    # transport. A unit exponent gives the direct proportional closure without
+    # reintroducing the removed critical-density logistic switch.
+    amoc_convection_transport_exponent: float = 1.00
     amoc_convection_adjustment_years: float = 20.0
     amoc_convection_recovery_years: float = 80.0
     # Smooth the weakening/recovery timescale transition around zero tendency.
@@ -4031,14 +4028,25 @@ class ProcessClimateModel:
         )
         self.baseline_density_driver = float(initial_density["density_driver"])
         self.baseline_density_driver_ratio = float(initial_density["density_ratio"])
-        # Local convection retains its linear anomaly closure. Its scale must
-        # use that same EOS, independently of the selected hydraulic EOS.
+        # Local convection retains its linear anomaly closure. Preserve its
+        # high-latitude control buoyancy scale independently of both the selected
+        # nonlinear hydraulic EOS and the South Atlantic upper-limb geometry.
+        # Reusing the upper-limb driver here dilutes convection sensitivity by
+        # roughly a factor of five because that driver contains the warm 35 S
+        # source-to-north temperature contrast rather than the high-latitude
+        # buoyancy margin.
         linear_density = initial_amoc_density_diagnostics(
-            replace(config, amoc_density_eos="linear"),
+            replace(
+                config,
+                amoc_density_eos="linear",
+                amoc_density_geometry="interhemispheric_high_latitude",
+            ),
             baseline_north_temperature_c=self.baseline_amoc_north_c,
             baseline_southern_temperature_c=self.baseline_amoc_southern_c,
         )
-        self.baseline_convection_density_driver = float(linear_density["density_driver"])
+        self.baseline_convection_density_driver = max(
+            abs(float(linear_density["density_driver"])), 1.0e-12
+        )
         self._freshwater_override_sv: float | None = None
         self._reference_residual_mode = False
         self._reference_tendency_residual_cache: dict[tuple[float, float], ModelState] = {}
@@ -9254,11 +9262,13 @@ class ProcessClimateModel:
             and state.convection_efficiency <= 0.25
         )
 
-        # Convection efficiency is deliberately not a second AMOC transport
-        # multiplier.  It affects the conservative deep-to-surface salt
-        # entrainment pathway, while overturning strength itself follows the
-        # prognostic thermohaline density gradient and pycnocline hydraulics.
-        convection_multiplier = 1.0
+        # Northern deep-water formation is a distinct physical prerequisite for
+        # overturning, in addition to the basin-scale hydraulic density head.
+        # Couple the continuous prognostic efficiency directly without a tuned
+        # threshold or Boolean collapse switch.
+        convection_multiplier = max(
+            float(state.convection_efficiency), 0.0
+        ) ** cfg.amoc_convection_transport_exponent
 
         signed_hydraulic_target_without_convection = float(
             cfg.amoc_reference_sv
@@ -9274,7 +9284,7 @@ class ProcessClimateModel:
             else max(signed_hydraulic_target_without_convection, 0.0)
         )
         unbounded_hydraulic_target = float(
-            hydraulic_target_without_convection
+            hydraulic_target_without_convection * convection_multiplier
         )
         hydraulic_target = unbounded_hydraulic_target
         if hydraulic_target > cfg.amoc_reference_sv:
@@ -15137,7 +15147,10 @@ def build_parser() -> argparse.ArgumentParser:
         "--amoc-convection-transport-exponent",
         type=float,
         default=ModelConfig().amoc_convection_transport_exponent,
-        help=argparse.SUPPRESS,
+        help=(
+            "Exponent coupling continuous northern convection efficiency to "
+            "the hydraulic AMOC target (default 1: direct proportional coupling)."
+        ),
     )
     parser.add_argument(
         "--amoc-convective-mixing-reference",

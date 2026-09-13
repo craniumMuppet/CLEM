@@ -52,6 +52,13 @@ spurious TEOS-10 common-warming strengthening, but remains a reduced water-mass
 transformation closure requiring process-level validation. The literal local
 surface-temperature pathway remains available as the nondefault
 `teos10_surface_watermass` structural sensitivity.
+
+Northern deep-water-formation efficiency now multiplies the basin hydraulic
+target continuously with a unit exponent. Its anomaly scale preserves the
+high-latitude linear control buoyancy margin rather than inheriting the much
+larger South Atlantic upper-limb density driver. This repairs a geometry-change
+regression, but the reduced convection closure and its structural uncertainty
+still require comparison with comprehensive coupled models and observations.
 The phase-space stability and recovery of the revised system must be assessed
 afresh; a passing finite-duration run does not identify an equilibrium branch.
 

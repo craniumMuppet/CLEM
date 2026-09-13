@@ -31,49 +31,49 @@
     "initial_amoc_sv": 15.0,
     "active_salinity": {
       "amoc_sv": {
-        "year_10": 16.644584999282657,
-        "year_50": 16.9791921396276,
-        "year_100": 16.983525040734946
+        "year_10": 16.69783353346219,
+        "year_50": 16.973614506850154,
+        "year_100": 16.973208056949648
       },
-      "north_salinity_psu_year_100": 34.91041192361825,
-      "south_atlantic_upper_salinity_psu_year_100": 34.87860002131536
+      "north_salinity_psu_year_100": 34.9102383874806,
+      "south_atlantic_upper_salinity_psu_year_100": 34.8785548880162
     },
     "frozen_salinity": {
       "amoc_sv": {
-        "year_10": 16.66937222542668,
-        "year_50": 16.98754048407218,
-        "year_100": 16.984950047093374
+        "year_10": 16.727234443027704,
+        "year_50": 16.994676376615125,
+        "year_100": 16.980481112276678
       },
       "north_salinity_psu_year_100": 34.91067557244026,
       "south_atlantic_upper_salinity_psu_year_100": 34.87885739062209
     },
     "active_minus_frozen_amoc_sv": {
-      "year_10": -0.024787226144024288,
-      "year_50": -0.008348344444581102,
-      "year_100": -0.0014250063584277939
+      "year_10": -0.029400909565513444,
+      "year_50": -0.02106186976497071,
+      "year_100": -0.007273055327029709
     }
   },
   "legacy_seed_sensitivity_under_0p2sv_100y_hosing": {
     "-0.15": {
       "initial_boundary_fovs_sv": -0.16000000000000633,
       "initial_internal_section_freshwater_sv": 0.015454545454541752,
-      "final_boundary_fovs_sv": -0.16644673037167848,
-      "final_internal_section_freshwater_sv": -0.0007972619937946647,
-      "final_amoc_sv": 14.403080774270506
+      "final_boundary_fovs_sv": -0.13791866049382462,
+      "final_internal_section_freshwater_sv": 0.006117202242444639,
+      "final_amoc_sv": 11.88293920080182
     },
     "+0.00": {
       "initial_boundary_fovs_sv": -0.16000000000000633,
       "initial_internal_section_freshwater_sv": 0.015454545454541752,
-      "final_boundary_fovs_sv": -0.16644673037167848,
-      "final_internal_section_freshwater_sv": -0.0007972619937946647,
-      "final_amoc_sv": 14.403080774270506
+      "final_boundary_fovs_sv": -0.13791866049382462,
+      "final_internal_section_freshwater_sv": 0.006117202242444639,
+      "final_amoc_sv": 11.88293920080182
     },
     "+0.15": {
       "initial_boundary_fovs_sv": -0.16000000000000633,
       "initial_internal_section_freshwater_sv": 0.015454545454541752,
-      "final_boundary_fovs_sv": -0.16644673037167848,
-      "final_internal_section_freshwater_sv": -0.0007972619937946647,
-      "final_amoc_sv": 14.403080774270506
+      "final_boundary_fovs_sv": -0.13791866049382462,
+      "final_internal_section_freshwater_sv": 0.006117202242444639,
+      "final_amoc_sv": 11.88293920080182
     }
   },
   "interpretation": {

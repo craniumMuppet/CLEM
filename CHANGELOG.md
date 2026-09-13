@@ -30,6 +30,10 @@
   doubled-CO2 AMOC now weakens rather than responding to spurious differential
   thermal expansion of the local 35 S surface source. See
   `docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md`.
+- Keep the northern convection buoyancy scale independent of the South Atlantic
+  hydraulic geometry and restore its continuous unit-exponent transport
+  coupling. This removes the SSP2-4.5 regression in which convection weakened
+  diagnostically while its AMOC transport multiplier remained exactly one.
 
 ### Current-model review corrections
 

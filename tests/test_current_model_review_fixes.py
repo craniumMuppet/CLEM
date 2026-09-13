@@ -120,6 +120,52 @@ def test_hydraulic_eos_does_not_rescale_local_convection(resolution, perturbatio
             math.exp(-0.000152 / teos["amoc_convection_reference_density_driver"]))
 
 
+def test_default_convection_scale_is_independent_of_upper_limb_geometry():
+    config = cm.ModelConfig(
+        resolution_deg=10.0,
+        auto_initialize_from_1850=False,
+        seasonal_arctic_enabled=False,
+        duration_years=0.1,
+    )
+    model = cm.ProcessClimateModel(config)
+    high_latitude_linear = cm.initial_amoc_density_diagnostics(
+        replace(
+            config,
+            amoc_density_eos="linear",
+            amoc_density_geometry="interhemispheric_high_latitude",
+        ),
+        baseline_north_temperature_c=model.baseline_amoc_north_c,
+        baseline_southern_temperature_c=model.baseline_amoc_southern_c,
+    )
+    upper_limb_linear = cm.initial_amoc_density_diagnostics(
+        replace(config, amoc_density_eos="linear"),
+        baseline_north_temperature_c=model.baseline_amoc_north_c,
+        baseline_southern_temperature_c=model.baseline_amoc_southern_c,
+    )
+    assert model.baseline_convection_density_driver == pytest.approx(
+        abs(high_latitude_linear["density_driver"])
+    )
+    assert model.baseline_convection_density_driver != pytest.approx(
+        abs(upper_limb_linear["density_driver"])
+    )
+
+
+def test_continuous_convection_efficiency_directly_scales_transport():
+    config = cm.ModelConfig(
+        resolution_deg=10.0,
+        auto_initialize_from_1850=False,
+        seasonal_arctic_enabled=False,
+        duration_years=0.1,
+    )
+    model = cm.ProcessClimateModel(config)
+    model.state.convection_efficiency = 0.8
+    diagnostics = model._amoc_diagnostics(model.state)
+    assert diagnostics["amoc_convection_transport_multiplier"] == pytest.approx(0.8)
+    assert diagnostics["amoc_unbounded_hydraulic_target_sv"] == pytest.approx(
+        diagnostics["amoc_hydraulic_target_without_convection_sv"] * 0.8
+    )
+
+
 def test_short_hosing_integration_preserves_salt_and_weakens_amoc():
     config = cm.ModelConfig(
         resolution_deg=10.0, auto_initialize_from_1850=False,

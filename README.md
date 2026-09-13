@@ -199,6 +199,12 @@ The validation integrations report a maximum salt-conservation error of:
 
 The SSP2-4.5 experiment produces similar global warming at 5° and 10° model resolution.
 
+The current unreleased physics revision gives 2081-2100 AMOC weakening of
+17.00% at 5° and 18.23% at 10° relative to 1995-2014, with 2100 transports of
+13.33 and 13.08 Sv. These are development sensitivity results. The table below
+records the older tagged-release experiment and is retained as historical
+evidence.
+
 | Metric | 5° | 10° |
 |---|---:|---:|
 | Historical warming, 2011-2020 vs 1850-1900 | 1.020 °C | 1.027 °C |
