@@ -1,0 +1,295 @@
+{
+  "sign_identity": "FovS = -q * (S_upper_boundary - S_deep_return) / S0",
+  "steady_budget_identity": "FovS = -(surface freshwater + northern-boundary freshwater + southern-gyre freshwater), when storage is zero",
+  "cases": {
+    "freshwater_budget_default": {
+      "control": {
+        "configured_external_salinity_seed_psu": 35.15,
+        "solved_external_salinity_psu": 35.24008733714616,
+        "deep_salinity_psu": 34.91067557244026,
+        "south_atlantic_upper_salinity_psu": 34.87885739062209,
+        "boundary_fovs_sv": -0.16000000000000633,
+        "internal_section_freshwater_sv": 0.015454545454541752,
+        "control_box_virtual_freshwater_sv": {
+          "north": 0.43,
+          "tropical": -0.65,
+          "south_atlantic_upper": 0.38,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": -0.15999999999999998
+        },
+        "control_surface_freshwater_sv": {
+          "north": 0.37,
+          "tropical": -0.65,
+          "south_atlantic_upper": 0.0,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.28
+        },
+        "control_nonoverturning_boundary_freshwater_sv": {
+          "north": 0.06,
+          "tropical": 0.0,
+          "south_atlantic_upper": 0.38,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": -0.44
+        },
+        "budget_components_sv": {
+          "atlantic_surface": -0.28,
+          "northern_boundary": 0.06,
+          "southern_gyre": 0.38,
+          "predicted_fovs": -0.15999999999999998
+        },
+        "one_sv_weakening_tendency_change_psu_per_century": {
+          "north": -0.0863512959272731,
+          "tropical": 0.028239886022727104,
+          "south_atlantic_upper": -0.028498290208556556,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.0011550256941176948
+        }
+      },
+      "hosing_0p2sv_100y": {
+        "initial_fovs_sv": -0.16000000000000633,
+        "final_fovs_sv": -0.16644673037167848,
+        "minimum_amoc_sv": 14.403080774270506,
+        "final_amoc_sv": 14.403080774270506,
+        "final_north_salinity_psu": 34.570604558510176,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.2171218392510424e+16
+      },
+      "amoc_only_active_salinity": {
+        "year_10_amoc_sv": 16.644584999282657,
+        "year_50_amoc_sv": 16.9791921396276,
+        "year_100_amoc_sv": 16.983525040734946
+      },
+      "amoc_only_frozen_salinity": {
+        "year_10_amoc_sv": 16.66937222542668,
+        "year_50_amoc_sv": 16.98754048407218,
+        "year_100_amoc_sv": 16.984950047093374
+      },
+      "active_minus_frozen_amoc_sv": {
+        "year_10_amoc_sv": -0.024787226144024288,
+        "year_50_amoc_sv": -0.008348344444581102,
+        "year_100_amoc_sv": -0.0014250063584277939
+      }
+    },
+    "freshwater_budget_alternative_salt_inventory_seed": {
+      "control": {
+        "configured_external_salinity_seed_psu": 34.7,
+        "solved_external_salinity_psu": 34.927346024404855,
+        "deep_salinity_psu": 34.59793425969896,
+        "south_atlantic_upper_salinity_psu": 34.566116077880785,
+        "boundary_fovs_sv": -0.16000000000000633,
+        "internal_section_freshwater_sv": 0.015454545454541752,
+        "control_box_virtual_freshwater_sv": {
+          "north": 0.43,
+          "tropical": -0.65,
+          "south_atlantic_upper": 0.38,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": -0.15999999999999998
+        },
+        "control_surface_freshwater_sv": {
+          "north": 0.37,
+          "tropical": -0.65,
+          "south_atlantic_upper": 0.0,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.28
+        },
+        "control_nonoverturning_boundary_freshwater_sv": {
+          "north": 0.06,
+          "tropical": 0.0,
+          "south_atlantic_upper": 0.38,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": -0.44
+        },
+        "budget_components_sv": {
+          "atlantic_surface": -0.28,
+          "northern_boundary": 0.06,
+          "southern_gyre": 0.38,
+          "predicted_fovs": -0.15999999999999998
+        },
+        "one_sv_weakening_tendency_change_psu_per_century": {
+          "north": -0.0863512959272731,
+          "tropical": 0.028239886022727104,
+          "south_atlantic_upper": -0.028498290208556556,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.0011550256941176948
+        }
+      },
+      "hosing_0p2sv_100y": {
+        "initial_fovs_sv": -0.16000000000000633,
+        "final_fovs_sv": -0.16628795142426248,
+        "minimum_amoc_sv": 14.388503385303913,
+        "final_amoc_sv": 14.388503385303913,
+        "final_north_salinity_psu": 34.257485129581276,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.2180373099405944e+16
+      },
+      "amoc_only_active_salinity": {
+        "year_10_amoc_sv": 16.643854615774167,
+        "year_50_amoc_sv": 16.979047634555574,
+        "year_100_amoc_sv": 16.983425057971544
+      },
+      "amoc_only_frozen_salinity": {
+        "year_10_amoc_sv": 16.668751178231645,
+        "year_50_amoc_sv": 16.98746454345263,
+        "year_100_amoc_sv": 16.984871981518367
+      },
+      "active_minus_frozen_amoc_sv": {
+        "year_10_amoc_sv": -0.024896562457477955,
+        "year_50_amoc_sv": -0.008416908897057596,
+        "year_100_amoc_sv": -0.0014469235468226316
+      }
+    },
+    "legacy_prescribed_hydrography_positive": {
+      "control": {
+        "configured_external_salinity_seed_psu": 34.7,
+        "solved_external_salinity_psu": 34.7,
+        "deep_salinity_psu": 35.15,
+        "south_atlantic_upper_salinity_psu": 35.45882352941177,
+        "boundary_fovs_sv": 0.2185714285714265,
+        "internal_section_freshwater_sv": -0.15000000000000163,
+        "control_box_virtual_freshwater_sv": {
+          "north": 0.3142857142857142,
+          "tropical": -0.21890756302520747,
+          "south_atlantic_upper": -0.3139495798319333,
+          "southern": 5.551115123125783e-18,
+          "deep": 0.0,
+          "external": 0.2185714285714265
+        },
+        "control_surface_freshwater_sv": {
+          "north": 0.3142857142857142,
+          "tropical": -0.21890756302520747,
+          "south_atlantic_upper": -0.3139495798319333,
+          "southern": 5.551115123125783e-18,
+          "deep": 0.0,
+          "external": 0.2185714285714265
+        },
+        "control_nonoverturning_boundary_freshwater_sv": {
+          "north": 0.0,
+          "tropical": 0.0,
+          "south_atlantic_upper": 0.0,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.0
+        },
+        "budget_components_sv": {
+          "atlantic_surface": -0.28,
+          "northern_boundary": 0.06,
+          "southern_gyre": 0.38,
+          "predicted_fovs": NaN
+        },
+        "one_sv_weakening_tendency_change_psu_per_century": {
+          "north": -0.06311390399999992,
+          "tropical": 0.007541183382352851,
+          "south_atlantic_upper": 0.05986539423529398,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": -0.001577847599999987
+        }
+      },
+      "hosing_0p2sv_100y": {
+        "initial_fovs_sv": 0.2185714285714265,
+        "final_fovs_sv": 0.14429196631954896,
+        "minimum_amoc_sv": 13.257561300580694,
+        "final_amoc_sv": 13.257561300580694,
+        "final_north_salinity_psu": 34.802293430970764,
+        "final_basin_salt_inventory_anomaly_psu_m3": -1.7796547149352088e+16
+      },
+      "amoc_only_active_salinity": {
+        "year_10_amoc_sv": 16.63756176190624,
+        "year_50_amoc_sv": 16.928455762647115,
+        "year_100_amoc_sv": 16.954230209434012
+      },
+      "amoc_only_frozen_salinity": {
+        "year_10_amoc_sv": 16.700504621326996,
+        "year_50_amoc_sv": 16.984647187752493,
+        "year_100_amoc_sv": 16.98251206321471
+      },
+      "active_minus_frozen_amoc_sv": {
+        "year_10_amoc_sv": -0.06294285942075462,
+        "year_50_amoc_sv": -0.056191425105378556,
+        "year_100_amoc_sv": -0.028281853780697475
+      }
+    },
+    "legacy_prescribed_hydrography_negative": {
+      "control": {
+        "configured_external_salinity_seed_psu": 35.356,
+        "solved_external_salinity_psu": 35.356,
+        "deep_salinity_psu": 35.15,
+        "south_atlantic_upper_salinity_psu": 35.45882352941177,
+        "boundary_fovs_sv": -0.10005714285714434,
+        "internal_section_freshwater_sv": -0.15000000000000163,
+        "control_box_virtual_freshwater_sv": {
+          "north": 0.3142857142857142,
+          "tropical": -0.21890756302520747,
+          "south_atlantic_upper": 0.004678991596637576,
+          "southern": 5.551115123125783e-18,
+          "deep": 0.0,
+          "external": -0.10005714285714434
+        },
+        "control_surface_freshwater_sv": {
+          "north": 0.3142857142857142,
+          "tropical": -0.21890756302520747,
+          "south_atlantic_upper": 0.004678991596637576,
+          "southern": 5.551115123125783e-18,
+          "deep": 0.0,
+          "external": -0.10005714285714434
+        },
+        "control_nonoverturning_boundary_freshwater_sv": {
+          "north": 0.0,
+          "tropical": 0.0,
+          "south_atlantic_upper": 0.0,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.0
+        },
+        "budget_components_sv": {
+          "atlantic_surface": -0.28,
+          "northern_boundary": 0.06,
+          "southern_gyre": 0.38,
+          "predicted_fovs": NaN
+        },
+        "one_sv_weakening_tendency_change_psu_per_century": {
+          "north": -0.06311390399999992,
+          "tropical": 0.007541183382352851,
+          "south_atlantic_upper": 0.008111992955294129,
+          "southern": 0.0,
+          "deep": 0.0,
+          "external": 0.0007223035680000101
+        }
+      },
+      "hosing_0p2sv_100y": {
+        "initial_fovs_sv": -0.10005714285714434,
+        "final_fovs_sv": -0.11021855355574776,
+        "minimum_amoc_sv": 13.783654070651272,
+        "final_amoc_sv": 13.783654070651272,
+        "final_north_salinity_psu": 34.80487143500735,
+        "final_basin_salt_inventory_anomaly_psu_m3": -2.183229671650544e+16
+      },
+      "amoc_only_active_salinity": {
+        "year_10_amoc_sv": 16.664648189910277,
+        "year_50_amoc_sv": 16.95964266173055,
+        "year_100_amoc_sv": 16.9703242437185
+      },
+      "amoc_only_frozen_salinity": {
+        "year_10_amoc_sv": 16.700504621326996,
+        "year_50_amoc_sv": 16.984647187752493,
+        "year_100_amoc_sv": 16.98251206321471
+      },
+      "active_minus_frozen_amoc_sv": {
+        "year_10_amoc_sv": -0.03585643141671824,
+        "year_50_amoc_sv": -0.02500452602194514,
+        "year_100_amoc_sv": -0.012187819496208618
+      }
+    }
+  },
+  "interpretation": {
+    "cause": "The former external reservoir was fresher than the deep return, so its use as the upper boundary source forced positive FovS.",
+    "new_control": "The default salinity contrast is solved from separately specified surface, northern-boundary, and southern-gyre freshwater terms. Changing either legacy salinity seed leaves the predicted control FovS unchanged.",
+    "remaining_structural_limitation": "The budget components are observational control inputs and the box model does not predict absolute evaporation, precipitation, runoff, or an evolving azonal boundary transport. FovS is therefore a conditional budget prediction, not a free coupled-climate prediction."
+  }
+}

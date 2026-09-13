@@ -2,6 +2,35 @@
 
 ## Unreleased
 
+### September 12 physics review repairs
+
+- Apply the liquid-ocean reference floor in both hemispheres and weight the
+  water-vapour emission-height response by baseline vapour path.
+- Use South Atlantic upper salinity with a transformed source temperature tied
+  to northern surface-to-deep stratification in the default `teos10_matched`
+  hydraulic density. Keep `teos10_surface_watermass` as the literal local-source
+  sensitivity, expose freezing-bound diagnostics, and open overturning through the external
+  reservoir with conservative control hydrology and basin-inventory diagnostics.
+- Disable empirical Arctic GMST heating and phase restoring by default; remove
+  freshwater-only scaling of exported ice and correct Arctic air heat accounting.
+- Integrate Gaussian daily variability in Greenland PDD and subtract reference
+  runoff after applying retention to total melt.
+- Use complete annual Gregory/tail diagnostics and include Arctic TOA feedback
+  in the component sum; exclude disabled closure parameters from ensembles.
+- Define `fovs_sv` at the model's external southern boundary and rename the
+  former SAU/deep result `amoc_internal_section_freshwater_sv`.
+- Solve the default control salinity contrasts from explicit Atlantic surface,
+  northern-boundary, and azonal southern-boundary freshwater-budget terms. The
+  resulting FovS is -0.160 Sv without an FovS or boundary-salinity target; the
+  legacy prescribed-hydrography mode remains available for attribution.
+- Unify control-salinity initialization and AMOC density screening, make the
+  inactive legacy FovS field inert during validation, and separate surface,
+  non-overturning boundary, and combined virtual freshwater diagnostics.
+- Preserve earlier numerical evidence as historical. Development tests pass;
+  doubled-CO2 AMOC now weakens rather than responding to spurious differential
+  thermal expansion of the local 35 S surface source. See
+  `docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md`.
+
 ### Current-model review corrections
 
 - Use global near-surface air temperature consistently for ECS, TCR, Gregory

@@ -341,7 +341,42 @@ with st.sidebar:
     amoc_surface_heat_coupling = st.slider('Surface AMOC heat coupling fraction', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_surface_heat_coupling_fraction), 0.025, help=setting_tooltip('amoc_surface_heat_coupling', extra_note='Fraction of the diagnosed overturning heat-transport anomaly applied to the prognostic surface mixed layer.'))
     amoc_heat_response_damping = st.slider('AMOC regional temperature damping (W/m2/K)', 0.25, 4.0, float(DEFAULT_MODEL_CONFIG.amoc_heat_response_damping_wm2_k), 0.05, help=setting_tooltip('amoc_heat_response_damping'))
     atlantic_gyre_heat_transport = float(DEFAULT_MODEL_CONFIG.atlantic_gyre_heat_transport_pw)
-    initial_fovs = st.slider('Initial FovS at 34.5 S (Sv)', -0.5, 0.2, float(DEFAULT_MODEL_CONFIG.initial_fovs_sv), 0.01, help=setting_tooltip('initial_fovs', extra_note='Negative values mean the overturning imports salinity into the Atlantic. The South Atlantic upper-limb salinity is derived from this target rather than from the Southern Ocean surface box.'))
+    amoc_control_salinity_mode = st.selectbox(
+        'AMOC control salinity initialization',
+        ['freshwater_budget', 'prescribed_hydrography'],
+        index=0,
+        help=setting_tooltip('amoc_control_salinity_mode'),
+    )
+    amoc_control_north_surface_freshwater = st.number_input(
+        'Northern Atlantic surface freshwater (Sv)', -1.0, 1.0,
+        float(DEFAULT_MODEL_CONFIG.amoc_control_north_surface_freshwater_sv), 0.01,
+        disabled=amoc_control_salinity_mode != 'freshwater_budget',
+        help=setting_tooltip('amoc_control_north_surface_freshwater_sv'),
+    )
+    amoc_control_lower_atlantic_surface_freshwater = st.number_input(
+        'Lower Atlantic surface freshwater (Sv)', -1.0, 1.0,
+        float(DEFAULT_MODEL_CONFIG.amoc_control_lower_atlantic_surface_freshwater_sv), 0.01,
+        disabled=amoc_control_salinity_mode != 'freshwater_budget',
+        help=setting_tooltip('amoc_control_lower_atlantic_surface_freshwater_sv'),
+    )
+    amoc_control_northern_boundary_freshwater = st.number_input(
+        'Northern boundary freshwater import (Sv)', -1.0, 1.0,
+        float(DEFAULT_MODEL_CONFIG.amoc_control_northern_boundary_freshwater_sv), 0.01,
+        disabled=amoc_control_salinity_mode != 'freshwater_budget',
+        help=setting_tooltip('amoc_control_northern_boundary_freshwater_sv'),
+    )
+    amoc_control_southern_gyre_freshwater = st.number_input(
+        'Southern gyre freshwater import (Sv)', -1.0, 1.0,
+        float(DEFAULT_MODEL_CONFIG.amoc_control_southern_gyre_freshwater_sv), 0.01,
+        disabled=amoc_control_salinity_mode != 'freshwater_budget',
+        help=setting_tooltip('amoc_control_southern_gyre_freshwater_sv'),
+    )
+    initial_fovs = st.slider(
+        'Legacy internal-section freshwater target (Sv)', -0.5, 0.2,
+        float(DEFAULT_MODEL_CONFIG.initial_fovs_sv), 0.01,
+        disabled=amoc_control_salinity_mode != 'prescribed_hydrography',
+        help=setting_tooltip('initial_fovs', extra_note='Used only in prescribed_hydrography mode.'),
+    )
 
     st.subheader("AMOC hysteresis")
     run_hysteresis = st.checkbox('Run equilibrium AMOC continuation', value=False, help=setting_tooltip('run_hysteresis', extra_note='Solves and stability-tests all discoverable preindustrial AMOC equilibria at each freshwater level.'))
@@ -650,6 +685,19 @@ config = ModelConfig(
     ),
     initial_fovs_sv=float(initial_fovs),
     fovs_reference_salinity_psu=float(fovs_reference_salinity),
+    amoc_control_salinity_mode=str(amoc_control_salinity_mode),
+    amoc_control_north_surface_freshwater_sv=float(
+        amoc_control_north_surface_freshwater
+    ),
+    amoc_control_lower_atlantic_surface_freshwater_sv=float(
+        amoc_control_lower_atlantic_surface_freshwater
+    ),
+    amoc_control_northern_boundary_freshwater_sv=float(
+        amoc_control_northern_boundary_freshwater
+    ),
+    amoc_control_southern_gyre_freshwater_sv=float(
+        amoc_control_southern_gyre_freshwater
+    ),
     land_heat_capacity_wyr_m2_k=float(land_capacity),
     ocean_mixed_layer_heat_capacity_wyr_m2_k=float(ocean_capacity),
     deep_ocean_heat_capacity_wyr_m2_k=float(deep_capacity),

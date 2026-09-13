@@ -1,0 +1,63 @@
+{
+  "scope": "109 distinct focused tests; historical release inventory not rerun",
+  "passed_test_files": [
+    "tests/test_physics_review_repairs.py",
+    "tests/test_amoc_eos_physics_repair.py",
+    "tests/test_current_model_review_fixes.py",
+    "tests/test_greenland_reservoir_units.py",
+    "tests/test_monte_carlo_science_prior_consistency.py",
+    "tests/test_property_conservation.py",
+    "tests/test_v22929_validation_semantics_and_interface_parity.py",
+    "tests/test_v2281_interface_maintenance.py",
+    "tests/test_v22912_monte_carlo_integrity.py",
+    "tests/test_r16_source_fixes.py",
+    "tests/test_r16_1_teos_hotfix.py",
+    "tests/test_r17_spatial_teos_recovery.py",
+    "tests/test_r18_source_fixes.py"
+  ],
+  "batches": [
+    {
+      "passed": 37,
+      "description": "original focused selection"
+    },
+    {
+      "passed": 13,
+      "description": "conservation and interface parity"
+    },
+    {
+      "passed": 10,
+      "description": "follow-up after prior filtering and static-verifier cleanup; 2 new tests and 8 repeated"
+    },
+    {
+      "passed": 54,
+      "description": "complete focused suite after the FovS diagnostic correction"
+    },
+    {
+      "passed": 55,
+      "description": "complete focused suite after correcting the boundary source hydrography"
+    },
+    {
+      "passed": 62,
+      "description": "complete focused suite plus desktop interface maintenance after freshwater-budget FovS prediction"
+    },
+    {
+      "passed": 71,
+      "description": "expanded focused suite after second review; one multiprocessing timeout under concurrent verification load passed alone in 9.11 seconds"
+    },
+    {
+      "passed": 26,
+      "description": "historical R16/R17 regression files updated for the current South Atlantic freshwater-budget defaults"
+    },
+    {
+      "passed": 98,
+      "description": "complete focused suite after correcting the doubled-CO2 hydraulic thermal response"
+    },
+    {
+      "passed": 109,
+      "description": "complete focused suite after separating transformed and literal-source TEOS-10 modes"
+    }
+  ],
+  "compilation": "passed",
+  "diff_whitespace_check": "passed",
+  "independent_observational_validation": false
+}

@@ -15,27 +15,29 @@ from sea_ice_observation import (
 )
 
 
-def test_production_amoc_uses_matched_teos10_high_latitude_geometry():
+def test_production_amoc_uses_direct_teos10_south_atlantic_geometry():
     cfg = cm.ModelConfig(resolution_deg=10.0, auto_initialize_from_1850=False)
     assert cfg.amoc_density_eos == "teos10_matched"
-    assert cfg.amoc_density_geometry == "interhemispheric_high_latitude"
+    assert cfg.amoc_density_geometry == "south_atlantic_upper"
     d = cm.initial_amoc_density_diagnostics(cfg)
-    assert d["density_driver"] == pytest.approx(1.1687567542e-3, abs=2e-10)
+    assert d["density_driver"] == pytest.approx(1.7988550118e-3, abs=2e-10)
     assert d["density_ratio"] == pytest.approx(1.0, abs=2e-6)
     assert d["density_ratio_to_linear_reference"] == pytest.approx(
-        2.692987913, abs=2e-6
+        0.9272448514, abs=2e-6
     )
 
 
-def _bare_model(eos: str = "linear"):
+def _bare_model(eos: str = "linear", geometry: str = "south_atlantic_upper"):
     model = cm.ProcessClimateModel.__new__(cm.ProcessClimateModel)
     model.config = cm.ModelConfig(
         resolution_deg=10.0,
         auto_initialize_from_1850=False,
         amoc_density_eos=eos,
+        amoc_density_geometry=geometry,
     )
     model.baseline_amoc_north_c = 5.0
     model.baseline_amoc_southern_c = -1.0
+    model.baseline_amoc_south_atlantic_upper_c = 12.0
     return model
 
 
@@ -49,7 +51,7 @@ def test_teos10_matched_preserves_linear_thermal_pathway(monkeypatch):
     import amoc_density_r16 as density
     monkeypatch.setattr(density, "teos10_density_driver", fake_driver)
 
-    model = _bare_model("teos10_matched")
+    model = _bare_model("teos10_matched", "interhemispheric_high_latitude")
     model._density_driver_from_values(
         north_temperature_c=8.0,
         southern_temperature_c=3.0,
@@ -66,7 +68,7 @@ def test_teos10_matched_preserves_linear_thermal_pathway(monkeypatch):
     assert call["source_temperature_c"] != pytest.approx(3.0)
 
 
-def test_teos10_surface_watermass_preserves_r16_direct_source_branch(monkeypatch):
+def test_teos10_surface_watermass_uses_literal_source_temperature(monkeypatch):
     calls = []
 
     def fake_driver(**kwargs):
@@ -83,8 +85,35 @@ def test_teos10_surface_watermass_preserves_r16_direct_source_branch(monkeypatch
         southern_salinity_psu=34.2,
         north_surface_anomaly_c=2.0,
         north_deep_anomaly_c=0.5,
+        south_atlantic_upper_temperature_c=3.0,
+        south_atlantic_upper_salinity_psu=34.2,
     )
     assert calls[-1]["source_temperature_c"] == pytest.approx(3.0)
+
+
+def test_teos10_matched_uses_transformed_south_atlantic_source_temperature(monkeypatch):
+    calls = []
+
+    def fake_driver(**kwargs):
+        calls.append(kwargs)
+        return 0.002
+
+    import amoc_density_r16 as density
+    monkeypatch.setattr(density, "teos10_density_driver", fake_driver)
+    model = _bare_model("teos10_matched")
+    model._density_driver_from_values(
+        north_temperature_c=8.0,
+        southern_temperature_c=3.0,
+        north_salinity_psu=35.1,
+        southern_salinity_psu=34.2,
+        north_surface_anomaly_c=2.0,
+        north_deep_anomaly_c=0.5,
+        south_atlantic_upper_temperature_c=3.0,
+        south_atlantic_upper_salinity_psu=34.2,
+    )
+    # The transformed upper limb is 12 + 2 - (2 - 0.5) = 12.5 C.
+    assert calls[-1]["source_temperature_c"] == pytest.approx(12.5)
+    assert calls[-1]["source_temperature_c"] != pytest.approx(3.0)
 
 
 def test_reference_support_uses_fixed_pack_boundary_and_obeys_extent_bounds():

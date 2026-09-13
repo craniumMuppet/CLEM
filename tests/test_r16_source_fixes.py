@@ -8,24 +8,28 @@ import climate_model as cm
 from sea_ice_observation import reconstruct_concentration_and_occupancy
 
 
-def test_r16_default_restores_validated_high_latitude_geometry_and_alias():
+def test_current_default_uses_south_atlantic_source_and_keeps_legacy_alias():
     cfg = cm.ModelConfig(
         resolution_deg=10.0,
         auto_initialize_from_1850=False,
         amoc_density_eos="linear",
     )
-    assert cfg.amoc_density_geometry == "interhemispheric_high_latitude"
+    assert cfg.amoc_density_geometry == "south_atlantic_upper"
     default = cm.initial_amoc_density_diagnostics(cfg)
     legacy = cm.initial_amoc_density_diagnostics(replace(cfg, amoc_density_geometry="legacy_southern_surface"))
     sau = cm.initial_amoc_density_diagnostics(replace(cfg, amoc_density_geometry="south_atlantic_upper"))
-    assert default["density_driver"] == pytest.approx(4.34e-4, abs=2e-8)
-    assert legacy["density_driver"] == pytest.approx(default["density_driver"], rel=0, abs=1e-15)
-    assert default["active_source_salinity_psu"] == pytest.approx(cfg.initial_southern_salinity_psu)
-    assert sau["density_driver"] > 1.0e-3
+    assert default["density_driver"] == pytest.approx(sau["density_driver"])
+    assert default["density_ratio"] == pytest.approx(1.0)
+    assert default["active_source_salinity_psu"] == pytest.approx(
+        cm.solve_amoc_control_salinity(cfg)[2]
+    )
+    assert legacy["active_source_salinity_psu"] == pytest.approx(
+        cm.solve_amoc_control_salinity(cfg)[3]
+    )
 
 
 @pytest.mark.parametrize("resolution", [10.0, 5.0, 2.5])
-def test_high_latitude_density_control_is_resolution_consistent(resolution):
+def test_south_atlantic_density_control_is_resolution_consistent(resolution):
     cfg = cm.ModelConfig(
         resolution_deg=resolution,
         auto_initialize_from_1850=False,
@@ -33,7 +37,7 @@ def test_high_latitude_density_control_is_resolution_consistent(resolution):
     )
     d = cm.initial_amoc_density_diagnostics(cfg)
     assert d["density_driver"] > 0.0
-    assert d["density_ratio"] == pytest.approx(1.0, abs=2e-3)
+    assert d["density_ratio"] == pytest.approx(1.0, abs=1e-12)
 
 
 def test_teos10_uses_geometry_specific_source_coordinate(monkeypatch):
@@ -47,6 +51,9 @@ def test_teos10_uses_geometry_specific_source_coordinate(monkeypatch):
         @staticmethod
         def rho_t_exact(sa,t,p):
             return 1000.0 + sa - 0.2*t
+        @staticmethod
+        def t_freezing(sa,p,saturation_fraction):
+            return -1.8
     monkeypatch.setitem(__import__('sys').modules, 'gsw', FakeGSW)
     eos.teos10_density_driver(north_temperature_c=10,north_salinity_psu=35,source_temperature_c=2,source_salinity_psu=34,source_latitude_deg=-52.5,source_longitude_deg=-20,reference_density_kg_m3=1025)
     assert calls[-1] == (-20.0, -52.5)

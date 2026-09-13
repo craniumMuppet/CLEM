@@ -19,12 +19,14 @@ def test_hydrographic_prior_mode_is_physical_for_current_amoc_geometry() -> None
     base = ModelConfig()
     north = PHYSICAL_AMOC_PRIORS["initial_north_salinity_psu"]
     southern = PHYSICAL_AMOC_PRIORS["initial_southern_salinity_psu"]
-    fovs = PHYSICAL_AMOC_PRIORS["initial_fovs_sv"]
     sampled = {
         "initial_north_salinity_psu": float(north.mode),
         "initial_deep_salinity_psu": float(north.mode),
         "initial_southern_salinity_psu": float(southern.mode),
-        "initial_fovs_sv": 0.5 * (fovs.lower + fovs.upper),
     }
 
     assert _joint_prior_state_is_physical(sampled, base)
+
+
+def test_legacy_internal_fovs_target_is_not_a_science_prior() -> None:
+    assert "initial_fovs_sv" not in PHYSICAL_AMOC_PRIORS

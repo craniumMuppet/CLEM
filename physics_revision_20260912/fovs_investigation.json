@@ -1,0 +1,84 @@
+{
+  "scope": "Mechanism diagnosis of the current reduced model; not an observational FovS estimate or proof of AMOC mono/multistability.",
+  "control_budget": {
+    "salinity_psu": {
+      "north": 34.91067557244026,
+      "tropical": 35.594766481531174,
+      "south_atlantic_upper": 34.87885739062209,
+      "southern": 34.0,
+      "deep": 34.91067557244026,
+      "external": 35.24008733714616
+    },
+    "fovs_southern_boundary_sv": -0.16000000000000633,
+    "freshwater_budget_components_sv": {
+      "surface": -0.28,
+      "northern_boundary": 0.06,
+      "southern_gyre": 0.38,
+      "predicted_fovs": -0.15999999999999998
+    },
+    "legacy_internal_section_freshwater_sv": 0.015454545454541752,
+    "boundary_and_internal_have_opposite_sign": true,
+    "salinity_tendency_change_for_1sv_weakening_psu_per_century": {
+      "north": -0.0863512959272731,
+      "tropical": 0.028239886022727104,
+      "south_atlantic_upper": -0.028498290208556556,
+      "southern": 0.0,
+      "deep": 0.0,
+      "external": 0.0011550256941176948
+    }
+  },
+  "amoc_only_perturbation": {
+    "initial_amoc_sv": 15.0,
+    "active_salinity": {
+      "amoc_sv": {
+        "year_10": 16.644584999282657,
+        "year_50": 16.9791921396276,
+        "year_100": 16.983525040734946
+      },
+      "north_salinity_psu_year_100": 34.91041192361825,
+      "south_atlantic_upper_salinity_psu_year_100": 34.87860002131536
+    },
+    "frozen_salinity": {
+      "amoc_sv": {
+        "year_10": 16.66937222542668,
+        "year_50": 16.98754048407218,
+        "year_100": 16.984950047093374
+      },
+      "north_salinity_psu_year_100": 34.91067557244026,
+      "south_atlantic_upper_salinity_psu_year_100": 34.87885739062209
+    },
+    "active_minus_frozen_amoc_sv": {
+      "year_10": -0.024787226144024288,
+      "year_50": -0.008348344444581102,
+      "year_100": -0.0014250063584277939
+    }
+  },
+  "legacy_seed_sensitivity_under_0p2sv_100y_hosing": {
+    "-0.15": {
+      "initial_boundary_fovs_sv": -0.16000000000000633,
+      "initial_internal_section_freshwater_sv": 0.015454545454541752,
+      "final_boundary_fovs_sv": -0.16644673037167848,
+      "final_internal_section_freshwater_sv": -0.0007972619937946647,
+      "final_amoc_sv": 14.403080774270506
+    },
+    "+0.00": {
+      "initial_boundary_fovs_sv": -0.16000000000000633,
+      "initial_internal_section_freshwater_sv": 0.015454545454541752,
+      "final_boundary_fovs_sv": -0.16644673037167848,
+      "final_internal_section_freshwater_sv": -0.0007972619937946647,
+      "final_amoc_sv": 14.403080774270506
+    },
+    "+0.15": {
+      "initial_boundary_fovs_sv": -0.16000000000000633,
+      "initial_internal_section_freshwater_sv": 0.015454545454541752,
+      "final_boundary_fovs_sv": -0.16644673037167848,
+      "final_internal_section_freshwater_sv": -0.0007972619937946647,
+      "final_amoc_sv": 14.403080774270506
+    }
+  },
+  "interpretation": {
+    "boundary_indicator": "Control FovS is solved from the independently specified surface, northern-boundary, and southern-gyre freshwater-budget terms.",
+    "feedback": "A weaker AMOC reduces tropical-to-north salt import and transiently slows recovery, but the tested perturbation returns to the control.",
+    "legacy_seed": "In freshwater-budget mode, legacy initial_fovs is inactive. It cannot select the absolute salinity, control contrasts, or FovS."
+  }
+}

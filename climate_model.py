@@ -4,7 +4,7 @@
 The model resolves annual-mean land, mixed-layer ocean, and deep-ocean
 anomalies in latitude bands. It includes prognostic sea ice, snow, low cloud,
 and a salt-conserving Atlantic overturning circulation with five active
-Atlantic boxes, an external compensation reservoir, and dynamic pycnocline depth. Continuous convection and salt-advection feedbacks can produce weak or collapsed states; negative overturning is disabled by default unless an exploratory reversal closure is explicitly requested. Climate
+Atlantic boxes, an external compensation reservoir, and dynamic pycnocline depth. Continuous convection and salinity feedbacks are resolved, but their stability must be diagnosed from the complete freshwater budget. Negative overturning is disabled by default unless an exploratory reversal closure is explicitly requested. Climate
 sensitivity is never supplied as an input. It is diagnosed from a separate
 abrupt doubled-CO2 experiment using both equilibrium warming and a Gregory
 regression.
@@ -42,6 +42,7 @@ from matplotlib.path import Path as MatplotlibPath
 import numpy as np
 import pandas as pd
 from scipy.optimize import least_squares
+from scipy.special import ndtr
 
 from scientific_evidence import add_scientific_use_metadata
 from sea_ice_observation import (
@@ -75,6 +76,7 @@ ScenarioName = Literal[
 ForcingMode = Literal["co2_only", "total_effective"]
 CO2ForcingFormula = Literal["logarithmic", "meinshausen2020"]
 FreshwaterCompensationMode = Literal["external", "atlantic"]
+AmocControlSalinityMode = Literal["freshwater_budget", "prescribed_hydrography"]
 AmocCouplingScheme = Literal["euler", "heun"]
 AmocDensityGeometry = Literal["interhemispheric_high_latitude", "legacy_southern_surface", "south_atlantic_upper"]
 AmocDensityEOS = Literal["linear", "teos10", "teos10_surface_watermass", "teos10_matched"]
@@ -334,7 +336,7 @@ class ModelConfig:
     # requires both polar darkness and a cold reference air column, preventing
     # the nominal winter term from acting strongly during the dark-but-warm
     # September shoulder season.
-    arctic_winter_transport_enhancement: float = 19.0
+    arctic_winter_transport_enhancement: float = 0.0
     arctic_winter_transport_temperature_scale_c: float = 15.0
     arctic_open_water_heat_release_wm2_per_fraction: float = 24.0
     arctic_ice_air_exchange_wm2_k: float = 0.08
@@ -466,8 +468,8 @@ class ModelConfig:
     # lower latitudes, preserving the conservative coupling.
     # R15 mechanism switches are true ablation controls. Defaults preserve the
     # validated R13/R14 branch; the local R15 runner tests each mechanism off.
-    arctic_forced_ocean_heat_convergence_enabled: bool = True
-    arctic_phase_restoring_enabled: bool = True
+    arctic_forced_ocean_heat_convergence_enabled: bool = False
+    arctic_phase_restoring_enabled: bool = False
     arctic_extra_lapse_rate_feedback_enabled: bool = True
     arctic_forced_ocean_heat_convergence_wm2_per_k: float = 8.00
     arctic_forced_ocean_heat_convergence_onset_warming_c: float = 0.40
@@ -531,6 +533,9 @@ class ModelConfig:
     # CMIP5/6 WV is about +1.77 W m-2 K-1. 0.98 keeps WV near that value
     # while the model's resolved lapse-rate response brings WV+LR near +1.3.
     water_vapor_emission_height_km_per_lnq: float = 0.98
+    # Optical-path weighting q0/(q0+q_scale) suppresses the emission-height
+    # response in dry columns. This is a structural closure, not a new AR6 fit.
+    water_vapor_optical_path_scale: float = 0.002
     longwave_spectral_factor: float = 0.98
 
     ocean_open_water_albedo: float = 0.075
@@ -553,12 +558,10 @@ class ModelConfig:
     high_cloud_top_temperature_k: float = 220.0
     high_cloud_temperature_coupling: float = 0.25
 
-    # Salt-conserving Atlantic overturning loop. Positive AMOC follows the
-    # deep return limb -> South Atlantic upper limb -> Tropical Atlantic ->
-    # Northern sinking -> deep return limb. The Southern Ocean surface box is
-    # prognostic but is not the hydraulic source water or an advective limb of
-    # the 34.5 S overturning salt transport. The dedicated South Atlantic
-    # upper-limb tracer supplies both FovS and the R15 hydraulic source state.
+    # Open salt-conserving overturning: external -> South Atlantic upper ->
+    # tropical -> north -> deep -> external. The Southern surface reservoir
+    # exchanges separately. The SAU/deep FovS is an internal section diagnostic;
+    # a distinct boundary freshwater diagnostic closes the basin inventory.
     amoc_reference_sv: float = 17.0
     amoc_adjustment_years: float = 8.0
     thermal_expansion_per_k: float = 2.0e-4
@@ -591,17 +594,13 @@ class ModelConfig:
     # north-south thermal contrast is still retained in the baseline driver.
     amoc_interhemispheric_temperature_coupling: float = 0.00
     haline_contraction_per_psu: float = 7.6e-4
-    # R16: retain the numerically validated interhemispheric high-latitude
-    # hydraulic closure as the production default. South-Atlantic-upper water
-    # remains an explicit structural sensitivity because the R15.1 local run
-    # made the default AMOC strengthen under SSP2-4.5 and respond too weakly
-    # to freshwater hosing.
-    amoc_density_geometry: AmocDensityGeometry = "interhemispheric_high_latitude"
-    # Use nonlinear TEOS-10 density on the established reduced-order North
-    # Atlantic stratification pathway. This changes the equation of state while
-    # preserving the model's hydraulic thermal coordinate and exact 17 Sv
-    # control normalization. The direct prognostic-water-mass TEOS and fixed
-    # alpha/beta equations remain explicit structural sensitivities.
+    # Compare the northern sinking and South Atlantic upper water masses.
+    # Choosing a geometry by whether it reproduces an AMOC decline would be
+    # calibration. The revised response requires fresh observational validation.
+    amoc_density_geometry: AmocDensityGeometry = "south_atlantic_upper"
+    # Apply TEOS-10 to the transformed upper-limb temperature implied by the
+    # northern surface-to-deep stratification closure. Literal source-water
+    # temperatures remain available as a structural sensitivity.
     amoc_density_eos: AmocDensityEOS = "teos10_matched"
     # Dimensional screening reference for the coherent source-water geometry.
     # It is not an AMOC-strength tuning parameter; the runtime transport is
@@ -685,19 +684,37 @@ class ModelConfig:
     amoc_deep_box_volume_m3: float = 2.5e17
     initial_north_salinity_psu: float = 35.15
     initial_tropical_salinity_psu: float = 35.65
-    initial_southern_salinity_psu: float = 33.00
+    initial_southern_salinity_psu: float = 34.00
     initial_deep_salinity_psu: float = 35.15
-    # Present-day overturning freshwater transport at nominally 34.5 S.
-    # Negative values mean the overturning imports salinity (exports
-    # freshwater) into the Atlantic. The South Atlantic upper-limb salinity is
-    # derived from this target, the deep salinity, and reference AMOC strength.
+    # Legacy internal SAU/deep section target used to derive initial SAU
+    # salinity. With the open boundary this is not FovS: the external/SAU
+    # inflow and deep/external outflow define the modeled southern boundary.
+    # Retained so prescribed_hydrography runs reproduce older configurations;
+    # it is completely inactive in freshwater_budget mode.
     initial_fovs_sv: float = -0.15
     fovs_reference_salinity_psu: float = 35.0
-    # Large external-ocean reservoir used to place compensating virtual salt
-    # outside the Atlantic by default. This preserves total salt without
-    # directly salinifying the tropical and Southern Atlantic source waters.
+    # The default control salinity contrasts are solved from independently
+    # estimated terms in the Atlantic freshwater budget, rather than tuned to
+    # an FovS value. Positive values add freshwater to the represented Atlantic.
+    # The northern term treats the observed freshwater divergence from 26.5 N
+    # to Bering Strait as a steady-equivalent surface flux (zero storage); the
+    # lower-Atlantic term is the residual required by the basin-wide -0.28 Sv
+    # surface budget. The two boundary terms represent Bering Strait
+    # and the azonal southern-boundary circulation. Their sum leaves the
+    # overturning boundary transport as a prediction of the steady budget.
+    # The external-reservoir flux closes the six-box virtual-salt inventory.
+    amoc_control_salinity_mode: AmocControlSalinityMode = "freshwater_budget"
+    amoc_control_north_surface_freshwater_sv: float = 0.37
+    amoc_control_lower_atlantic_surface_freshwater_sv: float = -0.65
+    amoc_control_northern_boundary_freshwater_sv: float = 0.06
+    amoc_control_southern_gyre_freshwater_sv: float = 0.38
+    # Large South Atlantic boundary reservoir used for the upper inflow and
+    # deep return, and to place compensating virtual salt outside the Atlantic.
+    # In freshwater-budget mode this is only part of the conserved absolute
+    # salt-inventory seed; it cannot select the solved salinity contrasts or
+    # FovS. In prescribed-hydrography mode it is the upper boundary salinity.
     amoc_external_box_volume_m3: float = 9.0e17
-    initial_external_salinity_psu: float = 34.70
+    initial_external_salinity_psu: float = 35.15
     # Conservative anomaly exchange with the external ocean. These transports
     # relax only departures from the control-state salinity contrasts, so the
     # calibrated initial equilibrium is unchanged. They represent unresolved
@@ -706,6 +723,9 @@ class ModelConfig:
     # while preserving total salt exactly.
     amoc_southern_external_exchange_sv: float = 5.0
     amoc_south_atlantic_external_exchange_sv: float = 0.50
+    # Open overturning: external -> SAU -> tropical -> north -> deep -> external.
+    # False retains the historical closed-loop topology for attribution only.
+    amoc_open_boundary_enabled: bool = True
     # Exact projection is permitted only for floating-point roundoff. The
     # pre-projection residual is recorded and any larger leak aborts the run.
     salt_projection_max_residual_ppm: float = 1.0e-8
@@ -774,6 +794,9 @@ class ModelConfig:
     greenland_reference_seasonal_amplitude_c: float = 13.5
     greenland_reference_temperature_peak_phase: float = 0.54
     greenland_pdd_melt_factor_gt_per_degree_day: float = 0.38
+    # Gaussian daily variability in the PDD integral (Reeh-type approximation).
+    # A conventional structural default; local/seasonal variability is unresolved.
+    greenland_daily_temperature_std_c: float = 4.5
     greenland_baseline_precipitation_gt_per_year: float = 700.0
     greenland_precipitation_fraction_per_k: float = 0.05
     greenland_snow_rain_transition_c: float = 1.0
@@ -1328,6 +1351,8 @@ class ModelConfig:
             raise ValueError("greenland_seasonal_runoff_fraction must be in [0, 1]")
         if self.water_vapor_emission_height_km_per_lnq < 0.0:
             raise ValueError("water-vapor emission-height response cannot be negative")
+        if not math.isfinite(self.water_vapor_optical_path_scale) or self.water_vapor_optical_path_scale <= 0.0:
+            raise ValueError("water_vapor_optical_path_scale must be finite and positive")
         if not 0.0 < self.longwave_spectral_factor <= 1.5:
             raise ValueError("longwave_spectral_factor must be in (0, 1.5]")
         if self.cryosphere_adjustment_years <= 0.0:
@@ -1382,6 +1407,8 @@ class ModelConfig:
             raise ValueError("greenland_reference_temperature_peak_phase must be in [0, 1)")
         if self.greenland_pdd_melt_factor_gt_per_degree_day < 0.0:
             raise ValueError("greenland_pdd_melt_factor_gt_per_degree_day cannot be negative")
+        if not math.isfinite(self.greenland_daily_temperature_std_c) or self.greenland_daily_temperature_std_c < 0.0:
+            raise ValueError("greenland_daily_temperature_std_c must be finite and nonnegative")
         if self.greenland_baseline_precipitation_gt_per_year <= 0.0:
             raise ValueError("greenland_baseline_precipitation_gt_per_year must be positive")
         if self.greenland_precipitation_fraction_per_k < 0.0:
@@ -1577,14 +1604,38 @@ class ModelConfig:
             raise ValueError("initial density-ratio bounds are inconsistent")
         if self.fovs_reference_salinity_psu <= 0.0:
             raise ValueError("fovs_reference_salinity_psu must be positive")
-        if not -1.0 <= self.initial_fovs_sv <= 1.0:
-            raise ValueError("initial_fovs_sv must lie between -1 and 1 Sv")
-        derived_upper_salinity = (
-            self.initial_deep_salinity_psu
-            - self.initial_fovs_sv
-            * self.fovs_reference_salinity_psu
-            / self.amoc_reference_sv
+        if self.amoc_control_salinity_mode not in {
+            "freshwater_budget", "prescribed_hydrography"
+        }:
+            raise ValueError(
+                "amoc_control_salinity_mode must be freshwater_budget or "
+                "prescribed_hydrography"
+            )
+        control_freshwater = (
+            self.amoc_control_north_surface_freshwater_sv,
+            self.amoc_control_lower_atlantic_surface_freshwater_sv,
+            self.amoc_control_northern_boundary_freshwater_sv,
+            self.amoc_control_southern_gyre_freshwater_sv,
         )
+        if any(not math.isfinite(value) for value in control_freshwater):
+            raise ValueError("control freshwater fluxes must be finite")
+        if any(abs(value) > 1.0 for value in control_freshwater):
+            raise ValueError("each control freshwater flux must lie within +/-1 Sv")
+        legacy_hydrography_active = (
+            self.amoc_control_salinity_mode == "prescribed_hydrography"
+            or not self.amoc_open_boundary_enabled
+        )
+        if legacy_hydrography_active:
+            if not -1.0 <= self.initial_fovs_sv <= 1.0:
+                raise ValueError("initial_fovs_sv must lie between -1 and 1 Sv")
+            derived_upper_salinity = (
+                self.initial_deep_salinity_psu
+                - self.initial_fovs_sv
+                * self.fovs_reference_salinity_psu
+                / self.amoc_reference_sv
+            )
+        else:
+            derived_upper_salinity = self.initial_deep_salinity_psu
         initial_salinities = [
             self.initial_north_salinity_psu,
             self.initial_tropical_salinity_psu,
@@ -2995,7 +3046,10 @@ def build_baseline_temperature_components(
         unconstrained_ocean = raw_ocean + offset
         positive_excess = np.maximum(unconstrained_ocean - freezing, 0.0)
         ocean = freezing + (1.0 - arctic_blend_2d) * positive_excess
-        ocean = np.where(active_arctic_ocean, np.maximum(ocean, freezing), unconstrained_ocean)
+        ocean = np.where(active_arctic_ocean, ocean, unconstrained_ocean)
+        # The Southern Ocean is liquid too. Apply the bound before solving
+        # the global-mean offset, so the correction cannot undo the floor.
+        ocean = np.maximum(ocean, freezing)
         blended = (
             grid.land_fraction_map * land
             + grid.ocean_fraction_map * ocean
@@ -3129,6 +3183,182 @@ def _baseline_amoc_south_atlantic_upper_temperature(
     return float(np.sum(baseline_ocean_map_c * weights) / denominator)
 
 
+def amoc_box_volumes(config: ModelConfig) -> np.ndarray:
+    """Return AMOC salinity-box volumes in the model's canonical order."""
+
+    return np.array(
+        [
+            config.amoc_north_box_volume_m3,
+            config.amoc_tropical_box_volume_m3,
+            config.amoc_south_atlantic_upper_box_volume_m3,
+            config.amoc_southern_box_volume_m3,
+            config.amoc_deep_box_volume_m3,
+            config.amoc_external_box_volume_m3,
+        ],
+        dtype=float,
+    )
+
+
+def amoc_control_salinity_seed(config: ModelConfig) -> np.ndarray:
+    """Return the salt-inventory seed or prescribed control hydrography."""
+
+    south_upper = float(
+        config.initial_deep_salinity_psu
+        if (
+            config.amoc_control_salinity_mode == "freshwater_budget"
+            and config.amoc_open_boundary_enabled
+        )
+        else (
+            config.initial_deep_salinity_psu
+            - config.initial_fovs_sv
+            * config.fovs_reference_salinity_psu
+            / config.amoc_reference_sv
+        )
+    )
+    return np.array(
+        [
+            config.initial_north_salinity_psu,
+            config.initial_tropical_salinity_psu,
+            south_upper,
+            config.initial_southern_salinity_psu,
+            config.initial_deep_salinity_psu,
+            config.initial_external_salinity_psu,
+        ],
+        dtype=float,
+    )
+
+
+def configured_control_surface_freshwater_fluxes(config: ModelConfig) -> np.ndarray:
+    """Map steady-equivalent surface freshwater onto the salinity boxes."""
+
+    flux = np.array(
+        [
+            config.amoc_control_north_surface_freshwater_sv,
+            config.amoc_control_lower_atlantic_surface_freshwater_sv,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+        ],
+        dtype=float,
+    )
+    flux[5] = -float(np.sum(flux[:5]))
+    return flux
+
+
+def configured_control_boundary_freshwater_fluxes(config: ModelConfig) -> np.ndarray:
+    """Map non-overturning boundary freshwater transports onto salt boxes."""
+
+    flux = np.array(
+        [
+            config.amoc_control_northern_boundary_freshwater_sv,
+            0.0,
+            config.amoc_control_southern_gyre_freshwater_sv,
+            0.0,
+            0.0,
+            0.0,
+        ],
+        dtype=float,
+    )
+    flux[5] = -float(np.sum(flux[:5]))
+    return flux
+
+
+def configured_control_box_freshwater_fluxes(config: ModelConfig) -> np.ndarray:
+    """Return combined virtual freshwater forcing used by salinity dynamics."""
+
+    return (
+        configured_control_surface_freshwater_fluxes(config)
+        + configured_control_boundary_freshwater_fluxes(config)
+    )
+
+
+def solve_amoc_control_salinity(
+    config: ModelConfig,
+    *,
+    seed_salinity: np.ndarray | None = None,
+    box_volumes_m3: np.ndarray | None = None,
+) -> np.ndarray:
+    """Solve the steady control salinity without prescribing FovS.
+
+    The seed fixes total salt and the disconnected Southern surface box. The
+    connected-box contrasts follow from the steady advective, mixing, and
+    independently configured freshwater budgets.
+    """
+
+    seed = np.asarray(
+        amoc_control_salinity_seed(config)
+        if seed_salinity is None
+        else seed_salinity,
+        dtype=float,
+    ).copy()
+    if (
+        config.amoc_control_salinity_mode != "freshwater_budget"
+        or not config.amoc_open_boundary_enabled
+    ):
+        return seed
+    volumes = np.asarray(
+        amoc_box_volumes(config) if box_volumes_m3 is None else box_volumes_m3,
+        dtype=float,
+    )
+    if seed.shape != (6,) or volumes.shape != (6,):
+        raise ValueError("AMOC salinity seed and volume arrays must have length 6")
+
+    active = np.array([0, 1, 2, 4, 5], dtype=int)
+    q = float(config.amoc_reference_sv)
+    north_gyre = float(config.amoc_north_tropical_gyre_sv)
+    south_gyre = float(config.amoc_tropical_southern_gyre_sv)
+    convection = float(config.amoc_convective_mixing_reference_sv)
+
+    def salt_transport_psu_sv(values: np.ndarray) -> np.ndarray:
+        salinity = np.zeros(6, dtype=float)
+        salinity[active] = values
+        transport = np.zeros(6, dtype=float)
+        transport[0] += q * (salinity[1] - salinity[0])
+        transport[1] += q * (salinity[2] - salinity[1])
+        transport[2] += q * (salinity[5] - salinity[2])
+        transport[4] += q * (salinity[0] - salinity[4])
+        transport[5] += q * (salinity[4] - salinity[5])
+        north_exchange = north_gyre * (salinity[1] - salinity[0])
+        transport[0] += north_exchange
+        transport[1] -= north_exchange
+        south_exchange = south_gyre * (salinity[1] - salinity[2])
+        transport[2] += south_exchange
+        transport[1] -= south_exchange
+        convective_exchange = convection * (salinity[4] - salinity[0])
+        transport[0] += convective_exchange
+        transport[4] -= convective_exchange
+        return transport
+
+    operator = np.column_stack(
+        [
+            salt_transport_psu_sv(np.eye(len(active))[j])
+            for j in range(len(active))
+        ]
+    )
+    independent_rows = np.array([0, 1, 2, 4], dtype=int)
+    connected_volume = float(np.sum(volumes[active]))
+    inventory_weights = volumes[active] / connected_volume
+    matrix = np.vstack([operator[independent_rows], inventory_weights])
+    freshwater = configured_control_box_freshwater_fluxes(config)
+    connected_inventory = float(np.sum(volumes[active] * seed[active]))
+    rhs = np.concatenate(
+        [
+            config.fovs_reference_salinity_psu * freshwater[independent_rows],
+            [connected_inventory / connected_volume],
+        ]
+    )
+    solved = np.linalg.solve(matrix, rhs)
+    result = seed.copy()
+    result[active] = solved
+    residual = salt_transport_psu_sv(solved) - (
+        config.fovs_reference_salinity_psu * freshwater
+    )
+    if float(np.max(np.abs(residual[active]))) > 1.0e-9:
+        raise FloatingPointError("control salinity budget solve did not close")
+    return result
+
+
 def initial_amoc_density_diagnostics(
     config: ModelConfig,
     *,
@@ -3154,19 +3384,16 @@ def initial_amoc_density_diagnostics(
         config.arctic_module_full_latitude_deg,
         config.arctic_interface_freezing_temperature_c,
     )
-    south_upper_salinity = float(
-        config.initial_deep_salinity_psu
-        - config.initial_fovs_sv
-        * config.fovs_reference_salinity_psu
-        / config.amoc_reference_sv
-    )
+    control_salinity = solve_amoc_control_salinity(config)
+    north_salinity = float(control_salinity[0])
+    south_upper_salinity = float(control_salinity[2])
     high_latitude_geometry = config.amoc_density_geometry in {
         "interhemispheric_high_latitude",
         "legacy_southern_surface",
     }
     if high_latitude_geometry:
         active_source_temperature = southern
-        active_source_salinity = float(config.initial_southern_salinity_psu)
+        active_source_salinity = float(control_salinity[3])
         reference_driver = float(config.amoc_reference_density_driver)
     else:
         active_source_temperature = source_temperature
@@ -3180,7 +3407,7 @@ def initial_amoc_density_diagnostics(
         source_latitude = -52.5 if high_latitude_geometry else -35.0
         driver = teos10_density_driver(
             north_temperature_c=north,
-            north_salinity_psu=float(config.initial_north_salinity_psu),
+            north_salinity_psu=north_salinity,
             source_temperature_c=active_source_temperature,
             source_salinity_psu=active_source_salinity,
             source_longitude_deg=-20.0,
@@ -3192,6 +3419,7 @@ def initial_amoc_density_diagnostics(
         # contrast with the old linear alpha/beta reference made the nominal
         # control ratio about 2.7 and disabled the initial-density safety gate.
         canonical = ModelConfig()
+        canonical_salinity = solve_amoc_control_salinity(canonical)
         control_midpoint = 0.5 * (north + southern)
         reference_north = float(
             control_midpoint
@@ -3209,22 +3437,17 @@ def initial_amoc_density_diagnostics(
                 canonical.arctic_interface_freezing_temperature_c,
             )
         )
-        reference_south_upper_salinity = float(
-            canonical.initial_deep_salinity_psu
-            - canonical.initial_fovs_sv
-            * canonical.fovs_reference_salinity_psu
-            / canonical.amoc_reference_sv
-        )
+        reference_south_upper_salinity = float(canonical_salinity[2])
         teos_reference_driver = teos10_density_driver(
             north_temperature_c=reference_north,
-            north_salinity_psu=float(canonical.initial_north_salinity_psu),
+            north_salinity_psu=float(canonical_salinity[0]),
             source_temperature_c=(
                 reference_southern
                 if high_latitude_geometry
                 else reference_south_upper_temperature
             ),
             source_salinity_psu=(
-                float(canonical.initial_southern_salinity_psu)
+                float(canonical_salinity[3])
                 if high_latitude_geometry
                 else reference_south_upper_salinity
             ),
@@ -3241,9 +3464,40 @@ def initial_amoc_density_diagnostics(
             active_source_temperature - north
         )
         haline = float(config.haline_contraction_per_psu) * (
-            float(config.initial_north_salinity_psu) - active_source_salinity
+            north_salinity - active_source_salinity
         )
         driver = float(thermal + haline)
+        if not high_latitude_geometry:
+            # The South-Atlantic source temperature is grid dependent, so its
+            # linear reference must be evaluated on the same grid rather than
+            # compared with the old fixed hydrography. Preserve the configured
+            # reference field as an explicit scale relative to its default.
+            canonical = ModelConfig()
+            canonical_salinity = solve_amoc_control_salinity(canonical)
+            control_midpoint = 0.5 * (north + southern)
+            reference_north = float(
+                control_midpoint
+                + 0.5 * canonical.amoc_control_north_minus_south_temperature_c
+            )
+            reference_source_temperature = (
+                _baseline_amoc_south_atlantic_upper_temperature(
+                    config.resolution_deg,
+                    canonical.arctic_module_start_latitude_deg,
+                    canonical.arctic_module_full_latitude_deg,
+                    canonical.arctic_interface_freezing_temperature_c,
+                )
+            )
+            canonical_linear_driver = float(
+                canonical.thermal_expansion_per_k
+                * (reference_source_temperature - reference_north)
+                + canonical.haline_contraction_per_psu
+                * (canonical_salinity[0] - canonical_salinity[2])
+            )
+            reference_driver = float(
+                canonical_linear_driver
+                * config.amoc_reference_density_driver
+                / canonical.amoc_reference_density_driver
+            )
         linear_reference_ratio = float(driver / reference_driver)
 
     ratio = float(driver / reference_driver)
@@ -3251,6 +3505,7 @@ def initial_amoc_density_diagnostics(
         "baseline_north_temperature_c": north,
         "baseline_southern_temperature_c": southern,
         "baseline_south_atlantic_upper_temperature_c": source_temperature,
+        "baseline_north_salinity_psu": north_salinity,
         "active_source_temperature_c": active_source_temperature,
         "active_source_salinity_psu": active_source_salinity,
         "thermal_density_driver": thermal,
@@ -3314,6 +3569,15 @@ def annual_mean_insolation(lat_deg: np.ndarray, solar_constant_wm2: float) -> np
         + np.cos(latitude) * np.cos(declination) * np.sin(hour_angle)
     )
     return np.mean(np.maximum(daily, 0.0), axis=1)
+
+
+def expected_positive_temperature(mean_c: Any, std_c: float) -> np.ndarray:
+    """E[max(T, 0)] for Gaussian daily temperatures, in degrees Celsius."""
+    mean = np.asarray(mean_c, dtype=float)
+    if std_c == 0.0:
+        return np.maximum(mean, 0.0)
+    z = mean / std_c
+    return std_c * np.exp(-0.5 * z * z) / math.sqrt(2.0 * math.pi) + mean * ndtr(z)
 
 
 def saturation_specific_humidity(
@@ -3625,10 +3889,10 @@ class ProcessClimateModel:
         self.arctic_raw_reference_ice_export_freshwater_sv = float(
             np.mean(reference_export_samples_sv)
         )
-        self.arctic_ice_export_freshwater_salinity_scale = float(
-            config.arctic_ice_export_freshwater_reference_sv
-            / max(self.arctic_raw_reference_ice_export_freshwater_sv, 1.0e-12)
-        )
+        # Exported latent energy and freshwater must describe the same ice.
+        # The old observation-based freshwater-only multiplier broke that
+        # identity. Keep the old config target as a historical diagnostic only.
+        self.arctic_ice_export_freshwater_salinity_scale = 1.0
         freezing = float(config.arctic_interface_freezing_temperature_c)
         self._arctic_open_water_temperature_maxima = {
             1.0e-6: freezing,
@@ -3724,40 +3988,31 @@ class ProcessClimateModel:
         self.baseline_amoc_southern_c = float(
             control_midpoint_c - 0.5 * control_contrast_c
         )
-        self.baseline_amoc_deep_c = self.baseline_amoc_southern_c - 2.0
+        self.baseline_amoc_deep_c = max(
+            self.baseline_amoc_southern_c - 2.0,
+            config.arctic_interface_freezing_temperature_c,
+        )
 
-        self.amoc_box_volumes_m3 = np.array(
-            [
-                config.amoc_north_box_volume_m3,
-                config.amoc_tropical_box_volume_m3,
-                config.amoc_south_atlantic_upper_box_volume_m3,
-                config.amoc_southern_box_volume_m3,
-                config.amoc_deep_box_volume_m3,
-                config.amoc_external_box_volume_m3,
-            ],
-            dtype=float,
-        )
-        self.initial_south_atlantic_upper_salinity_psu = float(
-            config.initial_deep_salinity_psu
-            - config.initial_fovs_sv
-            * config.fovs_reference_salinity_psu
-            / config.amoc_reference_sv
-        )
-        initial_salinity = np.array(
-            [
-                config.initial_north_salinity_psu,
-                config.initial_tropical_salinity_psu,
-                self.initial_south_atlantic_upper_salinity_psu,
-                config.initial_southern_salinity_psu,
-                config.initial_deep_salinity_psu,
-                config.initial_external_salinity_psu,
-            ],
-            dtype=float,
-        )
+        self.amoc_box_volumes_m3 = amoc_box_volumes(config)
+        seed_salinity = amoc_control_salinity_seed(config)
         # The freshwater transport definition conventionally uses S0 = 35.
         # Keep this reference independent of the domain-mean salinity.
         self.amoc_reference_salinity_psu = float(
             config.fovs_reference_salinity_psu
+        )
+        initial_salinity = self._control_salinity_from_freshwater_budget(
+            seed_salinity
+        )
+        if (
+            not np.all(np.isfinite(initial_salinity))
+            or np.any(initial_salinity <= 0.0)
+            or np.any(initial_salinity >= 50.0)
+        ):
+            raise ValueError(
+                "Solved AMOC control salinities must be finite and between 0 and 50 PSU"
+            )
+        self.initial_south_atlantic_upper_salinity_psu = float(
+            initial_salinity[2]
         )
         self.initial_amoc_salinity_psu = initial_salinity.copy()
         self.amoc_total_box_volume_m3 = float(np.sum(self.amoc_box_volumes_m3))
@@ -3787,8 +4042,22 @@ class ProcessClimateModel:
         self._freshwater_override_sv: float | None = None
         self._reference_residual_mode = False
         self._reference_tendency_residual_cache: dict[tuple[float, float], ModelState] = {}
-        self.baseline_surface_freshwater_sv = self._calibrate_surface_freshwater_fluxes(
-            initial_salinity
+        self.baseline_box_virtual_freshwater_sv = (
+            self._configured_control_box_freshwater_fluxes()
+            if config.amoc_control_salinity_mode == "freshwater_budget"
+            and config.amoc_open_boundary_enabled
+            else self._calibrate_surface_freshwater_fluxes(initial_salinity)
+        )
+        # Compatibility alias for older analysis code. In freshwater-budget
+        # mode this includes non-overturning boundary terms as virtual fluxes.
+        self.baseline_surface_freshwater_sv = (
+            self.baseline_box_virtual_freshwater_sv.copy()
+        )
+        self.baseline_control_boundary_freshwater_sv = (
+            self._configured_control_boundary_freshwater_fluxes()
+            if config.amoc_control_salinity_mode == "freshwater_budget"
+            and config.amoc_open_boundary_enabled
+            else np.zeros(6, dtype=float)
         )
 
         zeros = np.zeros_like(self.grid.lat)
@@ -3829,12 +4098,12 @@ class ProcessClimateModel:
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_seasonal_ice_fraction=arctic_reference_0["atlantic_ice_fraction"].copy(),
             arctic_non_atlantic_seasonal_ice_fraction=arctic_reference_0["non_atlantic_ice_fraction"].copy(),
-            north_salinity_psu=config.initial_north_salinity_psu,
-            tropical_salinity_psu=config.initial_tropical_salinity_psu,
-            south_atlantic_upper_salinity_psu=self.initial_south_atlantic_upper_salinity_psu,
-            southern_salinity_psu=config.initial_southern_salinity_psu,
-            deep_salinity_psu=config.initial_deep_salinity_psu,
-            external_salinity_psu=config.initial_external_salinity_psu,
+            north_salinity_psu=float(initial_salinity[0]),
+            tropical_salinity_psu=float(initial_salinity[1]),
+            south_atlantic_upper_salinity_psu=float(initial_salinity[2]),
+            southern_salinity_psu=float(initial_salinity[3]),
+            deep_salinity_psu=float(initial_salinity[4]),
+            external_salinity_psu=float(initial_salinity[5]),
             pycnocline_depth_m=config.amoc_initial_pycnocline_depth_m,
             convection_efficiency=1.0,
             amoc_sv=config.amoc_reference_sv,
@@ -7734,7 +8003,8 @@ class ProcessClimateModel:
 
         h0_m = self.emission_height_base_km * 1000.0
         lnq = np.log(np.maximum(q, 1.0e-12) / np.maximum(q0, 1.0e-12))
-        h_full_m = h0_m + cfg.water_vapor_emission_height_km_per_lnq * 1000.0 * lnq
+        vapor_path_weight = q0 / (q0 + cfg.water_vapor_optical_path_scale)
+        h_full_m = h0_m + cfg.water_vapor_emission_height_km_per_lnq * 1000.0 * vapor_path_weight * lnq
         h_full_m = np.clip(h_full_m, 1000.0, 11000.0)
 
         emission0 = np.clip(t0 - gamma0 * h0_m, 180.0, 320.0)
@@ -7954,6 +8224,58 @@ class ProcessClimateModel:
             "north_deep_anomaly": float(north_deep_anomaly),
         }
 
+    def _density_source_temperature(
+        self,
+        north_temperature_c: float,
+        southern_temperature_c: float,
+        north_surface_anomaly_c: float,
+        north_deep_anomaly_c: float,
+        south_atlantic_upper_temperature_c: float | None,
+    ) -> float:
+        """Return the source temperature used by the hydraulic density driver."""
+
+        cfg = self.config
+        literal_source_temperature = cfg.amoc_density_eos in {
+            "teos10",
+            "teos10_surface_watermass",
+        }
+        if cfg.amoc_density_geometry in {
+            "interhemispheric_high_latitude",
+            "legacy_southern_surface",
+        }:
+            if literal_source_temperature:
+                return float(southern_temperature_c)
+            effective_delta_t = (
+                self.baseline_amoc_southern_c
+                - self.baseline_amoc_north_c
+                - cfg.amoc_temperature_density_coupling
+                * (float(north_surface_anomaly_c) - float(north_deep_anomaly_c))
+            )
+            return float(north_temperature_c) + effective_delta_t
+
+        if literal_source_temperature:
+            if south_atlantic_upper_temperature_c is None:
+                raise ValueError(
+                    "South Atlantic upper-limb surface-water temperature is required "
+                    "for the literal-source TEOS-10 sensitivity"
+                )
+            return float(south_atlantic_upper_temperature_c)
+
+        # The 35 S tracer supplies the boundary salinity, while the temperature
+        # represents water after northward transformation into the sinking
+        # branch. Tying that temperature to northern surface-to-deep
+        # stratification avoids treating local subtropical warming as a growing
+        # hydraulic density head. The control state remains unchanged.
+        northern_stratification_anomaly = (
+            float(north_surface_anomaly_c) - float(north_deep_anomaly_c)
+        )
+        return float(
+            self.baseline_amoc_south_atlantic_upper_c
+            + float(north_surface_anomaly_c)
+            - cfg.amoc_temperature_density_coupling
+            * northern_stratification_anomaly
+        )
+
     def _density_driver_from_values(
         self,
         north_temperature_c: float,
@@ -7966,43 +8288,35 @@ class ProcessClimateModel:
         south_atlantic_upper_salinity_psu: float | None = None,
     ) -> float:
         cfg = self.config
-        if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}:
+        high_latitude_geometry = cfg.amoc_density_geometry in {
+            "interhemispheric_high_latitude",
+            "legacy_southern_surface",
+        }
+        if high_latitude_geometry:
             # Exact R13/R14 geometry retained for structural attribution.
-            baseline_delta_t = self.baseline_amoc_southern_c - self.baseline_amoc_north_c
-            northern_stratification_anomaly = (
-                float(north_surface_anomaly_c) - float(north_deep_anomaly_c)
-            )
-            effective_delta_t = (
-                baseline_delta_t
-                - cfg.amoc_temperature_density_coupling
-                * northern_stratification_anomaly
-            )
-            source_temperature_c = float(southern_temperature_c)
             source_salinity_psu = float(southern_salinity_psu)
-            thermal_delta_t = effective_delta_t
         else:
-            if south_atlantic_upper_temperature_c is None or south_atlantic_upper_salinity_psu is None:
-                raise ValueError("South Atlantic upper-limb density geometry requires source temperature and salinity")
-            source_temperature_c = float(south_atlantic_upper_temperature_c)
+            if south_atlantic_upper_salinity_psu is None:
+                raise ValueError(
+                    "South Atlantic upper-limb density geometry requires source salinity"
+                )
             source_salinity_psu = float(south_atlantic_upper_salinity_psu)
-            # Both thermal and haline terms now compare the same source and
-            # sinking water masses. This removes the old Southern-surface/FovS
-            # inconsistency and its fragile cancellation.
-            thermal_delta_t = source_temperature_c - float(north_temperature_c)
+
+        source_temperature_c = self._density_source_temperature(
+            north_temperature_c,
+            southern_temperature_c,
+            north_surface_anomaly_c,
+            north_deep_anomaly_c,
+            south_atlantic_upper_temperature_c,
+        )
+        thermal_delta_t = source_temperature_c - float(north_temperature_c)
 
         if cfg.amoc_density_eos in {"teos10", "teos10_surface_watermass", "teos10_matched"}:
             from amoc_density_r16 import teos10_density_driver
-            teos_source_temperature = source_temperature_c
-            if cfg.amoc_density_eos == "teos10_matched":
-                # Change only the nonlinear EOS. The effective north-to-source
-                # temperature difference follows the exact linear hydraulic
-                # pathway, while absolute warming can still alter TEOS-10
-                # expansion coefficients naturally.
-                teos_source_temperature = float(north_temperature_c) + thermal_delta_t
             return teos10_density_driver(
                 north_temperature_c=float(north_temperature_c),
                 north_salinity_psu=float(north_salinity_psu),
-                source_temperature_c=teos_source_temperature,
+                source_temperature_c=source_temperature_c,
                 source_salinity_psu=source_salinity_psu,
                 source_longitude_deg=-20.0,
                 source_latitude_deg=(-52.5 if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"} else -35.0),
@@ -8026,6 +8340,40 @@ class ProcessClimateModel:
                 state.external_salinity_psu,
             ],
             dtype=float,
+        )
+
+    def _configured_control_surface_freshwater_fluxes(self) -> np.ndarray:
+        """Map steady-equivalent surface freshwater onto salt boxes.
+
+        Positive values freshen the represented Atlantic. The external residual
+        represents the atmospheric compensation required by the closed virtual-
+        salt system.
+        """
+        return configured_control_surface_freshwater_fluxes(self.config)
+
+    def _configured_control_boundary_freshwater_fluxes(self) -> np.ndarray:
+        """Map non-overturning boundary freshwater transports onto salt boxes."""
+        return configured_control_boundary_freshwater_fluxes(self.config)
+
+    def _configured_control_box_freshwater_fluxes(self) -> np.ndarray:
+        """Return the combined virtual freshwater forcing used by salinity."""
+        return configured_control_box_freshwater_fluxes(self.config)
+
+    def _control_salinity_from_freshwater_budget(
+        self, seed_salinity: np.ndarray
+    ) -> np.ndarray:
+        """Solve the open-loop steady salinity from fixed freshwater forcing.
+
+        The seed supplies total salt and the disconnected Southern surface-box
+        salinity only. Salinity contrasts in the overturning loop are obtained
+        from steady advection, gyre exchange, convective mixing, and the
+        independently configured freshwater fluxes. No FovS target enters the
+        linear system.
+        """
+        return solve_amoc_control_salinity(
+            self.config,
+            seed_salinity=seed_salinity,
+            box_volumes_m3=self.amoc_box_volumes_m3,
         )
 
     def _project_salinity_to_conserved_total(
@@ -8083,14 +8431,10 @@ class ProcessClimateModel:
 
         Box order is north, tropical, South Atlantic upper limb, Southern
         Ocean surface density reference, deep return limb, external reservoir.
-        Positive overturning across the South Atlantic boundary follows
-        D -> SAU -> T -> N -> D. The fresh Southern Ocean surface box is not
-        inserted into that advective loop: it remains a prognostic surface
-        density-reference reservoir coupled only by its own surface/external
-        exchanges. This keeps the resolved salt transport at 34.5 S consistent
-        with the same SAU/deep limbs used by the FovS diagnostic. Negative
-        overturning reverses the four-box Atlantic loop; no absolute-value
-        transport direction is imposed.
+        Positive open-boundary overturning follows E -> SAU -> T -> N -> D -> E.
+        The legacy closed option follows D -> SAU -> T -> N -> D. The Southern
+        surface reservoir exchanges separately. Negative transport reverses
+        every directed connection, including the external boundary.
         """
         cfg = self.config
         n, t, sau, so, d = 0, 1, 2, 3, 4
@@ -8105,6 +8449,15 @@ class ProcessClimateModel:
             upstream = {n: t, t: sau, sau: d, d: n}
         else:
             upstream = {n: d, d: sau, sau: t, t: n}
+        if cfg.amoc_open_boundary_enabled:
+            # Close the volume circulation through the world-ocean reservoir,
+            # rather than recirculating all deep Atlantic water into SAU.
+            if amoc_sv >= 0.0:
+                upstream[sau] = 5
+                upstream[5] = d
+            else:
+                upstream[d] = 5
+                upstream[5] = sau
         for destination, source in upstream.items():
             tendency[destination] += (
                 q * conversion * (salinity[source] - salinity[destination])
@@ -8156,14 +8509,16 @@ class ProcessClimateModel:
             * self.amoc_box_volumes_m3
             / (self.amoc_reference_salinity_psu * 1.0e6 * SECONDS_PER_YEAR)
         )
-        # Deep and external boxes have no direct control freshwater flux.
+        # The deep box has no surface freshwater flux. The external ocean
+        # does: its control hydrology balances the open boundary salt flux.
         if abs(flux[4]) > 1.0e-10:
             raise ValueError(
                 "Initial deep salinity is inconsistent with the control overturning loop. "
                 "Set initial_deep_salinity_psu equal to initial_north_salinity_psu."
             )
-        flux[4:] = 0.0
-        flux[:4] -= np.sum(flux[:4]) / 4.0
+        flux[4] = 0.0
+        surface_boxes = [0, 1, 2, 3, 5]
+        flux[surface_boxes] -= np.sum(flux) / len(surface_boxes)
         return flux
 
     def _greenland_regional_warming_c(self, state: ModelState) -> float:
@@ -8364,8 +8719,8 @@ class ProcessClimateModel:
         )
         effective_anomaly = anomaly + elevation_warming_c
         surface_temperature = reference_temperature + effective_anomaly
-        current_positive_temperature = max(surface_temperature, 0.0)
-        reference_positive_temperature = max(reference_temperature, 0.0)
+        current_positive_temperature = float(expected_positive_temperature(surface_temperature, cfg.greenland_daily_temperature_std_c))
+        reference_positive_temperature = float(expected_positive_temperature(reference_temperature, cfg.greenland_daily_temperature_std_c))
         pdd_rate = DAYS_PER_YEAR * current_positive_temperature
         reference_pdd_rate = DAYS_PER_YEAR * reference_positive_temperature
         melt_anomaly = (
@@ -8423,10 +8778,10 @@ class ProcessClimateModel:
                 1.0,
             )
         )
+        reference_melt = cfg.greenland_pdd_melt_factor_gt_per_degree_day * reference_pdd_rate
         runoff_melt_anomaly = (
-            (1.0 - retention_fraction) * melt_anomaly
-            if melt_anomaly >= 0.0
-            else melt_anomaly
+            (1.0 - retention_fraction) * (reference_melt + melt_anomaly)
+            - (1.0 - cfg.greenland_meltwater_retention_fraction) * reference_melt
         )
         net_surface_loss = runoff_melt_anomaly - snowfall_anomaly
         remaining_fraction = float(
@@ -8449,6 +8804,7 @@ class ProcessClimateModel:
             "elevation_feedback_warming_c": float(elevation_warming_c),
             "positive_degree_day_rate": float(pdd_rate),
             "melt_anomaly_gt_per_year": float(melt_anomaly),
+            "reference_melt_gt_per_year": float(reference_melt),
             "snowfall_anomaly_gt_per_year": float(snowfall_anomaly),
             "retention_fraction": retention_fraction,
             "net_surface_loss_gt_per_year": float(net_surface_loss),
@@ -8534,7 +8890,8 @@ class ProcessClimateModel:
         melt_anomaly = (
             cfg.greenland_pdd_melt_factor_gt_per_degree_day
             * DAYS_PER_YEAR
-            * (np.maximum(surface, 0.0) - np.maximum(reference, 0.0))
+            * (expected_positive_temperature(surface, cfg.greenland_daily_temperature_std_c)
+               - expected_positive_temperature(reference, cfg.greenland_daily_temperature_std_c))
         )
         width = cfg.greenland_snow_rain_transition_width_c
         current_snow = 1.0 / (
@@ -8573,10 +8930,13 @@ class ProcessClimateModel:
                 1.0,
             )
         )
-        runoff_melt = np.where(
-            melt_anomaly >= 0.0,
-            (1.0 - retention) * melt_anomaly,
-            melt_anomaly,
+        reference_melt = (
+            cfg.greenland_pdd_melt_factor_gt_per_degree_day * DAYS_PER_YEAR
+            * expected_positive_temperature(reference, cfg.greenland_daily_temperature_std_c)
+        )
+        runoff_melt = (
+            (1.0 - retention) * (reference_melt + melt_anomaly)
+            - (1.0 - cfg.greenland_meltwater_retention_fraction) * reference_melt
         )
         net_loss = runoff_melt - snowfall_anomaly
         remaining_fraction = float(
@@ -8726,7 +9086,7 @@ class ProcessClimateModel:
         sea_ice_export_sv: float = 0.0,
     ) -> np.ndarray:
         cfg = self.config
-        flux = self.baseline_surface_freshwater_sv.copy()
+        flux = self.baseline_box_virtual_freshwater_sv.copy()
         north_fraction = cfg.hydrological_freshwater_north_fraction
         flux[0] += hosing_sv + greenland_sv + hydrological_sv * north_fraction
         flux[1] += hydrological_sv * (1.0 - north_fraction)
@@ -8994,20 +9354,14 @@ class ProcessClimateModel:
         )
         total_salt = fixed_volume_salinity_inventory * ocean_volume_scale
         salt_error_ppm = 1.0e6 * (total_salt / self.initial_total_salt_psu_m3 - 1.0)
-        # Two-layer reduction of the section-integrated overturning
-        # freshwater transport at nominally 34.5 S:
-        #   FovS = -q (S_upper - S_deep) / S0.
-        # The dedicated South Atlantic upper-limb tracer prevents the fresh
-        # Southern Ocean surface box from being incorrectly used as the
-        # northward-flowing upper branch. Negative FovS means the overturning
-        # imports salinity (exports freshwater) into the Atlantic, matching the
-        # observational convention and the sign linked to salt-advection
-        # feedback in AMOC stability studies.
+        # Legacy internal SAU/deep section transport. This was historically
+        # called FovS, but it is inside the open model boundary and cannot be
+        # used as the basin freshwater-budget stability indicator.
         south_atlantic_limb_contrast = (
             state.south_atlantic_upper_salinity_psu
             - state.deep_salinity_psu
         )
-        fovs_sv = (
+        internal_fovs_sv = (
             -state.amoc_sv
             * south_atlantic_limb_contrast
             / cfg.fovs_reference_salinity_psu
@@ -9041,21 +9395,111 @@ class ProcessClimateModel:
             if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}
             else state.south_atlantic_upper_salinity_psu
         )
-        density_source_temperature = (
-            temperatures["southern"]
-            if cfg.amoc_density_geometry in {"interhemispheric_high_latitude", "legacy_southern_surface"}
-            else temperatures["south_atlantic_upper"]
+        density_source_temperature = self._density_source_temperature(
+            temperatures["north"],
+            temperatures["southern"],
+            temperatures["north_surface_anomaly"],
+            temperatures["north_deep_anomaly"],
+            temperatures["south_atlantic_upper"],
+        )
+        eos_diagnostics = {}
+        if cfg.amoc_density_eos != "linear":
+            from amoc_density_r16 import teos10_density_diagnostics
+            eos_diagnostics = {
+                "amoc_" + name: value for name, value in teos10_density_diagnostics(
+                    north_temperature_c=temperatures["north"],
+                    north_salinity_psu=state.north_salinity_psu,
+                    source_temperature_c=density_source_temperature,
+                    source_salinity_psu=density_source_salinity,
+                    source_longitude_deg=-20.0,
+                    source_latitude_deg=(-35.0 if cfg.amoc_density_geometry == "south_atlantic_upper" else -52.5),
+                    reference_density_kg_m3=cfg.reference_density_kg_m3,
+                ).items() if name != "density_driver"
+            }
+        basin_indices = [0, 1, 2, 4]
+        basin_inventory_anomaly = float(np.sum(
+            self.amoc_box_volumes_m3[basin_indices]
+            * (salinity[basin_indices] * ocean_volume_scale
+               - self.initial_amoc_salinity_psu[basin_indices])
+        ))
+        boundary_upper_salinity = (
+            state.external_salinity_psu if state.amoc_sv >= 0.0
+            else state.south_atlantic_upper_salinity_psu
+        )
+        boundary_deep_salinity = (
+            state.deep_salinity_psu if state.amoc_sv >= 0.0
+            else state.external_salinity_psu
+        )
+        boundary_freshwater_sv = (
+            -state.amoc_sv * (boundary_upper_salinity - boundary_deep_salinity)
+            / cfg.fovs_reference_salinity_psu
+            if cfg.amoc_open_boundary_enabled else 0.0
+        )
+        fovs_sv = (
+            boundary_freshwater_sv
+            if cfg.amoc_open_boundary_enabled
+            else internal_fovs_sv
         )
         linear_haline_term = cfg.haline_contraction_per_psu * (
             state.north_salinity_psu - density_source_salinity
         )
         return {
+            **eos_diagnostics,
+            "amoc_open_boundary_enabled": float(cfg.amoc_open_boundary_enabled),
+            "amoc_basin_salt_inventory_anomaly_psu_m3": basin_inventory_anomaly,
+            # FovS means the overturning freshwater transport through the
+            # model's southern external boundary. Preserve the explicit alias
+            # and publish the old internal-section value under its true name.
+            "fovs_sv": fovs_sv,
+            "fovs_is_external_boundary": float(cfg.amoc_open_boundary_enabled),
+            "fovs_control_is_freshwater_budget_diagnosed": float(
+                cfg.amoc_control_salinity_mode == "freshwater_budget"
+                and cfg.amoc_open_boundary_enabled
+            ),
+            "amoc_control_surface_freshwater_sv": float(
+                cfg.amoc_control_north_surface_freshwater_sv
+                + cfg.amoc_control_lower_atlantic_surface_freshwater_sv
+            ),
+            "amoc_control_northern_boundary_freshwater_sv": float(
+                cfg.amoc_control_northern_boundary_freshwater_sv
+            ),
+            "amoc_control_southern_gyre_freshwater_sv": float(
+                cfg.amoc_control_southern_gyre_freshwater_sv
+            ),
+            "amoc_control_budget_predicted_fovs_sv": float(
+                -(
+                    cfg.amoc_control_north_surface_freshwater_sv
+                    + cfg.amoc_control_lower_atlantic_surface_freshwater_sv
+                    + cfg.amoc_control_northern_boundary_freshwater_sv
+                    + cfg.amoc_control_southern_gyre_freshwater_sv
+                )
+            ) if (
+                cfg.amoc_control_salinity_mode == "freshwater_budget"
+                and cfg.amoc_open_boundary_enabled
+            ) else float("nan"),
+            "amoc_boundary_overturning_freshwater_sv": boundary_freshwater_sv,
+            "amoc_internal_section_freshwater_sv": internal_fovs_sv,
+            # A liquid northern-boundary overturning transport is not resolved
+            # by this box topology.  Keep the refined DeltaFov diagnostic
+            # explicitly incomplete instead of substituting surface or ice
+            # freshwater fluxes for FovN.
+            "fovn_northern_boundary_overturning_freshwater_sv": float("nan"),
+            "delta_fov_stability_indicator_sv": float("nan"),
+            "delta_fov_stability_indicator_complete": 0.0,
             "tropical_atlantic_temperature_c": temperatures["tropical"],
             "north_atlantic_temperature_c": temperatures["north"],
             "southern_ocean_temperature_c": temperatures["southern"],
             "south_atlantic_upper_temperature_c": temperatures["south_atlantic_upper"],
             "atlantic_deep_temperature_c": temperatures["deep"],
             "amoc_density_source_temperature_c": density_source_temperature,
+            "amoc_density_source_temperature_adjustment_c": float(
+                density_source_temperature
+                - (
+                    temperatures["south_atlantic_upper"]
+                    if cfg.amoc_density_geometry == "south_atlantic_upper"
+                    else temperatures["southern"]
+                )
+            ),
             "amoc_density_source_salinity_psu": density_source_salinity,
             "amoc_density_geometry_is_south_atlantic_upper": float(
                 cfg.amoc_density_geometry == "south_atlantic_upper"
@@ -9168,7 +9612,6 @@ class ProcessClimateModel:
             "south_atlantic_upper_minus_deep_salinity_psu": (
                 south_atlantic_limb_contrast
             ),
-            "fovs_sv": fovs_sv,
             "total_salt_psu_m3": total_salt,
             "fixed_volume_salinity_inventory_psu_m3": fixed_volume_salinity_inventory,
             "ocean_added_freshwater_m3": float(state.ocean_added_freshwater_m3),
@@ -9353,12 +9796,12 @@ class ProcessClimateModel:
             arctic_non_atlantic_open_water_heat_anomaly_wyr_m2=zeros.copy(),
             arctic_atlantic_seasonal_ice_fraction=atlantic_seasonal.copy(),
             arctic_non_atlantic_seasonal_ice_fraction=non_atlantic_seasonal.copy(),
-            north_salinity_psu=cfg.initial_north_salinity_psu,
-            tropical_salinity_psu=cfg.initial_tropical_salinity_psu,
-            south_atlantic_upper_salinity_psu=self.initial_south_atlantic_upper_salinity_psu,
-            southern_salinity_psu=cfg.initial_southern_salinity_psu,
-            deep_salinity_psu=cfg.initial_deep_salinity_psu,
-            external_salinity_psu=cfg.initial_external_salinity_psu,
+            north_salinity_psu=float(self.initial_amoc_salinity_psu[0]),
+            tropical_salinity_psu=float(self.initial_amoc_salinity_psu[1]),
+            south_atlantic_upper_salinity_psu=float(self.initial_amoc_salinity_psu[2]),
+            southern_salinity_psu=float(self.initial_amoc_salinity_psu[3]),
+            deep_salinity_psu=float(self.initial_amoc_salinity_psu[4]),
+            external_salinity_psu=float(self.initial_amoc_salinity_psu[5]),
             pycnocline_depth_m=cfg.amoc_initial_pycnocline_depth_m,
             convection_efficiency=1.0,
             amoc_sv=cfg.amoc_reference_sv,
@@ -10283,10 +10726,10 @@ class ProcessClimateModel:
         arctic_air_heat_content_anomaly_zj = (
             weighted_mean(
                 self.grid.atlantic_ocean_fraction
-                * self.arctic_module_blend
+                * (self.arctic_module_blend > 0.0)
                 * state.arctic_atlantic_air_anomaly_c
                 + self.non_atlantic_ocean_fraction
-                * self.arctic_module_blend
+                * (self.arctic_module_blend > 0.0)
                 * state.arctic_non_atlantic_air_anomaly_c,
                 self.grid.band_area_weights,
             )
@@ -10362,6 +10805,9 @@ class ProcessClimateModel:
             hosing, hydrological, greenland_applied_flux,
             self._last_atlantic_ice_storage_freshwater_sv,
             self._last_atlantic_ice_export_freshwater_sv,
+        )
+        physical_surface_flux = (
+            surface_flux - self.baseline_control_boundary_freshwater_sv
         )
         sea_ice_area = weighted_mean(
             self.grid.ocean_fraction * ice_aggregate, self.grid.band_area_weights
@@ -10630,11 +11076,25 @@ class ProcessClimateModel:
                 bool(self.config.arctic_sea_ice_export_salinity_coupling_enabled)
             ),
             "total_anomalous_freshwater_sv": total_freshwater,
-            "north_surface_freshwater_sv": surface_flux[0],
-            "tropical_surface_freshwater_sv": surface_flux[1],
-            "south_atlantic_upper_surface_freshwater_sv": surface_flux[2],
-            "southern_surface_freshwater_sv": surface_flux[3],
-            "external_surface_freshwater_sv": surface_flux[5],
+            "north_surface_freshwater_sv": physical_surface_flux[0],
+            "tropical_surface_freshwater_sv": physical_surface_flux[1],
+            "south_atlantic_upper_surface_freshwater_sv": physical_surface_flux[2],
+            "southern_surface_freshwater_sv": physical_surface_flux[3],
+            "external_surface_freshwater_sv": physical_surface_flux[5],
+            "north_box_virtual_freshwater_sv": surface_flux[0],
+            "tropical_box_virtual_freshwater_sv": surface_flux[1],
+            "south_atlantic_upper_box_virtual_freshwater_sv": surface_flux[2],
+            "southern_box_virtual_freshwater_sv": surface_flux[3],
+            "external_box_virtual_freshwater_sv": surface_flux[5],
+            "north_boundary_freshwater_sv": (
+                self.baseline_control_boundary_freshwater_sv[0]
+            ),
+            "south_atlantic_gyre_boundary_freshwater_sv": (
+                self.baseline_control_boundary_freshwater_sv[2]
+            ),
+            "external_boundary_freshwater_compensation_sv": (
+                self.baseline_control_boundary_freshwater_sv[5]
+            ),
             "amoc_sv": state.amoc_sv,
             **amoc,
         }
@@ -10913,6 +11373,32 @@ class ProcessClimateModel:
 # ---------------------------------------------------------------------------
 
 
+def annual_mean_diagnostics(frame: pd.DataFrame) -> pd.DataFrame:
+    """Time-weighted complete model years, labelled by their right endpoint.
+
+    Integrate the recorded piecewise-linear diagnostics with interpolated year
+    boundaries. Endpoint samples are not counted twice; incomplete years are
+    discarded. This is diagnostic quadrature, not an integrator energy audit.
+    """
+    time_values = frame["elapsed_years"].to_numpy(dtype=float)
+    if len(time_values) < 2 or np.any(np.diff(time_values) <= 0.0):
+        raise ValueError("Annual means require strictly increasing sample times")
+    columns = [c for c in frame.select_dtypes(include=[np.number]).columns if c != "elapsed_years"]
+    rows = []
+    first_year = int(math.ceil(time_values[0] - 1e-8))
+    final_year = int(math.floor(time_values[-1] + 1e-8))
+    for start in range(first_year, final_year):
+        end = start + 1
+        interior = time_values[(time_values > start) & (time_values < end)]
+        sample_times = np.concatenate(([float(start)], interior, [float(end)]))
+        row = {"elapsed_years": float(end)}
+        for column in columns:
+            samples = np.interp(sample_times, time_values, frame[column].to_numpy(dtype=float))
+            row[column] = float(np.trapezoid(samples, sample_times))
+        rows.append(row)
+    return pd.DataFrame(rows, columns=["elapsed_years", *columns])
+
+
 def diagnose_climate_sensitivity(
     config: ModelConfig,
     equilibrium_years: float = 1200.0,
@@ -10955,10 +11441,11 @@ def diagnose_climate_sensitivity(
         )
         abrupt_result = ProcessClimateModel(diagnostic_base).run()
         abrupt = abrupt_result.dataframe.copy()
+        annual_abrupt = annual_mean_diagnostics(abrupt)
         tail_years = min(100.0, max(20.0, 0.1 * actual_equilibrium_years))
-        tail = abrupt[
-            abrupt["elapsed_years"]
-            >= actual_equilibrium_years - tail_years
+        tail = annual_abrupt[
+            annual_abrupt["elapsed_years"]
+            > actual_equilibrium_years - tail_years
         ]
         equilibrium_ecs = float(tail["global_near_surface_air_warming_c"].mean())
         equilibrium_imbalance = float(tail["toa_imbalance_wm2"].mean())
@@ -10974,9 +11461,9 @@ def diagnose_climate_sensitivity(
             max(actual_equilibrium_years + 400.0, 2.0 * actual_equilibrium_years),
         )
 
-    gregory = abrupt[
-        (abrupt["elapsed_years"] >= 1.0)
-        & (abrupt["elapsed_years"] <= gregory_years)
+    gregory = annual_abrupt[
+        (annual_abrupt["elapsed_years"] >= 1.0)
+        & (annual_abrupt["elapsed_years"] <= gregory_years)
     ]
     if len(gregory) < 3:
         raise ValueError("Not enough points for Gregory regression")
@@ -11027,6 +11514,7 @@ def diagnose_climate_sensitivity(
         "Water vapor": float(tail["water_vapor_flux_wm2"].mean() / denominator),
         "Surface albedo": float(tail["surface_albedo_flux_wm2"].mean() / denominator),
         "Cloud": float(tail["cloud_flux_wm2"].mean() / denominator),
+        "Arctic module TOA": float(tail["arctic_external_toa_anomaly_wm2"].mean() / denominator),
     }
     feedbacks["Net feedback"] = float(sum(feedbacks.values()))
 
@@ -13028,7 +13516,7 @@ def make_cryosphere_map_figure(
 
 
 def make_gregory_figure(diagnostics: SensitivityDiagnostics) -> plt.Figure:
-    data = diagnostics.abrupt_2x
+    data = annual_mean_diagnostics(diagnostics.abrupt_2x)
     subset = data[(data["elapsed_years"] >= 1.0) & (data["elapsed_years"] <= 150.0)]
     temperature = subset["global_near_surface_air_warming_c"].to_numpy()
     imbalance = subset["toa_imbalance_wm2"].to_numpy()
@@ -14451,8 +14939,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--uncompensated-hosing", action="store_true", help="Treat artificial hosing as a real ocean-mass freshwater addition instead of a compensated redistribution experiment.")
     parser.add_argument("--legacy-compensated-greenland", action="store_true", help="Structural attribution only: reproduce the old compensated Greenland freshwater treatment.")
     parser.add_argument("--disable-greenland-elevation-feedback", action="store_true", help="Disable Greenland thinning/elevation melt feedback for mechanism attribution.")
-    parser.add_argument("--disable-arctic-forced-ocean-heat-convergence", action="store_true", help="Disable the empirical Arctic forced-ocean heat-convergence term.")
-    parser.add_argument("--disable-arctic-phase-restoring", action="store_true", help="Disable Arctic seasonal/phase restoring.")
+    parser.add_argument("--enable-arctic-forced-ocean-heat-convergence", dest="arctic_forced_ocean_heat_convergence_enabled", action="store_true", default=ModelConfig().arctic_forced_ocean_heat_convergence_enabled, help="Enable the legacy empirical Arctic heat-convergence sensitivity.")
+    parser.add_argument("--enable-arctic-phase-restoring", dest="arctic_phase_restoring_enabled", action="store_true", default=ModelConfig().arctic_phase_restoring_enabled, help="Enable the legacy Arctic phase-restoring sensitivity.")
+    parser.add_argument("--disable-arctic-forced-ocean-heat-convergence", dest="arctic_forced_ocean_heat_convergence_enabled", action="store_false", default=argparse.SUPPRESS, help=argparse.SUPPRESS)
+    parser.add_argument("--disable-arctic-phase-restoring", dest="arctic_phase_restoring_enabled", action="store_false", default=argparse.SUPPRESS, help=argparse.SUPPRESS)
     parser.add_argument("--disable-arctic-extra-lapse-rate-feedback", action="store_true", help="Disable the extra unresolved Arctic lapse-rate feedback term.")
     parser.add_argument(
         "--warming-freshwater",
@@ -14590,7 +15080,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--amoc-density-geometry",
         choices=["interhemispheric_high_latitude", "south_atlantic_upper", "legacy_southern_surface"],
         default=ModelConfig().amoc_density_geometry,
-        help="AMOC hydraulic density geometry; interhemispheric_high_latitude is the validated default, south_atlantic_upper is structural sensitivity, and legacy_southern_surface is an exact compatibility alias.",
+        help="AMOC hydraulic density geometry; south_atlantic_upper is the production default, interhemispheric_high_latitude is a structural sensitivity, and legacy_southern_surface is an exact compatibility alias.",
     )
     parser.add_argument(
         "--amoc-density-eos",
@@ -14716,15 +15206,48 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=-0.15,
         help=(
-            "Initial overturning freshwater transport at 34.5 S (Sv). "
-            "Negative values mean the overturning imports salinity into the Atlantic."
+            "Legacy initial SAU/deep internal-section freshwater target (Sv); "
+            "used to derive initial SAU salinity, not the open-boundary FovS."
         ),
     )
     parser.add_argument(
         "--fovs-reference-salinity",
         type=float,
         default=35.0,
-        help="Reference salinity S0 used in the FovS diagnostic (PSU).",
+        help="Reference salinity S0 used in boundary and internal freshwater-transport diagnostics (PSU).",
+    )
+    parser.add_argument(
+        "--amoc-control-salinity-mode",
+        choices=["freshwater_budget", "prescribed_hydrography"],
+        default=ModelConfig().amoc_control_salinity_mode,
+        help=(
+            "Derive control salinity contrasts from the freshwater budget "
+            "(default), or retain the legacy prescribed hydrography."
+        ),
+    )
+    parser.add_argument(
+        "--amoc-control-north-surface-freshwater",
+        type=float,
+        default=ModelConfig().amoc_control_north_surface_freshwater_sv,
+        help="Control surface freshwater input north of 26.5 N (Sv).",
+    )
+    parser.add_argument(
+        "--amoc-control-lower-atlantic-surface-freshwater",
+        type=float,
+        default=ModelConfig().amoc_control_lower_atlantic_surface_freshwater_sv,
+        help="Control surface freshwater input from 34.5 S to 26.5 N (Sv).",
+    )
+    parser.add_argument(
+        "--amoc-control-northern-boundary-freshwater",
+        type=float,
+        default=ModelConfig().amoc_control_northern_boundary_freshwater_sv,
+        help="Control non-overturning northern-boundary freshwater import (Sv).",
+    )
+    parser.add_argument(
+        "--amoc-control-southern-gyre-freshwater",
+        type=float,
+        default=ModelConfig().amoc_control_southern_gyre_freshwater_sv,
+        help="Control azonal southern-boundary freshwater import (Sv).",
     )
     parser.add_argument("--freshwater-start-fraction", type=float, default=0.25)
     parser.add_argument("--freshwater-ramp-years", type=float, default=40.0)
@@ -15087,8 +15610,8 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         freshwater_hosing_compensated=not args.uncompensated_hosing,
         greenland_uncompensated_freshwater_enabled=not args.legacy_compensated_greenland,
         greenland_elevation_feedback_enabled=not args.disable_greenland_elevation_feedback,
-        arctic_forced_ocean_heat_convergence_enabled=not args.disable_arctic_forced_ocean_heat_convergence,
-        arctic_phase_restoring_enabled=not args.disable_arctic_phase_restoring,
+        arctic_forced_ocean_heat_convergence_enabled=args.arctic_forced_ocean_heat_convergence_enabled,
+        arctic_phase_restoring_enabled=args.arctic_phase_restoring_enabled,
         arctic_extra_lapse_rate_feedback_enabled=not args.disable_arctic_extra_lapse_rate_feedback,
         warming_freshwater_sv_per_k=args.warming_freshwater,
         hydrological_freshwater_sv_per_k=args.hydrological_freshwater,
@@ -15220,6 +15743,19 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
         ),
         initial_fovs_sv=args.initial_fovs,
         fovs_reference_salinity_psu=args.fovs_reference_salinity,
+        amoc_control_salinity_mode=args.amoc_control_salinity_mode,
+        amoc_control_north_surface_freshwater_sv=(
+            args.amoc_control_north_surface_freshwater
+        ),
+        amoc_control_lower_atlantic_surface_freshwater_sv=(
+            args.amoc_control_lower_atlantic_surface_freshwater
+        ),
+        amoc_control_northern_boundary_freshwater_sv=(
+            args.amoc_control_northern_boundary_freshwater
+        ),
+        amoc_control_southern_gyre_freshwater_sv=(
+            args.amoc_control_southern_gyre_freshwater
+        ),
         freshwater_start_fraction=args.freshwater_start_fraction,
         freshwater_ramp_years=args.freshwater_ramp_years,
         freshwater_compensation_mode=args.freshwater_compensation_mode,

@@ -1,5 +1,63 @@
 # Model limitations
 
+## September 12 physics revision
+
+The current default has changed again; the numerical AMOC discussion below
+describes earlier configurations. See `PHYSICS_REVIEW_REPAIRS_2026_09_12.md`.
+Historical and future fits must be re-established for the revised equations.
+
+CLEM integrates anomalies about a prescribed analytic 1850 climatology. Its
+unforced equilibrium is constructed, rather than obtained by balancing an
+independently calculated absolute radiation budget. The main latitude-band
+energy model is annual-mean; only the Arctic module and Greenland temperature
+weighting have seasonality. Prescribed radiative forcing is spatially uniform.
+Changing the solar constant changes reference insolation and feedback weights,
+but does not constitute an imposed solar-forcing experiment.
+
+The revised water-vapour optical-path weighting is a reduced closure, not a
+radiative-transfer calculation or a new fit to radiative kernels. The analytic
+land/SST climatology, common emission-height parameterization, broad Southern
+Hemisphere sea-ice logistic, uniform deep-ocean heat exchange and missing
+Antarctic ice sheet still limit regional interpretation.
+
+The Arctic GMST heat-convergence and reference-phase-restoring closures and
+extra winter GMST transport are off by default. The thickness-relaxation
+export and concentration closures remain development parameterizations; their
+absolute fluxes are not independently validated Fram Strait export. Exported
+latent heat and its freshwater equivalent now use the same conversion without
+a freshwater-only observational multiplier. Disabling empirical heating is
+not evidence that the remaining Arctic trend is observationally accurate.
+
+Greenland still uses one representative seasonal temperature cycle, a fixed
+Gaussian daily temperature spread and simplified precipitation/discharge.
+Correcting the PDD integral and reference runoff does not establish a present-day
+mass-loss fit. Spatial accumulation zones and ocean-driven discharge need
+separate development and validation.
+
+The open Atlantic boundary uses a large boundary reservoir. Its control salinity
+contrasts are solved from specified surface, northern-boundary and southern-gyre
+freshwater-budget terms; neither FovS nor an upper/deep boundary salinity
+contrast enters that solve. The resulting control FovS is -0.16 Sv. This is a
+conditional equilibrium-budget prediction because CLEM does not calculate the
+absolute evaporation, precipitation, runoff or azonal boundary circulation that
+supply those inputs. The reported surface, non-overturning boundary and combined
+virtual box fluxes are separate diagnostics. `fovs_sv` is the diagnosed overturning transport; the
+historical SAU/deep value is named `amoc_internal_section_freshwater_sv`.
+Hydraulic density/depth exponents, heat-transport coupling and the prescribed
+control freshwater components remain structural assumptions.
+The South Atlantic salinity tracer supplies the hydraulic upper-limb salinity,
+while its effective temperature anomaly follows northern surface-to-deep
+stratification rather than the local 35 S surface anomaly. This prevents a
+spurious TEOS-10 common-warming strengthening, but remains a reduced water-mass
+transformation closure requiring process-level validation. The literal local
+surface-temperature pathway remains available as the nondefault
+`teos10_surface_watermass` structural sensitivity.
+The phase-space stability and recovery of the revised system must be assessed
+afresh; a passing finite-duration run does not identify an equilibrium branch.
+
+All previously inspected observations, including 2013–2024, remain development
+evidence and cannot be relabelled an untouched holdout.
+
 The AMOC numerical screening results below predate the current checkout's
 convection-normalization correction. They describe the earlier EOS repair,
 not the corrected model's validated historical or future response. Local

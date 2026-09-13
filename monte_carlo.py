@@ -299,6 +299,8 @@ MONTE_CARLO_PHYSICAL_PARAMETERS = frozenset(
         "moist_lapse_rate_weight",
         "arctic_lapse_rate_feedback_wm2_k",
         "water_vapor_emission_height_km_per_lnq",
+        "water_vapor_optical_path_scale",
+        "greenland_daily_temperature_std_c",
         "longwave_spectral_factor",
         "land_heat_capacity_wyr_m2_k",
         "ocean_mixed_layer_heat_capacity_wyr_m2_k",
@@ -409,8 +411,11 @@ MONTE_CARLO_PHYSICAL_PARAMETERS = frozenset(
         "initial_southern_salinity_psu",
         "initial_deep_salinity_psu",
         "initial_external_salinity_psu",
-        "initial_fovs_sv",
         "fovs_reference_salinity_psu",
+        "amoc_control_north_surface_freshwater_sv",
+        "amoc_control_lower_atlantic_surface_freshwater_sv",
+        "amoc_control_northern_boundary_freshwater_sv",
+        "amoc_control_southern_gyre_freshwater_sv",
         "amoc_southern_external_exchange_sv",
         "amoc_south_atlantic_external_exchange_sv",
         "amoc_initial_pycnocline_depth_m",
@@ -595,22 +600,21 @@ PHYSICAL_AMOC_PRIORS: dict[str, PriorSpec] = {
     "amoc_hydraulic_depth_exponent": PriorSpec(0.2, 2.0, "uniform", None, source="hydraulic scaling", rationale="Positive depth exponent."),
     "amoc_hydraulic_transport_max_sv": PriorSpec(19.6, 24.0, "truncated_normal", 20.0, source="extreme-regime hydraulic closure", rationale="Samples uncertainty in the positive AMOC saturation while remaining above the built-in reference prior support."),
     "amoc_pycnocline_feedback_strength": PriorSpec(0.0, 0.50, "uniform", None, "pycnocline-overturning feedback", "Bounded feedback fraction; strong cancellation is disfavoured by stability tests."),
-    "amoc_convection_density_scale_factor": PriorSpec(1.2, 6.0, "lognormal", 4.0, source="local density normalization", rationale="v2.28 validated density normalization; the support contains the public default and allows structural uncertainty."),
+    "amoc_convection_density_scale_factor": PriorSpec(1.0, 6.0, "lognormal", 1.0, source="local density normalization", rationale="The distribution is centered on the revised public default and allows structural uncertainty."),
     "amoc_convection_minimum_fraction": PriorSpec(0.0, 0.30, "beta", 0.02, 8.0, "residual mixing under weak convection", "Near-zero convection is permitted while background ocean mixing remains elsewhere in the model."),
     "amoc_convective_mixing_reference_sv": PriorSpec(1.0, 12.0, "lognormal", 5.0, source="northern convective entrainment", rationale="Positive vertical salt-exchange scale; strong convection replenishes northern salinity."),
     "amoc_convective_mixing_exponent": PriorSpec(1.0, 4.0, "uniform", None, source="nonlinear convective entrainment", rationale="Controls how rapidly vertical salt exchange disappears as convection weakens."),
     "amoc_convection_entrainment_feedback": PriorSpec(0.0, 0.12, "beta", 0.0, 10.0, "optional density-memory feedback", "Default zero avoids double-counting prognostic convection-dependent salt mixing."),
     "amoc_convection_adjustment_years": PriorSpec(2.0, 80.0, "lognormal", 20.0, source="convection adjustment", rationale="Positive response timescale."),
     "amoc_convection_recovery_years": PriorSpec(10.0, 300.0, "lognormal", 80.0, source="salinity and convection recovery", rationale="Positive response timescale; support includes fast and slow recovery regimes."),
-    "amoc_reference_density_driver": PriorSpec(4.0e-4, 1.5e-3, "lognormal", 7.5e-4, source="absolute control-state density margin", rationale="Contains the validated control density driver while rejecting physically fragile initial hydrography through the joint constraint."),
+    "amoc_reference_density_driver": PriorSpec(4.0e-4, 1.5e-3, "lognormal", 4.34e-4, source="absolute control-state density margin", rationale="Centered on the revised legacy linear/matched-EOS reference and bounded by the joint physical constraint."),
     "amoc_eddy_depth_exponent": PriorSpec(0.5, 4.0, "uniform", None, source="Southern Ocean eddy compensation", rationale="Positive response exponent."),
     "amoc_ekman_inflow_sv": PriorSpec(10.0, 40.0, "lognormal", 25.0, source="Southern Ocean wind-driven inflow", rationale="Positive volume transport."),
     "amoc_upwelling_reference_sv": PriorSpec(1.0, 12.0, "lognormal", 5.0, source="low-latitude diapycnal upwelling", rationale="Positive volume transport."),
     "amoc_eddy_outflow_reference_sv": PriorSpec(4.0, 25.0, "lognormal", 13.0, source="Southern Ocean eddy outflow", rationale="Positive volume transport."),
     "amoc_north_tropical_gyre_sv": PriorSpec(1.0, 12.0, "lognormal", 5.0, source="subtropical gyre salt exchange", rationale="Effective diffusive exchange; posterior response constraints limit excessive damping of salt-advection feedback."),
     "amoc_tropical_southern_gyre_sv": PriorSpec(3.0, 22.0, "lognormal", 10.0, source="South Atlantic gyre salt exchange", rationale="Effective diffusive exchange; posterior response constraints limit excessive damping of salt-advection feedback."),
-    "initial_fovs_sv": PriorSpec(-0.60, 0.30, "uniform", None, source="physically possible signed freshwater transport", rationale="Broad signed prior; observational estimate enters only as likelihood."),
-    "initial_southern_salinity_psu": PriorSpec(32.70, 33.30, "truncated_normal", 33.00, source="Southern Ocean high-latitude source-water salinity", rationale="Centered on the current interhemispheric control hydrography and constrained jointly by the absolute AMOC density margin."),
+    "initial_southern_salinity_psu": PriorSpec(33.70, 34.30, "truncated_normal", 34.00, source="Southern Ocean surface salinity structural range", rationale="The southern surface reservoir is distinct from the default South Atlantic upper hydraulic source; this range is not a fitted AMOC tipping constraint."),
     "initial_north_salinity_psu": PriorSpec(34.85, 35.45, "truncated_normal", 35.15, source="North Atlantic source-water salinity", rationale="Hydrographic prior constrained jointly by the absolute AMOC density margin."),
 }
 
@@ -684,7 +688,7 @@ TIME_SERIES_METRICS: dict[str, tuple[str, str, bool]] = {
         False,
     ),
     "amoc_sv": ("AMOC transport", "AMOC (Sv)", True),
-    "fovs_sv": ("Overturning freshwater transport (FovS)", "FovS (Sv)", True),
+    "fovs_sv": ("Southern-boundary overturning freshwater transport (FovS)", "FovS (Sv)", True),
     "amoc_heat_transport_pw": (
         "AMOC-associated Atlantic heat transport",
         "Heat transport (PW)",
@@ -1055,6 +1059,17 @@ def _density_reference_prior_is_active(config: ModelConfig) -> bool:
     )
 
 
+def _inactive_arctic_closure_parameters(config: ModelConfig) -> set[str]:
+    inactive = set()
+    if not config.arctic_forced_ocean_heat_convergence_enabled:
+        inactive.update(name for name in MONTE_CARLO_PHYSICAL_PARAMETERS
+                        if name.startswith("arctic_forced_ocean_heat_convergence_"))
+    if not config.arctic_phase_restoring_enabled:
+        inactive.update(name for name in MONTE_CARLO_PHYSICAL_PARAMETERS
+                        if name.startswith("arctic_phase_restoring_"))
+    return inactive
+
+
 def science_default_ranges(
     mode: str, base_config: ModelConfig | None = None,
 ) -> dict[str, tuple[float, float]]:
@@ -1073,12 +1088,16 @@ def science_default_ranges(
         ranges.pop(name, None)
     if not _density_reference_prior_is_active(base_config or ModelConfig()):
         ranges.pop("amoc_reference_density_driver", None)
+    for name in _inactive_arctic_closure_parameters(base_config or ModelConfig()):
+        ranges.pop(name, None)
     return ranges
 
 
 def _resolve_parameter_name(name: str, base_config: ModelConfig) -> str:
     cleaned = name.strip().replace("-", "_")
     resolved = PARAMETER_ALIASES.get(cleaned, cleaned)
+    if resolved in _inactive_arctic_closure_parameters(base_config):
+        raise ValueError(f"{resolved} is inactive because its Arctic closure is disabled")
     if resolved == "amoc_reference_density_driver" and not _density_reference_prior_is_active(base_config):
         raise ValueError(
             "amoc_reference_density_driver is inactive for the selected EOS, "
@@ -1323,6 +1342,8 @@ def generate_samples(
         raise ValueError("Monte Carlo mode requires at least two runs.")
     if "amoc_reference_density_driver" in ranges:
         _resolve_parameter_name("amoc_reference_density_driver", base_config)
+    for name in _inactive_arctic_closure_parameters(base_config).intersection(ranges):
+        _resolve_parameter_name(name, base_config)
     names = list(ranges)
     unit = _unit_design(runs, len(names), seed, design)
     unit = _apply_gaussian_copula_correlations(unit, names, correlated_priors)

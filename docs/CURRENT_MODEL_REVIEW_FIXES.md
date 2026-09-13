@@ -1,5 +1,9 @@
 # Current-model review corrections — 2026-09-11
 
+**Superseded default:** the September 12 structural physics revision is described
+in `PHYSICS_REVIEW_REPAIRS_2026_09_12.md`. The results below remain evidence for
+the earlier equations and are not validation of the revised default.
+
 **September 12 recovery follow-up:** the year-3,000 continuation passes the
 unchanged pycnocline thresholds. See `RECOVERY_EXTENSION_RESULTS_2026_09_12.md`
 for the remaining drift, recovery interpretation and checkpoint provenance.

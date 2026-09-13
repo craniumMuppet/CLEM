@@ -41,6 +41,7 @@ def test_sensitivity_uses_air_temperature_for_metrics_feedbacks_and_plot(monkeyp
             for field in ("planck", "lapse_rate", "polar_inversion", "water_vapor",
                           "surface_albedo", "cloud"):
                 frame[field + "_flux_wm2"] = -air
+            frame["arctic_external_toa_anomaly_wm2"] = 0.25 * air
             return SimpleNamespace(dataframe=frame)
 
     monkeypatch.setattr(cm, "ProcessClimateModel", DiagnosticModel)
@@ -53,6 +54,8 @@ def test_sensitivity_uses_air_temperature_for_metrics_feedbacks_and_plot(monkeyp
     assert diagnostics.gregory_restoring_coefficient_wm2_k == pytest.approx(1.0)
     assert diagnostics.tcr_c == pytest.approx(2.0, abs=0.02)
     assert diagnostics.feedbacks_wm2_k["Planck"] == pytest.approx(-1.0)
+    assert diagnostics.feedbacks_wm2_k["Arctic module TOA"] == pytest.approx(0.25)
+    assert diagnostics.feedbacks_wm2_k["Net feedback"] == pytest.approx(-5.75)
     assert diagnostics.bulk_surface_equilibrium_response_c == pytest.approx(
         diagnostics.equilibrium_ecs_c / 2.0)
     assert diagnostics.bulk_surface_transient_response_c == pytest.approx(diagnostics.tcr_c / 2.0)
@@ -80,7 +83,7 @@ def test_inactive_density_prior_is_removed_and_explicit_sampling_rejected(eos):
 
 
 def test_linear_density_prior_remains_available_only_when_it_controls_screening():
-    config = cm.ModelConfig(amoc_density_eos="linear")
+    config = cm.ModelConfig(amoc_density_eos="linear", amoc_density_geometry="interhemispheric_high_latitude")
     name = "amoc_reference_density_driver"
     assert name in mc.science_default_ranges("ar6_amoc", config)
     assert name in mc.parse_ranges([[name, "0.0004", "0.0005"]], config, "none", False)
@@ -113,7 +116,8 @@ def test_hydraulic_eos_does_not_rescale_local_convection(resolution, perturbatio
         assert teos[key] == pytest.approx(linear[key], abs=1e-12)
     assert teos["amoc_hydraulic_target_sv"] != pytest.approx(linear["amoc_hydraulic_target_sv"])
     if perturbation == "freshening":
-        assert teos["amoc_convection_target"] == pytest.approx(math.exp(-0.000152 / 0.000434))
+        assert teos["amoc_convection_target"] == pytest.approx(
+            math.exp(-0.000152 / teos["amoc_convection_reference_density_driver"]))
 
 
 def test_short_hosing_integration_preserves_salt_and_weakens_amoc():

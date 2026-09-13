@@ -134,6 +134,7 @@ def terminate_process_tree(
 MONTE_CARLO_SAMPLING = ["uniform", "triangular", "loguniform"]
 MONTE_CARLO_DESIGNS = ["sobol", "latin_hypercube", "random"]
 MONTE_CARLO_CONSTRAINT_MODES = ["none", "ar6", "ar6_amoc"]
+AMOC_CONTROL_SALINITY_MODES = ["freshwater_budget", "prescribed_hydrography"]
 
 # id, ModelConfig field, label, default minimum, default maximum, units/help
 MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
@@ -175,7 +176,7 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("amoc_density", "amoc_density_transport_exponent", "AMOC density exponent", "0.8", "2.5", ""),
     ("amoc_depth", "amoc_hydraulic_depth_exponent", "AMOC hydraulic depth exponent", "0.5", "1.2", ""),
     ("pyc_feedback", "amoc_pycnocline_feedback_strength", "Pycnocline AMOC feedback strength", "0.00", "0.30", "fraction"),
-    ("conv_scale", "amoc_convection_density_scale_factor", "Convection density scale factor", "1.2", "6.0", "factor"),
+    ("conv_scale", "amoc_convection_density_scale_factor", "Convection density scale factor", "1.0", "6.0", "factor"),
     ("conv_min", "amoc_convection_minimum_fraction", "Residual convection fraction", "0.00", "0.15", "fraction"),
     ("conv_mix", "amoc_convective_mixing_reference_sv", "Convective salt exchange", "1.0", "10.0", "Sv"),
     ("conv_mix_exp", "amoc_convective_mixing_exponent", "Convective mixing exponent", "1.0", "4.0", ""),
@@ -189,8 +190,7 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("eddy_outflow", "amoc_eddy_outflow_reference_sv", "Southern Ocean eddy outflow", "9.0", "16.0", "Sv"),
     ("north_gyre", "amoc_north_tropical_gyre_sv", "Northern gyre exchange", "2.0", "8.0", "Sv"),
     ("south_gyre", "amoc_tropical_southern_gyre_sv", "Southern gyre exchange", "5.0", "15.0", "Sv"),
-    ("initial_fovs", "initial_fovs_sv", "Initial FovS at 34.5 S", "-0.33", "0.03", "Sv"),
-    ("southern_salinity", "initial_southern_salinity_psu", "Initial Southern Ocean salinity", "32.70", "33.30", "PSU"),
+    ("southern_salinity", "initial_southern_salinity_psu", "Initial Southern Ocean salinity", "33.70", "34.30", "PSU"),
     ("north_salinity", "initial_north_salinity_psu", "Initial northern/deep salinity", "34.85", "35.45", "PSU"),
 ]
 
@@ -326,6 +326,11 @@ DEFAULTS: dict[str, Any] = {
     "amoc_south_atlantic_external_exchange": f"{MODEL_DEFAULT_CONFIG.amoc_south_atlantic_external_exchange_sv:g}",
     "initial_fovs": "-0.15",
     "fovs_reference_salinity": "35.0",
+    "amoc_control_salinity_mode": MODEL_DEFAULT_CONFIG.amoc_control_salinity_mode,
+    "amoc_control_north_surface_freshwater": f"{MODEL_DEFAULT_CONFIG.amoc_control_north_surface_freshwater_sv:g}",
+    "amoc_control_lower_atlantic_surface_freshwater": f"{MODEL_DEFAULT_CONFIG.amoc_control_lower_atlantic_surface_freshwater_sv:g}",
+    "amoc_control_northern_boundary_freshwater": f"{MODEL_DEFAULT_CONFIG.amoc_control_northern_boundary_freshwater_sv:g}",
+    "amoc_control_southern_gyre_freshwater": f"{MODEL_DEFAULT_CONFIG.amoc_control_southern_gyre_freshwater_sv:g}",
     "freshwater_start_fraction": "0.25",
     "freshwater_ramp_years": "40",
     "freshwater_compensation_mode": "external",
@@ -535,6 +540,11 @@ CLI_MAP = {
     "amoc_south_atlantic_external_exchange": "--amoc-south-atlantic-external-exchange",
     "initial_fovs": "--initial-fovs",
     "fovs_reference_salinity": "--fovs-reference-salinity",
+    "amoc_control_salinity_mode": "--amoc-control-salinity-mode",
+    "amoc_control_north_surface_freshwater": "--amoc-control-north-surface-freshwater",
+    "amoc_control_lower_atlantic_surface_freshwater": "--amoc-control-lower-atlantic-surface-freshwater",
+    "amoc_control_northern_boundary_freshwater": "--amoc-control-northern-boundary-freshwater",
+    "amoc_control_southern_gyre_freshwater": "--amoc-control-southern-gyre-freshwater",
     "freshwater_start_fraction": "--freshwater-start-fraction",
     "freshwater_ramp_years": "--freshwater-ramp-years",
     "freshwater_compensation_mode": "--freshwater-compensation-mode",
@@ -573,6 +583,7 @@ NUMERIC_KEYS = {
         "ssp_before",
         "ssp_after",
         "freshwater_compensation_mode",
+        "amoc_control_salinity_mode",
         "amoc_coupling_scheme",
         "amoc_southern_ocean_structure",
         "amoc_indo_pacific_compensation",
@@ -2093,17 +2104,38 @@ class ClimateModelGUI:
         self._field(pycnocline, 17, "amoc_indo_pacific_compensation_fraction", "Indo-Pacific compensation fraction")
         self._field(pycnocline, 18, "amoc_indo_pacific_compensation_max", "Maximum Indo-Pacific compensation (Sv)")
 
-        fovs = self._section(tab, "South Atlantic salt-advection diagnostic", 4)
+        fovs = self._section(tab, "South Atlantic freshwater budget", 4)
         self._field(
-            fovs,
-            0,
-            "initial_fovs",
-            "Initial FovS at 34.5 S (Sv)",
-            help_text="Negative = overturning imports salinity into the Atlantic",
+            fovs, 0, "amoc_control_salinity_mode", "Control salinity initialization",
+            values=AMOC_CONTROL_SALINITY_MODES,
+            help_text="Default solves salinity contrasts from the freshwater budget",
+        )
+        self._field(
+            fovs, 1, "amoc_control_north_surface_freshwater",
+            "Northern surface freshwater (Sv)",
+        )
+        self._field(
+            fovs, 2, "amoc_control_lower_atlantic_surface_freshwater",
+            "Lower-Atlantic surface freshwater (Sv)",
+        )
+        self._field(
+            fovs, 3, "amoc_control_northern_boundary_freshwater",
+            "Northern boundary freshwater import (Sv)",
+        )
+        self._field(
+            fovs, 4, "amoc_control_southern_gyre_freshwater",
+            "Southern gyre freshwater import (Sv)",
         )
         self._field(
             fovs,
-            1,
+            5,
+            "initial_fovs",
+            "Legacy internal-section freshwater target (Sv)",
+            help_text="Derives initial South Atlantic upper salinity; not boundary FovS",
+        )
+        self._field(
+            fovs,
+            6,
             "fovs_reference_salinity",
             "FovS reference salinity S0 (PSU)",
         )

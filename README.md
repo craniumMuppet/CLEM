@@ -10,17 +10,22 @@ It couples global temperature, ocean heat uptake, radiative feedbacks, Arctic se
 
 CLEM is intended for **climate-process experiments, sensitivity studies, teaching, and model development** rather than as a replacement for a comprehensive General Circulation Model (GCM) or Earth System Model (ESM).
 
-Climate sensitivity is not prescribed directly. **ECS and TCR emerge from the model's radiative feedbacks, ocean heat uptake, and coupled dynamics.**
+Climate sensitivity is not prescribed directly. **ECS and TCR are diagnosed from forcing experiments.** The original feedback coefficients were calibrated against AR6 assessments; agreement with those assessments is calibration evidence, not independent validation.
 
 ## Current release status
 
-**Current checkout (Unreleased):** governing physics have changed since the
-tagged v2.29.29 release. The checkout uses matched-pathway TEOS-10 hydraulic
-density, a corrected Greenland mass reservoir, and an EOS-independent linear
-reference for local convection. ECS/TCR and feedback diagnostics now use the
-model's global near-surface air-temperature proxy. The numerical tables below
-are tagged-release evidence, not validation of these newer changes. See
-`docs/CURRENT_MODEL_REVIEW_FIXES.md` for the corrections and verification scope.
+**Current checkout (Unreleased, September 12 physics revision):** the default
+uses direct water-mass TEOS-10 density, an open Atlantic overturning boundary,
+an ocean freezing floor in both hemispheres, and dry-column weighting of the
+water-vapour response. Greenland includes Gaussian daily variability and
+reference runoff. Empirical Arctic GMST heating, extra winter transport and
+phase restoring are disabled by default. Feedback accounting includes Arctic
+TOA fluxes and Gregory regression uses complete annual means.
+
+The numerical tables below describe the tagged release, **not the revised
+default**. Neither those tables nor September 11's validation establishes
+predictive skill for this revision. See [the repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md)
+for changes, development checks and remaining limitations.
 
 **v2.29.29** is the public-release consolidation of the validated R15–R18.5.1 repair, structural-validation, observation-integration, packaging, and attribution work. The version bump itself changes release identity only; it does not retune the governing climate, AMOC, Greenland, or sea-ice dynamics. Existing v2.29.28 numerical evidence is retained as inherited evidence and is linked to v2.29.29 by an explicit dynamics-equivalence record.
 
@@ -38,8 +43,7 @@ See `RELEASE_NOTES_V2_29_29.md`, `V2_29_29_DYNAMICS_EQUIVALENCE.json`, `R18_2_RE
 - Separate land, mixed-layer ocean, and deep-ocean heat reservoirs
 - Meridional heat transport
 - Land-ocean heat exchange
-- Seasonal solar geometry
-- Polar night and midnight sun
+- Annual-mean insolation in the latitude-band energy-balance model
 - Prognostic low-cloud feedback
 - Snow and surface-albedo feedbacks
 - Water-vapour feedback
@@ -60,6 +64,7 @@ See `RELEASE_NOTES_V2_29_29.md`, `V2_29_29_DYNAMICS_EQUIVALENCE.json`, `R18_2_RE
 ### Arctic and Cryosphere
 
 - Seasonal thermodynamic Arctic model
+- Seasonal solar geometry, including polar night and midnight sun, within the Arctic module
 - Prognostic sea-ice concentration
 - Prognostic sea-ice volume
 - Vertical ice growth
@@ -154,21 +159,28 @@ The default control configuration uses an AMOC reference strength of approximate
 
 The reference overturning freshwater transport at approximately 34.5°S is:
 
-**FovS = -0.150 Sv**
+**Tagged-release internal-section target: -0.150 Sv**
 
-CLEM uses the conventional sign interpretation in which negative FovS represents an overturning circulation that imports salt into the Atlantic / exports freshwater.
+CLEM uses the conventional sign interpretation in which negative FovS represents an overturning circulation that exports freshwater from the Atlantic.
 
-This allows an active Atlantic **salt-advection feedback**.
+In the revised model, `fovs_sv` and `amoc_boundary_overturning_freshwater_sv`
+both report the actual external boundary transport. The historical SAU/deep
+quantity is retained as `amoc_internal_section_freshwater_sv`.
 
-When AMOC weakens:
+The default control salinity contrast is solved without an FovS target. The
+specified control budget contains -0.28 Sv of Atlantic surface freshwater
+exchange, +0.06 Sv of northern-boundary import, and +0.38 Sv of azonal southern
+gyre import. Steady conservation then predicts:
 
-1. Northward salt transport decreases.
-2. The northern Atlantic freshens.
-3. Surface density decreases.
-4. Deep convection weakens.
-5. AMOC weakens further.
+**FovS = -0.16 Sv**
 
-Under SSP2-4.5, FovS remains negative through 2100.
+This is an equilibrium budget prediction conditional on independently estimated
+control fluxes. CLEM does not yet predict absolute evaporation, precipitation,
+runoff, or the azonal boundary transport, so it is not a free coupled-climate
+prediction. `amoc_basin_salt_inventory_anomaly_psu_m3` tracks subsequent basin
+storage changes.
+
+In the tagged-release SSP2-4.5 experiments, the internal-section FovS remained negative through 2100.
 
 | Resolution | Late/final FovS |
 |---|---:|

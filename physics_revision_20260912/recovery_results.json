@@ -1,0 +1,19 @@
+{
+  "protocol": "0.2 Sv for years 0-100, then zero through year 1000; seasonal Arctic, Greenland SMB/dynamics and anomalous hydrology disabled to isolate basin ventilation",
+  "source_sha256": {
+    "climate_model.py": "618480be97fe15f8e58abedab0cf68f383e5b902640421e69d428a2496ca99a4",
+    "amoc_density_r16.py": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122"
+  },
+  "open_boundary": {
+    "amoc_at_hosing_end_sv": 14.403080774270478,
+    "final_amoc_sv": 16.764377933146054,
+    "remaining_basin_deficit_fraction": 0.13855179804026208,
+    "maximum_pre_projection_salt_error_ppm": 3.442071041035311e-10
+  },
+  "legacy_closed_boundary": {
+    "amoc_at_hosing_end_sv": 13.820638749677812,
+    "final_amoc_sv": 16.62072510976327,
+    "remaining_basin_deficit_fraction": 0.9596496999606742,
+    "maximum_pre_projection_salt_error_ppm": 1.7205889938469644e-10
+  }
+}
