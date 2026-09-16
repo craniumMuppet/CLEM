@@ -15,9 +15,9 @@
 - Add `tools/build_readme_science_figures.py` and a SHA-256 manifest for the
   displayed science assets. Remove the superseded individually embedded SSP,
   SSP2-4.5 final-map and percent-ramp image assets.
-- Pin the frozen R18.1 governing-source snapshot to LF in `.gitattributes`, so
-  Windows CI preserves its published byte-level SHA-256 instead of converting
-  the file to CRLF during checkout.
+- Pin Python sources to LF in `.gitattributes`, so Windows CI preserves the
+  published byte-level SHA-256 values for current and frozen R18.1 provenance
+  sources instead of converting those files to CRLF during checkout.
 
 ### September 12 physics review repairs
 
