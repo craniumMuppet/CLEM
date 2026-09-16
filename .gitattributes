@@ -1,6 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
+# Historical governing-source hashes are byte-exact. Force LF on Windows so
+# GitHub Actions reads the same bytes recorded by the frozen R18.1 provenance.
+provenance/r18.1-parent/climate_model.py text eol=lf
+
 # Frozen validation products are byte-bound to published SHA-256 provenance.
 # Preserve their recorded CRLF bytes across checkout/archive operations.
 data/validation/sea_ice_fixed_mask/N_03_fixed_mask.csv -text
