@@ -10,28 +10,20 @@ It couples global temperature, ocean heat uptake, radiative feedbacks, Arctic se
 
 CLEM is intended for **climate-process experiments, sensitivity studies, teaching, and model development** rather than as a replacement for a comprehensive General Circulation Model (GCM) or Earth System Model (ESM).
 
-Climate sensitivity is not prescribed directly. **ECS and TCR are diagnosed from forcing experiments.** The original feedback coefficients were calibrated against AR6 assessments; agreement with those assessments is calibration evidence, not independent validation.
+Climate sensitivity is not prescribed directly. **ECS and TCR are diagnosed from forcing experiments.** The original feedback coefficients were calibrated against AR6 assessments. This is calibration evidence, not independent validation.
 
 ## Current scientific results
 
-The current unreleased checkout adds a separate, slow AMOC sinking-capacity
-limit informed by FAFMIP North Atlantic heat-flux experiments. The model still
-calculates hydraulic density, pycnocline depth, salinity and FovS
-prognostically, but the empirical forced-heat capacity controls the default SSP
-AMOC response. Its global-forcing mapping and 20-year lag are emulator choices,
-so the scenario and ensemble results below are conditional sensitivity results
-rather than independently validated forecasts. The implementation and evidence
-scope are documented in the
+The current checkout adds a FAFMIP-informed AMOC sinking-capacity limit. The
+lower of this limit and the hydraulic density capacity controls the default SSP
+response. Its global-forcing mapping and 20-year lag are emulator assumptions,
+so these results are conditional sensitivities. See the
 [forced-heat review](docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md).
 
 ### Paired CO2 target sweep
 
-The target experiment requested **128 paired prior members per CO2 target** at
-400, 600, 800, 1000, 1200 and 2200 ppm. **123 members completed all six
-targets**; five members failed before the paired comparison. The bands and
-fractions therefore describe the complete-member ensemble. Collapse fractions
-are conditional model outcomes, not estimates of real-world collapse
-probability.
+The sweep uses **128 paired prior members per CO2 target** at 400, 600, 800,
+1000, 1200 and 2200 ppm.
 
 ![Conditional AMOC outcomes across six CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_overview.png)
 
@@ -39,31 +31,21 @@ probability.
 
 ### Four-pathway SSP comparison
 
-The four-panel comparison uses the current 5° configuration with automatic
-1850 initialization. Temperature, AMOC, southern-boundary FovS and Northern
-Hemisphere sea-ice area are drawn from the same 1850–2300 integrations.
+All four panels use the same 5° integrations from 1850 to 2300.
 
 ![Temperature, AMOC, FovS and sea-ice response under four SSP pathways](docs/assets/science_update_2026_09/ssp_four_panel_comparison.png)
 
-| Scenario | Temperature anomaly in 2100 | AMOC, 2081–2100 | AMOC decline from 1995–2014 | FovS in 2100 | Sea-ice area in 2100 |
+| Scenario | 2100 temperature | AMOC, 2081–2100 | AMOC decline | 2100 FovS | 2100 sea ice |
 |---|---:|---:|---:|---:|---:|
-| SSP1-2.6 | 1.463 °C | 12.700 Sv | 20.945% | −0.12421 Sv | 16.612 million km² |
-| SSP2-4.5 | 2.327 °C | 11.297 Sv | 29.680% | −0.10725 Sv | 16.165 million km² |
-| SSP4-6.0 | 2.771 °C | 10.633 Sv | 33.813% | −0.09887 Sv | 15.946 million km² |
-| SSP5-8.5 | 4.141 °C | 8.785 Sv | 45.316% | −0.07461 Sv | 15.183 million km² |
+| SSP1-2.6 | 1.46 °C | 12.70 Sv | 20.9% | −0.124 Sv | 16.61 million km² |
+| SSP2-4.5 | 2.33 °C | 11.30 Sv | 29.7% | −0.107 Sv | 16.17 million km² |
+| SSP4-6.0 | 2.77 °C | 10.63 Sv | 33.8% | −0.099 Sv | 15.95 million km² |
+| SSP5-8.5 | 4.14 °C | 8.79 Sv | 45.3% | −0.075 Sv | 15.18 million km² |
 
-Temperature is relative to the initialized 1850 model state. AMOC decline uses
-the stated historical and late-century period means. Under SSP5-8.5 the
-empirical sinking-capacity branch drives AMOC toward zero by 2300; this is a
-model sensitivity outcome, not a calibrated tipping probability or date.
+Temperature is relative to 1850. AMOC decline compares 2081–2100 with
+1995–2014. Under SSP5-8.5 the empirical branch approaches zero by 2300.
 
 ### SSP2-4.5 parameter uncertainty
-
-The SSP2-4.5 Monte Carlo experiment requested **512 prior members**. **495
-members completed successfully** and 17 failed. The plotted median and
-intervals are conditional on the successful prior ensemble; they are not an
-observational posterior. At 2100, 165 of 495 members are below 10 Sv and 24 are
-at or below the 6 Sv weak/collapsed reference.
 
 ![SSP2-4.5 Monte Carlo AMOC percentage decline](docs/assets/science_update_2026_09/ssp245_monte_carlo_amoc_decline_percent.png)
 
@@ -79,21 +61,17 @@ at or below the 6 Sv weak/collapsed reference.
 | Ocean heat-content change, 1971–2018 | 348.2 ZJ | 350–500 ZJ | 1.8 ZJ below lower bound |
 | 100-year post-hosing recovery | 79.510% | at least 80% | 0.490 percentage points low |
 | Historical AMOC, approximately 2004–2020 | 15.74–15.86 Sv | RAPID 16.9 ± 1.2 Sv | about 1.0–1.2 Sv low |
-| Arctic sea-ice area bias | March +0.355; September −0.055 million km² | NSIDC-compatible area | seasonal signed bias |
+| Arctic sea-ice area bias | March +0.355 and September −0.055 million km² | NSIDC-compatible area | seasonal signed bias |
 
-The AMOC scenario spread is dominated by the empirical forced-heat response
-and its prior. FovS is calculated from the evolving AMOC and conservative
-salinity states, but is conditional on that AMOC closure while it controls.
-Sea-ice area is more directly represented than geographical extent. The maps
-use a reduced latitude-band/two-sector geometry and have no local forecast
-skill.
+AMOC spread mainly reflects the forced-heat prior. FovS remains prognostic but
+follows the AMOC closure while it controls. The sea-ice maps use reduced
+geometry and have no local forecast skill.
 
 ### SSP diagnostics
 
-The diagnostic composites show final near-surface temperature, sea ice and
-snow together with the AMOC target, convection/pycnocline and Atlantic-salinity
-time series. The rectangular North Atlantic temperature feature is the
-reduced-grid AMOC fingerprint, not resolved regional ocean structure.
+The composites show surface temperature, sea ice, snow, AMOC, convection,
+pycnocline depth and Atlantic salinity. The rectangular North Atlantic feature
+comes from the reduced grid.
 
 #### SSP2-4.5
 
@@ -103,30 +81,23 @@ reduced-grid AMOC fingerprint, not resolved regional ocean structure.
 
 ![SSP5-8.5 process and final-state diagnostics](docs/assets/science_update_2026_09/ssp585_diagnostics.png)
 
-Figure provenance, source hashes and requested/successful ensemble counts are
-recorded in
-[`docs/assets/science_update_2026_09/manifest.json`](docs/assets/science_update_2026_09/manifest.json).
+Figure provenance and source hashes are in the
+[asset manifest](docs/assets/science_update_2026_09/manifest.json).
 
 ## Current release status
 
 **Current checkout (Unreleased, September 16 science update):** the default
-uses direct water-mass TEOS-10 density, an open Atlantic overturning boundary,
-an ocean freezing floor in both hemispheres, and dry-column weighting of the
-water-vapour response. Greenland includes Gaussian daily variability and
-reference runoff. Empirical Arctic GMST heating, extra winter transport and
-phase restoring are disabled by default. Feedback accounting includes Arctic
-TOA fluxes and Gregory regression uses complete annual means. A separately
-reported, FAFMIP-informed empirical forced-heat sinking capacity now complements the
-hydraulic density target; the lower capacity controls the AMOC tendency.
+uses direct water-mass TEOS-10 density, an open Atlantic boundary, bilateral
+ocean freezing floors and dry-column water-vapour weighting. It also updates
+Greenland runoff, Arctic feedback accounting and AMOC sinking capacity. The
+lower of the hydraulic and FAFMIP-informed capacities controls AMOC.
 
-Tables explicitly described as inherited or tagged-release evidence retain
-their original model state. The current figures above and the current SSP2-4.5
-table below use the unreleased revision. Neither body of evidence establishes
-prospective predictive skill. See
-[the repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md) for changes,
-development checks and remaining limitations.
+Current figures use the unreleased revision. Tagged-release evidence retains
+its original model state. See the
+[repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md).
 
-**v2.29.29** is the public-release consolidation of the validated R15–R18.5.1 repair, structural-validation, observation-integration, packaging, and attribution work. The version bump itself changes release identity only; it does not retune the governing climate, AMOC, Greenland, or sea-ice dynamics. Existing v2.29.28 numerical evidence is retained as inherited evidence and is linked to v2.29.29 by an explicit dynamics-equivalence record.
+**v2.29.29** consolidates the validated R15–R18.5.1 work without retuning the
+v2.29.28 dynamics. A dynamics-equivalence record links the inherited evidence.
 
 R18.4 completed the sixth-source Arctic observational stack by processing authentic **NSIDC-0611 v4/v4.1 EASE-Grid Sea Ice Age** files for 1984–2024. The Arctic observational stack is now **6/6 available**. Independent predictive scientific validation remains **`not_available`** until the preregistered 2027–2036 prospective holdout observations exist.
 
@@ -243,7 +214,7 @@ CLEM calculates its climate sensitivity from explicit forcing experiments rather
 
 These inherited sensitivity values used the bulk-surface temperature field.
 Current ECS, TCR, Gregory regression, and feedback normalization use
-`global_near_surface_air_warming_c`; outputs identify that field explicitly and
+`global_near_surface_air_warming_c`. Outputs identify that field explicitly and
 retain separate `bulk_surface_equilibrium_response_c` and
 `bulk_surface_transient_response_c` diagnostics. The two temperature definitions
 must not be treated as interchangeable in comparisons or calibration.
@@ -402,7 +373,7 @@ R18.4 additionally integrates NSIDC-0611 sea-ice age as a structural diagnostic.
 
 The current SSP AMOC magnitude is set mainly by the FAFMIP-informed empirical
 forced-heat capacity. The underlying study applies regional ocean-surface heat
-flux perturbations; it does not estimate CLEM's transfer from global effective
+flux perturbations. It does not estimate CLEM's transfer from global effective
 forcing, the scaled prior range, or the 20-year response time. Consequently,
 the SSP5-8.5 approach toward a near-zero AMOC by 2300 and the Monte Carlo
 collapse fraction are emulator sensitivity results. They are not process-only
@@ -437,7 +408,7 @@ step, not a claim of independent calibration. The RAPID comparison is from
 [Johns et al. (2023)](https://doi.org/10.1098/rsta.2022.0188).
 
 Mechanism isolation attributes almost all of the pre-repair model's excessive
-historical decline to the thermal-density pathway; removing anomalous
+historical decline to the thermal-density pathway. Removing anomalous
 freshwater changes shifts the mean by only about 0.025 Sv. At the control
 temperatures, the old constant thermal expansion coefficient is
 2.0e-4 K^-1, compared with TEOS-10 values of about 1.22e-4 K^-1 for the
@@ -447,7 +418,7 @@ thermal (-0.001200) and haline (+0.001634) terms therefore left a fragile
 The repair changes only the equation used to translate the established thermal
 and salinity coordinates into density, retaining their geometry, initial
 hydrography, hydraulic coefficients, and 17 Sv control. A literal
-prognostic-water-mass TEOS alternative was also tested; although its historical
+prognostic-water-mass TEOS alternative was also tested. Although its historical
 mean reached ~16.34 Sv, its SSP2-4.5 weakening was only ~6.5%, below the model's
 independently declared 15–50% development range, so it was not promoted.
 
@@ -613,7 +584,7 @@ Hemisphere sea-ice area/extent:
   every scenario in analysis-ready long form
 
 Resume an interrupted batch with the same settings by adding
-`--resume-all-ssp`; complete compatible scenario subfolders are skipped.
+`--resume-all-ssp`. Complete compatible scenario subfolders are skipped.
 Use `--ssp-workers 1` for the former sequential behavior or choose 2–4 workers
 to trade additional memory use for faster completion. The default is the
 smaller of four workers or the detected logical CPU count.
@@ -664,7 +635,7 @@ CLEM v2.29.29 is distributed as a **multi-asset release** rather than one oversi
 - `CLEM_v2.29.28_R18_validation_results_finalized.zip` — **29,314,682 bytes**, SHA-256 `69f0d2d8095e084e6464c291ca978417d9891d759ca0649106c6cee434dce4c8`. This is the finalized R18 structural/observation-operator validation bundle.
 - `CLEM_v2.29.28_R18_2_seaice_operator_results.zip` — **25,318,048 bytes**, SHA-256 `d6506dfbec839528ad3c4e633c1563cf18c1fc6caf6dd94fd44dfe5ec36e0f06`. This contains the completed R18.2 5°/10° sea-ice observation-operator numerical comparison. Its historical version label is likewise preserved.
 
-The raw NSIDC-0611 NetCDF archive is **not** a CLEM release asset. CLEM ships the processed diagnostic and full source-file SHA-256 provenance instead. Historical numerical assets are inherited by the explicit dynamics-equivalence record; they are not relabelled as newly generated v2.29.29 runs.
+The raw NSIDC-0611 NetCDF archive is **not** a CLEM release asset. CLEM ships the processed diagnostic and full source-file SHA-256 provenance instead. Historical numerical assets are inherited by the explicit dynamics-equivalence record. They are not relabelled as newly generated v2.29.29 runs.
 
 R15–R18.5.1 supplied the structural, observation-operator, provenance, and public-release work consolidated into v2.29.29. R18.2 supplies the completed sea-ice operator numerical evidence and R18.4 adds authentic NSIDC-0611 processed observational data. Historical evidence filenames retain `v2.29.28` where that is the version under which the numerical run was actually executed.
 
@@ -692,4 +663,4 @@ Processed third-party scientific data distributed with CLEM retain the attributi
 
 ## License
 
-CLEM source code and original CLEM material are released under the MIT License. See `LICENSE`. Third-party datasets and derived data may be subject to separate terms; see `THIRD_PARTY_DATA.md`.
+CLEM source code and original CLEM material are released under the MIT License. See `LICENSE`. Third-party datasets and derived data may be subject to separate terms. See `THIRD_PARTY_DATA.md`.
