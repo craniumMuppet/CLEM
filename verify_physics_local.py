@@ -608,6 +608,9 @@ def static_worker() -> dict[str, Any]:
         float(v) for v in salt_model.baseline_control_boundary_freshwater_sv
     ]
     salt_amoc = salt_model._amoc_diagnostics(salt_model.state)
+    weak_convection_state = salt_model.state.copy()
+    weak_convection_state.convection_efficiency = 0.5
+    weak_convection_amoc = salt_model._amoc_diagnostics(weak_convection_state)
     route_base = salt_model._surface_freshwater_fluxes_sv(0.0, 0.0, 0.0, 0.0, 0.0)
     route_export = salt_model._surface_freshwater_fluxes_sv(0.0, 0.0, 0.0, 0.0, 0.05)
     route_storage = salt_model._surface_freshwater_fluxes_sv(0.0, 0.0, 0.0, 0.05, 0.0)
@@ -718,9 +721,10 @@ def static_worker() -> dict[str, Any]:
             "legacy_convection_transition_width": float(cfg.amoc_convection_transition_width),
             "convection_density_scale_factor": float(cfg.amoc_convection_density_scale_factor),
             "convection_transport_exponent": float(cfg.amoc_convection_transport_exponent),
-            "pass_continuous_convection_multiplies_transport": bool(
-                abs(cfg.amoc_convection_transport_exponent - 1.0) < 1.0e-12
-                and "hydraulic_target_without_convection * convection_multiplier" in source_text
+            "pass_default_convection_has_no_direct_transport_multiplier": bool(
+                abs(cfg.amoc_convection_transport_exponent) < 1.0e-12
+                and abs(weak_convection_amoc["amoc_hydraulic_target_sv"]
+                        - salt_amoc["amoc_hydraulic_target_sv"]) < 1.0e-12
             ),
             "amoc_temperature_density_coupling": float(cfg.amoc_temperature_density_coupling),
             "amoc_interhemispheric_temperature_coupling": float(cfg.amoc_interhemispheric_temperature_coupling),
@@ -1469,7 +1473,8 @@ def finalize_results(static_result: dict[str, Any], segment_status: dict[str, An
             "pass_salt_conservation": bool(max_salt_error < 1.0e-6),
         }
     if ssp_rows:
-        results["tests"]["ssp245_out_of_sample"] = ssp_rows
+        # This scenario has been inspected during closure development.
+        results["tests"]["ssp245_development"] = ssp_rows
     if "10deg" in ssp_rows and "5deg" in ssp_rows:
         a = ssp_rows["10deg"]
         b = ssp_rows["5deg"]

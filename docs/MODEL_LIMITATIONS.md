@@ -45,6 +45,25 @@ virtual box fluxes are separate diagnostics. `fovs_sv` is the diagnosed overturn
 historical SAU/deep value is named `amoc_internal_section_freshwater_sv`.
 Hydraulic density/depth exponents, heat-transport coupling and the prescribed
 control freshwater components remain structural assumptions.
+The September 14 revision adds a separate forced-heat sinking-capacity state.
+Its 5.10 Sv response scale uses the final-decade FAFMIP 50% North Atlantic
+heat-flux ensemble mean as a benchmark. Its 20-year response time is a heuristic
+interpretation of the reported qualitative stabilization, not a fitted FAFMIP
+timescale. FAFMIP does not supply CLEM's mapping from instantaneous global
+anthropogenic effective forcing to standardized North Atlantic heat input.
+That mapping is an empirical emulator assumption. The model
+reports this capacity, the hydraulic target, and the lower active target
+separately. Passing an assessed SSP response range is development evidence,
+not independent validation or a real-world forecast.
+While the forced-heat capacity is the lower target, salinity and FovS remain
+prognostic but cannot change AMOC unless their hydraulic target falls below
+that capacity. Thus the default SSP AMOC trajectory is principally an empirical
+forcing response with lag; it is not a salt-advection-controlled projection.
+When the forcing-index capacity is the tighter SSP constraint, the AMOC
+trajectory can be identical across latitude resolutions even though their
+hydraulic targets and salinity/FovS trajectories differ. This is a deliberate
+reduced-emulator limitation and must not be presented as cross-resolution
+process agreement.
 The South Atlantic salinity tracer supplies the hydraulic upper-limb salinity,
 while its effective temperature anomaly follows northern surface-to-deep
 stratification rather than the local 35 S surface anomaly. This prevents a
@@ -53,12 +72,15 @@ transformation closure requiring process-level validation. The literal local
 surface-temperature pathway remains available as the nondefault
 `teos10_surface_watermass` structural sensitivity.
 
-Northern deep-water-formation efficiency now multiplies the basin hydraulic
-target continuously with a unit exponent. Its anomaly scale preserves the
-high-latitude linear control buoyancy margin rather than inheriting the much
-larger South Atlantic upper-limb density driver. This repairs a geometry-change
-regression, but the reduced convection closure and its structural uncertainty
-still require comparison with comprehensive coupled models and observations.
+Northern convection controls salt mixing. Its additional direct transport
+multiplier is off by default and available only as an explicit structural
+experiment; its overlap with the hydraulic response has not been validated.
+Convection normalization uses the magnitude of the north-surface/deep linear
+control density contrast. This removes dependence on an unrelated southern
+box, but the prescribed control temperatures and exponential anomaly law
+remain reduced model assumptions, not a derived convective-onset criterion.
+The 17–18% SSP decline from trial commit `eec6bcd` is superseded. See
+`CONVECTION_REVIEW_FOLLOWUP_2026_09_14.md` for current results and validation limits.
 The phase-space stability and recovery of the revised system must be assessed
 afresh; a passing finite-duration run does not identify an equilibrium branch.
 

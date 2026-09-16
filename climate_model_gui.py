@@ -170,6 +170,7 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("amoc_reference", "amoc_reference_sv", "Reference AMOC", "14.0", "19.0", "Sv"),
     ("amoc_temp", "amoc_temperature_density_coupling", "AMOC northern-stratification coupling", "0.40", "1.00", "fraction"),
     ("amoc_adjust", "amoc_adjustment_years", "AMOC adjustment time", "3.0", "20.0", "years"),
+    ("amoc_forced_heat", "amoc_forced_heat_response_sv_per_doubling", "Forced-heat AMOC response", "3.27", "8.63", "Sv/doubling"),
     ("amoc_heat", "amoc_heat_transport_pw_per_sv", "Overturning heat transport", "0.035", "0.050", "PW/Sv"),
     ("amoc_surface_heat", "amoc_surface_heat_coupling_fraction", "Surface AMOC heat coupling", "0.025", "0.20", "fraction"),
     ("amoc_heat_damping", "amoc_heat_response_damping_wm2_k", "AMOC temperature damping", "0.8", "2.5", "W/m2/K"),
@@ -178,6 +179,7 @@ MC_RANGE_SPECS: list[tuple[str, str, str, str, str, str]] = [
     ("pyc_feedback", "amoc_pycnocline_feedback_strength", "Pycnocline AMOC feedback strength", "0.00", "0.30", "fraction"),
     ("conv_scale", "amoc_convection_density_scale_factor", "Convection density scale factor", "1.0", "6.0", "factor"),
     ("conv_min", "amoc_convection_minimum_fraction", "Residual convection fraction", "0.00", "0.15", "fraction"),
+    ("conv_transport", "amoc_convection_transport_exponent", "Experimental convection transport exponent", "0.0", "1.0", "off at zero"),
     ("conv_mix", "amoc_convective_mixing_reference_sv", "Convective salt exchange", "1.0", "10.0", "Sv"),
     ("conv_mix_exp", "amoc_convective_mixing_exponent", "Convective mixing exponent", "1.0", "4.0", ""),
     ("conv_feedback", "amoc_convection_entrainment_feedback", "Convective entrainment feedback", "0.00", "0.22", "ratio"),
@@ -300,6 +302,8 @@ DEFAULTS: dict[str, Any] = {
     "greenland_retention_loss_fraction_per_k": "0.04",
     "amoc_temperature_coupling": "1.0",
     "amoc_adjustment_years": "8.0",
+    "amoc_forced_heat_response": f"{MODEL_DEFAULT_CONFIG.amoc_forced_heat_response_sv_per_doubling:g}",
+    "amoc_forced_heat_adjustment_years": f"{MODEL_DEFAULT_CONFIG.amoc_forced_heat_adjustment_years:g}",
     "amoc_heat_transport": "0.040",
     "amoc_surface_heat_coupling": f"{MODEL_DEFAULT_CONFIG.amoc_surface_heat_coupling_fraction:g}",
     "amoc_heat_response_damping": f"{MODEL_DEFAULT_CONFIG.amoc_heat_response_damping_wm2_k:g}",
@@ -309,6 +313,7 @@ DEFAULTS: dict[str, Any] = {
     "amoc_pycnocline_feedback_strength": f"{MODEL_DEFAULT_CONFIG.amoc_pycnocline_feedback_strength:g}",
     "amoc_convection_density_scale_factor": f"{MODEL_DEFAULT_CONFIG.amoc_convection_density_scale_factor:.2f}",
     "amoc_convection_minimum_fraction": "0.02",
+    "amoc_convection_transport_exponent": f"{MODEL_DEFAULT_CONFIG.amoc_convection_transport_exponent:g}",
     "amoc_convective_mixing_reference_sv": "5.0",
     "amoc_convective_mixing_exponent": "2.0",
     "amoc_convection_entrainment_feedback": "0.00",
@@ -514,6 +519,8 @@ CLI_MAP = {
     "greenland_retention_loss_fraction_per_k": "--greenland-retention-loss-fraction-per-k",
     "amoc_temperature_coupling": "--amoc-temperature-coupling",
     "amoc_adjustment_years": "--amoc-adjustment-years",
+    "amoc_forced_heat_response": "--amoc-forced-heat-response",
+    "amoc_forced_heat_adjustment_years": "--amoc-forced-heat-adjustment-years",
     "amoc_heat_transport": "--amoc-heat-transport",
     "amoc_surface_heat_coupling": "--amoc-surface-heat-coupling",
     "amoc_heat_response_damping": "--amoc-heat-response-damping",
@@ -523,6 +530,7 @@ CLI_MAP = {
     "amoc_pycnocline_feedback_strength": "--amoc-pycnocline-feedback-strength",
     "amoc_convection_density_scale_factor": "--amoc-convection-density-scale-factor",
     "amoc_convection_minimum_fraction": "--amoc-convection-minimum-fraction",
+    "amoc_convection_transport_exponent": "--amoc-convection-transport-exponent",
     "amoc_convective_mixing_reference_sv": "--amoc-convective-mixing-reference",
     "amoc_convective_mixing_exponent": "--amoc-convective-mixing-exponent",
     "amoc_convection_entrainment_feedback": "--amoc-convection-entrainment-feedback",
@@ -1976,51 +1984,57 @@ class ClimateModelGUI:
             "Temperature-density coupling",
         )
         self._field(
-            dynamics, 2, "amoc_adjustment_years", "Adjustment time (years)"
+            dynamics, 1, "amoc_forced_heat_response", "Forced-heat response (Sv/doubling)"
         )
         self._field(
-            dynamics, 3, "amoc_heat_transport", "Overturning heat transport (PW/Sv)"
+            dynamics, 2, "amoc_forced_heat_adjustment_years", "Forced-heat adjustment time (years)"
         )
         self._field(
-            dynamics, 4, "amoc_surface_heat_coupling", "Surface heat coupling fraction"
+            dynamics, 3, "amoc_adjustment_years", "Hydraulic adjustment time (years)"
         )
         self._field(
-            dynamics, 5, "amoc_heat_response_damping", "AMOC temperature damping (W/m2/K)"
+            dynamics, 4, "amoc_heat_transport", "Overturning heat transport (PW/Sv)"
         )
         self._field(
-            dynamics, 6, "atlantic_gyre_heat_transport", "Atlantic gyre heat transport (PW)"
+            dynamics, 5, "amoc_surface_heat_coupling", "Surface heat coupling fraction"
         )
         self._field(
-            dynamics, 7, "amoc_density_exponent", "Density transport exponent"
+            dynamics, 6, "amoc_heat_response_damping", "AMOC temperature damping (W/m2/K)"
         )
         self._field(
-            dynamics, 8, "amoc_depth_exponent", "Hydraulic depth exponent"
+            dynamics, 7, "atlantic_gyre_heat_transport", "Atlantic gyre heat transport (PW)"
         )
         self._field(
-            dynamics, 9, "amoc_eddy_depth_exponent", "Eddy depth exponent"
+            dynamics, 8, "amoc_density_exponent", "Density transport exponent"
         )
         self._field(
-            dynamics, 10, "amoc_collapse_threshold", "Collapse threshold (Sv)"
+            dynamics, 9, "amoc_depth_exponent", "Hydraulic depth exponent"
         )
         self._field(
-            dynamics, 11, "amoc_reference_density_driver", "Reference absolute density driver"
+            dynamics, 10, "amoc_eddy_depth_exponent", "Eddy depth exponent"
         )
         self._field(
-            dynamics, 12, "amoc_minimum_initial_density_ratio", "Minimum initial density-margin ratio"
+            dynamics, 11, "amoc_collapse_threshold", "Collapse threshold (Sv)"
         )
         self._field(
-            dynamics, 13, "amoc_maximum_initial_density_ratio", "Maximum initial density-margin ratio"
+            dynamics, 12, "amoc_reference_density_driver", "Reference absolute density driver"
+        )
+        self._field(
+            dynamics, 13, "amoc_minimum_initial_density_ratio", "Minimum initial density-margin ratio"
+        )
+        self._field(
+            dynamics, 14, "amoc_maximum_initial_density_ratio", "Maximum initial density-margin ratio"
         )
         self._checkbox(
-            dynamics, 14, "amoc_enforce_initial_density_constraint",
+            dynamics, 15, "amoc_enforce_initial_density_constraint",
             "Reject physically fragile initial density states"
         )
         self._checkbox(
-            dynamics, 15, "amoc_allow_reversal",
+            dynamics, 16, "amoc_allow_reversal",
             "Allow exploratory negative AMOC reversal"
         )
         self._field(
-            dynamics, 16, "amoc_coupling_scheme",
+            dynamics, 17, "amoc_coupling_scheme",
             "Coupled AMOC integration scheme",
             values=["euler", "heun"],
         )
@@ -2033,6 +2047,10 @@ class ClimateModelGUI:
         self._field(
             convection, 3, "amoc_convection_minimum_fraction",
             "Residual convection fraction"
+        )
+        self._field(
+            convection, 4, "amoc_convection_transport_exponent",
+            "Experimental transport exponent (0: off)"
         )
         self._field(
             convection, 5, "amoc_convective_mixing_reference_sv",

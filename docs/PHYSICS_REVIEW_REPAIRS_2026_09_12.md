@@ -1,5 +1,10 @@
 # Physics review repairs — 2026-09-12
 
+**Historical development record:** numerical results below describe commit
+`eec6bcd` and its predecessors. The convection change in that commit was
+subsequently revised. Current equations, results and evidence limitations are
+in [the September 14 follow-up](CONVECTION_REVIEW_FOLLOWUP_2026_09_14.md).
+
 This is an Unreleased structural revision. It corrects reproducible defects and
 removes unsupported default forcing closures. It does **not** establish that
 the revised model reproduces observed climate or real AMOC tipping behavior.
@@ -154,33 +159,31 @@ reached 15.921 and ended at 16.183 Sv. With the complete current repair, the
 sign and numerical consistency, but do not constitute observational validation
 of the response magnitude.
 
-### SSP2-4.5 convection-coupling regression
+### SSP2-4.5 convection experiment (subsequently superseded)
 
 Changing the hydraulic source to the South Atlantic upper limb also changed the
 normalization of the separate northern convection anomaly from about
-`5.1e-4` to `2.1e-3`. The prognostic convection efficiency was then excluded
-from transport by a hard-coded multiplier of one. In the 5-degree SSP2-4.5 run,
+`5.1e-4` to `2.1e-3`. Direct convection multiplication had already been
+deliberately disabled in R13; that was not an accidental omission. In the 5-degree SSP2-4.5 run,
 AMOC consequently reached a shallow 16.08 Sv minimum and recovered to 16.16 Sv
 by 2100 even though convection efficiency had fallen to about 0.94.
 
-The repair preserves the high-latitude linear control buoyancy margin as the
-convection anomaly scale, independently of the selected South Atlantic
-hydraulic geometry. Continuous convection efficiency again multiplies the
-hydraulic target with the pre-existing unit exponent. The old critical-density
-logistic switch remains absent, and no SSP-specific target or coefficient is
-introduced.
+The trial commit restored the legacy north/Southern-Ocean linear hydraulic
+contrast as the convection scale and enabled direct multiplication with a unit
+exponent. Neither choice established a local sinking law. Alternatives were
+examined using the SSP response, so this was development informed by that
+response, even without an explicit SSP-only coefficient.
 
 Using the repository's predeclared comparison of 2081-2100 with 1995-2014,
 SSP2-4.5 AMOC now declines 18.23% at 10 degrees and 17.00% at 5 degrees. The
 2100 transports are 13.08 and 13.33 Sv, respectively, versus the 17 Sv control.
-Both fall within the existing broad 15-50% development gate. CMIP6 and IPCC
-assess substantially uncertain magnitudes, so these runs establish removal of
-the suppressed-response regression rather than observational validation.
+Both fell within the existing broad 15-50% development gate. That agreement
+did not validate the selected closure. The September 14 follow-up replaces the
+nonlocal normalization and disables direct multiplication by default.
 
 The experiment source snapshots are saved with the time series.
-`source_equivalence.json` records exact equality between the current executable
-sources and the experiment snapshots. The current source and experiment hashes
-are both recorded.
+`source_equivalence.json` records equality at the time of those experiments;
+its `current_sha256` is historical and does not describe subsequent checkouts.
 
 An additional isolated pulse-recovery comparison is run with
 `python tools/verify_physics_revision.py --recovery-only`. It compares open and

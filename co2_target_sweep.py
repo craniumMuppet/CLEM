@@ -526,6 +526,12 @@ def _state_from_checkpoint(payload: dict[str, Any]) -> ModelState:
             state_payload[field_name] = np.zeros_like(
                 np.asarray(state_payload[template_name], dtype=float)
             )
+    if "amoc_forced_heat_capacity_sv" not in state_payload:
+        # Compatible baseline checkpoints are control states, so their AMOC
+        # transport is also the initial unforced heat-limited capacity.
+        state_payload["amoc_forced_heat_capacity_sv"] = float(
+            state_payload["amoc_sv"]
+        )
     return ModelState(**state_payload)
 
 def _final_window_mean(values: np.ndarray, years: np.ndarray, window_years: float) -> float:

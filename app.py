@@ -340,6 +340,8 @@ with st.sidebar:
     amoc_heat_transport = st.slider('Overturning heat transport (PW/Sv)', 0.0, 0.1, float(DEFAULT_MODEL_CONFIG.amoc_heat_transport_pw_per_sv), 0.005, help=setting_tooltip('amoc_heat_transport'))
     amoc_surface_heat_coupling = st.slider('Surface AMOC heat coupling fraction', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_surface_heat_coupling_fraction), 0.025, help=setting_tooltip('amoc_surface_heat_coupling', extra_note='Fraction of the diagnosed overturning heat-transport anomaly applied to the prognostic surface mixed layer.'))
     amoc_heat_response_damping = st.slider('AMOC regional temperature damping (W/m2/K)', 0.25, 4.0, float(DEFAULT_MODEL_CONFIG.amoc_heat_response_damping_wm2_k), 0.05, help=setting_tooltip('amoc_heat_response_damping'))
+    amoc_forced_heat_response = st.slider('Forced-heat AMOC response per doubling (Sv)', 0.0, 10.0, float(DEFAULT_MODEL_CONFIG.amoc_forced_heat_response_sv_per_doubling), 0.1, help=setting_tooltip('amoc_forced_heat_response'))
+    amoc_forced_heat_adjustment_years = st.slider('Forced-heat AMOC adjustment time (years)', 1.0, 100.0, float(DEFAULT_MODEL_CONFIG.amoc_forced_heat_adjustment_years), 1.0, help=setting_tooltip('amoc_forced_heat_adjustment_years'))
     atlantic_gyre_heat_transport = float(DEFAULT_MODEL_CONFIG.atlantic_gyre_heat_transport_pw)
     amoc_control_salinity_mode = st.selectbox(
         'AMOC control salinity initialization',
@@ -522,6 +524,7 @@ with st.sidebar:
         pycnocline_feedback_strength = st.slider('Pycnocline AMOC feedback strength', 0.0, 1.0, float(DEFAULT_MODEL_CONFIG.amoc_pycnocline_feedback_strength), 0.05, help=setting_tooltip('pycnocline_feedback_strength'))
         convection_density_scale_factor = st.slider('Convection density normalization scale', 1.0, 6.0, float(DEFAULT_MODEL_CONFIG.amoc_convection_density_scale_factor), 0.01, help=setting_tooltip('convection_density_scale_factor'))
         convection_minimum_fraction = st.slider('Residual deep-convection fraction', 0.0, 0.7, float(DEFAULT_MODEL_CONFIG.amoc_convection_minimum_fraction), 0.01, help=setting_tooltip('convection_minimum_fraction'))
+        convection_transport_exponent = st.number_input('Experimental convection transport exponent (0: off)', min_value=0.0, value=float(DEFAULT_MODEL_CONFIG.amoc_convection_transport_exponent), step=0.1, help=setting_tooltip('convection_transport_exponent'))
         convective_mixing_reference = st.slider('Convective salt exchange (Sv)', 0.0, 15.0, float(DEFAULT_MODEL_CONFIG.amoc_convective_mixing_reference_sv), 0.5, help=setting_tooltip('convective_mixing_reference'))
         convective_mixing_exponent = st.slider('Convective mixing exponent', 0.5, 5.0, float(DEFAULT_MODEL_CONFIG.amoc_convective_mixing_exponent), 0.1, help=setting_tooltip('convective_mixing_exponent'))
         convection_entrainment_feedback = st.slider('Convective entrainment feedback', 0.0, 0.35, float(DEFAULT_MODEL_CONFIG.amoc_convection_entrainment_feedback), 0.01, help=setting_tooltip('convection_entrainment_feedback'))
@@ -636,6 +639,8 @@ config = ModelConfig(
     amoc_heat_transport_pw_per_sv=float(amoc_heat_transport),
     amoc_surface_heat_coupling_fraction=float(amoc_surface_heat_coupling),
     amoc_heat_response_damping_wm2_k=float(amoc_heat_response_damping),
+    amoc_forced_heat_response_sv_per_doubling=float(amoc_forced_heat_response),
+    amoc_forced_heat_adjustment_years=float(amoc_forced_heat_adjustment_years),
     atlantic_gyre_heat_transport_pw=float(atlantic_gyre_heat_transport),
     amoc_adjustment_years=float(amoc_adjustment),
     amoc_density_transport_exponent=float(density_exponent),
@@ -643,6 +648,7 @@ config = ModelConfig(
     amoc_pycnocline_feedback_strength=float(pycnocline_feedback_strength),
     amoc_convection_density_scale_factor=float(convection_density_scale_factor),
     amoc_convection_minimum_fraction=float(convection_minimum_fraction),
+    amoc_convection_transport_exponent=float(convection_transport_exponent),
     amoc_convective_mixing_reference_sv=float(convective_mixing_reference),
     amoc_convective_mixing_exponent=float(convective_mixing_exponent),
     amoc_convection_entrainment_feedback=float(
@@ -792,8 +798,18 @@ with experiment_tab:
         ]
         st.line_chart(chart, x_label="Year", y_label="Temperature anomaly (°C)")
     with right:
-        chart = df.set_index("year")[["amoc_sv", "amoc_hydraulic_target_sv"]].copy()
-        chart.columns = ["AMOC", "Hydraulic density target"]
+        chart = df.set_index("year")[[
+            "amoc_sv",
+            "amoc_transport_target_sv",
+            "amoc_forced_heat_capacity_sv",
+            "amoc_hydraulic_target_sv",
+        ]].copy()
+        chart.columns = [
+            "AMOC",
+            "Active transport target",
+            "Forced-heat sinking capacity",
+            "Hydraulic density target",
+        ]
         chart["6 Sv reference"] = AMOC_SIX_SV_REFERENCE
         st.line_chart(chart, x_label="Year", y_label="Transport (Sv)")
 

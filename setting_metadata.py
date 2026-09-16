@@ -648,6 +648,24 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Large-scale ocean adjustment and reduced-model calibration.",
         "Medium",
     ),
+    "amoc_forced_heat_response": _physical(
+        "Reduction in the slow North Atlantic sinking-capacity limit per CO2-doubling-equivalent anthropogenic forcing.",
+        "Default 5.10 Sv uses the final-decade FAFMIP 50% North Atlantic heat-flux ensemble mean. A heuristic 3.27–8.63 Sv structural range scales it by the reported 0.25–0.66 versus 0.39 Sv m²/W intermodel sensitivity range.",
+        "Couldrey et al. (2022), Climate Dynamics, doi:10.1007/s00382-022-06386-y. The study does not directly constrain the global-forcing-to-regional-heat transfer used by this emulator.",
+        "Low",
+    ),
+    "amoc_forced_heat_response_sv_per_doubling": _physical(
+        "Reduction in the slow North Atlantic sinking-capacity limit per CO2-doubling-equivalent anthropogenic forcing.",
+        "Default 5.10 Sv uses the final-decade FAFMIP 50% North Atlantic heat-flux ensemble mean. A heuristic 3.27–8.63 Sv structural range scales it by the reported 0.25–0.66 versus 0.39 Sv m²/W intermodel sensitivity range.",
+        "Couldrey et al. (2022), Climate Dynamics, doi:10.1007/s00382-022-06386-y. The study does not directly constrain the global-forcing-to-regional-heat transfer used by this emulator.",
+        "Low",
+    ),
+    "amoc_forced_heat_adjustment_years": _physical(
+        "E-folding time for the forced-heat sinking capacity to approach its forcing-dependent target.",
+        "Default 20 years is a heuristic interpretation of most FAFMIP models stabilising after the first decades; the paper does not estimate this e-folding time.",
+        "Couldrey et al. (2022) provides qualitative FAFMIP transient behavior.",
+        "Low",
+    ),
     "amoc_heat_transport": _physical(
         "Overturning heat transport per Sverdrup of AMOC anomaly.",
         "No separately observed CI because RAPID constrains total heat transport. Built-in prior support: 0.015–0.080 PW/Sv; default 0.040.",
@@ -792,8 +810,8 @@ SETTING_INFO: dict[str, SettingInfo] = {
     ),
     "amoc_convection_density_scale_factor": _physical(
         "Multiplies the linear control-density scale for the local northern surface-to-deep density anomaly, independently of the hydraulic EOS.",
-        "No direct observational CI. Built-in prior support: 1.2–6.0; current deterministic default 1.00. The prior retains its older development range.",
-        "Maps box-model density anomalies onto a nondimensional convection stability metric.",
+        "No direct observational CI. Built-in prior support: 1.0–6.0; default 1.00.",
+        "Scales the magnitude of the prescribed local north/deep linear density contrast; exponential anomaly response is a reduced model assumption.",
         "Low",
     ),
     "amoc_convection_minimum_fraction": _physical(
@@ -803,9 +821,9 @@ SETTING_INFO: dict[str, SettingInfo] = {
         "Low",
     ),
     "amoc_convection_transport_exponent": _physical(
-        "Exponent coupling continuous northern deep-water-formation efficiency to AMOC transport.",
-        "Built-in structural prior support: 0.5–1.5; default 1.0 gives direct proportional coupling.",
-        "Reduced deep-water-formation closure without a critical-density switch.",
+        "Experimental direct convection multiplier on hydraulic AMOC transport.",
+        "Default 0.0 disables direct multiplication; 1.0 is proportional. No built-in science prior; explicit user ranges permit sensitivity experiments.",
+        "Combined buoyancy response has not been validated; changing this exponent changes the model closure.",
         "Low",
     ),
     "amoc_convective_mixing_reference_sv": _physical(

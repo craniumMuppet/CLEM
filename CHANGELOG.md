@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### September 16 science-result documentation
+
+- Replace the old README scenario gallery with the current paired CO2 target
+  sweep, a four-panel 1850–2300 SSP comparison, the 512-requested-member
+  SSP2-4.5 Monte Carlo ensemble, and paired SSP2-4.5/SSP5-8.5 diagnostic
+  composites.
+- Report requested and successful ensemble counts separately, add the current
+  historical-warming, ocean-heat-content, hosing-recovery, AMOC and sea-ice
+  biases, and label the empirical AMOC closure and reduced-grid maps as
+  conditional sensitivity evidence.
+- Add `tools/build_readme_science_figures.py` and a SHA-256 manifest for the
+  displayed science assets. Remove the superseded individually embedded SSP,
+  SSP2-4.5 final-map and percent-ramp image assets.
+
 ### September 12 physics review repairs
 
 - Apply the liquid-ocean reference floor in both hemispheres and weight the
@@ -30,10 +44,28 @@
   doubled-CO2 AMOC now weakens rather than responding to spurious differential
   thermal expansion of the local 35 S surface source. See
   `docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md`.
-- Keep the northern convection buoyancy scale independent of the South Atlantic
-  hydraulic geometry and restore its continuous unit-exponent transport
-  coupling. This removes the SSP2-4.5 regression in which convection weakened
-  diagnostically while its AMOC transport multiplier remained exactly one.
+- Normalize northern convection using the local north/deep control density
+  contrast. Withdraw the default direct transport multiplier introduced in
+  `eec6bcd`; retain it as an explicit unvalidated experiment in CLI and both GUIs,
+  excluded from built-in science priors. Preserve failed SSP development gates
+  as results and distinguish them from numerical checks and independent validation.
+  See `docs/CONVECTION_REVIEW_FOLLOWUP_2026_09_14.md`.
+- Add a separately prognostic North Atlantic forced-heat sinking capacity,
+  using the FAFMIP 50% North Atlantic heat experiment as an external benchmark
+  rather than numerically fitting the CLEM SSP2-4.5 endpoint. The conversion
+  from global effective forcing to regional heat input remains an empirical
+  emulator assumption. The active AMOC target is the lower of this
+  capacity and the existing hydraulic density target. Export both limits,
+  retain the conservative salinity/FovS calculation, and expose the response
+  strength and timescale in the CLI and both GUIs. See
+  `docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md`.
+- Make a zero forced-heat response an exact disable switch even for hydraulic
+  targets above 17 Sv or a carried reduced-capacity state. This also removes
+  the hard-minimum corner from the unforced equilibrium system.
+- Reference local convection salinity anomalies to the solved control
+  hydrography and include explicit additional forcing in the SSP forced-heat
+  index. These corrections affect allowed nondefault configurations; the
+  default SSP2-4.5 trajectory is unchanged.
 
 ### Current-model review corrections
 

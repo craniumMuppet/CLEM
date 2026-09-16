@@ -563,6 +563,17 @@ class ModelConfig:
     # a distinct boundary freshwater diagnostic closes the basin inventory.
     amoc_reference_sv: float = 17.0
     amoc_adjustment_years: float = 8.0
+    # Empirical proxy for greenhouse-forced North Atlantic heat input. FAFMIP's
+    # constant 50% North Atlantic heat-flux experiment produced 5.1 Sv
+    # ensemble-mean weakening in years 61-70 and may approximate the regional
+    # heat input near CO2 doubling (Couldrey et al. 2022,
+    # doi:10.1007/s00382-022-06386-y). The paper does not supply the global-ERF
+    # transfer function used here. The 20-year e-folding time is a heuristic
+    # interpretation of the qualitative first-decades stabilization. This is an
+    # explicit emulator constraint, separate from the prognostic hydraulic
+    # density and salt-advection closure.
+    amoc_forced_heat_response_sv_per_doubling: float = 5.10
+    amoc_forced_heat_adjustment_years: float = 20.0
     thermal_expansion_per_k: float = 2.0e-4
     # Full forced northern surface-to-deep stratification anomaly contribution
     # to the basin-scale hydraulic density response. This is anomaly-only, so it
@@ -625,18 +636,19 @@ class ModelConfig:
     # continue to load.  The v2.2 dynamics do not use a tuned critical ratio or
     # transition width.  Convection instead responds continuously to the local
     # northern surface-versus-deep thermohaline density anomaly, normalized by
-    # the dimensional control AMOC density driver.
+    # the magnitude of the local north-surface/deep control density contrast.
     amoc_convection_critical_density_ratio: float = 0.00
     amoc_convection_transition_width: float = 0.10
-    # Dimensionless scale multiplying the physical control density driver in the
+    # Dimensionless scale multiplying the local control density contrast in the
     # local convection response.  1.0 means one control-driver-sized adverse
     # local density anomaly reduces convection by e^-1 before configured bounds.
     amoc_convection_density_scale_factor: float = 1.00
     amoc_convection_minimum_fraction: float = 0.02
-    # Continuous deep-water-formation efficiency multiplies the hydraulic
-    # transport. A unit exponent gives the direct proportional closure without
-    # reintroducing the removed critical-density logistic switch.
-    amoc_convection_transport_exponent: float = 1.00
+    # Optional structural experiment: multiply hydraulic transport by convection
+    # efficiency raised to this power. Off by default because the hydraulic
+    # density and convective salt-mixing pathways already respond to buoyancy;
+    # their combination with a direct multiplier has not been validated.
+    amoc_convection_transport_exponent: float = 0.00
     amoc_convection_adjustment_years: float = 20.0
     amoc_convection_recovery_years: float = 80.0
     # Smooth the weakening/recovery timescale transition around zero tendency.
@@ -1368,6 +1380,20 @@ class ModelConfig:
             raise ValueError("AMOC reference transport must be positive")
         if self.amoc_adjustment_years <= 0.0:
             raise ValueError("AMOC adjustment time must be positive")
+        if (
+            not math.isfinite(self.amoc_forced_heat_response_sv_per_doubling)
+            or self.amoc_forced_heat_response_sv_per_doubling < 0.0
+        ):
+            raise ValueError(
+                "amoc_forced_heat_response_sv_per_doubling must be finite and nonnegative"
+            )
+        if (
+            not math.isfinite(self.amoc_forced_heat_adjustment_years)
+            or self.amoc_forced_heat_adjustment_years <= 0.0
+        ):
+            raise ValueError(
+                "amoc_forced_heat_adjustment_years must be finite and positive"
+            )
         if self.amoc_convection_timescale_smoothing <= 0.0:
             raise ValueError("amoc_convection_timescale_smoothing must be positive")
         if self.amoc_heat_transport_pw_per_sv < 0.0:
@@ -1463,8 +1489,8 @@ class ModelConfig:
             raise ValueError("amoc_convection_density_scale_factor must be positive")
         if not 0.0 <= self.amoc_convection_minimum_fraction <= 1.0:
             raise ValueError("amoc_convection_minimum_fraction must be in [0, 1]")
-        if self.amoc_convection_transport_exponent < 0.0:
-            raise ValueError("amoc_convection_transport_exponent cannot be negative")
+        if not math.isfinite(self.amoc_convection_transport_exponent) or self.amoc_convection_transport_exponent < 0.0:
+            raise ValueError("amoc_convection_transport_exponent must be finite and nonnegative")
         if self.amoc_convection_adjustment_years <= 0.0:
             raise ValueError("amoc_convection_adjustment_years must be positive")
         if self.amoc_convection_recovery_years <= 0.0:
@@ -1800,6 +1826,7 @@ class ModelState:
     pycnocline_depth_m: float
     convection_efficiency: float
     amoc_sv: float
+    amoc_forced_heat_capacity_sv: float
     amoc_convection_collapsed: bool = False
     greenland_freshwater_sv: float = 0.0
     greenland_remaining_ice_gt: float = 0.0
@@ -1847,6 +1874,9 @@ class ModelState:
             pycnocline_depth_m=float(self.pycnocline_depth_m),
             convection_efficiency=float(self.convection_efficiency),
             amoc_sv=float(self.amoc_sv),
+            amoc_forced_heat_capacity_sv=float(
+                self.amoc_forced_heat_capacity_sv
+            ),
             amoc_convection_collapsed=bool(self.amoc_convection_collapsed),
             greenland_freshwater_sv=float(self.greenland_freshwater_sv),
             greenland_remaining_ice_gt=float(self.greenland_remaining_ice_gt),
@@ -2428,6 +2458,12 @@ class SimulationResult:
             "final_toa_imbalance_wm2": float(final["toa_imbalance_wm2"]),
             "initial_amoc_sv": float(initial["amoc_sv"]),
             "final_amoc_sv": float(final["amoc_sv"]),
+            "final_amoc_forced_heat_capacity_sv": float(
+                final["amoc_forced_heat_capacity_sv"]
+            ),
+            "final_amoc_transport_target_sv": float(
+                final["amoc_transport_target_sv"]
+            ),
             "minimum_amoc_sv": float(self.dataframe["amoc_sv"].min()),
             "final_amoc_change_percent": float(
                 100.0 * (final["amoc_sv"] / self.config.amoc_reference_sv - 1.0)
@@ -4028,25 +4064,20 @@ class ProcessClimateModel:
         )
         self.baseline_density_driver = float(initial_density["density_driver"])
         self.baseline_density_driver_ratio = float(initial_density["density_ratio"])
-        # Local convection retains its linear anomaly closure. Preserve its
-        # high-latitude control buoyancy scale independently of both the selected
-        # nonlinear hydraulic EOS and the South Atlantic upper-limb geometry.
-        # Reusing the upper-limb driver here dilutes convection sensitivity by
-        # roughly a factor of five because that driver contains the warm 35 S
-        # source-to-north temperature contrast rather than the high-latitude
-        # buoyancy margin.
-        linear_density = initial_amoc_density_diagnostics(
-            replace(
-                config,
-                amoc_density_eos="linear",
-                amoc_density_geometry="interhemispheric_high_latitude",
-            ),
-            baseline_north_temperature_c=self.baseline_amoc_north_c,
-            baseline_southern_temperature_c=self.baseline_amoc_southern_c,
+        # Normalize the local linear anomaly using the SAME north/deep boxes.
+        # This is a scale derived from prescribed control hydrography, not an
+        # observed convective threshold or a calibrated transport sensitivity.
+        self.baseline_convection_density_contrast = float(
+            -config.thermal_expansion_per_k
+            * (self.baseline_amoc_north_c - self.baseline_amoc_deep_c)
+            + config.haline_contraction_per_psu
+            * (initial_salinity[0] - initial_salinity[4])
         )
-        self.baseline_convection_density_driver = max(
-            abs(float(linear_density["density_driver"])), 1.0e-12
+        self.baseline_convection_density_driver = abs(
+            self.baseline_convection_density_contrast
         )
+        if not math.isfinite(self.baseline_convection_density_driver) or self.baseline_convection_density_driver <= 1.0e-12:
+            raise ValueError("Local north/deep control density contrast is zero or nonfinite; convection normalization is undefined")
         self._freshwater_override_sv: float | None = None
         self._reference_residual_mode = False
         self._reference_tendency_residual_cache: dict[tuple[float, float], ModelState] = {}
@@ -4115,6 +4146,7 @@ class ProcessClimateModel:
             pycnocline_depth_m=config.amoc_initial_pycnocline_depth_m,
             convection_efficiency=1.0,
             amoc_sv=config.amoc_reference_sv,
+            amoc_forced_heat_capacity_sv=config.amoc_reference_sv,
             amoc_convection_collapsed=False,
             greenland_freshwater_sv=0.0,
             greenland_remaining_ice_gt=config.greenland_initial_ice_mass_gt,
@@ -9167,6 +9199,45 @@ class ProcessClimateModel:
         tendency[4] -= salt_transport / self.amoc_box_volumes_m3[4]
         return tendency, surface_flux
 
+    def _amoc_forced_heat_forcing_wm2(self, elapsed_years: float) -> float:
+        """Return the forcing index used by the empirical AMOC heat closure.
+
+        Total anthropogenic effective forcing plus the user's constant
+        additional forcing is used for SSP runs configured with total forcing.
+        Idealised CO2 and explicit CO2-only runs use their selected total
+        prescribed forcing. This keeps volcanic/natural forcing out of the slow
+        greenhouse-forced response while respecting both public forcing inputs.
+        """
+
+        prescribed = self.prescribed_forcing_components(elapsed_years)
+        anthropogenic = float(prescribed["rcmip_anthropogenic_wm2"])
+        if (
+            self.config.forcing_mode == "total_effective"
+            and math.isfinite(anthropogenic)
+        ):
+            return anthropogenic + self.config.additional_forcing_wm2
+        return float(prescribed["total_wm2"])
+
+    def _amoc_forced_heat_capacity_target_sv(
+        self, elapsed_years: float
+    ) -> float:
+        """Return the instantaneous FAFMIP-informed proxy sinking capacity."""
+
+        cfg = self.config
+        forcing_doublings = (
+            self._amoc_forced_heat_forcing_wm2(elapsed_years)
+            / cfg.co2_doubling_erf_wm2
+        )
+        target = (
+            cfg.amoc_reference_sv
+            - cfg.amoc_forced_heat_response_sv_per_doubling
+            * forcing_doublings
+        )
+        # This empirical closure constrains forward northern sinking only. A
+        # reverse circulation, when explicitly enabled, remains the job of the
+        # signed hydraulic density closure.
+        return max(float(target), 0.0)
+
     def _amoc_diagnostics(self, state: ModelState) -> dict[str, float]:
         cfg = self.config
         temperatures = self._amoc_box_temperatures(state)
@@ -9200,14 +9271,17 @@ class ProcessClimateModel:
         northern_haline_anomaly = (
             state.north_salinity_psu
             - state.deep_salinity_psu
-            - (cfg.initial_north_salinity_psu - cfg.initial_deep_salinity_psu)
+            - (
+                self.initial_amoc_salinity_psu[0]
+                - self.initial_amoc_salinity_psu[4]
+            )
         )
         # Local northern deep-water formation responds to the *anomalous*
         # surface-versus-deep thermohaline density change.  This quantity was
         # previously computed but discarded, leaving convection and its saline
         # entrainment almost fully active during strong hosing.  Normalizing by
-        # the dimensional control driver gives a transparent O(1) response scale
-        # without choosing an empirical collapse location.
+        # the local control contrast gives a dimensionless response scale.
+        # The exponential response remains an unvalidated reduced closure.
         convection_density_anomaly = (
             -cfg.thermal_expansion_per_k
             * cfg.amoc_convection_temperature_density_coupling
@@ -9262,10 +9336,9 @@ class ProcessClimateModel:
             and state.convection_efficiency <= 0.25
         )
 
-        # Northern deep-water formation is a distinct physical prerequisite for
-        # overturning, in addition to the basin-scale hydraulic density head.
-        # Couple the continuous prognostic efficiency directly without a tuned
-        # threshold or Boolean collapse switch.
+        # Optional structural sensitivity; zero exponent leaves hydraulic
+        # transport unchanged while convection still controls salt mixing.
+        # Nonzero exponents are not an independently validated sinking closure.
         convection_multiplier = max(
             float(state.convection_efficiency), 0.0
         ) ** cfg.amoc_convection_transport_exponent
@@ -9302,6 +9375,30 @@ class ProcessClimateModel:
                     1.0 + (positive_anomaly / positive_span) ** 4
                 ) ** 0.25
             )
+        forced_heat_capacity = max(
+            float(state.amoc_forced_heat_capacity_sv), 0.0
+        )
+        forced_heat_reduction = max(
+            cfg.amoc_reference_sv - forced_heat_capacity, 0.0
+        )
+        # Heat input and hydraulic density each limit northern sinking. Taking
+        # the lower capacity avoids adding two independently estimated AMOC
+        # anomalies and therefore avoids double counting their shared thermal
+        # contribution. Salinity/FovS feedbacks can still become the tighter
+        # constraint when the hydraulic branch weakens further. The empirical
+        # closure represents forced weakening only: at zero or negative forced
+        # heat reduction it must not cap hydraulic strengthening. Besides making
+        # the documented zero-response switch exact, this keeps the autonomous
+        # control and hosing equilibrium system off the corner of a hard min().
+        forced_heat_limit_available = (
+            cfg.amoc_forced_heat_response_sv_per_doubling > 0.0
+            and forced_heat_reduction > 0.0
+        )
+        transport_target = float(
+            min(hydraulic_target, forced_heat_capacity)
+            if forced_heat_limit_available
+            else hydraulic_target
+        )
         southern_temperature_anomaly_c = (
             temperatures["southern"] - self.baseline_amoc_southern_c
         )
@@ -9544,6 +9641,8 @@ class ProcessClimateModel:
             "amoc_density_driver_ratio": density_ratio,
             "amoc_initial_density_driver": self.baseline_density_driver,
             "amoc_convection_reference_density_driver": self.baseline_convection_density_driver,
+            "amoc_convection_control_density_contrast": self.baseline_convection_density_contrast,
+            "amoc_convection_transport_exponent": cfg.amoc_convection_transport_exponent,
             "amoc_initial_density_driver_ratio": self.baseline_density_driver_ratio,
             "amoc_baseline_north_temperature_c": self.baseline_amoc_north_c,
             "amoc_baseline_southern_temperature_c": self.baseline_amoc_southern_c,
@@ -9556,6 +9655,13 @@ class ProcessClimateModel:
                 self.baseline_amoc_north_c - self.baseline_amoc_southern_c
             ),
             "amoc_hydraulic_target_sv": hydraulic_target,
+            "amoc_forced_heat_capacity_sv": forced_heat_capacity,
+            "amoc_transport_target_sv": transport_target,
+            "amoc_forced_heat_constraint_active": float(
+                forced_heat_limit_available
+                and forced_heat_capacity < hydraulic_target
+            ),
+            "amoc_forced_heat_capacity_reduction_sv": forced_heat_reduction,
             "amoc_unbounded_hydraulic_target_sv": unbounded_hydraulic_target,
             "amoc_hydraulic_transport_max_sv": cfg.amoc_hydraulic_transport_max_sv,
             "amoc_hydraulic_target_without_convection_sv": (
@@ -9578,7 +9684,7 @@ class ProcessClimateModel:
             "amoc_below_six_sv_reference": float(
                 0.0 <= state.amoc_sv <= AMOC_SIX_SV_REFERENCE
             ),
-            "amoc_equilibrium_sv": hydraulic_target,
+            "amoc_equilibrium_sv": transport_target,
             "amoc_pycnocline_raw_multiplier": raw_depth_multiplier,
             "amoc_pycnocline_transport_multiplier": depth_multiplier,
             "amoc_convection_efficiency": state.convection_efficiency,
@@ -9684,7 +9790,7 @@ class ProcessClimateModel:
         )
         amoc = self._amoc_diagnostics(state)
         amoc_rate = (
-            amoc["amoc_hydraulic_target_sv"] - state.amoc_sv
+            amoc["amoc_transport_target_sv"] - state.amoc_sv
         ) / cfg.amoc_adjustment_years
         if not cfg.amoc_allow_reversal and state.amoc_sv <= 0.0 and amoc_rate < 0.0:
             amoc_rate = 0.0
@@ -9815,6 +9921,7 @@ class ProcessClimateModel:
             pycnocline_depth_m=cfg.amoc_initial_pycnocline_depth_m,
             convection_efficiency=1.0,
             amoc_sv=cfg.amoc_reference_sv,
+            amoc_forced_heat_capacity_sv=cfg.amoc_reference_sv,
             amoc_convection_collapsed=False,
             greenland_freshwater_sv=0.0,
             greenland_remaining_ice_gt=cfg.greenland_initial_ice_mass_gt,
@@ -9925,6 +10032,9 @@ class ProcessClimateModel:
         )
         if not self.config.amoc_allow_reversal:
             corrected.amoc_sv = max(float(corrected.amoc_sv), 0.0)
+        corrected.amoc_forced_heat_capacity_sv = max(
+            float(corrected.amoc_forced_heat_capacity_sv), 0.0
+        )
 
         # Irreversible Greenland counters need a constrained projection after
         # subtracting the reference-step truncation residual.  The raw
@@ -10172,6 +10282,18 @@ class ProcessClimateModel:
             arctic.get("atlantic_ice_export_freshwater_raw_sv", 0.0)
         )
 
+        forced_heat_target = self._amoc_forced_heat_capacity_target_sv(
+            elapsed_years + 0.5 * dt
+        )
+        forced_heat_decay = math.exp(
+            -dt / cfg.amoc_forced_heat_adjustment_years
+        )
+        forced_heat_capacity_new = float(
+            forced_heat_target
+            + (state.amoc_forced_heat_capacity_sv - forced_heat_target)
+            * forced_heat_decay
+        )
+
         provisional_state = ModelState(
             land_anomaly_c=land_new,
             atlantic_ocean_anomaly_c=atlantic_new,
@@ -10206,6 +10328,7 @@ class ProcessClimateModel:
             pycnocline_depth_m=state.pycnocline_depth_m,
             convection_efficiency=state.convection_efficiency,
             amoc_sv=state.amoc_sv,
+            amoc_forced_heat_capacity_sv=forced_heat_capacity_new,
             amoc_convection_collapsed=state.amoc_convection_collapsed,
             greenland_freshwater_sv=state.greenland_freshwater_sv,
             greenland_remaining_ice_gt=state.greenland_remaining_ice_gt,
@@ -10258,7 +10381,7 @@ class ProcessClimateModel:
 
             amoc = self._amoc_diagnostics(provisional_state)
             amoc_new = state.amoc_sv + dt * (
-                amoc["amoc_hydraulic_target_sv"] - state.amoc_sv
+                amoc["amoc_transport_target_sv"] - state.amoc_sv
             ) / cfg.amoc_adjustment_years
             if not cfg.amoc_allow_reversal:
                 amoc_new = max(float(amoc_new), 0.0)
@@ -10456,6 +10579,9 @@ class ProcessClimateModel:
         provisional_state.pycnocline_depth_m = float(pycnocline_new)
         provisional_state.convection_efficiency = float(convection_new)
         provisional_state.amoc_sv = float(amoc_new)
+        provisional_state.amoc_forced_heat_capacity_sv = float(
+            forced_heat_capacity_new
+        )
         provisional_state.amoc_convection_collapsed = bool(
             amoc["amoc_convection_collapsed"] >= 0.5
         )
@@ -10496,6 +10622,7 @@ class ProcessClimateModel:
             self.state.south_atlantic_upper_salinity_psu, self.state.southern_salinity_psu,
             self.state.deep_salinity_psu, self.state.external_salinity_psu,
             self.state.pycnocline_depth_m, self.state.amoc_sv,
+            self.state.amoc_forced_heat_capacity_sv,
             self.state.greenland_freshwater_sv,
             self.state.greenland_remaining_ice_gt,
             self.state.greenland_cumulative_melt_gt,
@@ -10518,6 +10645,10 @@ class ProcessClimateModel:
             raise FloatingPointError("Pycnocline depth left the 50-4000 m numerical validity range.")
         if abs(self.state.amoc_sv) > 80.0:
             raise FloatingPointError("AMOC transport exceeded the model's valid range.")
+        if not 0.0 <= self.state.amoc_forced_heat_capacity_sv <= 80.0:
+            raise FloatingPointError(
+                "AMOC forced-heat capacity left the model's valid range."
+            )
         if not self.config.amoc_allow_reversal and self.state.amoc_sv < -1.0e-10:
             raise FloatingPointError("Negative AMOC occurred while reversal is disabled.")
         if not 0.0 <= self.state.greenland_remaining_ice_gt <= self.config.greenland_initial_ice_mass_gt + 1.0e-6:
@@ -10780,6 +10911,12 @@ class ProcessClimateModel:
             + arctic_open_water_heat_content_anomaly_zj
         )
         amoc = self._amoc_diagnostics(state)
+        amoc["amoc_forced_heat_forcing_wm2"] = (
+            self._amoc_forced_heat_forcing_wm2(elapsed_years)
+        )
+        amoc["amoc_forced_heat_instantaneous_target_sv"] = (
+            self._amoc_forced_heat_capacity_target_sv(elapsed_years)
+        )
         hosing = self.prescribed_freshwater_hosing_sv(elapsed_years)
         hydrological, greenland, greenland_target = self._freshwater_components(
             state, gmst, elapsed_years
@@ -11621,7 +11758,7 @@ def _amoc_equilibrium_tendency(
         [
             *salinity_tendency[:5],
             (
-                diagnostics["amoc_hydraulic_target_sv"] - state.amoc_sv
+                diagnostics["amoc_transport_target_sv"] - state.amoc_sv
             )
             / model.config.amoc_adjustment_years,
             (
@@ -13830,8 +13967,20 @@ def save_outputs(result: SimulationResult, output_dir: str | Path) -> None:
     ax.plot(
         df["year"],
         df["amoc_hydraulic_target_sv"],
-        label="Target after convection efficiency",
+        label="Hydraulic density target",
         linestyle=":",
+    )
+    ax.plot(
+        df["year"],
+        df["amoc_forced_heat_capacity_sv"],
+        label="Forced-heat sinking capacity",
+        linestyle="-.",
+    )
+    ax.plot(
+        df["year"],
+        df["amoc_transport_target_sv"],
+        label="Active transport target",
+        linewidth=1.5,
     )
     ax.axhline(
         AMOC_SIX_SV_REFERENCE,
@@ -15059,6 +15208,21 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--amoc-adjustment-years", type=float, default=8.0)
+    parser.add_argument(
+        "--amoc-forced-heat-response",
+        type=float,
+        default=ModelConfig().amoc_forced_heat_response_sv_per_doubling,
+        help=(
+            "Empirical reduction in northern sinking capacity per "
+            "CO2-doubling-equivalent forcing (Sv). Set to 0 to disable."
+        ),
+    )
+    parser.add_argument(
+        "--amoc-forced-heat-adjustment-years",
+        type=float,
+        default=ModelConfig().amoc_forced_heat_adjustment_years,
+        help="E-folding time of the forced-heat sinking-capacity response.",
+    )
     parser.add_argument("--amoc-heat-transport", type=float, default=0.040)
     parser.add_argument(
         "--amoc-surface-heat-coupling",
@@ -15148,8 +15312,8 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=ModelConfig().amoc_convection_transport_exponent,
         help=(
-            "Exponent coupling continuous northern convection efficiency to "
-            "the hydraulic AMOC target (default 1: direct proportional coupling)."
+            "Experimental exponent multiplying hydraulic AMOC by convection "
+            "efficiency (default 0: off; 1: proportional; unvalidated closure)."
         ),
     )
     parser.add_argument(
@@ -15693,6 +15857,12 @@ def config_from_args(args: argparse.Namespace) -> ModelConfig:
             args.amoc_convection_temperature_coupling
         ),
         amoc_adjustment_years=args.amoc_adjustment_years,
+        amoc_forced_heat_response_sv_per_doubling=(
+            args.amoc_forced_heat_response
+        ),
+        amoc_forced_heat_adjustment_years=(
+            args.amoc_forced_heat_adjustment_years
+        ),
         amoc_density_transport_exponent=args.amoc_density_exponent,
         amoc_density_geometry=args.amoc_density_geometry,
         amoc_density_eos=args.amoc_density_eos,

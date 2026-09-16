@@ -120,7 +120,28 @@ def test_hydraulic_eos_does_not_rescale_local_convection(resolution, perturbatio
             math.exp(-0.000152 / teos["amoc_convection_reference_density_driver"]))
 
 
-def test_default_convection_scale_is_independent_of_upper_limb_geometry():
+@pytest.mark.parametrize("geometry", ["south_atlantic_upper", "interhemispheric_high_latitude"])
+def test_local_convection_is_independent_of_southern_control_salinity(geometry):
+    config = cm.ModelConfig(
+        resolution_deg=10.0,
+        auto_initialize_from_1850=False,
+        seasonal_arctic_enabled=False,
+        duration_years=0.1,
+        amoc_density_geometry=geometry,
+        amoc_enforce_initial_density_constraint=False,
+    )
+    models = [cm.ProcessClimateModel(replace(config, initial_southern_salinity_psu=s))
+              for s in (34.0, 33.8)]
+    targets = []
+    for model in models:
+        assert model.baseline_convection_density_contrast < 0.0
+        assert model.baseline_convection_density_driver > 1e-3
+        model.state.north_salinity_psu -= 0.2
+        targets.append(model._amoc_diagnostics(model.state)["amoc_convection_target"])
+    assert targets[0] == pytest.approx(targets[1], abs=1e-12)
+
+
+def test_default_convection_changes_salt_mixing_without_direct_transport_gain():
     config = cm.ModelConfig(
         resolution_deg=10.0,
         auto_initialize_from_1850=False,
@@ -128,42 +149,19 @@ def test_default_convection_scale_is_independent_of_upper_limb_geometry():
         duration_years=0.1,
     )
     model = cm.ProcessClimateModel(config)
-    high_latitude_linear = cm.initial_amoc_density_diagnostics(
-        replace(
-            config,
-            amoc_density_eos="linear",
-            amoc_density_geometry="interhemispheric_high_latitude",
-        ),
-        baseline_north_temperature_c=model.baseline_amoc_north_c,
-        baseline_southern_temperature_c=model.baseline_amoc_southern_c,
-    )
-    upper_limb_linear = cm.initial_amoc_density_diagnostics(
-        replace(config, amoc_density_eos="linear"),
-        baseline_north_temperature_c=model.baseline_amoc_north_c,
-        baseline_southern_temperature_c=model.baseline_amoc_southern_c,
-    )
-    assert model.baseline_convection_density_driver == pytest.approx(
-        abs(high_latitude_linear["density_driver"])
-    )
-    assert model.baseline_convection_density_driver != pytest.approx(
-        abs(upper_limb_linear["density_driver"])
-    )
-
-
-def test_continuous_convection_efficiency_directly_scales_transport():
-    config = cm.ModelConfig(
-        resolution_deg=10.0,
-        auto_initialize_from_1850=False,
-        seasonal_arctic_enabled=False,
-        duration_years=0.1,
-    )
-    model = cm.ProcessClimateModel(config)
-    model.state.convection_efficiency = 0.8
-    diagnostics = model._amoc_diagnostics(model.state)
-    assert diagnostics["amoc_convection_transport_multiplier"] == pytest.approx(0.8)
-    assert diagnostics["amoc_unbounded_hydraulic_target_sv"] == pytest.approx(
-        diagnostics["amoc_hydraulic_target_without_convection_sv"] * 0.8
-    )
+    model.state.north_salinity_psu -= 0.2
+    strong = model.state.copy()
+    weak = strong.copy()
+    weak.convection_efficiency = 0.5
+    assert model._amoc_diagnostics(weak)["amoc_hydraulic_target_sv"] == pytest.approx(
+        model._amoc_diagnostics(strong)["amoc_hydraulic_target_sv"])
+    strong_rate = model._salinity_tendency(strong, 0.0)[0]
+    weak_rate = model._salinity_tendency(weak, 0.0)[0]
+    assert weak_rate[0] < strong_rate[0]
+    assert abs(np.dot(weak_rate - strong_rate, model.amoc_box_volumes_m3)) < 1.0
+    model.config = replace(config, amoc_convection_transport_exponent=1.0)
+    assert model._amoc_diagnostics(weak)["amoc_hydraulic_target_sv"] < (
+        model._amoc_diagnostics(strong)["amoc_hydraulic_target_sv"])
 
 
 def test_short_hosing_integration_preserves_salt_and_weakens_amoc():

@@ -21,7 +21,10 @@ def test_v2252_physical_defaults_do_not_use_freshwater_compensation() -> None:
     assert config.amoc_convection_entrainment_feedback == 0.0
     assert config.arctic_ocean_air_exchange_wm2_k == 0.20
     assert config.arctic_moisture_transport_wm2_per_k == 0.22
-    assert config.arctic_winter_transport_enhancement == 19.0
+    # The September 2026 physics review disabled the extra empirical winter
+    # GMST transport in the current default; the historical v2.25.2 value was
+    # 19 W/m2 but is no longer the production configuration.
+    assert config.arctic_winter_transport_enhancement == 0.0
     assert config.arctic_open_water_stable_exchange_wm2_k == 0.5
     assert config.arctic_open_water_unstable_exchange_wm2_k == 10.0
     assert config.arctic_open_water_exchange_transition_c == 0.5

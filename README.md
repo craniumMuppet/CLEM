@@ -12,20 +12,119 @@ CLEM is intended for **climate-process experiments, sensitivity studies, teachin
 
 Climate sensitivity is not prescribed directly. **ECS and TCR are diagnosed from forcing experiments.** The original feedback coefficients were calibrated against AR6 assessments; agreement with those assessments is calibration evidence, not independent validation.
 
+## Current scientific results
+
+The current unreleased checkout adds a separate, slow AMOC sinking-capacity
+limit informed by FAFMIP North Atlantic heat-flux experiments. The model still
+calculates hydraulic density, pycnocline depth, salinity and FovS
+prognostically, but the empirical forced-heat capacity controls the default SSP
+AMOC response. Its global-forcing mapping and 20-year lag are emulator choices,
+so the scenario and ensemble results below are conditional sensitivity results
+rather than independently validated forecasts. The implementation and evidence
+scope are documented in the
+[forced-heat review](docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md).
+
+### Paired CO2 target sweep
+
+The target experiment requested **128 paired prior members per CO2 target** at
+400, 600, 800, 1000, 1200 and 2200 ppm. **123 members completed all six
+targets**; five members failed before the paired comparison. The bands and
+fractions therefore describe the complete-member ensemble. Collapse fractions
+are conditional model outcomes, not estimates of real-world collapse
+probability.
+
+![Conditional AMOC outcomes across six CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_overview.png)
+
+![Paired AMOC percentage-decline trajectories across six CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_amoc_percent_decline_trajectories.png)
+
+### Four-pathway SSP comparison
+
+The four-panel comparison uses the current 5° configuration with automatic
+1850 initialization. Temperature, AMOC, southern-boundary FovS and Northern
+Hemisphere sea-ice area are drawn from the same 1850–2300 integrations.
+
+![Temperature, AMOC, FovS and sea-ice response under four SSP pathways](docs/assets/science_update_2026_09/ssp_four_panel_comparison.png)
+
+| Scenario | Temperature anomaly in 2100 | AMOC, 2081–2100 | AMOC decline from 1995–2014 | FovS in 2100 | Sea-ice area in 2100 |
+|---|---:|---:|---:|---:|---:|
+| SSP1-2.6 | 1.463 °C | 12.700 Sv | 20.945% | −0.12421 Sv | 16.612 million km² |
+| SSP2-4.5 | 2.327 °C | 11.297 Sv | 29.680% | −0.10725 Sv | 16.165 million km² |
+| SSP4-6.0 | 2.771 °C | 10.633 Sv | 33.813% | −0.09887 Sv | 15.946 million km² |
+| SSP5-8.5 | 4.141 °C | 8.785 Sv | 45.316% | −0.07461 Sv | 15.183 million km² |
+
+Temperature is relative to the initialized 1850 model state. AMOC decline uses
+the stated historical and late-century period means. Under SSP5-8.5 the
+empirical sinking-capacity branch drives AMOC toward zero by 2300; this is a
+model sensitivity outcome, not a calibrated tipping probability or date.
+
+### SSP2-4.5 parameter uncertainty
+
+The SSP2-4.5 Monte Carlo experiment requested **512 prior members**. **495
+members completed successfully** and 17 failed. The plotted median and
+intervals are conditional on the successful prior ensemble; they are not an
+observational posterior. At 2100, 165 of 495 members are below 10 Sv and 24 are
+at or below the 6 Sv weak/collapsed reference.
+
+![SSP2-4.5 Monte Carlo AMOC percentage decline](docs/assets/science_update_2026_09/ssp245_monte_carlo_amoc_decline_percent.png)
+
+| Absolute AMOC transport | Global surface-temperature anomaly |
+|:---:|:---:|
+| ![SSP2-4.5 Monte Carlo AMOC transport](docs/assets/science_update_2026_09/ssp245_monte_carlo_amoc_sv.png) | ![SSP2-4.5 Monte Carlo global surface-temperature anomaly](docs/assets/science_update_2026_09/ssp245_monte_carlo_global_surface_warming.png) |
+
+### Current biases and scope
+
+| Check | Current result | Reference or declared range | Difference |
+|---|---:|---:|---:|
+| Historical warming, 2011–2020 | 0.8368 °C | 0.95–1.20 °C | 0.1132 °C below lower bound |
+| Ocean heat-content change, 1971–2018 | 348.2 ZJ | 350–500 ZJ | 1.8 ZJ below lower bound |
+| 100-year post-hosing recovery | 79.510% | at least 80% | 0.490 percentage points low |
+| Historical AMOC, approximately 2004–2020 | 15.74–15.86 Sv | RAPID 16.9 ± 1.2 Sv | about 1.0–1.2 Sv low |
+| Arctic sea-ice area bias | March +0.355; September −0.055 million km² | NSIDC-compatible area | seasonal signed bias |
+
+The AMOC scenario spread is dominated by the empirical forced-heat response
+and its prior. FovS is calculated from the evolving AMOC and conservative
+salinity states, but is conditional on that AMOC closure while it controls.
+Sea-ice area is more directly represented than geographical extent. The maps
+use a reduced latitude-band/two-sector geometry and have no local forecast
+skill.
+
+### SSP diagnostics
+
+The diagnostic composites show final near-surface temperature, sea ice and
+snow together with the AMOC target, convection/pycnocline and Atlantic-salinity
+time series. The rectangular North Atlantic temperature feature is the
+reduced-grid AMOC fingerprint, not resolved regional ocean structure.
+
+#### SSP2-4.5
+
+![SSP2-4.5 process and final-state diagnostics](docs/assets/science_update_2026_09/ssp245_diagnostics.png)
+
+#### SSP5-8.5
+
+![SSP5-8.5 process and final-state diagnostics](docs/assets/science_update_2026_09/ssp585_diagnostics.png)
+
+Figure provenance, source hashes and requested/successful ensemble counts are
+recorded in
+[`docs/assets/science_update_2026_09/manifest.json`](docs/assets/science_update_2026_09/manifest.json).
+
 ## Current release status
 
-**Current checkout (Unreleased, September 12 physics revision):** the default
+**Current checkout (Unreleased, September 16 science update):** the default
 uses direct water-mass TEOS-10 density, an open Atlantic overturning boundary,
 an ocean freezing floor in both hemispheres, and dry-column weighting of the
 water-vapour response. Greenland includes Gaussian daily variability and
 reference runoff. Empirical Arctic GMST heating, extra winter transport and
 phase restoring are disabled by default. Feedback accounting includes Arctic
-TOA fluxes and Gregory regression uses complete annual means.
+TOA fluxes and Gregory regression uses complete annual means. A separately
+reported, FAFMIP-informed empirical forced-heat sinking capacity now complements the
+hydraulic density target; the lower capacity controls the AMOC tendency.
 
-The numerical tables below describe the tagged release, **not the revised
-default**. Neither those tables nor September 11's validation establishes
-predictive skill for this revision. See [the repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md)
-for changes, development checks and remaining limitations.
+Tables explicitly described as inherited or tagged-release evidence retain
+their original model state. The current figures above and the current SSP2-4.5
+table below use the unreleased revision. Neither body of evidence establishes
+prospective predictive skill. See
+[the repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md) for changes,
+development checks and remaining limitations.
 
 **v2.29.29** is the public-release consolidation of the validated R15–R18.5.1 repair, structural-validation, observation-integration, packaging, and attribution work. The version bump itself changes release identity only; it does not retune the governing climate, AMOC, Greenland, or sea-ice dynamics. Existing v2.29.28 numerical evidence is retained as inherited evidence and is linked to v2.29.29 by an explicit dynamics-equivalence record.
 
@@ -86,7 +185,10 @@ See `RELEASE_NOTES_V2_29_29.md`, `V2_29_29_DYNAMICS_EQUIVALENCE.json`, `R18_2_RE
 
 ### AMOC and Atlantic Ocean
 
-CLEM contains an explicitly coupled reduced-order AMOC rather than prescribing AMOC strength directly from global temperature.
+CLEM contains an explicitly coupled reduced-order AMOC. Its transport evolves
+toward the lower of a prognostic hydraulic density capacity and an empirical,
+slow forced-heat capacity benchmarked against FAFMIP experiments. FAFMIP does
+not directly constrain CLEM's global-forcing-to-regional-heat mapping.
 
 The AMOC subsystem includes:
 
@@ -109,6 +211,7 @@ The AMOC subsystem includes:
 - Greenland freshwater forcing
 - Arctic sea-ice freshwater forcing
 - AMOC heat transport feedback
+- FAFMIP-informed empirical forced-heat sinking capacity
 - Salt-advection feedback
 - Freshwater hosing experiments
 - Weak and collapsed AMOC states
@@ -157,10 +260,6 @@ The default control configuration uses an AMOC reference strength of approximate
 
 ### FovS
 
-The reference overturning freshwater transport at approximately 34.5°S is:
-
-**Tagged-release internal-section target: -0.150 Sv**
-
 CLEM uses the conventional sign interpretation in which negative FovS represents an overturning circulation that exports freshwater from the Atlantic.
 
 In the revised model, `fovs_sv` and `amoc_boundary_overturning_freshwater_sv`
@@ -180,12 +279,13 @@ runoff, or the azonal boundary transport, so it is not a free coupled-climate
 prediction. `amoc_basin_salt_inventory_anomaly_psu_m3` tracks subsequent basin
 storage changes.
 
-In the tagged-release SSP2-4.5 experiments, the internal-section FovS remained negative through 2100.
+In the current 5° SSP2-4.5 batch, external-boundary FovS remains negative
+through 2100.
 
-| Resolution | Late/final FovS |
+| Period | FovS |
 |---|---:|
-| 5° | **-0.102 Sv** |
-| 10° | **-0.097 Sv** |
+| 2081–2100 mean | **−0.10991 Sv** |
+| 2100 | **−0.10725 Sv** |
 
 Salt is explicitly conserved between the Atlantic and compensation reservoirs.
 
@@ -199,69 +299,32 @@ The validation integrations report a maximum salt-conservation error of:
 
 The SSP2-4.5 experiment produces similar global warming at 5° and 10° model resolution.
 
-The current unreleased physics revision gives 2081-2100 AMOC weakening of
-17.00% at 5° and 18.23% at 10° relative to 1995-2014, with 2100 transports of
-13.33 and 13.08 Sv. These are development sensitivity results. The table below
-records the older tagged-release experiment and is retained as historical
-evidence.
+The current default uses the FAFMIP-informed forced-heat sinking-capacity proxy
+described in the [September 14 forced-heat report](docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md).
 
-| Metric | 5° | 10° |
+| Current unreleased metric | 5° | 10° |
 |---|---:|---:|
-| Historical warming, 2011-2020 vs 1850-1900 | 1.020 °C | 1.027 °C |
-| Warming, 2081-2100 vs 1850-1900 | **2.655 °C** | **2.671 °C** |
-| AMOC, 1995-2014 | 14.98 Sv | 14.88 Sv |
-| AMOC, 2081-2100 | **9.20 Sv** | **8.65 Sv** |
-| AMOC decline | **38.60%** | **41.87%** |
-| Minimum AMOC | 8.83 Sv | 8.25 Sv |
-| Final FovS | -0.102 Sv | -0.097 Sv |
+| AMOC, 1995–2014 | 16.083 Sv | 16.083 Sv |
+| AMOC, 2081–2100 | **11.297 Sv** | **11.297 Sv** |
+| AMOC decline | **29.761%** | **29.761%** |
+| AMOC in 2100 | 10.952 Sv | 10.952 Sv |
+| Late-century FovS | −0.1099 Sv | −0.1100 Sv |
+| FovS in 2100 | −0.10725 Sv | −0.10732 Sv |
+| Hydraulic target in 2100 | 16.957 Sv | 16.844 Sv |
+| Forced-heat capacity in 2100 | 10.710 Sv | 10.710 Sv |
 
-The cross-resolution difference in late-century global warming is approximately:
+The forcing-index heat capacity is the tighter limit in this SSP run, which is
+why the AMOC trajectory is common across resolutions. The grid-dependent
+hydraulic targets and prognostic FovS values remain distinct. This is reduced
+emulator behavior, not evidence that both grids independently predict the same
+ocean circulation.
 
-**0.016 °C**
-
-The corresponding difference in AMOC decline is approximately:
-
-**3.27 percentage points**
-
----
-
-## Generated Scenario Gallery
-
-### All-SSP comparisons
-
-#### AMOC
-
-![AMOC comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_amoc_comparison.png)
-
-#### Global near-surface air temperature
-
-![Temperature comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_temperature_comparison.png)
-
-#### Northern Hemisphere sea ice
-
-![Sea-ice comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_sea_ice_comparison.png)
-
-#### FovS
-
-![FovS comparison across SSP1-2.6, SSP2-4.5, SSP4-6.0, and SSP5-8.5](outputs_ssps/ssp_fovs_comparison.png)
-
-### SSP2-4.5 final diagnostics
-
-#### Temperature anomaly
-
-![Final SSP2-4.5 temperature-anomaly map](outputs_ssps/ssp245/diagnostics/final_temperature_anomaly_map.png)
-
-#### Sea ice
-
-![Final SSP2-4.5 sea-ice map](outputs_ssps/ssp245/diagnostics/final_sea_ice_map.png)
-
-#### Snow
-
-![Final SSP2-4.5 snow map](outputs_ssps/ssp245/diagnostics/final_snow_map.png)
-
-### Percent-ramp comparison
-
-![Atmospheric CO2 percent-ramp comparison](outputs_percent_ramp_comparison/percent_ramp_comparison.png)
+The all-SSP batch shown near the top uses automatic 1850 initialization and
+gives a 29.680% SSP2-4.5 decline at 5°. The fixed-control review configuration
+in this table gives 29.761%. That small difference is an initialization choice,
+not independent cross-resolution agreement. Earlier trial responses are
+preserved in the [convection follow-up](docs/CONVECTION_REVIEW_FOLLOWUP_2026_09_14.md)
+as development history rather than current results.
 
 ---
 
@@ -334,6 +397,18 @@ R18.4 additionally integrates NSIDC-0611 sea-ice age as a structural diagnostic.
 ---
 
 ## Known Biases and Limitations
+
+### Empirical SSP AMOC response
+
+The current SSP AMOC magnitude is set mainly by the FAFMIP-informed empirical
+forced-heat capacity. The underlying study applies regional ocean-surface heat
+flux perturbations; it does not estimate CLEM's transfer from global effective
+forcing, the scaled prior range, or the 20-year response time. Consequently,
+the SSP5-8.5 approach toward a near-zero AMOC by 2300 and the Monte Carlo
+collapse fraction are emulator sensitivity results. They are not process-only
+predictions or calibrated real-world probabilities. FovS remains prognostic,
+but its scenario path is conditional on the empirical AMOC transport whenever
+that capacity is the active limit.
 
 ### Historical AMOC Mean State
 

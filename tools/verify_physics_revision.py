@@ -4,6 +4,7 @@ Run from the repository root: python tools/verify_physics_revision.py
 These are physical/numerical checks, not an observational validation campaign.
 """
 from dataclasses import asdict, replace
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -15,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import numpy as np
 import climate_model as cm
+
+DEFAULT_OUTPUT = ROOT / "physics_review_followup_20260914"
 
 
 def snapshot_sources(output: Path) -> dict[str, str]:
@@ -38,9 +41,8 @@ def snapshot_sources(output: Path) -> dict[str, str]:
     return hashes
 
 
-def main():
-    output = ROOT / "physics_revision_20260912"
-    output.mkdir(exist_ok=True)
+def main(output=DEFAULT_OUTPUT):
+    output.mkdir(parents=True, exist_ok=True)
     source_hashes = snapshot_sources(output)
     base = cm.ModelConfig(
         resolution_deg=10.0, auto_initialize_from_1850=False,
@@ -107,7 +109,7 @@ def main():
     (output / "results.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
 
 
-def recovery_probe():
+def recovery_probe(output=DEFAULT_OUTPUT):
     """Isolate boundary ventilation with identical 100-year freshwater pulses."""
     class PulseModel(cm.ProcessClimateModel):
         def prescribed_freshwater_hosing_sv(self, elapsed_years):
@@ -115,8 +117,7 @@ def recovery_probe():
                 return 0.0
             return super().prescribed_freshwater_hosing_sv(elapsed_years)
 
-    output = ROOT / "physics_revision_20260912"
-    output.mkdir(exist_ok=True)
+    output.mkdir(parents=True, exist_ok=True)
     source_hashes = snapshot_sources(output)
     results = {"protocol": "0.2 Sv for years 0-100, then zero through year 1000; seasonal Arctic, Greenland SMB/dynamics and anomalous hydrology disabled to isolate basin ventilation", "source_sha256": {
         **source_hashes}}
@@ -146,17 +147,82 @@ def recovery_probe():
     assert results["open_boundary"]["remaining_basin_deficit_fraction"] < results["legacy_closed_boundary"]["remaining_basin_deficit_fraction"]
 
 
-def ssp245_probe():
-    """Check the current SSP2-4.5 response against the predeclared broad gate."""
-    output = ROOT / "physics_revision_20260912"
-    output.mkdir(exist_ok=True)
+def ssp245_metrics(frame):
+    """Separate numerical consistency from the previously inspected SSP gate."""
+    required = [
+        "year", "amoc_sv", "fovs_sv", "amoc_convection_efficiency",
+        "amoc_forced_heat_capacity_sv", "amoc_hydraulic_target_sv",
+        "amoc_transport_target_sv", "amoc_forced_heat_constraint_active",
+        "pre_projection_salt_conservation_error_ppm",
+    ]
+    if not np.isfinite(frame[required].to_numpy()).all():
+        raise ValueError("SSP output contains nonfinite required diagnostics")
+
+    def window_mean(first, last):
+        window = frame.loc[frame.year.between(first - 1e-8, last + 1e-8)]
+        expected = np.arange(first, last + 1.0)
+        if len(window) != len(expected) or not np.allclose(
+            window.year, expected, rtol=0.0, atol=1e-8
+        ):
+            raise ValueError(f"SSP comparison requires complete annual window {first}-{last}")
+        return float(window.amoc_sv.mean())
+
+    recent = window_mean(1995, 2014)
+    late = window_mean(2081, 2100)
+    if recent <= 0.0:
+        raise ValueError("SSP reference AMOC must be positive")
+    decline = 100.0 * (1.0 - late / recent)
+    minimum = float(frame.amoc_sv.min())
+    maximum_salt = float(frame.pre_projection_salt_conservation_error_ppm.abs().max())
+    return {
+        "amoc_1995_2014_sv": recent,
+        "amoc_2081_2100_sv": late,
+        "amoc_decline_percent": decline,
+        "final_amoc_sv": float(frame.amoc_sv.iloc[-1]),
+        "minimum_amoc_sv": minimum,
+        "final_fovs_sv": float(frame.fovs_sv.iloc[-1]),
+        "final_forced_heat_capacity_sv": float(
+            frame.amoc_forced_heat_capacity_sv.iloc[-1]
+        ),
+        "final_hydraulic_target_sv": float(
+            frame.amoc_hydraulic_target_sv.iloc[-1]
+        ),
+        "final_transport_target_sv": float(
+            frame.amoc_transport_target_sv.iloc[-1]
+        ),
+        "late_forced_heat_constraint_fraction": float(
+            frame.loc[
+                frame.year.between(2081.0 - 1e-8, 2100.0 + 1e-8),
+                "amoc_forced_heat_constraint_active",
+            ].mean()
+        ),
+        "final_convection_efficiency": float(frame.amoc_convection_efficiency.iloc[-1]),
+        "maximum_pre_projection_salt_error_ppm": maximum_salt,
+        "numerical_checks_passed": maximum_salt < 1.0e-8,
+        "development_response_gate_passed": bool(
+            15.0 <= decline <= 50.0 and late > 5.0 and minimum > 3.0
+        ),
+    }
+
+
+def ssp245_probe(output=DEFAULT_OUTPUT):
+    """Persist all results, including a failure of the unchanged development gate."""
+    output.mkdir(parents=True, exist_ok=True)
     source_hashes = snapshot_sources(output)
     results = {
         "comparison": "mean 2081-2100 AMOC relative to mean 1995-2014 AMOC",
         "evidence_scope": "development consistency check; not independent validation",
+        "gate_was_inspected_during_model_development": True,
+        "independent_validation_passed": False,
+        "development_gate": "15-50% decline, late AMOC >5 Sv, minimum AMOC >3 Sv",
+        "completed": False,
+        "passed": False,
         "source_sha256": source_hashes,
         "resolutions": {},
     }
+    (output / "ssp245_results.json").write_text(
+        json.dumps(results, indent=2, allow_nan=False), encoding="utf-8"
+    )
     for resolution in (10.0, 5.0):
         cfg = cm.ModelConfig(
             start_year=1850.0,
@@ -170,38 +236,36 @@ def ssp245_probe():
         )
         print(f"Starting SSP2-4.5 at {resolution:g} degrees", flush=True)
         frame = cm.ProcessClimateModel(cfg).run().dataframe
-        recent = frame.loc[frame.year.between(1995.0, 2014.0), "amoc_sv"]
-        late = frame.loc[frame.year.between(2081.0, 2100.0), "amoc_sv"]
-        decline = float(100.0 * (1.0 - late.mean() / recent.mean()))
-        record = {
-            "amoc_1995_2014_sv": float(recent.mean()),
-            "amoc_2081_2100_sv": float(late.mean()),
-            "amoc_decline_percent": decline,
-            "final_amoc_sv": float(frame.amoc_sv.iloc[-1]),
-            "minimum_amoc_sv": float(frame.amoc_sv.min()),
-            "final_fovs_sv": float(frame.fovs_sv.iloc[-1]),
-            "final_convection_efficiency": float(
-                frame.amoc_convection_efficiency.iloc[-1]
-            ),
-            "maximum_pre_projection_salt_error_ppm": float(
-                frame.pre_projection_salt_conservation_error_ppm.abs().max()
-            ),
-        }
-        assert 15.0 <= decline <= 50.0, record
-        assert record["minimum_amoc_sv"] > 3.0, record
-        assert record["maximum_pre_projection_salt_error_ppm"] < 1.0e-8, record
+        frame.to_csv(output / f"ssp245_{resolution:g}deg.csv", index=False)
+        record = {"config": asdict(cfg), **ssp245_metrics(frame)}
         results["resolutions"][f"{resolution:g}deg"] = record
-        print(json.dumps(record), flush=True)
+        (output / "ssp245_results.json").write_text(
+            json.dumps(results, indent=2, allow_nan=False), encoding="utf-8"
+        )
+        print(json.dumps({k: v for k, v in record.items() if k != "config"}), flush=True)
     results["completed"] = True
-    (output / "ssp245_results.json").write_text(
-        json.dumps(results, indent=2), encoding="utf-8"
+    results["passed"] = all(
+        r["numerical_checks_passed"] and r["development_response_gate_passed"]
+        for r in results["resolutions"].values()
     )
+    (output / "ssp245_results.json").write_text(
+        json.dumps(results, indent=2, allow_nan=False), encoding="utf-8"
+    )
+    return results
 
 
 if __name__ == "__main__":
-    if "--recovery-only" in sys.argv:
-        recovery_probe()
-    elif "--ssp245-only" in sys.argv:
-        ssp245_probe()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--recovery-only", action="store_true")
+    mode.add_argument("--ssp245-only", action="store_true")
+    args = parser.parse_args()
+    if args.recovery_only:
+        recovery_probe(args.output)
+    elif args.ssp245_only:
+        results = ssp245_probe(args.output)
+        if not results["passed"]:
+            raise SystemExit("SSP development gate FAILED; full results saved. This is not independent validation.")
     else:
-        main()
+        main(args.output)

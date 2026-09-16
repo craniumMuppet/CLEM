@@ -1,0 +1,192 @@
+{
+  "date": "2026-09-15",
+  "scope": "FAFMIP-informed empirical forced-heat AMOC closure and prognostic FovS review",
+  "source_sha256": {
+    "climate_model.py": "c88cee69c335a50123bd520a36c5dd1767591c7e81e9071e9cae4a2b32dbeb2f",
+    "amoc_density_r16.py": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+    "scientific_evidence.py": "dfc3693cd4de72bad04d46644454787da8bd65572967bb3f002962241e526718"
+  },
+  "ssp245_1850_2100": {
+    "completed": true,
+    "passed": true,
+    "evidence_scope": "development consistency check; not independent validation",
+    "resolutions": {
+      "10deg": {
+        "amoc_1995_2014_sv": 16.083242199733096,
+        "amoc_2081_2100_sv": 11.29664008315319,
+        "amoc_decline_percent": 29.76142532168882,
+        "final_amoc_sv": 10.95210532309395,
+        "minimum_amoc_sv": 10.95210532309395,
+        "final_fovs_sv": -0.10731944120755729,
+        "final_forced_heat_capacity_sv": 10.709576503436093,
+        "final_hydraulic_target_sv": 16.84440281324184,
+        "final_transport_target_sv": 10.709576503436093,
+        "late_forced_heat_constraint_fraction": 1.0,
+        "final_convection_efficiency": 0.935932818071761,
+        "maximum_pre_projection_salt_error_ppm": 3.442093701025524e-10,
+        "numerical_checks_passed": true,
+        "development_response_gate_passed": true
+      },
+      "5deg": {
+        "amoc_1995_2014_sv": 16.08324219975615,
+        "amoc_2081_2100_sv": 11.29664008315319,
+        "amoc_decline_percent": 29.761425321789492,
+        "final_amoc_sv": 10.95210532309395,
+        "minimum_amoc_sv": 10.95210532309395,
+        "final_fovs_sv": -0.1072467976253047,
+        "final_forced_heat_capacity_sv": 10.709576503436093,
+        "final_hydraulic_target_sv": 16.95659329560796,
+        "final_transport_target_sv": 10.709576503436093,
+        "late_forced_heat_constraint_fraction": 1.0,
+        "final_convection_efficiency": 0.938292563772521,
+        "maximum_pre_projection_salt_error_ppm": 5.163129067257664e-10,
+        "numerical_checks_passed": true,
+        "development_response_gate_passed": true
+      }
+    }
+  },
+  "ssp245_5deg_1850_2200": {
+    "output": "outputs_ssp245",
+    "review": "outputs_ssp245/amoc_fovs_review.json",
+    "amoc_weakening_percent": {
+      "2081_2100_vs_1995_2014": 29.761425321789492,
+      "2181_2200_vs_1995_2014": 38.06040900208188,
+      "2200_endpoint_vs_17sv_control": 41.562528904337
+    },
+    "periods": {
+      "baseline_1995_2014": {
+        "years": [
+          1995,
+          2014
+        ],
+        "n_annual_samples": 20,
+        "mean_amoc_sv": 16.08324219975615,
+        "mean_fovs_sv": -0.15200117695191326,
+        "mean_forced_heat_capacity_sv": 15.769578098082059,
+        "mean_hydraulic_target_sv": 16.70624409490277,
+        "forced_heat_constraint_active_fraction": 1.0
+      },
+      "late_2081_2100": {
+        "years": [
+          2081,
+          2100
+        ],
+        "n_annual_samples": 20,
+        "mean_amoc_sv": 11.29664008315319,
+        "mean_fovs_sv": -0.10990825278926875,
+        "mean_forced_heat_capacity_sv": 10.9879371322804,
+        "mean_hydraulic_target_sv": 16.886451119740524,
+        "forced_heat_constraint_active_fraction": 1.0
+      },
+      "extension_2181_2200": {
+        "years": [
+          2181,
+          2200
+        ],
+        "n_annual_samples": 20,
+        "mean_amoc_sv": 9.961894437733527,
+        "mean_fovs_sv": -0.10505174053615374,
+        "mean_forced_heat_capacity_sv": 9.936205712904554,
+        "mean_hydraulic_target_sv": 17.168156493967174,
+        "forced_heat_constraint_active_fraction": 1.0
+      }
+    },
+    "numerics": {
+      "maximum_absolute_salt_conservation_error_ppm": 2.220446049250313e-10,
+      "maximum_pre_projection_salt_conservation_error_ppm": 5.163129067257664e-10
+    },
+    "maximum_absolute_fovs_recalculation_residual_sv": 3.469446951953614e-15,
+    "reviewed_source_reproduction": "physics_review_forced_heat_20260914/ssp245_reviewed_2200_final",
+    "timeseries_sha256": "567b789df4defc522c448ac44604180c450f5bf981ebefeeefa2451ce4c2f0b0",
+    "reviewed_timeseries_byte_identical": true,
+    "maximum_numeric_difference": 0.0
+  },
+  "verification": {
+    "focused_suite": {
+      "passed": 54,
+      "failed": 0,
+      "seconds": 42.48
+    },
+    "python_compilation": "passed",
+    "git_diff_check": "passed_with_line_ending_warnings_only",
+    "unforced_300_year_5deg_control": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 247.0
+    },
+    "temporary_hosing_recovery_regression": {
+      "status": "existing threshold mismatch",
+      "required_recovery_percent": 80.0,
+      "measured_recovery_percent": 79.50985671369612,
+      "same_result_in_preserved_pre_forced_heat_snapshot": true,
+      "action": "Physical parameters and the threshold were left unchanged to avoid post-hoc tuning."
+    },
+    "full_release_suite_passed": false,
+    "historical_development_regression": {
+      "status": "existing baseline mismatch",
+      "historical_gmst_2011_2020_c": 0.836834,
+      "required_gmst_range_c": [
+        0.95,
+        1.2
+      ],
+      "historical_ocean_heat_content_change_1971_2018_zj": 348.165,
+      "required_ocean_heat_content_range_zj": [
+        350.0,
+        500.0
+      ],
+      "attribution": "The archived pre-forced-heat calculation gives essentially the same values; the thresholds were not changed."
+    },
+    "unforced_equilibrium_jacobian_test": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 38.65
+    },
+    "scientific_metadata_targeted_test": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 38.83
+    },
+    "broader_accuracy_integrity_file": {
+      "passed": 11,
+      "failed": 2,
+      "status": "existing unrelated sea-ice expectation mismatches",
+      "details": [
+        "A test expects fractional subgrid occupancy where the current sea-ice implementation reports binary occupancy for the tested state.",
+        "A test expects the legacy phrase 'display_reconstruction' while the current evidence summary identifies a native two-sector concentration projection."
+      ],
+      "amoc_or_fovs_failures": 0
+    }
+  },
+  "interpretation": "The default SSP weakening is dominated by a FAFMIP-informed empirical global-forcing-index sinking-capacity proxy. It is development consistency evidence for a reduced emulator, not a process-derived or independently validated AMOC forecast. FovS is recalculated from prognostic transport and salinity, but its trajectory is conditional on that empirical AMOC response.",
+  "review_fixes": [
+    {
+      "issue": "A zero response still capped hydraulic targets above the reference transport.",
+      "fix": "Require a positive configured response and a reduced prognostic capacity before applying the forced-heat limit.",
+      "ssp_effect": "None; the final-source 1850-2200 time series is byte-identical across all 262 columns."
+    },
+    {
+      "issue": "The convection salinity anomaly referenced raw configured salinities even when freshwater-budget initialization solved a different control hydrography.",
+      "fix": "Reference the same solved control north/deep salinities used by the convection normalization.",
+      "ssp_effect": "None for the default configuration because its raw and solved north/deep salinity contrasts are both zero."
+    },
+    {
+      "issue": "The total-effective SSP AMOC forcing proxy omitted the public constant additional_forcing_wm2.",
+      "fix": "Include explicit additional forcing in the proxy for total-effective SSP runs while continuing to exclude natural and volcanic forcing.",
+      "ssp_effect": "None for the default configuration because additional_forcing_wm2 is zero."
+    },
+    {
+      "issue": "Documentation overstated how directly FAFMIP constrained the global-forcing transfer, uncertainty range, and 20-year lag.",
+      "fix": "Label all three as empirical emulator choices informed by, but not estimated directly from, the regional FAFMIP experiments.",
+      "ssp_effect": "None; this changes scientific attribution and output metadata, not the numerical trajectory."
+    }
+  ],
+  "idealized_response_check": {
+    "experiment": "70-year abrupt doubled CO2, 10 degree, seasonal Arctic disabled",
+    "final_decade_amoc_weakening_sv": 4.78607,
+    "final_amoc_forced_heat_capacity_sv": 12.05401,
+    "final_amoc_hydraulic_target_sv": 16.52616,
+    "final_fovs_sv": -0.11805,
+    "maximum_pre_projection_salt_error_ppm": 3.442e-10,
+    "evidence_scope": "idealized implementation response check; not independent validation"
+  }
+}

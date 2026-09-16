@@ -1,0 +1,140 @@
+{
+  "generated_date": "2026-09-15",
+  "scenario": "ssp245",
+  "resolution_deg": 5.0,
+  "integration_years": [
+    1850,
+    2200
+  ],
+  "comparison_definition": "Annual samples selected by rounded calendar year; weakening is relative to the 1995-2014 mean.",
+  "periods": {
+    "baseline_1995_2014": {
+      "years": [
+        1995,
+        2014
+      ],
+      "n_annual_samples": 20,
+      "mean_amoc_sv": 16.08324219975615,
+      "mean_fovs_sv": -0.15200117695191326,
+      "mean_forced_heat_capacity_sv": 15.769578098082059,
+      "mean_hydraulic_target_sv": 16.70624409490277,
+      "forced_heat_constraint_active_fraction": 1.0
+    },
+    "late_2081_2100": {
+      "years": [
+        2081,
+        2100
+      ],
+      "n_annual_samples": 20,
+      "mean_amoc_sv": 11.29664008315319,
+      "mean_fovs_sv": -0.10990825278926875,
+      "mean_forced_heat_capacity_sv": 10.9879371322804,
+      "mean_hydraulic_target_sv": 16.886451119740524,
+      "forced_heat_constraint_active_fraction": 1.0
+    },
+    "extension_2181_2200": {
+      "years": [
+        2181,
+        2200
+      ],
+      "n_annual_samples": 20,
+      "mean_amoc_sv": 9.961894437733527,
+      "mean_fovs_sv": -0.10505174053615374,
+      "mean_forced_heat_capacity_sv": 9.936205712904554,
+      "mean_hydraulic_target_sv": 17.168156493967174,
+      "forced_heat_constraint_active_fraction": 1.0
+    }
+  },
+  "amoc_weakening_percent": {
+    "2081_2100_vs_1995_2014": 29.761425321789492,
+    "2181_2200_vs_1995_2014": 38.06040900208188,
+    "2200_endpoint_vs_17sv_control": 41.562528904337
+  },
+  "endpoints": {
+    "1850": {
+      "amoc_sv": 17.0,
+      "fovs_sv": -0.1600000000000063,
+      "forced_heat_capacity_sv": 17.0,
+      "active_transport_target_sv": 17.0,
+      "hydraulic_target_sv": 17.0,
+      "anthropogenic_forcing_index_wm2": 0.146519275,
+      "external_minus_deep_salinity_psu": 0.3294117647058954
+    },
+    "2000": {
+      "amoc_sv": 16.27070616688157,
+      "fovs_sv": -0.1537249844432911,
+      "forced_heat_capacity_sv": 15.975947955322658,
+      "active_transport_target_sv": 15.975947955322658,
+      "hydraulic_target_sv": 16.68937427435498,
+      "anthropogenic_forcing_index_wm2": 1.5249004099999883,
+      "external_minus_deep_salinity_psu": 0.33067860732847265
+    },
+    "2020": {
+      "amoc_sv": 15.387790407225138,
+      "fovs_sv": -0.1456396830162427,
+      "forced_heat_capacity_sv": 14.951705883447866,
+      "active_transport_target_sv": 14.951705883447866,
+      "hydraulic_target_sv": 16.60179915839631,
+      "anthropogenic_forcing_index_wm2": 2.64354093,
+      "external_minus_deep_salinity_psu": 0.3312619141975759
+    },
+    "2050": {
+      "amoc_sv": 13.476687031664216,
+      "fovs_sv": -0.1284413363910199,
+      "forced_heat_capacity_sv": 12.956620351165949,
+      "active_transport_target_sv": 12.956620351165949,
+      "hydraulic_target_sv": 16.623491282657664,
+      "anthropogenic_forcing_index_wm2": 4.10849199,
+      "external_minus_deep_salinity_psu": 0.3335720984781645
+    },
+    "2100": {
+      "amoc_sv": 10.95210532309395,
+      "fovs_sv": -0.1072467976253047,
+      "forced_heat_capacity_sv": 10.709576503436091,
+      "active_transport_target_sv": 10.709576503436091,
+      "hydraulic_target_sv": 16.95659329560796,
+      "anthropogenic_forcing_index_wm2": 5.20635357,
+      "external_minus_deep_salinity_psu": 0.3427320872244195
+    },
+    "2150": {
+      "amoc_sv": 10.1800444589369,
+      "fovs_sv": -0.1037470344405617,
+      "forced_heat_capacity_sv": 10.11912356445514,
+      "active_transport_target_sv": 10.11912356445514,
+      "hydraulic_target_sv": 17.112699314763635,
+      "anthropogenic_forcing_index_wm2": 5.40440116,
+      "external_minus_deep_salinity_psu": 0.3566925684918729
+    },
+    "2200": {
+      "amoc_sv": 9.934370086262708,
+      "fovs_sv": -0.105589476932245,
+      "forced_heat_capacity_sv": 9.917020665626422,
+      "active_transport_target_sv": 9.917020665626422,
+      "hydraulic_target_sv": 17.169410752160413,
+      "anthropogenic_forcing_index_wm2": 5.47815292,
+      "external_minus_deep_salinity_psu": 0.37200463245665816
+    }
+  },
+  "closure": {
+    "forced_heat_response_sv_per_doubling": 5.1,
+    "forced_heat_adjustment_years": 20.0,
+    "convection_transport_exponent": 0.0,
+    "fovs_equation": "-amoc_sv * (external_salinity_psu - deep_salinity_psu) / fovs_reference_salinity_psu",
+    "maximum_absolute_fovs_recalculation_residual_sv": 3.469446951953614e-15
+  },
+  "numerics": {
+    "maximum_absolute_salt_conservation_error_ppm": 2.220446049250313e-10,
+    "maximum_pre_projection_salt_conservation_error_ppm": 5.163129067257664e-10
+  },
+  "source": {
+    "original_full_output_source_sha256": "4b311ce075fa357077891ff1812a5e3c4856722e8c0383e06c1fb19fcdb58002",
+    "reviewed_source_sha256": "c88cee69c335a50123bd520a36c5dd1767591c7e81e9071e9cae4a2b32dbeb2f",
+    "reviewed_source_reproduction": "physics_review_forced_heat_20260914/ssp245_reviewed_2200_final",
+    "timeseries_sha256": "567b789df4defc522c448ac44604180c450f5bf981ebefeeefa2451ce4c2f0b0",
+    "reviewed_timeseries_byte_identical": true,
+    "maximum_numeric_difference_from_reviewed_source": 0.0,
+    "scientific_evidence_sha256": "dfc3693cd4de72bad04d46644454787da8bd65572967bb3f002962241e526718",
+    "primary_source": "Couldrey et al. 2022, doi:10.1007/s00382-022-06386-y"
+  },
+  "interpretation": "The default SSP AMOC response is dominated by a FAFMIP-informed empirical global-forcing-index sinking-capacity proxy and is not a process-derived or independently validated forecast. FovS is diagnosed from prognostic AMOC and conservative salinity states, so it is not prescribed, but its trajectory is conditional on that empirical AMOC response while the forced-heat capacity controls."
+}

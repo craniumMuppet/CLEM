@@ -1,0 +1,34 @@
+{
+  "generated_date": "2026-09-16",
+  "co2_target_sweep": {
+    "requested_members_per_target": 128,
+    "complete_paired_members": 123,
+    "failed_members": 5
+  },
+  "ssp245_monte_carlo": {
+    "requested_members": 512,
+    "successful_members": 495,
+    "failed_members": 17
+  },
+  "sources": {
+    "outputs_ssps/ssp_temperature_comparison.csv": "bc0f070c675bcc3255ef47db1fd2686b244d38d554e8f44aa31a11fe4f72093a",
+    "outputs_ssps/ssp_amoc_comparison.csv": "ac420fca25faa35fa766199f911602e1a2790a1ad6b6e544e6ab338f9bd11200",
+    "outputs_ssps/ssp_fovs_comparison.csv": "737c09c5ec545a9a2408625236d6b50dba6a488cdc651eb448b6008e67219174",
+    "outputs_ssps/ssp_sea_ice_comparison.csv": "1b627a57295f8ca0b14cf9c417d974d7d27fff18f5738faae0e43b79de3be1a0",
+    "outputs_co2_target_sweep/co2_target_sweep_amoc_percent_decline_trajectories.png": "d0d2ac0abb8c3d093ff06e42972dfed6e9b6402aa2f8fbe1c5687e26235e5371",
+    "outputs_co2_target_sweep/co2_target_sweep_overview.png": "c24530e7f2fdfc0eae6d29031a1ce50b782c5f371b3b9a65145bf1f73f6c8e59",
+    "outputs_ssp245_monte_carlo/monte_carlo_amoc_decline_percent_all.png": "0296c871f1e8379430f215fec8b47ea932eee32a48f701870b6fb1cb3f6ab68f",
+    "outputs_ssp245_monte_carlo/monte_carlo_amoc_sv_all.png": "c0b1b1ca2706232649025aaafd3470054bf7e9aec6c1fc4413e63c8f5ec43ced",
+    "outputs_ssp245_monte_carlo/monte_carlo_global_surface_warming_c_all.png": "8a1c4cc50fd6ff52fdef2041eaa06afaffd30b765796e7259c60296ba179e8a1"
+  },
+  "assets": {
+    "co2_target_sweep_amoc_percent_decline_trajectories.png": "d0d2ac0abb8c3d093ff06e42972dfed6e9b6402aa2f8fbe1c5687e26235e5371",
+    "co2_target_sweep_overview.png": "c24530e7f2fdfc0eae6d29031a1ce50b782c5f371b3b9a65145bf1f73f6c8e59",
+    "ssp245_diagnostics.png": "c51a643a869a6a254740acef3a9bbd7615f192a9104b2db490f0538580e38881",
+    "ssp245_monte_carlo_amoc_decline_percent.png": "0296c871f1e8379430f215fec8b47ea932eee32a48f701870b6fb1cb3f6ab68f",
+    "ssp245_monte_carlo_amoc_sv.png": "c0b1b1ca2706232649025aaafd3470054bf7e9aec6c1fc4413e63c8f5ec43ced",
+    "ssp245_monte_carlo_global_surface_warming.png": "8a1c4cc50fd6ff52fdef2041eaa06afaffd30b765796e7259c60296ba179e8a1",
+    "ssp585_diagnostics.png": "565028aa5f8c4e48cd318c5fc06c7e9b7d5a63cf3a3aaefb0e9222826fefa3d2",
+    "ssp_four_panel_comparison.png": "a207f055a3f7d2fa0472087ea7a1e83fa5ea86a0d919068042598b21cbd8ca23"
+  }
+}

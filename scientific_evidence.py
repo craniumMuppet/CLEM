@@ -70,8 +70,15 @@ SCIENTIFIC_USE_METADATA: dict[str, Any] = {
             "warning": "Do not interpret as a local, coastal, or point forecast.",
         },
         "amoc": {
-            "role": "sensitivity emulator with full anomalous thermal-density coupling restored",
-            "warning": "Scenario weakening and hosing response are sensitivity results, not precise collapse probability or timing forecasts.",
+            "role": (
+                "sensitivity emulator with prognostic hydraulic density and salinity, "
+                "plus an empirical global-forcing-index sinking-capacity proxy"
+            ),
+            "warning": (
+                "Default SSP weakening is dominated by a FAFMIP-informed empirical "
+                "forcing proxy and is not a process-derived AMOC forecast; hosing "
+                "response and collapse timing are sensitivity results."
+            ),
         },
         "greenland": {
             "role": "aggregate surface-mass-balance and discharge emulator",

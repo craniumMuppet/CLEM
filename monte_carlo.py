@@ -253,6 +253,7 @@ PARAMETER_ALIASES: dict[str, str] = {
     "amoc_reference": "amoc_reference_sv",
     "amoc_temperature_coupling": "amoc_temperature_density_coupling",
     "amoc_adjustment_years": "amoc_adjustment_years",
+    "amoc_forced_heat_response": "amoc_forced_heat_response_sv_per_doubling",
     "amoc_heat_transport": "amoc_heat_transport_pw_per_sv",
     "amoc_surface_heat_coupling": "amoc_surface_heat_coupling_fraction",
     "amoc_heat_response_damping": "amoc_heat_response_damping_wm2_k",
@@ -262,6 +263,7 @@ PARAMETER_ALIASES: dict[str, str] = {
     "amoc_pycnocline_feedback_strength": "amoc_pycnocline_feedback_strength",
     "amoc_convection_density_scale_factor": "amoc_convection_density_scale_factor",
     "amoc_convection_minimum_fraction": "amoc_convection_minimum_fraction",
+    "convection_transport_exponent": "amoc_convection_transport_exponent",
     "amoc_convective_mixing_reference": "amoc_convective_mixing_reference_sv",
     "amoc_convective_mixing_exponent": "amoc_convective_mixing_exponent",
     "amoc_convection_entrainment_feedback": "amoc_convection_entrainment_feedback",
@@ -384,6 +386,7 @@ MONTE_CARLO_PHYSICAL_PARAMETERS = frozenset(
         # AMOC state, transport, and feedback parameters.
         "amoc_reference_sv",
         "amoc_adjustment_years",
+        "amoc_forced_heat_response_sv_per_doubling",
         "thermal_expansion_per_k",
         "amoc_temperature_density_coupling",
         "haline_contraction_per_psu",
@@ -580,6 +583,7 @@ PHYSICAL_CLIMATE_PRIORS: dict[str, PriorSpec] = {
 }
 
 PHYSICAL_AMOC_PRIORS: dict[str, PriorSpec] = {
+    "amoc_forced_heat_response_sv_per_doubling": PriorSpec(3.27, 8.63, "truncated_normal", 5.10, source="FAFMIP-informed North Atlantic heat-flux proxy", rationale="The 5.1 Sv centre is the final-decade 50% North Atlantic heat-forcing ensemble mean. Bounds heuristically scale that response by the reported 0.25-0.66 versus 0.39 Sv m2/W model-sensitivity range; FAFMIP does not supply the global-ERF transfer function."),
     "amoc_heat_transport_pw_per_sv": PriorSpec(0.015, 0.080, "loguniform", None, source="temperature contrast times seawater heat capacity", rationale="Positive heat transported per unit overturning."),
     "amoc_surface_heat_coupling_fraction": PriorSpec(0.02, 0.80, "beta", 0.10, 5.0, "surface expression of overturning heat transport", "Bounded fraction; low values avoid excessive cold-blob restoration."),
     "amoc_heat_response_damping_wm2_k": PriorSpec(0.20, 5.0, "loguniform", None, source="regional radiative and turbulent damping", rationale="Positive damping rate."),
@@ -603,7 +607,6 @@ PHYSICAL_AMOC_PRIORS: dict[str, PriorSpec] = {
     "amoc_pycnocline_feedback_strength": PriorSpec(0.0, 0.50, "uniform", None, "pycnocline-overturning feedback", "Bounded feedback fraction; strong cancellation is disfavoured by stability tests."),
     "amoc_convection_density_scale_factor": PriorSpec(1.0, 6.0, "lognormal", 1.0, source="local density normalization", rationale="The distribution is centered on the revised public default and allows structural uncertainty."),
     "amoc_convection_minimum_fraction": PriorSpec(0.0, 0.30, "beta", 0.02, 8.0, "residual mixing under weak convection", "Near-zero convection is permitted while background ocean mixing remains elsewhere in the model."),
-    "amoc_convection_transport_exponent": PriorSpec(0.5, 1.5, "truncated_normal", 1.0, source="continuous deep-water-formation transport coupling", rationale="Unit exponent is direct proportional coupling; support represents structural uncertainty without a threshold."),
     "amoc_convective_mixing_reference_sv": PriorSpec(1.0, 12.0, "lognormal", 5.0, source="northern convective entrainment", rationale="Positive vertical salt-exchange scale; strong convection replenishes northern salinity."),
     "amoc_convective_mixing_exponent": PriorSpec(1.0, 4.0, "uniform", None, source="nonlinear convective entrainment", rationale="Controls how rapidly vertical salt exchange disappears as convection weakens."),
     "amoc_convection_entrainment_feedback": PriorSpec(0.0, 0.12, "beta", 0.0, 10.0, "optional density-memory feedback", "Default zero avoids double-counting prognostic convection-dependent salt mixing."),
