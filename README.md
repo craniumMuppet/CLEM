@@ -2,7 +2,6 @@
 
 **Abbreviation: CLEM**  
 **Current release: v2.29.29**  
-**Validation/release maintenance lineage: R18.5.1 / R18.6 public-release consolidation**
 
 **CLEM v2.29.29** is a process-based reduced-complexity climate model written in Python.
 
@@ -120,22 +119,17 @@ Figure provenance and source hashes are in the
 
 ## Current release status
 
-**Current checkout (Unreleased, September 16 science update):** the default
-uses direct water-mass TEOS-10 density, an open Atlantic boundary, bilateral
-ocean freezing floors and dry-column water-vapour weighting. It also updates
-Greenland runoff, Arctic feedback accounting and AMOC sinking capacity. The
-lower of the hydraulic and FAFMIP-informed capacities controls AMOC.
+The current science update uses direct water mass TEOS-10 density, an open
+Atlantic boundary, updated Greenland and Arctic feedbacks, and the
+FAFMIP-informed AMOC sinking capacity. The figures above use this unreleased
+revision. Detailed release history and inherited evidence are recorded in the
+[release notes](RELEASE_NOTES_V2_29_29.md),
+[dynamics equivalence record](V2_29_29_DYNAMICS_EQUIVALENCE.json), and
+[physics repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md).
 
-Current figures use the unreleased revision. Tagged-release evidence retains
-its original model state. See the
-[repair report](docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md).
-
-**v2.29.29** consolidates the validated R15–R18.5.1 work without retuning the
-v2.29.28 dynamics. A dynamics-equivalence record links the inherited evidence.
-
-R18.4 completed the sixth-source Arctic observational stack by processing authentic **NSIDC-0611 v4/v4.1 EASE-Grid Sea Ice Age** files for 1984–2024. The Arctic observational stack is now **6/6 available**. Independent predictive scientific validation remains **`not_available`** until the preregistered 2027–2036 prospective holdout observations exist.
-
-See `RELEASE_NOTES_V2_29_29.md`, `V2_29_29_DYNAMICS_EQUIVALENCE.json`, `R18_2_RESULTS_REVIEW.md`, `R18_4_NSIDC_0611_INTEGRATION.md`, `R18_5_PUBLIC_RELEASE_MERGE.md`, `docs/VALIDATION.md`, and `docs/MODEL_LIMITATIONS.md`.
+The Arctic observational stack contains six development and structural
+diagnostics. Independent prospective validation is not yet available because
+the preregistered 2027 to 2036 observation period is still in the future.
 
 ---
 
@@ -417,44 +411,12 @@ that capacity is the active limit.
 
 ### Historical AMOC Mean State
 
-The former fixed-alpha/beta configuration had a documented low historical AMOC
-mean. The current v2.29.29 production configuration repairs that physical
-density pathway with
-[TEOS-10](https://www.teos-10.org/pubs/TEOS-10_Manual.pdf) on the same
-reduced-order North Atlantic stratification pathway. It does not raise the
-17 Sv preindustrial control anchor, retune a hydraulic coefficient, or add an
-output correction.
-
-For approximately 2004–2020:
-
-| Dataset / Configuration | 2004–2020 AMOC |
-|---|---:|
-| Pre-repair fixed-alpha/beta, 10° | **~14.17 Sv** |
-| Pre-repair fixed-alpha/beta, 5° | **~14.32 Sv** |
-| CLEM v2.29.29 production matched-pathway TEOS-10, 10° | **~15.74 Sv** |
-| CLEM v2.29.29 production matched-pathway TEOS-10, 5° | **~15.86 Sv** |
-| RAPID 26.5° N | **16.9 ± 1.2 Sv** |
-
-The nonlinear density closure reduces the pre-repair discrepancy from 2.6–2.7
-Sv to about 1.0–1.2 Sv, inside the published RAPID uncertainty interval.
-These are 10°/5° historical runs using the production 0.05-year integration
-step, not a claim of independent calibration. The RAPID comparison is from
-[Johns et al. (2023)](https://doi.org/10.1098/rsta.2022.0188).
-
-Mechanism isolation attributes almost all of the pre-repair model's excessive
-historical decline to the thermal-density pathway. Removing anomalous
-freshwater changes shifts the mean by only about 0.025 Sv. At the control
-temperatures, the old constant thermal expansion coefficient is
-2.0e-4 K^-1, compared with TEOS-10 values of about 1.22e-4 K^-1 for the
-northern box and 0.43e-4 K^-1 for the cold Southern source. The old linear
-thermal (-0.001200) and haline (+0.001634) terms therefore left a fragile
-0.000434 residual, whereas the direct TEOS-10 density contrast is 0.001169.
-The repair changes only the equation used to translate the established thermal
-and salinity coordinates into density, retaining their geometry, initial
-hydrography, hydraulic coefficients, and 17 Sv control. A literal
-prognostic-water-mass TEOS alternative was also tested. Although its historical
-mean reached ~16.34 Sv, its SSP2-4.5 weakening was only ~6.5%, below the model's
-independently declared 15–50% development range, so it was not promoted.
+The current TEOS-10 density pathway gives a 2004 to 2020 mean AMOC of
+15.74 Sv at 10 degrees and 15.86 Sv at 5 degrees, compared with
+16.9 plus or minus 1.2 Sv from RAPID. This improves on the former fixed
+coefficient pathway without changing the 17 Sv control anchor or applying an
+output correction. The comparison is development evidence, not independent
+calibration. See [Johns et al. (2023)](https://doi.org/10.1098/rsta.2022.0188).
 
 ### Simplified Sea-Ice Geography
 
@@ -489,14 +451,6 @@ CLEM does not explicitly resolve:
 - Eddy-resolving convection
 
 Its AMOC system should therefore be interpreted as a reduced dynamical representation rather than a substitute for an ocean GCM.
-
-### Arctic Validation Status
-
-Historical and recent Arctic observations were inspected during development and therefore remain **development/calibration/structural evaluation**, not untouched prospective validation.
-
-The present observational stack contains all six intended products: NOAA/NSIDC fixed-mask concentration/area, PIOMAS volume, CryoSat-2 thickness, ICESat-2 thickness, OSI SAF area cross-check, and NSIDC-0611 multiyear sea-ice age. CryoSat-2 temporal correlation remains a documented development limitation and is not used to justify post-hoc physics tuning.
-
-The frozen 2027–2036 prospective protocol has not yet accumulated the required future observations, so independent predictive validation is correctly reported as **`not_available`**, not as a model failure.
 
 ### AMOC Tipping Interpretation
 
@@ -639,41 +593,18 @@ Available experiment types include:
 
 ---
 
-## Validation
+## Validation and evidence
 
-CLEM v2.29.29 has been tested with a physics/structural validation suite covering:
+CLEM has physics and structural checks for climate sensitivity, conservation,
+numerical convergence, AMOC response, freshwater experiments, sea ice, and
+cross resolution behaviour. Detailed results, methods, and historical evidence
+belong in the release records rather than the README. See the
+[release notes](RELEASE_NOTES_V2_29_29.md),
+[dynamics equivalence record](V2_29_29_DYNAMICS_EQUIVALENCE.json), and
+[R18.2 results review](R18_2_RESULTS_REVIEW.md).
 
-- ECS and Gregory regression
-- TCR and radiative-feedback decomposition
-- Energy and salt conservation
-- Timestep convergence
-- SSP2-4.5 response and cross-resolution consistency
-- AMOC thermal weakening, FovS, and salt-advection feedback
-- Greenland and Arctic freshwater routing
-- Pycnocline closure
-- Freshwater hosing, AMOC collapse, recovery, and structural sensitivity
-- Reduced TEOS-10 AMOC EOS sensitivity
-- Arctic mechanism ablations
-- Sea-ice area/extent observation-operator tests
-- PIOMAS, CryoSat-2, ICESat-2, OSI SAF, and NSIDC-0611 structural/development diagnostics
-
-The release keeps the large historical numerical evidence separate from the clean source archive.
-
-## Public release assets
-
-CLEM v2.29.29 is distributed as a **multi-asset release** rather than one oversized source archive:
-
-- `CLEM-v2.29.29-source.zip` — clean current source tree. Its SHA-256 is published in the accompanying `.sha256`/release asset manifest.
-- `CLEM-v2.29.28-physics-repair-r13-validation-results.zip` — **80,553,730 bytes**, SHA-256 `3ebb04a5c6d609184f9576a77592c422e26d9956774ab0537111c2324708befb`. This is the large inherited Repair R11-R13 numerical evidence bundle. Its v2.29.28 name is preserved because that is the version that generated the evidence.
-- `CLEM_v2.29.28_R17_validation_results.zip` — **44,545,789 bytes**, SHA-256 `c386edc134992a6e0ae45d8b7d0ecae1d726645729aa7ff2d03c86a09f1fd950`. This is the accepted R17 structural AMOC/TEOS-matched/recovery and paired 5°/10° sea-ice evidence bundle.
-- `CLEM_v2.29.28_R18_validation_results_finalized.zip` — **29,314,682 bytes**, SHA-256 `69f0d2d8095e084e6464c291ca978417d9891d759ca0649106c6cee434dce4c8`. This is the finalized R18 structural/observation-operator validation bundle.
-- `CLEM_v2.29.28_R18_2_seaice_operator_results.zip` — **25,318,048 bytes**, SHA-256 `d6506dfbec839528ad3c4e633c1563cf18c1fc6caf6dd94fd44dfe5ec36e0f06`. This contains the completed R18.2 5°/10° sea-ice observation-operator numerical comparison. Its historical version label is likewise preserved.
-
-The raw NSIDC-0611 NetCDF archive is **not** a CLEM release asset. CLEM ships the processed diagnostic and full source-file SHA-256 provenance instead. Historical numerical assets are inherited by the explicit dynamics-equivalence record. They are not relabelled as newly generated v2.29.29 runs.
-
-R15–R18.5.1 supplied the structural, observation-operator, provenance, and public-release work consolidated into v2.29.29. R18.2 supplies the completed sea-ice operator numerical evidence and R18.4 adds authentic NSIDC-0611 processed observational data. Historical evidence filenames retain `v2.29.28` where that is the version under which the numerical run was actually executed.
-
-The preregistered 2027–2036 holdout is intentionally unavailable until future observations exist. It must not be replaced by retrospective data or manually marked as passed.
+Release downloads keep the clean source archive separate from historical
+numerical evidence. Each asset publishes its own size and SHA 256 value.
 
 ---
 
