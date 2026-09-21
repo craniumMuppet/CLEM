@@ -9,4 +9,7 @@ CLEM v2.29.29 carries forward the accepted v2.29.28/R18.2-R18.5.1 Arctic dynamic
 - Independent prospective validation remains `not_available` until the preregistered 2027-2036 observations exist.
 - Historical v2.29.28 numerical result filenames are preserved and inherited through `V2_29_29_DYNAMICS_EQUIVALENCE.json`.
 
-For the original numerical evidence and operator analysis see `V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md`, `R18_2_RESULTS_REVIEW.md`, and `R18_4_NSIDC_0611_INTEGRATION.md`.
+For the original numerical evidence and operator analysis see
+`docs/internal-repair-history/v2.14-v2.29/V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md`,
+`docs/internal-repair-history/v2.14-v2.29/R18_2_RESULTS_REVIEW.md`, and
+`docs/internal-repair-history/v2.14-v2.29/R18_4_NSIDC_0611_INTEGRATION.md`.

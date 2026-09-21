@@ -601,7 +601,7 @@ cross resolution behaviour. Detailed results, methods, and historical evidence
 belong in the release records rather than the README. See the
 [release notes](RELEASE_NOTES_V2_29_29.md),
 [dynamics equivalence record](V2_29_29_DYNAMICS_EQUIVALENCE.json), and
-[R18.2 results review](R18_2_RESULTS_REVIEW.md).
+[R18.2 results review](docs/internal-repair-history/v2.14-v2.29/R18_2_RESULTS_REVIEW.md).
 
 Release downloads keep the clean source archive separate from historical
 numerical evidence. Each asset publishes its own size and SHA 256 value.

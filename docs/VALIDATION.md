@@ -86,4 +86,7 @@ CryoSat-2 temporal correlation remains a documented development limitation. It i
 
 The preregistered **2027-2036** prospective holdout is intentionally future evidence. Until the required observations exist, the correct status is **`not_available`**, not failed and not passed. Retrospective/development evidence must not be substituted for this holdout.
 
-See `R18_2_RESULTS_REVIEW.md`, `R18_4_NSIDC_0611_INTEGRATION.md`, `R18_5_PUBLIC_RELEASE_MERGE.md`, and `validation/prospective/`.
+See `internal-repair-history/v2.14-v2.29/R18_2_RESULTS_REVIEW.md`,
+`internal-repair-history/v2.14-v2.29/R18_4_NSIDC_0611_INTEGRATION.md`,
+`internal-repair-history/v2.14-v2.29/R18_5_PUBLIC_RELEASE_MERGE.md`, and
+`../validation/prospective/`.
