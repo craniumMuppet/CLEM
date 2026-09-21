@@ -20,14 +20,48 @@ response. Its global-forcing mapping and 20-year lag are emulator assumptions,
 so these results are conditional sensitivities. See the
 [forced-heat review](docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md).
 
-### Paired CO2 target sweep
+### Weighted CO2 target sweep
 
-The sweep uses **128 paired prior members per CO2 target** at 400, 600, 800,
-1000, 1200 and 2200 ppm.
+This larger posterior weighted assessment supersedes the earlier 128 member
+sweep for its central estimates. It requested 512 paired Monte Carlo members
+for each of eight fixed targets at 280, 400, 600, 700, 800, 1000, 1200 and
+1600 ppm. The supplied run log records a Sobol design, triangular sampling,
+science priors and AR6 AMOC constraint mode. A total of 495 paired members
+completed every target, giving a 96.68% survival fraction.
 
-![Conditional AMOC outcomes across six CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_overview.png)
+| Target | Weighted persistent collapse | Weighted mean peak decline | Weighted median peak decline | Weighted P05 to P95 | Member minimum to maximum |
+|---|---:|---:|---:|---:|---:|
+| 280 ppm | 0.000% | 0.439% | 0.277% | 0.170% to 1.902% | 0.164% to 3.738% |
+| 400 ppm | 0.000% | 14.775% | 13.838% | 10.287% to 20.487% | 9.908% to 25.674% |
+| 600 ppm | 0.000% | 32.055% | 30.023% | 22.319% to 44.447% | 21.496% to 55.700% |
+| 700 ppm | 0.166% | 38.895% | 36.429% | 27.081% to 53.930% | 26.082% to 67.585% |
+| 800 ppm | 3.412% | 44.951% | 42.102% | 31.298% to 62.328% | 30.144% to 78.109% |
+| 1000 ppm | 23.049% | 55.337% | 51.829% | 38.530% to 76.728% | 37.108% to 100.000% |
+| 1200 ppm | 40.829% | 63.957% | 59.956% | 44.572% to 88.761% | 42.927% to 100.000% |
+| 1600 ppm | 75.952% | 76.796% | 72.781% | 54.106% to 100.000% | 52.110% to 100.000% |
 
-![Paired AMOC percentage-decline trajectories across six CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_amoc_percent_decline_trajectories.png)
+![Weighted AMOC outcomes across eight CO2 targets](outputs_co2_target_sweep/co2_target_sweep_overview.png)
+
+![Weighted AMOC percentage decline trajectories across eight CO2 targets](outputs_co2_target_sweep/co2_target_sweep_amoc_percent_decline_trajectories.png)
+
+Collapse requires AMOC below 6 Sv for at least 95% of the final 30 year window
+and no active recovery longer than 5 years. Peak decline is the largest percent
+reduction from each member specific preforcing AMOC baseline. The mean, median
+and P05 to P95 columns use posterior weights. Member minimum to maximum gives
+the observed raw extrema across the 495 completed members. Values are rounded
+to three decimal percentage points.
+
+The weighted central assessment shows steadily stronger AMOC decline as the
+target rises. Persistent collapse is absent through 600 ppm, appears at 700
+ppm, reaches 23.049% at 1000 ppm and 75.952% at 1600 ppm. The weighted
+threshold fit reaches 10% persistent collapse near 867 ppm and 50% near 1304
+ppm, conditional on this model and its priors.
+
+Posterior weighting makes the central estimates more informative than the
+earlier unweighted sweep, but the run reports an effective sample size of 28.6,
+below its required 49.5. Its quantitative uncertainty products are therefore
+labelled exploratory only. The weighted intervals and threshold values should
+be read as conditional screening results rather than precise probability bounds.
 
 ### Four-pathway SSP comparison
 
