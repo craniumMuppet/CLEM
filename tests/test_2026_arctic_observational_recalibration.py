@@ -41,7 +41,7 @@ def test_repaired_core_five_observation_stack_is_complete() -> None:
     assert status["missing_sources"] == []
 
 def test_packaged_recalibration_enforces_level_trend_and_physical_gates() -> None:
-    payload=json.loads((ROOT/"ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())
+    payload=json.loads((ROOT/"validation/current/ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())
     assert payload["calibration_passed"] is True
     assert payload["validation_informed_development_evaluation_passed"] is True
     assert payload["physical_volume_thickness_validation"]["passed"] is True

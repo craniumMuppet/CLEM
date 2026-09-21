@@ -28,7 +28,7 @@ with (ROOT / "pyproject.toml").open("rb") as handle:
 project_version = str(project["version"])
 project_name = str(project["name"])
 
-metadata = json.loads(read("RELEASE_METADATA.json"))
+metadata = json.loads(read("provenance/current/RELEASE_METADATA.json"))
 readme = read("README.md")
 app_head = "\n".join(read("app.py").splitlines()[:8])
 app_text = read("app.py")

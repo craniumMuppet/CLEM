@@ -74,6 +74,6 @@ The raw NSIDC-0611 NetCDF archive is **not** a CLEM release asset. CLEM ships th
 
 - Updated legacy regression assertions that still froze superseded pre-R15 AMOC/Greenland defaults; tests now assert the final validated v2.29.29 defaults rather than forcing physics backward.
 - Updated R18/R18.2 provenance tests and verifier logic to recognize the documented `MODEL_VERSION`-only identity bump through version-neutral dynamics equivalence instead of requiring the obsolete literal v2.29.28 `climate_model.py` hash.
-- Clarified that `SOURCE_FINGERPRINT.json` is retained as historical/frozen repair-line provenance; `V2_29_29_RELEASE_TREE_FINGERPRINT.json` is the current release-tree identity.
+- Clarified that `provenance/history/SOURCE_FINGERPRINT.json` is retained as historical/frozen repair-line provenance; `provenance/current/V2_29_29_RELEASE_TREE_FINGERPRINT.json` is the current release-tree identity.
 - Removed transient pytest/bytecode caches from public packaging and re-audited path, case, archive and manifest safety.
 - Post-merge bounded verification records **54 passing tests with zero failures** across current-release semantics, coupled fail-closed behavior, repaired-default/provenance assertions, six-source Arctic handling, and target/baseline safety, plus a passing zero-year static physics check. The full canonical runner is still pinned to `pytest==9.1.1`; this assistant environment has 9.0.2 and could not install 9.1.1 offline, so no false canonical pass is claimed.

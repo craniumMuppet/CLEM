@@ -388,7 +388,8 @@ def load_ice_age_annual() -> pd.DataFrame | None:
 
 
 def write_stack_status(path: Path | None = None) -> Path:
-    destination = path or ROOT / "ARCTIC_VALIDATION_STACK_STATUS_2026.json"
+    destination = path or ROOT / "validation" / "current" / "ARCTIC_VALIDATION_STACK_STATUS_2026.json"
+    destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(
         json.dumps(validation_stack_status(), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",

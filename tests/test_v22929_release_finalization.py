@@ -37,7 +37,7 @@ def test_v22929_documents_are_synchronized() -> None:
     assert (ROOT/"V2_29_29_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md").is_file()
 
 def test_v22929_current_evidence_is_fail_closed_and_osi_is_development_only() -> None:
-    p=json.loads((ROOT/"ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())
+    p=json.loads((ROOT/"validation/current/ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json").read_text())
     assert p["calibration_passed"] is True
     assert p["physical_volume_thickness_validation"]["passed"] is True
     assert p["physical_volume_thickness_validation"]["scientific_volume_thickness_validation_complete"] is False
@@ -52,7 +52,7 @@ def test_v22929_retrospective_fold_local_manifest_is_semantically_honest() -> No
     assert status["fold_local_candidate_selection_used"] is True
     assert status["full_continuous_recalibration_used"] is False
     assert status["scientific_predictive_skill_claim_allowed"] is False
-    m=json.loads((ROOT/"RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json").read_text())
+    m=json.loads((ROOT/"validation/current/RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json").read_text())
     assert [x["calibrate_through"] for x in m["folds"]] == [1989,1999,2009]
     assert m["invalid_1979_fold_removed"] is True
     assert m["candidate_bank_predeclared_before_this_bank_was_scored"] is True

@@ -89,9 +89,9 @@ def _promote_staged_generation(staging: Path, output_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "release_validation")
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "validation" / "current")
     parser.add_argument("--segment-years", type=float, default=20.0)
-    parser.add_argument("--test-results", type=Path, default=ROOT / "TEST_RESULTS_V2_29_29.json")
+    parser.add_argument("--test-results", type=Path, default=ROOT / "validation" / "current" / "TEST_RESULTS_V2_29_29.json")
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 

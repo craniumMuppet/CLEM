@@ -1,0 +1,3946 @@
+{
+  "aggregate_sha256": "56aa2f6c4e467eec9f76df0ed6ead2de7fbdd0daf56f58500a0842dca5125783",
+  "algorithm": "sha256",
+  "coverage": "release executable/config/runtime/documentation inventory; generated evidence and transient caches excluded",
+  "file_count": 984,
+  "files": {
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/.github/workflows/ci.yml": {
+      "sha256": "c70f9e56e75258a277830107244a1aaf2e61fafceacd00adf9607493eb0e4488",
+      "size_bytes": 1591
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ACTUAL_SEA_ICE_FIX.md": {
+      "sha256": "8bf05f9b0e0c848bd6defc3f5861fb6491c32c38ba7e37757e961f0c5156180f",
+      "size_bytes": 2849
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/AMOC_COMPLETION_COUNTS_V2_16_3.md": {
+      "sha256": "cebb2c37e80896ea5ff90d6825ae68bb87b6bfed0b81d920a873e19460c3bf5f",
+      "size_bytes": 1044
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ARCTIC_ACQUISITION_HOTFIX_2026.md": {
+      "sha256": "5cac347443b1d0f4bd35329c00e66700b4986b6fcc321987f2e94f2e6fef6bee",
+      "size_bytes": 2055
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ARCTIC_BUNDLE_REVIEW_AND_DATA_REPAIR_2026_08_09.md": {
+      "sha256": "e1de4b9c6dac46f1d6884bba7e70cc521e456050983afee28a64832e499e91f3",
+      "size_bytes": 4545
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ARCTIC_CORE5_CONTINUE_2026.md": {
+      "sha256": "9b8ab8d465e3298ad1c9591aeff1a1b30ee135db9967d4cf7446e50fd055c4f2",
+      "size_bytes": 925
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ARCTIC_OBSERVATIONAL_RECALIBRATION_2026.md": {
+      "sha256": "c624c03e5a3eed1279064cf0e3b4b382418b41dc2c935ff6847826b4f41f0e06",
+      "size_bytes": 4069
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/CHANGELOG.md": {
+      "sha256": "32592cb2537a7a26beb3b9e05580fc59889e44c15c66465eebcbc4b8719e99d2",
+      "size_bytes": 90563
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/CLEM_SOURCES.md": {
+      "sha256": "7f740e8f3febc00f87c9248d83a4ff4def13b44291e98d3bc043f6480dfe74f4",
+      "size_bytes": 6286
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/CO2_TARGET_SWEEP_V2_19_0.md": {
+      "sha256": "4d18ed8a8ba1e39c8c8466ddb56ae1f192c8095e4de858f76c0184b0c63858f6",
+      "size_bytes": 2722
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/CO2_TARGET_SWEEP_V2_20_0.md": {
+      "sha256": "c63eab1fe78782d0cd904f512a1544e5275e4e5d905edb528b62c9962864dbb9",
+      "size_bytes": 4153
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/CONTINUOUS_AMOC_V2_16_0.md": {
+      "sha256": "6ba75d1f2685c068725451c5ea59764195db563b51027efd292199853caa9ada",
+      "size_bytes": 3639
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/FRESHWATER_MONTE_CARLO_V2_16_0.md": {
+      "sha256": "68290fc5ddee8122cf19bd45b4ec14201ddc04260fe563dadee4c4de8b4ed90a",
+      "size_bytes": 1043
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/GUI_STARTUP_HOTFIX_V2_29_17.md": {
+      "sha256": "b066adedd91b02048ecfa6b05c6b1fa63ec4c503e914dff4c1ac828f8dc3c2bd",
+      "size_bytes": 1074
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/HYBRID_SSP_RATE_SPLICE_V2_16_1.md": {
+      "sha256": "a8e4fed5b49801f11bf3f1783def9c27a02103690c36d0c4b438d0d51c9e3927",
+      "size_bytes": 1841
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/ITEMS_1_4_OBSERVATION_OPERATOR_FIXES_2026.md": {
+      "sha256": "320ce542c1e8ef7ec74a9deef7a95ae94094c26cd6915c4b5615e3a3537287e9",
+      "size_bytes": 4908
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/LONG_HOLD_SALINITY_EXCHANGE_V2_18_2.md": {
+      "sha256": "d010b1f8d5e23065aac9c1e706ea3ebe50bb2645c9bd0f0e502c1b16bcf70426",
+      "size_bytes": 3452
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/NSIDC_0611_ACQUISITION_FIX_2026.md": {
+      "sha256": "2abcd5cd7a0e375cce05e0a62dd557358fab08d51fa0a902a31fc184b0083e25",
+      "size_bytes": 2042
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/NSIDC_0611_LEGACY_AUTH_FIX_2026.md": {
+      "sha256": "8a5f77b3c6711c1e6f0d1482d26b7ebb291483990b36a16280e21484d4aa9b1b",
+      "size_bytes": 1863
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/OUTPUT_ASSESSMENT.md": {
+      "sha256": "daf3c225f449e1a42b00b641aed2a2e566b1f43b122f38f4d04181cc2611a489",
+      "size_bytes": 5839
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PERCENT_RAMP_HOLD_V2_18_0.md": {
+      "sha256": "18ebba573aec77ab379e149e36139bd746ed43cdc8e7d55c54e0e9819d815432",
+      "size_bytes": 1498
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PERCENT_RAMP_HOLD_V2_18_1.md": {
+      "sha256": "abf1166d051939aad851117eedb2bd75badf5086e599d1420709bd24e01ab632",
+      "size_bytes": 1787
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PERCENT_RAMP_RATE_INPUT_V2_18_1.md": {
+      "sha256": "845cb0fed6adb56997d238743fb315f4417d567f77c3c89774804de6e68d183e",
+      "size_bytes": 751
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PHYSICS_REPAIR_LOCAL_VERIFICATION.md": {
+      "sha256": "3be65fc1a869b043a21256a5741e12cbcdb1e91c3835ff719d4db034638d9989",
+      "size_bytes": 4256
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PHYSICS_REPAIR_NOTES.md": {
+      "sha256": "075990075d0a906796772a719539d89416e7d45bf31aed6be3d35feef52075cc",
+      "size_bytes": 1517
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/PHYSICS_REPAIR_R13.md": {
+      "sha256": "d187bcbc1abbd232b66a48e119a7e0f4a959ef144fbde7df275ad3ccbc0425ad",
+      "size_bytes": 507
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/POSTERIOR_AMOC_REPORTING_V2_16_4.md": {
+      "sha256": "55b63e821521b0796d086a52067c92833be3b7b0a732ff148ff3b5c1006db3e0",
+      "size_bytes": 1477
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R15_1_RESULTS_REVIEW.md": {
+      "sha256": "ca91640e46ce7bdaf5bf1fff747f19f41eb05d300172fe0d0a1525d1a4e26b3e",
+      "size_bytes": 4782
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R15_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "b270561f0ba944202a92ca1faccc3991796935428684faad93e311087dd3236e",
+      "size_bytes": 3804
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R15_SEA_ICE_SPATIAL_DESIGN.md": {
+      "sha256": "9b2c9c4ef805cf68cfac76ed0107467b03287795b1c114c665bb52713483de23",
+      "size_bytes": 1106
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R16_1_TEOS_HOTFIX.md": {
+      "sha256": "4e0d1d6cb0089879878a9a9190f1a9d520c83d2788026e9e364d536ebe1b3f54",
+      "size_bytes": 1451
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R16_2_PROVENANCE_HOTFIX.md": {
+      "sha256": "9cd01e67f7d56ba4f4e331fa26358b7d804e36f3a4cb7622abcd6e237e7696a4",
+      "size_bytes": 1359
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R16_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "0b76ae80c32090ba0b215ac2dd70dcfe0d38e79e965c9da0dd1874e5f4389236",
+      "size_bytes": 5738
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R16_RESULTS_REVIEW.md": {
+      "sha256": "4491a629486625bb4e9b84f6ab8dec6b0e0bf0d68d79ee21cbd82d7273000ca5",
+      "size_bytes": 6489
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R16_SEA_ICE_EXTENT_REPAIR.md": {
+      "sha256": "29ad4891dd81d048905aecb7010ff3798b9317b51f5a784579a2539b46df5f9b",
+      "size_bytes": 2441
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R17_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "ecd0c2402e64f7009079ebd79170ca75d552fabc88a5599002bebc0b2121cb78",
+      "size_bytes": 3939
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R17_RESULTS_BASELINE.md": {
+      "sha256": "512e21d0911d90d3f561f7498ca490aceedac1d4181e8a192a73293f0ac828e3",
+      "size_bytes": 864
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R17_RESULTS_REVIEW.md": {
+      "sha256": "768e86c6667732b711c98cb504f41169178896825d017e5f3a326a26662a2ccd",
+      "size_bytes": 1060
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_1_FINALIZER_AND_AMOC_DIAGNOSIS.md": {
+      "sha256": "2e6dde86db1b48e30d80ecb4eb88b372dda5ddfc6f066000a1cf1d6119326961",
+      "size_bytes": 2848
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_2_OBSERVATION_OPERATOR_HOTFIX.md": {
+      "sha256": "a9ff625a91457b0321616ff49c50f70b501d572570c0d6d381b87fdfb8023131",
+      "size_bytes": 1960
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_2_RESULTS_REVIEW.md": {
+      "sha256": "0f0081b0150a0c93429f4f4b77fa8e64cc0368375fedce2a6e139ca5a0ceb6ed",
+      "size_bytes": 2655
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_3_FINAL_RELEASE_AUDIT.md": {
+      "sha256": "b226ba8465642f41e465fcb9fcfd4635e474b354cf340791bd89effd27b80748",
+      "size_bytes": 8902
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_4_NSIDC_0611_INTEGRATION.md": {
+      "sha256": "ccd61e78c30abc145117b210b6282b4be75ca32f93739e613ce15470d3ca9081",
+      "size_bytes": 2043
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_5_1_NSIDC_ATTRIBUTION_MAINTENANCE.md": {
+      "sha256": "669e64b501f92c8f86c89075802b269a204939f53b037143d722cdb0909d6b34",
+      "size_bytes": 721
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_5_PACKAGE_AUDIT.md": {
+      "sha256": "f89b190535b7f96d542d4d32a5f5873a6593a47377f45a7e323b5ef8e38f4240",
+      "size_bytes": 3293
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_5_PUBLIC_RELEASE_MERGE.md": {
+      "sha256": "c7d8cf0cdfa847ee5f94770148becb1283b3add3647402aca439b54465696855",
+      "size_bytes": 1402
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "7c4dba9cc89d82b8038f7795bb9d606237e97e07095451c1d520cf0f1adcba66",
+      "size_bytes": 1296
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/R18_RESULTS_REVIEW.md": {
+      "sha256": "8c6225aa7b21c9e049f155bf39ed516192ca738df737dcd201e4f83fc522fc11",
+      "size_bytes": 4342
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/README.md": {
+      "sha256": "10ab5877eebb31f358d45d3f67202dad27e8264b9ee3b034802e7218f9588cc4",
+      "size_bytes": 25933
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/RELEASE_ASSETS_V2_29_29.md": {
+      "sha256": "a3f82e4d6da5ed9f9f16c5c49852bf7a4510f2ab176cf7be74218f800f8a0e16",
+      "size_bytes": 1720
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/RELEASE_NOTES_V2_29_29.md": {
+      "sha256": "b9441518801de3978ba0b249e5071636f3c374addda2f149c239d53da1449d14",
+      "size_bytes": 9061
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REPAIR_R11_RESULTS_REVIEW.md": {
+      "sha256": "4e9a809d7a91a074e6b391619fa06380c063001618439b5521f4de1cb7c02297",
+      "size_bytes": 2430
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "37d9cd13bef5719a862915c4f16504132d846941746b2b8c898030a8bfa7f04a",
+      "size_bytes": 2420
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REVIEW_FIXES_V2_17_1.md": {
+      "sha256": "310a2512e10c385c296fc0067a986c81b25cb1a41751382091250d0c4a580923",
+      "size_bytes": 3559
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REVIEW_FIXES_V2_21_0.md": {
+      "sha256": "22b17d6cc6155319192dbd59df5156b9cf1ce87b1671d7e676e28e7ea3f53822",
+      "size_bytes": 3192
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REVIEW_FIXES_V2_22_0.md": {
+      "sha256": "f3064905fe887adb33df35432cd2bec9e21ed0312ac396ec48eb3a4c6a96ecae",
+      "size_bytes": 2450
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/REVIEW_FIXES_V2_23_0.md": {
+      "sha256": "b59e405b9b23912d53f997ee4f504b2709a4aa0550527d62c6aa93b12d4622a4",
+      "size_bytes": 3275
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/RUN_POSTERIOR_V2_17_0.md": {
+      "sha256": "97c5ae09d02ec7e256c7432ddbb253bfc2cb90b5720f10a8e02c1ed0ed1b9c0d",
+      "size_bytes": 1536
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/SCIENTIFIC_CONSTRAINTS.md": {
+      "sha256": "3f9c6288b35b7c8ed69afd9a2fc056ed65cd4d768929b1cf0dd770c097b55e85",
+      "size_bytes": 20376
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/SCIENTIFIC_REVIEW_FIXES_2026.md": {
+      "sha256": "7281e2ffae0aa66368953f340359f3e62d113ac7227f62ec4d72f5561a417830",
+      "size_bytes": 8066
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/SETTING_REFERENCE_GUIDE.md": {
+      "sha256": "42eec815b66d3504055610d221a4cae9b120623fc96539aa33562426bde88f83",
+      "size_bytes": 9661
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/SIX_SOURCE_ARCTIC_VALIDATION_2026.md": {
+      "sha256": "0dd3909869728166c36376e26d0b6ac1e0b6ea994b1fb56632ca90dfabe2fa3b",
+      "size_bytes": 3674
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/STRUCTURAL_AMOC_FIXES_V2_17_0.md": {
+      "sha256": "c6ca621f3ee75d2963218da4f58651e2a7548feae8a8e3bc46f892113d0b2674",
+      "size_bytes": 2874
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/THIRD_PARTY_DATA.md": {
+      "sha256": "915f20b6c2c4d62d95a62a4cc7c43e2db9e42074de6d28c4921212a6a745d923",
+      "size_bytes": 13557
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_20_0_IMPLEMENTATION.md": {
+      "sha256": "8da9ea4876fb5ec7a6caebfd6346a3e4992f4bac9936af884fc9cd8b76175561",
+      "size_bytes": 2944
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_23_COMPATIBILITY_V2_26_0.md": {
+      "sha256": "571553de51dddd05f2a144994f8ea8d8cbc8246aa9eb4770384ac5c243681a77",
+      "size_bytes": 3748
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_23_COMPATIBILITY_V2_27_0.md": {
+      "sha256": "9056f2bd9be8d00e42ea300a66119bc72df30eea5f98704ff5162ba911af463b",
+      "size_bytes": 3615
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_24_0_ACCURACY_FIXES.md": {
+      "sha256": "39fec3ef6a5c43ee874694a5b7b91a5dfd3f227c4859680a039024e8ba58fe2d",
+      "size_bytes": 2483
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_25_2_SEASONAL_ARCTIC_AND_AMOC_FIXES.md": {
+      "sha256": "8927930f9d896aa22e8cf987d3610b6a8e9749d47173e11e50566c7757edda27",
+      "size_bytes": 5975
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_26_0_THERMODYNAMIC_ARCTIC.md": {
+      "sha256": "e452c2c8506949aa8a864fc37de1461176e9d71f0dba1036480668e671e63b10",
+      "size_bytes": 5933
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_27_0_ARCTIC_GREENLAND_REBUILD.md": {
+      "sha256": "74010932ff91f6b28a388836ca35a5472d8682fe0e37f1cd73758d75b8059a01",
+      "size_bytes": 7329
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_27_1_ARCTIC_MAINTENANCE.md": {
+      "sha256": "68e1177af4b2e19a3045f1c6cd753fbf894c6e4b75ad02495570f1c96d697947",
+      "size_bytes": 3455
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_28_0_FRACTIONAL_ARCTIC.md": {
+      "sha256": "a1c850f6e3926f963baac68b93327ee4e22bb40c9e87d73f236aef71a6b7bc6a",
+      "size_bytes": 3930
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_28_1_INTERFACE_MAINTENANCE.md": {
+      "sha256": "aafa63a0c6928aeb27ca053a6980fc317dc887fd6dabb5c2af23852d5273579c",
+      "size_bytes": 2473
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_0_COUPLED_ARCTIC_OCEAN.md": {
+      "sha256": "43e765e151f8b959187ec4f2fafd513c2c66de75ad6eb343e72299311125a1ed",
+      "size_bytes": 2032
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_10_INTEGRITY_RECOVERY.md": {
+      "sha256": "70b65132212f5f7da62af8c95a2513f77595c3f42aac672f583a8ffc26f6ba3d",
+      "size_bytes": 4831
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_11_TARGET_BASELINE_SAFETY.md": {
+      "sha256": "6e4bf7487e9cb7c4605bc59e3b32e9e6252e2cb5a75edbd74e4b9da286a0cfd5",
+      "size_bytes": 3093
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_12_MONTE_CARLO_INTEGRITY.md": {
+      "sha256": "5a5dff203b62c4252ffe47a0dca55d2e3ffe622eceacc560784a057424a9f078",
+      "size_bytes": 3494
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_13_INTEGRITY_AND_AMOC_BASELINE.md": {
+      "sha256": "2582570c90d5f57acaf162e52731af1babcb3f07419ecf2eaff856fd2467d234",
+      "size_bytes": 3957
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_14_RECOVERY_AND_WINTER_SEA_ICE.md": {
+      "sha256": "312fb6b82966de674ae9c4580f055ddda87a00c4bba0c5177bee3db30d25f0ee",
+      "size_bytes": 5453
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_15_WINTER_SEA_ICE_INTEGRITY.md": {
+      "sha256": "71556ffc3f378513418b7c8ba689aa75f1fdea2537da0113dc27ac8db1b2fd58",
+      "size_bytes": 5372
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_16_RELEASE_INTEGRITY_AND_OUTPUTS.md": {
+      "sha256": "6ee954ddd1a711616fc1c22f9af70cef4441c6d040d64876d551280bc07423d5",
+      "size_bytes": 2325
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_17_ARCTIC_SWEEP_INTEGRITY.md": {
+      "sha256": "8e6d53cb8bb804e063a340e51477479e87964c3e72a003d469e45a831216f148",
+      "size_bytes": 4363
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_18_ARCTIC_CALIBRATION_AND_TARGET_SURVIVAL.md": {
+      "sha256": "54007a0bfe6475070e711e0238cc7cd6da2ee80d4c00c48d5f1e5810febccd4d",
+      "size_bytes": 7683
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_1_ARCTIC_PHASE_CONSISTENCY.md": {
+      "sha256": "c2b4b8f8fe7330bd1f88280b7f1059c0fe6d402f562d60d56b4ccb2e233c6a93",
+      "size_bytes": 4305
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_20_IMPLEMENTATION_AND_CHANGELOG.md": {
+      "sha256": "d17bee52efe682468f66e6a6c5eb41ff48bd8f8baef3a8b9af876d62e5820f4f",
+      "size_bytes": 914
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_20_PROGNOSTIC_SEA_ICE_AND_COUPLED_VALIDATION.md": {
+      "sha256": "a59d2cb35fb37a0989fafb99a006e0405c4d0df00e1330c2d4fc2bc92141e5d5",
+      "size_bytes": 1077
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_20_REVIEW_CORRECTIONS.md": {
+      "sha256": "584f262b2b0cdef897c6379cc2cd8802cb73704a92766a66734986ff23908f90",
+      "size_bytes": 875
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_21_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "c982697b51c4ba17d13eea00f96980af1a641c86263f7d80fae8b7c5556d1e6e",
+      "size_bytes": 7027
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_22_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "8354507ae1e739a90074d0917a3df3da990f37a0a3592f9feaa04c7780f646f3",
+      "size_bytes": 2588
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_23_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "63dfac4cad2cd00dad4781f3ab8357b6d9c99c2db25adc6765a05a8dc3d695b8",
+      "size_bytes": 3870
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_24_REVIEW_FIXES.md": {
+      "sha256": "de30bcf64b0a8dc8c96042ee0e2dfdd9f248ad6b2e005d79480a55217e7c48d7",
+      "size_bytes": 5500
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_25_REVIEW_FIXES.md": {
+      "sha256": "66f2ffd22e79781cdfe1fb67a448fa16133d51479ce36947861ebca58fd6df17",
+      "size_bytes": 2181
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_26_ARCTIC_OBSERVATIONAL_RECALIBRATION.md": {
+      "sha256": "73aebb1d2161bd4500bf66677e48ce88ea40dd0656a94222781434003a4c89a5",
+      "size_bytes": 2088
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_27_ARCTIC_VALIDATION_AND_RELEASE_INTEGRITY.md": {
+      "sha256": "8f79c9554cdd32616aac1f99daa812e0b654c7aa65dc0cc013d569272a91ed0f",
+      "size_bytes": 1306
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
+      "sha256": "c846f4421347ec0aba9b5ffe1d7095590c978c7f969e93a138e32ea75b4e85c3",
+      "size_bytes": 3014
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_29_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
+      "sha256": "0d9ddf4ca63ee99772805284d8911faec9c7ba105e2c80265094512fee241306",
+      "size_bytes": 954
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_2_RELEASE_INTEGRITY.md": {
+      "sha256": "71db5655f4719275f8d8e5c2a842e783ef3be7771d1ddb428af7857a404ea936",
+      "size_bytes": 3345
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_3_OPERATIONAL_SAFETY.md": {
+      "sha256": "0d9901d6e40aa89d49f4d69afece5711c405bbd43f07936d21b1b70159eb6131",
+      "size_bytes": 4276
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_4_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "990259208115410ecd6c8e94364350d98fbdfd00bc027f6acfc8738cad1383d3",
+      "size_bytes": 6182
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_4_POST_FIX_REVIEW.md": {
+      "sha256": "8f9bb324a2cdec606355ef0dcc7e582bad7e6b02b8031cb21bbac8ff7703fb02",
+      "size_bytes": 4750
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_5_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "3a7045e4038339752d01f55bf4dfa9e12179aa71158e9d3682c782263f69fe59",
+      "size_bytes": 3465
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_5_POST_FIX_REVIEW.md": {
+      "sha256": "e740681c3591ec944e041bab847436c78a5efbef0585b2b863f2724eddbf683a",
+      "size_bytes": 2058
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_6_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "c48393dfb8b1609a1ab7ae069bf06360f78c69652a59a02db25eea9af86cf3e0",
+      "size_bytes": 3978
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_6_NATIVE_ARCTIC_INTEGRITY.md": {
+      "sha256": "79e809997a92b21f773d7f83a4619713cf473531ebdbda135fd01dc471b9ad34",
+      "size_bytes": 2472
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_6_POST_FIX_REVIEW.md": {
+      "sha256": "aee7a1ea8e24a39f3e7d965be163877c5cbc2b4ae26fbb241986c81fc0190a9a",
+      "size_bytes": 3672
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_7_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "64e5eee82bb5a2de07ad678e27459759ce52acb0a3f602ca4ac744dab0d97fe1",
+      "size_bytes": 3976
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_7_NATIVE_ARCTIC_INTEGRITY.md": {
+      "sha256": "5c798f7e7f6f9831150451ae5dd495bbbcacd4fcc3c5ef30e4b708ef2bfadebb",
+      "size_bytes": 3890
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_7_POST_FIX_REVIEW.md": {
+      "sha256": "36406020a0b0a82e5b9f74bbca5a5f1d016ff7052e0bd454f4168dbed85ada1e",
+      "size_bytes": 2652
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_8_RESUMABLE_LONG_RUNS.md": {
+      "sha256": "13cc5f97d292e0dbda2160788286bdb53988d480e6cde1e949b443b3c4375d5f",
+      "size_bytes": 3175
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/V2_29_9_SCIENTIFIC_REVIEW_FIXES.md": {
+      "sha256": "0b1c9bac74ac98adaab7781cfdbb5d87c7f78c14cb888badd55878e6b7509611",
+      "size_bytes": 7551
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_completion_counts_test.py": {
+      "sha256": "4a1c345789178cdfdab6bc288cc410eef648f5b43b994bf5025496d96a72d220",
+      "size_bytes": 2593
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_continuation.py": {
+      "sha256": "306ca420121143e99ef7ed998c76358bb836221e193215d49b6d20a7aed1813b",
+      "size_bytes": 10039
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_density_r16.py": {
+      "sha256": "c43520acd7e8438164e1df1c1213ec1f58101af0899d56ca83ec68eb18d084b4",
+      "size_bytes": 3560
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_dynamics_fix_test.py": {
+      "sha256": "b06812e5e7afb7d54f7e6ed68682063697a964afb10cd63c42dda925e854afd8",
+      "size_bytes": 5006
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_ensemble_validation.py": {
+      "sha256": "6b5d5fffcb4fef1dfbc0a13ccee302779b263d77ddd4b767199a39008f269035",
+      "size_bytes": 6023
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_identifiability_analysis.py": {
+      "sha256": "4cbce007a2fa66835963110a80e3ee9e148655196e22e1c678ceceae5847b192",
+      "size_bytes": 5445
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_outcomes.py": {
+      "sha256": "72e49b28d2e375ef4bf84687c98d49faa3584026209d870e61096575fd74a23c",
+      "size_bytes": 6777
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_persistent_collapse_test.py": {
+      "sha256": "b00db71194a3520c7e845579ec24b7a94269cce5caf095e2228f5d42cbc7866f",
+      "size_bytes": 3241
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_six_sv_reference_test.py": {
+      "sha256": "6446d074a878edb3d08cecfe2b89e927fa9c331e61c03cab961f518a6b93c865",
+      "size_bytes": 2440
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/amoc_structural_family_analysis.py": {
+      "sha256": "aea7b49ec4534aa8df30df0a380ee711c5ea3393a8447bc987ef52d703dc0e21",
+      "size_bytes": 9138
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/app.py": {
+      "sha256": "c17475810857e33e75ebabee2935846f2edc886033a2409f369b72c498260a77",
+      "size_bytes": 71442
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/arctic_observation_operator.py": {
+      "sha256": "f51b6be0bdf1c38001f1e07298f1e23d564668951c67b5868252a9fab8c3dfcc",
+      "size_bytes": 12172
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/arctic_process_budget.py": {
+      "sha256": "896351eb8cc5018b24dbd949b7c1ed73e805a6c75765b4065c9e038123c098eb",
+      "size_bytes": 13456
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/arctic_validation_stack.py": {
+      "sha256": "43d3efdb00b815b98a6a358a8a555bc20cb146a54d9a641ce9cddf7db14930a2",
+      "size_bytes": 17768
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/bootstrap_runtime.py": {
+      "sha256": "ef3dc0dde3a4d2d591d8ad7b1e909b53e2bae5fd90c62e061d2db783591a4311",
+      "size_bytes": 4435
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/calibration_fix_test.py": {
+      "sha256": "b45c57140da0ea5c8fa943523516170d60a2ef5e5437ed7fc570dd07c12027b2",
+      "size_bytes": 8780
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/check_release_identity.py": {
+      "sha256": "f39fd77c7ff9a6bef297af56cd0a91f292c434ec39c6258994007b694ba04aaf",
+      "size_bytes": 3735
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/climate_model.py": {
+      "sha256": "4e980a3ab203c165c2d8c38dc2a80608e95bf192b59ef8bff12fef5ec84b2e18",
+      "size_bytes": 760022
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/climate_model_gui.py": {
+      "sha256": "789efd8911a915db9179fbedee01490c43ec768b1bcc5b287625ceaadf22f786",
+      "size_bytes": 138650
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/co2_target_sweep.py": {
+      "sha256": "908b636acc4648b29fdcf45c1f21bab89c2eb9861c5ac564cbe2f7caa7c1d15d",
+      "size_bytes": 122192
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/co2_target_sweep_test.py": {
+      "sha256": "fffe6e4d5f38c16991a2afeda0681b9eb0a6a854dc542af051683bda3e2ba212",
+      "size_bytes": 7364
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/combine_v22920_validation.py": {
+      "sha256": "58e02e53f30119334badd7311933fcee539a95865ca2fd49d7db02359dae8534",
+      "size_bytes": 240
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/combine_v22921_validation.py": {
+      "sha256": "58e02e53f30119334badd7311933fcee539a95865ca2fd49d7db02359dae8534",
+      "size_bytes": 240
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/combine_v22922_validation.py": {
+      "sha256": "a3d925e4d7e812a5bcd26fd7d3b6bab8d3132d6b96b2c6a100d0b14a3ad7dfd1",
+      "size_bytes": 15948
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/combine_v22923_validation.py": {
+      "sha256": "c9cc079374d645507f53c9ead2bdb6711c6df5b7f814d987a3575b2680923a47",
+      "size_bytes": 20987
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/combine_v22929_validation.py": {
+      "sha256": "c0a896cce33ec4d935ad7b413eb6f16c59637e1bccbd83a437f03c950558079c",
+      "size_bytes": 306
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/ARCTIC_VALIDATION_STACK.md": {
+      "sha256": "055848345f2bc99be8121dd14ebe2280b8d212a774ef3413517628e29b4c21ae",
+      "size_bytes": 3171
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/open_water/OISST_SOURCE_ACQUISITION.md": {
+      "sha256": "cc30d618330b208600a7827cd62c2e52f5ac6a88735da97610d1c71e33f35c4a",
+      "size_bytes": 658
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/open_water/README.md": {
+      "sha256": "3f24fe24ad9854436189b89afb4467eb26c51ff278f8e7f400a1405a9bc47901",
+      "size_bytes": 1516
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/sea_ice_crosscheck/osi_saf_osi450a1/README.md": {
+      "sha256": "f02aa7ee83103e5f85f189a30964e82598fd155aa68c10357d10741e995e3b03",
+      "size_bytes": 511
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/sea_ice_fixed_mask/README.md": {
+      "sha256": "bc8ae458b9d3ddc5670a398dabcb182bee30fac017b5a15c4c7b8c6d9fe58615",
+      "size_bytes": 1370
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/sea_ice_physical/README.md": {
+      "sha256": "c5b56accc9665d79e4dbc4a9f842c66561254af46c5055a48c5c42476623b3f2",
+      "size_bytes": 889
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/data/validation/sea_ice_structural/nsidc_0611_v4/README.md": {
+      "sha256": "c3208add2ec2bbed0b7509258f36f01cd7389f133b52999237a0974d5ec3ed5f",
+      "size_bytes": 506
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/deep_validation_v2_25_2.py": {
+      "sha256": "a6a14d716e70b42b9340aebe8316a66abffda50a884a65e50af378f80d08f657",
+      "size_bytes": 3743
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/CURRENT_MODEL_REVIEW_FIXES.md": {
+      "sha256": "b10577a6d456ecd04743e46db550da1ef43394b3d974e6dedd32312e7da216e3",
+      "size_bytes": 7059
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/CURRENT_MODEL_VALIDATION_RESULTS_2026_09_11.md": {
+      "sha256": "a7c72113549e379c8bce31326d04abd9771a37fbdbaff591a270e2f16573b7c6",
+      "size_bytes": 4001
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/MODEL_LIMITATIONS.md": {
+      "sha256": "dd6ae093a45a9d38200e2c990a6e52232621668a577c381bb52d3c23af40f3d9",
+      "size_bytes": 9936
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/NAME_CHANGE.md": {
+      "sha256": "60e21fe870c94a6ac407cb2a21f645827638e400cac2f2e20a8fc6acc6fc9423",
+      "size_bytes": 907
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/PACKAGING_AUDIT.md": {
+      "sha256": "afa750150eb551ede46288492ccd88e40da59199e7420bd5e764d577cded1cad",
+      "size_bytes": 1174
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/PHYSICS_REPAIR_R13.md": {
+      "sha256": "d187bcbc1abbd232b66a48e119a7e0f4a959ef144fbde7df275ad3ccbc0425ad",
+      "size_bytes": 507
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md": {
+      "sha256": "e34758cce8b75909be1ca8e3c229211ee31085421a4c631be2c869bbc497479a",
+      "size_bytes": 19702
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/RECOVERY_EXTENSION_RESULTS_2026_09_12.md": {
+      "sha256": "b5be9eebd29c4fe985bbd90ca5e5cbd15613a0e94c14ffede6e46f8ec27255c5",
+      "size_bytes": 3140
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/REPAIR_R11_RESULTS_REVIEW.md": {
+      "sha256": "4e9a809d7a91a074e6b391619fa06380c063001618439b5521f4de1cb7c02297",
+      "size_bytes": 2430
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "37d9cd13bef5719a862915c4f16504132d846941746b2b8c898030a8bfa7f04a",
+      "size_bytes": 2420
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "0060a04c1ef05ee3d606cbca8b46ba0f9d22d340ebb80ccc41df8bbf2cbc99cf",
+      "size_bytes": 2395
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/VALIDATION.md": {
+      "sha256": "9d2712be427b1acb540b059e0474d5857b95352a6aa1d7543da9b2f4563f29ab",
+      "size_bytes": 6565
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/VERSIONING.md": {
+      "sha256": "a03f45e063453ae74320e84e5b6122c7d40aa6cf440fa989f167813876587060",
+      "size_bytes": 1668
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/PACKAGING_AUDIT_V2_29_28_PUBLIC_RENAME.md": {
+      "sha256": "dd83e1802a6c717960d4d929067cf1a1cfb9f186e2ec3757ba33a19d95ab602c",
+      "size_bytes": 2576
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/README.md": {
+      "sha256": "15517e4ac96856cbb8d9337c216b7c866dc9d18da0c5747f7ed0c1318407a4d4",
+      "size_bytes": 571
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/PACKAGING_AUDIT_V2_13.md": {
+      "sha256": "f1c342286c7667f9367ab746222f93d88b1d534a8969c46929aa012ce2d244b4",
+      "size_bytes": 5377
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/PHYSICS_REPAIR_R13_LEGACY_CONTENT.md": {
+      "sha256": "063a3f596604f14ebb407540557aff9c9a44133952a4576636268dcd7525b01e",
+      "size_bytes": 2231
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "063a3f596604f14ebb407540557aff9c9a44133952a4576636268dcd7525b01e",
+      "size_bytes": 2231
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "d567019ad2b9b3a148e8cd79ac07c2546047cc53a216bc95c15a3aab1c3fd986",
+      "size_bytes": 2390
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/MODEL_LIMITATIONS.md": {
+      "sha256": "7223d53d91e2996dc134a84907003ce336a81f902cc03c70725ad14c6eff5bcc",
+      "size_bytes": 760
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "063a3f596604f14ebb407540557aff9c9a44133952a4576636268dcd7525b01e",
+      "size_bytes": 2231
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/README_VALIDATED_PACKAGE.md": {
+      "sha256": "b7ffdc3d6c48dab156c0834b415bcfbcb48891e43d8ee594e01e1d115de07bc9",
+      "size_bytes": 4775
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "0060a04c1ef05ee3d606cbca8b46ba0f9d22d340ebb80ccc41df8bbf2cbc99cf",
+      "size_bytes": 2395
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "d567019ad2b9b3a148e8cd79ac07c2546047cc53a216bc95c15a3aab1c3fd986",
+      "size_bytes": 2390
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/VALIDATION.md": {
+      "sha256": "1e7f02f559c46febc4733e260fac01372bd34e2a53bbd0c441aca8c3ba59e5b8",
+      "size_bytes": 976
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/ci_validated_package.yml": {
+      "sha256": "5b46e0a931d2801664bc0539dc36824e2063820e9f5b52bd0e1a1668fd22d677",
+      "size_bytes": 1725
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_10.md": {
+      "sha256": "bea90805837f84489e7dcb9de422dab36a20dc024f4dd64fe5985587b222dc76",
+      "size_bytes": 3087
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_11.md": {
+      "sha256": "215060c9b7e4348d76dfa58b8c2c7c08830d9328c6f8d01c5595b7c2747f332f",
+      "size_bytes": 2501
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_12.md": {
+      "sha256": "43bebeb2edb63dfea45c6c57ba35917c3fd46a6c9969ee6e844448c9d4cc8c71",
+      "size_bytes": 1980
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "063a3f596604f14ebb407540557aff9c9a44133952a4576636268dcd7525b01e",
+      "size_bytes": 2231
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_5.md": {
+      "sha256": "2a7b53e1b1d874b16549283e338f8e5063f95653c8ee256264a722375be590b3",
+      "size_bytes": 2022
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_6.md": {
+      "sha256": "1b2bfab758fc2316969a71a5932ea8da78610f3183b4186e8543aa82312d26ff",
+      "size_bytes": 1258
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_7.md": {
+      "sha256": "292365d4cfc6da56058690571ba1b165e97f42451b782b3484c22f0d46602b19",
+      "size_bytes": 2144
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_8.md": {
+      "sha256": "0eb34f6c789903adf16e03dc0d44863780628f83d2f0304c443365fe877935a9",
+      "size_bytes": 3126
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_9.md": {
+      "sha256": "cc74c50f695941725a5097d375247c74fca7d83f53fd1a6360f088ab4e070dfe",
+      "size_bytes": 1776
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/README.md": {
+      "sha256": "0e30c2770919bf65d43be7bc5356a4b77403731cb82f52277a301f3e4de04362",
+      "size_bytes": 1312
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_10_RESULTS_REVIEW.md": {
+      "sha256": "5528457301a90ed12b35fc467d5a586b11f741bfa22849df98f159bba8783ff8",
+      "size_bytes": 2110
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "0060a04c1ef05ee3d606cbca8b46ba0f9d22d340ebb80ccc41df8bbf2cbc99cf",
+      "size_bytes": 2395
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "d567019ad2b9b3a148e8cd79ac07c2546047cc53a216bc95c15a3aab1c3fd986",
+      "size_bytes": 2390
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_6_RESULTS_REVIEW.md": {
+      "sha256": "13008ef1c67849121bbd3b4e731c4b43eef8caa16d3d689dcb2fadef30320354",
+      "size_bytes": 1888
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_7_RESULTS_REVIEW.md": {
+      "sha256": "b6743e74ca230f67ce08d34944d734627bf8b39bc6746c8df44271d5318553ec",
+      "size_bytes": 1268
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_8_RESULTS_REVIEW.md": {
+      "sha256": "4cc40206bd1c4de2a6847dff450e2955742c7681cd7bed070f35d8a505404c59",
+      "size_bytes": 3349
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_9_RESULTS_REVIEW.md": {
+      "sha256": "eb5d688ee1c8c08eb9b364342fa666c1feb4ec6ad763c1801d8fe17761d4c2e0",
+      "size_bytes": 2408
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/patch_v22.py": {
+      "sha256": "93e6ba9cccae7ec4dae604952de3201e8880c4af33c82b38afe602bc4dc9510f",
+      "size_bytes": 17605
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/docs/original-repository-root/README.md": {
+      "sha256": "f0c3e9a991e0428de43d21668c6bb18494fd334d0b3e8b1e101087b104ef88ee",
+      "size_bytes": 174
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/full_regression_test.py": {
+      "sha256": "8ff086652feb870fd53af464a08a8471cdb21482d763dae96c4999f9c534b356",
+      "size_bytes": 3506
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/gui_layout_test.py": {
+      "sha256": "d4a9eefa68ec6db9a42ee04391b5d8eef0b8881ee605717f097a1415c21ecdfb",
+      "size_bytes": 1429
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/gui_smoke_test.py": {
+      "sha256": "d20efe43c88bb13abf54f901cb5fbd837881470e6ae563580bfef04ce22e1ac5",
+      "size_bytes": 4144
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/gui_startup_smoke_test.py": {
+      "sha256": "45e1ed744950944a64ee88b4b56adc9658c0d299ef660b0c16a1a8b0640fdb35",
+      "size_bytes": 643
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/held_out_amoc_validation.py": {
+      "sha256": "d5fea1dbf1e3efbcfb92436c42840479f51cb5ddad607c492e23129fabad1d74",
+      "size_bytes": 16851
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/hybrid_ssp_transition_test.py": {
+      "sha256": "7c7bdedd1747b14adfc6351c8f60319b264779be7e9fd67f4316b167908b26a5",
+      "size_bytes": 2542
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/isolated_pytest_exit.py": {
+      "sha256": "8dda0dfb7fce6c2f5f9ca4311de9b53e6f2ff0dc3d2017ea77577d28e71906d5",
+      "size_bytes": 274
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/launch_gui.pyw": {
+      "sha256": "2c3f5e6b73b7915859df7f65d7f1acc15adcc45b989ceae58c9642a5d649998e",
+      "size_bytes": 1425
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/long_hold_salinity_exchange_test.py": {
+      "sha256": "87caa60767c3b1e29386a309902287dbd5136ccdf34844458db945e5b3f6b51f",
+      "size_bytes": 3953
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/monte_carlo.py": {
+      "sha256": "fabd51ffa8271db9d348c2a0299acebc238b2b327076743a0932faa61dd2bb87",
+      "size_bytes": 171236
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/monte_carlo_smoke_test.py": {
+      "sha256": "df04263ed35d4b711a626cf5da3042ae63c05938a366f8af5787e86f8b2c1b94",
+      "size_bytes": 6889
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/parameter_activity_r15.py": {
+      "sha256": "e131370345617c276a4521cc4d1830fbecd89701520bb5504ea2e2c37fb307e9",
+      "size_bytes": 1436
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/parameter_activity_r16.py": {
+      "sha256": "6b9c6e8b034b0cff7153333e240d36a0d20b7716a42dfd7af857a6c9320328ea",
+      "size_bytes": 1517
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/percent_ramp_hold_test.py": {
+      "sha256": "ebc3417a65c1439fa2598c17d0c06eaf1930c061116a63b85c1f39de10a65b5d",
+      "size_bytes": 4073
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/process_tree_stop_test.py": {
+      "sha256": "f25e72f4cffb5ad398bd2ad648af79465601a7e594661c390ed397095b27e9c5",
+      "size_bytes": 2664
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/prospective_validation_r16.py": {
+      "sha256": "dfc08ab6ca7811cb701bbf8b3ef77fba922d134e9e539268a0cbfd95b99da69d",
+      "size_bytes": 3988
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16-parent/climate_model.py": {
+      "sha256": "7e575e881beeedb779994a54bc7f067a3ffadc1f589894fb6c8d43706a3f9b8d",
+      "size_bytes": 690985
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/climate_model.py": {
+      "sha256": "a3c88139106d6e3e895aedf538094af4f11f6ad0d340b658d72d144cf1cef5d9",
+      "size_bytes": 691694
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/run_r16_2_teos_validation.bat": {
+      "sha256": "1cf0a0c85251f8c024582232f7d7b432edc715b7f1dca1cf667159c401eb5f3b",
+      "size_bytes": 298
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/run_r16_2_teos_validation_debug.bat": {
+      "sha256": "4ccc051f71bddf2fb47a793826492b7ac9eb48fe845a8d28a2f4c4e99030688f",
+      "size_bytes": 164
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/run_r16_local_validation.bat": {
+      "sha256": "b031f4b7c1aabc2b8188689d8c3122a490dc3b0b816ecd7def8d43e07e77f2de",
+      "size_bytes": 253
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/run_r16_local_validation_debug.bat": {
+      "sha256": "cdb6324876b38e1a2cf7f9720d2acd781f3c2614eac2866ef5a93fec554205a1",
+      "size_bytes": 118
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/sea_ice_observation.py": {
+      "sha256": "79f32dac6a923a37bab483f92f81ce5385e28d76e920f1890a2dbd9bb58b2abb",
+      "size_bytes": 14695
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/tests/test_r16_2_provenance_hotfix.py": {
+      "sha256": "fa7e91891345e99e41d1686d425580ee3afa886f4e2bbf87657a0214ea1a8267",
+      "size_bytes": 2288
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r16.2-parent/verify_r16_local.py": {
+      "sha256": "1ffac6fde8b13d9f8738e7cf9e54e65c497117f70195140bb679e807e5f33049",
+      "size_bytes": 63813
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/arctic_observation_operator.py": {
+      "sha256": "7d41e9083ca398fdd46b573ba2f449592cb866bafe302bae9524e73add961be9",
+      "size_bytes": 10701
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/climate_model.py": {
+      "sha256": "4784b33bd4ec57dd3d21645d27ad524e0c2169153d463ad6ff771e297f385e56",
+      "size_bytes": 704819
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/run_r17_local_validation.bat": {
+      "sha256": "a54c8cd55bfb6cb0dd2c35a365ae982552e2f687a143b948f9e510aa96e409f4",
+      "size_bytes": 398
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/run_r17_local_validation_debug.bat": {
+      "sha256": "b9b4eee4c7ffb6bb59f63177c08295a67ebf5289519f6788fa45445140dab250",
+      "size_bytes": 148
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/run_r17_recovery_validation.bat": {
+      "sha256": "4edab044e96cb96f81320e1853ee044a02fdd91df121ff722e0c5d20b5330d3a",
+      "size_bytes": 193
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/run_r17_sea_ice_validation.bat": {
+      "sha256": "de3e3a9c081af66207a382b4fdcccec41dd4d875cc34d974b68c70385fab4510",
+      "size_bytes": 146
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/run_r17_teos_validation.bat": {
+      "sha256": "ae1205c82a214009e5aaa693f8545d87e471e8354f9f4e766616c81596982241",
+      "size_bytes": 364
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/sea_ice_observation.py": {
+      "sha256": "8520954ec2f2310e30dea210c2db980760bf1ef654c982e0bc914b78acf5cae5",
+      "size_bytes": 16718
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/sea_ice_validation.py": {
+      "sha256": "ad2705571ff7e54944b559c50ad01f2f66ce8afe4eb153a6ccacfb8c4410a7a3",
+      "size_bytes": 74303
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/tests/test_r17_spatial_teos_recovery.py": {
+      "sha256": "9084672dc9e59b43e7cafcc7adc77ecb1468056b689b4ddda11eada978a78dee",
+      "size_bytes": 9153
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r17-parent/verify_r17_local.py": {
+      "sha256": "d4f533c1474349c7927f4a5e569863a295d1e3674e3415c68b7774a7b947de04",
+      "size_bytes": 60581
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/climate_model.py": {
+      "sha256": "12549f4fdaeb5731303fa1b86372a0e60ab26772fa61e0efe142531293154ae7",
+      "size_bytes": 707925
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/run_r18_local_validation.bat": {
+      "sha256": "c58a8d752ba6e76983b08ce8586904174d39cde428d32d78b640a55df0df9877",
+      "size_bytes": 219
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/run_r18_local_validation_debug.bat": {
+      "sha256": "91d7f95ddd5b8ac9cf5b56320894ee103bf5cff2ec44923eb70fe930e5288052",
+      "size_bytes": 159
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/run_r18_recovery_validation.bat": {
+      "sha256": "134d5df5d9398130c8a9f2976ae1130002341e783e4580c2c9387c5ac2da96df",
+      "size_bytes": 130
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/run_r18_sea_ice_validation.bat": {
+      "sha256": "535467607bd5b9fffef45dda08b26554165953e07f6b1f9c78aaa30b22020ef3",
+      "size_bytes": 129
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18-parent/verify_r18_local.py": {
+      "sha256": "e316d015d723e346b6b5856edc2727eedecb555861959c8518425bff5e5682b1",
+      "size_bytes": 70497
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/R18_RESULTS_REVIEW.md": {
+      "sha256": "8c6225aa7b21c9e049f155bf39ed516192ca738df737dcd201e4f83fc522fc11",
+      "size_bytes": 4342
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/arctic_observation_operator.py": {
+      "sha256": "f51b6be0bdf1c38001f1e07298f1e23d564668951c67b5868252a9fab8c3dfcc",
+      "size_bytes": 12172
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/climate_model.py": {
+      "sha256": "12549f4fdaeb5731303fa1b86372a0e60ab26772fa61e0efe142531293154ae7",
+      "size_bytes": 707925
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/run_r18_local_validation.bat": {
+      "sha256": "c58a8d752ba6e76983b08ce8586904174d39cde428d32d78b640a55df0df9877",
+      "size_bytes": 219
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/run_r18_local_validation_debug.bat": {
+      "sha256": "91d7f95ddd5b8ac9cf5b56320894ee103bf5cff2ec44923eb70fe930e5288052",
+      "size_bytes": 159
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/run_r18_recovery_validation.bat": {
+      "sha256": "134d5df5d9398130c8a9f2976ae1130002341e783e4580c2c9387c5ac2da96df",
+      "size_bytes": 130
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/run_r18_sea_ice_validation.bat": {
+      "sha256": "535467607bd5b9fffef45dda08b26554165953e07f6b1f9c78aaa30b22020ef3",
+      "size_bytes": 129
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/sea_ice_observation.py": {
+      "sha256": "8520954ec2f2310e30dea210c2db980760bf1ef654c982e0bc914b78acf5cae5",
+      "size_bytes": 16718
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/sea_ice_validation.py": {
+      "sha256": "221bc9a7af2ac37f4a03c171bf98fadca559b9051dea9ca82df4645cdd20b0ca",
+      "size_bytes": 74606
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/r18.1-parent/verify_r18_local.py": {
+      "sha256": "9f5737f3651e4188110fba136a32edfca685dcd82b8613d15a127b11cd0e1749",
+      "size_bytes": 70511
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/repair-workflow-legacy/PHYSICS_REPAIR_V2_12.md": {
+      "sha256": "43bebeb2edb63dfea45c6c57ba35917c3fd46a6c9969ee6e844448c9d4cc8c71",
+      "size_bytes": 1980
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/repair-workflow-legacy/README.md": {
+      "sha256": "7d22e38f2371090524ab06a113b4e0206a742cff326cedd8f664bc173bf17b19",
+      "size_bytes": 328
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/repair-workflow-legacy/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "0060a04c1ef05ee3d606cbca8b46ba0f9d22d340ebb80ccc41df8bbf2cbc99cf",
+      "size_bytes": 2395
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/validation-cleanup-r14/CHANGELOG.md": {
+      "sha256": "2e02e5bcaead71932704da02c08e4e7406d071c9ee54bf48b0cb7838dce72ea8",
+      "size_bytes": 2229
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/validation-cleanup-r14/CRYOSAT2_DIAGNOSTIC.md": {
+      "sha256": "381c74ff5b2f62bb7981c49357e7dbdaf1fca72b131830285563689d644c1a66",
+      "size_bytes": 4038
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/provenance/validation-cleanup-r14/CURRENT_R13_SOURCE_AUDIT.md": {
+      "sha256": "d4c75e0eaca9c53732f981c9da0b2dba0943afcd2b592e73445c93a3ccceb7e2",
+      "size_bytes": 26852
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/pyproject.toml": {
+      "sha256": "1593d27ad0e2fc4648db3aa04e84c1196871a3ef3bb4e43003a3dfa69b5aa3c1",
+      "size_bytes": 778
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/r18_1_amoc_bistability_diagnosis.py": {
+      "sha256": "3d2e8661737e9d1a0eca0daf9ef9fb0cb11a82a285ed127d23b9fe0613be2346",
+      "size_bytes": 8672
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/recover_run_state.py": {
+      "sha256": "c28ec7a1e1d470e089b1814f0473510ef75b807dc35174b09b06cb5f9bdb6024",
+      "size_bytes": 653
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/release_tree_fingerprint.py": {
+      "sha256": "dc2819a4a75e491bfe186aaab6588ae93959b5684997f278e19b5f16391ed75e",
+      "size_bytes": 4847
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/requirements-dev.in": {
+      "sha256": "56671c62dcdf4f34a50573741e2ae9c8d346470a7d4369d02d059660faf20c13",
+      "size_bytes": 33
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/requirements-dev.lock": {
+      "sha256": "e743fc8253c68cc56d18d721bd88fb23098f8957549c7558100abdf32d33a502",
+      "size_bytes": 208
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/requirements.in": {
+      "sha256": "1d9d9a7b5fe39ee8e10b6d2bd175570a03e22f42442b05c80b816b5e7c7be952",
+      "size_bytes": 171
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/requirements.lock": {
+      "sha256": "19c660eea9f9cf5ccca79b0abccacbecebff03c51e7cae7657dda12e648c73b1",
+      "size_bytes": 996
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/rerun_co2_target_sweep_v22917.ps1": {
+      "sha256": "b3c0ed49858a565d4a7a79b0f02e62aa893b7bdca0f06a35c38ab6214b5eec85",
+      "size_bytes": 7996
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/rerun_co2_target_sweep_v22918.ps1": {
+      "sha256": "14481ca503ebedc02937287df47809b3c0c97255ae411e78f6efd76edc32824a",
+      "size_bytes": 8221
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/rerun_co2_target_sweep_v22920.ps1": {
+      "sha256": "671492c7b937bcead8e9afb3c56b0e9fd8d5990e252a2e59f898dc55b0e0556c",
+      "size_bytes": 8783
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/review_fixes_v2_21_0_test.py": {
+      "sha256": "3ef5a205e7ebcee7b704621e1165b38ff2724e6ff9df8c1f585465221221ba17",
+      "size_bytes": 7540
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_app.bat": {
+      "sha256": "17c05e4343254a38ff2220b0a86243c0369ae0a5c83dabe3df304192992bcacd",
+      "size_bytes": 488
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_app.sh": {
+      "sha256": "812150d1621f6d4c1196687dc128ae6e1b00e688c9ce70a4938c356d39646a49",
+      "size_bytes": 83
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_gui.bat": {
+      "sha256": "91292e48f8ada70a434cadae16bbfa5375a59afa5ad003e4402b8a9acb881e2f",
+      "size_bytes": 939
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_gui.sh": {
+      "sha256": "cd201efdb6ff96bf7a0e4d7d8d1ff8a98621fcfd6906c5eace5c58edca9f3f3c",
+      "size_bytes": 124
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_gui_debug.bat": {
+      "sha256": "4c4cb55453fe03f67fd003db845d8b32fdc535c95f3dbce43ce6c5b7580c4ddd",
+      "size_bytes": 632
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_r18_2_seaice_operator_validation.bat": {
+      "sha256": "931ab20c675833eb2a9f5918c7cc8cec03b4fff24bd52c5cf30ce26f47522ef9",
+      "size_bytes": 255
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_r18_2_seaice_operator_validation_debug.bat": {
+      "sha256": "c9e3d6c625adbe6461720a2ee3c36b01fa21c80e73a4b71d573a25017f2876c6",
+      "size_bytes": 175
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_release_consistency.sh": {
+      "sha256": "6b178afb67019d3c8df6022886c88bd28a76f38382599cfdb8bc2239e2cab196",
+      "size_bytes": 236
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_state.py": {
+      "sha256": "258a64a39ff86e9b78abd5a8f6b0860fb0a324774880273caf4583e6394a66b2",
+      "size_bytes": 34188
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_tests.py": {
+      "sha256": "fcb3072788774a5517c2ef240e2a32af2ed67b037753f132ff405cfc34ced7f8",
+      "size_bytes": 6598
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_v216_validation.py": {
+      "sha256": "7cbc7720324b8aca1451d576f985ab554b9c507779234fa182ecd3d672547257",
+      "size_bytes": 3182
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_v22921_engineering_tests.py": {
+      "sha256": "f9667eef3a03c114983dcec32b33d86ed8600f05578787bdcd306ea7b979e3ec",
+      "size_bytes": 186
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_v22922_engineering_tests.py": {
+      "sha256": "081570865d5fad3208094e8c9805fad01f452cc690184188d9915471e7d7c54c",
+      "size_bytes": 6822
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_v22923_engineering_tests.py": {
+      "sha256": "9203469a587d48192814ecee42f2eda757b1fb856cb673ce3c29fd0e61e4125f",
+      "size_bytes": 8486
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/run_v22929_engineering_tests.py": {
+      "sha256": "41962b424cf95ba17a1b2d5e65ca4766873d8a3c092112a9982fa55340bfc9fa",
+      "size_bytes": 10485
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/runtime_provenance.py": {
+      "sha256": "e38ec7c81bdc62dac72430776906de53a1777e3d12c024277e26b5d251c706c8",
+      "size_bytes": 6666
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/safe_checkpoint.py": {
+      "sha256": "fcc9999f28cc57c1def2d7065fbb023ab6317b6db0c82f29b3d2ae699f813a28",
+      "size_bytes": 17230
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/scientific_evidence.py": {
+      "sha256": "c692614563d1e8988a0720757ce6712baf75ecbf9efe338c9667f1e1b21ac00d",
+      "size_bytes": 6557
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/sea_ice_nested_hindcast.py": {
+      "sha256": "d317ee964b6721f749eb9bdb03b398f73c9e5829f199f377295b1e1a2bebdda8",
+      "size_bytes": 5883
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/sea_ice_observation.py": {
+      "sha256": "8520954ec2f2310e30dea210c2db980760bf1ef654c982e0bc914b78acf5cae5",
+      "size_bytes": 16718
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/sea_ice_validation.py": {
+      "sha256": "221bc9a7af2ac37f4a03c171bf98fadca559b9051dea9ca82df4645cdd20b0ca",
+      "size_bytes": 74606
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/sensitivity_convergence_test.py": {
+      "sha256": "ec97e60a52656f27c746702dc7437943432259844d662dec947e060c0aabbba1",
+      "size_bytes": 1281
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/setting_metadata.py": {
+      "sha256": "d851f1cc5544716db8af145f9741838faccae8c6d50c8cabfa59e3b70a4e5ac8",
+      "size_bytes": 100912
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/setting_metadata_test.py": {
+      "sha256": "56771ffa893f17422956a0e207c416c48d9f8ce47f12bac26dde622b612fcb3c",
+      "size_bytes": 2990
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/smoke_test.py": {
+      "sha256": "9129b69b860a076e6ab1d982213b137cabdfa7c865a80e0a31ad632c82ec1964",
+      "size_bytes": 11024
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/structural_fixes_v2_17_0_test.py": {
+      "sha256": "e212c935ee6924c5297e1e31f5509b27fae4b350650eeffbec065d0543cd1061",
+      "size_bytes": 7195
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/test_r15_setup_record_hotfix.py": {
+      "sha256": "691ee6336c34588a145c34d66cf62095e21730c2f9c7f5eecd1638759213d2b8",
+      "size_bytes": 974
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_2026_arctic_data_processing_repairs.py": {
+      "sha256": "7c825f47f0b6db52fe615de2936c2f613ab843c8e8622e3919cfdb99663b2eab",
+      "size_bytes": 3418
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_2026_arctic_observational_recalibration.py": {
+      "sha256": "50fd22bdf43d78d50943c3c9d290fd1e1ba0396daa84e8f2b0e059998e6ce68f",
+      "size_bytes": 4353
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_2026_sea_ice_scientific_review_fixes.py": {
+      "sha256": "22ea2eda57e2b068490899919989d4740f560d4cefc17bc9f2186bb8c0d7c9c4",
+      "size_bytes": 6653
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_amoc_eos_physics_repair.py": {
+      "sha256": "7d00bb82986db0d9d3e6178ee56bacc5eb164f658bddc01d29d82f530a03c75f",
+      "size_bytes": 1985
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_arctic_core5_nonblocking_acquisition.py": {
+      "sha256": "682d936042feedeb85f9984e86f1f382f88897b1ba6c25a217b65323af6c24b9",
+      "size_bytes": 3721
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_current_model_review_fixes.py": {
+      "sha256": "453fcb75cce6897efd21843298e7c34749e82f2945c8c1833f2df95c43231c1b",
+      "size_bytes": 8470
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_greenland_reservoir_units.py": {
+      "sha256": "a2a739e585034f36327b7e7065fb164305fb4f71ac02510194025fae4bc2d337",
+      "size_bytes": 1679
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_legacy_entrypoints.py": {
+      "sha256": "3dc7469db34033d1289b5e197cc4172e289e7f802844207d48c466b4cdfb6443",
+      "size_bytes": 6779
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_monte_carlo_science_prior_consistency.py": {
+      "sha256": "a48feb13db675509369f415b7ae0ea0d9f50914046806cd21e80de615f27a296",
+      "size_bytes": 1128
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_physics_review_repairs.py": {
+      "sha256": "ab4f83e83eceb3b52c272532b0b156de187e40711ca05c580165c21ce87ebb45",
+      "size_bytes": 12355
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_property_conservation.py": {
+      "sha256": "b892b66475f34aa8c3784c61d9b1dcb154d566b32971bea292555d2df2a5026c",
+      "size_bytes": 4255
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r16_1_teos_hotfix.py": {
+      "sha256": "46c675c581f1ee1b2aec75baddd76284e761bf0d3d689721e421aa46f39a7efd",
+      "size_bytes": 2623
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r16_source_fixes.py": {
+      "sha256": "2b909a637e38c051b967fe3c5354f4a182c49880df9d2854e6e1811b93915539",
+      "size_bytes": 7003
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r17_spatial_teos_recovery.py": {
+      "sha256": "a9666218fa71f9f005690c1d97406a553043d913ee338797cc344339197b5e1e",
+      "size_bytes": 10880
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r18_1_finalizer_and_diagnosis.py": {
+      "sha256": "ec2b1ca0ffcc24e1e037f98a4bc3f8b557e3774a263d0e2fff81f7b4c784de4d",
+      "size_bytes": 2352
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r18_2_seaice_operator.py": {
+      "sha256": "03827fa72e4775d0e8cd0b0357ec3ddffa41e592f85b677debb26441ac7e5470",
+      "size_bytes": 4730
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_r18_source_fixes.py": {
+      "sha256": "0c26c0bb388bbbe1654bd0e8102405f4458e01c239d2175c5d88c27645269b64",
+      "size_bytes": 7982
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_review_fixes.py": {
+      "sha256": "3479fafa557f91672893566598ca57b65f7efc1d9d40a0fa494dff8d976dbdca",
+      "size_bytes": 7394
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_runtime_bootstrap.py": {
+      "sha256": "8fb62b3aa4e40aec287779737ae663382a7c8dc02dc7f0b712f7fa78867d625e",
+      "size_bytes": 1862
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_sea_ice_actual_fix.py": {
+      "sha256": "2588a58683500094854ab00870faf20c46319b6a0d1554210d36297a0bed4e97",
+      "size_bytes": 7206
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_six_source_arctic_validation_stack.py": {
+      "sha256": "0c4b3d103d5a14324ecfb68f63bd6be249b602d04f2aa7854a10c6dabaa1e585",
+      "size_bytes": 15303
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_ssp_batch.py": {
+      "sha256": "30b1a7c7e0dd7bd69b3d83cacd5799be84cb13dec746a612d12797d133f4ad41",
+      "size_bytes": 9622
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v221_scientific_fixes.py": {
+      "sha256": "ee70f54ee467151c1bc10b2f297ff629ea014d8759f6744f9d8f519b35ae41e5",
+      "size_bytes": 7878
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v222_remaining_fixes.py": {
+      "sha256": "ce6adcc220059827f62282377d7db70d8a83ee2e4fdc63c18183700fe37d93ba",
+      "size_bytes": 9717
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v223_final_fixes.py": {
+      "sha256": "9e472227897f32d4460c6a4caaa747626f94e6b538885e7dff774a328dee310b",
+      "size_bytes": 7971
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v224_accuracy_fixes.py": {
+      "sha256": "05457d67ee3535a3e107b44ebd89b8a53bf613f6460adfd19464336b3077746c",
+      "size_bytes": 2091
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2252_seasonal_arctic.py": {
+      "sha256": "bd179865e7c7d779db7f0039b023f6b2ef5668058ea4718c030a01ee0de6d7d4",
+      "size_bytes": 4895
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v226_thermodynamic_arctic.py": {
+      "sha256": "38982d7628c0949d262988ae45cf11937eceb9a2dbfcc89a3bf32295e7e16c08",
+      "size_bytes": 14841
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2271_maintenance_arctic.py": {
+      "sha256": "135a48385762698a40c59fa4a6b2d49f72c44f3f49ac1b9f3ee2ca5304bfc31f",
+      "size_bytes": 10016
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v227_structural_arctic_greenland.py": {
+      "sha256": "fd8da93fe58eb2462533567d079477fcec30e6288985eaafeef5fad7baf9bc13",
+      "size_bytes": 10380
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2281_interface_maintenance.py": {
+      "sha256": "b20fbe6244bd0e95a964424934cafdd1fdf336703be8952e39e3a42e7c06b397",
+      "size_bytes": 4960
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2281_remaining_maintenance.py": {
+      "sha256": "9cce462c9eef8295c7fa6d43ad08900c4cef7a512f94241e479b1297b8260a9c",
+      "size_bytes": 6146
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v228_fractional_arctic.py": {
+      "sha256": "de31ab49732bf96af1da85ff82ce0e5f9525a7b60e42b5dcfa7062f11e335931",
+      "size_bytes": 14604
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22910_integrity_recovery.py": {
+      "sha256": "3faf9463a72ee2ee44e69f3be6960826bc4aa0d8242369e5e02c28167991e562",
+      "size_bytes": 9030
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22911_target_baseline_safety.py": {
+      "sha256": "2315f5d5212e2e72f99956227801ef7bfb092fdbf9fb8e1d49e5c5cbac7d737e",
+      "size_bytes": 11471
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22912_monte_carlo_integrity.py": {
+      "sha256": "c6af2cd822faa5df65b2655e68d42ff03e5c1d98eda34c2e569d7aa6f3ed88ca",
+      "size_bytes": 8057
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22913_integrity_amoc_baseline.py": {
+      "sha256": "71aed8a024075daed59e1c505c053a7f91936752e8494be52205d6b30ade3018",
+      "size_bytes": 6322
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22914_recovery_validation_seaice.py": {
+      "sha256": "cfee74ce476bc739461ecb74da54d9eca3c896baf466fed5f61d79bf7e855f09",
+      "size_bytes": 9394
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22915_winter_seaice_integrity.py": {
+      "sha256": "6fad121e119a8d211378416fc94fb886ac9e2cf0f2ae3d42c16e7d8f2da28039",
+      "size_bytes": 7229
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22916_release_integrity.py": {
+      "sha256": "d8f81befdce4189ab67e936df1879cd1b006d00d6796a8b5104a73298712e1a7",
+      "size_bytes": 7897
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22917_arctic_sweep_integrity.py": {
+      "sha256": "3fa5ce22053b68bea45e04c5656053897c00cd33348ca8cc9e56133d119cbea8",
+      "size_bytes": 8354
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22917_gui_startup.py": {
+      "sha256": "db8ebf18a00ea981e7b840cca819245e543b86ead6fab6ebb35f51905a63f893",
+      "size_bytes": 1036
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22918_release_corrections.py": {
+      "sha256": "5830dd5fe26b0c28dda9fb8e6d490e7204a8b7591af2b420fecfd5bb3c227a61",
+      "size_bytes": 8766
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2291_arctic_phase_consistency.py": {
+      "sha256": "0e5fc214738ea3f0cc464de0ee58e8cd1b31b5300a5c7e9c69aee06b32e0ed81",
+      "size_bytes": 7953
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22920_prognostic_sea_ice.py": {
+      "sha256": "66d3abb470f3827c64a90b331b3aab5cfb7db200f084f57b1db0d91d7e7b91cd",
+      "size_bytes": 9180
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22920_review_corrections.py": {
+      "sha256": "50786a31d225205d18557aef8a03669d7e62e183db9d9e930d39304741a0b278",
+      "size_bytes": 3560
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22922_engineering_corrections.py": {
+      "sha256": "9cddf9157919397f436708161ab9f07d8191f41647e7a071dff4709b78edbb67",
+      "size_bytes": 475
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22923_engineering_corrections.py": {
+      "sha256": "41a748088e63ec87b4bd953d4dab82510d9f8d59064034950dc9589bd5cc8e72",
+      "size_bytes": 10196
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22925_review_cleanup.py": {
+      "sha256": "d7e4a827c8b20ed2390bc164d921415929d7ed65603d6a7c4a08d87b61c0be58",
+      "size_bytes": 1443
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22929_coupled_fail_closed.py": {
+      "sha256": "a3cb455d4232f57c8c0da119010242328a5f153fb7a5e232bc0c1da5178c1e7e",
+      "size_bytes": 5982
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22929_release_finalization.py": {
+      "sha256": "09c1590d0dcce0c501ce07ba6aa8acf54dce9dd7dc8a7202c7fce35f716ec2d6",
+      "size_bytes": 4687
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v22929_validation_semantics_and_interface_parity.py": {
+      "sha256": "910b373fc07c347608622430eb1a92193c5257eb3b609ca580cb8bb30c2bacd6",
+      "size_bytes": 6272
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2292_release_integrity.py": {
+      "sha256": "25b5f824f9c73a7c3f2a70128640f1952fd89540b183a3fb4060b4ce9c3c3173",
+      "size_bytes": 9210
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2293_operational_safety.py": {
+      "sha256": "f3cf33cf6f24da36fcf563d9aeb8ec28f5c283a483f4cbd8f15fbf4bb86cb828",
+      "size_bytes": 7511
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2294_accuracy_integrity.py": {
+      "sha256": "76302c63bf998483e566415403d874c56b24523b2d72cae1e36780afb40cca3c",
+      "size_bytes": 11580
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2295_physical_integrity.py": {
+      "sha256": "c3f090a6070e5d33a9091f46b3913a2b831483b7d92b90b80332bead0962804c",
+      "size_bytes": 7389
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2296_native_arctic_integrity.py": {
+      "sha256": "8b585b44c70bc9e485df14118fc647dd4dccdfd76b6ebbe7a903d0f5a9770cae",
+      "size_bytes": 9243
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2297_review_fixes.py": {
+      "sha256": "0e6cd537513649143f966431da408f24b48f52a62004d3aba759e51237e77ff4",
+      "size_bytes": 10616
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2298_resumable_sweeps.py": {
+      "sha256": "665bfe871687ee7bcaf4aaf28b4b42f77190830c9e71bb9810c29ff3c20add19",
+      "size_bytes": 18583
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v2299_scientific_review_fixes.py": {
+      "sha256": "12ff2d654fb30df07103e05464502c267c7072b51f289a17a536caa31f5b04e1",
+      "size_bytes": 6102
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tests/test_v229_coupled_arctic_ocean.py": {
+      "sha256": "1d71a98e6dada1e2fab842b3f7e82e50cde89ebc3cd3fe289b715778476015c4",
+      "size_bytes": 4208
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/acquire_arctic_validation_stack.ps1": {
+      "sha256": "9f7fdb944b6f5cd6c9a9918632c9e18f76c244ff48d45a47a12179180bfe07d5",
+      "size_bytes": 6200
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/acquire_arctic_validation_stack.py": {
+      "sha256": "7f84f851c690b0f975ab01302fd9c74387d31b97d082f3bea177df1d8ef0419e",
+      "size_bytes": 67796
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/acquire_oisst_provenance.py": {
+      "sha256": "ef3130cb207a1f9e79c3b1f217bc44820d6ec6831f493d8ae772773edde0a388",
+      "size_bytes": 3046
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/build_sea_ice_fix_manifest.py": {
+      "sha256": "6a507ed962035729efb552708f059e0ad7b46801e379cfa6d3e8eb6c42fac6c9",
+      "size_bytes": 2745
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/create_dependency_lock.py": {
+      "sha256": "dd6bedf887a71898155bfa4956cdcb92b161cc6dc35d4147eecfcd4d1b56332c",
+      "size_bytes": 2272
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/create_v22927_fingerprint.py": {
+      "sha256": "a5c93d219b1681ef7aa4ca03bfb61548f2f550c848aa60728388a9b79210eef7",
+      "size_bytes": 624
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/create_v22929_fingerprint.py": {
+      "sha256": "4108bf3554f8ed59fc8298a30ada1a43eb01233f0d670505c2f6fba9a6d0a275",
+      "size_bytes": 1005
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/evaluate_v2297_candidate.py": {
+      "sha256": "9f896c1a0d55b0ef29cda2b34933646d9e408c2c76c56b06a9a8221141266a95",
+      "size_bytes": 3490
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/export_arctic_validation_bundle.py": {
+      "sha256": "d71ae536ca739138a623ecc7d01ce94418288474b1f15ffc24dcc76e5ffc0ffa",
+      "size_bytes": 2846
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/extend_recovery_validation.py": {
+      "sha256": "9308484c1d2eec57175f5355e2cd289ad207840b3a2213c5fc3b5d00b57346ed",
+      "size_bytes": 10718
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22921_status.py": {
+      "sha256": "08ff2cefd907e0e1643eade2ffedfa6933aa915b0f5ec1bc0dea4d33834ee00e",
+      "size_bytes": 184
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22922_status.py": {
+      "sha256": "a1a359740bb2c36e6cc78ecb5f902931afd0a319fe2602f3bf7fd57c4bedf3ca",
+      "size_bytes": 11925
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22923_status.py": {
+      "sha256": "b730a1bd4144f090781242611b020f38b100dbe2550991fe7a808cd11fdd93a4",
+      "size_bytes": 14664
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22926_release.py": {
+      "sha256": "cd8e1e8742ba6bbe92b1bea6a8b8740380eb86d2ba12ed17c4ee26a88890bf25",
+      "size_bytes": 6535
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22927_release.py": {
+      "sha256": "11db784d5826a12af1fa1bbda4275225e68ceb1fb01f9b928673033179dd7d9d",
+      "size_bytes": 8455
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/finalize_v22929_release.py": {
+      "sha256": "eed99e894d27a7339d14fea141b7b33c580fd9f936fb96c3a112e2828daa54f3",
+      "size_bytes": 23895
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/investigate_fovs.py": {
+      "sha256": "244db6b3b90877827c0abee9f87ab102b8dc6caaab870d21456cb2913df36236",
+      "size_bytes": 6292
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/investigate_fovs_sign.py": {
+      "sha256": "2c4ee614b600bba4da01f91887c55dfd8767eec0b315b32d30d6217bbfb1f182",
+      "size_bytes": 7239
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v227.py": {
+      "sha256": "3a16942defb9a39d8fbdcfc1b45898ef814ab88f36f7b016a69dc14426904e4e",
+      "size_bytes": 3806
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2271.py": {
+      "sha256": "b5ee129d74f1025b95755b24a40afcc598dff8d08fc323fbab9cdd9b5417325d",
+      "size_bytes": 3748
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v228.py": {
+      "sha256": "54bce800f773bd71508cac662707b065b326f31f0eac8131a1d695ad18690860",
+      "size_bytes": 3743
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v229.py": {
+      "sha256": "e4633f3938d7f076ebe8f76298312e35c09a84414ca0b285d1e34f0701fe617f",
+      "size_bytes": 3868
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2291.py": {
+      "sha256": "a8125b3d6347c9033fa05c90a25316809b7e16894d14f5e9505025c7ed2b7ec7",
+      "size_bytes": 3957
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22910.py": {
+      "sha256": "4267f1f74bba2816b1559a07a125a4d0bd858d3d3cc1f53fc3ef1971e11b6086",
+      "size_bytes": 7481
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22911.py": {
+      "sha256": "66d3d310d0c5855bb1a79087c240193abde112fa29d554d75ab6117ae4083664",
+      "size_bytes": 7541
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22912.py": {
+      "sha256": "3d34bfe3f8df20f8a73469bcbbf8483a89006e755cac2bd1bd3db99aa772ffe1",
+      "size_bytes": 7590
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22913.py": {
+      "sha256": "a76a293b061c0f4ad6ee8b065f76a2a5333512674d46a8d09eb8730347e13ad4",
+      "size_bytes": 7600
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22914.py": {
+      "sha256": "b57f4b29ce2211024e9d043cf4d4e50f45a18433cd3133fc24f39ec3afa0aeee",
+      "size_bytes": 7936
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22915.py": {
+      "sha256": "d731d72dca24b2b0586177df2005a7b72c7960da33a38b04caf576415ee4a30b",
+      "size_bytes": 8664
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22916.py": {
+      "sha256": "5f141774f1e63e4dcc41d156b9e01cbf4dcd03054f4b9786ae42fecc59084d4b",
+      "size_bytes": 8888
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22917.py": {
+      "sha256": "29479c712433af7fcbc2db574416e2f1a6baa30987b8d45931bc5db6078eb167",
+      "size_bytes": 9303
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22917_gui_hotfix.py": {
+      "sha256": "f5cecb741376b24d07b569a93a933d7c65fde57bce84e11db6c79787d447351d",
+      "size_bytes": 5090
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22918.py": {
+      "sha256": "4aac3319a0c067aa806f0f9332981238f279c4da952f0820f870dd7e02cc050c",
+      "size_bytes": 5609
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2292.py": {
+      "sha256": "72fac4f0b2d473002774f3b9b2084577ef4e401ad93bd6cad701d21c6cf9a965",
+      "size_bytes": 4051
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22920.py": {
+      "sha256": "2a752966afcacd0674d110237949978d3df0b3cb4e1928e312ccfea597b64db1",
+      "size_bytes": 176
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22921.py": {
+      "sha256": "6c9ac34e460833b48e7df1da8b698b17beab60bd371e0519f3fab2e59192108a",
+      "size_bytes": 169
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22922.py": {
+      "sha256": "f5544db29630ea295589509e11e61d9f85a10f08bf3d4d44a98281e25a50df6c",
+      "size_bytes": 16782
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v22923.py": {
+      "sha256": "88a401820d1ebae80b19a50cd0d26644e6ea73b6425737751b8df279c6cb1ccb",
+      "size_bytes": 20979
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2293.py": {
+      "sha256": "9b05c943ad14ed0511e9fe70de06336773a8bc965e28e7e1808cd24c36a22b57",
+      "size_bytes": 4735
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2294.py": {
+      "sha256": "c130d6b02e288a2acdbb22f6ac2317b73ab2c47f9b43ff48369b6165ff324121",
+      "size_bytes": 5270
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2295.py": {
+      "sha256": "06fb777bf115d25a8e67e988d7ceaa11e17eac390726dfef387959a8f9ad6ba0",
+      "size_bytes": 5416
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2296.py": {
+      "sha256": "669b26628e44597984660fdf3e1363d56a546e6817edd62294d5aa02b07df5fa",
+      "size_bytes": 5559
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2297.py": {
+      "sha256": "a994dd247a9149bbf90f35f6bbae4e6abc1d1d335141d9b4ae2c79b9234685d9",
+      "size_bytes": 6920
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2298.py": {
+      "sha256": "410865785dbb82ad82b6c29bb455d289b5421d9a198db4fb8ae46d29860af7d7",
+      "size_bytes": 7190
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/package_v2299.py": {
+      "sha256": "a6bfbb52144a0ca582347cd905295e1be4bad63be1cdcbfc2ed16fcd11c8eb82",
+      "size_bytes": 7305
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/process_noaa_oisst_arctic_benchmarks.py": {
+      "sha256": "ba66a259a2df61afa711e431064196b23045acc4aa3f056cc07e37b5f2ec5900",
+      "size_bytes": 10203
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/refresh_piomas_osi.ps1": {
+      "sha256": "7f4c50ac0fa592d3305428207c16d8306f016f31cfe500413bd6e6cb56b88ab3",
+      "size_bytes": 6200
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/regenerate_dependency_locks.sh": {
+      "sha256": "1be021b18fd1b3414240e5898e0020c2f3a966c566191cd0d5ca3cb138d636f0",
+      "size_bytes": 202
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/reproduce_v22915_winter_review.py": {
+      "sha256": "f3a70a8ccb0ca1bcc5070c973d9b023f11ef867eb3c4c7d6aae06d8f7a350c58",
+      "size_bytes": 6936
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/reproduce_v22916_winter_review.py": {
+      "sha256": "0b44118b1404cf78065020d496d4ba9cdc1f3127b8b6271a50c64132d04597fd",
+      "size_bytes": 6936
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_checkpointed_arctic_candidate.py": {
+      "sha256": "205571733f14be5ff972cdf7ca5485657c7578e46f455d00d6374692d5a7bb60",
+      "size_bytes": 12073
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_isolated_v2293_tests.py": {
+      "sha256": "2dc1db40e3217e38f6a4f4c9e36d6fdd4cd38d4ea46e22dc18cbdd2584c62c63",
+      "size_bytes": 6225
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22910_validation_parallel.py": {
+      "sha256": "18dd482444f71a2bdbc4604b68c87733a4f256e4af8ec9aa4247d904faf275d8",
+      "size_bytes": 5340
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22911_validation_parallel.py": {
+      "sha256": "32534d52105820863f31eb52ba00b004b130ba192fc4c723ce5aa3ddd3fb3239",
+      "size_bytes": 5340
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22912_validation_parallel.py": {
+      "sha256": "1bf3c250f776b5e7578639139b7442d9b1f18573034ef631b3960c7510d349bb",
+      "size_bytes": 5340
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22913_validation_parallel.py": {
+      "sha256": "7ef981dd856614336c62660bc18dbcd995d467fd474244d4ea0087f2e21d1ab0",
+      "size_bytes": 5340
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22914_validation_parallel.py": {
+      "sha256": "6c11300d4bb7e1cde0a55f3a0a85a91b7582e37d79cf87939f4d08f6b79459a4",
+      "size_bytes": 5340
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22915_validation_parallel.py": {
+      "sha256": "42160859a99ff2f9a05d35d739720368e9fbc29ef6d35bc2b5ef5a7ae3e8def0",
+      "size_bytes": 5373
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v22916_validation_parallel.py": {
+      "sha256": "c7d215fc45dc7a3bf6f6126c70ced625f71b7082d274fe99f869ca5f441fefcc",
+      "size_bytes": 5702
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2293_validation_parallel.py": {
+      "sha256": "e3ccda9fe11364c05f85d1679ac0e85c9ed2774abe30155a484264a68f56153a",
+      "size_bytes": 3206
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2294_validation_parallel.py": {
+      "sha256": "1b278b8b3ca47651e6bce268c77609ec8df53ae1f099d11319db5fae5e2e5b9d",
+      "size_bytes": 3206
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2295_validation_parallel.py": {
+      "sha256": "974083f878dc7984b47b7ce8e5c6ef7f6358ed2c7b464257a1af5fc858208e95",
+      "size_bytes": 3206
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2296_validation_parallel.py": {
+      "sha256": "0a376790702e84f9c8b5594d750c8204ea1b120c478949c8a18d8c952bb1f3e8",
+      "size_bytes": 5296
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2297_validation_parallel.py": {
+      "sha256": "a7548ad69a20619afd83887e09931d339c10d3f78c38c8a08b4ae9d66a4c40b8",
+      "size_bytes": 5296
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/run_v2299_validation_parallel.py": {
+      "sha256": "b69b4a5170b835c52cb56027a2b26413222ad35fc023570dc7577f98d3be12d7",
+      "size_bytes": 5336
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/v22927_release_integrity.py": {
+      "sha256": "ac1f28824f454d6354394ac39da850097ee28b5d89eac49c1e0a8c1ceea31cd1",
+      "size_bytes": 5725
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/v22929_release_integrity.py": {
+      "sha256": "adaee747682249a122dad090156fdd7ca69dd1e7fed9621e2c608dd10e25500d",
+      "size_bytes": 7360
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/validate_sea_ice_fix.py": {
+      "sha256": "bf57c9ac152b4d6821900ffe919849236be73f1ce093558bd715443219c96209",
+      "size_bytes": 24019
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/validate_v22924_lean.py": {
+      "sha256": "50c169c0a56528f98437f87688e97eaa31d4ff44ff87485aaea07bdb6fe1cc05",
+      "size_bytes": 11911
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/validate_v22925_lean.py": {
+      "sha256": "23b1ee1a502bcf6d88cb74fa17573ecd1f8db3d95a2ed1dee29dbf0ae296675a",
+      "size_bytes": 12688
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/verify_dependency_lock.py": {
+      "sha256": "fa6ef82b08f53f8bb1b2246dc44fb44be2c27ceff43a4fed85ba4bb135015c37",
+      "size_bytes": 3245
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/verify_physics_revision.py": {
+      "sha256": "7d23def62dfb9158c4c39ce914ff1e1ab6216b9f08cb31f097b2bb53d2f2570a",
+      "size_bytes": 10269
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/verify_sea_ice_fix_manifest.py": {
+      "sha256": "b89b5cdba3328ada888edeefa04f69ef81eda1073a06f03a7e8135279120e029",
+      "size_bytes": 4075
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/verify_v22927_fingerprint.py": {
+      "sha256": "10063063937eba2623e6261110b068f7852c40d6745411abe27ebcfccabcf2f0",
+      "size_bytes": 711
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/tools/verify_v22929_fingerprint.py": {
+      "sha256": "86bf100089f100f2086d568bf44a08e0bdda9080ca0196bf340ff5554121f076",
+      "size_bytes": 711
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/trusted_validation_pickle.py": {
+      "sha256": "cde49e0b456c0fc680cab4da400f4636595ed1fc5b9182981d0779e096044b22",
+      "size_bytes": 4583
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/v2_17_1_validation_test.py": {
+      "sha256": "e3f665743e75557afd74a5bf23270415011e9fc03c350898c812000d13f5de99",
+      "size_bytes": 7443
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v227.py": {
+      "sha256": "84d30e39b60ed6b4a4124c4db00e9f2929d498d6197b123b316a0d3cf865a2a3",
+      "size_bytes": 20221
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2271.py": {
+      "sha256": "dde590dc308448fa9d8ec2e252ab804bc9002f547b6d905bbcaa6564cbcfd099",
+      "size_bytes": 21058
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v228.py": {
+      "sha256": "181be1966608bd1cdda0f25da8e963ebce67761a5880672b407e95b6dca75f75",
+      "size_bytes": 23325
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2281.py": {
+      "sha256": "f3572a2e0d84acd1098ddff2105a8e334a31747227a58befb1b9a558d1cd85d5",
+      "size_bytes": 24914
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v229.py": {
+      "sha256": "df4204b46f30afecc5dd5dbd65825fc68282577ac8b8332c16a9be2ab58a1a15",
+      "size_bytes": 31513
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2291.py": {
+      "sha256": "b9b71f4c1f97cdc7734b336c06e153200887b2b95f3ec749c96245905aa36dc7",
+      "size_bytes": 36266
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22910.py": {
+      "sha256": "5ac266f825cabdeb08f95486890c83bb26d4807bc535600e470cb3aa6ee86c7c",
+      "size_bytes": 62760
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22911.py": {
+      "sha256": "0b945ea2d9b1cb112f226735a89b4be0552e54a725ea6dbd7d4c8aadd36e023c",
+      "size_bytes": 63185
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22912.py": {
+      "sha256": "2529c58f299e9af99111c6147238396f3c489a3ee3cf968b56d6fb0ebbdc1a9e",
+      "size_bytes": 63859
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22913.py": {
+      "sha256": "ceba638921eeab90e3aae8a8088bf4e94ced6282602c6f5714e039e027f2af70",
+      "size_bytes": 64669
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22914.py": {
+      "sha256": "941c07533e0454cad6e58986f48cd26d7ad3cdb90c3fc0a0c464fba0a362dcd3",
+      "size_bytes": 65836
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22915.py": {
+      "sha256": "38f2c0b7d65337d4f0b1346932daa733b6aff05349223f382a9780b6bf50c24a",
+      "size_bytes": 74199
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22916.py": {
+      "sha256": "f2fb1d45467a148a588f5f954cfe08f6b258b7b8dba4af767eabecb6a3e4c18c",
+      "size_bytes": 78236
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22918.py": {
+      "sha256": "9d1caf8eecf8ea0101b102d701e5134902b89c0e7e496f0ff6b52210b9be7bea",
+      "size_bytes": 7795
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2292.py": {
+      "sha256": "b964edd3d163cc3e63e58fe043a5c091adbf4f1560d436f44b99191aaf2311fb",
+      "size_bytes": 44079
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22920.py": {
+      "sha256": "b6b06bd531b259588953fe7100b29b2b74ae767db4bfbb8741c6c26a4d64f56f",
+      "size_bytes": 221
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22921.py": {
+      "sha256": "b6b06bd531b259588953fe7100b29b2b74ae767db4bfbb8741c6c26a4d64f56f",
+      "size_bytes": 221
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22922.py": {
+      "sha256": "1bb37968b453e0fa5e8165f4840d180c8a4e264aa2d53307a88b53c6023f68fa",
+      "size_bytes": 50744
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22923.py": {
+      "sha256": "be5c7522a2b6b03143101a52d71f995b510129584e9bfa9b16f079a534313bc8",
+      "size_bytes": 56338
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22929.py": {
+      "sha256": "fe13b0c0fc7c9ecfe56ae20207cf888679c5def056e7d453c1051a2913c141e5",
+      "size_bytes": 421
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v22929_coupled.py": {
+      "sha256": "639091b93a0bab2949be5441c74fbd33aef9de8ab98ba23feb17ea03255d98c5",
+      "size_bytes": 5876
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2293.py": {
+      "sha256": "e3a9836a53500152387f8a19266d25136e3eb34e6eea61051ececf95c0ea9409",
+      "size_bytes": 44991
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2294.py": {
+      "sha256": "8fbb3f7705dbe466dbd9d1df968e4d93aa6ddcf57b3164069f3929d3c8c8a3eb",
+      "size_bytes": 54992
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2295.py": {
+      "sha256": "5a30904b6d6bf2e3ba9824474853b5075d718ae092703a26a1c740236603c4d1",
+      "size_bytes": 60546
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2296.py": {
+      "sha256": "2f546c16061ed980eefc4b0876bbe7a03ea4da96bf00776ca08f67117c7149d0",
+      "size_bytes": 66290
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2297.py": {
+      "sha256": "9bc22ae99e3e039f25b641a028b59c95334860e7c6a803d592080b6ba1ff2706",
+      "size_bytes": 68294
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validate_v2299.py": {
+      "sha256": "098d664bd8117b9d0ef5fa9d4aba7f976b6bc5c95e267160322234024be3e6c3",
+      "size_bytes": 59224
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_manual.py": {
+      "sha256": "8a4b5f3fadc9707d29ce3c26698c6fbebaa39272f1e838f5d7a6352fc5ced6ee",
+      "size_bytes": 6359
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_provenance.py": {
+      "sha256": "ea565dfea1a62cc8f562dbc19fd79f47c9fe421af9b3278047f61a3385a96c4b",
+      "size_bytes": 6017
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_segment_chain.py": {
+      "sha256": "0d00acafe1f1c1a3682d6e28eb82819fe24853b1bffbd3000b8bf5fbd4c9f58c",
+      "size_bytes": 2513
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_segment_supervisor.py": {
+      "sha256": "95ad8073c66afd284432a2313757af1ab409291c8eb5f45887c320f065eac46d",
+      "size_bytes": 1232
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_segment_worker.py": {
+      "sha256": "6f920b7250e28a86d0817d4c0071dbd556a7b699d43f04ff915ed9df0c1ad6f7",
+      "size_bytes": 1949
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/validation_segmentation.py": {
+      "sha256": "e6af37fd8c60167a638bc1ed7a60973e15d2b5c4d8f7b17f1b01b093331d6d6e",
+      "size_bytes": 9483
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/verify_physics_local.py": {
+      "sha256": "49e2a11caf0b3f078a4374e056a03f9f59afcad184c56ef915d14776552d068e",
+      "size_bytes": 92267
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/verify_r16_local.py": {
+      "sha256": "1ffac6fde8b13d9f8738e7cf9e54e65c497117f70195140bb679e807e5f33049",
+      "size_bytes": 63813
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/verify_r18_2_seaice_operator.py": {
+      "sha256": "3975e9fdba2870382dca0bc583faca830ebb1719549e9e3c072e6b6cf4176c6b",
+      "size_bytes": 69466
+    },
+    ".claude/worktrees/yugoslavia-character-portraits-e2f31a/worker_supervision.py": {
+      "sha256": "0a628ced42fcf77dc64dcf5a0290f77970215e5d18ae26bbc0c73e962af667ee",
+      "size_bytes": 10560
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "48686065a6862f8a144c58af26e7d07d02a7aadfbc12ebd50acbf107da63d87f",
+      "size_bytes": 1544
+    },
+    ".gitignore": {
+      "sha256": "89092268bc3fd38e5c422d9cd876d26d17031c5dcf298fdc51b672dac3a2a5bb",
+      "size_bytes": 4680
+    },
+    "CHANGELOG.md": {
+      "sha256": "a906a298e5f3331a0e1561cd265dbbcd0f8d23318a23d25beae1f5a338e60d1a",
+      "size_bytes": 92711
+    },
+    "CLEM_SOURCES.md": {
+      "sha256": "e63a5081deb9dc8a4f8b87e00b6af8c370213ad39f4255480ddd53e5ae9dd6bd",
+      "size_bytes": 6235
+    },
+    "README.md": {
+      "sha256": "3af429360464d4b76cfd08a4f7dd64e8fb1dc2330355cf1cb3b8393fad58b716",
+      "size_bytes": 25565
+    },
+    "RELEASE_ASSETS_V2_29_29.md": {
+      "sha256": "df10fcfe252f4552431af3ad266b0116ae1a6de5cfb64f439dcbf19c7d7c233a",
+      "size_bytes": 1706
+    },
+    "RELEASE_NOTES_V2_29_29.md": {
+      "sha256": "1cde511496bc739a7dc8e1f7c4d7bd2c68ef77509896fe565504b813152e7cd6",
+      "size_bytes": 9020
+    },
+    "SCIENTIFIC_CONSTRAINTS.md": {
+      "sha256": "6ff4b8e04304877bc339527374e395fd12047d8d40e91204f80a79110873d91d",
+      "size_bytes": 20151
+    },
+    "SETTING_REFERENCE_GUIDE.md": {
+      "sha256": "7b06f55b0b2cea6240469e39c5bae5710962b465736856c79be2f62a61bb7702",
+      "size_bytes": 9545
+    },
+    "THIRD_PARTY_DATA.md": {
+      "sha256": "8f60db909a16e26c94abe39d70b6e81d342317daeafea9fd1d4c977e2ec75a1d",
+      "size_bytes": 13209
+    },
+    "V2_29_29_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
+      "sha256": "9e1bdb4d1f31381125cb05214fb0452c7eb5676f25fe8569d62fd9d0fceafa7d",
+      "size_bytes": 1065
+    },
+    "amoc_completion_counts_test.py": {
+      "sha256": "3d78764ef592a8808d884990c3b2bdc3bdbc8b8d4150c15d46c0a352682a6991",
+      "size_bytes": 2521
+    },
+    "amoc_continuation.py": {
+      "sha256": "f57c1856750cee2c186131d2106d3ade02d544e5598004fd6e293c7dbf4a0f13",
+      "size_bytes": 9794
+    },
+    "amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "amoc_dynamics_fix_test.py": {
+      "sha256": "b98d1d91d9a5620bd0d431e9f6454b985a2b5eca842a75f67d80184624446631",
+      "size_bytes": 4873
+    },
+    "amoc_ensemble_validation.py": {
+      "sha256": "034be4a61b1fe3c078e6d8941bec71bdff0bc979d502f89e59d16c3de885605e",
+      "size_bytes": 5856
+    },
+    "amoc_identifiability_analysis.py": {
+      "sha256": "d853ef5e92b91956fe87d8fa7fabb1230947615bbdcd1681ee9d9f51d42b2168",
+      "size_bytes": 5299
+    },
+    "amoc_outcomes.py": {
+      "sha256": "376b56b1b8c64ee8a4ef06753080508e83eeb0998d208761ba0f5d99e38c98a7",
+      "size_bytes": 6614
+    },
+    "amoc_persistent_collapse_test.py": {
+      "sha256": "55fabf7f35bbf4eb0b85225c696553489fbc5d1fc360777964336754cb1c2615",
+      "size_bytes": 3153
+    },
+    "amoc_six_sv_reference_test.py": {
+      "sha256": "e344cc0eaa2cdd905a32d2cc5f7b34c37ebbff450852387950d32a4427114447",
+      "size_bytes": 2366
+    },
+    "amoc_structural_family_analysis.py": {
+      "sha256": "7f9fdce4717fda7ca4c0b55d953ba54f6e41a77040d1426385e6ce7916340c69",
+      "size_bytes": 8923
+    },
+    "app.py": {
+      "sha256": "2dfe16fe6dfe07e5d585dece2c4e8ce1e4da4c3d524104d3f89d9d64f3ad280c",
+      "size_bytes": 71583
+    },
+    "arctic_observation_operator.py": {
+      "sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+      "size_bytes": 11872
+    },
+    "arctic_process_budget.py": {
+      "sha256": "20371ecd40bf0e4a1cded7d7ffdc337c1a894f9f12e58177b3a2d74e5b237cbf",
+      "size_bytes": 13126
+    },
+    "arctic_validation_stack.py": {
+      "sha256": "f65a65661f47dc324608ef888eb720ac9859e2073c8d687ba04d46809b968162",
+      "size_bytes": 17457
+    },
+    "bootstrap_runtime.py": {
+      "sha256": "df2672caede73c7ef30d3022bed1ed36cd0e2aba845e33a8795c4f6864bbce32",
+      "size_bytes": 4303
+    },
+    "calibration_fix_test.py": {
+      "sha256": "61b5e4b8083f96c9b38ce81927fcbb9a11e6c9f2faa3f7751896f4d2e125d03b",
+      "size_bytes": 8566
+    },
+    "calibration_targets.json": {
+      "sha256": "9233b6ae024b1d89d212de475c14887e888656466655d4cddf8e9e5ed73040cb",
+      "size_bytes": 597
+    },
+    "check_release_identity.py": {
+      "sha256": "0ab0cb65d4f8ac666447357a61147df157fcae1fe475b1d265e22d49ef5769d1",
+      "size_bytes": 3680
+    },
+    "climate_model.py": {
+      "sha256": "c88cee69c335a50123bd520a36c5dd1767591c7e81e9071e9cae4a2b32dbeb2f",
+      "size_bytes": 766321
+    },
+    "climate_model_gui.py": {
+      "sha256": "47dc9ed88e300eb3c408cc852aca7c98b736c92af15ba38eb1008bb3212deddd",
+      "size_bytes": 139717
+    },
+    "climate_model_settings_increased_sv_from_melt.json": {
+      "sha256": "3b794196e3a11f1f04b461a3a9c3dc272eadd9f292ced46d9c35757186ffa776",
+      "size_bytes": 9392
+    },
+    "co2_target_sweep.py": {
+      "sha256": "ce989128fd1331b7c4eac36a7a3bda13a1e29e7135ce62dcbd5b01d76cc4979c",
+      "size_bytes": 119705
+    },
+    "co2_target_sweep_test.py": {
+      "sha256": "0b6b7f4742b34c14d3e7aba6af8de0a29c83ef9507ade73daa3bd6b0b0c1579f",
+      "size_bytes": 7188
+    },
+    "combine_v22920_validation.py": {
+      "sha256": "ddd59a436b75d9dc4601f979f2a141a7743b90771f9d4bf8a995f3649799f234",
+      "size_bytes": 233
+    },
+    "combine_v22921_validation.py": {
+      "sha256": "ddd59a436b75d9dc4601f979f2a141a7743b90771f9d4bf8a995f3649799f234",
+      "size_bytes": 233
+    },
+    "combine_v22922_validation.py": {
+      "sha256": "38594c8261a957e9d52ea3561660de1fea987f84ef3d531e2deb9e2d5a2b3e3a",
+      "size_bytes": 15568
+    },
+    "combine_v22923_validation.py": {
+      "sha256": "f7d5bd1963457bd8a00ea59666b9cd454845b36fc3d0bebd640fb31667b6ab6c",
+      "size_bytes": 20517
+    },
+    "combine_v22929_validation.py": {
+      "sha256": "c27b4652e4ea37872795a2c1e2f6cf10ae739f993b200473db0bdc937c03006c",
+      "size_bytes": 294
+    },
+    "data/ssp_pathways_rcmip_v5_1_0.csv": {
+      "sha256": "9c2924ee980e7f48513c9f9af92439f089ea9e4535d59b6ce1d25dcec0fadfad",
+      "size_bytes": 169200
+    },
+    "data/validation/ARCTIC_VALIDATION_STACK.md": {
+      "sha256": "1b5274541874602ea2c2c58edbad404e37a2309e662f61c0d72c2f8f64371935",
+      "size_bytes": 3125
+    },
+    "data/validation/nsidc/METADATA.json": {
+      "sha256": "fcc3289ba3340bb5d8736c324e9ef14857b68d1d74767ea15c71b447c3717808",
+      "size_bytes": 2852
+    },
+    "data/validation/nsidc/N_03_extent_v4.0.csv": {
+      "sha256": "01c4fa25d1a4a35aee9558eeecd652564fc91582e35e7b2fcaf8c19ebf56aff7",
+      "size_bytes": 2352
+    },
+    "data/validation/nsidc/N_09_extent_v4.0.csv": {
+      "sha256": "bdeb4dea8b52f6dc8a8faecfd5d220dc758b6dd2ddea345d7b18897df0d9716f",
+      "size_bytes": 2304
+    },
+    "data/validation/open_water/NOAA_OISST_ARCTIC_BENCHMARKS.json": {
+      "sha256": "f1d2585fb00cbdc5d9d7a240605c95da178f372b9c0b2f6a5a5e58a548b0834b",
+      "size_bytes": 3916
+    },
+    "data/validation/open_water/OISST_SOURCE_ACQUISITION.md": {
+      "sha256": "87082bb329403d8978a50cb6b132a61aa177fa297593e0708870fae2b2e0a38c",
+      "size_bytes": 643
+    },
+    "data/validation/open_water/README.md": {
+      "sha256": "4ac8600d37e162dcc268a7fe95a7d36e01ac321d0b85a33dd05f3d30e4b037a2",
+      "size_bytes": 1487
+    },
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/METADATA.json": {
+      "sha256": "c7dc22bcd04d3f4335ce0b262fbb627f9f149c92efa1791ed4cf1ac5316b545b",
+      "size_bytes": 29555
+    },
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/MODEL_OBSERVATION_OPERATOR.npz": {
+      "sha256": "0b91e97b12db4d7e3f98f49cc4b7e3123db614bd7deb5aa29b02c5f6e3092529",
+      "size_bytes": 663614
+    },
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_03_fixed_mask_crosscheck.csv": {
+      "sha256": "c541ee385615e8162516087b5acee0d6632b99b1e0a85b170058642c84f76200",
+      "size_bytes": 2132
+    },
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/N_09_fixed_mask_crosscheck.csv": {
+      "sha256": "99aac602ebc70396244778b3bf7c8f1b852fc24cfbf5580b1e0ba1ae3cbf71fb",
+      "size_bytes": 2070
+    },
+    "data/validation/sea_ice_crosscheck/osi_saf_osi450a1/README.md": {
+      "sha256": "1b0dfca5fc22c4be6d02c2871042a4f9841aee1f7d7d7e695f692e5729aaacb2",
+      "size_bytes": 497
+    },
+    "data/validation/sea_ice_fixed_mask/METADATA.json": {
+      "sha256": "c840c15202164b16552fcc7e8407500dd3f55017256afc88909bad7c1dbc0e36",
+      "size_bytes": 11614
+    },
+    "data/validation/sea_ice_fixed_mask/MODEL_OBSERVATION_OPERATOR.npz": {
+      "sha256": "96f9083859d80143b3506317f1dc47e3ecb660ff09f8f5c67d27eb5f1f55aa3e",
+      "size_bytes": 1122868
+    },
+    "data/validation/sea_ice_fixed_mask/N_03_fixed_mask.csv": {
+      "sha256": "803014ebd964317df6dfde845eb402c4f7447e7b0177fd7406303cc4e212fdc4",
+      "size_bytes": 2897
+    },
+    "data/validation/sea_ice_fixed_mask/N_09_fixed_mask.csv": {
+      "sha256": "46f1eed6f6208455c082017ff3b469e9ba984c95f04c58850b8427ab0567c08a",
+      "size_bytes": 2780
+    },
+    "data/validation/sea_ice_fixed_mask/README.md": {
+      "sha256": "a9422a38f000cce1167ce1d9ff5a54db1dcce1566bc7a3a1adac0217d5cc9dac",
+      "size_bytes": 1354
+    },
+    "data/validation/sea_ice_physical/PIOMAS.monthly.Current.v2.1.csv": {
+      "sha256": "4f8f6d3f1f7504ba92b378a2c6c4dab4167e41b227393cb3319e624768a6a4fa",
+      "size_bytes": 5055
+    },
+    "data/validation/sea_ice_physical/README.md": {
+      "sha256": "4c8d646ab5d15edd318eb6cddba62b827805bbdf0e132b46add473f4b29ffb88",
+      "size_bytes": 873
+    },
+    "data/validation/sea_ice_physical/SOURCES.json": {
+      "sha256": "d7b01310f799e42bdfa92aed139ee67e12ba89edb46e04212ada48edf04124ec",
+      "size_bytes": 1593
+    },
+    "data/validation/sea_ice_physical/cryosat2_rdeft4_monthly.csv": {
+      "sha256": "ea822416b0b3484f46d8c8eea389761378cc81927534bdbe42d2ffac38246e5c",
+      "size_bytes": 948
+    },
+    "data/validation/sea_ice_physical/cryosat2_rdeft4_operator.npz": {
+      "sha256": "d14aa0ec444ecf60c33ca7be8d2fc38a6703535f7d7d6dbd9fa3db7c0a70cd11",
+      "size_bytes": 1331370
+    },
+    "data/validation/sea_ice_physical/cryosat2_rdeft4_v1_metadata.json": {
+      "sha256": "f7639577088f1392bbb2366554799760da8afd4a238b81635771b8a230245b09",
+      "size_bytes": 2308
+    },
+    "data/validation/sea_ice_physical/icesat2_is2sitmogr4_monthly.csv": {
+      "sha256": "62ac3f07403fb91994ba7137249ad5a31822962a94942e0b355558b4df49e3b5",
+      "size_bytes": 628
+    },
+    "data/validation/sea_ice_physical/icesat2_is2sitmogr4_operator.npz": {
+      "sha256": "7503913a78ea2e3511a5bc9ded158f2e001553ac80da4f3ba93479175853df31",
+      "size_bytes": 2038050
+    },
+    "data/validation/sea_ice_physical/icesat2_is2sitmogr4_v4_metadata.json": {
+      "sha256": "e2f665b9a5ba35d8eaf4a197a327644cd1a29157d4159a6ae41350021ccc911f",
+      "size_bytes": 1763
+    },
+    "data/validation/sea_ice_physical/piomas_common_domain_operator.npz": {
+      "sha256": "0e8645d97cec32010aa3374df5b570fb14c0a405eb2bc7ea257800a90e133238",
+      "size_bytes": 196925
+    },
+    "data/validation/sea_ice_physical/piomas_v2_1_metadata.json": {
+      "sha256": "0788f54ab6798aae4b1e6e4e00a8042b6ab47dced12cfc67555244aa873c78bb",
+      "size_bytes": 5631
+    },
+    "data/validation/sea_ice_physical/piomas_volume_monthly.csv": {
+      "sha256": "409558ecff12bef7c8db4a9f6044bead22a3b7ea24092ce1a6baac85e488a7ca",
+      "size_bytes": 31024
+    },
+    "data/validation/sea_ice_structural/nsidc_0611_v4/METADATA.json": {
+      "sha256": "8371a8c11695cc7c79324323f8c9b47936e6b50069cda0bb9ef021f3a466f07d",
+      "size_bytes": 5783
+    },
+    "data/validation/sea_ice_structural/nsidc_0611_v4/README.md": {
+      "sha256": "dd2816462c3f343e53c06efa6cacb736c9fb8d8f2de9f6c9034c98b0c07dc6b8",
+      "size_bytes": 497
+    },
+    "data/validation/sea_ice_structural/nsidc_0611_v4/multiyear_ice_annual.csv": {
+      "sha256": "06ab7be731d77a02ef92f95fb5f9c88225fe7dd16a6424e497551d48ba95adca",
+      "size_bytes": 6882
+    },
+    "data/validation/temperature/HADCRUT5_BASELINE_METADATA.json": {
+      "sha256": "cb9ba531603c2b860891952bd37025b35fa5400538c8893527580bc27a3ed43c",
+      "size_bytes": 516
+    },
+    "data/validation/temperature/HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv": {
+      "sha256": "45f634f176442a0ebd163844b2a40fb09d98f6217f575b008ddf37ea4c858c88",
+      "size_bytes": 7048
+    },
+    "data/world_grid_5deg.npz": {
+      "sha256": "b58d2129ba92a6b8cc5192b1504628bb0b0828063c68a7ae2136610b87873d95",
+      "size_bytes": 276615
+    },
+    "deep_validation_v2_25_2.py": {
+      "sha256": "f6d18426ddf370fc184a466ffa6c1148088223ecfa1eb3a26432dd32840a7c09",
+      "size_bytes": 3654
+    },
+    "dependency_integrity.lock.json": {
+      "sha256": "d49723c02ac5b9f3f92d28e5e33603bc1b5fa9b5f0be4e4f041f0b4bc24223b9",
+      "size_bytes": 22484
+    },
+    "development_regression_benchmarks.json": {
+      "sha256": "70f92f5491b6311561f45d80f69f4accaa9672ceb117edbb3fca17d2c3ab22ad",
+      "size_bytes": 5458
+    },
+    "docs/AMOC_FORCED_HEAT_CLOSURE_2026_09_14.md": {
+      "sha256": "e66897969532f322af86fbd36d14ac9102138bfb1bfbba2095966a15069a3e59",
+      "size_bytes": 9129
+    },
+    "docs/CONVECTION_REVIEW_FOLLOWUP_2026_09_14.md": {
+      "sha256": "8621f16bfb3b99359275ae940bdc3d0a3035b1dc0cf8f6fe788aa749f95a41ea",
+      "size_bytes": 7982
+    },
+    "docs/CURRENT_MODEL_REVIEW_FIXES.md": {
+      "sha256": "20d2dc7767473f9be85a7062785ccf0cd8e8f36c996e3b0eeb14798bfbdf90d0",
+      "size_bytes": 6938
+    },
+    "docs/CURRENT_MODEL_VALIDATION_RESULTS_2026_09_11.md": {
+      "sha256": "ca0540eafdcf626137ba6aad1b33f9dd256cd584f71a6c6751b7502b687b10ff",
+      "size_bytes": 3927
+    },
+    "docs/MODEL_LIMITATIONS.md": {
+      "sha256": "2330cb0b7e82b8af54e66b46c8f274342f121e21f0258ffa07d71278309264cb",
+      "size_bytes": 11434
+    },
+    "docs/NAME_CHANGE.md": {
+      "sha256": "def3a5e7c5f89ff5a114c30fd2a3a3a3b19a4e3b681580e9b69be037ff9c3224",
+      "size_bytes": 896
+    },
+    "docs/PACKAGING_AUDIT.md": {
+      "sha256": "0b5137c08fd7eedfc1b8709f7017dfd73cb6d88dfd304b832d854cbdf6a2b01c",
+      "size_bytes": 1152
+    },
+    "docs/PHYSICS_REPAIR_R13.md": {
+      "sha256": "7c872fbd494446fa970c72a043f0f16df15fffc3474eff11df19188ee9d1d461",
+      "size_bytes": 500
+    },
+    "docs/PHYSICS_REVIEW_REPAIRS_2026_09_12.md": {
+      "sha256": "92e2dc243a33ee1d5e9f216f3e0e3985e76ccafa228976defdb08c621779b9d1",
+      "size_bytes": 19963
+    },
+    "docs/RECOVERY_EXTENSION_RESULTS_2026_09_12.md": {
+      "sha256": "a773c081227cba236ab8c732c273b98618ef23ed80a57b214e346b5c619c7571",
+      "size_bytes": 3086
+    },
+    "docs/REPAIR_R11_RESULTS_REVIEW.md": {
+      "sha256": "34a45a9b44911a9c3af412432e9e51b4312c0a98da0e82f8ac59fbc74dea855e",
+      "size_bytes": 2388
+    },
+    "docs/REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "166291ec85509dfd454162684f93329fcede0af57a0627d236f9f279e978bbc2",
+      "size_bytes": 2380
+    },
+    "docs/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "cd2052abd7d98eb512e56899371ac89f8cdb54167a36a908a56aa0adeb183499",
+      "size_bytes": 2353
+    },
+    "docs/VALIDATION.md": {
+      "sha256": "7f32406277b37c2b958d4b07578550deac8124bfbf97ae608afa4070b2b4d017",
+      "size_bytes": 6667
+    },
+    "docs/VERSIONING.md": {
+      "sha256": "e1fce338f973eac87b1cfd470c7b2da87cec67f54862a6ff953a16b6fff2af79",
+      "size_bytes": 1671
+    },
+    "docs/internal-repair-history/PACKAGING_AUDIT_V2_29_28_PUBLIC_RENAME.md": {
+      "sha256": "c37b31d355b550d521214b899300b3bc2082c223f38aed29070b0ac2d385e3f7",
+      "size_bytes": 2521
+    },
+    "docs/internal-repair-history/README.md": {
+      "sha256": "87a2ff8001f16bd78ac006d5082ee75f164fea6e3acc681833aee640a4fd20d6",
+      "size_bytes": 709
+    },
+    "docs/internal-repair-history/legacy-v-labels/PACKAGING_AUDIT_V2_13.md": {
+      "sha256": "83aacc283b3f581af0eca84be0342ded69240cc067b6fa558e9fcccf031e79f9",
+      "size_bytes": 5271
+    },
+    "docs/internal-repair-history/legacy-v-labels/PHYSICS_REPAIR_R13_LEGACY_CONTENT.md": {
+      "sha256": "6c06ab8eecdb52d0265d3b9c0496a63b76f3616a9c2922a04981cf03ef2bb5ee",
+      "size_bytes": 2195
+    },
+    "docs/internal-repair-history/legacy-v-labels/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "6c06ab8eecdb52d0265d3b9c0496a63b76f3616a9c2922a04981cf03ef2bb5ee",
+      "size_bytes": 2195
+    },
+    "docs/internal-repair-history/legacy-v-labels/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "6e0e0c256c83c226ab424369ecb832585c778d6ee29c1d5285cb47d25f2bc913",
+      "size_bytes": 2350
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/MODEL_LIMITATIONS.md": {
+      "sha256": "7544f2e5dc02c6957e399155cd22b46461b9dc5276e9b912a98da39cec158d64",
+      "size_bytes": 746
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "6c06ab8eecdb52d0265d3b9c0496a63b76f3616a9c2922a04981cf03ef2bb5ee",
+      "size_bytes": 2195
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/README_VALIDATED_PACKAGE.md": {
+      "sha256": "443020fbde06da0a43dc94b08a01b3f2b2cbf7308465ff44c3576a43e2e6288e",
+      "size_bytes": 4726
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "cd2052abd7d98eb512e56899371ac89f8cdb54167a36a908a56aa0adeb183499",
+      "size_bytes": 2353
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "6e0e0c256c83c226ab424369ecb832585c778d6ee29c1d5285cb47d25f2bc913",
+      "size_bytes": 2350
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/VALIDATION.md": {
+      "sha256": "89acd9aead6fecef9e2eab02a021115748e7a6d564632e58eed109b52c4a8a4d",
+      "size_bytes": 959
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/ci_validated_package.yml": {
+      "sha256": "0f0fa9d59e46588bf5d6c9de31ee8da2c2d6eee2bf5e5ca3f8c1dab8b2d136b5",
+      "size_bytes": 1670
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_10.md": {
+      "sha256": "72d95300f75cc7698b9bd5f29a929a87eb693a17c202710b3c2e273b915df8ee",
+      "size_bytes": 3025
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_11.md": {
+      "sha256": "e2a8715b89cd83fb4d064e3cbab32d1c37fe1238ec4e12ad1c0dca37e1952c06",
+      "size_bytes": 2456
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_12.md": {
+      "sha256": "284efdbb83523024f600c8a0b8dc72b54683cf2b212241bdbd4060eca52b7875",
+      "size_bytes": 1941
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_13.md": {
+      "sha256": "6c06ab8eecdb52d0265d3b9c0496a63b76f3616a9c2922a04981cf03ef2bb5ee",
+      "size_bytes": 2195
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_5.md": {
+      "sha256": "855b13dbb0fc72a1b4ce0ff23ad3f0fba92f792708c60e48af1d76b558e373e3",
+      "size_bytes": 1989
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_6.md": {
+      "sha256": "268a49a0965afc8ea8d1631d7853498de5a3127e8bfdce7e212bad22a5208471",
+      "size_bytes": 1232
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_7.md": {
+      "sha256": "9aecaf1da4d322f1861b7ba43d0772edbd9b0793e023857c1bac66e2423fff3e",
+      "size_bytes": 2100
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_8.md": {
+      "sha256": "e294f59efa94a48e9a4c8df72781f20c8a6fb0372a83a76c213c13d7454e5273",
+      "size_bytes": 3072
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/PHYSICS_REPAIR_V2_9.md": {
+      "sha256": "56647a1f5d99e52511f760deac247b94ac57fedf000521c142f5720a83a013d8",
+      "size_bytes": 1744
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/README.md": {
+      "sha256": "6694c01c3d5bf09e06a30cd51b9886e27e64be236aae84abb3552090f4974f3f",
+      "size_bytes": 1285
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_10_RESULTS_REVIEW.md": {
+      "sha256": "dbb3f9f88165ef8154def0858cd53776d0e67f050c98f26a4d207e6881578acb",
+      "size_bytes": 2057
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "cd2052abd7d98eb512e56899371ac89f8cdb54167a36a908a56aa0adeb183499",
+      "size_bytes": 2353
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_12_RESULTS_REVIEW.md": {
+      "sha256": "6e0e0c256c83c226ab424369ecb832585c778d6ee29c1d5285cb47d25f2bc913",
+      "size_bytes": 2350
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_6_RESULTS_REVIEW.md": {
+      "sha256": "3948af05117c95258338b744ea1dfb11931a6e9ce2dc9af8f4d9cb04314e969a",
+      "size_bytes": 1855
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_7_RESULTS_REVIEW.md": {
+      "sha256": "337d62fe0cdcced5457c33b7c3b34215633ca6e4add1042ec3c884c375d882d1",
+      "size_bytes": 1244
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_8_RESULTS_REVIEW.md": {
+      "sha256": "20d12facb19ac97cb3ee4c6e470c4e4c95a581ad954a40ff65b13fdab1e212ae",
+      "size_bytes": 3286
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/V2_9_RESULTS_REVIEW.md": {
+      "sha256": "bbef326334b533b1b15cfb1bc6dbb2cdc3bded925d4cb8aa2a745b351828fcc3",
+      "size_bytes": 2393
+    },
+    "docs/internal-repair-history/legacy-v-labels/v2.13/release-package-root/patch_v22.py": {
+      "sha256": "0bf5fc5a788069b7adf7b7b3343bc2dcaf9b9e025d404fef40c4ba5fb8d1da0c",
+      "size_bytes": 17259
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ACTUAL_SEA_ICE_FIX.md": {
+      "sha256": "9e48edb0d4109f84ef525d0f09be5454aad42292a37f441d882bb1740afb5301",
+      "size_bytes": 2810
+    },
+    "docs/internal-repair-history/v2.14-v2.29/AMOC_COMPLETION_COUNTS_V2_16_3.md": {
+      "sha256": "f8c0ca475072d0ad45842360d9732ba7f3edcac5f2b5398a7d865edf4ce0f755",
+      "size_bytes": 1025
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ARCTIC_ACQUISITION_HOTFIX_2026.md": {
+      "sha256": "53713a24028d7a08012677a96608af580203858ed8b03e69347b6f0a2682bcde",
+      "size_bytes": 2014
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ARCTIC_BUNDLE_REVIEW_AND_DATA_REPAIR_2026_08_09.md": {
+      "sha256": "eab79321b422fa2ed27fe8cad14010c1c3f2612a98ca4495fb2c936b82f1c02a",
+      "size_bytes": 4453
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ARCTIC_CORE5_CONTINUE_2026.md": {
+      "sha256": "db02cef427a1114ad353a250809e216deb7aa3a7423ef957160e04056a337dc7",
+      "size_bytes": 910
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ARCTIC_OBSERVATIONAL_RECALIBRATION_2026.md": {
+      "sha256": "80f7e6065c166f1f56686540dc2cfa92571eaf1c3fb2ee82665c4b31654d3f30",
+      "size_bytes": 4016
+    },
+    "docs/internal-repair-history/v2.14-v2.29/CO2_TARGET_SWEEP_V2_19_0.md": {
+      "sha256": "ef5e62fdf44ebac612c3b41bdfdacf8dbf1680b1730c00e2d543b536d8bfed63",
+      "size_bytes": 2654
+    },
+    "docs/internal-repair-history/v2.14-v2.29/CO2_TARGET_SWEEP_V2_20_0.md": {
+      "sha256": "6edcdda62d8207dbbcca18c99ccf4a03643cc28795f280f88b7125fc4d3bb22e",
+      "size_bytes": 4068
+    },
+    "docs/internal-repair-history/v2.14-v2.29/CONTINUOUS_AMOC_V2_16_0.md": {
+      "sha256": "c26f89818d525eba648be7eaef6fe86bb36d23621dbbbf51d69bccd18cb0d2cb",
+      "size_bytes": 3552
+    },
+    "docs/internal-repair-history/v2.14-v2.29/FRESHWATER_MONTE_CARLO_V2_16_0.md": {
+      "sha256": "e6d0e0c7cac7f63d9b798cfb08dc55a5c4a80160083b315deb66f4700409f105",
+      "size_bytes": 1029
+    },
+    "docs/internal-repair-history/v2.14-v2.29/GUI_STARTUP_HOTFIX_V2_29_17.md": {
+      "sha256": "0f1ebf6d3a0cdc48918a68c7bb1866d16ee138f268aef68bd6a1279736d810f6",
+      "size_bytes": 1049
+    },
+    "docs/internal-repair-history/v2.14-v2.29/HYBRID_SSP_RATE_SPLICE_V2_16_1.md": {
+      "sha256": "79b417f29b42bddcb89a2b5336dbfe9a1ca5dcd20128c5a265721ac5b64b0c16",
+      "size_bytes": 1806
+    },
+    "docs/internal-repair-history/v2.14-v2.29/ITEMS_1_4_OBSERVATION_OPERATOR_FIXES_2026.md": {
+      "sha256": "06faefa3c886e13b43516807954dc997814d7c2f810e1ba43bc67fe2e4e48ff0",
+      "size_bytes": 4838
+    },
+    "docs/internal-repair-history/v2.14-v2.29/LONG_HOLD_SALINITY_EXCHANGE_V2_18_2.md": {
+      "sha256": "f97d8b7445826879282dc2a94c05e1f3f1cedbf6e172afa0b1d30a07cbfe9270",
+      "size_bytes": 3392
+    },
+    "docs/internal-repair-history/v2.14-v2.29/NSIDC_0611_ACQUISITION_FIX_2026.md": {
+      "sha256": "bda3e29aefc1d84778f4db279726f063fa1511cd7cabb2a8fd942eb70b5a1339",
+      "size_bytes": 2007
+    },
+    "docs/internal-repair-history/v2.14-v2.29/NSIDC_0611_LEGACY_AUTH_FIX_2026.md": {
+      "sha256": "9aba7b071e2ee5956a409580f0b02e5a7fd43ab475f2b367334f355b58b055ee",
+      "size_bytes": 1836
+    },
+    "docs/internal-repair-history/v2.14-v2.29/OUTPUT_ASSESSMENT.md": {
+      "sha256": "9791ec4ce32a52f80f159e7762202c2e369cebbd17a9a7d8a587c0e62a949aec",
+      "size_bytes": 5745
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PERCENT_RAMP_HOLD_V2_18_0.md": {
+      "sha256": "3a998d85ef7ed39dbebddc07c45e428bd0674c990509c207b0bf0eea2cae12de",
+      "size_bytes": 1457
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PERCENT_RAMP_HOLD_V2_18_1.md": {
+      "sha256": "fd97f7b736ed9f19df584ddc8cafe5f10f7f995821d37285e42bb40654303940",
+      "size_bytes": 1740
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PERCENT_RAMP_RATE_INPUT_V2_18_1.md": {
+      "sha256": "6b57d09a7fd85c33aacd82540a7ad9d7473df5bceaa5e8d6017365acbfadf1aa",
+      "size_bytes": 737
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PHYSICS_REPAIR_LOCAL_VERIFICATION.md": {
+      "sha256": "e15dc9ac94fe46be9f38afd24e6aa070f65a089fbf86d28ca9c907e9321a0a0a",
+      "size_bytes": 4205
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PHYSICS_REPAIR_NOTES.md": {
+      "sha256": "adae031144b1d0214b6f473269d15809346fee343f8455e7270c388b445294bb",
+      "size_bytes": 1498
+    },
+    "docs/internal-repair-history/v2.14-v2.29/PHYSICS_REPAIR_R13.md": {
+      "sha256": "7c872fbd494446fa970c72a043f0f16df15fffc3474eff11df19188ee9d1d461",
+      "size_bytes": 500
+    },
+    "docs/internal-repair-history/v2.14-v2.29/POSTERIOR_AMOC_REPORTING_V2_16_4.md": {
+      "sha256": "9dc9464dbff84558d0b6cded576fe80cc97d832b030765e68eb3bcb650b3c42c",
+      "size_bytes": 1459
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R15_1_RESULTS_REVIEW.md": {
+      "sha256": "2c189035af11b34b79e2ea2e467dbfbf62cbd55487cd154892e7ab1d95a6b6e7",
+      "size_bytes": 4742
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R15_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "12029cefa1651ca3ded4e4ea735c851e08ce93d97554c25e11544242f013d617",
+      "size_bytes": 3767
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R15_SEA_ICE_SPATIAL_DESIGN.md": {
+      "sha256": "a5864bb38a209a2f5ca7570de319d225505c21b5ab4c2a0f238cf4a29242aa21",
+      "size_bytes": 1099
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R16_1_TEOS_HOTFIX.md": {
+      "sha256": "37d42638b0c9e4d61da41c617f6e068481e5d1f716070c641f0459e808552e78",
+      "size_bytes": 1422
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R16_2_PROVENANCE_HOTFIX.md": {
+      "sha256": "56a2df5368bb67a47c9cbc3231e085f24857f127098075f3ce6703c23467888c",
+      "size_bytes": 1337
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R16_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "188e1901f660b7ebcae0cb1c1c6942ee84d0f84d8045ae16496d8a87900a3203",
+      "size_bytes": 5648
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R16_RESULTS_REVIEW.md": {
+      "sha256": "4ec9351170204dff0ebb1e5b5ebfe335d7f173645a254dfc4557f794734f56a3",
+      "size_bytes": 6376
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R16_SEA_ICE_EXTENT_REPAIR.md": {
+      "sha256": "703324768d5ce511522bd02e97cac5e568a3d3b7e768b059313e5f68604b621a",
+      "size_bytes": 2406
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R17_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "92828246d8ebde847343a42e098cdea514792628b201e71fd5dd7b88b1aa6bac",
+      "size_bytes": 3897
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R17_RESULTS_BASELINE.md": {
+      "sha256": "5d8225fb891de5228f587a78d113e41cd2b9e9371e6a0fbf0652467b5a9b3d55",
+      "size_bytes": 851
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R17_RESULTS_REVIEW.md": {
+      "sha256": "984e9beaa6dc134f10320e80590c16aa063877759d6d9d43d934ca48abadac79",
+      "size_bytes": 1053
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_1_FINALIZER_AND_AMOC_DIAGNOSIS.md": {
+      "sha256": "0275ad1493b12266011e020dd32c1d4de21c10f0f1252534a0b3241a47b24dc0",
+      "size_bytes": 2813
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_2_OBSERVATION_OPERATOR_HOTFIX.md": {
+      "sha256": "3a91ab676762c58e82e7e73f5ad0139b5cad5929f8c2b3f7c4a1959c52dcb8f6",
+      "size_bytes": 1927
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_2_RESULTS_REVIEW.md": {
+      "sha256": "a9e10b9ef95a556e28aebdf6db599f83b3e1cba72ff653f194e49345873b1b32",
+      "size_bytes": 2620
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_3_FINAL_RELEASE_AUDIT.md": {
+      "sha256": "9d9a0c287acbf6c8367cfa5677a7ce108e4b4a94a23fa7a8ef91d14a84892dd7",
+      "size_bytes": 8825
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_4_NSIDC_0611_INTEGRATION.md": {
+      "sha256": "d6395b413ae77f93d95fc1b525dce0456a2bb6e2f112e58bf2a9cacbd8b8101d",
+      "size_bytes": 2012
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_5_1_NSIDC_ATTRIBUTION_MAINTENANCE.md": {
+      "sha256": "67f433317c2824c903d0d8d177d43866558881a59b5c7f2e6e6d2028937ca749",
+      "size_bytes": 707
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_5_PACKAGE_AUDIT.md": {
+      "sha256": "4d039ab0ef9b725ead6080b4b8c929235b839c3eb72a14e282308057c4edfcf9",
+      "size_bytes": 3237
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_5_PUBLIC_RELEASE_MERGE.md": {
+      "sha256": "f41f9fee594de81c59ee1f5042ab4ac91cbb47164965c9d7dc12033225f64650",
+      "size_bytes": 1378
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_IMPLEMENTATION_AND_LOCAL_VALIDATION.md": {
+      "sha256": "4e8ba856e0800ae6846c31b34c293038130b3aff51a2bd2622619dade0c984ac",
+      "size_bytes": 1281
+    },
+    "docs/internal-repair-history/v2.14-v2.29/R18_RESULTS_REVIEW.md": {
+      "sha256": "b3cce5dec04c2dd05d77ac8fcfa7a33863e784b2b0aed4e80ed77f641a3e4722",
+      "size_bytes": 4275
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REPAIR_R11_RESULTS_REVIEW.md": {
+      "sha256": "34a45a9b44911a9c3af412432e9e51b4312c0a98da0e82f8ac59fbc74dea855e",
+      "size_bytes": 2388
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "166291ec85509dfd454162684f93329fcede0af57a0627d236f9f279e978bbc2",
+      "size_bytes": 2380
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REVIEW_FIXES_V2_17_1.md": {
+      "sha256": "f32802eafdad864947d2075433a5429361324f28d0eb873952f60aee23f2dfaf",
+      "size_bytes": 3494
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REVIEW_FIXES_V2_21_0.md": {
+      "sha256": "f16175e7230342c7d92eeb2e4ee9276ad140ce0e6b23bb56fb51d7e3d5535ca6",
+      "size_bytes": 3130
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REVIEW_FIXES_V2_22_0.md": {
+      "sha256": "2fc11ff333d3cc84619e8648167a2eb6f9cd571b0ad98bc2a3dafe3bac14d92c",
+      "size_bytes": 2431
+    },
+    "docs/internal-repair-history/v2.14-v2.29/REVIEW_FIXES_V2_23_0.md": {
+      "sha256": "b5ad8f62738b8eb8cade7412ee86bc758dc400d57371c3b206f52e1c35e8e016",
+      "size_bytes": 3234
+    },
+    "docs/internal-repair-history/v2.14-v2.29/RUN_POSTERIOR_V2_17_0.md": {
+      "sha256": "075fc73a19efd76263c10df27b8cde89b23a8d62d62c30b44804d1421d855796",
+      "size_bytes": 1490
+    },
+    "docs/internal-repair-history/v2.14-v2.29/SCIENTIFIC_REVIEW_FIXES_2026.md": {
+      "sha256": "d528a0e42a04beb1bfe1f52953d90dc5b0447cb5108a44b9d54870f08e17c4c0",
+      "size_bytes": 7936
+    },
+    "docs/internal-repair-history/v2.14-v2.29/SIX_SOURCE_ARCTIC_VALIDATION_2026.md": {
+      "sha256": "4beb80285c50181594e3988f4e9fde2b44652f392359bb732f4a102ae24d7519",
+      "size_bytes": 3639
+    },
+    "docs/internal-repair-history/v2.14-v2.29/STRUCTURAL_AMOC_FIXES_V2_17_0.md": {
+      "sha256": "e727759993c800ec222605e2fe530ef4eff27f63eda4de9a47aa14d40b524d7e",
+      "size_bytes": 2825
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_20_0_IMPLEMENTATION.md": {
+      "sha256": "10915f23090a4a3ca10689e34d1451afcf22fbca43fe1b7aa0a0d703fb04019f",
+      "size_bytes": 2895
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_23_COMPATIBILITY_V2_26_0.md": {
+      "sha256": "9d4862d325ff99c729b5b52ad56f749920aadc56426d0a6ad042e74e12776c11",
+      "size_bytes": 3698
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_23_COMPATIBILITY_V2_27_0.md": {
+      "sha256": "19132a8a9ad9338b4217c94de414ea75176a40d7138d30d7f5d3db7f15df4282",
+      "size_bytes": 3559
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_24_0_ACCURACY_FIXES.md": {
+      "sha256": "1460e96c9bc70af6790d3d2afe5a38d818e532dc83ee2c3526341eaab9cf17d8",
+      "size_bytes": 2444
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_25_2_SEASONAL_ARCTIC_AND_AMOC_FIXES.md": {
+      "sha256": "22083441a4eb17abe93c6ed3b059bd3329d7765b9bacf51da7ade9bff462ca99",
+      "size_bytes": 5889
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_26_0_THERMODYNAMIC_ARCTIC.md": {
+      "sha256": "07f31c36e05cbb37f81ad683d4be6174def7f38ee978d0b3696f4967fb012b1a",
+      "size_bytes": 5828
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_27_0_ARCTIC_GREENLAND_REBUILD.md": {
+      "sha256": "cb4079238d133c5292f4bc2965e8230b44babcd1f3571cd16d83ad2c70001c66",
+      "size_bytes": 7219
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_27_1_ARCTIC_MAINTENANCE.md": {
+      "sha256": "044592c634fee7acb23e1104f41c39530d1e68bae9792722baeb8a6220588840",
+      "size_bytes": 3393
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_28_0_FRACTIONAL_ARCTIC.md": {
+      "sha256": "0d52b28f78548a3cfbe2789b5fe04ff9814a4c159d145de484a415b6d7a4366b",
+      "size_bytes": 3855
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_28_1_INTERFACE_MAINTENANCE.md": {
+      "sha256": "cb1b70fafe4eb4ae35be6f441362c9b50343769ee0615e4daba1105023829ab2",
+      "size_bytes": 2443
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_0_COUPLED_ARCTIC_OCEAN.md": {
+      "sha256": "c459d6c391cab8644feb91c97fb1a3d2290ebfdaa1c526ab1e58f0d19d523463",
+      "size_bytes": 2003
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_10_INTEGRITY_RECOVERY.md": {
+      "sha256": "75b7ab3f1691d5893952189c4d5880f3cef5c43c5ccc90dc02983d6808aedac6",
+      "size_bytes": 4761
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_11_TARGET_BASELINE_SAFETY.md": {
+      "sha256": "733240038cd0c26238f701a49df206385223bd141edd1524580aba0e810d3b75",
+      "size_bytes": 3046
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_12_MONTE_CARLO_INTEGRITY.md": {
+      "sha256": "9b834d80c601d703bd1c0fc24ea2926b67758febddf82c920341d7462c0d63bb",
+      "size_bytes": 3454
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_13_INTEGRITY_AND_AMOC_BASELINE.md": {
+      "sha256": "749a7bb227766669b98e8d2e4705e0e99d12496a768dd1f430dfc455913cb557",
+      "size_bytes": 3891
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_14_RECOVERY_AND_WINTER_SEA_ICE.md": {
+      "sha256": "a83f97829a0cbb40c50480b4f88ed84a025ed035fe65547da2f03c91318b4a8f",
+      "size_bytes": 5381
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_15_WINTER_SEA_ICE_INTEGRITY.md": {
+      "sha256": "6d94c4f2abf713fc2d13d8050d49f8edd520b4f22f967dd2f6d9a3bb6976c538",
+      "size_bytes": 5311
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_16_RELEASE_INTEGRITY_AND_OUTPUTS.md": {
+      "sha256": "6d4b437712ae56a59bbdf2cf5025fa16f4a3b29e1d118444c4921f02166b410c",
+      "size_bytes": 2298
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_17_ARCTIC_SWEEP_INTEGRITY.md": {
+      "sha256": "ec2227f94bb8cd7a181dec304e226dfea193de6ee1a699b3af30eb6542d1dd23",
+      "size_bytes": 4284
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_18_ARCTIC_CALIBRATION_AND_TARGET_SURVIVAL.md": {
+      "sha256": "eb2e82fd0d58442f1b6906d7072f5b0396d0faa8d0065e2a61c518af3d85f4bd",
+      "size_bytes": 7538
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_1_ARCTIC_PHASE_CONSISTENCY.md": {
+      "sha256": "e6a8f1027a4133382be68906de15cefb43e3cc3d62a8716113891052ad099c07",
+      "size_bytes": 4252
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_20_IMPLEMENTATION_AND_CHANGELOG.md": {
+      "sha256": "d547658fb0595b54cb66ef5e9d63eb12c5fbad9600c9e7de9eae279e09fd8c60",
+      "size_bytes": 905
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_20_PROGNOSTIC_SEA_ICE_AND_COUPLED_VALIDATION.md": {
+      "sha256": "3999d55cfd40a9d754f02857f96376fbc9beb08060e0ecf805c03b56b750b0b8",
+      "size_bytes": 1063
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_20_REVIEW_CORRECTIONS.md": {
+      "sha256": "608439dc3936612e643e16da8622ce11cb237012e4766ac253e82a9e5aa046bc",
+      "size_bytes": 860
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_21_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "2c9a65de6c904669b13d2d804c3f6fc2e4030b9d601b0bf5783f50167b0f39af",
+      "size_bytes": 6930
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_22_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "a98971db99c1a98d65a11d4b5fb91495277342940b434f0f6e4aad549136910c",
+      "size_bytes": 2546
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_23_ENGINEERING_CORRECTIONS.md": {
+      "sha256": "4e62470281fd743ffdf1a9d622188a6443633f907cdd3c7aaf9ad52a7b4f0c58",
+      "size_bytes": 3815
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_24_REVIEW_FIXES.md": {
+      "sha256": "89d42fbe392931fc4679ab7e26027b233c02ca15463619a445be902ed311afdf",
+      "size_bytes": 5413
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_25_REVIEW_FIXES.md": {
+      "sha256": "4337c334dbfa8c3cd722ed427ebfd44e4f835c4ad6af311ae0cd8e1f120c9847",
+      "size_bytes": 2154
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_26_ARCTIC_OBSERVATIONAL_RECALIBRATION.md": {
+      "sha256": "9e485eb8c7893cfbe7393caa29a8f50b9faa130d62218bcd171633e38ce2c12e",
+      "size_bytes": 2058
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_27_ARCTIC_VALIDATION_AND_RELEASE_INTEGRITY.md": {
+      "sha256": "7ad5c262d61881791dc65ea1e27874a6b80938a7ed709197a77f8823b3283687",
+      "size_bytes": 1287
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_28_ARCTIC_TREND_AND_VALIDATION_INTEGRITY.md": {
+      "sha256": "1638cf29daf2e01c6e1ed3bb512232e3b267122aee77055e10234b3bf50ac2e4",
+      "size_bytes": 2994
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_2_RELEASE_INTEGRITY.md": {
+      "sha256": "9241b505a6d73346c70bec912ccc57de0109dc874030471de6faeb06b3707c54",
+      "size_bytes": 3305
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_3_OPERATIONAL_SAFETY.md": {
+      "sha256": "4982cfcc6f2659c7f9a83e46d0d5ad2690185c41cac256b9708f58164c70f7a3",
+      "size_bytes": 4220
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_4_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "f072e4b66b3ff10c56064d0d660040df97e10911a701566401e6e67b0ebb8fea",
+      "size_bytes": 6082
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_4_POST_FIX_REVIEW.md": {
+      "sha256": "4efad8b09ac8d8d4316ec3f0c8d9d9646a080e53369f61e4dc192b11edc37bd1",
+      "size_bytes": 4692
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_5_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "6564621755f393f95c3217019148ce28bb034801319161d6ab64ec8664a77098",
+      "size_bytes": 3393
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_5_POST_FIX_REVIEW.md": {
+      "sha256": "a7f28ef1e65f79c1313f9317fb4131d0018bd706ee0ad3d7a496dca8dcd676bc",
+      "size_bytes": 2029
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_6_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "49e3604c69b9a7557c9bf59f6432650eac1740cba68c5d394706efc3e5a00807",
+      "size_bytes": 3895
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_6_NATIVE_ARCTIC_INTEGRITY.md": {
+      "sha256": "0843eecb4737fe507d5edf6ea36b2b1c897d67dc834bfbf2133ce17f2b64646b",
+      "size_bytes": 2417
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_6_POST_FIX_REVIEW.md": {
+      "sha256": "6e68f205205f0d5a07e6b67036afe797f0f9f62d9f35ad837e435346991fa74e",
+      "size_bytes": 3637
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_7_ACCURACY_AND_VALIDATION.md": {
+      "sha256": "6833726477dc7133146ef217104f057980b0dc4753f6419a33f791650eb44cb0",
+      "size_bytes": 3915
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_7_NATIVE_ARCTIC_INTEGRITY.md": {
+      "sha256": "f9d2ac531f8cbaf6cc7ce563aa4a42ec9586752ff346343e4f1671630206970a",
+      "size_bytes": 3834
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_7_POST_FIX_REVIEW.md": {
+      "sha256": "cb847f0991d93c7b5790dd826b8e7275020eb89ecd286e45d0c37666508d9a1b",
+      "size_bytes": 2620
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_8_RESUMABLE_LONG_RUNS.md": {
+      "sha256": "19be22e58af1197f574a42addeccd113fb2da5a8a6cff775c00ade12e0a49469",
+      "size_bytes": 3123
+    },
+    "docs/internal-repair-history/v2.14-v2.29/V2_29_9_SCIENTIFIC_REVIEW_FIXES.md": {
+      "sha256": "503a4584af32096964561bf209dce8a7363b62af1bb4002ba704a426a6577c85",
+      "size_bytes": 7429
+    },
+    "docs/original-repository-root/README.md": {
+      "sha256": "d0c63f33933b17ea11718777a824d829a5b77530a435f3fc3e125c0ad7024bbf",
+      "size_bytes": 172
+    },
+    "external_posthoc_sanity_benchmarks.json": {
+      "sha256": "1b9230c31288e73ed429ab3640a7222b7001138c652be5088d075388ff57f89a",
+      "size_bytes": 1446
+    },
+    "full_regression_test.py": {
+      "sha256": "d0ca67c474cc1ae075660dda1edafcaa5ea735ed945c2e04d4d82c446d1e6a5e",
+      "size_bytes": 3411
+    },
+    "gui_layout_test.py": {
+      "sha256": "50eb1520180513f93715ec01d54e34030ba0f602383e4031ea93bd8e2bd000d9",
+      "size_bytes": 1385
+    },
+    "gui_smoke_test.py": {
+      "sha256": "dedbc0a89f3ce2c90a5280974e187cb4bf82075ace2839f45a032911fa545676",
+      "size_bytes": 4011
+    },
+    "gui_startup_smoke_test.py": {
+      "sha256": "547324a823c7d8e5bf65a7f2261c25ab6d128ac698a5130a9e518d01f3bcc51d",
+      "size_bytes": 617
+    },
+    "held_out_amoc_benchmarks.json": {
+      "sha256": "67094e5d48b0688c4d0e72848362b0426e4a7187b92c6d2853150cb9a467b40a",
+      "size_bytes": 4420
+    },
+    "held_out_amoc_validation.py": {
+      "sha256": "83137f70da5b4590e9436a87e960398ec403c5784cb549bc8cf3d3f9d9f160a5",
+      "size_bytes": 16440
+    },
+    "hybrid_ssp_transition_test.py": {
+      "sha256": "3c087d0a6673e62d678c9ea0425609cae7b243bf1532d8e3879a656fa3c76ea8",
+      "size_bytes": 2470
+    },
+    "isolated_pytest_exit.py": {
+      "sha256": "a97dca1420e6b869e8a35fbf8cc8e4ff7a2ae308910285ac08a723ebd907a1d4",
+      "size_bytes": 268
+    },
+    "launch_gui.pyw": {
+      "sha256": "989355fd37f858985a56618076ebe2f6c51265a0675cf93c549b253ca4ad9ca5",
+      "size_bytes": 1367
+    },
+    "long_hold_salinity_exchange_test.py": {
+      "sha256": "d3103445cc62c27fc32ed8b1624c7268ca11b01afc38a7d8bb12f08245b701b2",
+      "size_bytes": 3842
+    },
+    "monte_carlo.py": {
+      "sha256": "1bb6202916763254709311d6fdf9bf9635e283ebc93736a2f30ecaa9c7f879c7",
+      "size_bytes": 167943
+    },
+    "monte_carlo_smoke_test.py": {
+      "sha256": "94b0588cade1261bf692733f2a226a1aea09c1628ed6827e23c7c63a8445892c",
+      "size_bytes": 6689
+    },
+    "outputs_ssp245_amoc_repaired/README.md": {
+      "sha256": "e74fb5a5dcb758267e8475b329244aab1d9b72f394a7bfd88ee55c92874b230a",
+      "size_bytes": 465
+    },
+    "parameter_activity_r15.py": {
+      "sha256": "ddf7f19ec37199452b20eaa8f3042c50ac56f7057b8bb997babb030992eb6f75",
+      "size_bytes": 1398
+    },
+    "parameter_activity_r16.py": {
+      "sha256": "aa27dbc631f9e32b4a4d4dee95da92561f6ed98946c2bd189526473eea8cb17c",
+      "size_bytes": 1476
+    },
+    "percent_ramp_hold_test.py": {
+      "sha256": "623a519df7c4a1e032dda67d251ff7b74d8cf06c9d5996bdef087aabd7adec93",
+      "size_bytes": 3950
+    },
+    "physics_recovery_extension_20260911/extend_recovery_validation.py": {
+      "sha256": "4eadcbb7d240f6f6d1e05b79df5b61b8446f2208abd993fbc53c6467ea4572b2",
+      "size_bytes": 10510
+    },
+    "physics_review_followup_20260914/coupled/amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "physics_review_followup_20260914/coupled/climate_model.py": {
+      "sha256": "6cf686b11f8b6210c3e311a3ac72587809a13d788a6b044fc051bc636513a832",
+      "size_bytes": 758875
+    },
+    "physics_review_followup_20260914/recovery/amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "physics_review_followup_20260914/recovery/climate_model.py": {
+      "sha256": "6cf686b11f8b6210c3e311a3ac72587809a13d788a6b044fc051bc636513a832",
+      "size_bytes": 758875
+    },
+    "physics_review_followup_20260914/ssp245/amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "physics_review_followup_20260914/ssp245/climate_model.py": {
+      "sha256": "6cf686b11f8b6210c3e311a3ac72587809a13d788a6b044fc051bc636513a832",
+      "size_bytes": 758875
+    },
+    "physics_review_forced_heat_20260914/amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "physics_review_forced_heat_20260914/climate_model.py": {
+      "sha256": "c88cee69c335a50123bd520a36c5dd1767591c7e81e9071e9cae4a2b32dbeb2f",
+      "size_bytes": 766321
+    },
+    "physics_revision_20260912/README.md": {
+      "sha256": "c7e1b4664326584f8f4107f6302a8e47da1ca60838ca44e73640e82b754c7675",
+      "size_bytes": 497
+    },
+    "physics_revision_20260912/amoc_density_r16.py": {
+      "sha256": "ce2ba84068cdb908dd612c9629ca215f75391e0f6defef52ae25871d64dda122",
+      "size_bytes": 3530
+    },
+    "physics_revision_20260912/climate_model.py": {
+      "sha256": "8260ddb0866e3027a139ea9afd5edad2830ec57c3df0d8a96cff4cbcdf806ef5",
+      "size_bytes": 758663
+    },
+    "physics_verification_results/PHYSICS_REPAIR_R13.md": {
+      "sha256": "7c872fbd494446fa970c72a043f0f16df15fffc3474eff11df19188ee9d1d461",
+      "size_bytes": 500
+    },
+    "physics_verification_results/REPAIR_R12_RESULTS_REVIEW.md": {
+      "sha256": "166291ec85509dfd454162684f93329fcede0af57a0627d236f9f279e978bbc2",
+      "size_bytes": 2380
+    },
+    "physics_verification_results/climate_model.py": {
+      "sha256": "bc83e8906ec37b07a47d25649456eee90a1b8e4d877f186233241c1b670db098",
+      "size_bytes": 733666
+    },
+    "physics_verification_results/verify_physics_local.py": {
+      "sha256": "27457db94dc7500091c76744b6e244992bfc0a064623e0068337cbc24e95b3e5",
+      "size_bytes": 89028
+    },
+    "process_tree_stop_test.py": {
+      "sha256": "95201172f46a0ac06b21c78fc080f8751f16ff8755e71d3402ec40c40003eb2a",
+      "size_bytes": 2577
+    },
+    "prospective_validation_r16.py": {
+      "sha256": "97516146bc984d6e278e6e86fdca01d1c287ad51c75730c6bb06378d61250c7e",
+      "size_bytes": 3903
+    },
+    "provenance/README.md": {
+      "sha256": "02a21b9a63b0645a9259d85cb9ddb01a4329dd5387eca78284f647973cabfd56",
+      "size_bytes": 320
+    },
+    "provenance/r16-parent/climate_model.py": {
+      "sha256": "ddcd2272bf2d10ed9d9eacb9fabdc5e65db7fdfc3e3e23a09e85d5bfffc2ba40",
+      "size_bytes": 676592
+    },
+    "provenance/r16.2-parent/climate_model.py": {
+      "sha256": "08662fef5d83154d8bc43420705a937c6acbc4b52b4677a6e20536d73193506e",
+      "size_bytes": 677289
+    },
+    "provenance/r16.2-parent/run_r16_2_teos_validation.bat": {
+      "sha256": "1cf0a0c85251f8c024582232f7d7b432edc715b7f1dca1cf667159c401eb5f3b",
+      "size_bytes": 298
+    },
+    "provenance/r16.2-parent/run_r16_2_teos_validation_debug.bat": {
+      "sha256": "4ccc051f71bddf2fb47a793826492b7ac9eb48fe845a8d28a2f4c4e99030688f",
+      "size_bytes": 164
+    },
+    "provenance/r16.2-parent/run_r16_local_validation.bat": {
+      "sha256": "7bf380ebdf8195f97980ff017b150c69f8a2b3a40e6147d0902395c51f50d79a",
+      "size_bytes": 246
+    },
+    "provenance/r16.2-parent/run_r16_local_validation_debug.bat": {
+      "sha256": "24ad4502923f0cd889ef80e506ecc2983a71bc8bdd8d061478e0473c9244438f",
+      "size_bytes": 111
+    },
+    "provenance/r16.2-parent/sea_ice_observation.py": {
+      "sha256": "7d346f90b87d4940a379c1afd50cefaa8184bd3ea6a91fb10fef4e8406774a65",
+      "size_bytes": 14353
+    },
+    "provenance/r16.2-parent/tests/test_r16_2_provenance_hotfix.py": {
+      "sha256": "5194c4a99c7229066f61adc46acb618402b97221c4ba7b2dde448bd9e437bb75",
+      "size_bytes": 2236
+    },
+    "provenance/r16.2-parent/verify_r16_local.py": {
+      "sha256": "75962098dfcab3e5b2fb3d24ce144a86a8d1847be31765a035959838eafb4947",
+      "size_bytes": 62597
+    },
+    "provenance/r17-parent/arctic_observation_operator.py": {
+      "sha256": "1f07bab842583ec0676bcecda86a2b4cd4a464e14ae4eb23daf947e6af9b716a",
+      "size_bytes": 10429
+    },
+    "provenance/r17-parent/climate_model.py": {
+      "sha256": "7e80b668de0f30d278ec2b79de6438c4d0a89b546eca3585d6efb37132e2e450",
+      "size_bytes": 690161
+    },
+    "provenance/r17-parent/run_r17_local_validation.bat": {
+      "sha256": "08705c7d37ceef333bd1d8a70b831ae31422030be18ebb71306706d88dbbf698",
+      "size_bytes": 386
+    },
+    "provenance/r17-parent/run_r17_local_validation_debug.bat": {
+      "sha256": "1c65d193818845e50eb37e5f28848a430813b40ae6bf6ef5e7381988327f5d4f",
+      "size_bytes": 139
+    },
+    "provenance/r17-parent/run_r17_recovery_validation.bat": {
+      "sha256": "e07fe04c654776c2462044aa8ee23c4ba10972609f946b41b079c57c4907aec3",
+      "size_bytes": 187
+    },
+    "provenance/r17-parent/run_r17_sea_ice_validation.bat": {
+      "sha256": "2c9cd78493893db63afc8791bc2b2fb0b8884e6c9ebddbfd36d53a27a8df4622",
+      "size_bytes": 140
+    },
+    "provenance/r17-parent/run_r17_teos_validation.bat": {
+      "sha256": "d9620e63f422f3883f7b4e2a4017a1aa75b78a86a38d00919776c3adaeeb2efc",
+      "size_bytes": 352
+    },
+    "provenance/r17-parent/sea_ice_observation.py": {
+      "sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+      "size_bytes": 16332
+    },
+    "provenance/r17-parent/sea_ice_validation.py": {
+      "sha256": "3b09c45fef054ebadb29beacb5a8ce9b3c6480e1ed4c6c20f10dbb6716d1cf63",
+      "size_bytes": 72643
+    },
+    "provenance/r17-parent/tests/test_r17_spatial_teos_recovery.py": {
+      "sha256": "c97109841a46bc176f61a5dce940beeb259b28326798fdffedfdbbb9777e2634",
+      "size_bytes": 8927
+    },
+    "provenance/r17-parent/verify_r17_local.py": {
+      "sha256": "c90302f0f0074b8fe20e4178c71b482c37ce4736dc397d386e12fd372cedcb24",
+      "size_bytes": 59344
+    },
+    "provenance/r18-parent/climate_model.py": {
+      "sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+      "size_bytes": 693217
+    },
+    "provenance/r18-parent/run_r18_local_validation.bat": {
+      "sha256": "c58a8d752ba6e76983b08ce8586904174d39cde428d32d78b640a55df0df9877",
+      "size_bytes": 219
+    },
+    "provenance/r18-parent/run_r18_local_validation_debug.bat": {
+      "sha256": "91d7f95ddd5b8ac9cf5b56320894ee103bf5cff2ec44923eb70fe930e5288052",
+      "size_bytes": 159
+    },
+    "provenance/r18-parent/run_r18_recovery_validation.bat": {
+      "sha256": "134d5df5d9398130c8a9f2976ae1130002341e783e4580c2c9387c5ac2da96df",
+      "size_bytes": 130
+    },
+    "provenance/r18-parent/run_r18_sea_ice_validation.bat": {
+      "sha256": "535467607bd5b9fffef45dda08b26554165953e07f6b1f9c78aaa30b22020ef3",
+      "size_bytes": 129
+    },
+    "provenance/r18-parent/verify_r18_local.py": {
+      "sha256": "bddbf864b16cbefb162b7fdd52b849e90db9db7dbe3effa438a666ce2e977109",
+      "size_bytes": 69106
+    },
+    "provenance/r18.1-parent/R18_RESULTS_REVIEW.md": {
+      "sha256": "b3cce5dec04c2dd05d77ac8fcfa7a33863e784b2b0aed4e80ed77f641a3e4722",
+      "size_bytes": 4275
+    },
+    "provenance/r18.1-parent/arctic_observation_operator.py": {
+      "sha256": "28d37a9505d9387434fd5a1157923b8eeed56a253600f2783e6bb31c53e421ba",
+      "size_bytes": 11872
+    },
+    "provenance/r18.1-parent/climate_model.py": {
+      "sha256": "e1553c1baccd7a90974f7879dd664a8a4b447adec5bd93407bbc5dd0e2c9bd90",
+      "size_bytes": 693217
+    },
+    "provenance/r18.1-parent/run_r18_local_validation.bat": {
+      "sha256": "c58a8d752ba6e76983b08ce8586904174d39cde428d32d78b640a55df0df9877",
+      "size_bytes": 219
+    },
+    "provenance/r18.1-parent/run_r18_local_validation_debug.bat": {
+      "sha256": "91d7f95ddd5b8ac9cf5b56320894ee103bf5cff2ec44923eb70fe930e5288052",
+      "size_bytes": 159
+    },
+    "provenance/r18.1-parent/run_r18_recovery_validation.bat": {
+      "sha256": "134d5df5d9398130c8a9f2976ae1130002341e783e4580c2c9387c5ac2da96df",
+      "size_bytes": 130
+    },
+    "provenance/r18.1-parent/run_r18_sea_ice_validation.bat": {
+      "sha256": "535467607bd5b9fffef45dda08b26554165953e07f6b1f9c78aaa30b22020ef3",
+      "size_bytes": 129
+    },
+    "provenance/r18.1-parent/sea_ice_observation.py": {
+      "sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+      "size_bytes": 16332
+    },
+    "provenance/r18.1-parent/sea_ice_validation.py": {
+      "sha256": "9ab60121dd17e305be548fed63541b505960e3f9d96468b7a152fff53289b05a",
+      "size_bytes": 72944
+    },
+    "provenance/r18.1-parent/verify_r18_local.py": {
+      "sha256": "6ed83bae00886b55c72f0a86874dace23ff3789a51ede43d996f6105e9e20f9a",
+      "size_bytes": 69120
+    },
+    "provenance/repair-workflow-legacy/PHYSICS_REPAIR_V2_12.md": {
+      "sha256": "284efdbb83523024f600c8a0b8dc72b54683cf2b212241bdbd4060eca52b7875",
+      "size_bytes": 1941
+    },
+    "provenance/repair-workflow-legacy/README.md": {
+      "sha256": "8b90986fdcefd35f9b66f9dff1aa675349b05102aebea170bf048c0c3d0b0c62",
+      "size_bytes": 320
+    },
+    "provenance/repair-workflow-legacy/V2_11_RESULTS_REVIEW.md": {
+      "sha256": "cd2052abd7d98eb512e56899371ac89f8cdb54167a36a908a56aa0adeb183499",
+      "size_bytes": 2353
+    },
+    "provenance/validation-cleanup-r14/CHANGELOG.md": {
+      "sha256": "288df3e45b7fae26964301889a0de4b946dbe7ded5eeceeff63dda3aee8326d9",
+      "size_bytes": 2197
+    },
+    "provenance/validation-cleanup-r14/CRYOSAT2_DIAGNOSTIC.md": {
+      "sha256": "afe5e07d7289bc349dda0dbeba1fd6f1fb742af8fc95cd61a8fc3d500a8d542c",
+      "size_bytes": 3972
+    },
+    "provenance/validation-cleanup-r14/CURRENT_R13_SOURCE_AUDIT.md": {
+      "sha256": "f347856abbe6a7d24fb678b2c3ba47adc8e68f2241a2b45d9008e544955e6a45",
+      "size_bytes": 26622
+    },
+    "pyproject.toml": {
+      "sha256": "1593d27ad0e2fc4648db3aa04e84c1196871a3ef3bb4e43003a3dfa69b5aa3c1",
+      "size_bytes": 778
+    },
+    "r18_1_amoc_bistability_diagnosis.py": {
+      "sha256": "a379dca2481f251cef3b26436f70380c0ec471370ea7c6ac1e5c422c696e5cc8",
+      "size_bytes": 8453
+    },
+    "recover_run_state.py": {
+      "sha256": "c011f5708e9ea626cdd4d748a86e7484f711372b84bb532978a83a4a7bac5d53",
+      "size_bytes": 629
+    },
+    "release_tree_fingerprint.py": {
+      "sha256": "1fbf44be8572942ef8e1bd3405d8d93aa3d1ebe29f14260576af6ef2828553e1",
+      "size_bytes": 4800
+    },
+    "requirements-dev.in": {
+      "sha256": "085727218ea8c95559c3be3a8095262b18fc6bf2d9261772e06be8532d0d1034",
+      "size_bytes": 31
+    },
+    "requirements-dev.lock": {
+      "sha256": "1a8cd201e7f2f9ec91b01137ce93050522099eddabe42f2d5b152b49c9bd5294",
+      "size_bytes": 200
+    },
+    "requirements.in": {
+      "sha256": "1d9d9a7b5fe39ee8e10b6d2bd175570a03e22f42442b05c80b816b5e7c7be952",
+      "size_bytes": 171
+    },
+    "requirements.lock": {
+      "sha256": "19c660eea9f9cf5ccca79b0abccacbecebff03c51e7cae7657dda12e648c73b1",
+      "size_bytes": 996
+    },
+    "rerun_co2_target_sweep_v22917.ps1": {
+      "sha256": "a95a81da301978e18b672dffcfe5bed7633c26816798341b51a4f1ad3a887a48",
+      "size_bytes": 7665
+    },
+    "rerun_co2_target_sweep_v22918.ps1": {
+      "sha256": "db45ca703e95d0fbd83ec15f24d6790e6f0f664c2236e3985b88f727ac43472a",
+      "size_bytes": 7882
+    },
+    "rerun_co2_target_sweep_v22920.ps1": {
+      "sha256": "a673595bcc3f839396b9bc51424d609460f6780061611a404bcfab6dbd517a3a",
+      "size_bytes": 8422
+    },
+    "review_fixes_v2_21_0_test.py": {
+      "sha256": "36281e9761d0db2bf5214e5153d7892093abf2e4ce3d6ddf894ee1b1af826b6a",
+      "size_bytes": 7322
+    },
+    "run_app.bat": {
+      "sha256": "5bc15735a421968058f11b6f10154269936514baaa57dc529f510530152ce515",
+      "size_bytes": 469
+    },
+    "run_app.sh": {
+      "sha256": "8b6a35ab08d964a23535c3c29ad2495096de806ca32e97cb078904d1a73c8e5f",
+      "size_bytes": 79
+    },
+    "run_gui.bat": {
+      "sha256": "51c88c50d664ef865bc108fd3183537a1f3fcf482963a296cff240deb874133f",
+      "size_bytes": 908
+    },
+    "run_gui.sh": {
+      "sha256": "c24e85330c2a4678cc59fda911d840375187789da8385a31f49c16d542a432f3",
+      "size_bytes": 119
+    },
+    "run_gui_debug.bat": {
+      "sha256": "f5d764bd7b848cd761b17618a7527cc8be8174195f442f4bf482f51f45774d51",
+      "size_bytes": 606
+    },
+    "run_r18_2_seaice_operator_validation.bat": {
+      "sha256": "dade2fe851ee73ebd67ebdbdec70bf718ff6b0ba6ee75e0f555946ce25b1d068",
+      "size_bytes": 246
+    },
+    "run_r18_2_seaice_operator_validation_debug.bat": {
+      "sha256": "a640820644430a00ab70e3d2cb11221928956ba28855e34e5df2ec771961389d",
+      "size_bytes": 167
+    },
+    "run_release_consistency.sh": {
+      "sha256": "59f8fcf8c381d08271ae7752b0c99f1ddd51c355b63094669c08608b128ab0c4",
+      "size_bytes": 230
+    },
+    "run_state.py": {
+      "sha256": "fdfbdd2c60c275bc55be23e809e8f909caa6d24485c3f34c0a953f78a505e600",
+      "size_bytes": 33276
+    },
+    "run_tests.py": {
+      "sha256": "f69b97e391b70fe355d79362cbe831de2e8c4d90911404a5d9d7604234d53415",
+      "size_bytes": 6406
+    },
+    "run_v216_validation.py": {
+      "sha256": "e36bb7f3fa8d08ac96a7616c9343adad65f4c2b5caf440e57371b70a7d2425bb",
+      "size_bytes": 3102
+    },
+    "run_v22921_engineering_tests.py": {
+      "sha256": "84ef7a84c8bf1130d9cfc52a24e52c396d267d1dda915bcfe0f4e28e2f62fff7",
+      "size_bytes": 180
+    },
+    "run_v22922_engineering_tests.py": {
+      "sha256": "160674133707ea0b849210b3376a6bea0bd5693238741ad2b9b26d27f12d8a34",
+      "size_bytes": 6629
+    },
+    "run_v22923_engineering_tests.py": {
+      "sha256": "5930b9234436c75c09bdefc5bbc2d728686c828a9463dceccfe4431bf2e5b9c8",
+      "size_bytes": 8249
+    },
+    "run_v22929_engineering_tests.py": {
+      "sha256": "4a8c6176ef7531e32d7850bed0da8df9fee297a0b7ac36ccdcfd831b79eac35f",
+      "size_bytes": 10211
+    },
+    "runtime_provenance.py": {
+      "sha256": "9887d7a77b696cf0f7146408fbf6839ae95d18b1bb2750f8bc25a02853b3be86",
+      "size_bytes": 6507
+    },
+    "safe_checkpoint.py": {
+      "sha256": "b9060dc8b1c76a418626a4f4464dd44b5942a30c282a748e9de709f7d05751e0",
+      "size_bytes": 16902
+    },
+    "scientific_evidence.py": {
+      "sha256": "dfc3693cd4de72bad04d46644454787da8bd65572967bb3f002962241e526718",
+      "size_bytes": 6697
+    },
+    "sea_ice_nested_hindcast.py": {
+      "sha256": "bf79c4124f8cfe7a7cc7f8663e5f5d0997fe971d188080e339bf6fc5254e7e60",
+      "size_bytes": 5722
+    },
+    "sea_ice_observation.py": {
+      "sha256": "ae630ba91d8eaf194c892b0a83c1b5286c354355c260daff47e7053d80f63d95",
+      "size_bytes": 16332
+    },
+    "sea_ice_validation.py": {
+      "sha256": "3ef4e0341d8fa5f4f6e673730ca33fcbbd2435565ff92266bc7e5c651a2ae3a9",
+      "size_bytes": 72971
+    },
+    "sensitivity_convergence_test.py": {
+      "sha256": "0c549eeae05e3c2babf725812ec89074358c27cfec6b4cce0aef8c216540fbe0",
+      "size_bytes": 1241
+    },
+    "setting_metadata.py": {
+      "sha256": "afd43ba81cfbf832dd9a9221497b71ad979608a88d8d9b504d27b0c490e809f1",
+      "size_bytes": 102529
+    },
+    "setting_metadata_test.py": {
+      "sha256": "4cc9c9206d55b419529e35d736136f368f8f91063fc10787df1c6bb7a868aacd",
+      "size_bytes": 2895
+    },
+    "smoke_test.py": {
+      "sha256": "3590eeaf3e09eb71d146cdfd3de0d97ccfbbf4a2001cf22f7aa575deadbbff9e",
+      "size_bytes": 10753
+    },
+    "structural_fixes_v2_17_0_test.py": {
+      "sha256": "a9fbddd48d0eaa73166e7adbad7642267ea1dd6bc4bd124fee07b7e5dd315ac4",
+      "size_bytes": 7000
+    },
+    "test_r15_setup_record_hotfix.py": {
+      "sha256": "6e9ee1bd83e60505116e6e9a5e314af67878d20f3e8b77c7f1a462edb399ab36",
+      "size_bytes": 941
+    },
+    "tests/test_2026_arctic_data_processing_repairs.py": {
+      "sha256": "b51d0377994f9af180742f7e207c91c40f0d9b7e27db339c8fb1d75e7532ae93",
+      "size_bytes": 3329
+    },
+    "tests/test_2026_arctic_observational_recalibration.py": {
+      "sha256": "cf72a46804d5799869de71ec9d166ace0c6c1c56d3c37ab6fcd447217813c5c2",
+      "size_bytes": 4300
+    },
+    "tests/test_2026_sea_ice_scientific_review_fixes.py": {
+      "sha256": "cd25f332e80266f8648cb899af882411038f43bf06cca9f88121077f4652bf31",
+      "size_bytes": 6491
+    },
+    "tests/test_amoc_eos_physics_repair.py": {
+      "sha256": "2d5b6e0c1e093ddcaa251974278a5ca37293c56f43ccc7a710f62473d8666646",
+      "size_bytes": 1983
+    },
+    "tests/test_arctic_core5_nonblocking_acquisition.py": {
+      "sha256": "85c2e22082fcdfd4b263aeb52fe9c86dac0205bb7cb46dc27506f3e5c259b678",
+      "size_bytes": 3643
+    },
+    "tests/test_convection_review_followup.py": {
+      "sha256": "087f388e84fdf0236dfe8e32186170370301a09f306cc04c28187cd451054eae",
+      "size_bytes": 5654
+    },
+    "tests/test_current_model_review_fixes.py": {
+      "sha256": "9ee6ff2da9672d15789a75d13a3eaa0af1409f2e4a6a164ca6b767950530d08c",
+      "size_bytes": 8473
+    },
+    "tests/test_forced_heat_amoc_closure.py": {
+      "sha256": "73f22bf211de3d48bd3aa031c8fd05fb2718081f39da0368f557915177a4255f",
+      "size_bytes": 6008
+    },
+    "tests/test_greenland_reservoir_units.py": {
+      "sha256": "89ea069fcaaa940167b7481ce352dabb701748dbdd306c404152824e348197f4",
+      "size_bytes": 1633
+    },
+    "tests/test_legacy_entrypoints.py": {
+      "sha256": "883d083c0d15b0358b10b454cc3ce64e558ff877f66214dfd088afd58a93ec1f",
+      "size_bytes": 6635
+    },
+    "tests/test_monte_carlo_science_prior_consistency.py": {
+      "sha256": "820a9bfc2a30ac29f6f79911c1059882aa21d0a5d9c9ae5fee80ed1787d60bd2",
+      "size_bytes": 1096
+    },
+    "tests/test_physics_review_repairs.py": {
+      "sha256": "aef70130c4e973144718349236f2c1099b98cef15cb2db796af53065b325b843",
+      "size_bytes": 12116
+    },
+    "tests/test_property_conservation.py": {
+      "sha256": "becfeb2699705d4c239974ed4afa2251f9bee2b855e14b73b04249e192127b17",
+      "size_bytes": 4131
+    },
+    "tests/test_r16_1_teos_hotfix.py": {
+      "sha256": "c3c2d5acf818ac34e3186b418e1a071abea5464a2eb06bb649998666178acd3b",
+      "size_bytes": 2605
+    },
+    "tests/test_r16_source_fixes.py": {
+      "sha256": "a102f52d7d2efff2e44b3beb22cf82470c2b7c2f7defa5fcbd6c07eced7db9bf",
+      "size_bytes": 6983
+    },
+    "tests/test_r17_spatial_teos_recovery.py": {
+      "sha256": "db5fad7d3162c22508dc72238b4c8ff034bbadfd9afad29f59933c8f3a17420c",
+      "size_bytes": 10836
+    },
+    "tests/test_r18_1_finalizer_and_diagnosis.py": {
+      "sha256": "f7bf665082c75691790b081625a5422c3657aa18bf991e9c2bd44def7460d262",
+      "size_bytes": 2294
+    },
+    "tests/test_r18_2_seaice_operator.py": {
+      "sha256": "fe40ae7788b70ed4fd2ff1b77b130c9ef3fa2115e5aaef92bded51afaeb049bf",
+      "size_bytes": 4615
+    },
+    "tests/test_r18_source_fixes.py": {
+      "sha256": "b2f53605553c327ddd43c6034fdaa01a52d5d239713ec01b85cf32185e408a89",
+      "size_bytes": 7980
+    },
+    "tests/test_review_fixes.py": {
+      "sha256": "c05315902a2cf79ceda4609eda3999eb8fe849f5b6b8a22569c510944d88f5fd",
+      "size_bytes": 7176
+    },
+    "tests/test_runtime_bootstrap.py": {
+      "sha256": "bc57b37012d3a416f013d4dce077b387218622f6bc46aef03e961d414554c26e",
+      "size_bytes": 1809
+    },
+    "tests/test_sea_ice_actual_fix.py": {
+      "sha256": "d09bacc33665b64b28ffe59e7bf463f543209c566c077e69d32d54f9fd26549f",
+      "size_bytes": 7135
+    },
+    "tests/test_six_source_arctic_validation_stack.py": {
+      "sha256": "bc2c05845b0039bfcf26cbfe3248f43f1fbbcf53d843b20559b368d2f391d20b",
+      "size_bytes": 14935
+    },
+    "tests/test_ssp_batch.py": {
+      "sha256": "016b608e076a636ed580c2e97cc387faf03c7468130ed437e4c7a9b9c40ba653",
+      "size_bytes": 9434
+    },
+    "tests/test_v221_scientific_fixes.py": {
+      "sha256": "0af889386e625195b1442ad096e2b813eab006892b88817ec8d65b22a2e75577",
+      "size_bytes": 7655
+    },
+    "tests/test_v222_remaining_fixes.py": {
+      "sha256": "35432e33d12de9eb723f8658bfa9c17ce518f30e284334dded43565ce951f575",
+      "size_bytes": 9477
+    },
+    "tests/test_v223_final_fixes.py": {
+      "sha256": "8f1dd6b1be6a23c02ce10ca98ca070a9793472eed29e6bfbd82177a5fcd739f8",
+      "size_bytes": 7752
+    },
+    "tests/test_v224_accuracy_fixes.py": {
+      "sha256": "8570199ab8b1009a1fcb94020fc25dfdcac5337590e9910c27e190de64308092",
+      "size_bytes": 2041
+    },
+    "tests/test_v2252_seasonal_arctic.py": {
+      "sha256": "a8a2ddcb8fab558a9672dc9521d245b3823e3dfc0e4ac5a3e3a67cdb79b587d4",
+      "size_bytes": 4994
+    },
+    "tests/test_v226_thermodynamic_arctic.py": {
+      "sha256": "bfc86acd379d3a128afbde1582daaee97d15534586e6bc6008db50bb86a7e9a9",
+      "size_bytes": 14474
+    },
+    "tests/test_v2271_maintenance_arctic.py": {
+      "sha256": "452a878958c782aa848ff2fa06fa1a712d012f3b41572cd9fd4a6f2505884e85",
+      "size_bytes": 9785
+    },
+    "tests/test_v227_structural_arctic_greenland.py": {
+      "sha256": "76984b87d271cb9db5b23df319ce6a3ecda472a960a49b7ab6b3b8b139e1ea17",
+      "size_bytes": 10143
+    },
+    "tests/test_v2281_interface_maintenance.py": {
+      "sha256": "b20fbe6244bd0e95a964424934cafdd1fdf336703be8952e39e3a42e7c06b397",
+      "size_bytes": 4960
+    },
+    "tests/test_v2281_remaining_maintenance.py": {
+      "sha256": "01dc0448e1a901234e05890aa4c2b961cffd825098019ee515bf483f3d7599df",
+      "size_bytes": 5971
+    },
+    "tests/test_v228_fractional_arctic.py": {
+      "sha256": "3cb8527b8743f6b072bbb6cb93ea5d4c0a32b540680048b7f1287eec248545df",
+      "size_bytes": 14271
+    },
+    "tests/test_v22910_integrity_recovery.py": {
+      "sha256": "5cfa96844195ba0b22ba7cf357a29b24e38d71fcd41c189b207208edca1318ff",
+      "size_bytes": 8775
+    },
+    "tests/test_v22911_target_baseline_safety.py": {
+      "sha256": "3cdaa1206df2bb1f7ff191a66b64fab0551e1ce7ba376c7e958da7344baa3a27",
+      "size_bytes": 11146
+    },
+    "tests/test_v22912_monte_carlo_integrity.py": {
+      "sha256": "35cdd4efb2b38b23ebd8aa9da7968efa79d03fbaea203307ad0952598cdbb7e6",
+      "size_bytes": 7834
+    },
+    "tests/test_v22913_integrity_amoc_baseline.py": {
+      "sha256": "cdb8083ba707ce5a5a39f63f9ae364719bf27f9aa317a0b98c8a3378e709afe6",
+      "size_bytes": 6130
+    },
+    "tests/test_v22914_recovery_validation_seaice.py": {
+      "sha256": "601cd5f048456b6241b237cfbbce7240251fe541e107fdcdc33b2330fbeeda0b",
+      "size_bytes": 9135
+    },
+    "tests/test_v22915_winter_seaice_integrity.py": {
+      "sha256": "1d664c66ed2555f64520df4e25a71da360adf5b3c8bf242c5985134a0feee240",
+      "size_bytes": 7024
+    },
+    "tests/test_v22916_release_integrity.py": {
+      "sha256": "2296b37ee45ad24d99a69e4cab39ef6812d54dbd48ce0fb739ba9ca0274527c0",
+      "size_bytes": 7697
+    },
+    "tests/test_v22917_arctic_sweep_integrity.py": {
+      "sha256": "67ae33ff889ebb50b12cf1f32ad33081c739ca8752581db45dc9c421dbe93d02",
+      "size_bytes": 8141
+    },
+    "tests/test_v22917_gui_startup.py": {
+      "sha256": "2db33977339125c51ab78551864686a3426d114dd99c6c0650240e3d17e2313a",
+      "size_bytes": 1005
+    },
+    "tests/test_v22918_release_corrections.py": {
+      "sha256": "113573e5d4c9a48f62479b9261a93fe310220fa79477c3ba3c1e53c3882824e6",
+      "size_bytes": 8558
+    },
+    "tests/test_v2291_arctic_phase_consistency.py": {
+      "sha256": "8293739fb89e041b5153abdbe665e7b436f0676f0dc7c3b63f3664871dd8ff64",
+      "size_bytes": 7734
+    },
+    "tests/test_v22920_prognostic_sea_ice.py": {
+      "sha256": "e4ae7bd271a2f3bbcadcb374685ec90236eadec3e4ada85f236022188332743c",
+      "size_bytes": 8947
+    },
+    "tests/test_v22920_review_corrections.py": {
+      "sha256": "8fdec3e5c4dbe2519843b780d1cd711c74fe8486994a54eea6e9948889980c7a",
+      "size_bytes": 3470
+    },
+    "tests/test_v22922_engineering_corrections.py": {
+      "sha256": "a7baf628d39d339ec8f6a981db1d22525de6e4a835c878037daca0470bba4be3",
+      "size_bytes": 462
+    },
+    "tests/test_v22923_engineering_corrections.py": {
+      "sha256": "41a748088e63ec87b4bd953d4dab82510d9f8d59064034950dc9589bd5cc8e72",
+      "size_bytes": 10196
+    },
+    "tests/test_v22925_review_cleanup.py": {
+      "sha256": "095bac1a19666f3bac940442ab8fa0d3bfddb46e4274fc67385b5f3b04328cae",
+      "size_bytes": 1430
+    },
+    "tests/test_v22929_coupled_fail_closed.py": {
+      "sha256": "7cac6f986e5c4145dc1864145f3a4b416bf25e7d92f92452824cf4ef4c2cf0c9",
+      "size_bytes": 5822
+    },
+    "tests/test_v22929_release_finalization.py": {
+      "sha256": "3306dfcf7fc6fce9d1f30c4b5b599e9d38870ffd4f3e0a88e364659e2c9ed9ca",
+      "size_bytes": 4646
+    },
+    "tests/test_v22929_validation_semantics_and_interface_parity.py": {
+      "sha256": "3ee3adadfdbe8f56cebd0987f93bc5113a79f363ccf4a451c5b395f8511e1e7f",
+      "size_bytes": 6140
+    },
+    "tests/test_v2292_release_integrity.py": {
+      "sha256": "16fff37c90af737220aa0cdf5d7741ab94672b181de6cc2d6cf366451682d3c4",
+      "size_bytes": 8987
+    },
+    "tests/test_v2293_operational_safety.py": {
+      "sha256": "a6e93c7b5777e7503c850249ca10709522db95661cd64f9213aef0826a319e8a",
+      "size_bytes": 7306
+    },
+    "tests/test_v2294_accuracy_integrity.py": {
+      "sha256": "0dd99dd2e28ccdae0c376bc2a4d822e21d02fcc4379cb2da8d9378b392add2f8",
+      "size_bytes": 11338
+    },
+    "tests/test_v2295_physical_integrity.py": {
+      "sha256": "ae60c3a81fb466908cf6059f8cd03eb5e0d354ec9b7af75d4e30642a5251f7e1",
+      "size_bytes": 7212
+    },
+    "tests/test_v2296_native_arctic_integrity.py": {
+      "sha256": "99a4f356626bc930826339e79bc4358cbfc942c371481a11e894ec63fec2b1d9",
+      "size_bytes": 9031
+    },
+    "tests/test_v2297_review_fixes.py": {
+      "sha256": "48f3c30a69bf66c0a9563ba1063bfeefa261155dca88836f378a1fa904a1bcb8",
+      "size_bytes": 10439
+    },
+    "tests/test_v2298_resumable_sweeps.py": {
+      "sha256": "592294e88a702e48ed4b4064e10b6b664bf9c95861a4775b79f4289f1dd65485",
+      "size_bytes": 18083
+    },
+    "tests/test_v2299_scientific_review_fixes.py": {
+      "sha256": "0cf5e9d9ed1a3f578448db2b020112d64ea35dbef3632b0ad29519fba0b3ed71",
+      "size_bytes": 5959
+    },
+    "tests/test_v229_coupled_arctic_ocean.py": {
+      "sha256": "088af0f641dfa1a9874037e0d89d4abb9669fc24a4c297d99c952d90a4885542",
+      "size_bytes": 4118
+    },
+    "tools/acquire_arctic_validation_stack.ps1": {
+      "sha256": "395baf1ba3829a451586c168b99d5e127e2685e5caa4521367920bf2fbb8e9ae",
+      "size_bytes": 6051
+    },
+    "tools/acquire_arctic_validation_stack.py": {
+      "sha256": "f9374fc356b3544e99db56174191b928701ec8f46822fbbd067bf0fb65cba1f5",
+      "size_bytes": 66251
+    },
+    "tools/acquire_oisst_provenance.py": {
+      "sha256": "ae574134310149b8442a5903b7610cbf7d34904077fbfc19ebb563454c69db8d",
+      "size_bytes": 2974
+    },
+    "tools/build_readme_science_figures.py": {
+      "sha256": "047ab30d695336ae9b92f0b42185f885d32123dd2343d87a19ff035917900254",
+      "size_bytes": 8849
+    },
+    "tools/build_sea_ice_fix_manifest.py": {
+      "sha256": "8d843e72c8ae78d776c1e4c33f0e5142f0530113f6ae55e5acf6dcba2debbb5c",
+      "size_bytes": 2655
+    },
+    "tools/create_dependency_lock.py": {
+      "sha256": "78ec56e928db8a1ba3890749fb8c91b6deca0a3ccdec78bd30f2e0311b166675",
+      "size_bytes": 2208
+    },
+    "tools/create_v22927_fingerprint.py": {
+      "sha256": "627da87d0e748b73edeabd8d45a6336ff2c1a51b73717b14d9b9db410410806b",
+      "size_bytes": 605
+    },
+    "tools/create_v22929_fingerprint.py": {
+      "sha256": "e11ca357d3555303d37529721433a7e548c23a6be0bfeab09cae4a96b12c95c7",
+      "size_bytes": 974
+    },
+    "tools/evaluate_v2297_candidate.py": {
+      "sha256": "73c396b8f6366bba316b67e3eb640ecad520d634bccbab31567dcf24cd6770db",
+      "size_bytes": 3411
+    },
+    "tools/export_arctic_validation_bundle.py": {
+      "sha256": "7abe59c7da995f8e3545f616183165247ddf9318443615ba3b1e7331e79ecdae",
+      "size_bytes": 2772
+    },
+    "tools/extend_recovery_validation.py": {
+      "sha256": "4eadcbb7d240f6f6d1e05b79df5b61b8446f2208abd993fbc53c6467ea4572b2",
+      "size_bytes": 10510
+    },
+    "tools/finalize_v22921_status.py": {
+      "sha256": "63e1745548282904ab6d151b610527aa65248af09134afdc32a4d4a809711ef1",
+      "size_bytes": 178
+    },
+    "tools/finalize_v22922_status.py": {
+      "sha256": "65d9c7735a7a2c3da6df33427e1642fa542d4cdaf58c67fe88c8917bbc559437",
+      "size_bytes": 11670
+    },
+    "tools/finalize_v22923_status.py": {
+      "sha256": "16830f474f21ba7c33cdf4128af00bca040b21c4a775372edb6fa4a24416f6dc",
+      "size_bytes": 14348
+    },
+    "tools/finalize_v22926_release.py": {
+      "sha256": "a6e52dd50a8d8703d6b05012caf86322b2f77b3789f559795b78cc87f322eb2e",
+      "size_bytes": 6373
+    },
+    "tools/finalize_v22927_release.py": {
+      "sha256": "dba98985d3f0c5862de91f8ac10ccde11efe2e281085320d5e1397fd4b84c8e6",
+      "size_bytes": 8245
+    },
+    "tools/finalize_v22929_release.py": {
+      "sha256": "90e3328589d54803076c94232ba278ae74c0dab34c4f6d91514245a303c34bed",
+      "size_bytes": 23529
+    },
+    "tools/investigate_fovs.py": {
+      "sha256": "60aa36f10cc972436e7270596133f69b79c433d579b98daf0aef6d3b1d7d6539",
+      "size_bytes": 6127
+    },
+    "tools/investigate_fovs_sign.py": {
+      "sha256": "42a1d7b7a54a41958ccccd5cc8d93cc6336e8e942ee19875b1fc1fa65ed8be04",
+      "size_bytes": 7057
+    },
+    "tools/package_v227.py": {
+      "sha256": "2a9739c8dc5f1cb3af9096e8fc50ece3a2ccee29ae95c9b0989e5ff2d3426edf",
+      "size_bytes": 3693
+    },
+    "tools/package_v2271.py": {
+      "sha256": "bf18a938a9a0e3503daa193bddcf33a54a2148c4db70814f91eb19eb1502c4c4",
+      "size_bytes": 3641
+    },
+    "tools/package_v228.py": {
+      "sha256": "4759f43a6e9a151e4c5b02244d8277ccfe1ca027bb0338a1a04f007ad02b07be",
+      "size_bytes": 3636
+    },
+    "tools/package_v229.py": {
+      "sha256": "1f4ec4ad003053d68aac33750067dc36368bffa74ca9c8bcd27ef99fba498315",
+      "size_bytes": 3756
+    },
+    "tools/package_v2291.py": {
+      "sha256": "b02ef7b73081677da9b6f11a8251f226ac301415eea45fc9e56c6f9255486ad3",
+      "size_bytes": 3838
+    },
+    "tools/package_v22910.py": {
+      "sha256": "4e36fc7996ce50b3098123599aec28a1c699785b0894c1e8e70eedefcbd4d98f",
+      "size_bytes": 7273
+    },
+    "tools/package_v22911.py": {
+      "sha256": "fc810421c00394e0a4cdd84c4e915bfa2690797708ced76dc529d0b989d28999",
+      "size_bytes": 7332
+    },
+    "tools/package_v22912.py": {
+      "sha256": "b2389f2fa05ee3c0be7c538e30f39b3fd23cc90e634412e86f8efe2c329122a7",
+      "size_bytes": 7380
+    },
+    "tools/package_v22913.py": {
+      "sha256": "7579d6094c477f7af6103d1e8e47f19fee15993f83c7c514706d6fbaa3434a65",
+      "size_bytes": 7390
+    },
+    "tools/package_v22914.py": {
+      "sha256": "41fd528459ca29fe1d2b782ae594ced2926144f4509029a1210c9bff53487add",
+      "size_bytes": 7717
+    },
+    "tools/package_v22915.py": {
+      "sha256": "b3f536c6cd295cfdfc96a36fdeac86deaa09388233c98eeb7908cc4054461d43",
+      "size_bytes": 8425
+    },
+    "tools/package_v22916.py": {
+      "sha256": "f4df508dbb8a6eec9f37b2cc5c8fa8814c4acfd40a0a76db014bed71fc9b2bde",
+      "size_bytes": 8644
+    },
+    "tools/package_v22917.py": {
+      "sha256": "4b0b4c049178e9e39c980a72d8c7765b72ec5e4509cfab64a3d2373685550614",
+      "size_bytes": 9048
+    },
+    "tools/package_v22917_gui_hotfix.py": {
+      "sha256": "ee26aa6c2014d365fb3e8a6e060fa193ceec4f4de48cd68290ec4bd78dec18e7",
+      "size_bytes": 4936
+    },
+    "tools/package_v22918.py": {
+      "sha256": "cab995445c0adc6b5b066fcbb31bb9c275c967d2edaa488beeb032442dea082e",
+      "size_bytes": 5441
+    },
+    "tools/package_v2292.py": {
+      "sha256": "8ed13c127b10c54f01a19aa5478cceae6fb64f031461ed3d646c6a733bab2f5e",
+      "size_bytes": 3930
+    },
+    "tools/package_v22920.py": {
+      "sha256": "8f52694d3e6cb153f2ecd4e29abfdcc246a52ed4015aa8ec939c6c424afef443",
+      "size_bytes": 168
+    },
+    "tools/package_v22921.py": {
+      "sha256": "25a3eb35837ad04bdfc23217dcacc67cf2dbca8340aad25c6a58babce896733d",
+      "size_bytes": 163
+    },
+    "tools/package_v22922.py": {
+      "sha256": "a0312ecaa9e74cc5aeffcd0a8966887ce80356e1ceabc8bf53323d68acbcc3df",
+      "size_bytes": 16426
+    },
+    "tools/package_v22923.py": {
+      "sha256": "d02451435adfd1d947058fa0eec97f7b7caec858ef948391531a0df017aefe4e",
+      "size_bytes": 20508
+    },
+    "tools/package_v2293.py": {
+      "sha256": "ee931d01c312e3cf34153c49fba038387298029307d10bfa2b6dc36212b1a29d",
+      "size_bytes": 4595
+    },
+    "tools/package_v2294.py": {
+      "sha256": "d19a8c11ebeaab28d638ddcccbe674f5bea20b1b57dedc4e25c1dc7bb91ee080",
+      "size_bytes": 5118
+    },
+    "tools/package_v2295.py": {
+      "sha256": "353d451a3b351ea74f501e7247c51315be6bf382c34f9b6b6069777dbce51c4f",
+      "size_bytes": 5261
+    },
+    "tools/package_v2296.py": {
+      "sha256": "7bf1505de8eaf41e66d47e83db01d7dcfaee57156953b1350a7b893c5dc56143",
+      "size_bytes": 5401
+    },
+    "tools/package_v2297.py": {
+      "sha256": "681e9dceaa08471f6841dd010f47ab96ff3967bcc5a01f4f64adb5713116d1dc",
+      "size_bytes": 6727
+    },
+    "tools/package_v2298.py": {
+      "sha256": "7231cd2c6305d9dcd10a81ccfc8d1d977bca7a81ca088caebbbb43d6a82d49c3",
+      "size_bytes": 6989
+    },
+    "tools/package_v2299.py": {
+      "sha256": "f43d8c92e37114beeb9b70d7c09efd394c5188ca2c46446b4902acca92281fc0",
+      "size_bytes": 7102
+    },
+    "tools/process_noaa_oisst_arctic_benchmarks.py": {
+      "sha256": "d1fc6d703f741eca0c507cc8e0e013203ba770e8425b980e0e263c51a7475bbc",
+      "size_bytes": 9930
+    },
+    "tools/refresh_piomas_osi.ps1": {
+      "sha256": "1b6abd4b418feec8699cf2ed1bf5cd503204e076b5e8c779ca5cde4d80509954",
+      "size_bytes": 6069
+    },
+    "tools/regenerate_dependency_locks.sh": {
+      "sha256": "4dd700903e6b421c635b2619a1a7345a147f70dda07bc4ea079ab360b3e7cf63",
+      "size_bytes": 197
+    },
+    "tools/reproduce_v22915_winter_review.py": {
+      "sha256": "4fddec37a9b33293308e60131cabc0d0fce1bc9ebb5766ac79b7de08d4dde3e5",
+      "size_bytes": 6761
+    },
+    "tools/reproduce_v22916_winter_review.py": {
+      "sha256": "912f991fd885ee061b4a9828fe950ed13c63fa4da951066e5b72261f4b977aba",
+      "size_bytes": 6761
+    },
+    "tools/run_checkpointed_arctic_candidate.py": {
+      "sha256": "e452a66ced8c7032fb24dc783874102899c3a7a4db57a1c0cad520e8117ebfdd",
+      "size_bytes": 11770
+    },
+    "tools/run_isolated_v2293_tests.py": {
+      "sha256": "4b85a2721567a58ed5ef78acda0a53f29e0218610a130934dd34f70247ba6a37",
+      "size_bytes": 6044
+    },
+    "tools/run_v22910_validation_parallel.py": {
+      "sha256": "3824e99ada05f877309895e5c7ea58d278be485e40b5d88ce52b6a20c1d8db1a",
+      "size_bytes": 5171
+    },
+    "tools/run_v22911_validation_parallel.py": {
+      "sha256": "bbb1835df2ffe7058c98ff4a724c1a9291bfb0036d5b06f7a401d48482ba95b2",
+      "size_bytes": 5171
+    },
+    "tools/run_v22912_validation_parallel.py": {
+      "sha256": "34c144a6b55a1b1dedb8dc6ae24421c5cbc919d5ac237b1e609cf5ebdb1f77ed",
+      "size_bytes": 5171
+    },
+    "tools/run_v22913_validation_parallel.py": {
+      "sha256": "df6f695d03cb86b7b92d6c0f7db7d02dee114861d3d1e5141802e4f85381badf",
+      "size_bytes": 5171
+    },
+    "tools/run_v22914_validation_parallel.py": {
+      "sha256": "7ab276d0df56fd40219ed6dfe5e186c86f4282ce80f56541b65b68e659424b59",
+      "size_bytes": 5171
+    },
+    "tools/run_v22915_validation_parallel.py": {
+      "sha256": "e6b3261e60dfe319bcb729d92d00cb3d1bffd537dfe85c4519c5ca3b657026db",
+      "size_bytes": 5203
+    },
+    "tools/run_v22916_validation_parallel.py": {
+      "sha256": "bf0f33eaa2dc04622a0b8d55d9b9b5315a053b9b0bdf46bedaa53d52198d8a4b",
+      "size_bytes": 5521
+    },
+    "tools/run_v2293_validation_parallel.py": {
+      "sha256": "ce1f157665d9d6fbf9a6bb883b20799efda84ffd45c47feab7bc709ee6d26bb7",
+      "size_bytes": 3101
+    },
+    "tools/run_v2294_validation_parallel.py": {
+      "sha256": "c4c918d26911b5c1ae4dc9745b23d680ed3bce2cde04a8eb6b3ed200c5263b34",
+      "size_bytes": 3101
+    },
+    "tools/run_v2295_validation_parallel.py": {
+      "sha256": "da0e08cb399d8e23d0a45dda89bad062ade24af723199cf3734df96972683399",
+      "size_bytes": 3101
+    },
+    "tools/run_v2296_validation_parallel.py": {
+      "sha256": "c0aa5fa7d53fa704e7355ef19c0999dfc9eff2a1675af5f660e114f79380086c",
+      "size_bytes": 5129
+    },
+    "tools/run_v2297_validation_parallel.py": {
+      "sha256": "e57b92c78859f1089133824b5fdb4e4496c63b529017e5796e496251463c34e8",
+      "size_bytes": 5129
+    },
+    "tools/run_v2299_validation_parallel.py": {
+      "sha256": "3fc6de234d24e18c0684442a8eb343eacbe5c6d3065ba360fc82b19f48fa221a",
+      "size_bytes": 5167
+    },
+    "tools/v22927_release_integrity.py": {
+      "sha256": "b8ef1c398b2eff94080ce22078345469aeaea6694d7511d7c1a8ab708391a0ae",
+      "size_bytes": 5585
+    },
+    "tools/v22929_release_integrity.py": {
+      "sha256": "19f1745fd406006074baf65d9ae478ba5f025fefdbc7eb0d730f537fd7ef5a54",
+      "size_bytes": 7578
+    },
+    "tools/validate_sea_ice_fix.py": {
+      "sha256": "3e0af283fbd0f6f5fa0227aa35a7b0d04ac54687748867cc786aa437f4240c20",
+      "size_bytes": 23372
+    },
+    "tools/validate_v22924_lean.py": {
+      "sha256": "2064dbeb26dd2fe9b744527548a78b4018209aae879e850a10ba61ce68cea9bc",
+      "size_bytes": 11639
+    },
+    "tools/validate_v22925_lean.py": {
+      "sha256": "5907bd79527cfcbc1625d868d1bf5bf23d4869e5aeb91d4115606d8acd2df6d2",
+      "size_bytes": 12400
+    },
+    "tools/verify_dependency_lock.py": {
+      "sha256": "8dab06eb41f6da4de0c6deeccbb849ce6683c406dfde565fa79bfe26acc21b3a",
+      "size_bytes": 3164
+    },
+    "tools/verify_physics_revision.py": {
+      "sha256": "993c5b8c853d21f65211913d8f698b452ceddeaed6a41e840b999835356e958a",
+      "size_bytes": 12937
+    },
+    "tools/verify_sea_ice_fix_manifest.py": {
+      "sha256": "06bad77e76daa110e463ba03680efe05ed35b277d5035ede70fb82b99cc6a65c",
+      "size_bytes": 3965
+    },
+    "tools/verify_v22927_fingerprint.py": {
+      "sha256": "e61c32e696764b7d8466ba6548e5d9f5abf4f07f81e04fc5336992bf485455cc",
+      "size_bytes": 690
+    },
+    "tools/verify_v22929_fingerprint.py": {
+      "sha256": "a89c8c72b436f161fd2205296a3f5001ad7daf4baeffb37435b633e584dec6d8",
+      "size_bytes": 690
+    },
+    "trusted_validation_pickle.py": {
+      "sha256": "1aa34d49b015ef9fdca861ffb8caf426d9453de497c33eea4f18314c8a627d47",
+      "size_bytes": 4466
+    },
+    "v2_17_1_validation_test.py": {
+      "sha256": "30c286956a3a1d0d269724f4ea9bdb592e6033675657b8ef4bcfc43f08b9aad5",
+      "size_bytes": 7241
+    },
+    "validate_v227.py": {
+      "sha256": "c4220fc8f178073298aca525ec47f572630721547d18f610cb80f5d85f3031fc",
+      "size_bytes": 19696
+    },
+    "validate_v2271.py": {
+      "sha256": "ff60c44010fb5bd2d8aad190f4d1e309e7baf8a29a5384a69d9c9d1c3d293edc",
+      "size_bytes": 20524
+    },
+    "validate_v228.py": {
+      "sha256": "81c06cfc5c4c99e00b1413e32f64ece1ba5711ee97683fd048db00d9ffee72c5",
+      "size_bytes": 22757
+    },
+    "validate_v2281.py": {
+      "sha256": "2ac397859afe6bc56ffb40230850e51248bce125c5e5cd0e626e1f4a2b482508",
+      "size_bytes": 24311
+    },
+    "validate_v229.py": {
+      "sha256": "a421ed459708565a35bd3f747b3064b5059e4e9dff6ed6be17cc8f04247312df",
+      "size_bytes": 30791
+    },
+    "validate_v2291.py": {
+      "sha256": "bdc0d9a394dff8dd1ddf7454b19b5186ccae054ea9276044da81474ebfe122eb",
+      "size_bytes": 35457
+    },
+    "validate_v22910.py": {
+      "sha256": "f2dab14b3becccf31f0c4643102e65df7f59db60245b4b4b56b5e269b6529dba",
+      "size_bytes": 61469
+    },
+    "validate_v22911.py": {
+      "sha256": "63ff16c24286a408fcf9f3e908d479ba401b1d3e2411602d8711df284e659731",
+      "size_bytes": 61888
+    },
+    "validate_v22912.py": {
+      "sha256": "5ce468d82323a8b4a6405cb0770127acc84b44dadb99f16d9ce7f1a66c52183e",
+      "size_bytes": 62552
+    },
+    "validate_v22913.py": {
+      "sha256": "9dbdcf7787bbb436d1095f83dcd3134f4550b4aa48798ab57a1dd906b1f8dc0e",
+      "size_bytes": 63346
+    },
+    "validate_v22914.py": {
+      "sha256": "73c9d7f6aa10355697cc347eec31e7d856bfe867eb18035fee7f80c888aaf208",
+      "size_bytes": 64493
+    },
+    "validate_v22915.py": {
+      "sha256": "25b88d6b6fbd1f007558451910283a0d6bbbd0837690d33c9600b14eb5d236fb",
+      "size_bytes": 72669
+    },
+    "validate_v22916.py": {
+      "sha256": "d7d38339794a31d54a5d33198aff05890d2cd6c097217b118b13dd21338c3f99",
+      "size_bytes": 76613
+    },
+    "validate_v22918.py": {
+      "sha256": "d163edc6646fc12863c2f18428be10b20589dd2c7cbe34c0bf5a31cdcbc0ef93",
+      "size_bytes": 7593
+    },
+    "validate_v2292.py": {
+      "sha256": "89ee12a758356f24fcc2622938770c92ebe565c5ebae3fabc6036d3c89a46175",
+      "size_bytes": 43106
+    },
+    "validate_v22920.py": {
+      "sha256": "0944552daf6bf07b72fe76d66ec991153ae1778c23e78a316a8f011786c822e3",
+      "size_bytes": 214
+    },
+    "validate_v22921.py": {
+      "sha256": "0944552daf6bf07b72fe76d66ec991153ae1778c23e78a316a8f011786c822e3",
+      "size_bytes": 214
+    },
+    "validate_v22922.py": {
+      "sha256": "9be5cc8986c4caa5091e462c7626773695360b148f2a7fd327dc9a2309599ba6",
+      "size_bytes": 49506
+    },
+    "validate_v22923.py": {
+      "sha256": "16da6de684817a4aa7f79c44f474dc9c93247e800ad67d94f98f94387081d4b4",
+      "size_bytes": 54976
+    },
+    "validate_v22929.py": {
+      "sha256": "ef90d2fe2223af455e2e8d0fec636c501916ab3adab48426f88ab3c611c73673",
+      "size_bytes": 404
+    },
+    "validate_v22929_coupled.py": {
+      "sha256": "a744f5a430ba295f3ed85221ec62510160280e106be3228e103eeca4b21d9acf",
+      "size_bytes": 5752
+    },
+    "validate_v2293.py": {
+      "sha256": "e0fb93f19a815b4bab113b06ab38e69e962b521f773d6b8e1be2fd468929e8ac",
+      "size_bytes": 44005
+    },
+    "validate_v2294.py": {
+      "sha256": "afeb1773913e48678e8b02d1c96a3ee8168cfe10c6dc7863bf6a6f0c9844adcb",
+      "size_bytes": 53840
+    },
+    "validate_v2295.py": {
+      "sha256": "09ac48e2b7ebb5cc1446b89cb85cb0b56e8a49676015ace3ef238eb29fd690b8",
+      "size_bytes": 59301
+    },
+    "validate_v2296.py": {
+      "sha256": "7b103696f223fa4528ec642ce0e7f7492db08dcb194d42dd10fadeabea2d52d6",
+      "size_bytes": 64932
+    },
+    "validate_v2297.py": {
+      "sha256": "64726e51c5fb0df6a1cff04db240a549859f17286055b7622a626bde90defdeb",
+      "size_bytes": 66895
+    },
+    "validate_v2299.py": {
+      "sha256": "2788a3f0dcbfd6c705152c6c04b82a490432b39a31312dd61f7487756644a765",
+      "size_bytes": 57990
+    },
+    "validation/README.md": {
+      "sha256": "6844a44891d6059cd9e740ccd3983c27ac93f42d3e95a2092fd5f2f86a337860",
+      "size_bytes": 306
+    },
+    "validation_manual.py": {
+      "sha256": "8f05830479980fa599f52e415a55c9aad53d46d6f8d870e2831bd79716e9034d",
+      "size_bytes": 6212
+    },
+    "validation_provenance.py": {
+      "sha256": "de7b8c09700dd76e365c3d824446b24a8fb5071d2717dd6ed98f99d30dde69e3",
+      "size_bytes": 5831
+    },
+    "validation_segment_chain.py": {
+      "sha256": "59d5d30f1afe28708a6536f177626c42d3574c461436fe0441fb09c19be1f9d9",
+      "size_bytes": 2445
+    },
+    "validation_segment_supervisor.py": {
+      "sha256": "7e2417ba8ea3db351d643e7c20b11a6db52f372fdbc059b9298cffac43130a01",
+      "size_bytes": 1197
+    },
+    "validation_segment_worker.py": {
+      "sha256": "51182c86fe62901042b490f66f6e2c4506e9447abe4a8b356cc7d32bba62db87",
+      "size_bytes": 1897
+    },
+    "validation_segmentation.py": {
+      "sha256": "ddf3b0145cbde33897835c8b02fdc08164bc1e95f1b5832079a582c84901359c",
+      "size_bytes": 9268
+    },
+    "verify_physics_local.py": {
+      "sha256": "5858bd0240736e510e1a05019a70d737b6fcb765c7944e11dbc5ab570e13b2ff",
+      "size_bytes": 90735
+    },
+    "verify_r16_local.py": {
+      "sha256": "75962098dfcab3e5b2fb3d24ce144a86a8d1847be31765a035959838eafb4947",
+      "size_bytes": 62597
+    },
+    "verify_r18_2_seaice_operator.py": {
+      "sha256": "43dd93789156b46207bd707234d79075e985889ec55ff1689dc0daba1a1ef514",
+      "size_bytes": 68031
+    },
+    "worker_supervision.py": {
+      "sha256": "4610580d2f80bfdc58b6c72336505a4781043d56e76240dfa4355c6bc7f67343",
+      "size_bytes": 10258
+    }
+  },
+  "profile": "release",
+  "schema_version": "2.0"
+}

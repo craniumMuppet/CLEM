@@ -1475,7 +1475,7 @@ def _dataset_metadata_with_integrity() -> dict[str, Any]:
 
 def retrospective_fold_local_hindcast_requirements() -> dict[str, Any]:
     """Return packaged retrospective fold-local development evidence, fail-closed."""
-    manifest_path = ROOT / "RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json"
+    manifest_path = ROOT / "validation" / "current" / "RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_28.json"
     minimum_baselines = [
         "persistence",
         "expanding_linear_trend",

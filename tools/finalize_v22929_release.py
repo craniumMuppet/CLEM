@@ -27,6 +27,7 @@ from v22929_release_integrity import (  # noqa: E402
     TEST_EVENTS,
     TEST_JUNIT,
     TEST_JSON,
+    VALIDATION_DIR,
     artifact_bundle_payload,
     build_file_records,
     load_json,
@@ -36,19 +37,19 @@ from v22929_release_integrity import (  # noqa: E402
 from arctic_validation_stack import validation_stack_status  # noqa: E402
 from prospective_validation_r16 import evaluate as evaluate_r16_prospective  # noqa: E402
 
-RECALIBRATION_JSON = "ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json"
-RETROSPECTIVE_JSON = "RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_29.json"
-COUPLED_SUMMARY_JSON = "VALIDATION_SUMMARY_V2_29_29.json"
+RECALIBRATION_JSON = f"{VALIDATION_DIR}/ARCTIC_OBSERVATIONAL_RECALIBRATION_10DEG_2026.json"
+RETROSPECTIVE_JSON = f"{VALIDATION_DIR}/RETROSPECTIVE_FOLD_LOCAL_ARCTIC_HINDCAST_V2_29_29.json"
+COUPLED_SUMMARY_JSON = f"{VALIDATION_DIR}/VALIDATION_SUMMARY_V2_29_29.json"
 COUPLED_RESOLUTION_JSONS = tuple(
     name
     for resolution in (5, 10)
     for name in (
-        f"SEA_ICE_VALIDATION_V2_29_29_{resolution}DEG.json",
-        f"ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_29_{resolution}DEG.json",
+        f"{VALIDATION_DIR}/SEA_ICE_VALIDATION_V2_29_29_{resolution}DEG.json",
+        f"{VALIDATION_DIR}/ARCTIC_GREENLAND_AMOC_VALIDATION_V2_29_29_{resolution}DEG.json",
     )
 )
 COUPLED_TIMESERIES = tuple(
-    f"COUPLED_TIMESERIES_V2_29_29_{resolution}DEG.csv" for resolution in (5, 10)
+    f"{VALIDATION_DIR}/COUPLED_TIMESERIES_V2_29_29_{resolution}DEG.csv" for resolution in (5, 10)
 )
 COUPLED_BUNDLE_MEMBERS = (*COUPLED_RESOLUTION_JSONS, *COUPLED_TIMESERIES)
 DECLARED_PYTEST_REQUIREMENT = "pytest==9.1.1"

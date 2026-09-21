@@ -32,4 +32,4 @@ Tag: `v2.29.29`
 
 ## Current versus historical fingerprints
 
-`V2_29_29_RELEASE_TREE_FINGERPRINT.json` is the active v2.29.29 release-tree fingerprint. The generic historical `SOURCE_FINGERPRINT.json` is retained for repair-line/prospective-protocol provenance and must not be interpreted as the current package identity.
+`provenance/current/V2_29_29_RELEASE_TREE_FINGERPRINT.json` is the active v2.29.29 release-tree fingerprint. The generic historical `provenance/history/SOURCE_FINGERPRINT.json` is retained for repair-line/prospective-protocol provenance and must not be interpreted as the current package identity.
