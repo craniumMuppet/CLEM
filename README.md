@@ -40,9 +40,9 @@ completed every target, giving a 96.68% survival fraction.
 | 1200 ppm | 40.829% | 63.957% | 59.956% | 44.572% to 88.761% | 42.927% to 100.000% |
 | 1600 ppm | 75.952% | 76.796% | 72.781% | 54.106% to 100.000% | 52.110% to 100.000% |
 
-![Weighted AMOC outcomes across eight CO2 targets](outputs_co2_target_sweep/co2_target_sweep_overview.png)
+![Weighted AMOC outcomes across eight CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_overview.png)
 
-![Weighted AMOC percentage decline trajectories across eight CO2 targets](outputs_co2_target_sweep/co2_target_sweep_amoc_percent_decline_trajectories.png)
+![Weighted AMOC percentage decline trajectories across eight CO2 targets](docs/assets/science_update_2026_09/co2_target_sweep_amoc_percent_decline_trajectories.png)
 
 Collapse requires AMOC below 6 Sv for at least 95% of the final 30 year window
 and no active recovery longer than 5 years. Peak decline is the largest percent
