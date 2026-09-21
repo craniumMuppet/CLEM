@@ -21,12 +21,12 @@ so these results are conditional sensitivities. See the
 
 ### Weighted CO2 target sweep
 
-This larger posterior weighted assessment supersedes the earlier 128 member
-sweep for its central estimates. It requested 512 paired Monte Carlo members
-for each of eight fixed targets at 280, 400, 600, 700, 800, 1000, 1200 and
-1600 ppm. The supplied run log records a Sobol design, triangular sampling,
-science priors and AR6 AMOC constraint mode. A total of 495 paired members
-completed every target, giving a 96.68% survival fraction.
+This weighted AMOC assessment samples 512 paired Monte Carlo parameter sets
+at eight fixed CO2 targets: 280, 400, 600, 700, 800, 1000, 1200 and 1600 ppm.
+Its Sobol design uses triangular sampling, science priors and AR6 AMOC
+constraint mode. Complete paired trajectories were produced for 495 parameter
+sets, giving a 96.68% survival fraction. Posterior weighting informs the
+central estimates reported below.
 
 | Target | Weighted persistent collapse | Weighted mean peak decline | Weighted median peak decline | Weighted P05 to P95 | Member minimum to maximum |
 |---|---:|---:|---:|---:|---:|
